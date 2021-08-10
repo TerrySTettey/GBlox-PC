@@ -1,12 +1,33 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
+
+const {exec} = require('child_process');
+
+exec(path.resolve(__dirname,'./pyduino_test.exe'), (error, stdout, stderr) => {
+    console.log("Help me Please. Help Me Help u.")
+    if(error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if(stderr) {
+        console.log(`stderr: ${stderr.message}`);
+        return;
+    }
+    console.log(`stdout: ${stdout.message}`);
+})
+
+
+/*
 const {PythonShell} = require('python-shell')
 
-PythonShell.run(path.join(__dirname, 'python_arduino.py'/*'pyduino_cli2.py'*/), null, function(res) {
+PythonShell.run(path.join(__dirname, 'python_arduino.py'), null, function(res) {
     //console.log(res)
     console.log('finished')
 });
+
+*/
+
 
 function createWindow() {
     const win = new BrowserWindow({
