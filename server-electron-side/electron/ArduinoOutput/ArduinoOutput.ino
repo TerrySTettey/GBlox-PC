@@ -19,6 +19,8 @@ void setup(){
 
 void loop(){
 
+  tone(Buzzer_Pin,(1047));
+  digitalWrite(LED_Pin,(HIGH));
 }
 
 int read_ultrasonic(int trigger, int echo){

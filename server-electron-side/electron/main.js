@@ -2,10 +2,13 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
-const {exec} = require('child_process');
+const {execFile} = require('child_process');
 
-exec(path.resolve(__dirname,'./pyduino_test.exe'), (error, stdout, stderr) => {
-    console.log("Help me Please. Help Me Help u.")
+//var result = execSync(path.resolve(__dirname.replace('\\','//'),'pyduino_test.exe')).toString();
+//console.log(result);
+
+execFile(path.resolve(__dirname,'./debugSh.bat'), function(error, stdout, stderr) {
+    console.log("Executing .exe")
     if(error) {
         console.log(`error: ${error.message}`);
         return;
