@@ -3,18 +3,10 @@ const path = require('path')
 const isDev = require('electron-is-dev')
 const {PythonShell} = require('python-shell')
 
-PythonShell.run(path.join(__dirname, /*'python_arduino.py'*/ 'pyduino_cli2.py'), null, function(err,res) {
-    if (err) {
-        console.log(error)
-        throw err;
-    }
-    console.log(res)
+PythonShell.run(path.join(__dirname, 'python_arduino.py'/*'pyduino_cli2.py'*/), null, function(res) {
+    //console.log(res)
     console.log('finished')
 });
-
-PythonShell.on('message', function(message) {
-    console.log(message)
-})
 
 function createWindow() {
     const win = new BrowserWindow({
