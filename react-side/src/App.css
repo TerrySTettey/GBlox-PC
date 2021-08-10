@@ -3,13 +3,19 @@
   height: 100%;
 }
 .fill-height {
-  height: 90%;
-  float: left;
-  width: 50%;
+  height: 100%;
+  width: 100%;
 }
+.TitleBar {
+  height: 50px;
+  background-color: dodgerblue;
+}
+
+/*
 .texter {
   float: left;
   height: 90%;
   width: 49%;
   resize: none;
 }
+*/

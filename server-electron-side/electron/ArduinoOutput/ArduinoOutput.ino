@@ -19,7 +19,6 @@ void setup(){
 
 void loop(){
 
-  tone(Buzzer_Pin,(1047));
   digitalWrite(LED_Pin,(HIGH));
 }
 

@@ -1,14 +1,34 @@
 import { BlocklyWorkspace } from 'react-blockly';
 import Blockly from "blockly";
 import React,{ useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
 import './App.css';
 
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 function App() {
   const [xml, setXml] = useState("");
   const [javascriptcode, setJavascriptCode] = useState("");
+  const classes = useStyles();
 
   const toolboxCategories = {
     kind: "categoryToolbox",
@@ -138,8 +158,7 @@ function App() {
         ],
       },
     ],
-  };
-
+  }
   const newToolBox = {
     kind: "categoryToolbox",
     contents: [
@@ -330,7 +349,19 @@ function App() {
 
     return (
           <div className="App">
-            <Button variant="contained" color="primary" onClick={uploadCode}>Upload Code</Button>
+            <AppBar position="static">
+              <Toolbar>
+                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" className={classes.title}>
+                  Mintduino
+                </Typography>
+                <Button color="inherit">Save</Button>
+                <Button color="inherit">Upload</Button>
+              </Toolbar>
+            </AppBar>
+            <Button variant="contained" color="secondary" onClick={uploadCode}>Upload Code</Button>
             <div className="App">
               <BlocklyWorkspace
                 className="fill-height"
@@ -351,7 +382,6 @@ function App() {
               />
               <textarea
                 id="code"
-                className="texter"
                 value={javascriptcode}
                 readOnly
               ></textarea>
