@@ -1,4 +1,4 @@
-import { BlocklyWorkspace } from 'react-blockly';
+import { BlocklyWorkspace} from 'react-blockly';
 import Blockly from "blockly";
 import React,{ useState } from 'react';
 
@@ -368,6 +368,24 @@ function App() {
     setState(open)
   }
 
+  function exportBlocks(workspace) {
+    try {
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      var xml_text = Blockly.Xml.domToText(xml);
+      console.log(xml_text);
+      
+      var link = document.createElement('a');
+      link.download="project.txt";
+      link.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (e) {
+      window.location.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
+      alert(e);
+    }
+  }
+
     return (
           <div className="App">
             <AppBar position="static">
@@ -385,11 +403,10 @@ function App() {
                 <Typography variant="h2" className={classes.title}>
                   Mintduino
                 </Typography>
-                <Button color="inherit">Save</Button>
-                <Button color="inherit">Upload</Button>
+                <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                <Button color="inherit" onClick={uploadCode}>Upload</Button>
               </Toolbar>
             </AppBar>
-            <Button variant="contained" color="secondary" onClick={uploadCode}>Upload Code</Button>
             <div className="App">
               <BlocklyWorkspace
                 className="fill-height"
