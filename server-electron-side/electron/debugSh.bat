@@ -1,1 +1,2 @@
-start /min /d "%~dp0" pyduino_test.exe
+echo@off
+RUNNHIDE pyduino_test.exe

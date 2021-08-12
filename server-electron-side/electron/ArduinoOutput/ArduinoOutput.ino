@@ -19,7 +19,7 @@ void setup(){
 
 void loop(){
 
-  digitalWrite(LED_Pin,(HIGH));
+  ServoA.write(45);
 }
 
 int read_ultrasonic(int trigger, int echo){
