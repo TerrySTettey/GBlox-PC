@@ -374,7 +374,7 @@ function App() {
     setState(open)
   }
 
-  function exportBlocks(workspace) {
+  function exportBlocks() {
     try {
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var xml_text = Blockly.Xml.domToText(xml);
@@ -390,6 +390,21 @@ function App() {
       window.location.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
       alert(e);
     }
+  }
+
+  function restore(){
+    Blockly.mainWorkspace.clear();
+    var inputfile = document.createElement('input');
+    inputfile.type = "file";
+    inputfile.name = "inputfile";
+    inputfile.id = "inputfile";
+
+    inputfile.addEventListener('change', function (){
+      var fr = new FileReader();
+      fr.onload=function(){
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, fr.result)
+      }
+    })
   }
 
     return (
@@ -410,6 +425,7 @@ function App() {
                   Mintduino
                 </Typography>
                 <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                <Button color="inherit" onClick={restore}>Load</Button>
                 <Button color="inherit" onClick={uploadCode}>Upload</Button>
               </Toolbar>
             </AppBar>
