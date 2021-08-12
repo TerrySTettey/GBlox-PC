@@ -1,2 +1,2 @@
-echo@off
-RUNNHIDE pyduino_test.exe
+cd /d %~dp0
+start RUNNHIDE pyduino_test.exe
