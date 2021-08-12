@@ -309,49 +309,42 @@ function App() {
     setJavascriptCode(code);
   }
 
-  function uploadCode(workspace) {
+  function uploadCode(workspace, callback) {
     var code = javascriptcode;
     console.log("Compiled Code");
-    alert("Ready to upload to Arduino.");
     var url = "http://127.0.0.1:8080/";
     var method = "POST";
     var async = true;
     var request = new XMLHttpRequest();
   
     request.onreadystatechange = function() {
-      if (request.readyState !== 4) { 
-          return; 
+      if (request.readyState == 4 && request.status == 200) { 
+          console.log("Code Done Uploading");
       }
-      var status = parseInt(request.status); // HTTP response status, e.g., 200 for "200 OK"
-          var errorInfo = null;
-          switch (status) {
-          case 200:
-              errorInfo = "Code Upload Success";
-              break;
-          case 0:
-              errorInfo = "code 0\n\nCould not connect to server at " + url + ".  Is the local web server running?";
-              break;
-          case 400:
-              errorInfo = "code 400\n\nBuild failed - probably due to invalid source code.  Make sure that there are no missing connections in the blocks.";
-              break;
-          case 500:
-              errorInfo = "code 500\n\nUpload failed.  Is the Arduino connected to USB port?";
-              break;
-          case 501:
-              errorInfo = "code 501\n\nUpload failed.  Is 'ino' installed and in your path?  This only works on Mac OS X and Linux at this time.";
-              break;
+      else{
+        //console.log(request.status);
+      }
+      {
+         var status = parseInt(request.status); 
+           console.log(status);
+           var errorInfo = null;
+           switch (status) {
+           case 200:
+               errorInfo = "Code Upload Success";
+               break;
+           case 400:
+               errorInfo = "code 400\n\nBuild failed - probably due to invalid source code.  Make sure that there are no missing connections in the blocks.";
+               break;
           default:
               errorInfo = "code " + status + "\n\nUnknown error.";
               break;
           };
-          
-          alert(errorInfo);
+          console.log(errorInfo);
+      }
       };
-  
       request.open(method, url, async);
       request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-      request.send(code);	    
-  
+      request.send(code);
   }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
