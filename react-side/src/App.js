@@ -1,13 +1,20 @@
 import { BlocklyWorkspace } from 'react-blockly';
 import Blockly from "blockly";
 import React,{ useState } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
 import './App.css';
@@ -347,14 +354,42 @@ function App() {
   
   }
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [state, setState] = React.useState(false)
+
+  const list = () => {
+    <List>
+      <ListItem>Hello World, it works!</ListItem>
+    </List>
+  }
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const togglefiledrawer = (open) => (event) => {
+    setState(open)
+  }
+
     return (
           <div className="App">
             <AppBar position="static">
               <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer(true)}>
                   <MenuIcon />
+                  <Drawer
+                    anchor={'top'}
+                    open={state}
+                    onClose={togglefiledrawer(false)}
+                  >
+                    {list()}
+                  </Drawer>
                 </IconButton>
-                <Typography variant="h6" className={classes.title}>
+                <Typography variant="h2" className={classes.title}>
                   Mintduino
                 </Typography>
                 <Button color="inherit">Save</Button>

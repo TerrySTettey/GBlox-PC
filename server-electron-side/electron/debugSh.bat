@@ -1,1 +1,1 @@
-start /d "%~dp0" pyduino_test.exe
+start /min /d "%~dp0" pyduino_test.exe
