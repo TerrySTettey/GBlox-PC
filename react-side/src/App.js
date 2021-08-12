@@ -392,19 +392,43 @@ function App() {
     }
   }
 
-  function restore(){
-    Blockly.mainWorkspace.clear();
-    var inputfile = document.createElement('input');
-    inputfile.type = "file";
-    inputfile.name = "inputfile";
-    inputfile.id = "inputfile";
-
-    inputfile.addEventListener('change', function (){
+  function importBlocksFiles() {
+    try {
+      var inp = document.createElement('input')
+      inp.id = "myfile"
+      inp.type = "file"
+      inp.accept= ".txt,.xml"
+      document.body.appendChild(inp);
+      inp.select();
+      console.log(inp.files)
+      var file = document.getElementById("myfile").files[0];
+      
       var fr = new FileReader();
-      fr.onload=function(){
-        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, fr.result)
-      }
-    })
+      fr.readAsText(file);          
+      fr.onload = function (event) {
+        var xml = Blockly.Xml.textToDom(event.target.result);
+        Blockly.mainWorkspace.clear();
+        Blockly.Xml.domToWorkspace(xml,Blockly.mainWorkspace);
+      };
+      //inp.remove();
+    } catch (e) {
+      alert(e);
+    }	  
+  }
+
+  function importBlocksFile(element) {
+    try {	
+      var file = element.files[0];
+      var fr = new FileReader();           
+      fr.onload = function (event) {
+        var xml = Blockly.Xml.textToDom(event.target.result);
+        Blockly.mainWorkspace.clear();
+        Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
+      };
+      fr.readAsText(file);
+    } catch (e) {
+      alert(e);
+    }	  
   }
 
     return (
@@ -425,10 +449,13 @@ function App() {
                   Mintduino
                 </Typography>
                 <Button color="inherit" onClick={exportBlocks}>Save</Button>
-                <Button color="inherit" onClick={restore}>Load</Button>
+                <input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>
+                <Button color="inherit" onClick={importBlocksFile}>Load</Button>
+                {/*<input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>*/}
                 <Button color="inherit" onClick={uploadCode}>Upload</Button>
               </Toolbar>
             </AppBar>
+            
             <div className="App">
               <BlocklyWorkspace
                 className="fill-height"
