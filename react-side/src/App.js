@@ -329,12 +329,18 @@ function App() {
            console.log(status);
            var errorInfo = null;
            switch (status) {
-           case 200:
-               errorInfo = "Code Upload Success";
-               break;
-           case 400:
-               errorInfo = "code 400\n\nBuild failed - probably due to invalid source code.  Make sure that there are no missing connections in the blocks.";
-               break;
+          case 200:
+              errorInfo = "Code Upload Success";
+              break;
+          case 400:
+              errorInfo = "code 400\n\nBuild failed - probably due to invalid source code.  Make sure that there are no missing connections in the blocks.";
+              break;
+          case 401:
+              errorInfo = "No Arduino connection found"
+              break;
+          case 402:
+              errorInfo = "Upload Failed"
+              break;
           default:
               errorInfo = "code " + status + "\n\nUnknown error.";
               break;
