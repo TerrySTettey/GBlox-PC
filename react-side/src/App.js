@@ -23,6 +23,9 @@ import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
 import './App.css';
 
+const electron = window.require('electron')
+const remote = electron.remote;
+const {BrowserWindow} = remote;
 var currentToolbox;
 
 const toolboxCategories = {
@@ -305,8 +308,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 function App() {
   const [xml, setXml] = useState("");
   const [javascriptcode, setJavascriptCode] = useState("");
@@ -323,276 +324,7 @@ function App() {
       currentToolbox = newToolBox;
     }
     console.log(currentToolbox);
-  }
-
-  // const toolboxCategories = {
-  //   kind: "categoryToolbox",
-  //   contents: [
-  //     {
-  //       kind: "category",
-  //       name: "Logic",
-  //       colour: "#5C81A6",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "controls_if",
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "logic_compare",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Loops",
-  //       colour: "#5C81A6",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "for_loop",
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "controls_whileUntil",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Math",
-  //       colour: "#5CA65C",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "math_round",
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "math_number",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Functional Blocks",
-  //       colour: "#5CA699",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "main_block",
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "delay",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Digital",
-  //       colour: "#5DB254",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "pin_setup"
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "digital_pin_write"
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "digital_read"
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Analog",
-  //       colour: "#2DB254",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "pin_setup"
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "analog_write"
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "analog_read"
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Sensors",
-  //       colour: "#4DB254",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "ultrasonic_sensor"
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "ultrasonic_sensor_setup"
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Actuators",
-  //       colour: "#2CB254",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "servo_write"
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // }
-  // const newToolBox = {
-  //   kind: "categoryToolbox",
-  //   contents: [
-  //     {
-  //       kind: "category",
-  //       name: "Logic",
-  //       colour: "#5C81A6",
-  //       contents: [
-  //         {
-  //           kind:"block",
-  //           type:"controls_if"
-  //         },
-  //         {
-  //           kind:"block",
-  //           type:"logic_compare"
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Loops",
-  //       colour: "#5C81A6",
-  //       contents:[
-  //         {
-  //           kind:"block",
-  //           type:"controls_whileUntil"
-  //         },
-  //         {
-  //           kind:"block",
-  //           type:"n_mainloop"
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Math",
-  //       colour: "#5C81A6",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "math_number"
-  //         },
-  //         {
-  //           kind: "block",
-  //           type: "math_round"
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Sensors",
-  //       colour: "#5C81A6",
-  //       contents: [
-  //         {
-  //           kind: "block",
-  //           type: "n_ultra_read"
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Actuators",
-  //       colour: "#5C81A6",
-  //       contents: [
-  //         {
-  //           kind:"category",
-  //           name:"Servo Motor",
-  //           contents: [
-  //             {
-  //               kind: "block",
-  //               type: "n_servo_rotate"
-  //             }
-  //           ]
-  //         },
-  //         {
-  //           kind:"category",
-  //           name:"LED",
-  //           contents: [
-  //             {
-  //               kind: "block",
-  //               type: "n_led_state"
-  //             },
-  //             {
-  //               kind: "block",
-  //               type: "n_writestate_ledon"
-  //             },
-  //             {
-  //               kind: "block",
-  //               type: "n_writestate_ledoff"
-  //             }
-  //           ]
-  //         },
-  //         {
-  //           kind:"category",
-  //           name:"Buzzer",
-  //           contents: [
-  //             {
-  //               kind: "block",
-  //               type: "n_buzzer_play"
-  //             },
-  //             {
-  //               kind: "block",
-  //               type: "n_buzzer_stop"
-  //             },
-  //             {
-  //               kind: "block",
-  //               type: "n_buzzer_play_def"
-  //             },
-  //             {
-  //               kind: "block",
-  //               type: "n_note"
-  //             },
-  //             {
-  //               kind: "block",
-  //               type: "n_buzzer_play_note"
-  //             },
-  //             {
-  //               kind: "block",
-  //               type: "n_buzzer_play_note_def"
-  //             }
-  //           ]
-  //         }  
-  //       ]
-  //     },
-  //     {
-  //       kind: "category",
-  //       name: "Core Functions",
-  //       colour: "#5C81A6",
-  //       contents:[
-  //         {
-  //           kind: "block",
-  //           type: "n_delay"
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
-  
-  ;
+  };
 
   function showCode(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
@@ -731,6 +463,10 @@ function App() {
 
     return (
           <div className="App">
+            <button onClick={()=> {
+              let win = new BrowserWindow();
+              win.loadUrl("https://www.youtube.com");
+            }}>Click Here</button>
             <AppBar position="static">
               <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>

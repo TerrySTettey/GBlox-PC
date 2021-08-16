@@ -36,9 +36,12 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 1400,
         height: 800,
+        //frame: false,
         webPreferences: {
             nodeIntegration: true,
-            preload: path.join(__dirname, 'preload.js')
+            contextIsolation: false,
+            //preload: path.join(__dirname, 'preload.js')
+            enableRemoteModule: true,
         }
     })
 
