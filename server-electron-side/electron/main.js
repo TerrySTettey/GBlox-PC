@@ -37,12 +37,14 @@ ipcMain.on("save-file", function (event, xml_data){
     saveFile(xml_data)
 })
 
-ipcMain.on("load-file", function (event, xml_data){
-    //loadFile()
+ipcMain.on("load-file", async function (event){
+    var data = await loadFile()
+    event.reply("return-load",data)
 })
 
 async function loadFile(){
-    const { filePath, canceled } = await dialog.showSaveDialog({
+    var ourdata = "nil";
+    const { filePaths, canceled } = await dialog.showOpenDialog({
         defaultPath: "project.xml",
         buttonLabel: "Load Project",
         title: "Load Project",
@@ -50,14 +52,26 @@ async function loadFile(){
             {name: 'Project File', extensions: ['txt','xml']}
         ]
       });
-
-    if (filePath && !canceled) {
-        fs.readFile(filePath,"utf-8",(err,data) => {
+    console.log("File Path: "+filePaths[0])
+    if (filePaths[0] && !canceled) {
+        console.log("The Calm before the Storm...")
+        try{
+            ourdata = fs.readFileSync(filePaths[0], 'utf8')
+            console.log('The file has been loaded!')
+            console.log(String("Data from Load: " + ourdata.toString()))
+        }catch(err) {
+            throw err;
+        }
+        /*
+        await fs.readFile(filePaths[0],"utf8",(err,data) => {
           if (err) throw err;
-          ipcMain.send("return-load", data)
-          console.log('The file has been loaded!');
+          console.log('The file has been loaded!')
+          console.log(String("Data from Load: " + data.toString()))
+          ourdata = data;
         });
+        */
     }
+    return ourdata;
 }
 
 
