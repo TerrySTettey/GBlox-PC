@@ -436,6 +436,7 @@ function App() {
                     open = {drawer}
                     onClick={onItemClick}
                     onClose={togglefiledrawer}
+                    width = {500}
                   >
                     <List>
                       <ListItem>
