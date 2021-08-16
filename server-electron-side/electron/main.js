@@ -2,7 +2,7 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 const {ipcMain, dialog} = require('electron')
-const fs = require('fs')
+var fs = require('fs')
 
 const {execFile} = require('child_process');
 
@@ -32,6 +32,33 @@ PythonShell.run(path.join(__dirname, 'python_arduino.py'), null, function(res) {
 });
 
 */
+
+ipcMain.on("save-file", function (event, xml_data){
+    saveFile(xml_data)
+})
+
+ipcMain.on("load-file", function (event, xml_data){
+    //loadFile()
+})
+
+async function loadFile(){
+    const { filePath, canceled } = await dialog.showSaveDialog({
+        defaultPath: "project.xml",
+        buttonLabel: "Load Project",
+        title: "Load Project",
+        filters: [
+            {name: 'Project File', extensions: ['txt','xml']}
+        ]
+      });
+
+    if (filePath && !canceled) {
+        fs.readFile(filePath,"utf-8",(err,data) => {
+          if (err) throw err;
+          ipcMain.send("return-load", data)
+          console.log('The file has been loaded!');
+        });
+    }
+}
 
 
 function createWindow() {
@@ -73,10 +100,13 @@ app.on('activate', () => {
 
 async function saveFile(data){
     const { filePath, canceled } = await dialog.showSaveDialog({
-        defaultPath: "text.txt"
+        defaultPath: "project.xml",
+        buttonLabel: "Save Project",
+        title: "Save Project As...",
+        filters: [
+            {name: 'Project File', extensions: ['txt','xml']}
+        ]
       });
-
-    console.log(filePath)
 
     if (filePath && !canceled) {
         fs.writeFile(filePath, data, (err) => {
@@ -86,6 +116,5 @@ async function saveFile(data){
     }
 }
 
-ipcMain.on("save-file", function (event, xml_data){
-    saveFile(xml_data)
-})
+
+

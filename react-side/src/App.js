@@ -406,16 +406,15 @@ function App() {
       var xml_text = Blockly.Xml.domToText(xml);
       console.log(xml_text);
       ipcRenderer.send('save-file', xml_text)
-      /*
-      var link = document.createElement('a');
-      link.download="project.txt";
-      link.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      */
     } catch (e) {
-      window.location.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
+      alert(e);
+    }
+  }
+
+  function loadBlocks(){
+    try{
+
+    }catch (e) {
       alert(e);
     }
   }
@@ -459,11 +458,13 @@ function App() {
   //   }	  
   // }
 
+  ipcRenderer.on("return-load",function(event, data){
+    Blockly.mainWorkspace.clear();
+    Blockly.Xml.domToWorkspace(data, Blockly.mainWorkspace);
+  })
+
     return (
           <div className="App">
-            <button onClick={()=>{
-              ipcRenderer.send("save-file")
-            }}>Click Here</button>
             <AppBar position="static">
               <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>
@@ -476,7 +477,10 @@ function App() {
                   >
                     <List>
                       <ListItem>
-                      <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                        <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                      </ListItem>
+                      <ListItem>
+                        <Button color="inherit" onClick={loadBlocks}>Load</Button>
                       </ListItem>
                     </List>
                   </Drawer>
@@ -484,10 +488,6 @@ function App() {
                 <Typography variant="h2" className={classes.title}>
                   Mintduino
                 </Typography>
-                {/*
-                <input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>
-                <Button color="inherit" onClick={importBlocksFile}>Load</Button> */}
-                {/*<input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>*/}
                 <Button color="inherit" onClick={uploadCode}>Upload</Button>
                 <FormGroup>
                 <FormControlLabel
