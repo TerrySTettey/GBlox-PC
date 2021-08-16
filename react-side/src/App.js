@@ -399,7 +399,7 @@ function App() {
     setDrawer(!drawer)
   }
 
-  const onItemClick = title => () => {
+  const onItemClick = () => {
     setDrawer(Drawer.variant === 'temporary' ? false : drawer);
     setDrawer(!drawer);
   };
@@ -474,7 +474,7 @@ function App() {
                   <Drawer
                     variant="temporary"
                     open = {drawer}
-                    onItemClick={onItemClick}
+                    onClick={onItemClick}
                     onClose={togglefiledrawer}
                   >
                     <List>
