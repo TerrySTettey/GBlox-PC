@@ -1,7 +1,8 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
-const {ipcMain} = require('electron')
+const {ipcMain, dialog} = require('electron')
+const fs = require('fs')
 
 const {execFile} = require('child_process');
 
@@ -21,22 +22,7 @@ execFile(path.resolve(__dirname,'./debugSh.bat'), function(error, stdout, stderr
     console.log(`stdout: ${stdout.message}`);
 })
 
-ipcMain.on("open-tube", function (){
-    const wint = new BrowserWindow({
-        width: 1400,
-        height: 800,
-        //frame: false,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            //preload: path.join(__dirname, 'preload.js')
-            enableRemoteModule: true,
-        }
 
-    });
-    wint.loadUrl("http://www.youtube.com")
-    
-})
 /*
 const {PythonShell} = require('python-shell')
 
@@ -83,4 +69,23 @@ app.on('activate', () => {
     if(BrowserWindow.getAllWindows().length === 0){
         createWindow();
     }
+})
+
+async function saveFile(data){
+    const { filePath, canceled } = await dialog.showSaveDialog({
+        defaultPath: "text.txt"
+      });
+
+    console.log(filePath)
+
+    if (filePath && !canceled) {
+        fs.writeFile(filePath, data, (err) => {
+          if (err) throw err;
+          console.log('The file has been saved!');
+        });
+    }
+}
+
+ipcMain.on("save-file", function (event, xml_data){
+    saveFile(xml_data)
 })

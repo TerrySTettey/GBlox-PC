@@ -2,8 +2,6 @@ import { BlocklyWorkspace} from 'react-blockly';
 import Blockly from "blockly";
 import React,{ useState } from 'react';
 
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -407,13 +405,15 @@ function App() {
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var xml_text = Blockly.Xml.domToText(xml);
       console.log(xml_text);
-      
+      ipcRenderer.send('save-file', xml_text)
+      /*
       var link = document.createElement('a');
       link.download="project.txt";
       link.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
       document.body.appendChild(link);
       link.click();
       link.remove();
+      */
     } catch (e) {
       window.location.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
       alert(e);
@@ -462,7 +462,7 @@ function App() {
     return (
           <div className="App">
             <button onClick={()=>{
-              ipcRenderer.send("open-tube")
+              ipcRenderer.send("save-file")
             }}>Click Here</button>
             <AppBar position="static">
               <Toolbar>
