@@ -25,9 +25,7 @@ import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
 import './App.css';
 
-const electron = window.require('electron')
-const remote = electron.remote;
-const {BrowserWindow} = remote;
+const {ipcRenderer} = window.require('electron')
 
 var currentToolbox;
 
@@ -463,9 +461,8 @@ function App() {
 
     return (
           <div className="App">
-            <button onClick={()=> {
-              let win = new BrowserWindow();
-              win.loadUrl("https://www.youtube.com");
+            <button onClick={()=>{
+              ipcRenderer.send("open-tube")
             }}>Click Here</button>
             <AppBar position="static">
               <Toolbar>
