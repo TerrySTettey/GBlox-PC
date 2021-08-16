@@ -1,7 +1,8 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
-const {ipcMain} = require('electron')
+const {ipcMain, dialog} = require('electron')
+var fs = require('fs')
 
 const {execFile} = require('child_process');
 
@@ -21,22 +22,7 @@ execFile(path.resolve(__dirname,'./debugSh.bat'), function(error, stdout, stderr
     console.log(`stdout: ${stdout.message}`);
 })
 
-ipcMain.on("open-tube", function (){
-    const wint = new BrowserWindow({
-        width: 1400,
-        height: 800,
-        //frame: false,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            //preload: path.join(__dirname, 'preload.js')
-            enableRemoteModule: true,
-        }
 
-    });
-    wint.loadUrl("http://www.youtube.com")
-    
-})
 /*
 const {PythonShell} = require('python-shell')
 
@@ -46,6 +32,47 @@ PythonShell.run(path.join(__dirname, 'python_arduino.py'), null, function(res) {
 });
 
 */
+
+ipcMain.on("save-file", function (event, xml_data){
+    saveFile(xml_data)
+})
+
+ipcMain.on("load-file", async function (event){
+    var data = await loadFile()
+    event.reply("return-load",data)
+})
+
+async function loadFile(){
+    var ourdata = "nil";
+    const { filePaths, canceled } = await dialog.showOpenDialog({
+        defaultPath: "project.xml",
+        buttonLabel: "Load Project",
+        title: "Load Project",
+        filters: [
+            {name: 'Project File', extensions: ['txt','xml']}
+        ]
+      });
+    console.log("File Path: "+filePaths[0])
+    if (filePaths[0] && !canceled) {
+        console.log("The Calm before the Storm...")
+        try{
+            ourdata = fs.readFileSync(filePaths[0], 'utf8')
+            console.log('The file has been loaded!')
+            console.log(String("Data from Load: " + ourdata.toString()))
+        }catch(err) {
+            throw err;
+        }
+        /*
+        await fs.readFile(filePaths[0],"utf8",(err,data) => {
+          if (err) throw err;
+          console.log('The file has been loaded!')
+          console.log(String("Data from Load: " + data.toString()))
+          ourdata = data;
+        });
+        */
+    }
+    return ourdata;
+}
 
 
 function createWindow() {
@@ -84,3 +111,24 @@ app.on('activate', () => {
         createWindow();
     }
 })
+
+async function saveFile(data){
+    const { filePath, canceled } = await dialog.showSaveDialog({
+        defaultPath: "project.xml",
+        buttonLabel: "Save Project",
+        title: "Save Project As...",
+        filters: [
+            {name: 'Project File', extensions: ['txt','xml']}
+        ]
+      });
+
+    if (filePath && !canceled) {
+        fs.writeFile(filePath, data, (err) => {
+          if (err) throw err;
+          console.log('The file has been saved!');
+        });
+    }
+}
+
+
+

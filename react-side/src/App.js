@@ -403,63 +403,29 @@ function App() {
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var xml_text = Blockly.Xml.domToText(xml);
       console.log(xml_text);
-      
-      var link = document.createElement('a');
-      link.download="project.txt";
-      link.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+      ipcRenderer.send('save-file', xml_text)
     } catch (e) {
-      window.location.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
       alert(e);
     }
   }
 
-  // function importBlocksFiles() {
-  //   try {
-  //     var inp = document.createElement('input')
-  //     inp.id = "myfile"
-  //     inp.type = "file"
-  //     inp.accept= ".txt,.xml"
-  //     document.body.appendChild(inp);
-  //     inp.select();
-  //     console.log(inp.files)
-  //     var file = document.getElementById("myfile").files[0];
-      
-  //     var fr = new FileReader();
-  //     fr.readAsText(file);          
-  //     fr.onload = function (event) {
-  //       var xml = Blockly.Xml.textToDom(event.target.result);
-  //       Blockly.mainWorkspace.clear();
-  //       Blockly.Xml.domToWorkspace(xml,Blockly.mainWorkspace);
-  //     };
-  //     //inp.remove();
-  //   } catch (e) {
-  //     alert(e);
-  //   }	  
-  // }
+  function loadBlocks(){
+    try{
+      ipcRenderer.send('load-file')
+    }catch (e) {
+      alert(e);
+    }
+  }
 
-  // function importBlocksFile(element) {
-  //   try {	
-  //     var file = element.files[0];
-  //     var fr = new FileReader();           
-  //     fr.onload = function (event) {
-  //       var xml = Blockly.Xml.textToDom(event.target.result);
-  //       Blockly.mainWorkspace.clear();
-  //       Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
-  //     };
-  //     fr.readAsText(file);
-  //   } catch (e) {
-  //     alert(e);
-  //   }	  
-  // }
+  ipcRenderer.on("return-load",async function(event, data){
+    Blockly.mainWorkspace.clear();
+    console.log(data);
+    var xmlss = await Blockly.Xml.textToDom(data);
+    Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+  })
 
     return (
           <div className="App">
-            <button onClick={()=>{
-              ipcRenderer.send("open-tube")
-            }}>Click Here</button>
             <AppBar position="static">
               <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>
@@ -473,7 +439,10 @@ function App() {
                   >
                     <List>
                       <ListItem>
-                      <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                        <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                      </ListItem>
+                      <ListItem>
+                        <Button color="inherit" onClick={loadBlocks}>Load</Button>
                       </ListItem>
                     </List>
                   </Drawer>
@@ -481,10 +450,6 @@ function App() {
                 <Typography variant="h2" className={classes.title}>
                   Mintduino
                 </Typography>
-                {/*
-                <input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>
-                <Button color="inherit" onClick={importBlocksFile}>Load</Button> */}
-                {/*<input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>*/}
                 <Button color="inherit" onClick={uploadCode}>Upload</Button>
                 <FormGroup>
                 <FormControlLabel
