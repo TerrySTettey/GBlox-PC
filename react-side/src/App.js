@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import { withStyles } from '@material-ui/core/styles';
 
 import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
@@ -642,8 +643,16 @@ function App() {
       request.send(code);
   }
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  // Drawer Stuff
+  const [drawer, setDrawer] = useState(false);
   const [state, setState] = React.useState(false)
+
+  const styles = theme => ({
+    drawerPaper: {
+      position: "relative",
+      width: 200
+    },
+  });
 
   const list = () => {
     <List>
@@ -651,17 +660,14 @@ function App() {
     </List>
   }
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const togglefiledrawer = (open) => (event) => {
-    setState(open)
+  const togglefiledrawer = () => {
+    setDrawer(!drawer)
   }
+
+  const onItemClick = title => () => {
+    setDrawer(Drawer.variant === 'temporary' ? false : drawer);
+    setDrawer(!drawer);
+  };
 
   function exportBlocks() {
     try {
@@ -720,24 +726,32 @@ function App() {
   //   }	  
   // }
 
+
+
+
     return (
           <div className="App">
             <AppBar position="static">
               <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer(true)}>
+                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>
                   <MenuIcon />
                   <Drawer
-                    anchor={'top'}
-                    open={state}
-                    onClose={togglefiledrawer(false)}
+                    variant="temporary"
+                    open = {drawer}
+                    onItemClick={onItemClick}
+                    onClose={togglefiledrawer}
                   >
-                    {list()}
+                    <List>
+                      <ListItem>
+                      <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                      </ListItem>
+                    </List>
                   </Drawer>
                 </IconButton>
                 <Typography variant="h2" className={classes.title}>
                   Mintduino
                 </Typography>
-                {/* <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                {/*
                 <input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>
                 <Button color="inherit" onClick={importBlocksFile}>Load</Button> */}
                 {/*<input id="myfile" type="file" onchange={importBlocksFile(this)} accept=".txt,.xml"></input>*/}
