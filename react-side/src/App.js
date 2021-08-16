@@ -2,8 +2,6 @@ import { BlocklyWorkspace} from 'react-blockly';
 import Blockly from "blockly";
 import React,{ useState } from 'react';
 
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,6 +18,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
+
 
 import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
@@ -307,6 +306,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  drawerPaper: {
+    position: "relative",
+    width: 1000
+  }
 }));
 
 function App() {
@@ -379,13 +382,6 @@ function App() {
   // Drawer Stuff
   const [drawer, setDrawer] = useState(false);
   const [state, setState] = React.useState(false)
-
-  const styles = theme => ({
-    drawerPaper: {
-      position: "relative",
-      width: 200
-    },
-  });
 
   const list = () => {
     <List>
@@ -469,6 +465,7 @@ function App() {
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>
                   <MenuIcon />
                   <Drawer
+                    className={classes.drawerPaper}
                     variant="temporary"
                     open = {drawer}
                     onClick={onItemClick}
@@ -491,7 +488,14 @@ function App() {
                 <Button color="inherit" onClick={uploadCode}>Upload</Button>
                 <FormGroup>
                 <FormControlLabel
-                    color = "inherit" control={<Switch checked={toolboxstate} onChange={toolboxchange} value="true"/>}
+                    color = "inherit" control={
+                      <Switch 
+                        checked={toolboxstate} 
+                        onChange={toolboxchange} 
+                        value={toolboxstate}
+                        name="toolbox"
+                        />
+                    }
                     labelPlacement="start"
                     label="Advanced Toolbox"
                   />
