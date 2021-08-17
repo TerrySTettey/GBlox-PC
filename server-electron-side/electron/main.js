@@ -12,6 +12,7 @@ const {execFile, execSync, exec} = require('child_process');
 //var result = execSync(path.resolve(__dirname.replace('\\','//'),'pyduino_test.exe')).toString();
 //console.log(result);
 
+/*
 execFile(path.resolve(__dirname,'./debugSh.bat'), function(error, stdout, stderr) {
     console.log("Executing .exe")
     if(error) {
@@ -24,6 +25,7 @@ execFile(path.resolve(__dirname,'./debugSh.bat'), function(error, stdout, stderr
     }
     console.log(`stdout: ${stdout.message}`);
 })
+*/
 
 
 /*
@@ -167,8 +169,9 @@ function VERIFYCODE(){
     return VERIFICATION;
 }
 
-ipcMain.on("read-reg",async function(event){
+ipcMain.on("read-reg",async function(event,jsCode){
     try{
+        fs.writeFileSync(path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino"), jsCode)
         CHECK_COMPORT();
         var VER = VERIFYCODE();
         console.log(VER)
