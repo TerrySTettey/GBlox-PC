@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/electron/arduino-1.8.15
 .pnp.js
 
 # testing

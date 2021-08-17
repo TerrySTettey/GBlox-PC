@@ -421,7 +421,7 @@ function App() {
   }
 
   function READREG(){
-    ipcRenderer.send('read-reg');
+    ipcRenderer.sendSync('read-reg');
     console.log("THE BUTTON WAS BLOODY PRESSED")
   }
 

@@ -3,9 +3,11 @@ const path = require('path')
 const isDev = require('electron-is-dev')
 const {ipcMain, dialog} = require('electron')
 var fs = require('fs')
-var REGKEY = null;
+var COMPORT = null;
+var VER = null;
+var REGKEY_TEST = null;
 
-const {execFile, exec} = require('child_process');
+const {execFile, execSync, exec} = require('child_process');
 
 //var result = execSync(path.resolve(__dirname.replace('\\','//'),'pyduino_test.exe')).toString();
 //console.log(result);
@@ -134,21 +136,56 @@ async function saveFile(data){
     }
 }
 
-async function READREG(){
-    REGKEY = await exec("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM",(error, stdout, stderr) => {
-         if (error) {
-           console.error(error);
-           return;
-         }
-         if (stderr) {
-           console.error(stderr);
-           return;
-         }
-         console.log(stdout);
-       });
-    console.log(REGKEY);
+function CHECK_COMPORT(){
+    COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", {encoding: "utf-8"})  //,(error, stdout, stderr) => {
+    console.log(COMPORT);
+    if (COMPORT.includes('COM')==1){
+        COMPORT = COMPORT.split("    ")[3].split("\\r")[0];
+    }
+    else{
+        COMPORT = "No Arduino Detected";
+    }
+ }
+
+function VERIFYCODE(){
+    var VERIFICATION = null;
+    if(COMPORT != "No Arduino Detected"){
+        VERIFICATION = exec(path.resolve(__dirname,"./arduino-1.8.15/arduino_debug --upload ")+path.resolve(__dirname,"./ArduinoOutput/ArduinoOutput.ino")+" --port "+COMPORT,(error, stdout, stderr) => {
+            console.log("INSIDE VERIFYCODE")
+            if (error) {
+                console.log("This is an error");
+                console.error(error);
+                return;
+              }
+        }
+        )
+    }
+    else{
+        VERIFICATION = "No Arduino Detected"
+    }
+
+    return VERIFICATION;
 }
 
 ipcMain.on("read-reg",async function(event){
-    READREG();
+    try{
+        CHECK_COMPORT();
+        var VER = VERIFYCODE();
+        console.log(VER)
+    }
+    catch(e){
+        console.log(e)
+    }
+    // REGKEY_TEMP.stdout.on("data", function(data){
+    //     //console.log(data);
+    // })
+    
+    // VER.stdout.on("data",function(data){
+    //     console.log("Hey this is our data" + data);
+    // })
+    event.returnValue = "Done";
 })
+
+
+
+
