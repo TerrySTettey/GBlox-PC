@@ -3,8 +3,9 @@ const path = require('path')
 const isDev = require('electron-is-dev')
 const {ipcMain, dialog} = require('electron')
 var fs = require('fs')
+var REGKEY = null;
 
-const {execFile} = require('child_process');
+const {execFile, exec} = require('child_process');
 
 //var result = execSync(path.resolve(__dirname.replace('\\','//'),'pyduino_test.exe')).toString();
 //console.log(result);
@@ -133,5 +134,21 @@ async function saveFile(data){
     }
 }
 
+async function READREG(){
+    REGKEY = await exec("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM",(error, stdout, stderr) => {
+         if (error) {
+           console.error(error);
+           return;
+         }
+         if (stderr) {
+           console.error(stderr);
+           return;
+         }
+         console.log(stdout);
+       });
+    console.log(REGKEY);
+}
 
-
+ipcMain.on("read-reg",async function(event){
+    READREG();
+})

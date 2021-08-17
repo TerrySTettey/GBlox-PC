@@ -420,6 +420,11 @@ function App() {
     }
   }
 
+  function READREG(){
+    ipcRenderer.send('read-reg');
+    console.log("THE BUTTON WAS BLOODY PRESSED")
+  }
+
     return (
           <div className="App">
             <AppBar position="static">
@@ -448,6 +453,7 @@ function App() {
                   Mintduino
                 </Typography>
                 <Button color="inherit" onClick={uploadCode}>Upload</Button>
+                <Button onClick={READREG}>Read REgistry</Button>
                 <FormGroup>
                 <FormControlLabel
                     color = "inherit" control={
