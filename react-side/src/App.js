@@ -411,18 +411,14 @@ function App() {
 
   function loadBlocks(){
     try{
-      ipcRenderer.send('load-file')
+      alert("Load-File -> Electron main.js")
+      var xmlss = Blockly.Xml.textToDom(ipcRenderer.sendSync('load-file'))
+      Blockly.mainWorkspace.clear();
+      Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
     }catch (e) {
       alert(e);
     }
   }
-
-  ipcRenderer.on("return-load",async function(event, data){
-    Blockly.mainWorkspace.clear();
-    console.log(data);
-    var xmlss = await Blockly.Xml.textToDom(data);
-    Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
-  })
 
     return (
           <div className="App">

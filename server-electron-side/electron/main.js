@@ -38,8 +38,11 @@ ipcMain.on("save-file", function (event, xml_data){
 })
 
 ipcMain.on("load-file", async function (event){
+    console.log("Electron main.js recieved load-file")
     var data = await loadFile()
-    event.reply("return-load",data)
+    console.log("Electron main js sending out return-load")
+    //event.reply("return-load",data)
+    event.returnValue = data;
 })
 
 async function loadFile(){
