@@ -17,6 +17,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 
@@ -337,6 +338,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    flex: '1 1 100'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -374,6 +376,25 @@ function App() {
   const tabpanelchange = (event, newTabval) => {
     settabpanel(newTabval);
   };
+
+  class TestComponent extends React.Component {
+    get styles() {
+        return {
+            root: {
+                flex: '1 1 100%',
+                minHeight: 0,
+                display: 'flex',
+                flexDirection: 'column'
+            },
+            container: {
+                flex: '1 1 100%;',
+                display: 'flex',
+                flexDirection: 'column',
+                overflowY: 'auto'
+            }
+        };
+    }
+  }
 
   function showCode(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
@@ -490,43 +511,36 @@ function App() {
       </AppBar>
 
       <div className="App">
-        <BlocklyWorkspace
-          className="fill-height"
-          wrapperClassName="fill-height"
-          initialXml={laxml}
-          toolboxConfiguration={currentToolbox}
-          workspaceConfiguration={{
-            grid: {
-              spacing: 20,
-              length: 3,
-              colour: "#ccc",
-              snap: true,
-              wheel: true,
-            },
-          }}
-          onWorkspaceChange={showCode}
-        />
-        <div>
-          <Tabs color="inherit" value={tabpanelval} onChange={tabpanelchange} aria-label="simple tabs example">
+      <BlocklyWorkspace
+              className="fill-height"
+              wrapperClassName="fill-height"
+              initialXml={laxml}
+              toolboxConfiguration={currentToolbox}
+              workspaceConfiguration={{
+                grid: {
+                  spacing: 20,
+                  length: 3,
+                  colour: "#ccc",
+                  snap: true,
+                  wheel: true,
+                },
+              }}
+              onWorkspaceChange={showCode}
+            />
+          <Tabs color="inherit" value={tabpanelval} onChange={tabpanelchange}>
             <Tab label="Upload Status" {...a11yProps(0)} />
             <Tab label="Code Generated" {...a11yProps(1)} />
           </Tabs>
           <TabPanel value={tabpanelval} index={0}>
+            <Box color="black" clone>
             <Typography align="center" color="inherit" display="block" variant="button">Upload Status : {upload_status}</Typography>
+            </Box>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
-            <textarea
-              id="code"
-              value={javascriptcode}
-              readOnly
-            ></textarea>
+          <TextField color = "inherit" id="outlined-basic" variant="outlined" value = {javascriptcode} disabled={true} multiline = {true} width = {500} fullWidth = {true} align="justify"/>
           </TabPanel>
-
         </div>
-
-
       </div>
-    </div>
   );
 }
 

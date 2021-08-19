@@ -107,14 +107,20 @@ app.on('activate', () => {
 
 //Function which identifies the COM Port that Arduino is connected to...
 function CHECK_COMPORT() {
-    COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })  //,(error, stdout, stderr) => {
-    console.log(COMPORT);
-    if (COMPORT.includes('COM') == 1) {
-        COMPORT = COMPORT.split("    ")[3].split("\r")[0];
+    try{
+        COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })  //,(error, stdout, stderr) => {
+            console.log(COMPORT);
+            if (COMPORT.includes('COM') == 1) {
+                COMPORT = COMPORT.split("    ")[3].split("\r")[0];
+            }
+            else {
+                COMPORT = "No Arduino Detected";
+            }
     }
-    else {
+    catch(e) {
         COMPORT = "No Arduino Detected";
     }
+    
 }
 
 //Function which compiles and tries to upload code to the connected Arduino...
@@ -154,15 +160,3 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
         console.log(e)
     }
 })
-
-//When the program is uploading / finished uploading to the board...
-ipcMain.on("upload-status", function (event) {
-    var uploadstat = check_upload_status();
-    event.returnValue = uploadstat;
-
-});
-
-//Function which returns upload status...
-function check_upload_status() {
-    return Upload_Status
-}
