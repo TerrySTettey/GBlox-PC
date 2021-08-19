@@ -43,6 +43,7 @@ ipcMain.on("save-file", function (event, xml_data){
 })
 
 ipcMain.on("load-file", async function (event){
+
     console.log("Electron main.js recieved load-file")
     var data = await loadFile()
     console.log("Electron main js sending out return-load")
@@ -142,7 +143,7 @@ function CHECK_COMPORT(){
     COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", {encoding: "utf-8"})  //,(error, stdout, stderr) => {
     console.log(COMPORT);
     if (COMPORT.includes('COM')==1){
-        COMPORT = COMPORT.split("    ")[3].split("\\r")[0];
+        COMPORT = COMPORT.split("    ")[3].split("\r")[0];
     }
     else{
         COMPORT = "No Arduino Detected";
