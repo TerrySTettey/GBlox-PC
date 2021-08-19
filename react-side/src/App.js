@@ -7,6 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -314,9 +315,11 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={2}>
-          <Typography>{children}</Typography>
+        <Container>
+        <Box>
+            {children}
         </Box>
+      </Container>
       )}
     </div>
   );
@@ -463,7 +466,7 @@ function App() {
               </List>
             </Drawer>
           </IconButton>
-          <Typography variant="h2" className={classes.title}>
+          <Typography component = "span" variant="h2" className={classes.title}>
             Mintduino
           </Typography>
           <Button color="inherit" onClick={uploadCode_ipc}>Upload</Button>
