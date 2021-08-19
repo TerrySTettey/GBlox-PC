@@ -408,7 +408,7 @@ function App() {
     try {
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var xml_text = Blockly.Xml.domToText(xml);
-      console.log(xml_text);
+      console.log("Saving the following: " + xml_text);
       ipcRenderer.send('save-file', xml_text)
     } catch (e) {
       alert(e);
@@ -417,12 +417,12 @@ function App() {
 
   function loadBlocks() {
     try {
-      alert("Load-File -> Electron main.js")
+      console.log("Loading a file...")
       var xmlss = Blockly.Xml.textToDom(ipcRenderer.sendSync('load-file'))
       Blockly.mainWorkspace.clear();
       Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
     } catch (e) {
-      alert(e);
+      throw e;
     }
   }
 
