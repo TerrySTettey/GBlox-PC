@@ -349,9 +349,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  drawerPaper: {
+  Tabs: {
     position: "relative",
-    width: 1000
+    width: 1000,
+    align: "left",
+    padding: 0
   }
 }));
 
@@ -482,13 +484,13 @@ function App() {
         </Toolbar>
       </AppBar>
           <div>
-          <Tabs value={tabpanelval} onChange={tabpanelchange}>
-            <Tab label="Upload Status" {...a11yProps(0)} />
+          <Tabs value={tabpanelval} onChange={tabpanelchange} fullWidth={true}>
+            <Tab label="Blockly Workspace" {...a11yProps(0)} />
             <Tab label="Code Generated" {...a11yProps(1)} />
           </Tabs>
-          <TabPanel value={tabpanelval} index={0}>
+          <TabPanel value={tabpanelval} index={0} class = {classes.Tabs}>
             <div className="BlocklyDiv">
-            <BlocklyWorkspace
+              <BlocklyWorkspace
                 className="fill-height"
                 wrapperClassName="fill-height"
                 initialXml={laxml}

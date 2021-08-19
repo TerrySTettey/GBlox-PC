@@ -4,15 +4,19 @@
 }
 .fill-height {
   position: relative;
-  left: 0;
+  padding: 0px;
+  left: 0px; 
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
 }
 .TitleBar {
   height: 50px;
   background-color: dodgerblue;
 }
-
+.MuiContainer-root {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
 /*
 .texter {
   float: left;
