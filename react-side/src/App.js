@@ -352,7 +352,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const [xml, setXml] = useState("");
+  const [laxml, setXml] = useState(`<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`);
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
@@ -494,8 +494,7 @@ function App() {
               <BlocklyWorkspace
                 className="fill-height"
                 wrapperClassName="fill-height"
-                initialxml={xml}
-                onXmlChange={setXml}
+                initialXml={laxml}
                 toolboxConfiguration = {currentToolbox}
                 workspaceConfiguration={{
                   grid: {
