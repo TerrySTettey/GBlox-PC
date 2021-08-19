@@ -392,11 +392,6 @@ function App() {
     setDrawer(!drawer)
   }
 
-  const onItemClick = () => {
-    setDrawer(Drawer.variant === 'temporary' ? false : drawer);
-    setDrawer(!drawer);
-  };
-
   function clearWorkspace() {
     Blockly.mainWorkspace.clear();
   }
