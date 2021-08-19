@@ -18,37 +18,6 @@ void setup(){
 }
 
 void loop(){
-  if ((read_ultrasonic(US_Trigger,US_Echo)) < 50) {
-
-    tone(Buzzer_Pin,(1047));
-    delay(50);
-    noTone(Buzzer_Pin);
-    tone(Buzzer_Pin,(1175));
-    delay(50);
-    noTone(Buzzer_Pin);
-    tone(Buzzer_Pin,(1319));
-    delay(50);
-    noTone(Buzzer_Pin);
-    tone(Buzzer_Pin,(1568));
-    delay(50);
-    noTone(Buzzer_Pin);
-    digitalWrite(LED_Pin,(HIGH));
-    delay(3000);} else {
-
-    tone(Buzzer_Pin,(1568));
-    delay(50);
-    noTone(Buzzer_Pin);
-    tone(Buzzer_Pin,(1397));
-    delay(50);
-    noTone(Buzzer_Pin);
-    tone(Buzzer_Pin,(1319));
-    delay(50);
-    noTone(Buzzer_Pin);
-    tone(Buzzer_Pin,(1047));
-    delay(50);
-    noTone(Buzzer_Pin);
-    digitalWrite(LED_Pin,(LOW));
-    delay(3000);}
 
 }
 

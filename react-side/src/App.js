@@ -526,11 +526,11 @@ function App() {
           </Tabs>
           <TabPanel value={tabpanelval} index={0}>
             <Box color="black" clone>
-            <Typography align="center" color="inherit" display="block" variant="button">Upload Status : {upload_status}</Typography>
+            <TextField color="inherit" display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
             </Box>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
-          <TextField color = "inherit" id="outlined-basic" variant="outlined" value = {javascriptcode} disabled={true} multiline = {true} width = {500} fullWidth = {true} align="justify"/>
+          <TextField color = "inherit" id="outlined-basic" variant="outlined" value = {javascriptcode} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
           </TabPanel>
         </div>
       </div>
