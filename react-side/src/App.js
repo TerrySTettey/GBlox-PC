@@ -377,25 +377,6 @@ function App() {
     settabpanel(newTabval);
   };
 
-  class TestComponent extends React.Component {
-    get styles() {
-        return {
-            root: {
-                flex: '1 1 100%',
-                minHeight: 0,
-                display: 'flex',
-                flexDirection: 'column'
-            },
-            container: {
-                flex: '1 1 100%;',
-                display: 'flex',
-                flexDirection: 'column',
-                overflowY: 'auto'
-            }
-        };
-    }
-  }
-
   function showCode(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
     setJavascriptCode(code);
