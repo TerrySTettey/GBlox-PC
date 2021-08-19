@@ -128,13 +128,14 @@ Blockly.JavaScript['digital_pin_write'] = function(block) {
   var number_digital_pin_number = block.getFieldValue('Digital Pin Number');
   var value_pin_number = Blockly.JavaScript.valueToCode(block, 'Pin number', Blockly.JavaScript.ORDER_ATOMIC);
   var dropdown_on_off = block.getFieldValue('On/Off');
-  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+  //var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
+  var digital_pin_number = undefined
   if (value_pin_number!==""){
-    var digital_pin_number = value_pin_number;
+    digital_pin_number = value_pin_number;
   }
   else{
-    var digital_pin_number =number_digital_pin_number;
+    digital_pin_number =number_digital_pin_number;
   }
   var code = 'digitalWrite('+digital_pin_number+','+dropdown_on_off+'); //Digital Pin '+digital_pin_number+' is '+dropdown_on_off+'\n';
   return code;
@@ -190,18 +191,21 @@ Blockly.JavaScript['analog_write'] = function(block) {
   var number_output_value = block.getFieldValue('Output Value');
   var value_analog_write = Blockly.JavaScript.valueToCode(block, 'Analog Write', Blockly.JavaScript.ORDER_ATOMIC);
   
+  var analog_pin = undefined
   if (value_arduino_pin!==""){
-    var analog_pin = value_arduino_pin;
+    analog_pin = value_arduino_pin;
   }
   else{
-    var analog_pin = text_pin_number;
+    analog_pin = text_pin_number;
   }
 
+  var output_value = undefined
+
   if (value_analog_write!==""){
-    var output_value = value_analog_write;
+    output_value = value_analog_write;
   }
   else{
-    var output_value = number_output_value;
+    output_value = number_output_value;
   }
     // TODO: Assemble JavaScript into code variable.
   var code = 'analogWrite('+analog_pin+','+output_value+'); //Analog Pin '+analog_pin+' set to '+output_value+'\n';
@@ -284,18 +288,20 @@ Blockly.JavaScript['servo_write'] = function(block) {
   var value_servo_motor_position = Blockly.JavaScript.valueToCode(block, 'Servo Motor Position', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
 
+  var servo_motor_pin = undefined
   if (value_servo_motor_pin!==""){
-    var servo_motor_pin = value_servo_motor_pin;
+    servo_motor_pin = value_servo_motor_pin;
   }
   else{
-    var servo_motor_pin = text_servo_motor_pin;
+    servo_motor_pin = text_servo_motor_pin;
   }
 
+  var servo_motor_position = undefined
   if (value_servo_motor_position!==""){
-    var servo_motor_position = value_servo_motor_position;
+    servo_motor_position = value_servo_motor_position;
   }
   else{
-    var servo_motor_position = number_motor_position;
+    servo_motor_position = number_motor_position;
   }
 
   var list_servo_var = Blockly.JavaScript.nameDB_.getDistinctName("myservo", Blockly.Variables.NAME_TYPE);
@@ -325,11 +331,12 @@ Blockly.JavaScript['delay'] = function(block) {
   var number_delay_amount = block.getFieldValue('Delay Amount');
   var value_delay_amount = Blockly.JavaScript.valueToCode(block, 'Delay amount', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
+  var delay_amount = undefined
   if (value_delay_amount!==""){
-    var delay_amount = value_delay_amount;
+    delay_amount = value_delay_amount;
   }
   else{
-    var delay_amount = number_delay_amount;
+    delay_amount = number_delay_amount;
   }
   var code = 'delay('+delay_amount+');\n';
   return code;
