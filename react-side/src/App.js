@@ -481,38 +481,43 @@ function App() {
           </FormGroup>
         </Toolbar>
       </AppBar>
-
-      <div className="App">
-      <BlocklyWorkspace
-              className="fill-height"
-              wrapperClassName="fill-height"
-              initialXml={laxml}
-              toolboxConfiguration={currentToolbox}
-              workspaceConfiguration={{
-                grid: {
-                  spacing: 20,
-                  length: 3,
-                  colour: "#ccc",
-                  snap: true,
-                  wheel: true,
-                },
-              }}
-              onWorkspaceChange={showCode}
-            />
+          <div>
           <Tabs value={tabpanelval} onChange={tabpanelchange}>
             <Tab label="Upload Status" {...a11yProps(0)} />
             <Tab label="Code Generated" {...a11yProps(1)} />
           </Tabs>
           <TabPanel value={tabpanelval} index={0}>
-            <Box color="black" clone>
-            <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
-            </Box>
+            <div className="BlocklyDiv">
+            <BlocklyWorkspace
+                className="fill-height"
+                wrapperClassName="fill-height"
+                initialXml={laxml}
+                toolboxConfiguration={currentToolbox}
+                workspaceConfiguration={{
+                  grid: {
+                    spacing: 20,
+                    length: 3,
+                    colour: "#ccc",
+                    snap: true,
+                    wheel: true,
+                  },
+                }}
+                onWorkspaceChange={showCode}
+              />
+              </div>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
           <TextField id="outlined-basic" variant="outlined" value = {javascriptcode} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
           </TabPanel>
-        </div>
+          </div>
+          <div>
+        <Box color="black" clone>
+            <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
+        </Box>
+          </div>
       </div>
+
+      
   );
 }
 
