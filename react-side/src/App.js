@@ -353,7 +353,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const [laxml, setXml] = useState(`<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`);
+  const laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
@@ -364,7 +364,7 @@ function App() {
 
   const toolboxchange = event => {
     setChecked(event.target.checked);
-    if (event.target.checked == true) {
+    if (event.target.checked === true) {
       currentToolbox = toolboxCategories;
     }
     else {
@@ -403,13 +403,6 @@ function App() {
 
   // Drawer Stuff
   const [drawer, setDrawer] = useState(false);
-  const [state, setState] = React.useState(false)
-
-  const list = () => {
-    <List>
-      <ListItem>Hello World, it works!</ListItem>
-    </List>
-  }
 
   const togglefiledrawer = () => {
     setDrawer(!drawer)
@@ -429,7 +422,7 @@ function App() {
     try {
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var xml_text = Blockly.Xml.domToText(xml);
-      console.log(xml_text);
+      console.log("Saving the following: " + xml_text);
       ipcRenderer.send('save-file', xml_text)
     } catch (e) {
       alert(e);
@@ -438,12 +431,12 @@ function App() {
 
   function loadBlocks() {
     try {
-      alert("Load-File -> Electron main.js")
+      console.log("Loading a file...")
       var xmlss = Blockly.Xml.textToDom(ipcRenderer.sendSync('load-file'))
       Blockly.mainWorkspace.clear();
       Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
     } catch (e) {
-      alert(e);
+      throw e;
     }
   }
 

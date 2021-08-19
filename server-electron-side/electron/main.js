@@ -16,10 +16,7 @@ ipcMain.on("save-file", function (event, xml_data) {
 
 //When load button is pressed...
 ipcMain.on("load-file", async function (event) {
-
-    console.log("Electron main.js recieved load-file")
     var data = await loadFile()
-    console.log("Electron main js sending out return-load")
     event.returnValue = data;
 })
 
@@ -36,7 +33,6 @@ async function loadFile() {
     });
     console.log("File Path: " + filePaths[0])
     if (filePaths[0] && !canceled) {
-        console.log("The Calm before the Storm...")
         try {
             ourdata = fs.readFileSync(filePaths[0], 'utf8')
             console.log('The file has been loaded!')
