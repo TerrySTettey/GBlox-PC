@@ -502,17 +502,17 @@ function App() {
               }}
               onWorkspaceChange={showCode}
             />
-          <Tabs color="inherit" value={tabpanelval} onChange={tabpanelchange}>
+          <Tabs value={tabpanelval} onChange={tabpanelchange}>
             <Tab label="Upload Status" {...a11yProps(0)} />
             <Tab label="Code Generated" {...a11yProps(1)} />
           </Tabs>
           <TabPanel value={tabpanelval} index={0}>
             <Box color="black" clone>
-            <TextField color="inherit" display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
+            <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
             </Box>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
-          <TextField color = "inherit" id="outlined-basic" variant="outlined" value = {javascriptcode} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
+          <TextField id="outlined-basic" variant="outlined" value = {javascriptcode} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
           </TabPanel>
         </div>
       </div>
