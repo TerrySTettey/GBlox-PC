@@ -360,7 +360,7 @@ function App() {
 
   const classes = useStyles();
 
-  const [toolboxstate, setChecked] = useState();
+  const [toolboxstate, setChecked] = useState(false);
 
   const toolboxchange = event => {
     setChecked(event.target.checked);
@@ -473,6 +473,7 @@ function App() {
                 <Switch
                   checked={toolboxstate}
                   onChange={toolboxchange}
+                  onClick={toolboxchange}
                   value={toolboxstate}
                   name="toolbox"
                 />
