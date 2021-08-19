@@ -1,6 +1,6 @@
-import { BlocklyWorkspace} from 'react-blockly';
+import { BlocklyWorkspace } from 'react-blockly';
 import Blockly from "blockly";
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,8 +10,6 @@ import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
@@ -21,19 +19,17 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
-
 
 import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
 import './App.css';
 
-const {ipcRenderer} = window.require('electron')
+const { ipcRenderer } = window.require('electron')
 
 var currentToolbox;
-var response ="null";
+var response = "null";
 
+// Advanced Toolbox
 const toolboxCategories = {
   kind: "categoryToolbox",
   contents: [
@@ -163,6 +159,8 @@ const toolboxCategories = {
     },
   ],
 }
+
+// Beginner Toolbox
 const newToolBox = {
   kind: "categoryToolbox",
   contents: [
@@ -172,12 +170,12 @@ const newToolBox = {
       colour: "#5C81A6",
       contents: [
         {
-          kind:"block",
-          type:"controls_if"
+          kind: "block",
+          type: "controls_if"
         },
         {
-          kind:"block",
-          type:"logic_compare"
+          kind: "block",
+          type: "logic_compare"
         }
       ]
     },
@@ -185,14 +183,14 @@ const newToolBox = {
       kind: "category",
       name: "Loops",
       colour: "#5C81A6",
-      contents:[
+      contents: [
         {
-          kind:"block",
-          type:"controls_whileUntil"
+          kind: "block",
+          type: "controls_whileUntil"
         },
         {
-          kind:"block",
-          type:"n_mainloop"
+          kind: "block",
+          type: "n_mainloop"
         }
       ]
     },
@@ -228,8 +226,8 @@ const newToolBox = {
       colour: "#5C81A6",
       contents: [
         {
-          kind:"category",
-          name:"Servo Motor",
+          kind: "category",
+          name: "Servo Motor",
           contents: [
             {
               kind: "block",
@@ -238,8 +236,8 @@ const newToolBox = {
           ]
         },
         {
-          kind:"category",
-          name:"LED",
+          kind: "category",
+          name: "LED",
           contents: [
             {
               kind: "block",
@@ -256,8 +254,8 @@ const newToolBox = {
           ]
         },
         {
-          kind:"category",
-          name:"Buzzer",
+          kind: "category",
+          name: "Buzzer",
           contents: [
             {
               kind: "block",
@@ -284,14 +282,14 @@ const newToolBox = {
               type: "n_buzzer_play_note_def"
             }
           ]
-        }  
+        }
       ]
     },
     {
       kind: "category",
       name: "Core Functions",
       colour: "#5C81A6",
-      contents:[
+      contents: [
         {
           kind: "block",
           type: "n_delay"
@@ -300,6 +298,7 @@ const newToolBox = {
     }
   ]
 }
+
 currentToolbox = newToolBox;
 
 function TabPanel(props) {
@@ -356,22 +355,22 @@ function App() {
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
-  
+
   const classes = useStyles();
-  
+
   const [toolboxstate, setChecked] = useState();
-  
+
   const toolboxchange = event => {
     setChecked(event.target.checked);
-    if (event.target.checked==true) {
+    if (event.target.checked == true) {
       currentToolbox = toolboxCategories;
     }
-    else{
+    else {
       currentToolbox = newToolBox;
     }
     console.log(currentToolbox);
   };
-  
+
   const tabpanelchange = (event, newTabval) => {
     settabpanel(newTabval);
   };
@@ -400,7 +399,7 @@ function App() {
     setDrawer(!drawer);
   };
 
-  function clearWorkspace(){
+  function clearWorkspace() {
     Blockly.mainWorkspace.clear();
   }
 
@@ -416,18 +415,18 @@ function App() {
     }
   }
 
-  function loadBlocks(){
-    try{
+  function loadBlocks() {
+    try {
       alert("Load-File -> Electron main.js")
       var xmlss = Blockly.Xml.textToDom(ipcRenderer.sendSync('load-file'))
       Blockly.mainWorkspace.clear();
       Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
-    }catch (e) {
+    } catch (e) {
       alert(e);
     }
   }
 
-  async function uploadCode_ipc(){
+  async function uploadCode_ipc() {
     response = 'Attempting to upload code';
     setUploadStatus(response);
     console.log(response);
@@ -442,93 +441,93 @@ function App() {
     });
   }
 
-    return (
-          <div className="App">
-            <AppBar position="static">
-              <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>
-                  <MenuIcon />
-                  <Drawer
-                    className={classes.drawerPaper}
-                    variant="temporary"
-                    open = {drawer}
-                    onClick={onItemClick}
-                    onClose={togglefiledrawer}
-                    width = {500}
-                  >
-                    <List>
-                      <ListItem>
-                        <Button color="inherit" onClick={exportBlocks}>Save</Button>
-                      </ListItem>
-                      <ListItem>
-                        <Button color="inherit" onClick={loadBlocks}>Load</Button>
-                      </ListItem>
-                      <ListItem>
-                        <Button color="inherit" onClick={clearWorkspace}>Clear Workspace</Button>
-                      </ListItem>
-                    </List>
-                  </Drawer>
-                </IconButton>
-                <Typography variant="h2" className={classes.title}>
-                  Mintduino
-                </Typography>
-                <Button color="inherit" onClick={uploadCode_ipc}>Upload</Button>
-                <FormGroup>
-                <FormControlLabel
-                    color = "inherit" control={
-                      <Switch 
-                        checked={toolboxstate} 
-                        onChange={toolboxchange} 
-                        value={toolboxstate}
-                        name="toolbox"
-                        />
-                    }
-                    labelPlacement="start"
-                    label="Advanced Toolbox"
-                  />
-                </FormGroup>
-              </Toolbar>
-            </AppBar>
-            
-            <div className="App">
-              <BlocklyWorkspace
-                className="fill-height"
-                wrapperClassName="fill-height"
-                initialXml={laxml}
-                toolboxConfiguration = {currentToolbox}
-                workspaceConfiguration={{
-                  grid: {
-                    spacing: 20,
-                    length: 3,
-                    colour: "#ccc",
-                    snap: true,
-                    wheel: true,
-                  },
-                }}
-                onWorkspaceChange={showCode}
-              />
-              <div>
-                <Tabs color="inherit" value = {tabpanelval} onChange = {tabpanelchange} aria-label="simple tabs example">
-                    <Tab label="Upload Status" {...a11yProps(0)} />
-                    <Tab label="Code Generated" {...a11yProps(1)} />
-                </Tabs>
-                <TabPanel value = {tabpanelval} index={0}>
-                 <Typography align = "center" color = "inherit" display = "block" variant="button">Upload Status : {upload_status}</Typography>
-                </TabPanel>
-                <TabPanel value = {tabpanelval} index={1}>
-                  <textarea
-                  id="code"
-                  value={javascriptcode}
-                  readOnly
-                ></textarea>
-                </TabPanel>
-                
-              </div>
-              
-              
-            </div>
+  return (
+    <div className="App">
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>
+            <MenuIcon />
+            <Drawer
+              className={classes.drawerPaper}
+              variant="temporary"
+              open={drawer}
+              onClick={onItemClick}
+              onClose={togglefiledrawer}
+              width={500}
+            >
+              <List>
+                <ListItem>
+                  <Button color="inherit" onClick={exportBlocks}>Save</Button>
+                </ListItem>
+                <ListItem>
+                  <Button color="inherit" onClick={loadBlocks}>Load</Button>
+                </ListItem>
+                <ListItem>
+                  <Button color="inherit" onClick={clearWorkspace}>Clear Workspace</Button>
+                </ListItem>
+              </List>
+            </Drawer>
+          </IconButton>
+          <Typography variant="h2" className={classes.title}>
+            Mintduino
+          </Typography>
+          <Button color="inherit" onClick={uploadCode_ipc}>Upload</Button>
+          <FormGroup>
+            <FormControlLabel
+              color="inherit" control={
+                <Switch
+                  checked={toolboxstate}
+                  onChange={toolboxchange}
+                  value={toolboxstate}
+                  name="toolbox"
+                />
+              }
+              labelPlacement="start"
+              label="Advanced Toolbox"
+            />
+          </FormGroup>
+        </Toolbar>
+      </AppBar>
+
+      <div className="App">
+        <BlocklyWorkspace
+          className="fill-height"
+          wrapperClassName="fill-height"
+          initialXml={laxml}
+          toolboxConfiguration={currentToolbox}
+          workspaceConfiguration={{
+            grid: {
+              spacing: 20,
+              length: 3,
+              colour: "#ccc",
+              snap: true,
+              wheel: true,
+            },
+          }}
+          onWorkspaceChange={showCode}
+        />
+        <div>
+          <Tabs color="inherit" value={tabpanelval} onChange={tabpanelchange} aria-label="simple tabs example">
+            <Tab label="Upload Status" {...a11yProps(0)} />
+            <Tab label="Code Generated" {...a11yProps(1)} />
+          </Tabs>
+          <TabPanel value={tabpanelval} index={0}>
+            <Typography align="center" color="inherit" display="block" variant="button">Upload Status : {upload_status}</Typography>
+          </TabPanel>
+          <TabPanel value={tabpanelval} index={1}>
+            <textarea
+              id="code"
+              value={javascriptcode}
+              readOnly
+            ></textarea>
+          </TabPanel>
+
         </div>
-      );
+
+
+      </div>
+    </div>
+  );
 }
 
 export default App;
