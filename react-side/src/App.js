@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
 
@@ -27,6 +28,7 @@ import './App.css';
 const {ipcRenderer} = window.require('electron')
 
 var currentToolbox;
+var response ="null";
 
 const toolboxCategories = {
   kind: "categoryToolbox",
@@ -315,6 +317,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const [xml, setXml] = useState("");
   const [javascriptcode, setJavascriptCode] = useState("");
+  const [upload_status, setUploadStatus] = useState("");
   const classes = useStyles();
   
   const [toolboxstate, setChecked] = React.useState();
@@ -335,50 +338,6 @@ function App() {
     setJavascriptCode(code);
   }
 
-  function uploadCode(workspace, callback) {
-    var code = javascriptcode;
-    console.log("Compiled Code");
-    var url = "http://127.0.0.1:8080/";
-    var method = "POST";
-    var async = true;
-    var request = new XMLHttpRequest();
-  
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200) { 
-          console.log("Code Done Uploading");
-      }
-      else{
-        //console.log(request.status);
-      }
-      {
-         var status = parseInt(request.status); 
-           console.log(status);
-           var errorInfo = null;
-           switch (status) {
-          case 200:
-              errorInfo = "Code Upload Success";
-              break;
-          case 400:
-              errorInfo = "code 400\n\nBuild failed - probably due to invalid source code.  Make sure that there are no missing connections in the blocks.";
-              break;
-          case 401:
-              errorInfo = "No Arduino connection found"
-              break;
-          case 402:
-              errorInfo = "Upload Failed"
-              break;
-          default:
-              errorInfo = "code " + status + "\n\nUnknown error.";
-              break;
-          };
-          console.log(errorInfo);
-      }
-      };
-      request.open(method, url, async);
-      request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-      request.send(code);
-  }
-
   // Drawer Stuff
   const [drawer, setDrawer] = useState(false);
   const [state, setState] = React.useState(false)
@@ -397,6 +356,11 @@ function App() {
     setDrawer(Drawer.variant === 'temporary' ? false : drawer);
     setDrawer(!drawer);
   };
+
+  function clearWorkspace(){
+    Blockly.mainWorkspace.clear();
+  }
+
 
   function exportBlocks() {
     try {
@@ -420,9 +384,19 @@ function App() {
     }
   }
 
-  function READREG(){
-    ipcRenderer.sendSync('read-reg', javascriptcode);
-    console.log("THE BUTTON WAS BLOODY PRESSED")
+  async function uploadCode_ipc(){
+    response = 'Attempting to upload code';
+    setUploadStatus(response);
+    console.log(response);
+    response = 'Awaiting Response from Arduino'
+    console.log(response);
+    //setUploadStatus(response);
+    ipcRenderer.invoke('upload-code', javascriptcode);
+    ipcRenderer.on('return_arduino', (event, result) => {
+      console.log(result);
+      response = result;
+      setUploadStatus(response);
+    });
   }
 
     return (
@@ -446,14 +420,16 @@ function App() {
                       <ListItem>
                         <Button color="inherit" onClick={loadBlocks}>Load</Button>
                       </ListItem>
+                      <ListItem>
+                        <Button color="inherit" onClick={clearWorkspace}>Clear Workspace</Button>
+                      </ListItem>
                     </List>
                   </Drawer>
                 </IconButton>
                 <Typography variant="h2" className={classes.title}>
                   Mintduino
                 </Typography>
-                <Button color="inherit" onClick={uploadCode}>Upload</Button>
-                <Button onClick={READREG}>Read REgistry</Button>
+                <Button color="inherit" onClick={uploadCode_ipc}>Upload</Button>
                 <FormGroup>
                 <FormControlLabel
                     color = "inherit" control={
@@ -489,6 +465,7 @@ function App() {
                 }}
                 onWorkspaceChange={showCode}
               />
+              <Typography display = "block" variant="button">Upload Status : {response}</Typography>
               <textarea
                 id="code"
                 value={javascriptcode}

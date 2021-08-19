@@ -6,6 +6,7 @@ var fs = require('fs')
 var COMPORT = null;
 var VER = null;
 var REGKEY_TEST = null;
+var Upload_Status = null;
 
 const {execFile, execSync, exec} = require('child_process');
 
@@ -150,46 +151,58 @@ function CHECK_COMPORT(){
     }
  }
 
-function VERIFYCODE(){
+async function VERIFYCODE(cb){
     var VERIFICATION = null;
+    var output = "";
+    console.log("INSIDE VER2")
     if(COMPORT != "No Arduino Detected"){
         VERIFICATION = exec(path.resolve(__dirname,"./arduino-1.8.15/arduino_debug --upload ")+path.resolve(__dirname,"./ArduinoOutput/ArduinoOutput.ino")+" --port "+COMPORT,(error, stdout, stderr) => {
             console.log("INSIDE VERIFYCODE")
             if (error) {
-                console.log("This is an error");
-                console.error(error);
-                return;
-              }
+                output += error;
+                console.log(output);
+                cb("Upload Failed : Error in Code")
+            }
+            else{
+                cb("Upload Successful")
+            }
+            //return VERIFICATION;
         }
         )
     }
     else{
-        VERIFICATION = "No Arduino Detected"
+        cb("No Arduino Detected");
     }
-
-    return VERIFICATION;
 }
 
-ipcMain.on("read-reg",async function(event,jsCode){
+ipcMain.handle("upload-code",async function(event,jsCode){
     try{
         fs.writeFileSync(path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino"), jsCode)
         CHECK_COMPORT();
-        var VER = VERIFYCODE();
-        console.log(VER)
+        VERIFYCODE(function(res) {
+            console.log("IT IS FINISHED");
+            event.sender.send('return_arduino',res);
+        });
+        //var VER = await VERIFYCODE();
+        //console.log(VER)
     }
     catch(e){
         console.log(e)
     }
-    // REGKEY_TEMP.stdout.on("data", function(data){
-    //     //console.log(data);
-    // })
     
     // VER.stdout.on("data",function(data){
     //     console.log("Hey this is our data" + data);
+    //     
     // })
-    event.returnValue = "Done";
+    
 })
 
+ipcMain.on("upload-status",function(event){
+    var uploadstat = check_upload_status();
+    event.returnValue = uploadstat;
 
+});
 
-
+function check_upload_status(){
+    return Upload_Status
+}
