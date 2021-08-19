@@ -449,7 +449,6 @@ function App() {
               className={classes.drawerPaper}
               variant="temporary"
               open={drawer}
-              onClick={onItemClick}
               onClose={togglefiledrawer}
               width={500}
             >
