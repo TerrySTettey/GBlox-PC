@@ -26,6 +26,8 @@ import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
 import "./customblocks/compiler/arduino_core";
 import './App.css';
+import "./customblocks/MelloBlocks"
+import "./customblocks/MelloBlocksGen"
 
 const { ipcRenderer } = window.require('electron')
 
