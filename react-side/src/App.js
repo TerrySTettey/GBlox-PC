@@ -24,13 +24,13 @@ import PropTypes from 'prop-types';
 
 import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
+import "./customblocks/compiler/arduino_core";
 import './App.css';
 
 const { ipcRenderer } = window.require('electron')
 
 var currentToolbox;
 var response = "null";
-
 // Advanced Toolbox
 const toolboxCategories = {
   kind: "categoryToolbox",
@@ -356,9 +356,11 @@ const useStyles = makeStyles((theme) => ({
     padding: 0
   }
 }));
-
+const laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`
+var newxml = laxml;
+var newxmldom = Blockly.Xml.textToDom(newxml);
 function App() {
-  const laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`
+  
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
@@ -366,6 +368,10 @@ function App() {
   const classes = useStyles();
 
   const [toolboxstate, setChecked] = useState(false);
+
+  const code_change = event => {
+    setJavascriptCode(event.target.value);
+  }
 
   const toolboxchange = event => {
     setChecked(event.target.checked);
@@ -375,15 +381,29 @@ function App() {
     else {
       currentToolbox = newToolBox;
     }
-    console.log(currentToolbox);
+    //console.log(currentToolbox);
   };
 
   const tabpanelchange = (event, newTabval) => {
+
     settabpanel(newTabval);
   };
 
   function showCode(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
+    newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    newxml = Blockly.Xml.domToText(newxmldom);
+    if (tabpanelval === 0){
+      if (newxml===laxml){}
+      else{
+        newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        newxml = Blockly.Xml.domToText(newxmldom);
+      }
+    }
+    else{
+      Blockly.Xml.domToWorkspace(newxmldom);
+    }
+    console.log(newxml);
     setJavascriptCode(code);
   }
 
@@ -487,13 +507,14 @@ function App() {
           <Tabs value={tabpanelval} onChange={tabpanelchange} fullWidth={true}>
             <Tab label="Blockly Workspace" {...a11yProps(0)} />
             <Tab label="Code Generated" {...a11yProps(1)} />
+            <Tab label="Edit Code" {...a11yProps(2)} />
           </Tabs>
           <TabPanel value={tabpanelval} index={0} class = {classes.Tabs}>
             <div className="BlocklyDiv">
               <BlocklyWorkspace
                 className="fill-height"
                 wrapperClassName="fill-height"
-                initialXml={laxml}
+                initialXml={newxml}
                 toolboxConfiguration={currentToolbox}
                 workspaceConfiguration={{
                   grid: {
@@ -509,7 +530,10 @@ function App() {
               </div>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
-          <TextField id="outlined-basic" variant="outlined" value = {javascriptcode} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
+            <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
+          </TabPanel>
+          <TabPanel value={tabpanelval} index={2}>
+          <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline = {true} fullWidth = {true} align="justify" onChange={code_change}/>
           </TabPanel>
           </div>
           <div>
