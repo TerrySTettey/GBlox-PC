@@ -40,22 +40,22 @@ var BulkFunctions = `\nint read_ultrasonic(int trigger, int echo){
 //     }
 // };
 
-Blockly.Blocks['n_servo_rotate'] = {
-    init: function() {
-      this.appendValueInput("degrees")
-          .setCheck("Number")
-          .appendField(new Blockly.FieldImage("https://static.thenounproject.com/png/1230725-200.png", 40, 40, { alt: "*ServoMotorIcon", flipRtl: "FALSE" }))
-          .appendField("Rotate Servo Motor to ");
-      this.appendDummyInput()
-          .appendField("Degrees");
-      this.setInputsInline(true);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(0);
-   this.setTooltip("Rotates Servo Motor to specified number of degrees");
-   this.setHelpUrl("");
-    }
-};
+// Blockly.Blocks['n_servo_rotate'] = {
+//     init: function() {
+//       this.appendValueInput("degrees")
+//           .setCheck("Number")
+//           .appendField(new Blockly.FieldImage("https://static.thenounproject.com/png/1230725-200.png", 40, 40, { alt: "*ServoMotorIcon", flipRtl: "FALSE" }))
+//           .appendField("Rotate Servo Motor to ");
+//       this.appendDummyInput()
+//           .appendField("Degrees");
+//       this.setInputsInline(true);
+//       this.setPreviousStatement(true, null);
+//       this.setNextStatement(true, null);
+//       this.setColour(0);
+//    this.setTooltip("Rotates Servo Motor to specified number of degrees");
+//    this.setHelpUrl("");
+//     }
+// };
 
 Blockly.Blocks['n_led_state'] = {
     init: function() {
@@ -224,12 +224,12 @@ Blockly.Blocks['n_buzzer_play_note_def'] = {
 //     return [code, Blockly.JavaScript.ORDER_NONE];
 // };
 
-Blockly.JavaScript['n_servo_rotate'] = function(block) {
-    var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
-    var code = '\nServoA.write('+value_degrees+');';
-    return code;
-};
+// Blockly.JavaScript['n_servo_rotate'] = function(block) {
+//     var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
+//     // TODO: Assemble JavaScript into code variable.
+//     var code = '\nServoA.write('+value_degrees+');';
+//     return code;
+// };
 
 Blockly.JavaScript['n_led_state'] = function(block) {
     var value_led_value = Blockly.JavaScript.valueToCode(block, 'led_value', Blockly.JavaScript.ORDER_ATOMIC);

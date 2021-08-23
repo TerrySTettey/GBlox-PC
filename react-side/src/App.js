@@ -403,7 +403,6 @@ function App() {
     else{
       Blockly.Xml.domToWorkspace(newxmldom);
     }
-    console.log(newxml);
     setJavascriptCode(code);
   }
 
