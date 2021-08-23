@@ -19,6 +19,7 @@ void setup(){
 
 void loop(){
 
+  digitalWrite(LED_Pin,(HIGH));
 }
 
 int read_ultrasonic(int trigger, int echo){

@@ -15,30 +15,30 @@ var BulkFunctions = `\nint read_ultrasonic(int trigger, int echo){
 
 /* Definitions */
 
-Blockly.Blocks['n_mainloop'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
-          .appendField("Main Loop");
-      this.appendStatementInput("mainLoop")
-          .setCheck(null);
-      this.setColour(135);
-    this.setTooltip("The Main Loop of the program.");
-    this.setHelpUrl("");
-    }
-};
+// Blockly.Blocks['n_mainloop'] = {
+//     init: function() {
+//       this.appendDummyInput()
+//           .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
+//           .appendField("Main Loop");
+//       this.appendStatementInput("mainLoop")
+//           .setCheck(null);
+//       this.setColour(135);
+//     this.setTooltip("The Main Loop of the program.");
+//     this.setHelpUrl("");
+//     }
+// };
 
-Blockly.Blocks['n_ultra_read'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/1-17510_radio-waves-clip-art-radio-wave.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
-          .appendField("Read Ultrasonic Sensor Value (cm)");
-      this.setOutput(true, "Number");
-      this.setColour(230);
-   this.setTooltip("Read Ultrasonic Sensor Value in centimeters");
-   this.setHelpUrl("");
-    }
-};
+// Blockly.Blocks['n_ultra_read'] = {
+//     init: function() {
+//       this.appendDummyInput()
+//           .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/1-17510_radio-waves-clip-art-radio-wave.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
+//           .appendField("Read Ultrasonic Sensor Value (cm)");
+//       this.setOutput(true, "Number");
+//       this.setColour(230);
+//    this.setTooltip("Read Ultrasonic Sensor Value in centimeters");
+//    this.setHelpUrl("");
+//     }
+// };
 
 Blockly.Blocks['n_servo_rotate'] = {
     init: function() {
@@ -210,19 +210,19 @@ Blockly.Blocks['n_buzzer_play_note_def'] = {
 
 /* Generators */
 
-Blockly.JavaScript['n_mainloop'] = function(block) {
-    var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-    // TODO: Assemble JavaScript into code variable.
-    var code = PreDeclarations + SetupCode +'\n\nvoid loop(){\n'+ statements_mainloop + '\n}\n' + BulkFunctions;
-    return code;
-};
+// Blockly.JavaScript['n_mainloop'] = function(block) {
+//     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
+//     // TODO: Assemble JavaScript into code variable.
+//     var code = PreDeclarations + SetupCode +'\n\nvoid loop(){\n'+ statements_mainloop + '\n}\n' + BulkFunctions;
+//     return code;
+// };
 
-Blockly.JavaScript['n_ultra_read'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = "read_ultrasonic(US_Trigger,US_Echo)";
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.JavaScript.ORDER_NONE];
-};
+// Blockly.JavaScript['n_ultra_read'] = function(block) {
+//     // TODO: Assemble JavaScript into code variable.
+//     var code = "read_ultrasonic(US_Trigger,US_Echo)";
+//     // TODO: Change ORDER_NONE to the correct strength.
+//     return [code, Blockly.JavaScript.ORDER_NONE];
+// };
 
 Blockly.JavaScript['n_servo_rotate'] = function(block) {
     var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
