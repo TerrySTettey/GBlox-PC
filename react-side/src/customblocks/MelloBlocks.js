@@ -1,3 +1,5 @@
+import Blockly from 'blockly';
+
 Blockly.Blocks['sensor_light_follower'] = {
   init: function() {
     this.appendDummyInput()

@@ -303,6 +303,115 @@ const newToolBox = {
   ]
 }
 
+const MelloToolbox = `  <category name="Motor">
+<block type="motor_move_indef">
+  <field name="direction">forward</field>
+</block>
+<block type="motor_move_seconds">
+  <field name="direction">forward</field>
+  <value name="seconds">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+</block>
+<block type="forklift_move_seconds">
+  <field name="direction">up</field>
+  <field name="speed">slow</field>
+  <value name="seconds">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+</block>
+<block type="forklift_move_indef">
+  <field name="direction">up</field>
+  <field name="speed">slow</field>
+</block>
+<block type="servo_rotate_to_degrees"></block>
+<block type="servo_360_rotate_direction">
+  <field name="direction">cw</field>
+  <field name="speed">slow</field>
+</block>
+</category>
+<category name="Ultrasonic">
+<block type="sensor_ultrasonic"></block>
+</category>
+<category name="Light Follower">
+<block type="sensor_light_follower"></block>
+</category>
+<category name="Line Follower">
+<block type="sensor_line_follower_right">
+  <field name="Right Line Follower Value">On</field>
+</block>
+<block type="sensor_line_follower_left">
+  <field name="Left Line Follower Value">On</field>
+</block>
+</category>
+<category name="Infrared Remote Control">
+<block type="communication_infrared_value">
+  <value name="NAME">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+  </value>
+</block>
+</category>
+<category name="Bluetooth">
+<block type="communication_bluetooth_start"></block>
+<block type="communication_bluetooth_receive">
+  <value name="NAME">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+  </value>
+</block>
+<block type="communincation_bluetooth_send">
+  <value name="NAME">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+  </value>
+</block>
+</category>
+<category name="RGB LED">
+<block type="led_rgb_led">
+  <field name="LED">Left</field>
+  <field name="colour">Red</field>
+  <field name="colour value">On</field>
+</block>
+</category>
+<category name="NeoPixel LED">
+<block type="led_neo_led">
+  <field name="NeoPixel LED">Left</field>
+  <value name="Red Value">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+  <value name="Green Value">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+  <value name="Blue Value">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+</block>
+</category>
+<category name="Buzzer">
+<block type="sound_buzzer_timer">
+  <field name="NAME">OPTIONNAME</field>
+  <value name="Buzzer Time">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+</block>
+</category>`;
+
 currentToolbox = newToolBox;
 
 function TabPanel(props) {
@@ -516,7 +625,7 @@ function App() {
                 className="fill-height"
                 wrapperClassName="fill-height"
                 initialXml={newxml}
-                toolboxConfiguration={currentToolbox}
+                toolboxConfiguration={MelloToolbox}
                 workspaceConfiguration={{
                   grid: {
                     spacing: 20,

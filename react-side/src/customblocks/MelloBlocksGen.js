@@ -1,3 +1,4 @@
+import Blockly from 'blockly';
 Blockly.JavaScript['sensor_light_follower'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
