@@ -17,6 +17,10 @@
   padding-left: 0px !important;
   padding-right: 0px !important;
 }
+.footer {
+  margin-top:calc(5% + 60px);
+  bottom: 0;
+}
 /*
 .texter {
   float: left;

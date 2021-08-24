@@ -3,26 +3,29 @@ import Blockly from "blockly";
 import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
+
+
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
-import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Switch from '@material-ui/core/Switch';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TextField from '@material-ui/core/TextField';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 
@@ -306,7 +309,7 @@ const newToolBox = {
     }
   ]
 }
-
+//Mello Toolbox
 const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 <category name="Logic" colour="#5b80a5">
     <block type="controls_if"></block>
@@ -540,7 +543,9 @@ const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id=
 </category>
 </xml>`;
 
-currentToolbox = newToolBox;
+const MelloDOM = Blockly.Xml.textToDom(MelloToolbox);
+
+currentToolbox = MelloDOM;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -593,18 +598,42 @@ const useStyles = makeStyles((theme) => ({
     width: 1000,
     align: "left",
     padding: 0
+  },
+  Progress: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+  footer: {
+    display: 'flex',
+    position: "fixed",
+    backgroundColor: "#F8F8F8",
+    zIndex: 999,
+    left: "0",
+    bottom: "0",
+    height: "60px",
+    width: "100%",
+  },
+  phantom: {
+    display: 'block',
+    padding: '20px',
+    height: '60px',
+    width: '100%',
   }
+
 }));
 const laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`
 var newxml = laxml;
 var newxmldom = Blockly.Xml.textToDom(newxml);
+
 function App() {
   
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
   const [toolbox_used, setToolboxUsed] = useState(1);
-
+  const [UploadProgress, setUploadProgress] = useState(0);
   const classes = useStyles();
 
   const [toolboxstate, setChecked] = useState(false);
@@ -617,7 +646,7 @@ function App() {
     setToolboxUsed(event.target.value);;
 switch(event.target.value){
   case 1: 
-    currentToolbox = MelloToolbox;
+    currentToolbox = MelloDOM;
     break;
   case 2:
     currentToolbox = newToolBox;
@@ -644,6 +673,29 @@ switch(event.target.value){
     settabpanel(newTabval);
   };
 
+  React.useEffect(() => {
+    switch (upload_status){
+      case "Uploading code":
+        setUploadProgress(10);
+        break;
+      case "Awaiting Response from Arduino":
+        setUploadProgress(30);
+        break;
+      case "No Arduino Detected":
+        setUploadProgress(0);
+        break;
+      case "Upload Failed : Error in Code":
+        setUploadProgress(0);
+        break;
+      case "Upload Successful":
+        setUploadProgress(100);
+        break;
+      default:
+        setUploadProgress(0);
+        break;
+    }
+    return UploadProgress;
+  });
   function showCode(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
     newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -696,11 +748,12 @@ switch(event.target.value){
   }
 
   async function uploadCode_ipc() {
-    response = 'Attempting to upload code';
+    response = 'Uploading code';
     setUploadStatus(response);
-    console.log(response);
-    response = 'Awaiting Response from Arduino'
-    console.log(response);
+    //console.log(response);
+    response = 'Awaiting Response from Arduino';
+    setUploadStatus(response);
+    //console.log(response);
     //setUploadStatus(response);
     ipcRenderer.invoke('upload-code', javascriptcode);
     ipcRenderer.on('return_arduino', (event, result) => {
@@ -756,10 +809,10 @@ switch(event.target.value){
             />
           </FormGroup> */}
         <FormControl>
-        <InputLabel id="demo-simple-select-label">Toolbox</InputLabel>
+        <InputLabel id="Toolbox Select">Toolbox</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="Toolbox Select"
+          id="Toolbox Select"
           value={toolbox_used}
           onChange={select_toolbox}
         >
@@ -803,10 +856,9 @@ switch(event.target.value){
           <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline = {true} fullWidth = {true} align="justify" onChange={code_change}/>
           </TabPanel>
           </div>
-          <div>
-        <Box color="black" clone>
+          <div className={classes.footer}>
             <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
-        </Box>
+            <CircularProgress variant="determinate" value={UploadProgress}  />
           </div>
       </div>
 

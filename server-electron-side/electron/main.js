@@ -148,7 +148,7 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
         fs.writeFileSync(path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino"), jsCode)
         CHECK_COMPORT();
         VERIFYCODE(function (res) {
-            console.log("IT IS FINISHED");
+            //console.log("IT IS FINISHED");
             event.sender.send('return_arduino', res);
         });
     }
