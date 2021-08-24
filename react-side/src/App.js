@@ -10,12 +10,16 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
+import InputLabel from '@material-ui/core/InputLabel';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TextField from '@material-ui/core/TextField';
@@ -303,114 +307,238 @@ const newToolBox = {
   ]
 }
 
-const MelloToolbox = `  <category name="Motor">
-<block type="motor_move_indef">
-  <field name="direction">forward</field>
-</block>
-<block type="motor_move_seconds">
-  <field name="direction">forward</field>
-  <value name="seconds">
-    <block type="math_number">
-      <field name="NUM">0</field>
+const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+<category name="Logic" colour="#5b80a5">
+    <block type="controls_if"></block>
+    <block type="logic_compare">
+        <field name="OP">EQ</field>
     </block>
-  </value>
-</block>
-<block type="forklift_move_seconds">
-  <field name="direction">up</field>
-  <field name="speed">slow</field>
-  <value name="seconds">
-    <block type="math_number">
-      <field name="NUM">0</field>
+    <block type="logic_operation">
+        <field name="OP">AND</field>
     </block>
-  </value>
-</block>
-<block type="forklift_move_indef">
-  <field name="direction">up</field>
-  <field name="speed">slow</field>
-</block>
-<block type="servo_rotate_to_degrees"></block>
-<block type="servo_360_rotate_direction">
-  <field name="direction">cw</field>
-  <field name="speed">slow</field>
-</block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean">
+        <field name="BOOL">TRUE</field>
+    </block>
+    <block type="logic_null"></block>
+    <block type="logic_ternary"></block>
 </category>
+<category name="Loops" colour="#5ba55b">
+    <block type="controls_repeat_ext">
+        <value name="TIMES">
+            <shadow type="math_number">
+                <field name="NUM">10</field>
+            </shadow>
+        </value>
+    </block>
+    <block type="controls_whileUntil">
+        <field name="MODE">WHILE</field>
+    </block>
+</category>
+<category name="Math" colour="#5b67a5">
+    <block type="math_number">
+        <field name="NUM">0</field>
+    </block>
+    <block type="math_arithmetic">
+        <field name="OP">ADD</field>
+        <value name="A">
+            <shadow type="math_number">
+                <field name="NUM">1</field>
+            </shadow>
+        </value>
+        <value name="B">
+            <shadow type="math_number">
+                <field name="NUM">1</field>
+            </shadow>
+        </value>
+    </block>
+    <block type="math_number_property">
+        <mutation divisor_input="false"></mutation>
+        <field name="PROPERTY">EVEN</field>
+        <value name="NUMBER_TO_CHECK">
+            <shadow type="math_number">
+                <field name="NUM">0</field>
+            </shadow>
+        </value>
+    </block>
+</category>
+<category name="Text" colour="#5ba58c">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+    <block type="text_join">
+      <mutation items="2"></mutation>
+    </block>
+    <block type="text_length">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_isEmpty">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_changeCase">
+      <field name="CASE">UPPERCASE</field>
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_trim">
+      <field name="MODE">BOTH</field>
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_prompt_ext">
+      <mutation type="TEXT"></mutation>
+      <field name="TYPE">TEXT</field>
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+<category name="Actuators">
+  <category name="Motor">
+  <block type="motor_move_indef">
+    <field name="direction">forward</field>
+  </block>
+  <block type="motor_move_seconds">
+    <field name="direction">forward</field>
+    <value name="seconds">
+      <block type="math_number">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+  </block>
+  </category>
+  <category name="Forklift">
+  <block type="forklift_move_seconds">
+    <field name="direction">up</field>
+    <field name="speed">slow</field>
+    <value name="seconds">
+      <block type="math_number">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+  </block>
+  <block type="forklift_move_indef">
+    <field name="direction">up</field>
+    <field name="speed">slow</field>
+  </block>
+  </category>
+  <category name="Servo">
+  <block type="servo_rotate_to_degrees"></block>
+  <block type="servo_360_rotate_direction">
+    <field name="direction">cw</field>
+    <field name="speed">slow</field>
+  </block>
+  </category>
+</category>
+<category name="Sensors">
 <category name="Ultrasonic">
-<block type="sensor_ultrasonic"></block>
+    <block type="sensor_ultrasonic"></block>
 </category>
 <category name="Light Follower">
-<block type="sensor_light_follower"></block>
+    <block type="sensor_light_follower"></block>
 </category>
 <category name="Line Follower">
-<block type="sensor_line_follower_right">
-  <field name="Right Line Follower Value">On</field>
-</block>
-<block type="sensor_line_follower_left">
-  <field name="Left Line Follower Value">On</field>
-</block>
-</category>
-<category name="Infrared Remote Control">
-<block type="communication_infrared_value">
-  <value name="NAME">
-    <block type="text">
-      <field name="TEXT"></field>
+    <block type="sensor_line_follower_right">
+        <field name="Right Line Follower Value">On</field>
     </block>
-  </value>
-</block>
+    <block type="sensor_line_follower_left">
+        <field name="Left Line Follower Value">On</field>
+    </block>
+</category>
+</category>
+<category name="Communication">
+<category name="Infrared Remote Control">
+    <block type="communication_infrared_value">
+        <value name="NAME">
+            <block type="text">
+                <field name="TEXT"></field>
+            </block>
+        </value>
+    </block>
 </category>
 <category name="Bluetooth">
-<block type="communication_bluetooth_start"></block>
-<block type="communication_bluetooth_receive">
-  <value name="NAME">
-    <block type="text">
-      <field name="TEXT"></field>
+    <block type="communication_bluetooth_start"></block>
+    <block type="communication_bluetooth_receive">
+        <value name="NAME">
+            <block type="text">
+                <field name="TEXT"></field>
+            </block>
+        </value>
     </block>
-  </value>
-</block>
-<block type="communincation_bluetooth_send">
-  <value name="NAME">
-    <block type="text">
-      <field name="TEXT"></field>
+    <block type="communincation_bluetooth_send">
+        <value name="NAME">
+            <block type="text">
+                <field name="TEXT"></field>
+            </block>
+        </value>
     </block>
-  </value>
-</block>
 </category>
+</category>
+<category name="LEDs">
 <category name="RGB LED">
-<block type="led_rgb_led">
-  <field name="LED">Left</field>
-  <field name="colour">Red</field>
-  <field name="colour value">On</field>
-</block>
+    <block type="led_rgb_led">
+        <field name="LED">Left</field>
+        <field name="colour">Red</field>
+        <field name="colour value">On</field>
+    </block>
 </category>
 <category name="NeoPixel LED">
-<block type="led_neo_led">
-  <field name="NeoPixel LED">Left</field>
-  <value name="Red Value">
-    <block type="math_number">
-      <field name="NUM">0</field>
+    <block type="led_neo_led">
+        <field name="NeoPixel LED">Left</field>
+        <value name="Red Value">
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+        </value>
+        <value name="Green Value">
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+        </value>
+        <value name="Blue Value">
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+        </value>
     </block>
-  </value>
-  <value name="Green Value">
-    <block type="math_number">
-      <field name="NUM">0</field>
-    </block>
-  </value>
-  <value name="Blue Value">
-    <block type="math_number">
-      <field name="NUM">0</field>
-    </block>
-  </value>
-</block>
 </category>
+</category>
+<category name="Sound">
 <category name="Buzzer">
-<block type="sound_buzzer_timer">
-  <field name="NAME">OPTIONNAME</field>
-  <value name="Buzzer Time">
-    <block type="math_number">
-      <field name="NUM">0</field>
+    <block type="sound_buzzer_timer">
+        <field name="NAME">OPTIONNAME</field>
+        <value name="Buzzer Time">
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+        </value>
     </block>
-  </value>
-</block>
-</category>`;
+</category>
+</category>
+</xml>`;
 
 currentToolbox = newToolBox;
 
@@ -475,6 +603,7 @@ function App() {
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
+  const [toolbox_used, setToolboxUsed] = useState(1);
 
   const classes = useStyles();
 
@@ -482,6 +611,21 @@ function App() {
 
   const code_change = event => {
     setJavascriptCode(event.target.value);
+  }
+
+  const select_toolbox = event => {
+    setToolboxUsed(event.target.value);;
+switch(event.target.value){
+  case 1: 
+    currentToolbox = MelloToolbox;
+    break;
+  case 2:
+    currentToolbox = newToolBox;
+    break;
+  case 3:
+    currentToolbox = toolboxCategories;
+    break;
+}
   }
 
   const toolboxchange = event => {
@@ -596,7 +740,7 @@ function App() {
             Mintduino
           </Typography>
           <Button color="inherit" onClick={uploadCode_ipc}>Upload</Button>
-          <FormGroup>
+          {/* <FormGroup>
             <FormControlLabel
               color="inherit" control={
                 <Switch
@@ -610,22 +754,35 @@ function App() {
               labelPlacement="start"
               label="Advanced Toolbox"
             />
-          </FormGroup>
+          </FormGroup> */}
+        <FormControl>
+        <InputLabel id="demo-simple-select-label">Toolbox</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={toolbox_used}
+          onChange={select_toolbox}
+        >
+          <MenuItem value={1}>Mello Toolbox</MenuItem>
+          <MenuItem value={2}>Basic Toolbox</MenuItem>
+          <MenuItem value={3}>Advanced Toolbox</MenuItem>
+        </Select>
+      </FormControl>
         </Toolbar>
       </AppBar>
           <div>
-          <Tabs value={tabpanelval} onChange={tabpanelchange} fullWidth={true}>
+          <Tabs value={tabpanelval} onChange={tabpanelchange} >
             <Tab label="Blockly Workspace" {...a11yProps(0)} />
             <Tab label="Code Generated" {...a11yProps(1)} />
             <Tab label="Edit Code" {...a11yProps(2)} />
           </Tabs>
-          <TabPanel value={tabpanelval} index={0} class = {classes.Tabs}>
+          <TabPanel value={tabpanelval} index={0} className = {classes.Tabs}>
             <div className="BlocklyDiv">
               <BlocklyWorkspace
                 className="fill-height"
                 wrapperClassName="fill-height"
                 initialXml={newxml}
-                toolboxConfiguration={MelloToolbox}
+                toolboxConfiguration={currentToolbox}
                 workspaceConfiguration={{
                   grid: {
                     spacing: 20,

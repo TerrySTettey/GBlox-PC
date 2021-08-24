@@ -1,5 +1,17 @@
 import Blockly from 'blockly';
 
+Blockly.Blocks['sensor_ultrasonic'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
+        .appendField("Read Ultrasonic Sensor Value");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['sensor_light_follower'] = {
   init: function() {
     this.appendDummyInput()

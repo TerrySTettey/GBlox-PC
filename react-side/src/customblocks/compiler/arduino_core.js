@@ -26,7 +26,7 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
     Total_SetupCode += peripheral_SetupCode;
     Total_BulkFunctions += peripheral_BulkFunctions;
     var code = Total_PreDeclarations + Total_SetupCode +'\n}\nvoid loop(){\n'+ statements_mainloop + '\n}\n' + Total_BulkFunctions;
-    console.log(Total_PreDeclarations);
+    // console.log(Total_PreDeclarations);
     Total_PreDeclarations = "";
     Total_SetupCode = "void setup(){\n";
     Total_BulkFunctions = "";

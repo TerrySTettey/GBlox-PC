@@ -1,4 +1,12 @@
 import Blockly from 'blockly';
+
+Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 Blockly.JavaScript['sensor_light_follower'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
