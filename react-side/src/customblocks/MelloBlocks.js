@@ -43,7 +43,7 @@ Blockly.Blocks['sensor_line_follower_right'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Right Line Follower")
+        .appendField("Right Line Follower is")
         .appendField(new Blockly.FieldDropdown([["On","On"], ["Off","Off"]]), "Right Line Follower Value");
     this.setOutput(true, null);
     this.setColour(230);
@@ -57,7 +57,7 @@ Blockly.Blocks['sensor_line_follower_left'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Left Line Follower")
+        .appendField("Left Line Follower is")
         .appendField(new Blockly.FieldDropdown([["On","On"], ["Off","Off"]]), "Left Line Follower Value");
     this.setOutput(true, null);
     this.setColour(230);

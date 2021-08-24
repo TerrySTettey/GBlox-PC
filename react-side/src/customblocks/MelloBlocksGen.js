@@ -7,7 +7,9 @@ var peripheral_SetupCode = "";
 const US_Trigger = 11;
 const US_Echo = 10;
 const  Right_Light_Follower = "A1";
-const Left_Light_Follower = "A0"
+const Left_Light_Follower = "A0";
+const Right_Line_Follower_Receiver = "A3";
+const Left_Line_Follower_Receiver = "A2";
 
 function clearvars(){
   peripheral_PreDeclarations = "";
@@ -33,7 +35,7 @@ Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
 };
 
 Blockly.JavaScript['sensor_light_follower_right'] = function(block) {
-  peripheral_PreDeclarations += `Right_Light_Follower = ${Right_Light_Follower};\n`;
+  peripheral_PreDeclarations += `int Right_Light_Follower = ${Right_Light_Follower};\n`;
   peripheral_SetupCode += `\tpinMode(Right_Light_Follower, INPUT);\n`
   var code = `analogRead(Right_Light_Follower)`;
   // TODO: Change ORDER_NONE to the correct strength.
@@ -41,7 +43,7 @@ Blockly.JavaScript['sensor_light_follower_right'] = function(block) {
 };
 
 Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
-  peripheral_PreDeclarations += `Left_Light_Follower = ${Left_Light_Follower};\n`;
+  peripheral_PreDeclarations += `int Left_Light_Follower = ${Left_Light_Follower};\n`;
   peripheral_SetupCode += `\tpinMode(Left_Light_Follower, INPUT);\n`
   var code = `analogRead(Left_Light_Follower)`;
   // TODO: Change ORDER_NONE to the correct strength.
@@ -50,16 +52,31 @@ Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
 
 Blockly.JavaScript['sensor_line_follower_right'] = function(block) {
   var dropdown_right_line_follower_value = block.getFieldValue('Right Line Follower Value');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  peripheral_PreDeclarations += `int Right_Line_Follower_Receiver = ${Right_Line_Follower_Receiver};\n`;
+  peripheral_SetupCode += `\tpinMode(Right_Line_Follower_Receiver, INPUT);`;
+  var sensor_val = 0;
+  if (dropdown_right_line_follower_value === "On"){
+    sensor_val = 1;
+  }
+  else{
+    sensor_val = 0;
+  }
+  var code =`map(analogRead(Right_Line_Follower_Receiver),0,255,0,1)==${sensor_val}`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
   var dropdown_left_line_follower_value = block.getFieldValue('Left Line Follower Value');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
+  peripheral_PreDeclarations += `int Left_Line_Follower_Receiver = ${Left_Line_Follower_Receiver};\n`;
+  peripheral_SetupCode += `\tpinMode(Left_Line_Follower_Receiver, INPUT);`;
+  var sensor_val = 0;
+  if (dropdown_left_line_follower_value === "On"){
+    sensor_val = 1;
+  }
+  else{
+    sensor_val = 0;
+  }
+  var code = `map(analogRead(Left_Line_Follower_Receiver),0,255,0,1)==${sensor_val}`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };

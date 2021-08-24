@@ -234,7 +234,7 @@ Blockly.Blocks['n_buzzer_play_note_def'] = {
 Blockly.JavaScript['n_led_state'] = function(block) {
     var value_led_value = Blockly.JavaScript.valueToCode(block, 'led_value', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
-    var code = '\ndigitalWrite(LED_Pin,'+value_led_value+');';
+    var code = '\ndigitalWrite(LED_BUILTIN,'+value_led_value+');';
     return code;
 };
 
