@@ -7,18 +7,33 @@ Blockly.Blocks['sensor_ultrasonic'] = {
         .appendField("Read Ultrasonic Sensor Value");
     this.setOutput(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
 };
 
-Blockly.Blocks['sensor_light_follower'] = {
+Blockly.Blocks['sensor_light_follower_right'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Light Follower Value");
+        .appendField("Read Right Light Follower Value");
     this.setOutput(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sensor_light_follower_left'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
+        .appendField("Read Left Light Follower Value");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -32,6 +47,7 @@ Blockly.Blocks['sensor_line_follower_right'] = {
         .appendField(new Blockly.FieldDropdown([["On","On"], ["Off","Off"]]), "Right Line Follower Value");
     this.setOutput(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -45,6 +61,7 @@ Blockly.Blocks['sensor_line_follower_left'] = {
         .appendField(new Blockly.FieldDropdown([["On","On"], ["Off","Off"]]), "Left Line Follower Value");
     this.setOutput(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -58,6 +75,7 @@ Blockly.Blocks['communication_infrared_value'] = {
         .appendField("Read Infrared Character:");
     this.setOutput(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -71,6 +89,7 @@ Blockly.Blocks['communication_bluetooth_start'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -82,6 +101,7 @@ Blockly.Blocks['communication_bluetooth_receive'] = {
         .setCheck(["Number", "String"])
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
         .appendField("Read Bluetooth Character:");
+    this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(230);
  this.setTooltip("");
@@ -113,6 +133,7 @@ Blockly.Blocks['sound_buzzer_buzz'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -123,13 +144,13 @@ Blockly.Blocks['led_rgb_led'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
         .appendField("Set")
-        .appendField(new Blockly.FieldDropdown([["Left","Left"], ["Right","Right"]]), "LED")
         .appendField(new Blockly.FieldDropdown([["Red","Red"], ["Blue","Blue"], ["Green","Green"]]), "colour")
         .appendField("Light")
         .appendField(new Blockly.FieldDropdown([["On","On"], ["Off","Off"]]), "colour value");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
+    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }

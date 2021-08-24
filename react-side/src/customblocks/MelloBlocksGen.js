@@ -1,13 +1,44 @@
 import Blockly from 'blockly';
 
+var peripheral_PreDeclarations = "";
+var peripheral_BulkFunctions = "";
+var peripheral_SetupCode = "";
+
+const US_Trigger = 11;
+const US_Echo = 10;
+
+function clearvars(){
+  peripheral_PreDeclarations = "";
+  peripheral_BulkFunctions = "";
+  peripheral_SetupCode = "";
+}
+
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
+
+  var code = "\tread_ultrasonic("+US_Trigger+","+US_Echo+")\n";;
+  peripheral_PreDeclarations += "int US_Trigger = " + US_Trigger+";\nint US_Echo = " + US_Echo+";\n\n";
+  peripheral_SetupCode += "\tpinMode("+US_Trigger+", OUTPUT);\n\tpinMode("+US_Echo+", INPUT);\n"
+  peripheral_BulkFunctions += `\nint read_ultrasonic(int trigger, int echo){
+      digitalWrite(trigger, LOW);
+      delayMicroseconds(2);
+      digitalWrite(trigger, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(trigger, LOW);
+      int duration = pulseIn(echo, HIGH);
+      int distance = duration * 0.034 / 2;
+      return distance;
+  }`
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['sensor_light_follower_right'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['sensor_light_follower'] = function(block) {
+Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.
@@ -67,7 +98,6 @@ Blockly.JavaScript['sound_buzzer_buzz'] = function(block) {
 };
 
 Blockly.JavaScript['led_rgb_led'] = function(block) {
-  var dropdown_led = block.getFieldValue('LED');
   var dropdown_colour = block.getFieldValue('colour');
   var dropdown_colour_value = block.getFieldValue('colour value');
   // TODO: Assemble JavaScript into code variable.
@@ -138,3 +168,5 @@ Blockly.JavaScript['servo_360_rotate_direction'] = function(block) {
   var code = '...;\n';
   return code;
 };
+
+export {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, US_Trigger, US_Echo, clearvars}

@@ -461,7 +461,8 @@ const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id=
     <block type="sensor_ultrasonic"></block>
 </category>
 <category name="Light Follower">
-    <block type="sensor_light_follower"></block>
+    <block type="sensor_light_follower_right"></block>
+    <block type="sensor_light_follower_left"></block>
 </category>
 <category name="Line Follower">
     <block type="sensor_line_follower_right">
@@ -546,6 +547,7 @@ const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id=
 const MelloDOM = Blockly.Xml.textToDom(MelloToolbox);
 
 currentToolbox = MelloDOM;
+var currentToolboxName = "Mello";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -633,7 +635,7 @@ function App() {
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
   const [toolbox_used, setToolboxUsed] = useState(1);
-  const [UploadProgress, setUploadProgress] = useState(0);
+  const [UploadProgress, setUploadProgress] = useState(1);
   const classes = useStyles();
 
   const [toolboxstate, setChecked] = useState(false);
@@ -647,12 +649,15 @@ function App() {
 switch(event.target.value){
   case 1: 
     currentToolbox = MelloDOM;
+    currentToolboxName = "Mello";
     break;
   case 2:
     currentToolbox = newToolBox;
+    currentToolboxName = "Basic";
     break;
   case 3:
     currentToolbox = toolboxCategories;
+    currentToolboxName = "Advanced"
     break;
 }
   }
@@ -674,25 +679,11 @@ switch(event.target.value){
   };
 
   React.useEffect(() => {
-    switch (upload_status){
-      case "Uploading code":
-        setUploadProgress(10);
-        break;
-      case "Awaiting Response from Arduino":
-        setUploadProgress(30);
-        break;
-      case "No Arduino Detected":
-        setUploadProgress(0);
-        break;
-      case "Upload Failed : Error in Code":
-        setUploadProgress(0);
-        break;
-      case "Upload Successful":
-        setUploadProgress(100);
-        break;
-      default:
-        setUploadProgress(0);
-        break;
+    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status === "Upload Failed: Error in Code" || upload_status === ""){
+      setUploadProgress(1);
+    }
+    else{
+      setUploadProgress(0);
     }
     return UploadProgress;
   });
@@ -792,6 +783,9 @@ switch(event.target.value){
           <Typography component = "span" variant="h2" className={classes.title}>
             Mintduino
           </Typography>
+          {UploadProgress == 0 &&
+              <CircularProgress color="secondary"/>
+            }
           <Button color="inherit" onClick={uploadCode_ipc}>Upload</Button>
           {/* <FormGroup>
             <FormControlLabel
@@ -814,6 +808,7 @@ switch(event.target.value){
           labelId="Toolbox Select"
           id="Toolbox Select"
           value={toolbox_used}
+          variant="outlined"
           onChange={select_toolbox}
         >
           <MenuItem value={1}>Mello Toolbox</MenuItem>
@@ -858,7 +853,7 @@ switch(event.target.value){
           </div>
           <div className={classes.footer}>
             <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
-            <CircularProgress variant="determinate" value={UploadProgress}  />
+
           </div>
       </div>
 
@@ -867,3 +862,4 @@ switch(event.target.value){
 }
 
 export default App;
+export {currentToolboxName};
