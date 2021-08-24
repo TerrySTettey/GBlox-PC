@@ -6,6 +6,8 @@ var peripheral_SetupCode = "";
 
 const US_Trigger = 11;
 const US_Echo = 10;
+const  Right_Light_Follower = "A1";
+const Left_Light_Follower = "A0"
 
 function clearvars(){
   peripheral_PreDeclarations = "";
@@ -14,7 +16,6 @@ function clearvars(){
 }
 
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
-
   var code = "\tread_ultrasonic("+US_Trigger+","+US_Echo+")\n";;
   peripheral_PreDeclarations += "int US_Trigger = " + US_Trigger+";\nint US_Echo = " + US_Echo+";\n\n";
   peripheral_SetupCode += "\tpinMode("+US_Trigger+", OUTPUT);\n\tpinMode("+US_Echo+", INPUT);\n"
@@ -32,15 +33,17 @@ Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
 };
 
 Blockly.JavaScript['sensor_light_follower_right'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
+  peripheral_PreDeclarations += `Right_Light_Follower = ${Right_Light_Follower};\n`;
+  peripheral_SetupCode += `\tpinMode(Right_Light_Follower, INPUT);\n`
+  var code = `analogRead(Right_Light_Follower)`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
+  peripheral_PreDeclarations += `Left_Light_Follower = ${Left_Light_Follower};\n`;
+  peripheral_SetupCode += `\tpinMode(Left_Light_Follower, INPUT);\n`
+  var code = `analogRead(Left_Light_Follower)`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };

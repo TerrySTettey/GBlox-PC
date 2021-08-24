@@ -37,7 +37,6 @@ Blockly.Blocks['n_mainloop'] = {
 Blockly.JavaScript['n_mainloop'] = function(block) {
     getPeripherals();
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-    // TODO: Assemble JavaScript into code variable.
     try{
         Total_PreDeclarations += peripherals.peripheral_PreDeclarations;
         Total_SetupCode +=peripherals.peripheral_SetupCode;
