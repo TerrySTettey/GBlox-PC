@@ -67,6 +67,19 @@ Blockly.Blocks['sensor_line_follower_left'] = {
   }
 };
 
+Blockly.Blocks['communication_infrared_start'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Start Infrared Communication");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['communication_infrared_value'] = {
   init: function() {
     this.appendValueInput("NAME")
@@ -100,7 +113,7 @@ Blockly.Blocks['communication_bluetooth_receive'] = {
     this.appendValueInput("NAME")
         .setCheck(["Number", "String"])
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Bluetooth Character:");
+        .appendField("Bluetooth Character Read is");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(230);

@@ -102,12 +102,13 @@ app.on('activate', () => {
 })
 
 //Function which identifies the COM Port that Arduino is connected to...
-function CHECK_COMPORT() {
+function CHECK_COMPORT(cb) {
     try{
         COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })  //,(error, stdout, stderr) => {
             console.log(COMPORT);
             if (COMPORT.includes('COM') == 1) {
                 COMPORT = COMPORT.split("    ")[3].split("\r")[0];
+                
             }
             else {
                 COMPORT = "No Arduino Detected";
@@ -116,7 +117,7 @@ function CHECK_COMPORT() {
     catch(e) {
         COMPORT = "No Arduino Detected";
     }
-    
+    cb(COMPORT);
 }
 
 //Function which compiles and tries to upload code to the connected Arduino...
@@ -146,13 +147,26 @@ async function VERIFYCODE(cb) {
 ipcMain.handle("upload-code", async function (event, jsCode) {
     try {
         fs.writeFileSync(path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino"), jsCode)
-        CHECK_COMPORT();
+        CHECK_COMPORT(function (res){
+            event.sender.send('arduino_comport',res);
+        });
         VERIFYCODE(function (res) {
             //console.log("IT IS FINISHED");
-            event.sender.send('return_arduino', res);
+            event.sender.send('arduino_upload_status', res);
         });
     }
     catch (e) {
         console.log(e)
+    }
+})
+
+ipcMain.handle("check-comport", async function (event, jsCode) {
+    try{
+        CHECK_COMPORT(function (res){
+            event.sender.send('arduino_comport',res);
+        });
+    }
+    catch(e){
+        console.log(e);
     }
 })

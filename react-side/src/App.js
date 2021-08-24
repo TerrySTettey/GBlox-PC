@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -28,6 +27,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
+
 
 import "./customblocks/customblocks";
 import "./customblocks/ntypeblocks";
@@ -170,7 +170,6 @@ const toolboxCategories = {
     },
   ],
 }
-
 // Beginner Toolbox
 const newToolBox = {
   kind: "categoryToolbox",
@@ -475,6 +474,7 @@ const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id=
 </category>
 <category name="Communication">
 <category name="Infrared Remote Control">
+    <block type="communication_infrared_start"></block>
     <block type="communication_infrared_value">
         <value name="NAME">
             <block type="text">
@@ -637,8 +637,9 @@ function App() {
   const [toolbox_used, setToolboxUsed] = useState(1);
   const [UploadProgress, setUploadProgress] = useState(1);
   const classes = useStyles();
-
   const [toolboxstate, setChecked] = useState(false);
+
+
 
   const code_change = event => {
     setJavascriptCode(event.target.value);
@@ -674,12 +675,11 @@ switch(event.target.value){
   };
 
   const tabpanelchange = (event, newTabval) => {
-
     settabpanel(newTabval);
   };
 
   React.useEffect(() => {
-    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status === "Upload Failed: Error in Code" || upload_status === ""){
+    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status === "Upload Failed : Error in Code" || upload_status === ""){
       setUploadProgress(1);
     }
     else{
@@ -747,7 +747,13 @@ switch(event.target.value){
     //console.log(response);
     //setUploadStatus(response);
     ipcRenderer.invoke('upload-code', javascriptcode);
-    ipcRenderer.on('return_arduino', (event, result) => {
+    ipcRenderer.on('arduino_comport',(event,result)=>{
+      console.log(result);
+      response=result;
+      setUploadStatus(`Arduino found on ${response}`);
+    });
+
+    ipcRenderer.on('arduino_upload_status', (event, result) => {
       console.log(result);
       response = result;
       setUploadStatus(response);
@@ -823,6 +829,7 @@ switch(event.target.value){
             <Tab label="Blockly Workspace" {...a11yProps(0)} />
             <Tab label="Code Generated" {...a11yProps(1)} />
             <Tab label="Edit Code" {...a11yProps(2)} />
+            <Tab label="Serial Monitor" {...a11yProps(3)} />
           </Tabs>
           <TabPanel value={tabpanelval} index={0} className = {classes.Tabs}>
             <div className="BlocklyDiv">
@@ -850,6 +857,8 @@ switch(event.target.value){
           <TabPanel value={tabpanelval} index={2}>
           <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline = {true} fullWidth = {true} align="justify" onChange={code_change}/>
           </TabPanel>
+          <TabPanel value={tabpanelval} index={3}>
+            </TabPanel>
           </div>
           <div className={classes.footer}>
             <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>

@@ -46,10 +46,10 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
         console.log(e)
     }
 
-    var code = Total_PreDeclarations + Total_SetupCode +'\n}\nvoid loop(){\n'+ statements_mainloop + '\n}\n' + Total_BulkFunctions;
+    var code = Total_PreDeclarations + Total_SetupCode +'}\nvoid loop(){\n'+ statements_mainloop + '}\n' + Total_BulkFunctions;
     // console.log(Total_PreDeclarations);
     Total_PreDeclarations = "";
-    Total_SetupCode = "void setup(){\n";
+    Total_SetupCode = "\nvoid setup(){\n";
     Total_BulkFunctions = "";
     try{
         peripherals.clearvars();

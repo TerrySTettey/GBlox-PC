@@ -10,6 +10,9 @@ const  Right_Light_Follower = "A1";
 const Left_Light_Follower = "A0";
 const Right_Line_Follower_Receiver = "A3";
 const Left_Line_Follower_Receiver = "A2";
+const IR_Remote = 3;
+const BluetoothTX = 12;
+const BluetoothRX = 13;
 
 function clearvars(){
   peripheral_PreDeclarations = "";
@@ -77,12 +80,19 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
     sensor_val = 0;
   }
   var code = `map(analogRead(Left_Line_Follower_Receiver),0,255,0,1)==${sensor_val}`;
-  // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.JavaScript['communication_infrared_start'] = function(block) {
+  peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`;
+  peripheral_SetupCode += `IrReceiver.begin(IR_Remote);\n`
+  var code = '';
+  return code;
+};
 Blockly.JavaScript['communication_infrared_value'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+  peripheral_PreDeclarations += ``;
+  peripheral_SetupCode += ``;
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.
@@ -91,22 +101,29 @@ Blockly.JavaScript['communication_infrared_value'] = function(block) {
 
 Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothTX},${BluetoothRX});\n`
+  peripheral_SetupCode += `\thc06.begin(9600);\n`;
+  var code = '';
   return code;
 };
 
 Blockly.JavaScript['communication_bluetooth_receive'] = function(block) {
-  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
+  var value_name = Blockly.JavaScript.valueToCode(block, "NAME", Blockly.JavaScript.ORDER_ATOMIC);
+  value_name = value_name.replaceAll(`'`,``);
+  peripheral_PreDeclarations += `int read_bluetooth();\n`;
+  peripheral_BulkFunctions += `int read_bluetooth(){\n\tif (hc06.available()){\n\t\t\treturn (hc06.read());\n}\n`
+  var code = `(read_bluetooth()=="${value_name}")`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['communincation_bluetooth_send'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+  value_name = value_name.replaceAll(`'`,``);
+  peripheral_PreDeclarations += `int send_bluetooth(char x);\n`;
+  peripheral_BulkFunctions += `int send_bluetooth(char x){\n\thc06.write(x);\n}\n`
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = `\tsend_bluetooth("${value_name}");\n`
   return code;
 };
 
