@@ -1,21 +1,42 @@
 #include <Servo.h>
-
-int read_ultrasonic(int trigger, int echo);
-
+Servo LeftServo;
+Servo RightServo;
+#include <Servo.h>
+Servo LeftServo;
+Servo RightServo;
+#include <Servo.h>
+Servo LeftServo;
+Servo RightServo;
+#include <Servo.h>
+Servo LeftServo;
+Servo RightServo;
+#include <Servo.h>
+Servo LeftServo;
+Servo RightServo;
 void setup(){
-  pinMode(4,OUTPUT); //Pin 4 Setup
+	LeftServo.attach(9);
+	RightServo.attach(8);	LeftServo.attach(9);
+	RightServo.attach(8);	LeftServo.attach(9);
+	RightServo.attach(8);	LeftServo.attach(9);
+	RightServo.attach(8);	LeftServo.attach(9);
+	RightServo.attach(8);
 }
 void loop(){
-  digitalWrite(4,HIGH); //Digital Pin 4 is HIGH
-}
-
-int read_ultrasonic(int trigger, int echo){
-  digitalWrite(trigger, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigger, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigger, LOW);
-  int duration = pulseIn(echo, HIGH);
-  int distance = duration * 0.034 / 2;
-  return distance;
+  LeftServo.write(180);
+  RightServo.write(0);
+  delay(6000);
+  LeftServo.write(90);
+  RightServo.write(90);LeftServo.write(90);
+  RightServo.write(90);
+  delay(3000);
+  LeftServo.write(90);
+  RightServo.write(90);LeftServo.write(0);
+  RightServo.write(0);
+  delay(3000);
+  LeftServo.write(90);
+  RightServo.write(90);LeftServo.write(180);
+  RightServo.write(180);
+  delay(5000);LeftServo.write(90);
+  RightServo.write(90);
+  delay(5000);
 }

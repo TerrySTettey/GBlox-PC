@@ -205,7 +205,7 @@ Blockly.Blocks['motor_move_indef'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
         .appendField("Make Mello")
-        .appendField(new Blockly.FieldDropdown([["move forward","forward"], ["move backward","backward"], ["stop","stop"], ["turn left","left"], ["turn right","right"]]), "direction");
+        .appendField(new Blockly.FieldDropdown([["move forward","forward"], ["move backward","backward"], ["stop","stop"], ["turn left","left"], ["turn right","right"],["rotate left","rleft"],["rotate right","rright"]]), "direction");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -220,7 +220,7 @@ Blockly.Blocks['motor_move_seconds'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
         .appendField("Make Mello")
-        .appendField(new Blockly.FieldDropdown([["move forward","forward"], ["move backward","backward"], ["stop","stop"], ["turn left","left"], ["turn right","right"]]), "direction");
+        .appendField(new Blockly.FieldDropdown([["move forward","forward"], ["move backward","backward"], ["stop","stop"],["rotate left","rleft"],["rotate right","rright"]]), "direction");
     this.appendValueInput("seconds")
         .setCheck("Number")
         .appendField("for");

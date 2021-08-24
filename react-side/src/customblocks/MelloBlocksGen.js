@@ -6,10 +6,12 @@ var peripheral_SetupCode = "";
 
 const US_Trigger = 11;
 const US_Echo = 10;
-const  Right_Light_Follower = "A1";
+const Right_Light_Follower = "A1";
 const Left_Light_Follower = "A0";
 const Right_Line_Follower_Receiver = "A3";
 const Left_Line_Follower_Receiver = "A2";
+const LeftServo = 9;
+const RightServo = 8;
 
 function clearvars(){
   peripheral_PreDeclarations = "";
@@ -145,16 +147,58 @@ Blockly.JavaScript['sound_buzzer_timer'] = function(block) {
 
 Blockly.JavaScript['motor_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
-  // TODO: Assemble JavaScript into code variable.
+  peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
+  peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
   var code = '...;\n';
+  switch(dropdown_direction){
+    case "forward":
+      code = "LeftServo.write(180);\nRightServo.write(0);";
+      break;
+    case "backward":
+      code = "LeftServo.write(0);\nRightServo.write(180);";
+      break;
+    case "left":
+      code = "LeftServo.write(0);\nRightServo.write(0);\ndelay(250);\nLeftServo.write(90);\nRightServo.write(90);";
+      break;
+    case "right":
+      code = "LeftServo.write(180);\nRightServo.write(180);\ndelay(250);\nLeftServo.write(90);\nRightServo.write(90);";
+      break;
+    case "rleft":
+      code = "LeftServo.write(0);\nRightServo.write(0);";
+      break;
+    case "rright":
+      code = "LeftServo.write(180);\nRightServo.write(180);";
+      break;
+    case "stop":
+      code = "LeftServo.write(90);\nRightServo.write(90);";
+      break;
+  }
   return code;
 };
 
 Blockly.JavaScript['motor_move_seconds'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
+  peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
+  peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
   var code = '...;\n';
+  switch(dropdown_direction){
+    case "forward":
+      code = `LeftServo.write(180);\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      break;
+    case "backward":
+      code = `LeftServo.write(0);\nRightServo.write(180);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      break;
+    case "rleft":
+      code = `LeftServo.write(0);\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      break;
+    case "rright":
+      code = `LeftServo.write(180);\nRightServo.write(180);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      break;
+    case "stop":
+      code = `LeftServo.write(90);\nRightServo.write(90);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      break;
+  }
   return code;
 };
 
