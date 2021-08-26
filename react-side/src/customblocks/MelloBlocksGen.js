@@ -183,6 +183,8 @@ Blockly.JavaScript['led_rgb_led'] = function(block) {
         code = `digitalWrite(${RGB_G}, LOW);\n`
       }
       break;
+    default:
+      break;
   }
   return code;
 };
@@ -192,6 +194,15 @@ Blockly.JavaScript['led_neo_led'] = function(block) {
   var value_red_value = Blockly.JavaScript.valueToCode(block, 'Red Value', Blockly.JavaScript.ORDER_ATOMIC);
   var value_green_value = Blockly.JavaScript.valueToCode(block, 'Green Value', Blockly.JavaScript.ORDER_ATOMIC);
   var value_blue_value = Blockly.JavaScript.valueToCode(block, 'Blue Value', Blockly.JavaScript.ORDER_ATOMIC);
+  const block_count = Blockly.mainWorkspace.getBlocksByType('led_neo_led',true);
+  console.log(block_count.length);
+  if (block_count.length < 2){
+    peripheral_PreDeclarations += `#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(2, A6, NEO_GRB + NEO_KHZ800);\n`;
+    peripheral_SetupCode += `pixels.begin();\n`;
+  }
+  else{
+    
+  }
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
   return code;

@@ -32,6 +32,21 @@ Blockly.Blocks['n_mainloop'] = {
 
 };
 
+Blockly.Blocks['n_delay'] = {
+    init: function() {
+      this.appendValueInput("seconds")
+          .setCheck("Number")
+          .appendField("delay for");
+      this.appendDummyInput()
+          .appendField("milliseconds");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(240);
+   this.setTooltip("Delays the program for a number of milliseconds.");
+   this.setHelpUrl("");
+    }
+};
+
 Blockly.JavaScript['n_mainloop'] = function(block) {
     getPeripherals();
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
@@ -56,5 +71,14 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
         console.log(e);
     }
     
+    return code;
+};
+
+
+
+Blockly.JavaScript['n_delay'] = function(block) {
+    var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\ndelay('+value_seconds+');';
     return code;
 };
