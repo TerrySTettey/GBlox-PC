@@ -23,6 +23,9 @@ Blockly.Blocks['n_mainloop'] = {
       this.appendDummyInput()
           .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
           .appendField("Main Loop");
+    this.appendDummyInput()
+          .appendField("Run Forever")
+          .appendField(new Blockly.FieldCheckbox("TRUE"),"LOOP");
       this.appendStatementInput("mainLoop")
           .setCheck(null);
       this.setColour(135);
@@ -50,6 +53,7 @@ Blockly.Blocks['n_delay'] = {
 Blockly.JavaScript['n_mainloop'] = function(block) {
     getPeripherals();
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
+    var checkbox_loop = block.getFieldValue("LOOP");
     try{
         Total_PreDeclarations += peripherals.peripheral_PreDeclarations;
         Total_SetupCode +=peripherals.peripheral_SetupCode;
@@ -58,8 +62,13 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
     catch(e){
         console.log(e)
     }
-
-    var code = Total_PreDeclarations + Total_SetupCode +'}\nvoid loop(){\n'+ statements_mainloop + '}\n' + Total_BulkFunctions;
+        if (checkbox_loop=="TRUE"){
+            var code = Total_PreDeclarations + Total_SetupCode +'}\nvoid loop(){\n'+ statements_mainloop + '}\n' + Total_BulkFunctions;
+        }
+        else{
+            var code = `${Total_PreDeclarations} ${Total_SetupCode} \n //Run Code Once\n${statements_mainloop}'}\nvoid loop(){}\n ${Total_BulkFunctions}`;
+        }
+    
     // console.log(Total_PreDeclarations);
     Total_PreDeclarations = "";
     Total_SetupCode = "\nvoid setup(){\n";

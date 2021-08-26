@@ -210,14 +210,6 @@ const toolboxCategories = {
               {
                 kind: "block",
                 type: "n_led_state"
-              },
-              {
-                kind: "block",
-                type: "n_writestate_ledon"
-              },
-              {
-                kind: "block",
-                type: "n_writestate_ledoff"
               }
             ]
           },

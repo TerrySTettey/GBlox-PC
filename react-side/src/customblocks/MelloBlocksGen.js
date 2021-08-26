@@ -130,9 +130,10 @@ Blockly.JavaScript['communication_infrared_value'] = function(block) {
 };
 
 Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`
-  peripheral_SetupCode += `\thc06.begin(9600);\n`;
+  if (peripheral_PreDeclarations.includes(`#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`)==0){
+    peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`
+    peripheral_SetupCode += `\thc06.begin(9600);\n`;
+  }
   var code = '';
   return code;
 };
@@ -140,8 +141,11 @@ Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
 Blockly.JavaScript['communication_bluetooth_receive'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, "NAME", Blockly.JavaScript.ORDER_ATOMIC);
   value_name = value_name.replaceAll(`'`,``);
-  peripheral_PreDeclarations += `char read_bluetooth();\n`;
-  peripheral_BulkFunctions += `char read_bluetooth(){\n\tif (hc06.available()){\n\t\t\treturn (hc06.read());\n}\n}\n`
+  if (peripheral_PreDeclarations.includes(`char read_bluetooth();\n`)==0){
+    peripheral_PreDeclarations += `char read_bluetooth();\n`;
+    peripheral_BulkFunctions += `char read_bluetooth(){\n\tif (hc06.available()){\n\t\t\treturn (hc06.read());\n}\n}\n`
+  }
+
   var code = `(read_bluetooth()=="${value_name}")`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
@@ -150,8 +154,11 @@ Blockly.JavaScript['communication_bluetooth_receive'] = function(block) {
 Blockly.JavaScript['communincation_bluetooth_send'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   value_name = value_name.replaceAll(`'`,``);
-  peripheral_PreDeclarations += `int send_bluetooth(char x);\n`;
-  peripheral_BulkFunctions += `int send_bluetooth(char x){\n\thc06.write(x);\n}\n`
+  if (peripheral_PreDeclarations.includes(`int send_bluetooth(char x);\n`)==0){
+    peripheral_PreDeclarations += `int send_bluetooth(char x);\n`;
+    peripheral_BulkFunctions += `int send_bluetooth(char x){\n\thc06.write(x);\n}\n`
+  }
+
   // TODO: Assemble JavaScript into code variable.
   var code = `\tsend_bluetooth("${value_name}");\n`
   return code;
