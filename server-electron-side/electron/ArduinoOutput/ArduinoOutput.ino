@@ -1,44 +1,45 @@
-int Right_Line_Follower_Receiver = A3;
-int Left_Line_Follower_Receiver = A2;
+#include <IRremote.h>
+int IR_Remote=3;
+IRrecv IrReceiver (IR_Remote);
+decode_results results;
 #include <Servo.h>
 Servo LeftServo;
 Servo RightServo;
 Servo ForkliftServo;
-int forkangle = 90;;
 
 void setup(){
-	pinMode(Right_Line_Follower_Receiver, INPUT);
-	pinMode(Left_Line_Follower_Receiver, INPUT);
+	IrReceiver.enableIRIn();
 	LeftServo.attach(9);
 	RightServo.attach(8);
-	ForkliftServo.attach(10);
+	ForkliftServo.attach(11);
 
 }
 
 void loop(){
-   raise_fork(1);
-   delay(2000);
-   lower_fork(1);
-   delay(2000);
+   	if(IrReceiver.decode(&results)){
+  		if(results.value==FF629D){  LeftServo.write(101);
+    RightServo.write(78);
 
-}
+  		}
+  	}	if(IrReceiver.decode(&results)){
+  		if(results.value==FFA857){  LeftServo.write(77);
+    RightServo.write(100);
 
-void raise_fork(int speed){
-  for(int i = 90; i > 0; i--){
-    if(i < 0) {
-      i = 0;
-    }
-    ForkliftServo.write(i);
-    delay(1000/(speed*90));
-  }
-}
+  		}
+  	}	if(IrReceiver.decode(&results)){
+  		if(results.value==FF22DD){  LeftServo.write(77);
+    RightServo.write(78);
 
-void lower_fork(int speed){
-  for(int i = 0; i < 90; i++){
-    if(i > 90) {
-      i = 90;
-    }
-    ForkliftServo.write(i);
-    delay(1000/(speed*90));
-  }
+  		}
+  	}	if(IrReceiver.decode(&results)){
+  		if(results.value==FFC23D){  LeftServo.write(101);
+    RightServo.write(100);
+
+  		}
+  	}	if(IrReceiver.decode(&results)){
+  		if(results.value==FF02FD){  LeftServo.write(90);
+    RightServo.write(90);
+
+  		}
+  	}
 }
