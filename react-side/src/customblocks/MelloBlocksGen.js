@@ -143,7 +143,7 @@ Blockly.JavaScript['communication_bluetooth_receive'] = function(block) {
   value_name = value_name.replaceAll(`'`,``);
   if (peripheral_PreDeclarations.includes(`char read_bluetooth();\n`)==0){
     peripheral_PreDeclarations += `char read_bluetooth();\n`;
-    peripheral_BulkFunctions += `char read_bluetooth(){\n\tif (hc06.available()){\n\t\t\treturn (hc06.read());\n}\n}\n`
+    peripheral_BulkFunctions += `char read_bluetooth(){\n\tif (hc06.available()>0){\n\t\treturn (hc06.read());\n\t}\n}\n`
   }
 
   var code = `(read_bluetooth()=="${value_name}")`;

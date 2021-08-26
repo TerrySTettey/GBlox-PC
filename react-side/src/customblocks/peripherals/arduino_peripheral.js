@@ -188,8 +188,60 @@ Blockly.JavaScript['n_servo_rotate'] = function(block) {
 Blockly.JavaScript['n_led_state'] = function(block) {
     var value_led_value = block.getFieldValue("led_state");
     // TODO: Assemble JavaScript into code variable.
-    var code = '\ndigitalWrite(LED_BUILTIN,'+value_led_value+');';
+    var code = `\n\tdigitalWrite(LED_BUILTIN,${value_led_value});\n`;
     return code;
 };
+
+Blockly.JavaScript['n_buzzer_play'] = function(block) {
+    var value_frequency = Blockly.JavaScript.valueToCode(block, 'frequency', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\ntone(Buzzer_Pin,'+value_frequency+');';
+    return code;
+};
+
+Blockly.JavaScript['n_buzzer_stop'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\nnoTone(Buzzer_Pin);';
+    return code;
+};
+
+Blockly.JavaScript['n_buzzer_play_def'] = function(block) {
+    var value_frequency = Blockly.JavaScript.valueToCode(block, 'frequency', Blockly.JavaScript.ORDER_ATOMIC);
+    var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\ntone(Buzzer_Pin,'+value_frequency+');\ndelay('+value_seconds+');\nnoTone(Buzzer_Pin);';
+    return code;
+};
+
+Blockly.JavaScript['n_note'] = function(block) {
+    var dropdown_note = block.getFieldValue('note');
+    // TODO: Assemble JavaScript into code variable.
+    var code = dropdown_note;
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['n_delay'] = function(block) {
+    var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\ndelay('+value_seconds+');';
+    return code;
+};
+
+Blockly.JavaScript['n_buzzer_play_note'] = function(block) {
+    var value_frequency = Blockly.JavaScript.valueToCode(block, 'frequency', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\ntone(Buzzer_Pin,'+value_frequency+');';
+    return code;
+};
+
+Blockly.JavaScript['n_buzzer_play_note_def'] = function(block) {
+    var value_frequency = Blockly.JavaScript.valueToCode(block, 'frequency', Blockly.JavaScript.ORDER_ATOMIC);
+    var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\ntone(Buzzer_Pin,'+value_frequency+');\ndelay('+value_seconds+');\nnoTone(Buzzer_Pin);';
+    return code;
+};
+
 
 export {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, US_Trigger, US_Echo, clearvars}

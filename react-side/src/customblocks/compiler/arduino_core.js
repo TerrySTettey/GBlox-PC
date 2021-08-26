@@ -63,7 +63,7 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
         console.log(e)
     }
         if (checkbox_loop=="TRUE"){
-            var code = Total_PreDeclarations + Total_SetupCode +'}\nvoid loop(){\n'+ statements_mainloop + '}\n' + Total_BulkFunctions;
+            var code = `${Total_PreDeclarations} ${Total_SetupCode} \nvoid loop(){\n ${statements_mainloop} \n ${Total_BulkFunctions}`;
         }
         else{
             var code = `${Total_PreDeclarations} ${Total_SetupCode} \n //Run Code Once\n${statements_mainloop}'}\nvoid loop(){}\n ${Total_BulkFunctions}`;
