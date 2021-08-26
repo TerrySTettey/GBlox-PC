@@ -16,10 +16,16 @@ const BluetoothRX = 13;
 const LeftServo = 9;
 const RightServo = 8;
 
+var ServoDefined = false;
+var FSpeed = 99;
+var BSpeed = 84;
+var DSpeed = 530;
+
 function clearvars(){
   peripheral_PreDeclarations = "";
   peripheral_BulkFunctions = "";
   peripheral_SetupCode = "";
+  ServoDefined = false;
 }
 
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
@@ -103,7 +109,7 @@ Blockly.JavaScript['communication_infrared_value'] = function(block) {
 
 Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothTX},${BluetoothRX});\n`
+  peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`
   peripheral_SetupCode += `\thc06.begin(9600);\n`;
   var code = '';
   return code;
@@ -112,8 +118,8 @@ Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
 Blockly.JavaScript['communication_bluetooth_receive'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, "NAME", Blockly.JavaScript.ORDER_ATOMIC);
   value_name = value_name.replaceAll(`'`,``);
-  peripheral_PreDeclarations += `int read_bluetooth();\n`;
-  peripheral_BulkFunctions += `int read_bluetooth(){\n\tif (hc06.available()){\n\t\t\treturn (hc06.read());\n}\n`
+  peripheral_PreDeclarations += `char read_bluetooth();\n`;
+  peripheral_BulkFunctions += `char read_bluetooth(){\n\tif (hc06.available()){\n\t\t\treturn (hc06.read());\n}\n}\n`
   var code = `(read_bluetooth()=="${value_name}")`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
@@ -164,30 +170,33 @@ Blockly.JavaScript['sound_buzzer_timer'] = function(block) {
 
 Blockly.JavaScript['motor_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
-  peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
-  peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
+  if(ServoDefined === false) {
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
+    ServoDefined = true;
+  }
   var code = '...;\n';
   switch(dropdown_direction){
     case "forward":
-      code = "LeftServo.write(180);\nRightServo.write(0);";
+      code = `LeftServo.write(${FSpeed});\nRightServo.write(${BSpeed});\n`;
       break;
     case "backward":
-      code = "LeftServo.write(0);\nRightServo.write(180);";
+      code = `LeftServo.write(${BSpeed});\nRightServo.write(${FSpeed});\n`;
       break;
     case "left":
-      code = "LeftServo.write(0);\nRightServo.write(0);\ndelay(250);\nLeftServo.write(90);\nRightServo.write(90);";
+      code = `LeftServo.write(${BSpeed});\nRightServo.write(${BSpeed});\ndelay(${DSpeed});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "right":
-      code = "LeftServo.write(180);\nRightServo.write(180);\ndelay(250);\nLeftServo.write(90);\nRightServo.write(90);";
+      code = `LeftServo.write(${FSpeed});\nRightServo.write(${FSpeed});\ndelay(${DSpeed});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "rleft":
-      code = "LeftServo.write(0);\nRightServo.write(0);";
+      code = `LeftServo.write(0);\nRightServo.write(0);\n`;
       break;
     case "rright":
-      code = "LeftServo.write(180);\nRightServo.write(180);";
+      code = `LeftServo.write(${FSpeed});\nRightServo.write(${FSpeed});\n`;
       break;
     case "stop":
-      code = "LeftServo.write(90);\nRightServo.write(90);";
+      code = `LeftServo.write(90);\nRightServo.write(90);\n`;
       break;
   }
   return code;
@@ -196,24 +205,27 @@ Blockly.JavaScript['motor_move_indef'] = function(block) {
 Blockly.JavaScript['motor_move_seconds'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
-  peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
-  peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
+  if(ServoDefined === false) {
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
+    ServoDefined = true;
+  }
   var code = '...;\n';
   switch(dropdown_direction){
     case "forward":
-      code = `LeftServo.write(180);\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      code = `LeftServo.write(${FSpeed});\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "backward":
-      code = `LeftServo.write(0);\nRightServo.write(180);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      code = `LeftServo.write(0);\nRightServo.write(${FSpeed});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "rleft":
-      code = `LeftServo.write(0);\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      code = `LeftServo.write(0);\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "rright":
-      code = `LeftServo.write(180);\nRightServo.write(180);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      code = `LeftServo.write(${FSpeed});\nRightServo.write(${FSpeed});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "stop":
-      code = `LeftServo.write(90);\nRightServo.write(90);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);`;
+      code = `LeftServo.write(90);\nRightServo.write(90);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
   }
   return code;
