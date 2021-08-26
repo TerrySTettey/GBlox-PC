@@ -82,7 +82,7 @@ Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
   if (peripheral_PreDeclarations.includes(`int Left_Light_Follower = ${Left_Light_Follower};\n`)==0){
   peripheral_PreDeclarations += `int Left_Light_Follower = ${Left_Light_Follower};\n`;
   peripheral_SetupCode += `\tpinMode(Left_Light_Follower, INPUT);\n`
-  }``
+  }
   var code = `analogRead(Left_Light_Follower)`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -387,29 +387,6 @@ Blockly.JavaScript['servo_360_rotate_direction'] = function(block) {
     ServoDefined = true;
   }
   var code = '...;\n';
-  switch(dropdown_direction){
-    case "forward":
-      if(dropdown_motorselect === "lm"){
-        code = `LeftServo.write(${LeftMotorACW});\n`;
-      } else if (dropdown_motorselect === "rm") {
-        code = `RightServo.write(${RightMotorCW});\n`
-      }
-      break;
-    case "backward":
-      if(dropdown_motorselect === "lm"){
-        code = `LeftServo.write(${LeftMotorCW});\n`;
-      } else if (dropdown_motorselect === "rm") {
-        code = `RightServo.write(${RightMotorACW});\n`
-      }
-      break;
-    case "stop":
-      if(dropdown_motorselect === "lm"){
-        code = `LeftServo.write(90);\n`;
-      } else if (dropdown_motorselect === "rm") {
-        code = `RightServo.write(90);\n`
-      }
-      break;
-  }
   return code;
 };
 
