@@ -123,20 +123,17 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
 
 Blockly.JavaScript['communication_infrared_start'] = function(block) {
   if (peripheral_PreDeclarations.includes( `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`)==0){
-    peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`;
-    peripheral_SetupCode += `IrReceiver.begin(IR_Remote);\n`
+    peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\nIRrecv IrReceiver (IR_Remote);\ndecode_results results;\n`;
+    peripheral_SetupCode += `\tIrReceiver.enableIRIn();\n`;
   }
   var code = '';
   return code;
 };
 Blockly.JavaScript['communication_infrared_value'] = function(block) {
-  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-  peripheral_PreDeclarations += ``;
-  peripheral_SetupCode += ``;
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  var dropdown_character = block.getFieldValue('Received_Character');
+  var statements_ir_decode_loop = Blockly.JavaScript.statementToCode(block, 'IR_Decode_Loop');
+  var code = `\tif(IrReceiver.decode(&results)){\n\t\tif(results.value==${dropdown_character}){${statements_ir_decode_loop}\n\t\t}\n\t}`;
+  return code;
 };
 
 Blockly.JavaScript['communication_bluetooth_start'] = function(block) {

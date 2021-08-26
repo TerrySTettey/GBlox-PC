@@ -430,11 +430,7 @@ const toolboxCategories = {
   <category name="Infrared Remote Control">
       <block type="communication_infrared_start"></block>
       <block type="communication_infrared_value">
-          <value name="NAME">
-              <block type="text">
-                  <field name="TEXT"></field>
-              </block>
-          </value>
+          <field name="Received_Character">FF629D</field>
       </block>
   </category>
   <category name="Bluetooth">

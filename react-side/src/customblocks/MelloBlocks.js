@@ -80,15 +80,32 @@ Blockly.Blocks['communication_infrared_start'] = {
   }
 };
 
+// Blockly.Blocks['communication_infrared_value'] = {
+//   init: function() {
+//     this.appendStatementInput("IR_Decode_Loop")
+//         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
+//         .appendField("Read Infrared Character:")
+//         .appendField(new Blockly.FieldDropdown([["Up","FF629D"],["Down","FFA857"],["Right","FFC23D"],["Left","FF22DD"],["Ok","FF02FD"],["1","FF6897"],["2","FF9867"],["3","FFB04F"],["4","FF30CF"],["5","FF18E7"],["6","FF7A85"],["7","FF10EF"],["8","FF38C7"],["9","FF5AA5"],["0","FF4AB5"],["#","FF52AD"],["*","FF42BD"]]),"Received_Character");
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour(230);
+//     this.setOutput(false,null);
+//  this.setTooltip("");
+//  this.setHelpUrl("");
+//   }
+// };
+
 Blockly.Blocks['communication_infrared_value'] = {
   init: function() {
-    this.appendValueInput("NAME")
-        .setCheck(["Number", "String"])
+    this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Infrared Character:");
-    this.setOutput(true, null);
+        .appendField("Read Infrared Character:")
+        .appendField(new Blockly.FieldDropdown([["Up","FF629D"],["Down","FFA857"],["Right","FFC23D"],["Left","FF22DD"],["Ok","FF02FD"],["1","FF6897"],["2","FF9867"],["3","FFB04F"],["4","FF30CF"],["5","FF18E7"],["6","FF7A85"],["7","FF10EF"],["8","FF38C7"],["9","FF5AA5"],["0","FF4AB5"],["#","FF52AD"],["*","FF42BD"]]),"Received_Character");
+    this.appendStatementInput("IR_Decode_Loop")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(230);
-    this.setInputsInline(true);
  this.setTooltip("");
  this.setHelpUrl("");
   }
