@@ -12,6 +12,7 @@ const Right_Line_Follower_Receiver = "A3";
 const Left_Line_Follower_Receiver = "A2";
 const LeftServo = 9;
 const RightServo = 8;
+const ForkliftServo = 11;
 const IR_Remote = 3;
 const BluetoothTX = 12;
 const BluetoothRX = 13;
@@ -20,10 +21,20 @@ const RGB_R = 6;
 const RGB_G = 4;
 const RGB_B = 5;
 
-const LeftMotorCW =  84;
-const LeftMotorACW = 99;
-const RightMotorCW = 84;
-const RightMotorACW = 99;
+/*
+const LeftMotorCW =  0;
+const LeftMotorACW = 135;
+const RightMotorCW = 0;
+const RightMotorACW = 135;
+*/
+
+
+const LeftMotorCW =  76;
+const LeftMotorACW = 101;
+const RightMotorCW = 78;
+const RightMotorACW = 100;
+
+
 var DSpeed = 530;
 
 var ServoDefined = false;
@@ -36,6 +47,7 @@ function clearvars(){
   peripheral_SetupCode = "";
   ServoDefined = false;
   RGBDefined = false;
+
 }
 
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
@@ -63,7 +75,6 @@ Blockly.JavaScript['sensor_light_follower_right'] = function(block) {
     peripheral_SetupCode += `\tpinMode(Right_Light_Follower, INPUT);\n`
   }
   var code = `analogRead(Right_Light_Follower)`;
-  // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -73,7 +84,6 @@ Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
   peripheral_SetupCode += `\tpinMode(Left_Light_Follower, INPUT);\n`
   }
   var code = `analogRead(Left_Light_Follower)`;
-  // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -227,15 +237,15 @@ Blockly.JavaScript['sound_buzzer_timer'] = function(block) {
   var dropdown_name = block.getFieldValue('note');
   var value_buzzer_time = Blockly.JavaScript.valueToCode(block, 'Buzzer Time', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `\ntone(${Buzzer_Pin},${dropdown_name}');\ndelay(${value_buzzer_time});\nnoTone(${Buzzer_Pin});`;
+  var code = `\ntone(${Buzzer_Pin},${dropdown_name});\ndelay(${value_buzzer_time});\nnoTone(${Buzzer_Pin});`;
   return code;
 };
 
 Blockly.JavaScript['motor_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -269,8 +279,8 @@ Blockly.JavaScript['motor_move_seconds'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});`
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -298,7 +308,12 @@ Blockly.JavaScript['forklift_move_seconds'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var dropdown_speed = block.getFieldValue('speed');
   var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
+  if(ServoDefined === false) {
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    ServoDefined = true;
+  }
+
   var code = '...;\n';
   return code;
 };
@@ -306,13 +321,21 @@ Blockly.JavaScript['forklift_move_seconds'] = function(block) {
 Blockly.JavaScript['forklift_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var dropdown_speed = block.getFieldValue('speed');
-  // TODO: Assemble JavaScript into code variable.
+  if(ServoDefined === false) {
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    ServoDefined = true;
+  }
   var code = '...;\n';
   return code;
 };
 
 Blockly.JavaScript['servo_rotate_to_degrees'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
+  if(ServoDefined === false) {
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    ServoDefined = true;
+  }
   var code = '...;\n';
   return code;
 };
@@ -320,7 +343,11 @@ Blockly.JavaScript['servo_rotate_to_degrees'] = function(block) {
 Blockly.JavaScript['servo_360_rotate_direction'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var dropdown_speed = block.getFieldValue('speed');
-  // TODO: Assemble JavaScript into code variable.
+  if(ServoDefined === false) {
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    ServoDefined = true;
+  }
   var code = '...;\n';
   return code;
 };
