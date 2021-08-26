@@ -10,9 +10,6 @@ const Right_Light_Follower = "A1";
 const Left_Light_Follower = "A0";
 const Right_Line_Follower_Receiver = "A3";
 const Left_Line_Follower_Receiver = "A2";
-const IR_Remote = 3;
-const BluetoothTX = 12;
-const BluetoothRX = 13;
 const LeftServo = 9;
 const RightServo = 8;
 
