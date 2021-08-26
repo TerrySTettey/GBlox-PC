@@ -1,61 +1,59 @@
 import Blockly from 'blockly';
 
-var PreDeclarations = "#include <Servo.h>;\n\nint US_Trigger = 12;\nint US_Echo = 11;\nint Servo_Pin = 10;\nint LED_Pin = 13;\nint Buzzer_Pin = 9;\n\nServo ServoA;\nint read_ultrasonic(int trigger, int echo);\n";
-var SetupCode = "\nvoid setup(){\n  ServoA.attach(Servo_Pin);\n  pinMode(LED_Pin, OUTPUT);\n  pinMode(US_Trigger, OUTPUT);\n  pinMode(US_Echo, INPUT);\n  pinMode(Buzzer_Pin, OUTPUT);\n}";
-var BulkFunctions = `\nint read_ultrasonic(int trigger, int echo){
-    digitalWrite(trigger, LOW);
-    delayMicroseconds(2);
-    digitalWrite(trigger, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(trigger, LOW);
-    int duration = pulseIn(echo, HIGH);
-    int distance = duration * 0.034 / 2;
-    return distance;
-}`
+var peripheral_PreDeclarations = "";
+var peripheral_BulkFunctions = "";
+var peripheral_SetupCode = "";
 
+
+
+function clearvars(){
+    peripheral_PreDeclarations = "";
+    peripheral_BulkFunctions = "";
+    peripheral_SetupCode = "";
+  }
 /* Definitions */
 
-// Blockly.Blocks['n_mainloop'] = {
-//     init: function() {
-//       this.appendDummyInput()
-//           .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
-//           .appendField("Main Loop");
-//       this.appendStatementInput("mainLoop")
-//           .setCheck(null);
-//       this.setColour(135);
-//     this.setTooltip("The Main Loop of the program.");
-//     this.setHelpUrl("");
-//     }
-// };
+Blockly.Blocks['n_mainloop'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
+          .appendField("Main Loop");
+      this.appendStatementInput("mainLoop")
+          .setCheck(null);
+      this.setColour(135);
+    this.setTooltip("The Main Loop of the program.");
+    this.setHelpUrl("");
+    }
+};
 
-// Blockly.Blocks['n_ultra_read'] = {
-//     init: function() {
-//       this.appendDummyInput()
-//           .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/1-17510_radio-waves-clip-art-radio-wave.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
-//           .appendField("Read Ultrasonic Sensor Value (cm)");
-//       this.setOutput(true, "Number");
-//       this.setColour(230);
-//    this.setTooltip("Read Ultrasonic Sensor Value in centimeters");
-//    this.setHelpUrl("");
-//     }
-// };
+Blockly.Blocks['n_ultra_read'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/1-17510_radio-waves-clip-art-radio-wave.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
+          .appendField("Read Ultrasonic Sensor Value (cm)");
+      this.setOutput(true, "Number");
+      this.setColour(230);
+   this.setTooltip("Read Ultrasonic Sensor Value in centimeters");
+   this.setHelpUrl("");
+    }
+};
 
-// Blockly.Blocks['n_servo_rotate'] = {
-//     init: function() {
-//       this.appendValueInput("degrees")
-//           .setCheck("Number")
-//           .appendField(new Blockly.FieldImage("https://static.thenounproject.com/png/1230725-200.png", 40, 40, { alt: "*ServoMotorIcon", flipRtl: "FALSE" }))
-//           .appendField("Rotate Servo Motor to ");
-//       this.appendDummyInput()
-//           .appendField("Degrees");
-//       this.setInputsInline(true);
-//       this.setPreviousStatement(true, null);
-//       this.setNextStatement(true, null);
-//       this.setColour(0);
-//    this.setTooltip("Rotates Servo Motor to specified number of degrees");
-//    this.setHelpUrl("");
-//     }
-// };
+Blockly.Blocks['n_servo_rotate'] = {
+    init: function() {
+      this.appendValueInput("degrees")
+          .setCheck("Number")
+          .appendField(new Blockly.FieldImage("https://static.thenounproject.com/png/1230725-200.png", 40, 40, { alt: "*ServoMotorIcon", flipRtl: "FALSE" }))
+          .appendField("Rotate Servo Motor to ");
+      this.appendDummyInput()
+          .appendField("Degrees");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(0);
+   this.setTooltip("Rotates Servo Motor to specified number of degrees");
+   this.setHelpUrl("");
+    }
+};
 
 Blockly.Blocks['n_led_state'] = {
     init: function() {
@@ -210,26 +208,38 @@ Blockly.Blocks['n_buzzer_play_note_def'] = {
 
 /* Generators */
 
-// Blockly.JavaScript['n_mainloop'] = function(block) {
-//     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-//     // TODO: Assemble JavaScript into code variable.
-//     var code = PreDeclarations + SetupCode +'\n\nvoid loop(){\n'+ statements_mainloop + '\n}\n' + BulkFunctions;
-//     return code;
-// };
+Blockly.JavaScript['n_mainloop'] = function(block) {
+    var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
+    peripheral_PreDeclarations = "#include <Servo.h>;\n\nint US_Trigger = 12;\nint US_Echo = 11;\nint Servo_Pin = 10;\nint LED_Pin = 13;\nint Buzzer_Pin = 9;\n\nServo ServoA;\nint read_ultrasonic(int trigger, int echo);\n";
+    peripheral_SetupCode = "\nvoid setup(){\n  ServoA.attach(Servo_Pin);\n  pinMode(LED_Pin, OUTPUT);\n  pinMode(US_Trigger, OUTPUT);\n  pinMode(US_Echo, INPUT);\n  pinMode(Buzzer_Pin, OUTPUT);\n}";
+    peripheral_BulkFunctions = `\nint read_ultrasonic(int trigger, int echo){
+        digitalWrite(trigger, LOW);
+        delayMicroseconds(2);
+        digitalWrite(trigger, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(trigger, LOW);
+        int duration = pulseIn(echo, HIGH);
+        int distance = duration * 0.034 / 2;
+        return distance;
+    }`
+    // TODO: Assemble JavaScript into code variable.
+     var code = '';
+    return code;
+};
 
-// Blockly.JavaScript['n_ultra_read'] = function(block) {
-//     // TODO: Assemble JavaScript into code variable.
-//     var code = "read_ultrasonic(US_Trigger,US_Echo)";
-//     // TODO: Change ORDER_NONE to the correct strength.
-//     return [code, Blockly.JavaScript.ORDER_NONE];
-// };
+Blockly.JavaScript['n_ultra_read'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    var code = "read_ultrasonic(US_Trigger,US_Echo)";
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
 
-// Blockly.JavaScript['n_servo_rotate'] = function(block) {
-//     var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
-//     // TODO: Assemble JavaScript into code variable.
-//     var code = '\nServoA.write('+value_degrees+');';
-//     return code;
-// };
+Blockly.JavaScript['n_servo_rotate'] = function(block) {
+    var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '\nServoA.write('+value_degrees+');';
+    return code;
+};
 
 Blockly.JavaScript['n_led_state'] = function(block) {
     var value_led_value = Blockly.JavaScript.valueToCode(block, 'led_value', Blockly.JavaScript.ORDER_ATOMIC);
@@ -304,3 +314,5 @@ Blockly.JavaScript['n_buzzer_play_note_def'] = function(block) {
 };
 
 /* End of Generators */
+
+export {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, clearvars}

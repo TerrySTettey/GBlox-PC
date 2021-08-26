@@ -1,6 +1,4 @@
 import Blockly from 'blockly';
-// import {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, clearvars} from './../peripherals/arduino_peripheral.js'
-// import {mello_PreDeclarations, mello_BulkFunctions, mello_SetupCode, mello_clearvars} from './../MelloBlocksGen.js'
 import { currentToolboxName } from '../../App.js';
 var peripherals = null;
 

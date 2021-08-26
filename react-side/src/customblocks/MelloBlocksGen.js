@@ -12,6 +12,10 @@ const Right_Line_Follower_Receiver = "A3";
 const Left_Line_Follower_Receiver = "A2";
 const LeftServo = 9;
 const RightServo = 8;
+const IR_Remote = 3;
+const BluetoothTX = 12;
+const BluetoothRX = 13;
+const Buzzer_Pin = 7;
 
 var ServoDefined = false;
 var FSpeed = 99;
@@ -135,7 +139,7 @@ Blockly.JavaScript['communincation_bluetooth_send'] = function(block) {
 Blockly.JavaScript['sound_buzzer_buzz'] = function(block) {
   var dropdown_note = block.getFieldValue('Note');
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = `tone(${Buzzer_Pin}, ${dropdown_note});\n`;
   return code;
 };
 
@@ -158,10 +162,10 @@ Blockly.JavaScript['led_neo_led'] = function(block) {
 };
 
 Blockly.JavaScript['sound_buzzer_timer'] = function(block) {
-  var dropdown_name = block.getFieldValue('NAME');
+  var dropdown_name = block.getFieldValue('note');
   var value_buzzer_time = Blockly.JavaScript.valueToCode(block, 'Buzzer Time', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = `\ntone(${Buzzer_Pin},${dropdown_name}');\ndelay(${value_buzzer_time});\nnoTone(${Buzzer_Pin});`;
   return code;
 };
 
