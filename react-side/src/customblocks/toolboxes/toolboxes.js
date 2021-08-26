@@ -373,6 +373,10 @@ const toolboxCategories = {
     <block type="motor_move_indef">
       <field name="direction">forward</field>
     </block>
+    <block type="motor_single_move_indef">
+      <field name="motorselect">lm</field>
+      <field name="direction">forward</field>
+    </block>
     <block type="motor_move_seconds">
       <field name="direction">forward</field>
       <value name="seconds">

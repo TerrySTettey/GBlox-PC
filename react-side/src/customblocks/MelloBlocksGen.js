@@ -29,7 +29,7 @@ const RightMotorACW = 135;
 */
 
 
-const LeftMotorCW =  76;
+const LeftMotorCW =  77;
 const LeftMotorACW = 101;
 const RightMotorCW = 78;
 const RightMotorACW = 100;
@@ -82,7 +82,7 @@ Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
   if (peripheral_PreDeclarations.includes(`int Left_Light_Follower = ${Left_Light_Follower};\n`)==0){
   peripheral_PreDeclarations += `int Left_Light_Follower = ${Left_Light_Follower};\n`;
   peripheral_SetupCode += `\tpinMode(Left_Light_Follower, INPUT);\n`
-  }
+  }``
   var code = `analogRead(Left_Light_Follower)`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -91,7 +91,7 @@ Blockly.JavaScript['sensor_line_follower_right'] = function(block) {
   var dropdown_right_line_follower_value = block.getFieldValue('Right Line Follower Value');
   if (peripheral_PreDeclarations.includes(`int Right_Line_Follower_Receiver = ${Right_Line_Follower_Receiver};\n`)==0){
     peripheral_PreDeclarations += `int Right_Line_Follower_Receiver = ${Right_Line_Follower_Receiver};\n`;
-    peripheral_SetupCode += `\tpinMode(Right_Line_Follower_Receiver, INPUT);`;
+    peripheral_SetupCode += `\tpinMode(Right_Line_Follower_Receiver, INPUT);\n`;
   }
   var sensor_val = 0;
   if (dropdown_right_line_follower_value === "On"){
@@ -100,7 +100,7 @@ Blockly.JavaScript['sensor_line_follower_right'] = function(block) {
   else{
     sensor_val = 0;
   }
-  var code =`map(analogRead(Right_Line_Follower_Receiver),0,255,0,1)==${sensor_val}`;
+  var code =`map(analogRead(Right_Line_Follower_Receiver),0,500,0,1)==${sensor_val}`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -108,7 +108,7 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
   var dropdown_left_line_follower_value = block.getFieldValue('Left Line Follower Value');
   if (peripheral_PreDeclarations.includes(`int Left_Line_Follower_Receiver = ${Left_Line_Follower_Receiver};\n`)==0){
     peripheral_PreDeclarations += `int Left_Line_Follower_Receiver = ${Left_Line_Follower_Receiver};\n`;
-    peripheral_SetupCode += `\tpinMode(Left_Line_Follower_Receiver, INPUT);`;
+    peripheral_SetupCode += `\tpinMode(Left_Line_Follower_Receiver, INPUT);\n`;
   }
   var sensor_val = 0;
   if (dropdown_left_line_follower_value === "On"){
@@ -117,7 +117,7 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
   else{
     sensor_val = 0;
   }
-  var code = `map(analogRead(Left_Line_Follower_Receiver),0,255,0,1)==${sensor_val}`;
+  var code = `map(analogRead(Left_Line_Follower_Receiver),0,500,0,1)==${sensor_val}`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -141,22 +141,24 @@ Blockly.JavaScript['communication_infrared_value'] = function(block) {
 
 Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
   if (peripheral_PreDeclarations.includes(`#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`)==0){
-    peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`
+    peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\nchar bdata = 'a';\n`
     peripheral_SetupCode += `\thc06.begin(9600);\n`;
   }
-  var code = '';
+  var code = 'while (hc06.available()>0){\n\tbdata = hc06.read();\n}\n';
   return code;
 };
 
 Blockly.JavaScript['communication_bluetooth_receive'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, "NAME", Blockly.JavaScript.ORDER_ATOMIC);
   value_name = value_name.replaceAll(`'`,``);
-  if (peripheral_PreDeclarations.includes(`char read_bluetooth();\n`)==0){
-    peripheral_PreDeclarations += `char read_bluetooth();\n`;
-    peripheral_BulkFunctions += `char read_bluetooth(){\n\tif (hc06.available()>0){\n\t\treturn (hc06.read());\n\t}\n}\n`
+  /*
+  if (peripheral_PreDeclarations.includes(`char bdata = 'a';\n`)==0){
+    peripheral_PreDeclarations += `char bdata = 'a';\n`;
+    peripheral_BulkFunctions += `char read_bluetooth(){\n\twhile (hc06.available()>0){\n\tbdata = hc06.read();\n}\n}\n`
   }
+  */
 
-  var code = `(read_bluetooth()=="${value_name}")`;
+  var code = `(bdata=='${value_name}')`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -164,6 +166,7 @@ Blockly.JavaScript['communication_bluetooth_receive'] = function(block) {
 Blockly.JavaScript['communincation_bluetooth_send'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   value_name = value_name.replaceAll(`'`,``);
+
   if (peripheral_PreDeclarations.includes(`int send_bluetooth(char x);\n`)==0){
     peripheral_PreDeclarations += `int send_bluetooth(char x);\n`;
     peripheral_BulkFunctions += `int send_bluetooth(char x){\n\thc06.write(x);\n}\n`
@@ -266,10 +269,45 @@ Blockly.JavaScript['motor_move_indef'] = function(block) {
       code = `LeftServo.write(${LeftMotorCW});\nRightServo.write(${RightMotorCW});\n`;
       break;
     case "rright":
-      code = `LeftServo.write(${LeftMotorACW});\nRightServo.write(${RightMotorACW}});\n`;
+      code = `LeftServo.write(${LeftMotorACW});\nRightServo.write(${RightMotorACW});\n`;
       break;
     case "stop":
       code = `LeftServo.write(90);\nRightServo.write(90);\n`;
+      break;
+  }
+  return code;
+};
+
+Blockly.JavaScript['motor_single_move_indef'] = function(block) {
+  var dropdown_direction = block.getFieldValue('direction');
+  var dropdown_motorselect = block.getFieldValue('motorselect');
+  if(ServoDefined === false) {
+    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
+    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    ServoDefined = true;
+  }
+  var code = '...;\n';
+  switch(dropdown_direction){
+    case "forward":
+      if(dropdown_motorselect === "lm"){
+        code = `LeftServo.write(${LeftMotorACW});\n`;
+      } else if (dropdown_motorselect === "rm") {
+        code = `RightServo.write(${RightMotorCW});\n`
+      }
+      break;
+    case "backward":
+      if(dropdown_motorselect === "lm"){
+        code = `LeftServo.write(${LeftMotorCW});\n`;
+      } else if (dropdown_motorselect === "rm") {
+        code = `RightServo.write(${RightMotorACW});\n`
+      }
+      break;
+    case "stop":
+      if(dropdown_motorselect === "lm"){
+        code = `LeftServo.write(90);\n`;
+      } else if (dropdown_motorselect === "rm") {
+        code = `RightServo.write(90);\n`
+      }
       break;
   }
   return code;
@@ -349,6 +387,29 @@ Blockly.JavaScript['servo_360_rotate_direction'] = function(block) {
     ServoDefined = true;
   }
   var code = '...;\n';
+  switch(dropdown_direction){
+    case "forward":
+      if(dropdown_motorselect === "lm"){
+        code = `LeftServo.write(${LeftMotorACW});\n`;
+      } else if (dropdown_motorselect === "rm") {
+        code = `RightServo.write(${RightMotorCW});\n`
+      }
+      break;
+    case "backward":
+      if(dropdown_motorselect === "lm"){
+        code = `LeftServo.write(${LeftMotorCW});\n`;
+      } else if (dropdown_motorselect === "rm") {
+        code = `RightServo.write(${RightMotorACW});\n`
+      }
+      break;
+    case "stop":
+      if(dropdown_motorselect === "lm"){
+        code = `LeftServo.write(90);\n`;
+      } else if (dropdown_motorselect === "rm") {
+        code = `RightServo.write(90);\n`
+      }
+      break;
+  }
   return code;
 };
 

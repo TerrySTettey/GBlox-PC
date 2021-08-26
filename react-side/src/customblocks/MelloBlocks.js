@@ -228,6 +228,22 @@ Blockly.Blocks['motor_move_indef'] = {
   }
 };
 
+Blockly.Blocks['motor_single_move_indef'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
+        .appendField("Turn")
+        .appendField(new Blockly.FieldDropdown([["Left Motor","lm"],["Right Motor", "rm"]]), "motorselect")
+        .appendField(new Blockly.FieldDropdown([["move forward","forward"], ["move backward","backward"], ["stop","stop"]]), "direction");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['motor_move_seconds'] = {
   init: function() {
     this.appendDummyInput()
