@@ -39,33 +39,39 @@ function clearvars(){
 }
 
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
-  var code = "\tread_ultrasonic("+US_Trigger+","+US_Echo+")\n";;
-  peripheral_PreDeclarations += "int US_Trigger = " + US_Trigger+";\nint US_Echo = " + US_Echo+";\n\n";
-  peripheral_SetupCode += "\tpinMode("+US_Trigger+", OUTPUT);\n\tpinMode("+US_Echo+", INPUT);\n"
-  peripheral_BulkFunctions += `\nint read_ultrasonic(int trigger, int echo){
-      digitalWrite(trigger, LOW);
-      delayMicroseconds(2);
-      digitalWrite(trigger, HIGH);
-      delayMicroseconds(10);
-      digitalWrite(trigger, LOW);
-      int duration = pulseIn(echo, HIGH);
-      int distance = duration * 0.034 / 2;
-      return distance;
-  }`
+  var code = "\tread_ultrasonic("+US_Trigger+","+US_Echo+")\n";
+  if (peripheral_PreDeclarations.includes(`int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`) == 0){
+    peripheral_PreDeclarations += `int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`;
+    peripheral_SetupCode += `\tpinMode(${US_Trigger}, OUTPUT);\n\tpinMode(${US_Echo}, INPUT);\n`;
+    peripheral_BulkFunctions += `\nint read_ultrasonic(int trigger, int echo){
+        digitalWrite(trigger, LOW);
+        delayMicroseconds(2);
+        digitalWrite(trigger, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(trigger, LOW);
+        int duration = pulseIn(echo, HIGH);
+        int distance = duration * 0.034 / 2;
+        return distance;
+    }`
+  }
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['sensor_light_follower_right'] = function(block) {
-  peripheral_PreDeclarations += `int Right_Light_Follower = ${Right_Light_Follower};\n`;
-  peripheral_SetupCode += `\tpinMode(Right_Light_Follower, INPUT);\n`
+  if (peripheral_PreDeclarations.includes()==0){
+    peripheral_PreDeclarations += `int Right_Light_Follower = ${Right_Light_Follower};\n`;
+    peripheral_SetupCode += `\tpinMode(Right_Light_Follower, INPUT);\n`
+  }
   var code = `analogRead(Right_Light_Follower)`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
+  if (peripheral_PreDeclarations.includes(`int Left_Light_Follower = ${Left_Light_Follower};\n`)==0){
   peripheral_PreDeclarations += `int Left_Light_Follower = ${Left_Light_Follower};\n`;
   peripheral_SetupCode += `\tpinMode(Left_Light_Follower, INPUT);\n`
+  }
   var code = `analogRead(Left_Light_Follower)`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
@@ -73,8 +79,10 @@ Blockly.JavaScript['sensor_light_follower_left'] = function(block) {
 
 Blockly.JavaScript['sensor_line_follower_right'] = function(block) {
   var dropdown_right_line_follower_value = block.getFieldValue('Right Line Follower Value');
-  peripheral_PreDeclarations += `int Right_Line_Follower_Receiver = ${Right_Line_Follower_Receiver};\n`;
-  peripheral_SetupCode += `\tpinMode(Right_Line_Follower_Receiver, INPUT);`;
+  if (peripheral_PreDeclarations.includes(`int Right_Line_Follower_Receiver = ${Right_Line_Follower_Receiver};\n`)==0){
+    peripheral_PreDeclarations += `int Right_Line_Follower_Receiver = ${Right_Line_Follower_Receiver};\n`;
+    peripheral_SetupCode += `\tpinMode(Right_Line_Follower_Receiver, INPUT);`;
+  }
   var sensor_val = 0;
   if (dropdown_right_line_follower_value === "On"){
     sensor_val = 1;
@@ -88,8 +96,10 @@ Blockly.JavaScript['sensor_line_follower_right'] = function(block) {
 
 Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
   var dropdown_left_line_follower_value = block.getFieldValue('Left Line Follower Value');
-  peripheral_PreDeclarations += `int Left_Line_Follower_Receiver = ${Left_Line_Follower_Receiver};\n`;
-  peripheral_SetupCode += `\tpinMode(Left_Line_Follower_Receiver, INPUT);`;
+  if (peripheral_PreDeclarations.includes(`int Left_Line_Follower_Receiver = ${Left_Line_Follower_Receiver};\n`)==0){
+    peripheral_PreDeclarations += `int Left_Line_Follower_Receiver = ${Left_Line_Follower_Receiver};\n`;
+    peripheral_SetupCode += `\tpinMode(Left_Line_Follower_Receiver, INPUT);`;
+  }
   var sensor_val = 0;
   if (dropdown_left_line_follower_value === "On"){
     sensor_val = 1;
@@ -102,8 +112,10 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
 };
 
 Blockly.JavaScript['communication_infrared_start'] = function(block) {
-  peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`;
-  peripheral_SetupCode += `IrReceiver.begin(IR_Remote);\n`
+  if (peripheral_PreDeclarations.includes( `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`)==0){
+    peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`;
+    peripheral_SetupCode += `IrReceiver.begin(IR_Remote);\n`
+  }
   var code = '';
   return code;
 };
@@ -195,13 +207,9 @@ Blockly.JavaScript['led_neo_led'] = function(block) {
   var value_green_value = Blockly.JavaScript.valueToCode(block, 'Green Value', Blockly.JavaScript.ORDER_ATOMIC);
   var value_blue_value = Blockly.JavaScript.valueToCode(block, 'Blue Value', Blockly.JavaScript.ORDER_ATOMIC);
   const block_count = Blockly.mainWorkspace.getBlocksByType('led_neo_led',true);
-  console.log(block_count.length);
-  if (block_count.length < 2){
+  if (peripheral_PreDeclarations.includes(`#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(2, A6, NEO_GRB + NEO_KHZ800);\n`) ==0){
     peripheral_PreDeclarations += `#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(2, A6, NEO_GRB + NEO_KHZ800);\n`;
     peripheral_SetupCode += `pixels.begin();\n`;
-  }
-  else{
-    
   }
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
