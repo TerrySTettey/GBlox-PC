@@ -16,9 +16,12 @@ const BluetoothRX = 13;
 const LeftServo = 9;
 const RightServo = 8;
 
+const LeftMotorCW =  84;
+const LeftMotorACW = 99;
+const RightMotorCW = 84;
+const RightMotorACW = 99;
+
 var ServoDefined = false;
-var FSpeed = 99;
-var BSpeed = 84;
 var DSpeed = 530;
 
 function clearvars(){
@@ -178,22 +181,22 @@ Blockly.JavaScript['motor_move_indef'] = function(block) {
   var code = '...;\n';
   switch(dropdown_direction){
     case "forward":
-      code = `LeftServo.write(${FSpeed});\nRightServo.write(${BSpeed});\n`;
+      code = `LeftServo.write(${LeftMotorACW});\nRightServo.write(${RightMotorCW});\n`;
       break;
     case "backward":
-      code = `LeftServo.write(${BSpeed});\nRightServo.write(${FSpeed});\n`;
+      code = `LeftServo.write(${LeftMotorCW});\nRightServo.write(${RightMotorACW});\n`;
       break;
     case "left":
-      code = `LeftServo.write(${BSpeed});\nRightServo.write(${BSpeed});\ndelay(${DSpeed});\nLeftServo.write(90);\nRightServo.write(90);\n`;
+      code = `LeftServo.write(${LeftMotorCW});\nRightServo.write(${RightMotorCW});\ndelay(${DSpeed});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "right":
-      code = `LeftServo.write(${FSpeed});\nRightServo.write(${FSpeed});\ndelay(${DSpeed});\nLeftServo.write(90);\nRightServo.write(90);\n`;
+      code = `LeftServo.write(${LeftMotorACW});\nRightServo.write(${RightMotorACW});\ndelay(${DSpeed});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "rleft":
-      code = `LeftServo.write(0);\nRightServo.write(0);\n`;
+      code = `LeftServo.write(${LeftMotorCW});\nRightServo.write(${RightMotorCW});\n`;
       break;
     case "rright":
-      code = `LeftServo.write(${FSpeed});\nRightServo.write(${FSpeed});\n`;
+      code = `LeftServo.write(${LeftMotorACW});\nRightServo.write(${RightMotorACW}});\n`;
       break;
     case "stop":
       code = `LeftServo.write(90);\nRightServo.write(90);\n`;
@@ -213,16 +216,16 @@ Blockly.JavaScript['motor_move_seconds'] = function(block) {
   var code = '...;\n';
   switch(dropdown_direction){
     case "forward":
-      code = `LeftServo.write(${FSpeed});\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
+      code = `LeftServo.write(${LeftMotorACW});\nRightServo.write(${RightMotorCW});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "backward":
-      code = `LeftServo.write(0);\nRightServo.write(${FSpeed});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
+      code = `LeftServo.write(${LeftMotorCW});\nRightServo.write(${RightMotorACW});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "rleft":
-      code = `LeftServo.write(0);\nRightServo.write(0);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
+      code = `LeftServo.write(${LeftMotorCW});\nRightServo.write(${RightMotorCW});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "rright":
-      code = `LeftServo.write(${FSpeed});\nRightServo.write(${FSpeed});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
+      code = `LeftServo.write(${LeftMotorACW});\nRightServo.write(${RightMotorACW});\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
       break;
     case "stop":
       code = `LeftServo.write(90);\nRightServo.write(90);\ndelay(${value_seconds*1000});\nLeftServo.write(90);\nRightServo.write(90);\n`;
