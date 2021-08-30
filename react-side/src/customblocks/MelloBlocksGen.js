@@ -12,7 +12,7 @@ const Right_Line_Follower_Receiver = "A3";
 const Left_Line_Follower_Receiver = "A2";
 const LeftServo = 9;
 const RightServo = 8;
-const ForkliftServo = 11;
+const ForkliftServo = 10;
 const IR_Remote = 3;
 const BluetoothTX = 12;
 const BluetoothRX = 13;
@@ -372,20 +372,20 @@ Blockly.JavaScript['forklift_move_indef'] = function(block) {
   switch (dropdown_direction){
     case "up":
       if (dropdown_speed == "slow"){
-        code = `raise_fork(0.4)`
+        code = `raise_fork(0.4);\n`
       }else if (dropdown_speed == "medium"){
-        code = `raise_fork(1)`
+        code = `raise_fork(1);\n`
       }else if (dropdown_speed == "fast"){
-        code = `raise_fork(2)`
+        code = `raise_fork(2);\n`
       }
       break;
     case "down":
       if (dropdown_speed == "slow"){
-        code = `lower_fork(0.4)`
+        code = `lower_fork(0.4);\n`
       }else if (dropdown_speed == "medium"){
-        code = `lower_fork(1)`
+        code = `lower_fork(1);\n`
       }else if (dropdown_speed == "fast"){
-        code = `lower_fork(2)`
+        code = `lower_fork(2);\n`
       }
       break;
   }
