@@ -193,8 +193,9 @@ ipcMain.handle("serialport_retreive", async function (event){
 })
 
 ipcMain.handle("serialport_write", async function (event, value){
-    serial_monitor.write(value);
-    console.log(value);
+    serial_monitor.write(value, function (err){
+        serial_monitor_results += `\nSent ${value} to Arduino\n`;
+    });
 })
 
 ipcMain.handle("serialport_close", function (event){
