@@ -133,7 +133,7 @@ function App() {
   const [UploadProgress, setUploadProgress] = useState(1);
   const classes = useStyles();
   const [toolboxstate, setChecked] = useState(false);
-
+  const [serialport_monitor, setSerialPortMonitor] = useState("");
 
 
   const code_change = event => {
@@ -169,11 +169,19 @@ switch(event.target.value){
     //console.log(currentToolbox);
   };
 
-  const tabpanelchange = (event, newTabval) => {
+const tabpanelchange = (event, newTabval) => {
     settabpanel(newTabval);
+    if (newTabval === 3){
+      ipcRenderer.invoke(`serialport_retreive`);
+      serialport();
+    }
+    else{
+      ipcRenderer.invoke(`serialport_close`);
+    }
   };
 
   React.useEffect(() => {
+    
     if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status === "Upload Failed : Error in Code" || upload_status === ""){
       setUploadProgress(1);
     }
@@ -182,6 +190,7 @@ switch(event.target.value){
     }
     return UploadProgress;
   });
+
   function showCode(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
     newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -210,6 +219,12 @@ switch(event.target.value){
     Blockly.mainWorkspace.clear();
   }
 
+  function serialport(){
+    ipcRenderer.on('serialport_monitor', (event, result) => {
+      console.log(typeof result);
+      setSerialPortMonitor(serialport_monitor => [...serialport_monitor, String.fromCharCode.apply(null, result)+`\n`]);;
+    });
+  }
 
   function exportBlocks() {
     try {
@@ -353,6 +368,7 @@ switch(event.target.value){
           <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline = {true} fullWidth = {true} align="justify" onChange={code_change}/>
           </TabPanel>
           <TabPanel value={tabpanelval} index={3}>
+          <TextField id="outlined-basic" variant="outlined" value={serialport_monitor} disabled={false} multiline = {true} fullWidth = {true} align="justify"/>
             </TabPanel>
           </div>
           <div className={classes.footer}>

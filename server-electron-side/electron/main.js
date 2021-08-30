@@ -2,11 +2,13 @@ const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 const { ipcMain, dialog } = require('electron')
-
+const serialport = require('serialport');
+const SerialPort = serialport.SerialPort;
+const Readline = require('@serialport/parser-readline')
 var fs = require('fs')
 var COMPORT = null;
 var Upload_Status = null;
-
+var serial_monitor;
 const { execSync, exec } = require('child_process');
 
 //When save button is pressed...
@@ -142,6 +144,58 @@ async function VERIFYCODE(cb) {
         cb("No Arduino Detected");
     }
 }
+
+async function readSerialPort(cb){
+    serial_monitor =new serialport(COMPORT, {
+        baudRate: 9600,
+        parser: new serialport.parsers.Readline('\r')
+    });
+    serial_monitor.on('data', function(data) {
+        console.log('data received: ' + data);
+        cb(data);
+    });
+}
+
+// function checkSerialPort(){
+//     serialport.list().then(ports => {
+//         ports.forEach(function(port) {
+//             //console.log(port.path)
+//             COMPORT = port.path;
+//         })
+//     })
+//     return COMPORT;
+// }
+
+ipcMain.handle("serialport_retreive", async function (event){
+    try{
+        console.log("Opening SerialMonitor\n");
+        CHECK_COMPORT(function (res){
+            console.log(res);
+            event.sender.send('arduino_comport',res);
+        });
+        readSerialPort(function (res){
+            console.log(res)
+            event.sender.send('serialport_monitor',res);
+        });
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+ipcMain.handle("serialport_close", function (event){
+    try {
+        console.log("Close SerialMonitor\n");
+        if (typeof serial_monitor != "undefined"){
+            serial_monitor.close(function (err){
+                console.log("Closed SerialMonitor",err);
+            });
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
 
 //When the upload button is pressed...
 ipcMain.handle("upload-code", async function (event, jsCode) {
