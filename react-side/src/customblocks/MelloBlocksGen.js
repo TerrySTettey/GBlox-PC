@@ -12,7 +12,7 @@ const Right_Line_Follower_Receiver = "A3";
 const Left_Line_Follower_Receiver = "A2";
 const LeftServo = 9;
 const RightServo = 8;
-const ForkliftServo = 11;
+const ForkliftServo = 10;
 const IR_Remote = 3;
 const BluetoothTX = 12;
 const BluetoothRX = 13;
@@ -246,6 +246,7 @@ Blockly.JavaScript['motor_move_indef'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -281,6 +282,7 @@ Blockly.JavaScript['motor_single_move_indef'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -316,6 +318,7 @@ Blockly.JavaScript['motor_move_seconds'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -346,8 +349,11 @@ Blockly.JavaScript['forklift_move_seconds'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
+
+
 
   var code = '...;\n';
   return code;
@@ -359,9 +365,30 @@ Blockly.JavaScript['forklift_move_indef'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
+  switch (dropdown_direction){
+    case "up":
+      if (dropdown_speed == "slow"){
+        code = `raise_fork(0.4);\n`
+      }else if (dropdown_speed == "medium"){
+        code = `raise_fork(1);\n`
+      }else if (dropdown_speed == "fast"){
+        code = `raise_fork(2);\n`
+      }
+      break;
+    case "down":
+      if (dropdown_speed == "slow"){
+        code = `lower_fork(0.4);\n`
+      }else if (dropdown_speed == "medium"){
+        code = `lower_fork(1);\n`
+      }else if (dropdown_speed == "fast"){
+        code = `lower_fork(2);\n`
+      }
+      break;
+  }
   return code;
 };
 
