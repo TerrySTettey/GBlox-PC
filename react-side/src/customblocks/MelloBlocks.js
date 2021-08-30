@@ -251,7 +251,7 @@ Blockly.Blocks['motor_single_move_indef'] = {
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
         .appendField("Turn")
         .appendField(new Blockly.FieldDropdown([["Left Motor","lm"],["Right Motor", "rm"]]), "motorselect")
-        .appendField(new Blockly.FieldDropdown([["move forward","forward"], ["move backward","backward"], ["stop","stop"]]), "direction");
+        .appendField(new Blockly.FieldDropdown([["forward","forward"], ["backward","backward"], ["to a stop","stop"]]), "direction");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -290,9 +290,9 @@ Blockly.Blocks['forklift_move_seconds'] = {
         .appendField(new Blockly.FieldDropdown([["slowly","slow"], ["moderately","medium"], ["quickly","fast"]]), "speed");
     this.appendValueInput("seconds")
         .setCheck("Number")
-        .appendField("for");
+        .appendField("to");
     this.appendDummyInput()
-        .appendField("seconds");
+        .appendField("degrees");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
