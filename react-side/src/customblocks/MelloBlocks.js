@@ -347,3 +347,62 @@ Blockly.Blocks['servo_360_rotate_direction'] = {
  this.setHelpUrl("");
   }
 };
+
+Blockly.Blocks['variable_set'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set Variable")
+        .appendField(new Blockly.FieldTextInput("var_name"), "varname");
+    this.appendValueInput("value")
+        .setCheck(["Number", "String"])
+        .appendField("to");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['variable_get'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Get Variable")
+        .appendField(new Blockly.FieldTextInput("var_name"), "varname")
+        .appendField("'s value");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['variable_create_int'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create Integer Variable")
+        .appendField(new Blockly.FieldTextInput("var_name"), "varname");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['variable_create_float'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create Float Variable")
+        .appendField(new Blockly.FieldTextInput("var_name"), "varname");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};

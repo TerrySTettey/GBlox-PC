@@ -246,7 +246,7 @@ Blockly.JavaScript['motor_move_indef'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -282,7 +282,7 @@ Blockly.JavaScript['motor_single_move_indef'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -318,7 +318,7 @@ Blockly.JavaScript['motor_move_seconds'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -349,7 +349,7 @@ Blockly.JavaScript['forklift_move_seconds'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
 
@@ -365,7 +365,7 @@ Blockly.JavaScript['forklift_move_indef'] = function(block) {
   if(ServoDefined === false) {
     peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
     peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(int speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(int speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -411,6 +411,40 @@ Blockly.JavaScript['servo_360_rotate_direction'] = function(block) {
     ServoDefined = true;
   }
   var code = '...;\n';
+  return code;
+};
+
+Blockly.JavaScript['variable_set'] = function(block) {
+  var text_varname = block.getFieldValue('varname');
+  var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  code = `${text_varname} = ${value_value};\n`
+  return code;
+};
+
+Blockly.JavaScript['variable_get'] = function(block) {
+  var text_varname = block.getFieldValue('varname');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...';
+  code = `${text_varname}`
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['variable_create_int'] = function(block) {
+  var text_varname = block.getFieldValue('varname');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  code = `int ${text_varname};\n`
+  return code;
+};
+
+Blockly.JavaScript['variable_create_float'] = function(block) {
+  var text_varname = block.getFieldValue('varname');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  code = `float ${text_varname};\n`
   return code;
 };
 

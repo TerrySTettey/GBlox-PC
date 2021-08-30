@@ -66,7 +66,7 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
             var code = `${Total_PreDeclarations} ${Total_SetupCode} \n}\n\nvoid loop(){\n ${statements_mainloop}\n} \n ${Total_BulkFunctions}`;
         }
         else{
-            var code = `${Total_PreDeclarations} ${Total_SetupCode} \n //Run Code Once\n${statements_mainloop}'}\nvoid loop(){}\n ${Total_BulkFunctions}`;
+            var code = `${Total_PreDeclarations} \nint runOnce;\n ${Total_SetupCode} \nrunOnce = 0;\n}\n\nvoid loop(){\n\tif(runOnce == 0){\n${statements_mainloop}\nrunOnce = 1;}\n}\n${Total_BulkFunctions}`;
         }
     
     // console.log(Total_PreDeclarations);
