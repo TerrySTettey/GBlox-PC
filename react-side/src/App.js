@@ -43,7 +43,6 @@ var currentToolbox;
 var response = "null";
 currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
-var old_serialport_results;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -135,6 +134,7 @@ function App() {
   const classes = useStyles();
   const [toolboxstate, setChecked] = useState(false);
   const [serialport_monitor, setSerialPortMonitor] = useState([]);
+  const [serialport_value, setSerialPortWrite] = useState("");
 
 
   const code_change = event => {
@@ -174,13 +174,17 @@ const tabpanelchange = (event, newTabval) => {
     settabpanel(newTabval);
     if (newTabval === 3){
       ipcRenderer.invoke(`serialport_retreive`);
-      serialport();
+      serialport_read();
     }
     else{
       ipcRenderer.invoke(`serialport_close`);
       setSerialPortMonitor([]);
     }
   };
+
+const serialport_change = (event) => {
+  setSerialPortWrite(event.target.value);
+}
 
   React.useEffect(() => {
 
@@ -221,12 +225,15 @@ const tabpanelchange = (event, newTabval) => {
     Blockly.mainWorkspace.clear();
   }
 
-  function serialport(){
+  function serialport_read(){
     ipcRenderer.on('serialport_monitor', (event, result) => { 
       setSerialPortMonitor(result);
-      
       //console.log(serialport_results);
     });
+  }
+
+  function serialport_write(){
+    ipcRenderer.invoke("serialport_write", serialport_value);
   }
 
   function exportBlocks() {
@@ -371,8 +378,21 @@ const tabpanelchange = (event, newTabval) => {
           <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline = {true} fullWidth = {true} align="justify" onChange={code_change}/>
           </TabPanel>
           <TabPanel value={tabpanelval} index={3}>
-          <TextField id="outlined-basic" variant="outlined" value={serialport_monitor} disabled={false} multiline = {true} fullWidth = {true} align="justify"/>
-            </TabPanel>
+          <Typography variant="h3">
+            Serial Monitor
+          </Typography>
+          <TextField id="outlined-basic" variant="outlined" value={serialport_monitor} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
+          <Typography variant="h5">
+            Write to Serial Monitor
+          </Typography>
+          <TextField id="outlined-basic" variant = "filled" value={serialport_value} disabled={false} multiline = {false} fullWidth = {true} align="justify" onKeyDown={(ev) => {
+              if (ev.key === 'Enter') {
+                serialport_write();
+                ev.preventDefault();
+              }
+            }} 
+            onChange={serialport_change}/>
+          </TabPanel>
           </div>
           <div className={classes.footer}>
             <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>

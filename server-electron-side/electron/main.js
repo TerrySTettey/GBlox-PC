@@ -157,8 +157,8 @@ async function readSerialPort(cb){
         console.log("Parsing Data for the first time")
         serial_monitor.pipe(parser);
         parser.on('data', function (data){
-            console.log("First Parse\n")
-            console.log(data);
+            // console.log("First Parse\n")
+            // console.log(data);
             serial_monitor_results += data;
             cb(serial_monitor_results);
         });
@@ -184,13 +184,17 @@ ipcMain.handle("serialport_retreive", async function (event){
             event.sender.send('arduino_comport',res);
         });
         readSerialPort(function (res){
-            console.log("Running\n")
             event.sender.send('serialport_monitor',res);
         });
     }
     catch (e) {
         console.log(e);
     }
+})
+
+ipcMain.handle("serialport_write", async function (event, value){
+    serial_monitor.write(value);
+    console.log(value);
 })
 
 ipcMain.handle("serialport_close", function (event){
