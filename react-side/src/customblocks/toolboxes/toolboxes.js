@@ -495,6 +495,20 @@ const toolboxCategories = {
       </block>
   </category>
   </category>
+  <category name="Variables">
+    <block type="variable_create_float">
+      <field name="varname">var_name</field>
+    </block>
+    <block type="variable_create_int">
+      <field name="varname">var_name</field>
+    </block>
+    <block type="variable_get">
+      <field name="varname">var_name</field>
+    </block>
+    <block type="variable_set">
+      <field name="varname">var_name</field>
+    </block>
+  </category>
   </xml>`;
   
   const MelloDOM = Blockly.Xml.textToDom(MelloToolbox);
