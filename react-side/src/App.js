@@ -43,6 +43,7 @@ var currentToolbox;
 var response = "null";
 currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
+var old_serialport_results;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -133,7 +134,7 @@ function App() {
   const [UploadProgress, setUploadProgress] = useState(1);
   const classes = useStyles();
   const [toolboxstate, setChecked] = useState(false);
-  const [serialport_monitor, setSerialPortMonitor] = useState("");
+  const [serialport_monitor, setSerialPortMonitor] = useState([]);
 
 
   const code_change = event => {
@@ -177,11 +178,12 @@ const tabpanelchange = (event, newTabval) => {
     }
     else{
       ipcRenderer.invoke(`serialport_close`);
+      setSerialPortMonitor([]);
     }
   };
 
   React.useEffect(() => {
-    
+
     if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status === "Upload Failed : Error in Code" || upload_status === ""){
       setUploadProgress(1);
     }
@@ -220,9 +222,10 @@ const tabpanelchange = (event, newTabval) => {
   }
 
   function serialport(){
-    ipcRenderer.on('serialport_monitor', (event, result) => {
-      console.log(typeof result);
-      setSerialPortMonitor(serialport_monitor => [...serialport_monitor, String.fromCharCode.apply(null, result)+`\n`]);;
+    ipcRenderer.on('serialport_monitor', (event, result) => { 
+      setSerialPortMonitor(result);
+      
+      //console.log(serialport_results);
     });
   }
 

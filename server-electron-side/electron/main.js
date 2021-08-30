@@ -4,11 +4,13 @@ const isDev = require('electron-is-dev')
 const { ipcMain, dialog } = require('electron')
 const serialport = require('serialport');
 const SerialPort = serialport.SerialPort;
-const Readline = require('@serialport/parser-readline')
+const Readline = serialport.parsers.Readline;
+const parser = new Readline();
 var fs = require('fs')
 var COMPORT = null;
 var Upload_Status = null;
 var serial_monitor;
+var serial_monitor_results = "";
 const { execSync, exec } = require('child_process');
 
 //When save button is pressed...
@@ -146,25 +148,33 @@ async function VERIFYCODE(cb) {
 }
 
 async function readSerialPort(cb){
-    serial_monitor =new serialport(COMPORT, {
-        baudRate: 9600,
-        parser: new serialport.parsers.Readline('\r')
-    });
-    serial_monitor.on('data', function(data) {
-        console.log('data received: ' + data);
-        cb(data);
-    });
+    // console.log(serial_monitor)
+    if (typeof serial_monitor === "undefined"){
+        serial_monitor =new serialport(COMPORT, {
+            baudRate: 9600,
+            parser: new serialport.parsers.Readline('\r\n'),
+        });
+        console.log("Parsing Data for the first time")
+        serial_monitor.pipe(parser);
+        parser.on('data', function (data){
+            console.log("First Parse\n")
+            console.log(data);
+            serial_monitor_results += data;
+            cb(serial_monitor_results);
+        });
+    }
+    else{
+        serial_monitor.open();
+        serial_monitor_results = "";
+    //     serial_monitor.pipe(parser);
+    //     parser.on('data', function (data){
+    //         console.log("Second Parse\n");
+    //         console.log(data);
+    //         cb(data);
+    // });
+    // serial_monitor.resume();
 }
-
-// function checkSerialPort(){
-//     serialport.list().then(ports => {
-//         ports.forEach(function(port) {
-//             //console.log(port.path)
-//             COMPORT = port.path;
-//         })
-//     })
-//     return COMPORT;
-// }
+}
 
 ipcMain.handle("serialport_retreive", async function (event){
     try{
@@ -174,7 +184,7 @@ ipcMain.handle("serialport_retreive", async function (event){
             event.sender.send('arduino_comport',res);
         });
         readSerialPort(function (res){
-            console.log(res)
+            console.log("Running\n")
             event.sender.send('serialport_monitor',res);
         });
     }
@@ -185,12 +195,17 @@ ipcMain.handle("serialport_retreive", async function (event){
 
 ipcMain.handle("serialport_close", function (event){
     try {
-        console.log("Close SerialMonitor\n");
-        if (typeof serial_monitor != "undefined"){
-            serial_monitor.close(function (err){
-                console.log("Closed SerialMonitor",err);
+        console.log("Closing SerialMonitor\n");
+        // if (typeof serial_monitor != "undefined"){
+            serial_monitor.close(function(err){
+                console.log(`Closed Serial Monitor ` + err);
             });
-        }
+        //     parser.on('close', function (data){
+        //         console.log("Closing Parser\n");
+        // });
+        //     serial_monitor.unpipe(parser);
+        // }
+        // serial_monitor.pause();
     }
     catch (e) {
         console.log(e);
