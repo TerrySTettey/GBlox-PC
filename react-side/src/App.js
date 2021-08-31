@@ -37,6 +37,8 @@ import "./customblocks/compiler/arduino_core";
 import './App.css';
 import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
+import "./blocklyextras/custom_category"
+import "./blocklyextras/toolbox_style.css"
 import {toolboxCategories, newToolBox, MelloToolbox, MelloDOM} from "./customblocks/toolboxes/toolboxes"
 
 const { ipcRenderer } = window.require('electron')
@@ -308,6 +310,7 @@ const variable_type_set = (event) => {
 
   return (
     <div className="App">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={togglefiledrawer}>
