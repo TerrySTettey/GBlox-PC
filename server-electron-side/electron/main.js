@@ -80,7 +80,7 @@ function createWindow() {
     })
 
     win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-    win.removeMenu()
+    // win.removeMenu()
     win.setTitle("Arduino From Scratch")
 
     if (isDev) {
@@ -181,7 +181,6 @@ ipcMain.handle("serialport_retreive", async function (event){
         console.log("Opening SerialMonitor\n");
         CHECK_COMPORT(function (res){
             console.log(res);
-            event.sender.send('arduino_comport',res);
         });
         readSerialPort(function (res){
             event.sender.send('serialport_monitor',res);

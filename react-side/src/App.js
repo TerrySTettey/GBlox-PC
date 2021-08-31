@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -43,6 +45,7 @@ var currentToolbox;
 var response = "null";
 currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
+var variables_created = [];
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -135,7 +138,9 @@ function App() {
   const [toolboxstate, setChecked] = useState(false);
   const [serialport_monitor, setSerialPortMonitor] = useState([]);
   const [serialport_value, setSerialPortWrite] = useState("");
-
+  const [newvariable_name, setNewVariableName] = useState("");
+  const [newvariable_type, setNewVariableType] = useState("float");
+  const [dialog_open, setDialogOpen] = useState(false);
 
   const code_change = event => {
     setJavascriptCode(event.target.value);
@@ -186,6 +191,13 @@ const serialport_change = (event) => {
   setSerialPortWrite(event.target.value);
 }
 
+const variable_name_set = (event) => {
+  setNewVariableName(event.target.value);
+}
+const variable_type_set = (event) => {
+  setNewVariableType(event.target.value);
+}
+
   React.useEffect(() => {
 
     if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status === "Upload Failed : Error in Code" || upload_status === ""){
@@ -197,8 +209,20 @@ const serialport_change = (event) => {
     return UploadProgress;
   });
 
+  function logbutton(){
+    console.log("Button Pressed");
+    setDialogOpen(true);
+  }
+
+  function closedialog() {
+    setDialogOpen(false);
+    variables_created.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
+    console.log(variables_created);
+  }
+
   function showCode(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
+    Blockly.mainWorkspace.registerButtonCallback("createvar", logbutton)
     newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     newxml = Blockly.Xml.domToText(newxmldom);
     if (tabpanelval === 0){
@@ -369,6 +393,21 @@ const serialport_change = (event) => {
                 }}
                 onWorkspaceChange={showCode}
               />
+              <Dialog onClose={closedialog} open={dialog_open}>
+                <DialogTitle id="simple-dialog-title">Set Variable</DialogTitle>
+                <Select 
+                value={newvariable_type}
+                variant="outlined"
+                onChange={variable_type_set}
+              >
+                <MenuItem value={"float"}>Float</MenuItem>
+                <MenuItem value={"int"}>Integer</MenuItem>
+                <MenuItem value={"char"}>Character</MenuItem>
+                <MenuItem value={"char[]"}>String</MenuItem>
+              </Select>
+                <TextField id="outlined-basic" variant = "filled" value={newvariable_name} disabled={false} multiline = {false} fullWidth = {true} align="justify" onChange={variable_name_set}/>
+                <Button onClick={closedialog}>Ok</Button>
+              </Dialog>
               </div>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
@@ -405,4 +444,4 @@ const serialport_change = (event) => {
 }
 
 export default App;
-export {currentToolboxName};
+export {currentToolboxName, variables_created};

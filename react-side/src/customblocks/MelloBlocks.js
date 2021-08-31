@@ -80,27 +80,13 @@ Blockly.Blocks['communication_infrared_start'] = {
   }
 };
 
-// Blockly.Blocks['communication_infrared_value'] = {
-//   init: function() {
-//     this.appendStatementInput("IR_Decode_Loop")
-//         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-//         .appendField("Read Infrared Character:")
-//         .appendField(new Blockly.FieldDropdown([["Up","FF629D"],["Down","FFA857"],["Right","FFC23D"],["Left","FF22DD"],["Ok","FF02FD"],["1","FF6897"],["2","FF9867"],["3","FFB04F"],["4","FF30CF"],["5","FF18E7"],["6","FF7A85"],["7","FF10EF"],["8","FF38C7"],["9","FF5AA5"],["0","FF4AB5"],["#","FF52AD"],["*","FF42BD"]]),"Received_Character");
-//     this.setPreviousStatement(true, null);
-//     this.setNextStatement(true, null);
-//     this.setColour(230);
-//     this.setOutput(false,null);
-//  this.setTooltip("");
-//  this.setHelpUrl("");
-//   }
-// };
 
 Blockly.Blocks['communication_infrared_value'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
         .appendField("Read Infrared Character:")
-        .appendField(new Blockly.FieldDropdown([["Up","FF629D"],["Down","FFA857"],["Right","FFC23D"],["Left","FF22DD"],["Ok","FF02FD"],["1","FF6897"],["2","FF9867"],["3","FFB04F"],["4","FF30CF"],["5","FF18E7"],["6","FF7A85"],["7","FF10EF"],["8","FF38C7"],["9","FF5AA5"],["0","FF4AB5"],["#","FF52AD"],["*","FF42BD"]]),"Received_Character");
+        .appendField(new Blockly.FieldDropdown([["Up","46"],["Down","15"],["Right","43"],["Left","44"],["Ok","40"],["1","16"],["2","19"],["3","D"],["4","C"],["5","18"],["6","5E"],["7","8"],["8","1C"],["9","5A"],["0","52"],["#","4A"],["*","42"]]),"Received_Character");
     this.appendStatementInput("IR_Decode_Loop")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -348,61 +334,62 @@ Blockly.Blocks['servo_360_rotate_direction'] = {
   }
 };
 
-Blockly.Blocks['variable_set'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Set Variable")
-        .appendField(new Blockly.FieldTextInput("var_name"), "varname");
-    this.appendValueInput("value")
-        .setCheck(["Number", "String"])
-        .appendField("to");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
+// Blockly.Blocks['variable_set'] = {
+//   init: function() {
+//     this.appendDummyInput()
+//         .appendField("Set Variable")
+//         .appendField(new Blockly.FieldTextInput("var_name"), "varname");
+//     this.appendValueInput("value")
+//         .setCheck(["Number", "String"])
+//         .appendField("to");
+//     this.setInputsInline(true);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour(230);
+//  this.setTooltip("");
+//  this.setHelpUrl("");
+//   }
+// };
 
-Blockly.Blocks['variable_get'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Get Variable")
-        .appendField(new Blockly.FieldTextInput("var_name"), "varname")
-        .appendField("'s value");
-    this.setInputsInline(true);
-    this.setOutput(true, null);
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
+// Blockly.Blocks['variable_get'] = {
+//   init: function() {
+//     this.appendDummyInput()
+//         .appendField("Get Variable")
+//         .appendField(new Blockly.FieldTextInput("var_name"), "varname")
+//         .appendField("'s value");
+//     this.setInputsInline(true);
+//     this.setOutput(true, null);
+//     this.setColour(230);
+//  this.setTooltip("");
+//  this.setHelpUrl("");
+//   }
+// };
 
-Blockly.Blocks['variable_create_int'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Create Integer Variable")
-        .appendField(new Blockly.FieldTextInput("var_name"), "varname");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
+// Blockly.Blocks['variable_create_int'] = {
+//   init: function() {
+//     this.appendDummyInput()
+//         .appendField("Create Integer Variable")
+//         .appendField(new Blockly.FieldTextInput("var_name"), "varname");
+//     this.setInputsInline(true);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour(230);
+//  this.setTooltip("");
+//  this.setHelpUrl("");
+//   }
+// };
 
-Blockly.Blocks['variable_create_float'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Create Float Variable")
-        .appendField(new Blockly.FieldTextInput("var_name"), "varname");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
+// Blockly.Blocks['variable_create_float'] = {
+//   init: function() {
+//     this.appendDummyInput()
+//         .appendField("Create Float Variable")
+//         .appendField(new Blockly.FieldTextInput("var_name"), "varname");
+//     this.setInputsInline(true);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour(230);
+//  this.setTooltip("");
+//  this.setHelpUrl("");
+//   }
+// };
+

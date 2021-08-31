@@ -450,6 +450,10 @@ const toolboxCategories = {
           </value>
       </block>
   </category>
+  <category name="Serial">
+  <block type="communication_serial_print"></block>
+  <block type="communication_serial_read"></block>
+  </category>
   </category>
   <category name="LEDs">
   <category name="RGB LED">
@@ -495,20 +499,11 @@ const toolboxCategories = {
       </block>
   </category>
   </category>
-  <category name="Variables">
-    <block type="variable_create_float">
-      <field name="varname">var_name</field>
-    </block>
-    <block type="variable_create_int">
-      <field name="varname">var_name</field>
-    </block>
-    <block type="variable_get">
-      <field name="varname">var_name</field>
-    </block>
-    <block type="variable_set">
-      <field name="varname">var_name</field>
-    </block>
+
+  <category name="Variables" custom="VARIABLES">
+  <button text="Create New Variable" callbackKey="createvar"></button>
   </category>
+  
   </xml>`;
   
   const MelloDOM = Blockly.Xml.textToDom(MelloToolbox);

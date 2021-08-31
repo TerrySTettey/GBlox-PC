@@ -40,6 +40,8 @@ var DSpeed = 530;
 var ServoDefined = false;
 var RGBDefined = false;
 
+var IR_Loop = "";
+var IR_Statements = "";
 
 function clearvars(){
   peripheral_PreDeclarations = "";
@@ -47,11 +49,12 @@ function clearvars(){
   peripheral_SetupCode = "";
   ServoDefined = false;
   RGBDefined = false;
-
+  IR_Loop = ``;
+  IR_Statements = ``;
 }
 
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
-  var code = "\tread_ultrasonic("+US_Trigger+","+US_Echo+")\n";
+  var code = "read_ultrasonic("+US_Trigger+","+US_Echo+")";
   if (peripheral_PreDeclarations.includes(`int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`) == 0){
     peripheral_PreDeclarations += `int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`;
     peripheral_SetupCode += `\tpinMode(${US_Trigger}, OUTPUT);\n\tpinMode(${US_Echo}, INPUT);\n`;
@@ -123,16 +126,17 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
 
 Blockly.JavaScript['communication_infrared_start'] = function(block) {
   if (peripheral_PreDeclarations.includes( `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`)==0){
-    peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\nIRrecv IrReceiver (IR_Remote);\ndecode_results results;\n`;
-    peripheral_SetupCode += `\tIrReceiver.enableIRIn();\n`;
+    peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`;
+    peripheral_SetupCode += `\n\tIrReceiver.begin(IR_Remote, ENABLE_LED_FEEDBACK);\n`;
   }
-  var code = '';
+  var code = ``;
   return code;
 };
 Blockly.JavaScript['communication_infrared_value'] = function(block) {
   var dropdown_character = block.getFieldValue('Received_Character');
   var statements_ir_decode_loop = Blockly.JavaScript.statementToCode(block, 'IR_Decode_Loop');
-  var code = `\tif(IrReceiver.decode(&results)){\n\t\tif(results.value==${dropdown_character}){${statements_ir_decode_loop}\n\t\t}\n\t}`;
+  var code = ``
+  IR_Loop += `if(IrReceiver.decodedIRData.command==0x${dropdown_character}){\n${statements_ir_decode_loop}\t\t}\n\t`;
   return code;
 };
 
@@ -414,38 +418,38 @@ Blockly.JavaScript['servo_360_rotate_direction'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['variable_set'] = function(block) {
-  var text_varname = block.getFieldValue('varname');
-  var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  code = `${text_varname} = ${value_value};\n`
-  return code;
-};
+// Blockly.JavaScript['variable_set'] = function(block) {
+//   var text_varname = block.getFieldValue('varname');
+//   var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
+//   // TODO: Assemble JavaScript into code variable.
+//   var code = '...;\n';
+//   code = `${text_varname} = ${value_value};\n`
+//   return code;
+// };
 
-Blockly.JavaScript['variable_get'] = function(block) {
-  var text_varname = block.getFieldValue('varname');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  code = `${text_varname}`
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
+// Blockly.JavaScript['variable_get'] = function(block) {
+//   var text_varname = block.getFieldValue('varname');
+//   // TODO: Assemble JavaScript into code variable.
+//   var code = '...';
+//   code = `${text_varname}`
+//   // TODO: Change ORDER_NONE to the correct strength.
+//   return [code, Blockly.JavaScript.ORDER_NONE];
+// };
 
-Blockly.JavaScript['variable_create_int'] = function(block) {
-  var text_varname = block.getFieldValue('varname');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  code = `int ${text_varname};\n`
-  return code;
-};
+// Blockly.JavaScript['variable_create_int'] = function(block) {
+//   var text_varname = block.getFieldValue('varname');
+//   // TODO: Assemble JavaScript into code variable.
+//   var code = '...;\n';
+//   code = `int ${text_varname};\n`
+//   return code;
+// };
 
-Blockly.JavaScript['variable_create_float'] = function(block) {
-  var text_varname = block.getFieldValue('varname');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  code = `float ${text_varname};\n`
-  return code;
-};
+// Blockly.JavaScript['variable_create_float'] = function(block) {
+//   var text_varname = block.getFieldValue('varname');
+//   // TODO: Assemble JavaScript into code variable.
+//   var code = '...;\n';
+//   code = `float ${text_varname};\n`
+//   return code;
+// };
 
-export {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, US_Trigger, US_Echo, clearvars}
+export {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, IR_Loop, IR_Statements, US_Trigger, US_Echo, clearvars}

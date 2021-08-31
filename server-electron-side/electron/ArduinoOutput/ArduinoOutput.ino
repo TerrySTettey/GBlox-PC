@@ -1,45 +1,44 @@
+#include <IRremote.h>
+int IR_Remote=3;
 #include <Servo.h>
 Servo LeftServo;
 Servo RightServo;
 Servo ForkliftServo;
 
-int runOnce;
-
 void setup(){
+
+	IrReceiver.begin(IR_Remote, ENABLE_LED_FEEDBACK);
 	LeftServo.attach(9);
 	RightServo.attach(8);
 	ForkliftServo.attach(10);
 
-runOnce = 0;
 }
 
 void loop(){
-	if(runOnce == 0){
+ 	if(IrReceiver.decode()){
+		if(IrReceiver.decodedIRData.command==0x46){
+  LeftServo.write(101);
+  RightServo.write(78);
+		}
+	if(IrReceiver.decodedIRData.command==0x15){
+  LeftServo.write(77);
+  RightServo.write(100);
+		}
+	if(IrReceiver.decodedIRData.command==0x43){
+  LeftServo.write(101);
+  RightServo.write(100);
+		}
+	if(IrReceiver.decodedIRData.command==0x44){
+  LeftServo.write(77);
+  RightServo.write(78);
+		}
+	if(IrReceiver.decodedIRData.command==0x40){
   LeftServo.write(90);
   RightServo.write(90);
-  int count;
-  count = 5;
-  while ((count) > 0) {
+		}
 
-    tone(7,1047);
-    delay(1000);
-    noTone(7);raise_fork(1);
-
-    tone(7,1568);
-    delay(1000);
-    noTone(7);
-    delay(500);lower_fork(1);
-
-    tone(7,2093);
-    delay(1000);
-    noTone(7);
-    delay(1000);
-    tone(7,1568);
-    delay(1000);
-    noTone(7);count = ((count) - 1);
-  }
-
-runOnce = 1;}
+IrReceiver.resume();
+}
 }
 
 void raise_fork(float speed){
