@@ -500,8 +500,10 @@ const toolboxCategories = {
   </category>
   </category>
 
-  <category name="Variables" custom="VARIABLES">
+  <category name="Variables">
   <button text="Create New Variable" callbackKey="createvar"></button>
+  <block type="variable_get"></block>
+<block type="variable_set"></block>
   </category>
   
   </xml>`;

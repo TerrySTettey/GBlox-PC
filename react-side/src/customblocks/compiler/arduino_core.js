@@ -1,7 +1,7 @@
 import Blockly from 'blockly';
 import { currentToolboxName, variables_created } from '../../App.js';
 var peripherals = null;
-var variables_set = [["Test", "Test"]];
+var variables_set = [["int sample_var", "Test"]];
 async function getPeripherals(){
     if (currentToolboxName === "Basic"){
         peripherals = await import('./../peripherals/arduino_peripheral.js')
@@ -179,7 +179,15 @@ function updatevariables_toolbox(workspace){
 Blockly.JavaScript['n_mainloop'] = function(block) {
     getPeripherals();
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-    
+    console.log(variables_set)
+    console.log(variables_created.length)
+    if (variables_created.length != 0){
+        variables_set = variables_created;
+        for (var i = 0; i < variables_set.length; i++) {
+            Total_PreDeclarations += `${variables_set[i][0]};\n`;
+            console.log(Total_PreDeclarations)
+        }
+    }
     var checkbox_loop = block.getFieldValue("LOOP");
     try{
         Total_PreDeclarations += peripherals.peripheral_PreDeclarations;
@@ -275,31 +283,31 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
   
-  Blockly.JavaScript['variable_create_variable'] = function(block) {
-    var dropdown_variable_type = block.getFieldValue('variable type');
-    var text_varname = Blockly.JavaScript.valueToCode(block, 'varname', Blockly.JavaScript.ORDER_ATOMIC);
-    text_varname = text_varname.replaceAll(`'`,'');
-    var code = `${dropdown_variable_type} ${text_varname};\n`
-    if (text_varname !== ""){
-        const temp_var = [`${dropdown_variable_type} ${text_varname}`,`${text_varname}`];
-        var duplicate_number = 0;
-        // console.log(temp_var[0]);
-        // console.log("arr" + variables_set[0][1])
-        for (var i=0; i<(variables_set.length); i++){
-            // console.log(variables_set[i][0].includes(temp_var[0]));
-                if (variables_set[i][0].includes(temp_var[0])==1){
-                    console.log("Duplicate found");
-                    duplicate_number++;
-                }
-            }
-        if (duplicate_number == 0){
-            variables_set.push(temp_var);
-        }
-        duplicate_number = 0;
+//   Blockly.JavaScript['variable_create_variable'] = function(block) {
+//     var dropdown_variable_type = block.getFieldValue('variable type');
+//     var text_varname = Blockly.JavaScript.valueToCode(block, 'varname', Blockly.JavaScript.ORDER_ATOMIC);
+//     text_varname = text_varname.replaceAll(`'`,'');
+//     var code = `${dropdown_variable_type} ${text_varname};\n`
+//     if (text_varname !== ""){
+//         const temp_var = [`${dropdown_variable_type} ${text_varname}`,`${text_varname}`];
+//         var duplicate_number = 0;
+//         // console.log(temp_var[0]);
+//         // console.log("arr" + variables_set[0][1])
+//         for (var i=0; i<(variables_set.length); i++){
+//             // console.log(variables_set[i][0].includes(temp_var[0]));
+//                 if (variables_set[i][0].includes(temp_var[0])==1){
+//                     console.log("Duplicate found");
+//                     duplicate_number++;
+//                 }
+//             }
+//         if (duplicate_number == 0){
+//             variables_set.push(temp_var);
+//         }
+//         duplicate_number = 0;
 
-    }
-    return code;
-  };
+//     }
+//     return code;
+//   };
 
 
 //   Blockly.JavaScript['variable_create_int'] = function(block) {

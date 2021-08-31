@@ -213,11 +213,13 @@ const variable_type_set = (event) => {
     console.log("Button Pressed");
     setDialogOpen(true);
   }
-
-  function closedialog() {
-    setDialogOpen(false);
+  function sendvariables(){ 
     variables_created.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
     console.log(variables_created);
+  }
+  function closedialog() {
+    setDialogOpen(false);
+    sendvariables();
   }
 
   function showCode(workspace) {
@@ -393,7 +395,11 @@ const variable_type_set = (event) => {
                 }}
                 onWorkspaceChange={showCode}
               />
-              <Dialog onClose={closedialog} open={dialog_open}>
+              <Dialog 
+                onClose={(event, reason) => {if (reason == 'backdropClick'){
+                setDialogOpen(false);
+                }}
+                } open={dialog_open}>
                 <DialogTitle id="simple-dialog-title">Set Variable</DialogTitle>
                 <Select 
                 value={newvariable_type}
