@@ -50,8 +50,16 @@ Blockly.Blocks['n_delay'] = {
     }
 };
 
+
+
 Blockly.JavaScript['n_mainloop'] = function(block) {
     getPeripherals();
+    //Blockly.HSV_SATURATION = 0.75;
+    //Blockly.HSV_VALUE = 1;
+
+    block.setDeletable(false);
+    block.setMovable(false);
+    block.setColour(0x0000FF)
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
     var checkbox_loop = block.getFieldValue("LOOP");
     try{

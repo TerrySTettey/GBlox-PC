@@ -55,9 +55,9 @@ const ServoSetup = {
   RightServo.write(90);
   ForkliftServo.write(90);
   ForkliftDegrees = 90;
-  \n`,
+  \n`.replace('\r', ''),
   Bulk:`\n
-  void raise_fork(int speed){
+  void raise_fork(float speed){
     for(int i = 90; i > 0; i--){
       if(i < 0) {
         i = 0;
@@ -67,7 +67,7 @@ const ServoSetup = {
     }
   }
   
-  void lower_fork(int speed){
+  void lower_fork(float speed){
     for(int i = 0; i < 90; i++){
       if(i > 90) {
         i = 90;
@@ -390,8 +390,6 @@ Blockly.JavaScript['forklift_move_seconds'] = function(block) {
     peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
-
-
 
   var code = '...;\n';
   return code;

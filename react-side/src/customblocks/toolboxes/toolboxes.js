@@ -260,7 +260,7 @@ const toolboxCategories = {
   }
   //Mello Toolbox
   const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-  <category name="Logic" colour="#5b80a5">
+  <category css-icon="customIcon fa fa-cog" name="Logic" colour="#5b80a5">
       <block type="controls_if"></block>
       <block type="logic_compare">
           <field name="OP">EQ</field>
@@ -368,7 +368,7 @@ const toolboxCategories = {
         </value>
       </block>
     </category>
-  <category name="Actuators">
+  <category name="Actuators" colour="#05386B">
     <category name="Motor">
     <block type="motor_move_indef">
       <field name="direction">forward</field>

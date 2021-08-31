@@ -26,21 +26,21 @@ void loop(){
 
 
   void raise_fork(float speed){
-    for(float i = 90; i > 0; i=i-0.01){
+    for(int i = 90; i > 0; i--){
       if(i < 0) {
         i = 0;
       }
     ForkliftServo.write(i);
-    delay(1000/(speed*90));
+    delay(90/(speed*1000));
     }
   }
 
   void lower_fork(float speed){
-    for(float i = 0; i < 90; i=i-0.01){
+    for(int i = 0; i < 90; i++){
       if(i > 90) {
         i = 90;
       }
     ForkliftServo.write(i);
-    delay(1000/(speed*90));
+    delay(90/(speed*1000));
     }
   }
