@@ -253,11 +253,13 @@ Blockly.JavaScript['n_delay'] = function(block) {
 
 Blockly.JavaScript['communication_serial_print'] = function(block) {
     var value_serial_print = Blockly.JavaScript.valueToCode(block, 'Serial_Print', Blockly.JavaScript.ORDER_ATOMIC);
-    value_serial_print = value_serial_print.replaceAll(`'`,``);
+    if (value_serial_print[0] == `'`){
+        value_serial_print = value_serial_print.replaceAll(`'`,`"`);
+    }
     if (Total_SetupCode.includes(`Serial.begin(9600);`) == 0){
         Total_SetupCode += `\tSerial.begin(9600);\n`;
     }
-    var code = `\tSerial.println("${value_serial_print}");\n`;
+    var code = `\tSerial.println(${value_serial_print});\n`;
     return code;
   };
 
@@ -274,7 +276,7 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
     console.log(text_varname);
     var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
-    var code = '...;\n';
+    var code = '';
     code = `${text_varname} = ${value_value};\n`
     return code;
   };
@@ -283,7 +285,7 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
     var text_varname = block.getFieldValue('variables_set');
     // TODO: Assemble JavaScript into code variable.
     var code = '...';
-    code = `Value is : ${text_varname}`
+    code = `${text_varname}`
     console.log(variables_set);
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
