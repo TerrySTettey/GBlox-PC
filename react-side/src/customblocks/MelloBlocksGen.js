@@ -40,6 +40,44 @@ var DSpeed = 530;
 var ServoDefined = false;
 var RGBDefined = false;
 
+const ServoSetup = {
+  PreDec:`\n
+  #include <Servo.h>
+  Servo LeftServo;
+  Servo RightServo;
+  Servo ForkliftServo;
+  int ForkliftDegrees;\n`,
+  Setup:`\n
+  LeftServo.attach(${LeftServo});
+  RightServo.attach(${RightServo});
+  ForkliftServo.attach(${ForkliftServo});
+  LeftServo.write(90);
+  RightServo.write(90);
+  ForkliftServo.write(90);
+  ForkliftDegrees = 90;
+  \n`,
+  Bulk:`\n
+  void raise_fork(int speed){
+    for(int i = 90; i > 0; i--){
+      if(i < 0) {
+        i = 0;
+      }
+    ForkliftServo.write(i);
+    delay(90/(speed*1000));
+    }
+  }
+  
+  void lower_fork(int speed){
+    for(int i = 0; i < 90; i++){
+      if(i > 90) {
+        i = 90;
+      }
+    ForkliftServo.write(i);
+    delay(90/(speed*1000));
+    }
+  }\n`
+}
+
 
 function clearvars(){
   peripheral_PreDeclarations = "";
@@ -244,9 +282,9 @@ Blockly.JavaScript['sound_buzzer_timer'] = function(block) {
 Blockly.JavaScript['motor_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_PreDeclarations += ServoSetup.PreDec;
+    peripheral_SetupCode += ServoSetup.Setup;
+    peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -280,9 +318,9 @@ Blockly.JavaScript['motor_single_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var dropdown_motorselect = block.getFieldValue('motorselect');
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_PreDeclarations += ServoSetup.PreDec;
+    peripheral_SetupCode += ServoSetup.Setup;
+    peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -316,9 +354,9 @@ Blockly.JavaScript['motor_move_seconds'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_PreDeclarations += ServoSetup.PreDec;
+    peripheral_SetupCode += ServoSetup.Setup;
+    peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -347,9 +385,9 @@ Blockly.JavaScript['forklift_move_seconds'] = function(block) {
   var dropdown_speed = block.getFieldValue('speed');
   var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_PreDeclarations += ServoSetup.PreDec;
+    peripheral_SetupCode += ServoSetup.Setup;
+    peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
 
@@ -363,29 +401,29 @@ Blockly.JavaScript['forklift_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var dropdown_speed = block.getFieldValue('speed');
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
-    peripheral_BulkFunctions += `\nvoid raise_fork(float speed){\n\tfor(int i = 90; i > 0; i--){\n\tif(i < 0) {\n\ti = 0;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n\nvoid lower_fork(float speed){\n\tfor(int i = 0; i < 90; i++){\n\tif(i > 90) {\n\ti = 90;\n}\nForkliftServo.write(i);\ndelay(1000/(speed*90));\n}\n}\n`
+    peripheral_PreDeclarations += ServoSetup.PreDec;
+    peripheral_SetupCode += ServoSetup.Setup;
+    peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
   var code = '...;\n';
   switch (dropdown_direction){
     case "up":
       if (dropdown_speed == "slow"){
-        code = `raise_fork(0.4);\n`
+        code = `raise_fork(0.006);\n`
       }else if (dropdown_speed == "medium"){
-        code = `raise_fork(1);\n`
+        code = `raise_fork(0.01);\n`
       }else if (dropdown_speed == "fast"){
-        code = `raise_fork(2);\n`
+        code = `raise_fork(0.032);\n`
       }
       break;
     case "down":
       if (dropdown_speed == "slow"){
-        code = `lower_fork(0.4);\n`
+        code = `lower_fork(0.006);\n`
       }else if (dropdown_speed == "medium"){
-        code = `lower_fork(1);\n`
+        code = `lower_fork(0.01);\n`
       }else if (dropdown_speed == "fast"){
-        code = `lower_fork(2);\n`
+        code = `lower_fork(0.032);\n`
       }
       break;
   }
@@ -394,8 +432,9 @@ Blockly.JavaScript['forklift_move_indef'] = function(block) {
 
 Blockly.JavaScript['servo_rotate_to_degrees'] = function(block) {
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    peripheral_PreDeclarations += ServoSetup.PreDec;
+    peripheral_SetupCode += ServoSetup.Setup;
+    peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
   var code = '...;\n';
@@ -406,8 +445,9 @@ Blockly.JavaScript['servo_360_rotate_direction'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var dropdown_speed = block.getFieldValue('speed');
   if(ServoDefined === false) {
-    peripheral_PreDeclarations += `#include <Servo.h>\nServo LeftServo;\nServo RightServo;\nServo ForkliftServo;\n`;
-    peripheral_SetupCode += `\tLeftServo.attach(${LeftServo});\n\tRightServo.attach(${RightServo});\n\tForkliftServo.attach(${ForkliftServo});\n`
+    peripheral_PreDeclarations += ServoSetup.PreDec;
+    peripheral_SetupCode += ServoSetup.Setup;
+    peripheral_BulkFunctions += ServoSetup.Bulk;
     ServoDefined = true;
   }
   var code = '...;\n';
