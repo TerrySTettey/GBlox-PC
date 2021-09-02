@@ -130,6 +130,23 @@ var newxml = laxml;
 var newxmldom = Blockly.Xml.textToDom(newxml);
 
 function App() {
+
+  /*
+  Blockly.Themes.FutureRetro = Blockly.Theme.defineTheme('futureRetro', 
+  {
+    'blockStyles': {
+      "colourPrimary": "#4a148c",
+      "colourSecondary":"#AD7BE9",
+      "colourTertiary":"#CDB6E9"
+    },
+    'categoryStyles':{
+      "colour": "#4a148c"
+    },
+    'componentStyles':{
+      'workspaceBackgroundColour': '#1e1e1e'
+    },
+  });
+  */
   
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
@@ -384,6 +401,7 @@ const variable_type_set = (event) => {
             <div className="BlocklyDiv">
               <BlocklyWorkspace
                 className="fill-height"
+                thelme={Blockly.Themes.FutureRetro}
                 wrapperClassName="fill-height"
                 initialXml={newxml}
                 toolboxConfiguration={currentToolbox}
