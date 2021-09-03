@@ -298,8 +298,7 @@ Blockly.Blocks['forklift_move_seconds'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Make the forklift")
-        .appendField(new Blockly.FieldDropdown([["rise upwards","up"], ["fall downwards","down"], ["stop","stop"]]), "direction")
+        .appendField("Rotate forklift")
         .appendField(new Blockly.FieldDropdown([["slowly","slow"], ["moderately","medium"], ["quickly","fast"]]), "speed");
     this.appendValueInput("seconds")
         .setCheck("Number")

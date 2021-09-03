@@ -34,21 +34,32 @@ void raise_fork(float speed){
       i = 0;
     }
     ForkliftServo.write(i);
+    ForkliftDegrees = i;
     //delay((1/2)*(1000/(speed*90)));
     delay(90/(speed*1000));
   }
 }
 
-/*
-
 void set_fork(float speed, int angle){
-  int nangle = map(angle, 0, 90, 90, 0); 
-  for(int i = ; i > 0; i--){
-    if(i < 0) {
-      i = 0;
+  int nangle = map(angle, 0, 90, 90, 0);
+  if (nangle > ForkliftDegrees) {
+    nangle = min(nangle,90);
+    for(int i = ForkliftDegrees; i < nangle ; i++){
+      if(i < 0) {
+        i = 0;
+      }
+      ForkliftServo.write(i);
+      delay(90/(speed*1000));
     }
-    ForkliftServo.write(i);
-    delay(90/(speed*1000));
+  } else if (nangle < ForkliftDegrees) {
+    nangle = max(nangle, 0);
+    for(int i = ForkliftDegrees; i > nangle ; i--){
+      if(i < 0) {
+        i = 0;
+      }
+      ForkliftServo.write(i);
+      delay(90/(speed*1000));
+    }
   }
 }
 
@@ -60,6 +71,7 @@ void lower_fork(float speed){
       i = 90;
     }
     ForkliftServo.write(i);
+    ForkliftDegrees = i;
     delay(90/(speed*1000));
   }
 }

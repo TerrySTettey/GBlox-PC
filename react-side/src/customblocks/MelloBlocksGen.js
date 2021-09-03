@@ -47,7 +47,8 @@ const ServoSetup = {
   Servo LeftServo;
   Servo RightServo;
   Servo ForkliftServo;
-  int ForkliftDegrees;\n`,
+  int ForkliftDegrees;
+  \n`,
   Setup:`\n
   LeftServo.attach(${LeftServo});
   RightServo.attach(${RightServo});
@@ -56,7 +57,7 @@ const ServoSetup = {
   RightServo.write(90);
   ForkliftServo.write(90);
   ForkliftDegrees = 90;
-  \n`.replace('\r', ''),
+  \n`,
   Bulk:`\n
   void raise_fork(float speed){
     for(int i = 90; i > 0; i--){
@@ -76,7 +77,31 @@ const ServoSetup = {
     ForkliftServo.write(i);
     delay(90/(speed*1000));
     }
-  }\n`
+  }
+  
+  void set_fork(float speed, int angle){
+    int nangle = map(angle, 0, 90, 90, 0);
+    if (nangle > ForkliftDegrees) {
+      nangle = min(nangle,90);
+      for(int i = ForkliftDegrees; i < nangle ; i++){
+        if(i < 0) {
+          i = 0;
+        }
+        ForkliftServo.write(i);
+        delay(90/(speed*1000));
+      }
+    } else if (nangle < ForkliftDegrees) {
+      nangle = max(nangle, 0);
+      for(int i = ForkliftDegrees; i > nangle ; i--){
+        if(i < 0) {
+          i = 0;
+        }
+        ForkliftServo.write(i);
+        delay(90/(speed*1000));
+      }
+    }
+  }
+  \n`
 }
 
 
@@ -175,6 +200,7 @@ Blockly.JavaScript['communication_infrared_start'] = function(block) {
   var code = ``;
   return code;
 };
+
 Blockly.JavaScript['communication_infrared_value'] = function(block) {
   var dropdown_character = block.getFieldValue('Received_Character');
   var statements_ir_decode_loop = Blockly.JavaScript.statementToCode(block, 'IR_Decode_Loop');
@@ -415,6 +441,17 @@ Blockly.JavaScript['forklift_move_seconds'] = function(block) {
   }
 
   var code = '...;\n';
+  switch (dropdown_speed){
+    case "slow":
+      code = `set_fork(0.006,${value_seconds});`
+      break;
+    case "medium":
+      code = `set_fork(0.01,${value_seconds});`
+      break;
+    case "fast":
+      code = `set_fork(0.032,${value_seconds});`
+      break;
+  }
   return code;
 };
 
