@@ -449,6 +449,7 @@ const toolboxCategories = {
               </block>
           </value>
       </block>
+      <block type="communication_bluetooth_read"></block>
   </category>
   <category name="Serial">
   <block type="communication_serial_print"></block>
@@ -497,6 +498,7 @@ const toolboxCategories = {
       <block type="sound_buzzer_buzz">
         <field name="Note">1047</field>
       </block>
+      <block type="sound_buzzer_stop"></block>
   </category>
   </category>
 

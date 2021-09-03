@@ -30,6 +30,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import "./customblocks/customblocks";
 // import "./customblocks/ntypeblocks";
@@ -125,10 +127,13 @@ const useStyles = makeStyles((theme) => ({
   }
 
 }));
-const laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`
-var newxml = laxml;
-var newxmldom = Blockly.Xml.textToDom(newxml);
 
+
+const mello_laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`;
+if (currentToolboxName == "Mello"){
+  var newxml = mello_laxml;
+  var newxmldom = Blockly.Xml.textToDom(newxml);
+}
 function App() {
   
   const [javascriptcode, setJavascriptCode] = useState("");
@@ -137,13 +142,16 @@ function App() {
   const [toolbox_used, setToolboxUsed] = useState(1);
   const [UploadProgress, setUploadProgress] = useState(1);
   const classes = useStyles();
-  const [toolboxstate, setChecked] = useState(false);
   const [serialport_monitor, setSerialPortMonitor] = useState([]);
   const [serialport_value, setSerialPortWrite] = useState("");
   const [newvariable_name, setNewVariableName] = useState("");
   const [newvariable_type, setNewVariableType] = useState("float");
   const [dialog_open, setDialogOpen] = useState(false);
 
+
+  
+
+  
   const code_change = event => {
     setJavascriptCode(event.target.value);
   }
@@ -166,22 +174,14 @@ switch(event.target.value){
 }
   }
 
-  const toolboxchange = event => {
-    setChecked(event.target.checked);
-    if (event.target.checked === true) {
-      currentToolbox = toolboxCategories;
-    }
-    else {
-      currentToolbox = newToolBox;
-    }
-    //console.log(currentToolbox);
-  };
-
 const tabpanelchange = (event, newTabval) => {
+    const oldTabval = tabpanelval;
     settabpanel(newTabval);
     if (newTabval === 3){
-      ipcRenderer.invoke(`serialport_retreive`);
-      serialport_read();
+      if (newTabval !== oldTabval){
+        ipcRenderer.invoke(`serialport_retreive`);
+        serialport_read();
+      }
     }
     else{
       ipcRenderer.invoke(`serialport_close`);
@@ -225,12 +225,13 @@ const variable_type_set = (event) => {
   }
 
   function showCode(workspace) {
-    const code = Blockly.JavaScript.workspaceToCode(workspace);
+    var code = Blockly.JavaScript.workspaceToCode(workspace)
+    // code = Blockly.JavaScript.blockToCode(`n_mainloop`,true);
     Blockly.mainWorkspace.registerButtonCallback("createvar", logbutton)
     newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     newxml = Blockly.Xml.domToText(newxmldom);
     if (tabpanelval === 0){
-      if (newxml===laxml){}
+      if (newxml===mello_laxml){}
       else{
         newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         newxml = Blockly.Xml.domToText(newxmldom);
@@ -239,6 +240,7 @@ const variable_type_set = (event) => {
     else{
       Blockly.Xml.domToWorkspace(newxmldom);
     }
+    console.log(newxml)
     setJavascriptCode(code);
   }
 
@@ -420,7 +422,12 @@ const variable_type_set = (event) => {
               </div>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
-            <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
+          <SyntaxHighlighter 
+          language="arduino" 
+          style={docco}
+          showLineNumbers = {true}>
+              {javascriptcode}
+            </SyntaxHighlighter>
           </TabPanel>
           <TabPanel value={tabpanelval} index={2}>
           <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline = {true} fullWidth = {true} align="justify" onChange={code_change}/>

@@ -91,21 +91,26 @@ function clearvars(){
 }
 
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
-  var code = "read_ultrasonic("+US_Trigger+","+US_Echo+")";
-  if (peripheral_PreDeclarations.includes(`int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`) == 0){
-    peripheral_PreDeclarations += `int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`;
-    peripheral_SetupCode += `\tpinMode(${US_Trigger}, OUTPUT);\n\tpinMode(${US_Echo}, INPUT);\n`;
-    peripheral_BulkFunctions += `\nint read_ultrasonic(int trigger, int echo){
-        digitalWrite(trigger, LOW);
-        delayMicroseconds(2);
-        digitalWrite(trigger, HIGH);
-        delayMicroseconds(10);
-        digitalWrite(trigger, LOW);
-        int duration = pulseIn(echo, HIGH);
-        int distance = duration * 0.034 / 2;
-        return distance;
-    }`
+  console.log(block.getRootBlock().type)
+  var code = ``;
+  if (block.getRootBlock().type === `n_mainloop`){
+    var code = "read_ultrasonic("+US_Trigger+","+US_Echo+")";
+    if (peripheral_PreDeclarations.includes(`int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`) == 0){
+      peripheral_PreDeclarations += `int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`;
+      peripheral_SetupCode += `\tpinMode(${US_Trigger}, OUTPUT);\n\tpinMode(${US_Echo}, INPUT);\n`;
+      peripheral_BulkFunctions += `\nint read_ultrasonic(int trigger, int echo){
+          digitalWrite(trigger, LOW);
+          delayMicroseconds(2);
+          digitalWrite(trigger, HIGH);
+          delayMicroseconds(10);
+          digitalWrite(trigger, LOW);
+          int duration = pulseIn(echo, HIGH);
+          int distance = duration * 0.034 / 2;
+          return distance;
+      }`
+    }
   }
+  
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -162,6 +167,7 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
 };
 
 Blockly.JavaScript['communication_infrared_start'] = function(block) {
+  console.log(block.getParent());
   if (peripheral_PreDeclarations.includes( `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`)==0){
     peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`;
     peripheral_SetupCode += `\n\tIrReceiver.begin(IR_Remote, ENABLE_LED_FEEDBACK);\n`;
@@ -179,7 +185,7 @@ Blockly.JavaScript['communication_infrared_value'] = function(block) {
 
 Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
   if (peripheral_PreDeclarations.includes(`#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`)==0){
-    peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\nchar bdata = 'a';\n`
+    peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\nchar bdata = '';\n`
     peripheral_SetupCode += `\thc06.begin(9600);\n`;
   }
   var code = 'while (hc06.available()>0){\n\tbdata = hc06.read();\n}\n';
@@ -215,10 +221,30 @@ Blockly.JavaScript['communincation_bluetooth_send'] = function(block) {
   return code;
 };
 
+Blockly.JavaScript['communication_bluetooth_read'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = `bdata`;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 Blockly.JavaScript['sound_buzzer_buzz'] = function(block) {
   var dropdown_note = block.getFieldValue('Note');
   // TODO: Assemble JavaScript into code variable.
   var code = `tone(${Buzzer_Pin}, ${dropdown_note});\n`;
+  return code;
+};
+
+Blockly.JavaScript['sound_buzzer_timer'] = function(block) {
+  var dropdown_name = block.getFieldValue('note');
+  var value_buzzer_time = Blockly.JavaScript.valueToCode(block, 'Buzzer Time', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = `\ntone(${Buzzer_Pin},${dropdown_name});\ndelay(${value_buzzer_time});\nnoTone(${Buzzer_Pin});`;
+  return code;
+};
+
+Blockly.JavaScript['sound_buzzer_stop'] = function(block) {
+  var code = `\tnoTone(${Buzzer_Pin});\n`;
   return code;
 };
 
@@ -274,13 +300,7 @@ Blockly.JavaScript['led_neo_led'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['sound_buzzer_timer'] = function(block) {
-  var dropdown_name = block.getFieldValue('note');
-  var value_buzzer_time = Blockly.JavaScript.valueToCode(block, 'Buzzer Time', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = `\ntone(${Buzzer_Pin},${dropdown_name});\ndelay(${value_buzzer_time});\nnoTone(${Buzzer_Pin});`;
-  return code;
-};
+
 
 Blockly.JavaScript['motor_move_indef'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');

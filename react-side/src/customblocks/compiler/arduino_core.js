@@ -180,18 +180,24 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
     getPeripherals();
     //Blockly.HSV_SATURATION = 0.75;
     //Blockly.HSV_VALUE = 1;
-
-    block.setDeletable(false);
-    block.setMovable(false);
+    if (currentToolboxName === "Mello"){
+        block.setDeletable(false);
+        block.setMovable(false);
+    }
+    else{
+        block.setDeletable(true);
+        block.setMovable(true);
+    }
+    console.log(block.getDescendants())
     block.setColour(0x0000FF)
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-    console.log(variables_set)
-    console.log(variables_created.length)
+    //console.log(variables_set)
+    //console.log(variables_created.length)
     if (variables_created.length != 0){
         variables_set = variables_created;
         for (var i = 0; i < variables_set.length; i++) {
             Total_PreDeclarations += `${variables_set[i][0]};\n`;
-            console.log(Total_PreDeclarations)
+            //console.log(Total_PreDeclarations)
         }
     }
     var checkbox_loop = block.getFieldValue("LOOP");
