@@ -462,6 +462,10 @@ const toolboxCategories = {
           <field name="colour">Red</field>
           <field name="colour value">On</field>
       </block>
+      <block type="led_rgb_led_all">
+          <field name="LED">Left</field>
+          <field name="colour">Red</field>
+      </block>
   </category>
   <category name="NeoPixel LED">
       <block type="led_neo_led">

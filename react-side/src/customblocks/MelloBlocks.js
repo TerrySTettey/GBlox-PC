@@ -80,7 +80,6 @@ Blockly.Blocks['communication_infrared_start'] = {
   }
 };
 
-
 Blockly.Blocks['communication_infrared_value'] = {
   init: function() {
     this.appendDummyInput()
@@ -163,6 +162,21 @@ Blockly.Blocks['led_rgb_led'] = {
         .appendField(new Blockly.FieldDropdown([["Red","Red"], ["Blue","Blue"], ["Green","Green"]]), "colour")
         .appendField("Light")
         .appendField(new Blockly.FieldDropdown([["On","On"], ["Off","Off"]]), "colour value");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setInputsInline(true);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['led_rgb_led_all'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
+        .appendField("Set Lights to")
+        .appendField(new Blockly.FieldDropdown([["Red","Red"], ["Blue","Blue"], ["Green","Green"], ["Yellow","Yellow"],["Magenta","Magenta"],["Cyan","Cyan"],["Off","Off"]]), "colour")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);

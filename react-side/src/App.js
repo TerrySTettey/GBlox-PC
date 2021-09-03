@@ -466,8 +466,6 @@ const variable_type_set = (event) => {
 
           </div>
       </div>
-
-      
   );
 }
 
