@@ -401,13 +401,6 @@ const toolboxCategories = {
       <field name="speed">slow</field>
     </block>
     </category>
-    <category name="Servo">
-    <block type="servo_rotate_to_degrees"></block>
-    <block type="servo_360_rotate_direction">
-      <field name="direction">cw</field>
-      <field name="speed">slow</field>
-    </block>
-    </category>
   </category>
   <category name="Sensors">
   <category name="Ultrasonic">
@@ -463,25 +456,9 @@ const toolboxCategories = {
           <field name="colour">Red</field>
           <field name="colour value">On</field>
       </block>
-  </category>
-  <category name="NeoPixel LED">
-      <block type="led_neo_led">
-          <field name="NeoPixel LED">Left</field>
-          <value name="Red Value">
-              <block type="math_number">
-                  <field name="NUM">0</field>
-              </block>
-          </value>
-          <value name="Green Value">
-              <block type="math_number">
-                  <field name="NUM">0</field>
-              </block>
-          </value>
-          <value name="Blue Value">
-              <block type="math_number">
-                  <field name="NUM">0</field>
-              </block>
-          </value>
+      <block type="led_rgb_led_all">
+          <field name="LED">Left</field>
+          <field name="colour">Red</field>
       </block>
   </category>
   </category>

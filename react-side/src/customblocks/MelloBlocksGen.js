@@ -308,6 +308,43 @@ Blockly.JavaScript['led_rgb_led'] = function(block) {
   return code;
 };
 
+Blockly.JavaScript['led_rgb_led_all'] = function(block) {
+  var dropdown_colour = block.getFieldValue('colour');
+  // TODO: Assemble JavaScript into code variable.
+  if(RGBDefined === false){
+    peripheral_SetupCode += `\tpinMode(${RGB_R}, OUTPUT);\n\tpinMode(${RGB_G}, OUTPUT);\n\tpinMode(${RGB_B}, OUTPUT);\n`
+    RGBDefined = true;
+  }
+  var code = '...;\n';
+  switch(dropdown_colour){
+    case "Red":
+        code = `digitalWrite(${RGB_R}, HIGH);\n`
+      break;
+    case "Blue":
+      code = `digitalWrite(${RGB_B}, HIGH);\n`
+        break;
+    case "Green":
+      code = `digitalWrite(${RGB_G}, HIGH);\n`
+      break;
+    case "Yellow":
+      code = `digitalWrite(${RGB_R}, HIGH);\n\tdigitalWrite(${RGB_G}, HIGH);\n`
+        break;
+    case "Magenta":
+      code = `digitalWrite(${RGB_R}, HIGH);\n\tdigitalWrite(${RGB_B}, HIGH);\n`
+        break;
+    case "Cyan":
+      code = `digitalWrite(${RGB_B}, HIGH);\n\tdigitalWrite(${RGB_G}, HIGH);\n`
+      break;
+    case "Off":
+      code = `digitalWrite(${RGB_G}, OFF);\n`
+      break;
+    default:
+      break;
+  }
+  return code;
+};
+
+
 Blockly.JavaScript['led_neo_led'] = function(block) {
   var dropdown_neopixel_led = block.getFieldValue('NeoPixel LED');
   var value_red_value = Blockly.JavaScript.valueToCode(block, 'Red Value', Blockly.JavaScript.ORDER_ATOMIC);
