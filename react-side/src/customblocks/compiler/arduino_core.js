@@ -190,7 +190,8 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
         Total_PreDeclarations += peripherals.peripheral_PreDeclarations;
         Total_SetupCode +=peripherals.peripheral_SetupCode;
         Total_BulkFunctions += peripherals.peripheral_BulkFunctions;
-        if (peripherals.IR_Loop != ``){
+        console.log(typeof peripherals.IR_Loop)
+        if (peripherals.IR_Loop != `` || peripherals.IR_Loop !="undefined"){
             statements_mainloop +=`\tif(IrReceiver.decode()){\n\t\t${peripherals.IR_Loop}\nIrReceiver.resume();\n}`;
         }
     }
