@@ -275,8 +275,18 @@ const toolboxCategories = {
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
   </category>
+<<<<<<< Updated upstream
   <category name="Loops" colour="#5ba55b">
       <block type="for_loop">
+=======
+  <category css-icon="customIcon fa fa-cog" name="Loops" colour="#5ba55b">
+      <block type="controls_repeat_ext">
+          <value name="TIMES">
+              <shadow type="math_number">
+                  <field name="NUM">10</field>
+              </shadow>
+          </value>
+>>>>>>> Stashed changes
       </block>
       <block type="controls_whileUntil">
           <field name="MODE">WHILE</field>
@@ -285,7 +295,7 @@ const toolboxCategories = {
       <field name= "seconds" type="number"></field>
       </block>
   </category>
-  <category name="Math" colour="#5b67a5">
+  <category css-icon="customIcon fa fa-cog" name="Math" colour="#5b67a5">
       <block type="math_number">
           <field name="NUM">0</field>
       </block>
@@ -312,7 +322,7 @@ const toolboxCategories = {
           </value>
       </block>
   </category>
-  <category name="Text" colour="#5ba58c">
+  <category css-icon="customIcon fa fa-cog" name="Text" colour="#5ba58c">
       <block type="text">
         <field name="TEXT"></field>
       </block>
@@ -366,100 +376,100 @@ const toolboxCategories = {
         </value>
       </block>
     </category>
-  <category name="Actuators" colour="#05386B">
+  <category css-icon="customIcon fa fa-cog" name="Actuators" colour="#05386B">
     <category name="Motor">
-    <block type="motor_move_indef">
-      <field name="direction">forward</field>
-    </block>
-    <block type="motor_single_move_indef">
-      <field name="motorselect">lm</field>
-      <field name="direction">forward</field>
-    </block>
-    <block type="motor_move_seconds">
-      <field name="direction">forward</field>
-      <value name="seconds">
-        <block type="math_number">
-          <field name="NUM">0</field>
-        </block>
-      </value>
-    </block>
+      <block type="motor_move_indef">
+        <field name="direction">forward</field>
+      </block>
+      <block type="motor_single_move_indef">
+        <field name="motorselect">lm</field>
+        <field name="direction">forward</field>
+      </block>
+      <block type="motor_move_seconds">
+        <field name="direction">forward</field>
+        <value name="seconds">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
     </category>
     <category name="Forklift">
-    <block type="forklift_move_seconds">
-      <field name="direction">up</field>
-      <field name="speed">slow</field>
-      <value name="seconds">
-        <block type="math_number">
-          <field name="NUM">0</field>
-        </block>
-      </value>
-    </block>
-    <block type="forklift_move_indef">
-      <field name="direction">up</field>
-      <field name="speed">slow</field>
-    </block>
+      <block type="forklift_move_seconds">
+        <field name="direction">up</field>
+        <field name="speed">slow</field>
+        <value name="seconds">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="forklift_move_indef">
+        <field name="direction">up</field>
+        <field name="speed">slow</field>
+      </block>
     </category>
   </category>
-  <category name="Sensors">
-  <category name="Ultrasonic">
-      <block type="sensor_ultrasonic"></block>
+  <category css-icon="customIcon fa fa-cog" name="Sensors">
+    <category name="Ultrasonic">
+        <block type="sensor_ultrasonic"></block>
+    </category>
+    <category name="Light Follower">
+        <block type="sensor_light_follower_right"></block>
+        <block type="sensor_light_follower_left"></block>
+    </category>
+    <category name="Line Follower">
+        <block type="sensor_line_follower_right">
+            <field name="Right Line Follower Value">On</field>
+        </block>
+        <block type="sensor_line_follower_left">
+            <field name="Left Line Follower Value">On</field>
+        </block>
+    </category>
   </category>
-  <category name="Light Follower">
-      <block type="sensor_light_follower_right"></block>
-      <block type="sensor_light_follower_left"></block>
+  <category css-icon="customIcon fa fa-cog" name="Communication">
+    <category name="Infrared Remote Control">
+        <block type="communication_infrared_start"></block>
+        <block type="communication_infrared_value">
+            <field name="Received_Character">FF629D</field>
+        </block>
+    </category>
+    <category name="Bluetooth">
+        <block type="communication_bluetooth_start"></block>
+        <block type="communication_bluetooth_receive">
+            <value name="NAME">
+                <block type="text">
+                    <field name="TEXT"></field>
+                </block>
+            </value>
+        </block>
+        <block type="communincation_bluetooth_send">
+            <value name="NAME">
+                <block type="text">
+                    <field name="TEXT"></field>
+                </block>
+            </value>
+        </block>
+    </category>
+      <category name="Serial">
+        <block type="communication_serial_print"></block>
+        <block type="communication_serial_read"></block>
+      </category>
   </category>
-  <category name="Line Follower">
-      <block type="sensor_line_follower_right">
-          <field name="Right Line Follower Value">On</field>
-      </block>
-      <block type="sensor_line_follower_left">
-          <field name="Left Line Follower Value">On</field>
-      </block>
+  <category css-icon="customIcon fa fa-cog" name="LEDs">
+    <category css-icon="customIcon fa fa-cog" name="RGB LED">
+        <block type="led_rgb_led">
+            <field name="LED">Left</field>
+            <field name="colour">Red</field>
+            <field name="colour value">On</field>
+        </block>
+        <block type="led_rgb_led_all">
+            <field name="LED">Left</field>
+            <field name="colour">Red</field>
+        </block>
+    </category>
   </category>
-  </category>
-  <category name="Communication">
-  <category name="Infrared Remote Control">
-      <block type="communication_infrared_start"></block>
-      <block type="communication_infrared_value">
-          <field name="Received_Character">FF629D</field>
-      </block>
-  </category>
-  <category name="Bluetooth">
-      <block type="communication_bluetooth_start"></block>
-      <block type="communication_bluetooth_receive">
-          <value name="NAME">
-              <block type="text">
-                  <field name="TEXT"></field>
-              </block>
-          </value>
-      </block>
-      <block type="communincation_bluetooth_send">
-          <value name="NAME">
-              <block type="text">
-                  <field name="TEXT"></field>
-              </block>
-          </value>
-      </block>
-  </category>
-  <category name="Serial">
-  <block type="communication_serial_print"></block>
-  <block type="communication_serial_read"></block>
-  </category>
-  </category>
-  <category name="LEDs">
-  <category name="RGB LED">
-      <block type="led_rgb_led">
-          <field name="LED">Left</field>
-          <field name="colour">Red</field>
-          <field name="colour value">On</field>
-      </block>
-      <block type="led_rgb_led_all">
-          <field name="LED">Left</field>
-          <field name="colour">Red</field>
-      </block>
-  </category>
-  </category>
-  <category name="Sound">
+  <category css-icon="customIcon fa fa-cog" name="Sound">
   <category name="Buzzer">
       <block type="sound_buzzer_timer">
           <field name="note">1047</field>
