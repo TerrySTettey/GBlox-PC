@@ -260,7 +260,6 @@ const variable_type_set = (event) => {
     else{
       Blockly.Xml.domToWorkspace(newxmldom);
     }
-    console.log(newxml)
     setJavascriptCode(code);
   }
 
@@ -273,6 +272,9 @@ const variable_type_set = (event) => {
 
   function clearWorkspace() {
     Blockly.mainWorkspace.clear();
+    if (currentToolboxName === "Mello" || currentToolboxName === "Basic"){
+      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml),Blockly.mainWorkspace);
+    }
   }
 
   function serialport_read(){
@@ -318,13 +320,11 @@ const variable_type_set = (event) => {
     //setUploadStatus(response);
     ipcRenderer.invoke('upload-code', javascriptcode);
     ipcRenderer.on('arduino_comport',(event,result)=>{
-      console.log(result);
       response=result;
       setUploadStatus(`Arduino found on ${response}`);
     });
 
     ipcRenderer.on('arduino_upload_status', (event, result) => {
-      console.log(result);
       response = result;
       setUploadStatus(response);
     });
@@ -457,7 +457,7 @@ const variable_type_set = (event) => {
           <Typography variant="h3">
             Serial Monitor
           </Typography>
-          <TextField id="outlined-basic" variant="outlined" value={serialport_monitor} disabled={true} multiline = {true} fullWidth = {true} align="justify"/>
+          <TextField id="outlined-basic" variant="outlined" value={serialport_monitor} disabled={true} multiline = {true} fullWidth = {true} align="justify" maxRows = {12} autoFocus = {true}/>
           <Typography variant="h5">
             Write to Serial Monitor
           </Typography>

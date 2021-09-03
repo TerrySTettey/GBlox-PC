@@ -311,25 +311,25 @@ Blockly.JavaScript['led_rgb_led_all'] = function(block) {
   var code = '...;\n';
   switch(dropdown_colour){
     case "Red":
-        code = `digitalWrite(${RGB_R}, HIGH);\n`
+        code = `digitalWrite(${RGB_R}, HIGH);\ndigitalWrite(${RGB_G}, LOW);\ndigitalWrite(${RGB_B}, LOW);\n`
       break;
     case "Blue":
-      code = `digitalWrite(${RGB_B}, HIGH);\n`
+      code = `digitalWrite(${RGB_B}, HIGH);\ndigitalWrite(${RGB_G}, LOW);\ndigitalWrite(${RGB_R}, LOW);\n`
         break;
     case "Green":
-      code = `digitalWrite(${RGB_G}, HIGH);\n`
+      code = `digitalWrite(${RGB_G}, HIGH);\ndigitalWrite(${RGB_R}, LOW);\ndigitalWrite(${RGB_B}, LOW);\n`
       break;
     case "Yellow":
-      code = `digitalWrite(${RGB_R}, HIGH);\n\tdigitalWrite(${RGB_G}, HIGH);\n`
+      code = `digitalWrite(${RGB_R}, HIGH);\n\tdigitalWrite(${RGB_G}, HIGH);\ndigitalWrite(${RGB_B}, LOW);\n`
         break;
     case "Magenta":
-      code = `digitalWrite(${RGB_R}, HIGH);\n\tdigitalWrite(${RGB_B}, HIGH);\n`
+      code = `digitalWrite(${RGB_R}, HIGH);\n\tdigitalWrite(${RGB_B}, HIGH);\ndigitalWrite(${RGB_G}, LOW);\n`
         break;
     case "Cyan":
-      code = `digitalWrite(${RGB_B}, HIGH);\n\tdigitalWrite(${RGB_G}, HIGH);\n`
+      code = `digitalWrite(${RGB_B}, HIGH);\n\tdigitalWrite(${RGB_G}, HIGH);\ndigitalWrite(${RGB_R}, LOW);\n`
       break;
     case "Off":
-      code = `digitalWrite(${RGB_G}, OFF);\n`
+      code = `digitalWrite(${RGB_G}, LOW);\ndigitalWrite(${RGB_R}, LOW);\ndigitalWrite(${RGB_B}, LOW);\n`
       break;
     default:
       break;

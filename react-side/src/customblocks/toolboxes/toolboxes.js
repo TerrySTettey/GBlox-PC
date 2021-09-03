@@ -276,15 +276,13 @@ const toolboxCategories = {
       <block type="logic_ternary"></block>
   </category>
   <category name="Loops" colour="#5ba55b">
-      <block type="controls_repeat_ext">
-          <value name="TIMES">
-              <shadow type="math_number">
-                  <field name="NUM">10</field>
-              </shadow>
-          </value>
+      <block type="for_loop">
       </block>
       <block type="controls_whileUntil">
           <field name="MODE">WHILE</field>
+      </block>
+      <block type="delay_core">
+      <field name= "seconds" type="number"></field>
       </block>
   </category>
   <category name="Math" colour="#5b67a5">

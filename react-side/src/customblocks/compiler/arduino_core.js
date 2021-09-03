@@ -43,17 +43,17 @@ Blockly.Blocks['n_mainloop'] = {
 
 };
 
-Blockly.Blocks['n_delay'] = {
+Blockly.Blocks['delay_core'] = {
     init: function() {
       this.appendValueInput("seconds")
           .setCheck("Number")
           .appendField("delay for");
       this.appendDummyInput()
-          .appendField("milliseconds");
+          .appendField("seconds");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(240);
-   this.setTooltip("Delays the program for a number of milliseconds.");
+      this.setColour(120);
+   this.setTooltip("Delays the program for a number of seconds.");
    this.setHelpUrl("");
     }
 };
@@ -133,6 +133,24 @@ Blockly.Blocks['communication_serial_print'] = {
     }
   };
 
+
+  Blockly.Blocks['for_loop'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Repeat for")
+          .appendField(new Blockly.FieldNumber(0, 0), "loop amount")
+          .appendField("Times");
+      this.appendStatementInput("for loop")
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(120);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+  
+
   
 //   Blockly.Blocks['variable_create_int'] = {
 //     init: function() {
@@ -190,7 +208,6 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
         Total_PreDeclarations += peripherals.peripheral_PreDeclarations;
         Total_SetupCode +=peripherals.peripheral_SetupCode;
         Total_BulkFunctions += peripherals.peripheral_BulkFunctions;
-        console.log(typeof peripherals.IR_Loop)
         if (peripherals.IR_Loop != ``){
             statements_mainloop +=`\tif(IrReceiver.decode()){\n\t\t${peripherals.IR_Loop}\nIrReceiver.resume();\n}`;
         }
@@ -234,12 +251,9 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
     return code;
 };
 
-
-
-Blockly.JavaScript['n_delay'] = function(block) {
+Blockly.JavaScript['delay_core'] = function(block) {
     var value_seconds = Blockly.JavaScript.valueToCode(block, 'seconds', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
-    var code = '\ndelay('+value_seconds+');';
+    var code = `\ndelay(${value_seconds*1000});\n`;
     return code;
 };
 
@@ -281,6 +295,14 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
     console.log(variables_set);
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
+  };
+
+  Blockly.JavaScript['for_loop'] = function(block) {
+    var number_loop_amount = block.getFieldValue('loop amount');
+    var statements_for_loop = Blockly.JavaScript.statementToCode(block, 'for loop');
+    // TODO: Assemble JavaScript into code variable.
+    var code = 'for (int i = 0;i<'+number_loop_amount+';i++) {\n'+statements_for_loop+'};\n';
+    return code;
   };
   
 //   Blockly.JavaScript['variable_create_variable'] = function(block) {
