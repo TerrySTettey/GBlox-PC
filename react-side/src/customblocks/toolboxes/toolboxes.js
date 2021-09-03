@@ -275,18 +275,8 @@ const toolboxCategories = {
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
   </category>
-<<<<<<< Updated upstream
   <category name="Loops" colour="#5ba55b">
       <block type="for_loop">
-=======
-  <category css-icon="customIcon fa fa-cog" name="Loops" colour="#5ba55b">
-      <block type="controls_repeat_ext">
-          <value name="TIMES">
-              <shadow type="math_number">
-                  <field name="NUM">10</field>
-              </shadow>
-          </value>
->>>>>>> Stashed changes
       </block>
       <block type="controls_whileUntil">
           <field name="MODE">WHILE</field>
