@@ -35,6 +35,7 @@ async function loadFile() {
             { name: 'Project File', extensions: ['txt', 'xml'] }
         ]
     });
+
     console.log("File Path: " + filePaths[0])
     if (filePaths[0] && !canceled) {
         try {

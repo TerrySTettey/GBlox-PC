@@ -302,9 +302,12 @@ const variable_type_set = (event) => {
   function loadBlocks() {
     try {
       console.log("Loading a file...")
-      var xmlss = Blockly.Xml.textToDom(ipcRenderer.sendSync('load-file'))
-      Blockly.mainWorkspace.clear();
-      Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+      var hold = ipcRenderer.sendSync('load-file')
+      if(hold !== "nil"){
+        var xmlss = Blockly.Xml.textToDom(hold)
+        Blockly.mainWorkspace.clear();
+        Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+      }
     } catch (e) {
       throw e;
     }
