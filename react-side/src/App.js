@@ -125,6 +125,7 @@ const useStyles = makeStyles((theme) => ({
   }
 
 }));
+
 const laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`
 var newxml = laxml;
 var newxmldom = Blockly.Xml.textToDom(newxml);
