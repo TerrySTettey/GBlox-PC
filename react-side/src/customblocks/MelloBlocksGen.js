@@ -116,9 +116,7 @@ function clearvars(){
 }
 
 Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
-  console.log(block.getRootBlock().type)
-  var code = ``;
-  if (block.getRootBlock().type === `n_mainloop`){
+
     var code = "read_ultrasonic("+US_Trigger+","+US_Echo+")";
     if (peripheral_PreDeclarations.includes(`int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`) == 0){
       peripheral_PreDeclarations += `int US_Trigger = ${US_Trigger};\nint US_Echo = ${US_Echo};\n\n`;
@@ -134,7 +132,6 @@ Blockly.JavaScript['sensor_ultrasonic'] = function(block) {
           return distance;
       }`
     }
-  }
   
   return [code, Blockly.JavaScript.ORDER_NONE];
 };

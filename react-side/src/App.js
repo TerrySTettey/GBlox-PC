@@ -42,7 +42,7 @@ import "./customblocks/MelloBlocksGen"
 import "./blocklyextras/custom_category"
 import "./blocklyextras/toolbox_style.css"
 import {toolboxCategories, newToolBox, MelloToolbox, MelloDOM} from "./customblocks/toolboxes/toolboxes"
-
+import {mainLoopCode} from "./customblocks/compiler/arduino_core"
 const { ipcRenderer } = window.require('electron')
 
 var currentToolbox;
@@ -242,8 +242,10 @@ const variable_type_set = (event) => {
   }
 
   function showCode(workspace) {
-    var code = Blockly.JavaScript.workspaceToCode(workspace)
-    // code = Blockly.JavaScript.blockToCode(`n_mainloop`,true);
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    if (currentToolboxName === "Mello"){
+      code = mainLoopCode;
+    }
     Blockly.mainWorkspace.registerButtonCallback("createvar", logbutton)
     newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     newxml = Blockly.Xml.domToText(newxmldom);

@@ -24,6 +24,7 @@ function dynamicVariables(new_var){
 var Total_PreDeclarations = "";
 var Total_SetupCode = "void setup(){\n";
 var Total_BulkFunctions = "";
+var mainLoopCode = "";
 
 Blockly.Blocks['n_mainloop'] = {
     init: function() {
@@ -160,21 +161,6 @@ Blockly.Blocks['communication_serial_print'] = {
 //    this.setHelpUrl("");
 //     }
 //   };
-function updatevariables_toolbox(workspace){
-    var new_variable = variables_created;
-    var xmllist = [];
-    if (new_variable !== []){
-    var blockText = `<block type="variable_get">
-      <field name="variables_set">"Test"</field>
-    </block>
-    <block type="variable_set">
-      <field name="varname">var_name</field>
-    </block>`;
-    const block = Blockly.Xml.textToDom(blockText);
-      xmllist.push(block);
-    }
-    return xmllist;
-}
 
 Blockly.JavaScript['n_mainloop'] = function(block) {
     getPeripherals();
@@ -188,7 +174,6 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
         block.setDeletable(true);
         block.setMovable(true);
     }
-    console.log(block.getDescendants())
     block.setColour(0x0000FF)
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
     //console.log(variables_set)
@@ -244,7 +229,7 @@ Blockly.JavaScript['n_mainloop'] = function(block) {
     // }
     // duplicate_number = 0;
 
-
+    mainLoopCode = code;
     return code;
 };
 
@@ -367,3 +352,5 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
 //     duplicate_number = 0;
 //     return code;
 //   };
+
+export {mainLoopCode}
