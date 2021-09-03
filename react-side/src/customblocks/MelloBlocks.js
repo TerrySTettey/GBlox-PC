@@ -139,17 +139,6 @@ Blockly.Blocks['communincation_bluetooth_send'] = {
   }
 };
 
-Blockly.Blocks['communication_bluetooth_read'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Read Bluetooth Data");
-    this.setInputsInline(true);
-    this.setOutput(true, null);
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
 
 Blockly.Blocks['sound_buzzer_buzz'] = {
   init: function() {

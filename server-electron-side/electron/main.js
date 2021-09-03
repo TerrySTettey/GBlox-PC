@@ -134,8 +134,9 @@ async function VERIFYCODE(cb) {
             console.log("INSIDE VERIFYCODE")
             if (error) {
                 output += error;
-                console.log(output);
-                cb("Upload Failed : Error in Code")
+                const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:","");
+                console.log(mainerror);
+                cb(`Upload Failed : Error in Code\n\n  ${mainerror}`)
             }
             else {
                 cb("Upload Successful")

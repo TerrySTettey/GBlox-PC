@@ -442,7 +442,6 @@ const toolboxCategories = {
               </block>
           </value>
       </block>
-      <block type="communication_bluetooth_read"></block>
   </category>
   <category name="Serial">
   <block type="communication_serial_print"></block>

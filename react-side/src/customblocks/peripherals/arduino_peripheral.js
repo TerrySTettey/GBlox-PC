@@ -14,6 +14,7 @@ function clearvars(){
     peripheral_SetupCode = "";
 }
 
+var IR_Loop = ``;
 
 Blockly.Blocks['n_ultra_read'] = {
     init: function() {
@@ -244,4 +245,4 @@ Blockly.JavaScript['n_buzzer_play_note_def'] = function(block) {
 };
 
 
-export {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, US_Trigger, US_Echo, clearvars}
+export {peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, US_Trigger, US_Echo, IR_Loop, clearvars}

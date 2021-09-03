@@ -36,6 +36,7 @@ import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import "./customblocks/customblocks";
 // import "./customblocks/ntypeblocks";
 import "./customblocks/compiler/arduino_core";
+import "./customblocks/peripherals/arduino_peripheral"
 import './App.css';
 import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
@@ -219,7 +220,7 @@ const variable_type_set = (event) => {
 
   React.useEffect(() => {
 
-    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status === "Upload Failed : Error in Code" || upload_status === ""){
+    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status.includes("Upload Failed : Error in Code") === 1  || upload_status === ""){
       setUploadProgress(1);
     }
     else{
@@ -243,7 +244,7 @@ const variable_type_set = (event) => {
 
   function showCode(workspace) {
     var code = Blockly.JavaScript.workspaceToCode(workspace);
-    if (currentToolboxName === "Mello"){
+    if (currentToolboxName === "Mello" || currentToolboxName === "Basic"){
       code = mainLoopCode;
     }
     Blockly.mainWorkspace.registerButtonCallback("createvar", logbutton)

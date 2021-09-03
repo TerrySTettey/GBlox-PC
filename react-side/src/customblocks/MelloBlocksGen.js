@@ -39,7 +39,7 @@ var DSpeed = 530;
 
 var ServoDefined = false;
 var RGBDefined = false;
-var IR_Loop = "";
+var IR_Loop = ``;
 var IR_Statements = "";
 const ServoSetup = {
   PreDec:`\n
@@ -208,7 +208,7 @@ Blockly.JavaScript['communication_infrared_value'] = function(block) {
 
 Blockly.JavaScript['communication_bluetooth_start'] = function(block) {
   if (peripheral_PreDeclarations.includes(`#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\n`)==0){
-    peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\nchar bdata = '';\n`
+    peripheral_PreDeclarations += `#include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\nchar bdata = '.';\n`
     peripheral_SetupCode += `\thc06.begin(9600);\n`;
   }
   var code = 'while (hc06.available()>0){\n\tbdata = hc06.read();\n}\n';
@@ -242,13 +242,6 @@ Blockly.JavaScript['communincation_bluetooth_send'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = `\tsend_bluetooth("${value_name}");\n`
   return code;
-};
-
-Blockly.JavaScript['communication_bluetooth_read'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = `bdata`;
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['sound_buzzer_buzz'] = function(block) {
