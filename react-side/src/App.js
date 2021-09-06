@@ -1,6 +1,5 @@
-import { BlocklyWorkspace } from 'react-blockly';
 import Blockly from "blockly";
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -333,6 +332,12 @@ const variable_type_set = (event) => {
     });
   }
 
+  var OurWorkspace
+ 
+  useEffect(() => {
+    OurWorkspace = Blockly.inject('blocklyDiv', { toolbox: currentToolbox, renderer: "zelos", workspace:false})
+  },[])
+
   return (
     <div className="App">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
@@ -406,24 +411,7 @@ const variable_type_set = (event) => {
             <Tab label="Serial Monitor" {...a11yProps(3)} />
           </Tabs>
           <TabPanel value={tabpanelval} index={0} className = {classes.Tabs}>
-            <div className="BlocklyDiv">
-              <BlocklyWorkspace
-                className="fill-height"
-                thelme={Blockly.Themes.FutureRetro}
-                wrapperClassName="fill-height"
-                initialXml={newxml}
-                toolboxConfiguration={currentToolbox}
-                workspaceConfiguration={{
-                  grid: {
-                    spacing: 20,
-                    length: 3,
-                    colour: "#ccc",
-                    snap: true,
-                    wheel: true,
-                  },
-                }}
-                onWorkspaceChange={showCode}
-              />
+            <div id="blocklyDiv">
               <Dialog 
                 onClose={(event, reason) => {if (reason == 'backdropClick'){
                 setDialogOpen(false);
@@ -443,7 +431,7 @@ const variable_type_set = (event) => {
                 <TextField id="outlined-basic" variant = "filled" value={newvariable_name} disabled={false} multiline = {false} fullWidth = {true} align="justify" onChange={variable_name_set}/>
                 <Button onClick={closedialog}>Ok</Button>
               </Dialog>
-              </div>
+            </div>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
           <SyntaxHighlighter 

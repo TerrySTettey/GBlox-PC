@@ -22,6 +22,11 @@
   bottom: 0;
 }
 
+#blocklyDiv {
+  width: 100%;
+  height: 350px;
+}
+
 /*
 .texter {
   float: left;
