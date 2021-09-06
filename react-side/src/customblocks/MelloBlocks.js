@@ -9,6 +9,7 @@ Blockly.Blocks['sensor_ultrasonic'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("colour_blocks");
  this.setHelpUrl("");
   }
 };
@@ -22,6 +23,7 @@ Blockly.Blocks['sensor_light_follower_right'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("colour_blocks");
  this.setHelpUrl("");
   }
 };
@@ -35,6 +37,7 @@ Blockly.Blocks['sensor_light_follower_left'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("colour_blocks");
  this.setHelpUrl("");
   }
 };
@@ -49,6 +52,7 @@ Blockly.Blocks['sensor_line_follower_right'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("colour_blocks");
  this.setHelpUrl("");
   }
 };
@@ -63,6 +67,7 @@ Blockly.Blocks['sensor_line_follower_left'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("colour_blocks");
  this.setHelpUrl("");
   }
 };
@@ -76,6 +81,7 @@ Blockly.Blocks['communication_infrared_start'] = {
     this.setNextStatement(true, null);
     this.setColour(230);
  this.setTooltip("");
+ this.setStyle("variable_blocks");
  this.setHelpUrl("");
   }
 };
@@ -92,6 +98,7 @@ Blockly.Blocks['communication_infrared_value'] = {
     this.setNextStatement(true, null);
     this.setColour(230);
  this.setTooltip("");
+ this.setStyle("variable_blocks");
  this.setHelpUrl("");
   }
 };
@@ -106,6 +113,7 @@ Blockly.Blocks['communication_bluetooth_start'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("variable_blocks");
  this.setHelpUrl("");
   }
 };
@@ -120,6 +128,7 @@ Blockly.Blocks['communication_bluetooth_receive'] = {
     this.setOutput(true, null);
     this.setColour(230);
  this.setTooltip("");
+ this.setStyle("variable_blocks");
  this.setHelpUrl("");
   }
 };
@@ -135,6 +144,7 @@ Blockly.Blocks['communincation_bluetooth_send'] = {
     this.setNextStatement(true, null);
     this.setColour(230);
  this.setTooltip("");
+ this.setStyle("variable_blocks");
  this.setHelpUrl("");
   }
 };
@@ -151,6 +161,7 @@ Blockly.Blocks['sound_buzzer_buzz'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -170,6 +181,7 @@ Blockly.Blocks['sound_buzzer_timer'] = {
     this.setNextStatement(true, null);
     this.setColour(230);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -183,6 +195,7 @@ Blockly.Blocks['sound_buzzer_stop'] = {
     this.setNextStatement(true, null);
     this.setColour(230);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -200,6 +213,7 @@ Blockly.Blocks['led_rgb_led'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -215,34 +229,35 @@ Blockly.Blocks['led_rgb_led_all'] = {
     this.setColour(230);
     this.setInputsInline(true);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
 
-Blockly.Blocks['led_neo_led'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Set ")
-        .appendField(new Blockly.FieldDropdown([["Left","Left"], ["Right","Right"]]), "NeoPixel LED")
-        .appendField("NeoPixel LED to:");
-    this.appendValueInput("Red Value")
-        .setCheck(null)
-        .appendField("Red:");
-    this.appendValueInput("Green Value")
-        .setCheck(null)
-        .appendField("Green:");
-    this.appendValueInput("Blue Value")
-        .setCheck(null)
-        .appendField("Blue:");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
+// Blockly.Blocks['led_neo_led'] = {
+//   init: function() {
+//     this.appendDummyInput()
+//         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
+//         .appendField("Set ")
+//         .appendField(new Blockly.FieldDropdown([["Left","Left"], ["Right","Right"]]), "NeoPixel LED")
+//         .appendField("NeoPixel LED to:");
+//     this.appendValueInput("Red Value")
+//         .setCheck(null)
+//         .appendField("Red:");
+//     this.appendValueInput("Green Value")
+//         .setCheck(null)
+//         .appendField("Green:");
+//     this.appendValueInput("Blue Value")
+//         .setCheck(null)
+//         .appendField("Blue:");
+//     this.setInputsInline(true);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour(230);
+//  this.setTooltip("");
+//  this.setHelpUrl("");
+//   }
+// };
 
 
 
@@ -257,6 +272,7 @@ Blockly.Blocks['motor_move_indef'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -273,6 +289,7 @@ Blockly.Blocks['motor_single_move_indef'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -293,6 +310,7 @@ Blockly.Blocks['motor_move_seconds'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -313,6 +331,7 @@ Blockly.Blocks['forklift_move_seconds'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -329,6 +348,7 @@ Blockly.Blocks['forklift_move_indef'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -343,6 +363,7 @@ Blockly.Blocks['servo_rotate_to_degrees'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };
@@ -359,6 +380,7 @@ Blockly.Blocks['servo_360_rotate_direction'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
  this.setTooltip("");
+ this.setStyle("procedure_blocks");
  this.setHelpUrl("");
   }
 };

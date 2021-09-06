@@ -284,7 +284,6 @@ const toolboxCategories = {
       <block type="delay_core">
       <field name= "seconds" type="number"></field>
       </block>
-      <block type="m_mainloop"><field name="LOOP"></field></block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Math" colour="#5b67a5">
       <block type="math_number">

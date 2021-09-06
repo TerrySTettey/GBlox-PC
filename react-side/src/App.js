@@ -128,6 +128,50 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+const component_styles = {
+  "workspaceBackgroundColour": "#1f1254",
+  "toolboxBackgroundColour": "#03254c"
+}
+
+const block_styles = {
+  "loop_blocks": {
+    "colourPrimary": "#c7b01a",
+    "colourSecondary":"#AD7BE9",
+    "colourTertiary":"#CDB6E9"
+ },
+ "logic_blocks": {
+    "colourPrimary": "#c91818",
+    "colourSecondary":"#64C7FF",
+    "colourTertiary":"#C5EAFF"
+ },
+ "math_blocks": {
+   "colourPrimary": "#03254c",
+   "colourSecondary":"#A334C5",
+   "colourTertiary":"#A3DB55"
+ },
+ "colour_blocks": {
+  "colourPrimary": "#23445b",
+  "colourSecondary": "#dbc7bd",
+  "colourTertiary": "#845d49"
+},
+"variable_blocks": {
+  "colourPrimary": "#525b99",
+  "colourSecondary": "#dbbdd6",
+  "colourTertiary": "#84497a"
+},
+"procedure_blocks": {
+  "colourPrimary": "#995ba5",
+  "colourSecondary": "#d6bddb",
+  "colourTertiary": "#7a4984"
+},
+
+}
+
+var test_theme = Blockly.Theme.defineTheme('test_theme', {
+  'blockStyles' : block_styles,
+  'componentStyles': component_styles,
+  'startHats': false
+});
 
 const mello_laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;
 if (currentToolboxName == "Mello"){
@@ -331,8 +375,6 @@ const variable_type_set = (event) => {
     });
   }
 
-
- 
   useEffect(() => {
     if(document.getElementById('blocklyDiv') !== null){
       var tb = currentToolbox;
@@ -346,12 +388,13 @@ const variable_type_set = (event) => {
        pinch: true}, grid:
        {spacing: 20,
         length: 3,
-        colour: '#ccc',
-        snap: true}});
+        colour: '#03254c',
+        snap: true}, theme: test_theme});
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
       OurWorkspace.addChangeListener(function(event){
         showCode(OurWorkspace);
       })
+      
     }
   },[tabpanelval])
 
@@ -363,6 +406,9 @@ const variable_type_set = (event) => {
     }
     else{
       setUploadProgress(0);
+    }
+    if (OurWorkspace !== null){
+      console.log(OurWorkspace.toolbox_.flyout_.positionAt_(10,10,10,10))
     }
     return UploadProgress;
   });
