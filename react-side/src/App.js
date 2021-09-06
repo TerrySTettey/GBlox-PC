@@ -426,7 +426,7 @@ const variable_type_set = (event) => {
                 <MenuItem value={"float"}>Float</MenuItem>
                 <MenuItem value={"int"}>Integer</MenuItem>
                 <MenuItem value={"char"}>Character</MenuItem>
-                <MenuItem value={"char[]"}>String</MenuItem>
+                <MenuItem value={"String"}>String</MenuItem>
               </Select>
                 <TextField id="outlined-basic" variant = "filled" value={newvariable_name} disabled={false} multiline = {false} fullWidth = {true} align="justify" onChange={variable_name_set}/>
                 <Button onClick={closedialog}>Ok</Button>
