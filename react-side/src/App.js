@@ -170,7 +170,7 @@ const block_styles = {
 var test_theme = Blockly.Theme.defineTheme('test_theme', {
   'blockStyles' : block_styles,
   'componentStyles': component_styles,
-  'startHats': false
+  'startHats': true
 });
 
 const mello_laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;
@@ -391,13 +391,27 @@ const variable_type_set = (event) => {
         colour: '#03254c',
         snap: true}, theme: test_theme});
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
+      OurWorkspace.toolbox_.setVisible(true)
       OurWorkspace.addChangeListener(function(event){
         showCode(OurWorkspace);
+        if (OurWorkspace !== null){
+          console.log(OurWorkspace.toolbox_.toolboxPosition);
+        }
       })
+      OurWorkspace.registerButtonCallback("Openfly", function(event){
+        OurWorkspace.toolbox_.flyout_.show(mello_laxml)
+      });
       
     }
   },[tabpanelval])
 
+  function sendflyout(){
+    if(OurWorkspace !== null){
+      console.log(Blockly.utils.toolbox.convertToolboxDefToJson(MelloToolbox))
+      OurWorkspace.refreshToolboxSelection()
+      OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(`<xml> <block type="variable_get"></block> </xml>`))
+  }
+}
 
   React.useEffect(() => {
 
@@ -407,9 +421,7 @@ const variable_type_set = (event) => {
     else{
       setUploadProgress(0);
     }
-    if (OurWorkspace !== null){
-      console.log(OurWorkspace.toolbox_.flyout_.positionAt_(10,10,10,10))
-    }
+
     return UploadProgress;
   });
 
@@ -443,6 +455,7 @@ const variable_type_set = (event) => {
           <Typography component = "span" variant="h2" className={classes.title}>
             Mintduino
           </Typography>
+          <Button onClick={sendflyout}>TesstTool</Button>
           {UploadProgress == 0 &&
               <CircularProgress color="secondary"/>
             }
