@@ -334,7 +334,9 @@ const variable_type_set = (event) => {
   var OurWorkspace
  
   useEffect(() => {
-    OurWorkspace = Blockly.inject('blocklyDiv', { toolbox: currentToolbox, renderer: "zelos", workspace:false})
+    if(document.getElementById('blocklyDiv') !== null){
+      OurWorkspace = Blockly.inject('blocklyDiv', { toolbox: currentToolbox, renderer: "zelos", workspace:false})
+    }
   },[tabpanelval])
 
   return (
@@ -410,8 +412,9 @@ const variable_type_set = (event) => {
             <Tab label="Serial Monitor" {...a11yProps(3)} />
           </Tabs>
           <TabPanel value={tabpanelval} index={0} className = {classes.Tabs}>
-            <div id="blocklyDiv">
-              <Dialog 
+            <section id="blocklyArea">
+              <div id="blocklyDiv">
+                <Dialog 
                 onClose={(event, reason) => {if (reason == 'backdropClick'){
                 setDialogOpen(false);
                 }}
@@ -429,8 +432,9 @@ const variable_type_set = (event) => {
               </Select>
                 <TextField id="outlined-basic" variant = "filled" value={newvariable_name} disabled={false} multiline = {false} fullWidth = {true} align="justify" onChange={variable_name_set}/>
                 <Button onClick={closedialog}>Ok</Button>
-              </Dialog>
-            </div>
+                </Dialog>
+              </div>
+            </section>
           </TabPanel>
           <TabPanel value={tabpanelval} index={1}>
           <SyntaxHighlighter 
