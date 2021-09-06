@@ -26,7 +26,7 @@ var Total_SetupCode = "void setup(){\n";
 var Total_BulkFunctions = "";
 var mainLoopCode = "";
 
-Blockly.Blocks['n_mainloop'] = {
+Blockly.Blocks['m_mainloop'] = {
     init: function() {
       this.appendDummyInput()
           .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
@@ -180,7 +180,7 @@ Blockly.Blocks['communication_serial_print'] = {
 //     }
 //   };
 
-Blockly.JavaScript['n_mainloop'] = function(block) {
+Blockly.JavaScript['m_mainloop'] = function(block) {
     getPeripherals();
     //Blockly.HSV_SATURATION = 0.75;
     //Blockly.HSV_VALUE = 1;

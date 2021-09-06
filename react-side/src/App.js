@@ -50,7 +50,7 @@ var response = "null";
 currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
 var variables_created = [];
-
+var OurWorkspace;
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const mello_laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="n_mainloop" id="E_nLLiJ8ewVBQ%pGS{hU" x="430" y="150"></block></xml>`;
+const mello_laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;
 if (currentToolboxName == "Mello"){
   var newxml = mello_laxml;
   var newxmldom = Blockly.Xml.textToDom(newxml);
@@ -175,6 +175,7 @@ switch(event.target.value){
   case 1: 
     currentToolbox = MelloDOM;
     currentToolboxName = "Mello";
+
     break;
   case 2:
     currentToolbox = newToolBox;
@@ -184,6 +185,14 @@ switch(event.target.value){
     currentToolbox = toolboxCategories;
     currentToolboxName = "Advanced"
     break;
+}
+console.log("switch?")
+if (OurWorkspace !== null && OurWorkspace !== undefined){
+  console.log("Ye")  
+  OurWorkspace.updateToolbox(currentToolbox);
+  if (currentToolboxName === "Mello"){
+    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml),OurWorkspace);
+  }
 }
   }
 
@@ -214,16 +223,7 @@ const variable_type_set = (event) => {
   setNewVariableType(event.target.value);
 }
 
-  React.useEffect(() => {
 
-    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status.includes("Upload Failed : Error in Code") === 1  || upload_status === ""){
-      setUploadProgress(1);
-    }
-    else{
-      setUploadProgress(0);
-    }
-    return UploadProgress;
-  });
 
   function logbutton(){
     console.log("Button Pressed");
@@ -246,17 +246,17 @@ const variable_type_set = (event) => {
       code = mainLoopCode;
     }
     Blockly.mainWorkspace.registerButtonCallback("createvar", logbutton)
-    newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    newxmldom = Blockly.Xml.workspaceToDom(workspace);
     newxml = Blockly.Xml.domToText(newxmldom);
     if (tabpanelval === 0){
       if (newxml===mello_laxml){}
       else{
-        newxmldom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        newxmldom = Blockly.Xml.workspaceToDom(workspace);
         newxml = Blockly.Xml.domToText(newxmldom);
       }
     }
     else{
-      Blockly.Xml.domToWorkspace(newxmldom);
+      Blockly.Xml.domToWorkspace(newxmldom,workspace);
     }
     setJavascriptCode(code);
   }
@@ -331,13 +331,41 @@ const variable_type_set = (event) => {
     });
   }
 
-  var OurWorkspace
+
  
   useEffect(() => {
     if(document.getElementById('blocklyDiv') !== null){
-      OurWorkspace = Blockly.inject('blocklyDiv', { toolbox: currentToolbox, renderer: "zelos", workspace:false})
+      var tb = currentToolbox;
+      OurWorkspace = Blockly.inject('blocklyDiv', { toolbox: currentToolbox, renderer: "zelos", zoom:
+      {controls: true,
+       wheel: true,
+       startScale: 1,
+       maxScale: 3,
+       minScale: 0.3,
+       scaleSpeed: 1.2,
+       pinch: true}, grid:
+       {spacing: 20,
+        length: 3,
+        colour: '#ccc',
+        snap: true}});
+      Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
+      OurWorkspace.addChangeListener(function(event){
+        showCode(OurWorkspace);
+      })
     }
   },[tabpanelval])
+
+
+  React.useEffect(() => {
+
+    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status.includes("Upload Failed : Error in Code") === 1  || upload_status === ""){
+      setUploadProgress(1);
+    }
+    else{
+      setUploadProgress(0);
+    }
+    return UploadProgress;
+  });
 
   return (
     <div className="App">
