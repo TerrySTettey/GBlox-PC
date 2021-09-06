@@ -165,10 +165,6 @@ function App() {
   const [newvariable_type, setNewVariableType] = useState("float");
   const [dialog_open, setDialogOpen] = useState(false);
 
-
-  
-
-  
   const code_change = event => {
     setJavascriptCode(event.target.value);
   }
@@ -213,6 +209,7 @@ const serialport_change = (event) => {
 const variable_name_set = (event) => {
   setNewVariableName(event.target.value);
 }
+
 const variable_type_set = (event) => {
   setNewVariableType(event.target.value);
 }
@@ -232,10 +229,12 @@ const variable_type_set = (event) => {
     console.log("Button Pressed");
     setDialogOpen(true);
   }
+
   function sendvariables(){ 
     variables_created.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
     console.log(variables_created);
   }
+
   function closedialog() {
     setDialogOpen(false);
     sendvariables();
@@ -336,7 +335,7 @@ const variable_type_set = (event) => {
  
   useEffect(() => {
     OurWorkspace = Blockly.inject('blocklyDiv', { toolbox: currentToolbox, renderer: "zelos", workspace:false})
-  },[])
+  },[tabpanelval])
 
   return (
     <div className="App">
