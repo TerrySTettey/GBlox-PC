@@ -28,7 +28,7 @@ export const Header = ({ }) => {
                         </g>
                     </svg>
                 </button>
-                <button type="button" id="edit-button" className="button-no-border">
+                <button type="button" id="edit-button" className="button-no-border glow">
                     <svg id="Component_3_2" data-name="Component 3 – 2" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
                         <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
                         <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
@@ -42,7 +42,7 @@ export const Header = ({ }) => {
                     </svg>
 
                 </button>
-                <button type="button" id="save-button" className="button-no-border">
+                <button type="button" id="save-button" className="button-no-border glow">
                     <svg id="Component_14_1" data-name="Component 14 – 1" xmlns="http://www.w3.org/2000/svg" width="103.381" height="40" viewBox="0 0 103.381 40">
                         <path id="Path_33" data-name="Path 33" d="M306.954,42h77.472c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
                         <g id="Group_426" data-name="Group 426" transform="translate(-504.258 -38.405)">
@@ -56,7 +56,7 @@ export const Header = ({ }) => {
             <div id="blank-space"></div>
             <div id="right-buttons-container">
                 <div className="header-button-container">
-                    <button type="button" id="robocentre-button" className="button-no-border">
+                    <button type="button" id="robocentre-button" className="button-no-border glow">
                         <svg id="Component_3_6" data-name="Component 3 – 6" xmlns="http://www.w3.org/2000/svg" width="180" height="40" viewBox="0 0 180 40">
                             <path id="Path_33" data-name="Path 33" d="M306.954,42H461.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
                             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
@@ -75,7 +75,7 @@ export const Header = ({ }) => {
                         </svg>
 
                     </button>
-                    <button type="button" id="competitions-button" className="button-no-border">
+                    <button type="button" id="competitions-button" className="button-no-border glow">
                         <svg id="Component_3_5" data-name="Component 3 – 5" xmlns="http://www.w3.org/2000/svg" width="170" height="40" viewBox="0 0 170 40">
                             <path id="Path_33" data-name="Path 33" d="M306.954,42H451.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
                             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
@@ -89,7 +89,7 @@ export const Header = ({ }) => {
                             </g>
                         </svg>
                     </button>
-                    <button type="button" id="help-button" className="button-no-border">
+                    <button type="button" id="help-button" className="button-no-border glow">
                         <svg id="Component_3_4" data-name="Component 3 – 4" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
                             <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
                             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
@@ -105,7 +105,7 @@ export const Header = ({ }) => {
                         </svg>
 
                     </button>
-                    <button type="button" id="settings-button" className="button-no-border">
+                    <button type="button" id="settings-button" className="button-no-border glow">
                         <svg id="Component_3_3" data-name="Component 3 – 3" xmlns="http://www.w3.org/2000/svg" width="130" height="40" viewBox="0 0 130 40">
                             <path id="Path_33" data-name="Path 33" d="M306.954,42H411.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
                             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
@@ -116,7 +116,7 @@ export const Header = ({ }) => {
 
                     </button>
                 </div>
-                <button type="button" id="menu-button" className="button-no-border">
+                <button type="button" id="menu-button" className="button-no-border glow grow">
                     <svg id="Component_8_1" data-name="Component 8 – 1" xmlns="http://www.w3.org/2000/svg" width="48.476" height="40.339" viewBox="0 0 48.476 40.339">
                         <path id="Path_246" data-name="Path 246" d="M0,0H48.476V5.008H0Z" fill="#e9e9ff" />
                         <path id="Path_247" data-name="Path 247" d="M0,0H48.476V5.008H0Z" transform="translate(0 17.666)" fill="#e9e9ff" />

@@ -413,6 +413,11 @@ const variable_type_set = (event) => {
       var Toolboxer = document.getElementsByClassName("blocklyToolboxDiv")[0];
       console.log(Toolboxer)
       var Destination = document.getElementById("ToolboxHolder").appendChild(Toolboxer)
+      Toolboxer.style.position = "absolute";
+      Toolboxer.style.width = "30vw";
+      Toolboxer.style.height = "20vw";
+      Toolboxer.style.left = "350px";
+
       /*
       var LogicButton=document.getElementById("blockly-0");
       OurWorkspace.toolbox_.flyout_.positionAt_(500,500,0,0)
