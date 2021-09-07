@@ -1,0 +1,64 @@
+
+.header-container {
+    background-color: #060841;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 4rem;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 5rem;
+    
+
+    #logo h1 {
+        position: relative;
+        color: white;
+        font-size: 5ch;
+        font-weight: bold;
+        padding: 0.5rem
+    }
+
+    .header-button-container {
+        display: flex;
+    }
+
+    #blank-space {
+        flex-grow: 1;
+        flex-shrink:1;
+
+    }
+
+    #right-buttons-container {
+        display:flex;
+        position: relative;
+        
+    }
+
+    
+}
+
+/*Removing Default Borders from Buttons*/
+.button-no-border {
+    display: inline-block;
+    border: none;
+    
+    padding:0;
+    margin:5px;
+    text-decoration: none;
+    background:none;
+    &:hover {
+        svg{
+            transform:scale(1.1);
+        }
+    }
+}
+
+
+/*Hover Animations*/
+.glow {
+    &:hover {
+        svg{
+            filter: 
+        }
+    }
+}

@@ -41,6 +41,9 @@ import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
 import "./blocklyextras/custom_category"
 import "./blocklyextras/toolbox_style.css"
+
+import {Header} from "./components/Header/Header"
+
 import {toolboxCategories, newToolBox, MelloToolbox, MelloDOM} from "./customblocks/toolboxes/toolboxes"
 import {mainLoopCode} from "./customblocks/compiler/arduino_core"
 const { ipcRenderer } = window.require('electron')
@@ -407,9 +410,19 @@ const variable_type_set = (event) => {
 
   function sendflyout(){
     if(OurWorkspace !== null){
+      var Toolboxer = document.getElementsByClassName("blocklyToolboxDiv")[0];
+      console.log(Toolboxer)
+      var Destination = document.getElementById("ToolboxHolder").appendChild(Toolboxer)
+      /*
+      var LogicButton=document.getElementById("blockly-0");
+      OurWorkspace.toolbox_.flyout_.positionAt_(500,500,0,0)
+      LogicButton.click();
+      */
+      /*
       console.log(Blockly.utils.toolbox.convertToolboxDefToJson(MelloToolbox))
       OurWorkspace.refreshToolboxSelection()
       OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(`<xml> <block type="variable_get"></block> </xml>`))
+      */
   }
 }
 
@@ -427,6 +440,8 @@ const variable_type_set = (event) => {
 
   return (
     <div className="App">
+      <Header />
+      <div id="ToolboxHolder"></div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <AppBar position="static">
         <Toolbar>
