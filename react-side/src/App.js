@@ -54,6 +54,7 @@ currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
 var variables_created = [];
 var OurWorkspace;
+var workspaces = [];
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -181,6 +182,55 @@ if (currentToolboxName == "Mello"){
   var newxml = mello_laxml;
   var newxmldom = Blockly.Xml.textToDom(newxml);
 }
+
+const WorkspaceTabs = () =>
+{
+  const [workspaceTab, setWorkspaceTab] = useState(0);
+  
+    const [workspacebuttons, setWorkspacebuttons] = useState([]);
+  
+    const addworkspaceTab = event => {
+      
+      setWorkspacebuttons(workspacebuttons.concat(<Tab label={`Workspace ${workspaces.length+1}`} {...a11yProps(0)}/>));
+      workspaces.push(undefined)
+      console.log(workspaces)
+    };
+  
+  
+  const workspaceTabchange = (event, newWorkspace) => {
+    const currentWorkspace = Blockly.Xml.workspaceToDom(OurWorkspace);  
+    console.log(workspaces)
+      console.log(newWorkspace)
+      //Save old Workspace
+      workspaces[workspaceTab] = currentWorkspace;
+      //Load new Workspace
+      console.log(workspaces[newWorkspace])
+      if (workspaces[newWorkspace] !== undefined || null){
+        OurWorkspace.clear();
+        Blockly.Xml.domToWorkspace(workspaces[newWorkspace],OurWorkspace);
+        console.log("Loaded workspace")
+      }
+      else{
+        OurWorkspace.clear();
+        workspaces[newWorkspace] = Blockly.Xml.workspaceToDom(OurWorkspace);
+        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml),OurWorkspace);
+      }
+      setWorkspaceTab(newWorkspace)
+  
+  }
+
+  return(
+    <div>
+    <Tabs value={workspaceTab} onChange={workspaceTabchange}>
+        {workspacebuttons}
+    </Tabs>
+    <Button onClick={addworkspaceTab}>Add Workspace Tab</Button>
+    </div>
+
+  )
+}
+
+
 function App() {
 
   /*
@@ -212,6 +262,8 @@ function App() {
   const [newvariable_type, setNewVariableType] = useState("float");
   const [dialog_open, setDialogOpen] = useState(false);
 
+
+
   const code_change = event => {
     setJavascriptCode(event.target.value);
   }
@@ -242,6 +294,7 @@ if (OurWorkspace !== null && OurWorkspace !== undefined){
   }
 }
   }
+
 
 const tabpanelchange = (event, newTabval) => {
     const oldTabval = tabpanelval;
@@ -296,11 +349,6 @@ const variable_type_set = (event) => {
     newxmldom = Blockly.Xml.workspaceToDom(workspace);
     newxml = Blockly.Xml.domToText(newxmldom);
     if (tabpanelval === 0){
-      if (newxml===mello_laxml){}
-      else{
-        newxmldom = Blockly.Xml.workspaceToDom(workspace);
-        newxml = Blockly.Xml.domToText(newxmldom);
-      }
     }
     else{
       Blockly.Xml.domToWorkspace(newxmldom,workspace);
@@ -398,7 +446,7 @@ const variable_type_set = (event) => {
       OurWorkspace.addChangeListener(function(event){
         showCode(OurWorkspace);
         if (OurWorkspace !== null){
-          console.log(OurWorkspace.toolbox_.toolboxPosition);
+          // console.log(OurWorkspace.toolbox_.toolboxPosition);
         }
       })
       OurWorkspace.registerButtonCallback("Openfly", function(event){
@@ -521,6 +569,11 @@ const variable_type_set = (event) => {
           <TabPanel value={tabpanelval} index={0} className = {classes.Tabs}>
             <section id="blocklyArea">
               <div id="blocklyDiv">
+                <WorkspaceTabs/>
+                {/* <Tabs value={workspaceTab} onChange={workspaceTabchange}>
+                  <Tab label="Workspace 1" {...a11yProps(0)}/>
+                  <Tab label="Workspace 2" {...a11yProps(1)}/>
+                </Tabs> */}
                 <Dialog 
                 onClose={(event, reason) => {if (reason == 'backdropClick'){
                 setDialogOpen(false);
