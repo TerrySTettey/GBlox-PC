@@ -5,28 +5,43 @@ import "./Header.scss"
 
 export const Header = ({ }) => {
 
+    /**Create Overlay for DropList*/
+    var overlay=document.createElement('div')
+    overlay.classList.add("focusOverlay")
+
+    overlay.onclick = function(event){
+        var drops = document.getElementsByClassName("dropdown-content");
+        for(var i = 0; i < drops.length; i++){
+            if (drops[i].classList.contains("show")){
+                drops[i].classList.remove("show");
+            }
+        }
+        overlay.remove()
+    }
+
+
     function fileButtonClicked(event) {
-        document.getElementById("file-dropdown").classList.toggle("show");
+        var buttonholder = document.getElementById("file-dropdown")
+        buttonholder.classList.toggle("show");
+        if(buttonholder.classList.contains('show')){
+            document.getElementsByClassName("App")[0].appendChild(overlay);
+        }
+
     }
 
     function editButtonClicked(event) {
-        document.getElementById("edit-dropdown").classList.toggle("show");
+        var buttonholder = document.getElementById("edit-dropdown")
+        buttonholder.classList.toggle("show");
+        if(buttonholder.classList.contains('show')){
+            document.getElementsByClassName("App")[0].appendChild(overlay);
+        }
     }
 
     function helpButtonClicked(event) {
-        document.getElementById("help-dropdown").classList.toggle("show");
-    }
-    window.onClick = function(event) {
-        console.log("Window CLicked")
-        if(!event.target.matches('dropdown-button')){
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for(i = 0; i < dropdowns.length; i++){
-                var openDropdown = dropdowns[i];
-                if(openDropdown.classList.contains('show')){
-                    openDropdown.classList.remove('show');
-                }
-            }
+        var buttonholder = document.getElementById("help-dropdown")
+        buttonholder.classList.toggle("show");
+        if(buttonholder.classList.contains('show')){
+            document.getElementsByClassName("App")[0].appendChild(overlay);
         }
     }
 
