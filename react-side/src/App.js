@@ -55,7 +55,7 @@ currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
 var variables_created = [];
 var OurWorkspace;
-var workspaces = [];
+var workspaces = [undefined];
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -183,48 +183,53 @@ if (currentToolboxName == "Mello"){
   var newxml = mello_laxml;
   var newxmldom = Blockly.Xml.textToDom(newxml);
 }
-
+var newWorkspaceTab = 0;
 const WorkspaceTabs = () =>
 {
+  const [workspacebuttons, setWorkspacebuttons] = useState([<Button id={`workspace_${workspaces.length}`} onClick={(event, reason) => {workspaceTabchange(event); setWorkspaceTab(event.currentTarget.value-1); console.log(workspaceTab)}} value={workspaces.length}>{`Workspace ${workspaces.length}`}</Button>]);
   const [workspaceTab, setWorkspaceTab] = useState(0);
-  
-    const [workspacebuttons, setWorkspacebuttons] = useState([]);
-  
-    const addworkspaceTab = event => {
-      
-      setWorkspacebuttons(workspacebuttons.concat(<Tab label={`Workspace ${workspaces.length+1}`} {...a11yProps(0)}/>));
-      workspaces.push(undefined)
-      console.log(workspaces)
-    };
-  
-  
-  const workspaceTabchange = (event, newWorkspace) => {
+
+  const workspaceTabchange = (event) => {
     const currentWorkspace = Blockly.Xml.workspaceToDom(OurWorkspace);  
-    console.log(workspaces)
-      console.log(newWorkspace)
       //Save old Workspace
-      workspaces[workspaceTab] = currentWorkspace;
+      workspaces[newWorkspaceTab] = currentWorkspace;
+      newWorkspaceTab = event.currentTarget.value-1;
+      console.log(workspaceTab)
       //Load new Workspace
-      console.log(workspaces[newWorkspace])
-      if (workspaces[newWorkspace] !== undefined || null){
+      if (workspaces[newWorkspaceTab] !== undefined || null){
         OurWorkspace.clear();
-        Blockly.Xml.domToWorkspace(workspaces[newWorkspace],OurWorkspace);
+        Blockly.Xml.domToWorkspace(workspaces[newWorkspaceTab],OurWorkspace);
         console.log("Loaded workspace")
+        console.log(workspaces)
       }
       else{
         OurWorkspace.clear();
-        workspaces[newWorkspace] = Blockly.Xml.workspaceToDom(OurWorkspace);
+        workspaces[newWorkspaceTab] = Blockly.Xml.workspaceToDom(OurWorkspace);
         Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml),OurWorkspace);
+        console.log("New Workspace Save");
+        console.log(workspaces)
       }
-      setWorkspaceTab(newWorkspace)
-  
-  }
+      
 
+  }
+  // useEffect(() =>{
+  //   console.log(newWorkspaceTab)
+  //   setWorkspaceTab(newWorkspaceTab)
+  // })
+  const deleteWorkspace =() => {
+    delete workspaces[workspaceTab];
+    delete workspacebuttons[workspaceTab];
+    console.log("Deleted Workspace")
+    console.log(workspaces)
+  }
+  const addworkspaceTab = event => {
+    const currenttab = workspaces.length;
+    setWorkspacebuttons(workspacebuttons.concat(<Button id={`workspace_${workspaces.length+1}`} onClick={(event, reason) => {workspaceTabchange(event); setWorkspaceTab(event.currentTarget.value-1); console.log(workspaceTab)}} value={workspaces.length+1}>{`Workspace ${workspaces.length+1}`}</Button>));
+    workspaces.push(undefined)
+  };
   return(
-    <div>
-    <Tabs value={workspaceTab} onChange={workspaceTabchange}>
+    <div id={`workspaceTabs`}>
         {workspacebuttons}
-    </Tabs>
     <Button onClick={addworkspaceTab}>Add Workspace Tab</Button>
     </div>
 
@@ -572,10 +577,6 @@ const variable_type_set = (event) => {
             <section id="blocklyArea">
               <div id="blocklyDiv">
                 <WorkspaceTabs/>
-                {/* <Tabs value={workspaceTab} onChange={workspaceTabchange}>
-                  <Tab label="Workspace 1" {...a11yProps(0)}/>
-                  <Tab label="Workspace 2" {...a11yProps(1)}/>
-                </Tabs> */}
                 <Dialog 
                 onClose={(event, reason) => {if (reason == 'backdropClick'){
                 setDialogOpen(false);
