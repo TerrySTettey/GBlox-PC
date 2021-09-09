@@ -43,6 +43,7 @@ import "./blocklyextras/custom_category"
 import "./blocklyextras/toolbox_style.css"
 
 import {Header} from "./components/Header/Header"
+import {Body} from "./components/Body/Body"
 
 import {toolboxCategories, newToolBox, MelloToolbox, MelloDOM} from "./customblocks/toolboxes/toolboxes"
 import {mainLoopCode} from "./customblocks/compiler/arduino_core"
@@ -113,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(2),
     },
   },
-  footer: {
+  footerdd: {
     display: 'flex',
     position: "fixed",
     backgroundColor: "#F8F8F8",
@@ -494,6 +495,7 @@ const variable_type_set = (event) => {
   return (
     <div className="App">
       <Header />
+      <Body />
       <div id="ToolboxHolder"></div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <AppBar position="static">

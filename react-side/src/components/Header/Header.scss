@@ -2,12 +2,14 @@
 .header-container {
     background-color: #060841;
     position: relative;
+    top: 0;
     display: flex;
-    width: calc(100vw-20px);
-    height: 4rem;
+    flex-direction: row;
+    height: 64px;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 56px;
+    padding-right: 56px;
+    z-index: 1;
     
 
     #logo h1 {
@@ -15,7 +17,8 @@
         color: white;
         font-size: 5ch;
         font-weight: bold;
-        padding:30px;
+        padding-left:12px;
+        padding-right:53px;
         margin:0;
     }
 
@@ -26,13 +29,12 @@
     #blank-space {
         flex-grow: 1;
         flex-shrink:1;
-
+        min-width: 0;
     }
 
-    #right-buttons-container {
-        display:flex;
-        position: relative;
-        
+
+    #menu-button {
+        margin-left: 25px;
     }
 
     
@@ -73,7 +75,8 @@
     background-color: none;
     min-width: 160px;
     z-index: 1;
-    top:100%;
+    /*HATE THIS PROPERTY*/
+    top:95%;
     margin: 0;
     padding: 0;
     
@@ -93,7 +96,7 @@
         
 
         &:hover {
-            background-color: #0b053383;
+            background-color: #000057;
             
         }
     }

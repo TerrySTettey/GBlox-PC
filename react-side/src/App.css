@@ -2,6 +2,10 @@
 .App {
   width: 100%;
   height: 100%;
+  margin:0;
+  padding:0;
+  position: relative;
+  display: block;
 }
 .fill-height {
   position: relative;
@@ -33,7 +37,7 @@
 
 #blocklyArea {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 80vh;
 }
 

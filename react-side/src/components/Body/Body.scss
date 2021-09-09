@@ -1,0 +1,11 @@
+
+
+.body-container {
+    display: flex;
+    position: relative;
+    left:0;
+    top:0;
+    width: calc(100vw-20px);
+    min-height: calc(100vh - 64px);
+    background-color: #060841;
+}
