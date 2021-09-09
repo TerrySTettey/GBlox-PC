@@ -26,11 +26,11 @@
     "electron-rebuild": "^3.2.2"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "electron-is-dev": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "node-gyp": "^8.2.0",
     "python-shell": "^3.0.0",
-    "serialport": "^9.2.0"
+    "serialport": "^9.2.1"
   },
   "config": {
     "forge": {

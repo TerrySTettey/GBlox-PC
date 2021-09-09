@@ -64,6 +64,7 @@
     margin-left: 5px;
     margin-right: 5px;
     display: block;
+    border: none;
 }
 
 .dropdown-content {
@@ -72,9 +73,13 @@
     background-color: none;
     min-width: 160px;
     z-index: 1;
+    top:100%;
+    margin: 0;
+    padding: 0;
     
 
     button {
+        position: relative;
         display: block;
         color: white;
         padding-top: 8px;
@@ -114,6 +119,5 @@
 }
 
 .show {
-    display: block;
-    
+    display: inline-block;;
 }
