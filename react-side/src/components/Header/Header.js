@@ -6,13 +6,13 @@ import "./Header.scss"
 export const Header = ({ }) => {
 
     /**Create Overlay for DropList*/
-    var overlay=document.createElement('div')
+    var overlay = document.createElement('div')
     overlay.classList.add("focusOverlay")
 
-    overlay.onclick = function(event){
+    overlay.onclick = function (event) {
         var drops = document.getElementsByClassName("dropdown-content");
-        for(var i = 0; i < drops.length; i++){
-            if (drops[i].classList.contains("show")){
+        for (var i = 0; i < drops.length; i++) {
+            if (drops[i].classList.contains("show")) {
                 drops[i].classList.remove("show");
             }
         }
@@ -23,7 +23,7 @@ export const Header = ({ }) => {
     function fileButtonClicked(event) {
         var buttonholder = document.getElementById("file-dropdown")
         buttonholder.classList.toggle("show");
-        if(buttonholder.classList.contains('show')){
+        if (buttonholder.classList.contains('show')) {
             document.getElementsByClassName("App")[0].appendChild(overlay);
         }
 
@@ -32,7 +32,7 @@ export const Header = ({ }) => {
     function editButtonClicked(event) {
         var buttonholder = document.getElementById("edit-dropdown")
         buttonholder.classList.toggle("show");
-        if(buttonholder.classList.contains('show')){
+        if (buttonholder.classList.contains('show')) {
             document.getElementsByClassName("App")[0].appendChild(overlay);
         }
     }
@@ -40,8 +40,16 @@ export const Header = ({ }) => {
     function helpButtonClicked(event) {
         var buttonholder = document.getElementById("help-dropdown")
         buttonholder.classList.toggle("show");
-        if(buttonholder.classList.contains('show')){
+        if (buttonholder.classList.contains('show')) {
             document.getElementsByClassName("App")[0].appendChild(overlay);
+        }
+    }
+
+    function settingsButtonClicked(event) {
+        var buttonholder = document.getElementById("settings-dropdown")
+        buttonholder.classList.toggle("show");
+        if (buttonholder.classList.contains('show')) {
+            //document.getElementsByClassName("App")[0].appendChild(overlay);
         }
     }
 
@@ -75,7 +83,6 @@ export const Header = ({ }) => {
                         <button className="button-no-border">Open</button>
                         <button className="button-no-border">Save</button>
                         <button className="button-no-border">Save As</button>
-                        <button className="button-no-border">Share</button>
                         <button className="button-no-border">Close</button>
                     </div>
                 </div>
@@ -94,8 +101,8 @@ export const Header = ({ }) => {
                         </svg>
                     </button>
                     <div className="dropdown-content" id="edit-dropdown">
-                        <button className="button-no-border">Cut</button>
                         <button className="button-no-border">Copy</button>
+                        <button className="button-no-border">Cut</button>
                         <button className="button-no-border">Paste</button>
                         <button className="button-no-border">Select All</button>
                         <button className="button-no-border">Delete</button>
@@ -168,15 +175,26 @@ export const Header = ({ }) => {
                         <button className="button-no-border">Check for Help</button>
                     </div>
                 </div>
-                <button type="button" id="settings-button" className="button-no-border glow">
-                    <svg id="Component_3_3" data-name="Component 3 – 3" xmlns="http://www.w3.org/2000/svg" width="130" height="40" viewBox="0 0 130 40">
-                        <path id="Path_33" data-name="Path 33" d="M306.954,42H411.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                        <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                            <text id="Settings" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Settings</tspan></text>
-                            <path id="Path_302" data-name="Path 302" d="M928,500.214v-4.427h-2.214a8.033,8.033,0,0,0-.716-1.724l1.567-1.567-3.131-3.131-1.567,1.567a8.015,8.015,0,0,0-1.724-.716V488h-4.427v2.214a8.014,8.014,0,0,0-1.724.716l-1.567-1.567-3.131,3.131,1.567,1.567a8.009,8.009,0,0,0-.716,1.724H908v4.427h2.215a8,8,0,0,0,.716,1.724l-1.567,1.567,3.131,3.131,1.567-1.567a8.005,8.005,0,0,0,1.724.716V508h4.427v-2.214a8.006,8.006,0,0,0,1.724-.716l1.567,1.567,3.131-3.131-1.567-1.567a8.029,8.029,0,0,0,.716-1.724ZM920.5,498a2.5,2.5,0,0,1-3.979,2.015,2.524,2.524,0,0,1-.536-.536,2.5,2.5,0,0,1,0-2.959,2.523,2.523,0,0,1,.536-.536,2.5,2.5,0,0,1,2.959,0,2.52,2.52,0,0,1,.536.536A2.495,2.495,0,0,1,920.5,498Z" transform="translate(-922.426 -486.2)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                        </g>
-                    </svg>
-                </button>
+                <div className="dropdown-button">
+                    <button type="button" id="settings-button" className="button-no-border-drop glow" onClick={settingsButtonClicked}>
+                        <svg id="Component_3_3" data-name="Component 3 – 3" xmlns="http://www.w3.org/2000/svg" width="130" height="40" viewBox="0 0 130 40">
+                            <path id="Path_33" data-name="Path 33" d="M306.954,42H411.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
+                            <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
+                                <text id="Settings" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Settings</tspan></text>
+                                <path id="Path_302" data-name="Path 302" d="M928,500.214v-4.427h-2.214a8.033,8.033,0,0,0-.716-1.724l1.567-1.567-3.131-3.131-1.567,1.567a8.015,8.015,0,0,0-1.724-.716V488h-4.427v2.214a8.014,8.014,0,0,0-1.724.716l-1.567-1.567-3.131,3.131,1.567,1.567a8.009,8.009,0,0,0-.716,1.724H908v4.427h2.215a8,8,0,0,0,.716,1.724l-1.567,1.567,3.131,3.131,1.567-1.567a8.005,8.005,0,0,0,1.724.716V508h4.427v-2.214a8.006,8.006,0,0,0,1.724-.716l1.567,1.567,3.131-3.131-1.567-1.567a8.029,8.029,0,0,0,.716-1.724ZM920.5,498a2.5,2.5,0,0,1-3.979,2.015,2.524,2.524,0,0,1-.536-.536,2.5,2.5,0,0,1,0-2.959,2.523,2.523,0,0,1,.536-.536,2.5,2.5,0,0,1,2.959,0,2.52,2.52,0,0,1,.536.536A2.495,2.495,0,0,1,920.5,498Z" transform="translate(-922.426 -486.2)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </svg>
+                    </button>
+                    <div className="dropdown-content" id="settings-dropdown">
+                        <div className="settings-component">
+                            <h2>Language</h2>
+                            <button type="button" className="button-no-border" id="close-settings-button">x</button>
+                            <div id="language-select">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <button type="button" id="menu-button" className="button-no-border grow">
                 <svg id="Component_8_1" data-name="Component 8 – 1" xmlns="http://www.w3.org/2000/svg" width="48.476" height="40.339" viewBox="0 0 48.476 40.339">

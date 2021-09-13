@@ -1,6 +1,6 @@
 /*Main header*/
 .header-container {
-    background-color: #060841;
+    background-color: #0B0533;
     position: relative;
     top: 0;
     display: flex;
@@ -38,7 +38,6 @@
 
     
 }
-
 /*Removing Default Borders from Buttons*/
 .button-no-border {
     display: block;
@@ -50,6 +49,7 @@
     background:none;
 }
 
+/*Removing Default Borders from Buttons with Dropdown Menus*/
 .button-no-border-drop {
     display: block;
     border: none;
@@ -59,6 +59,7 @@
     background:none;
 }
 
+/*Div Class for housing buttons which show dropdowns*/
 .dropdown-button {
     position: relative;
     padding: 0;
@@ -66,20 +67,36 @@
     margin-right: 5px;
     display: block;
     border: none;
+
+    #settings-dropdown {
+        background-color: #060841;
+        height:484px;
+        width: 396px;
+        right: -50px;
+        filter: drop-shadow(0 0 50px black);
+        border-radius: 20px;
+    
+        .settings-component{
+            color: white;
+            #close-settings-button {
+    
+            }
+        }
+    
+    }
 }
 
+/*Div Class for holding the dropdown content*/
 .dropdown-content {
     display: none;
     position:absolute;
     background-color: none;
     min-width: 160px;
-    z-index: 1;
     /*HATE THIS PROPERTY*/
     top:95%;
     margin: 0;
     padding: 0;
     z-index: 2;
-    
 
     button {
         position: relative;
@@ -103,6 +120,10 @@
 
 }
 
+
+
+/*Div that covers the screen when a dropdown is open;
+It covers the whole screen and when it is clicked, it closes all active dropdowns*/
 .focusOverlay {
     position: fixed;
     display: block;
@@ -114,8 +135,7 @@
     z-index: 1;
 }
 
-
-/*Hover Animations*/
+/*Glowing Animation*/
 .glow {
     &:hover {
         svg{
@@ -124,6 +144,7 @@
     }
 }
 
+/*Growing Animation*/
 .grow {
     &:hover {
         svg{
@@ -132,6 +153,7 @@
     }
 }
 
+/*Used to show the dropdown menu which is display:hidden by default*/
 .show {
     display: inline-block;;
 }
