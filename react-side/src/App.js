@@ -227,7 +227,7 @@ const WorkspaceTabs = () => {
   useEffect(() => {
     var next_tab = document.getElementById(`workspaceTabs`).children
     console.log(next_tab)
-    for (var i = 0; i < workspaces.length; i++) {
+    for (var i = 0; i < workspaces.length-1; i++) {
       next_tab[i].id=`Tab ${i+1}`;
       next_tab[i].children[0].id = `workspace_${i+1}`
       next_tab[i].children[0].innerHTML = `Workspace ${i+1}`
