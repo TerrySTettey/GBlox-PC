@@ -1,5 +1,6 @@
 import Blockly from "blockly";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forceUpdate } from 'react';
+
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -185,69 +186,67 @@ if (currentToolboxName == "Mello") {
   var newxmldom = Blockly.Xml.textToDom(newxml);
 }
 var newWorkspaceTab = 0;
-const WorkspaceTabs = () => {
-  const [workspacebuttons, setWorkspacebuttons] = useState([<div id={`Tab ${1}`}>
-    <Button id={`workspace_${1}`} onClick={(event, reason) => {
-      workspaceTabchange(event);
-      setWorkspaceTab(event.currentTarget.value - 1);
-    }} value={1}>{`Workspace ${1}`}</Button>
-    <button value={0} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>]);
-  const [workspaceTab, setWorkspaceTab] = useState(1);
+// const WorkspaceTabs = () => {
+//   const [workspacebuttons, setWorkspacebuttons] = useState([<div id={`Tab ${1}`}>
+//     <Button id={`workspace_${1}`} onClick={(event, reason) => {
+//       workspaceTabchange(event);
+//       setWorkspaceTab(event.currentTarget.value - 1);
+//     }} value={1}>{`Workspace ${1}`}</Button>
+//     <button value={1} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>]);
+//   const [workspaceTab, setWorkspaceTab] = useState(1);
 
-  const workspaceTabchange = (event) => {
-    const currentWorkspace = Blockly.Xml.workspaceToDom(OurWorkspace);
-    //Save old Workspace
-    workspaces[newWorkspaceTab] = currentWorkspace;
-    newWorkspaceTab = event.currentTarget.value - 1;
-    console.log(workspaceTab)
-    //Load new Workspace
-    if (workspaces[newWorkspaceTab] !== undefined || null) {
-      OurWorkspace.clear();
-      Blockly.Xml.domToWorkspace(workspaces[newWorkspaceTab], OurWorkspace);
-      console.log("Loaded workspace")
-    }
-    else {
-      OurWorkspace.clear();
-      workspaces[newWorkspaceTab] = Blockly.Xml.workspaceToDom(OurWorkspace);
-      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml), OurWorkspace);
-      console.log("New Workspace Save");
-    }
-  }
-  const deleteTab = (event) => {
-    console.log(event.currentTarget.value)
-    const temp_w = workspacebuttons;
-    temp_w.splice(event.currentTarget.value - 1, 1)
-    temp_w.forEach(element => console.log(element))
-    setWorkspacebuttons(workspacebuttons.splice(event.currentTarget.value - 1, 1));
-    workspacebuttons.forEach(element => console.log(element))
-    workspaces = workspaces.splice(event.currentTarget.value-2, 1)
-    console.log(workspacebuttons)
-    console.log("Deleted Workspace")
-    console.log(workspaces)
-    console.log(workspaces.length)
-  }
-  const addworkspaceTab = event => {
-    const currenttab = workspacebuttons.length + 1;
-    setWorkspacebuttons(workspacebuttons.concat(
-      <div id={`Tab ${workspacebuttons.length + 1}`}>
-        <Button id={`workspace_${workspacebuttons.length + 1}`} onClick={(event, reason) => {
-          workspaceTabchange(event);
-          setWorkspaceTab(event.currentTarget.value - 1);
-          console.log(workspaceTab)
-        }} value={currenttab + 1}>{`Workspace ${workspacebuttons.length + 1}`}</Button>
-        <button value={currenttab} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>));
-    console.log(workspacebuttons)
-    workspaces.push(undefined)
-  };
+//   const workspaceTabchange = (event) => {
+//     const currentWorkspace = Blockly.Xml.workspaceToDom(OurWorkspace);
+//     //Save old Workspace
+//     workspaces[newWorkspaceTab] = currentWorkspace;
+//     newWorkspaceTab = event.currentTarget.value - 1;
+//     console.log(workspaceTab)
+//     //Load new Workspace
+//     if (workspaces[newWorkspaceTab] !== undefined || null) {
+//       OurWorkspace.clear();
+//       Blockly.Xml.domToWorkspace(workspaces[newWorkspaceTab], OurWorkspace);
+//       console.log("Loaded workspace")
+//     }
+//     else {
+//       OurWorkspace.clear();
+//       workspaces[newWorkspaceTab] = Blockly.Xml.workspaceToDom(OurWorkspace);
+//       Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml), OurWorkspace);
+//       console.log("New Workspace Save");
+//     }
+//   }
 
-  return (
-    <div id={`workspaceTabs`}>
-      {workspacebuttons}
-      <Button onClick={addworkspaceTab}>Add Workspace Tab</Button>
-    </div>
-  )
-}
+//   const deleteTab = (event) => {
+//     console.log(`Deleting Tab ${event.currentTarget.value}`)
+//     const temp_w = workspacebuttons;
+//     setWorkspacebuttons(workspacebuttons.splice(event.currentTarget.value - 1, 1));
+//     workspacebuttons.forEach(element => console.log(element))
+//     workspaces = workspaces.splice(event.currentTarget.value - 1, 1)
+//     console.log("Deleted Workspace")
+//     console.log(workspaces)
+//     console.log(workspaces.length)
+//   }
 
+//   const addworkspaceTab = event => {
+//     const currenttab = workspacebuttons.length + 1;
+//     setWorkspacebuttons(workspacebuttons.concat(
+//       <div id={`Tab ${workspacebuttons.length + 1}`}>
+//         <Button id={`workspace_${workspacebuttons.length + 1}`} onClick={(event, reason) => {
+//           workspaceTabchange(event);
+//           setWorkspaceTab(event.currentTarget.value - 1);
+//           console.log(workspaceTab)
+//         }} value={currenttab}>{`Workspace ${workspacebuttons.length + 1}`}</Button>
+//         <button value={currenttab} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>));
+//     console.log(workspacebuttons)
+//     workspaces.push(undefined)
+//   };
+
+//   return (
+//     <div id={`workspaceTabs`}>
+//       {workspacebuttons}
+//       <Button onClick={addworkspaceTab}>Add Workspace Tab</Button>
+//     </div>
+//   )
+// }
 
 function App() {
 
@@ -279,7 +278,62 @@ function App() {
   const [newvariable_name, setNewVariableName] = useState("");
   const [newvariable_type, setNewVariableType] = useState("float");
   const [dialog_open, setDialogOpen] = useState(false);
+  const [workspacebuttons, setWorkspacebuttons] = useState([<div id={`Tab ${1}`}>
+    <Button id={`workspace_${1}`} onClick={(event, reason) => {
+      workspaceTabchange(event);
+      setWorkspaceTab(event.currentTarget.value - 1);
+    }} value={1}>{`Workspace ${1}`}</Button>
+    <button value={1} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>]);
+  const [workspaceTab, setWorkspaceTab] = useState(1);
+  const workspaceTabchange = (event) => {
+    const currentWorkspace = Blockly.Xml.workspaceToDom(OurWorkspace);
+    //Save old Workspace
+    workspaces[newWorkspaceTab] = currentWorkspace;
+    newWorkspaceTab = event.currentTarget.value - 1;
+    console.log(workspaceTab)
+    //Load new Workspace
+    if (workspaces[newWorkspaceTab] !== undefined || null) {
+      OurWorkspace.clear();
+      Blockly.Xml.domToWorkspace(workspaces[newWorkspaceTab], OurWorkspace);
+      console.log("Loaded workspace")
+    }
+    else {
+      OurWorkspace.clear();
+      workspaces[newWorkspaceTab] = Blockly.Xml.workspaceToDom(OurWorkspace);
+      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml), OurWorkspace);
+      console.log("New Workspace Save");
+    }
+  }
 
+  const deleteTab = (event) => {
+    console.log(`Deleting Tab ${event.currentTarget.value}`)
+    var tab = event.currentTarget.value - 1;
+
+    setWorkspacebuttons(workspacebuttons => workspacebuttons.slice(0, tab).concat(workspacebuttons.slice(tab+1)));
+    console.log("Deleted Workspace")
+    console.log(workspaces)
+  }
+
+  const addworkspaceTab = event => {
+    const currenttab = workspacebuttons.length + 1;
+    var temp_wb = workspacebuttons;
+    console.log(temp_wb)
+    console.log("New Workspace Created");
+    setWorkspacebuttons(workspacebuttons.concat(
+      <div id={`Tab ${workspacebuttons.length + 1}`}>
+        <Button id={`workspace_${workspacebuttons.length + 1}`} onClick={(event, reason) => {
+          workspaceTabchange(event);
+          setWorkspaceTab(event.currentTarget.value - 1);
+          console.log(workspaceTab)
+        }} value={currenttab}>{`Workspace ${workspacebuttons.length + 1}`}</Button>
+        <button value={currenttab} onClick={(event, reason) => { 
+
+          console.log(temp_wb)
+          deleteTab(event);
+         }}>x</button></div>));
+    console.log(workspacebuttons)
+    workspaces.push(undefined)
+  };
 
 
   const code_change = event => {
@@ -340,8 +394,6 @@ function App() {
   const variable_type_set = (event) => {
     setNewVariableType(event.target.value);
   }
-
-
 
   function logbutton() {
     console.log("Button Pressed");
@@ -478,6 +530,7 @@ function App() {
       });
 
     }
+
   }, [tabpanelval])
 
   function sendflyout() {
@@ -504,14 +557,21 @@ function App() {
   }
 
   React.useEffect(() => {
-
+    console.log(workspacebuttons)
+    if (workspacebuttons.length === 0) {
+      setWorkspacebuttons(([<div id={`Tab ${1}`}>
+      <Button id={`workspace_${1}`} onClick={(event, reason) => {
+        workspaceTabchange(event);
+        setWorkspaceTab(event.currentTarget.value - 1);
+      }} value={1}>{`Workspace ${1}`}</Button>
+      <button value={1} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>]))
+    }
     if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status.includes("Upload Failed : Error in Code") === 1 || upload_status === "") {
       setUploadProgress(1);
     }
     else {
       setUploadProgress(0);
     }
-
     return UploadProgress;
   });
 
@@ -594,7 +654,10 @@ function App() {
         <TabPanel value={tabpanelval} index={0} className={classes.Tabs}>
           <section id="blocklyArea">
             <div id="blocklyDiv">
-              <WorkspaceTabs />
+            <div id={`workspaceTabs`}>
+              {workspacebuttons}
+              <Button onClick={addworkspaceTab}>Add Workspace Tab</Button>
+            </div>
               <Dialog
                 onClose={(event, reason) => {
                   if (reason == 'backdropClick') {
