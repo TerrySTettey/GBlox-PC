@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import "./Header.scss"
 
-export const Header = ({ }) => {
+const Header = ({ }) => {
 
     /**Create Overlay for DropList*/
     var overlay = document.createElement('div')
@@ -62,7 +62,7 @@ export const Header = ({ }) => {
                 <div className="dropdown-button">
                     <button type="button" id="file-button" className="button-no-border-drop glow" onClick={fileButtonClicked}>
                         <svg id="Component_3_1" data-name="Component 3 – 1" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
-                            <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
+                            <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#000000" />
                             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
                                 <text id="File" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">File</tspan></text>
                                 <g id="Group_424" data-name="Group 424" transform="translate(-4 -2.007)">
@@ -208,6 +208,8 @@ export const Header = ({ }) => {
         </div>
     )
 }
+
+export default Header
 
 /*
 Header.PropTypes = {

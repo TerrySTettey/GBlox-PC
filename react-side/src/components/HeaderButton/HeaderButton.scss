@@ -1,0 +1,26 @@
+.empty-button {
+    display: block;
+    position: absolute;
+    border: none;
+    padding:0;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    background: none;
+    left:0;
+    top:0;
+}
+
+#header-button-container {
+    position:relative;
+    display: inline-block;
+
+    &:hover{
+        #Path_33{
+            fill : rgb(255, 0, 0);
+        }
+    }
+    
+}

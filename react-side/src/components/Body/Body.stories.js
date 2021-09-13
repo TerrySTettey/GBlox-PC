@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Body} from './Body';
+import Body from './Body';
 
 export default {
     title: 'Production/Body',
