@@ -1,5 +1,5 @@
 import Blockly from "blockly";
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -42,11 +42,11 @@ import "./customblocks/MelloBlocksGen"
 import "./blocklyextras/custom_category"
 import "./blocklyextras/toolbox_style.css"
 
-import {Header} from "./components/Header/Header"
-import {Body} from "./components/Body/Body"
+import { Header } from "./components/Header/Header"
+import { Body } from "./components/Body/Body"
 
-import {toolboxCategories, newToolBox, MelloToolbox, MelloDOM} from "./customblocks/toolboxes/toolboxes"
-import {mainLoopCode} from "./customblocks/compiler/arduino_core"
+import { toolboxCategories, newToolBox, MelloToolbox, MelloDOM } from "./customblocks/toolboxes/toolboxes"
+import { mainLoopCode } from "./customblocks/compiler/arduino_core"
 const { ipcRenderer } = window.require('electron')
 
 var currentToolbox;
@@ -56,6 +56,7 @@ var currentToolboxName = "Mello";
 var variables_created = [];
 var OurWorkspace;
 var workspaces = [undefined];
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -69,10 +70,10 @@ function TabPanel(props) {
     >
       {value === index && (
         <Container>
-        <Box>
+          <Box>
             {children}
-        </Box>
-      </Container>
+          </Box>
+        </Container>
       )}
     </div>
   );
@@ -141,98 +142,109 @@ const component_styles = {
 const block_styles = {
   "loop_blocks": {
     "colourPrimary": "#c7b01a",
-    "colourSecondary":"#AD7BE9",
-    "colourTertiary":"#CDB6E9"
- },
- "logic_blocks": {
+    "colourSecondary": "#AD7BE9",
+    "colourTertiary": "#CDB6E9"
+  },
+  "logic_blocks": {
     "colourPrimary": "#c91818",
-    "colourSecondary":"#64C7FF",
-    "colourTertiary":"#C5EAFF"
- },
- "math_blocks": {
-   "colourPrimary": "#03254c",
-   "colourSecondary":"#A334C5",
-   "colourTertiary":"#A3DB55"
- },
- "colour_blocks": {
-  "colourPrimary": "#23445b",
-  "colourSecondary": "#dbc7bd",
-  "colourTertiary": "#845d49"
-},
-"variable_blocks": {
-  "colourPrimary": "#525b99",
-  "colourSecondary": "#dbbdd6",
-  "colourTertiary": "#84497a"
-},
-"procedure_blocks": {
-  "colourPrimary": "#995ba5",
-  "colourSecondary": "#d6bddb",
-  "colourTertiary": "#7a4984"
-},
+    "colourSecondary": "#64C7FF",
+    "colourTertiary": "#C5EAFF"
+  },
+  "math_blocks": {
+    "colourPrimary": "#03254c",
+    "colourSecondary": "#A334C5",
+    "colourTertiary": "#A3DB55"
+  },
+  "colour_blocks": {
+    "colourPrimary": "#23445b",
+    "colourSecondary": "#dbc7bd",
+    "colourTertiary": "#845d49"
+  },
+  "variable_blocks": {
+    "colourPrimary": "#525b99",
+    "colourSecondary": "#dbbdd6",
+    "colourTertiary": "#84497a"
+  },
+  "procedure_blocks": {
+    "colourPrimary": "#995ba5",
+    "colourSecondary": "#d6bddb",
+    "colourTertiary": "#7a4984"
+  },
 
 }
 
 var test_theme = Blockly.Theme.defineTheme('test_theme', {
-  'blockStyles' : block_styles,
+  'blockStyles': block_styles,
   'componentStyles': component_styles,
   'startHats': true
 });
 
 const mello_laxml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;
-if (currentToolboxName == "Mello"){
+if (currentToolboxName == "Mello") {
   var newxml = mello_laxml;
   var newxmldom = Blockly.Xml.textToDom(newxml);
 }
 var newWorkspaceTab = 0;
-const WorkspaceTabs = () =>
-{
-  const [workspacebuttons, setWorkspacebuttons] = useState([<Button id={`workspace_${workspaces.length}`} onClick={(event, reason) => {workspaceTabchange(event); setWorkspaceTab(event.currentTarget.value-1); console.log(workspaceTab)}} value={workspaces.length}>{`Workspace ${workspaces.length}`}</Button>]);
-  const [workspaceTab, setWorkspaceTab] = useState(0);
+const WorkspaceTabs = () => {
+  const [workspacebuttons, setWorkspacebuttons] = useState([<div id={`Tab ${1}`}>
+    <Button id={`workspace_${1}`} onClick={(event, reason) => {
+      workspaceTabchange(event);
+      setWorkspaceTab(event.currentTarget.value - 1);
+    }} value={1}>{`Workspace ${1}`}</Button>
+    <button value={0} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>]);
+  const [workspaceTab, setWorkspaceTab] = useState(1);
 
   const workspaceTabchange = (event) => {
-    const currentWorkspace = Blockly.Xml.workspaceToDom(OurWorkspace);  
-      //Save old Workspace
-      workspaces[newWorkspaceTab] = currentWorkspace;
-      newWorkspaceTab = event.currentTarget.value-1;
-      console.log(workspaceTab)
-      //Load new Workspace
-      if (workspaces[newWorkspaceTab] !== undefined || null){
-        OurWorkspace.clear();
-        Blockly.Xml.domToWorkspace(workspaces[newWorkspaceTab],OurWorkspace);
-        console.log("Loaded workspace")
-        console.log(workspaces)
-      }
-      else{
-        OurWorkspace.clear();
-        workspaces[newWorkspaceTab] = Blockly.Xml.workspaceToDom(OurWorkspace);
-        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml),OurWorkspace);
-        console.log("New Workspace Save");
-        console.log(workspaces)
-      }
-      
-
+    const currentWorkspace = Blockly.Xml.workspaceToDom(OurWorkspace);
+    //Save old Workspace
+    workspaces[newWorkspaceTab] = currentWorkspace;
+    newWorkspaceTab = event.currentTarget.value - 1;
+    console.log(workspaceTab)
+    //Load new Workspace
+    if (workspaces[newWorkspaceTab] !== undefined || null) {
+      OurWorkspace.clear();
+      Blockly.Xml.domToWorkspace(workspaces[newWorkspaceTab], OurWorkspace);
+      console.log("Loaded workspace")
+    }
+    else {
+      OurWorkspace.clear();
+      workspaces[newWorkspaceTab] = Blockly.Xml.workspaceToDom(OurWorkspace);
+      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml), OurWorkspace);
+      console.log("New Workspace Save");
+    }
   }
-  // useEffect(() =>{
-  //   console.log(newWorkspaceTab)
-  //   setWorkspaceTab(newWorkspaceTab)
-  // })
-  const deleteWorkspace =() => {
-    delete workspaces[workspaceTab];
-    delete workspacebuttons[workspaceTab];
+  const deleteTab = (event) => {
+    console.log(event.currentTarget.value)
+    const temp_w = workspacebuttons;
+    temp_w.splice(event.currentTarget.value - 1, 1)
+    temp_w.forEach(element => console.log(element))
+    setWorkspacebuttons(workspacebuttons.splice(event.currentTarget.value - 1, 1));
+    workspacebuttons.forEach(element => console.log(element))
+    workspaces = workspaces.splice(event.currentTarget.value-2, 1)
+    console.log(workspacebuttons)
     console.log("Deleted Workspace")
     console.log(workspaces)
+    console.log(workspaces.length)
   }
   const addworkspaceTab = event => {
-    const currenttab = workspaces.length;
-    setWorkspacebuttons(workspacebuttons.concat(<Button id={`workspace_${workspaces.length+1}`} onClick={(event, reason) => {workspaceTabchange(event); setWorkspaceTab(event.currentTarget.value-1); console.log(workspaceTab)}} value={workspaces.length+1}>{`Workspace ${workspaces.length+1}`}</Button>));
+    const currenttab = workspacebuttons.length + 1;
+    setWorkspacebuttons(workspacebuttons.concat(
+      <div id={`Tab ${workspacebuttons.length + 1}`}>
+        <Button id={`workspace_${workspacebuttons.length + 1}`} onClick={(event, reason) => {
+          workspaceTabchange(event);
+          setWorkspaceTab(event.currentTarget.value - 1);
+          console.log(workspaceTab)
+        }} value={currenttab + 1}>{`Workspace ${workspacebuttons.length + 1}`}</Button>
+        <button value={currenttab} onClick={(event, reason) => { deleteTab(event) }}>x</button></div>));
+    console.log(workspacebuttons)
     workspaces.push(undefined)
   };
-  return(
-    <div id={`workspaceTabs`}>
-        {workspacebuttons}
-    <Button onClick={addworkspaceTab}>Add Workspace Tab</Button>
-    </div>
 
+  return (
+    <div id={`workspaceTabs`}>
+      {workspacebuttons}
+      <Button onClick={addworkspaceTab}>Add Workspace Tab</Button>
+    </div>
   )
 }
 
@@ -255,7 +267,7 @@ function App() {
     },
   });
   */
-  
+
   const [javascriptcode, setJavascriptCode] = useState("");
   const [upload_status, setUploadStatus] = useState("");
   const [tabpanelval, settabpanel] = useState(0);
@@ -276,67 +288,67 @@ function App() {
 
   const select_toolbox = event => {
     setToolboxUsed(event.target.value);;
-switch(event.target.value){
-  case 1: 
-    currentToolbox = MelloDOM;
-    currentToolboxName = "Mello";
+    switch (event.target.value) {
+      case 1:
+        currentToolbox = MelloDOM;
+        currentToolboxName = "Mello";
 
-    break;
-  case 2:
-    currentToolbox = newToolBox;
-    currentToolboxName = "Basic";
-    break;
-  case 3:
-    currentToolbox = toolboxCategories;
-    currentToolboxName = "Advanced"
-    break;
-}
-console.log("switch?")
-if (OurWorkspace !== null && OurWorkspace !== undefined){
-  console.log("Ye")  
-  OurWorkspace.updateToolbox(currentToolbox);
-  if (currentToolboxName === "Mello"){
-    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml),OurWorkspace);
+        break;
+      case 2:
+        currentToolbox = newToolBox;
+        currentToolboxName = "Basic";
+        break;
+      case 3:
+        currentToolbox = toolboxCategories;
+        currentToolboxName = "Advanced"
+        break;
+    }
+    console.log("switch?")
+    if (OurWorkspace !== null && OurWorkspace !== undefined) {
+      console.log("Ye")
+      OurWorkspace.updateToolbox(currentToolbox);
+      if (currentToolboxName === "Mello") {
+        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml), OurWorkspace);
+      }
+    }
   }
-}
-  }
 
 
-const tabpanelchange = (event, newTabval) => {
+  const tabpanelchange = (event, newTabval) => {
     const oldTabval = tabpanelval;
     settabpanel(newTabval);
-    if (newTabval === 3){
-      if (newTabval !== oldTabval){
+    if (newTabval === 3) {
+      if (newTabval !== oldTabval) {
         ipcRenderer.invoke(`serialport_retreive`);
         serialport_read();
       }
     }
-    else{
+    else {
       ipcRenderer.invoke(`serialport_close`);
       setSerialPortMonitor([]);
     }
   };
 
-const serialport_change = (event) => {
-  setSerialPortWrite(event.target.value);
-}
+  const serialport_change = (event) => {
+    setSerialPortWrite(event.target.value);
+  }
 
-const variable_name_set = (event) => {
-  setNewVariableName(event.target.value);
-}
+  const variable_name_set = (event) => {
+    setNewVariableName(event.target.value);
+  }
 
-const variable_type_set = (event) => {
-  setNewVariableType(event.target.value);
-}
+  const variable_type_set = (event) => {
+    setNewVariableType(event.target.value);
+  }
 
 
 
-  function logbutton(){
+  function logbutton() {
     console.log("Button Pressed");
     setDialogOpen(true);
   }
 
-  function sendvariables(){ 
+  function sendvariables() {
     variables_created.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
     console.log(variables_created);
   }
@@ -348,16 +360,16 @@ const variable_type_set = (event) => {
 
   function showCode(workspace) {
     var code = Blockly.JavaScript.workspaceToCode(workspace);
-    if (currentToolboxName === "Mello" || currentToolboxName === "Basic"){
+    if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
       code = mainLoopCode;
     }
     Blockly.mainWorkspace.registerButtonCallback("createvar", logbutton)
     newxmldom = Blockly.Xml.workspaceToDom(workspace);
     newxml = Blockly.Xml.domToText(newxmldom);
-    if (tabpanelval === 0){
+    if (tabpanelval === 0) {
     }
-    else{
-      Blockly.Xml.domToWorkspace(newxmldom,workspace);
+    else {
+      Blockly.Xml.domToWorkspace(newxmldom, workspace);
     }
     setJavascriptCode(code);
   }
@@ -371,19 +383,19 @@ const variable_type_set = (event) => {
 
   function clearWorkspace() {
     Blockly.mainWorkspace.clear();
-    if (currentToolboxName === "Mello" || currentToolboxName === "Basic"){
-      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml),Blockly.mainWorkspace);
+    if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
+      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(mello_laxml), Blockly.mainWorkspace);
     }
   }
 
-  function serialport_read(){
-    ipcRenderer.on('serialport_monitor', (event, result) => { 
+  function serialport_read() {
+    ipcRenderer.on('serialport_monitor', (event, result) => {
       setSerialPortMonitor(result);
       //console.log(serialport_results);
     });
   }
 
-  function serialport_write(){
+  function serialport_write() {
     ipcRenderer.invoke("serialport_write", serialport_value);
   }
 
@@ -402,7 +414,7 @@ const variable_type_set = (event) => {
     try {
       console.log("Loading a file...")
       var hold = ipcRenderer.sendSync('load-file')
-      if(hold !== "nil"){
+      if (hold !== "nil") {
         var xmlss = Blockly.Xml.textToDom(hold)
         Blockly.mainWorkspace.clear();
         Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
@@ -421,8 +433,8 @@ const variable_type_set = (event) => {
     //console.log(response);
     //setUploadStatus(response);
     ipcRenderer.invoke('upload-code', javascriptcode);
-    ipcRenderer.on('arduino_comport',(event,result)=>{
-      response=result;
+    ipcRenderer.on('arduino_comport', (event, result) => {
+      response = result;
       setUploadStatus(`Arduino found on ${response}`);
     });
 
@@ -433,37 +445,43 @@ const variable_type_set = (event) => {
   }
 
   useEffect(() => {
-    if(document.getElementById('blocklyDiv') !== null){
+    if (document.getElementById('blocklyDiv') !== null) {
       var tb = currentToolbox;
-      OurWorkspace = Blockly.inject('blocklyDiv', { toolbox: currentToolbox, renderer: "zelos", zoom:
-      {controls: true,
-       wheel: true,
-       startScale: 1,
-       maxScale: 3,
-       minScale: 0.3,
-       scaleSpeed: 1.2,
-       pinch: true}, grid:
-       {spacing: 20,
-        length: 3,
-        colour: '#03254c',
-        snap: true}, theme: test_theme});
+      OurWorkspace = Blockly.inject('blocklyDiv', {
+        toolbox: currentToolbox, renderer: "zelos", zoom:
+        {
+          controls: true,
+          wheel: true,
+          startScale: 1,
+          maxScale: 3,
+          minScale: 0.3,
+          scaleSpeed: 1.2,
+          pinch: true
+        }, grid:
+        {
+          spacing: 20,
+          length: 3,
+          colour: '#03254c',
+          snap: true
+        }, theme: test_theme
+      });
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
       OurWorkspace.toolbox_.setVisible(true)
-      OurWorkspace.addChangeListener(function(event){
+      OurWorkspace.addChangeListener(function (event) {
         showCode(OurWorkspace);
-        if (OurWorkspace !== null){
+        if (OurWorkspace !== null) {
           // console.log(OurWorkspace.toolbox_.toolboxPosition);
         }
       })
-      OurWorkspace.registerButtonCallback("Openfly", function(event){
+      OurWorkspace.registerButtonCallback("Openfly", function (event) {
         OurWorkspace.toolbox_.flyout_.show(mello_laxml)
       });
-      
-    }
-  },[tabpanelval])
 
-  function sendflyout(){
-    if(OurWorkspace !== null){
+    }
+  }, [tabpanelval])
+
+  function sendflyout() {
+    if (OurWorkspace !== null) {
       var Toolboxer = document.getElementsByClassName("blocklyToolboxDiv")[0];
       console.log(Toolboxer)
       var Destination = document.getElementById("ToolboxHolder").appendChild(Toolboxer)
@@ -482,15 +500,15 @@ const variable_type_set = (event) => {
       OurWorkspace.refreshToolboxSelection()
       OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(`<xml> <block type="variable_get"></block> </xml>`))
       */
+    }
   }
-}
 
   React.useEffect(() => {
 
-    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status.includes("Upload Failed : Error in Code") === 1  || upload_status === ""){
+    if (upload_status === "No Arduino Detected" || upload_status === "Upload Successful" || upload_status.includes("Upload Failed : Error in Code") === 1 || upload_status === "") {
       setUploadProgress(1);
     }
-    else{
+    else {
       setUploadProgress(0);
     }
 
@@ -527,13 +545,13 @@ const variable_type_set = (event) => {
               </List>
             </Drawer>
           </IconButton>
-          <Typography component = "span" variant="h2" className={classes.title}>
+          <Typography component="span" variant="h2" className={classes.title}>
             Mintduino
           </Typography>
           <Button onClick={sendflyout}>TesstTool</Button>
           {UploadProgress == 0 &&
-              <CircularProgress color="secondary"/>
-            }
+            <CircularProgress color="secondary" />
+          }
           <Button color="inherit" onClick={uploadCode_ipc}>Upload</Button>
           {/* <FormGroup>
             <FormControlLabel
@@ -550,90 +568,92 @@ const variable_type_set = (event) => {
               label="Advanced Toolbox"
             />
           </FormGroup> */}
-        <FormControl>
-        <InputLabel id="Toolbox Select">Toolbox</InputLabel>
-        <Select
-          labelId="Toolbox Select"
-          id="Toolbox Select"
-          value={toolbox_used}
-          variant="outlined"
-          onChange={select_toolbox}
-        >
-          <MenuItem value={1}>Mello Toolbox</MenuItem>
-          <MenuItem value={2}>Basic Toolbox</MenuItem>
-          <MenuItem value={3}>Advanced Toolbox</MenuItem>
-        </Select>
-      </FormControl>
+          <FormControl>
+            <InputLabel id="Toolbox Select">Toolbox</InputLabel>
+            <Select
+              labelId="Toolbox Select"
+              id="Toolbox Select"
+              value={toolbox_used}
+              variant="outlined"
+              onChange={select_toolbox}
+            >
+              <MenuItem value={1}>Mello Toolbox</MenuItem>
+              <MenuItem value={2}>Basic Toolbox</MenuItem>
+              <MenuItem value={3}>Advanced Toolbox</MenuItem>
+            </Select>
+          </FormControl>
         </Toolbar>
       </AppBar>
-          <div>
-          <Tabs value={tabpanelval} onChange={tabpanelchange} >
-            <Tab label="Blockly Workspace" {...a11yProps(0)} />
-            <Tab label="Code Generated" {...a11yProps(1)} />
-            <Tab label="Edit Code" {...a11yProps(2)} />
-            <Tab label="Serial Monitor" {...a11yProps(3)} />
-          </Tabs>
-          <TabPanel value={tabpanelval} index={0} className = {classes.Tabs}>
-            <section id="blocklyArea">
-              <div id="blocklyDiv">
-                <WorkspaceTabs/>
-                <Dialog 
-                onClose={(event, reason) => {if (reason == 'backdropClick'){
-                setDialogOpen(false);
-                }}
+      <div>
+        <Tabs value={tabpanelval} onChange={tabpanelchange} >
+          <Tab label="Blockly Workspace" {...a11yProps(0)} />
+          <Tab label="Code Generated" {...a11yProps(1)} />
+          <Tab label="Edit Code" {...a11yProps(2)} />
+          <Tab label="Serial Monitor" {...a11yProps(3)} />
+        </Tabs>
+        <TabPanel value={tabpanelval} index={0} className={classes.Tabs}>
+          <section id="blocklyArea">
+            <div id="blocklyDiv">
+              <WorkspaceTabs />
+              <Dialog
+                onClose={(event, reason) => {
+                  if (reason == 'backdropClick') {
+                    setDialogOpen(false);
+                  }
+                }
                 } open={dialog_open}>
                 <DialogTitle id="simple-dialog-title">Set Variable</DialogTitle>
-                <Select 
-                value={newvariable_type}
-                variant="outlined"
-                onChange={variable_type_set}
-              >
-                <MenuItem value={"float"}>Float</MenuItem>
-                <MenuItem value={"int"}>Integer</MenuItem>
-                <MenuItem value={"char"}>Character</MenuItem>
-                <MenuItem value={"String"}>String</MenuItem>
-              </Select>
-                <TextField id="outlined-basic" variant = "filled" value={newvariable_name} disabled={false} multiline = {false} fullWidth = {true} align="justify" onChange={variable_name_set}/>
+                <Select
+                  value={newvariable_type}
+                  variant="outlined"
+                  onChange={variable_type_set}
+                >
+                  <MenuItem value={"float"}>Float</MenuItem>
+                  <MenuItem value={"int"}>Integer</MenuItem>
+                  <MenuItem value={"char"}>Character</MenuItem>
+                  <MenuItem value={"String"}>String</MenuItem>
+                </Select>
+                <TextField id="outlined-basic" variant="filled" value={newvariable_name} disabled={false} multiline={false} fullWidth={true} align="justify" onChange={variable_name_set} />
                 <Button onClick={closedialog}>Ok</Button>
-                </Dialog>
-              </div>
-            </section>
-          </TabPanel>
-          <TabPanel value={tabpanelval} index={1}>
-          <SyntaxHighlighter 
-          language="arduino" 
-          style={docco}
-          showLineNumbers = {true}>
-              {javascriptcode}
-            </SyntaxHighlighter>
-          </TabPanel>
-          <TabPanel value={tabpanelval} index={2}>
-          <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline = {true} fullWidth = {true} align="justify" onChange={code_change}/>
-          </TabPanel>
-          <TabPanel value={tabpanelval} index={3}>
+              </Dialog>
+            </div>
+          </section>
+        </TabPanel>
+        <TabPanel value={tabpanelval} index={1}>
+          <SyntaxHighlighter
+            language="arduino"
+            style={docco}
+            showLineNumbers={true}>
+            {javascriptcode}
+          </SyntaxHighlighter>
+        </TabPanel>
+        <TabPanel value={tabpanelval} index={2}>
+          <TextField id="outlined-basic" variant="outlined" value={javascriptcode} disabled={false} multiline={true} fullWidth={true} align="justify" onChange={code_change} />
+        </TabPanel>
+        <TabPanel value={tabpanelval} index={3}>
           <Typography variant="h3">
             Serial Monitor
           </Typography>
-          <TextField id="outlined-basic" variant="outlined" value={serialport_monitor} disabled={true} multiline = {true} fullWidth = {true} align="justify" maxRows = {12} autoFocus = {true}/>
+          <TextField id="outlined-basic" variant="outlined" value={serialport_monitor} disabled={true} multiline={true} fullWidth={true} align="justify" maxRows={12} autoFocus={true} />
           <Typography variant="h5">
             Write to Serial Monitor
           </Typography>
-          <TextField id="outlined-basic" variant = "filled" value={serialport_value} disabled={false} multiline = {false} fullWidth = {true} align="justify" onKeyDown={(ev) => {
-              if (ev.key === 'Enter') {
-                serialport_write();
-                ev.preventDefault();
-              }
-            }} 
-            onChange={serialport_change}/>
-          </TabPanel>
-          </div>
-          <div className={classes.footer}>
-            <TextField display="block" disabled = {true} variant="outlined" value = {"Upload Status : " + upload_status} fullWidth = {true}></TextField>
-
-          </div>
+          <TextField id="outlined-basic" variant="filled" value={serialport_value} disabled={false} multiline={false} fullWidth={true} align="justify" onKeyDown={(ev) => {
+            if (ev.key === 'Enter') {
+              serialport_write();
+              ev.preventDefault();
+            }
+          }}
+            onChange={serialport_change} />
+        </TabPanel>
       </div>
+      <div className={classes.footer}>
+        <TextField display="block" disabled={true} variant="outlined" value={"Upload Status : " + upload_status} fullWidth={true}></TextField>
+
+      </div>
+    </div>
   );
 }
 
 export default App;
-export {currentToolboxName, variables_created};
+export { currentToolboxName, variables_created };
