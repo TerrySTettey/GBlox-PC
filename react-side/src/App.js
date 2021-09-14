@@ -37,10 +37,7 @@ import "./blocklyextras/toolbox_style.css"
 import Header from "./components/Header"
 import Body from "./components/Body"
 import HeaderButton from "./components/HeaderButton";
-<<<<<<< Updated upstream
-=======
 import Dropdown from "./components/Dropdown"
->>>>>>> Stashed changes
 
 import { DeviceList } from "./deviceDef/device_list.js"
 import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
@@ -508,10 +505,6 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< Updated upstream
-      <HeaderButton color="#FF0000" some="Hello World" />
-=======
->>>>>>> Stashed changes
       <Header />
       <Body></Body>
       <div id="ToolboxHolder"></div>
