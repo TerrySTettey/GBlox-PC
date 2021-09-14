@@ -1,0 +1,43 @@
+/*Div Class for holding the dropdown content*/
+
+.dropdown-container{
+    display: block;
+    position: relative;
+
+    .blue-dropdown-box {
+        display: block;
+        position:absolute;
+        background-color: none;
+        min-width: 160px;
+        /*HATE THIS PROPERTY*/
+        top:100%;
+        left: 5px;
+        margin: 0;
+        padding: 0;
+        z-index: 2;
+
+        button {
+            position: relative;
+            display: block;
+            color: white;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 20px;
+            margin: 0;
+            transition: background-color 1s;
+            background-color: #0000dcDD;
+            width: 100%;
+            text-align: left;
+            
+
+            &:hover {
+                background-color: #0000ad;
+                
+            }
+        }
+    }
+
+    #settings-dropdown-box {
+
+    }
+}

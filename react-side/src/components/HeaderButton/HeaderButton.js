@@ -3,18 +3,20 @@ import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 
 import "./HeaderButton.scss"
-import variables from "./HeaderButton.scss"
+
 
 const HeaderButton = (props) => {
     var buttonImage;
-    var [buttonState, setButtonState]= useState("Out");
+    
     var [buttonColor, setButtonColor]= useState("#0000dc");
     
-    console.log(variables)
-    variables.headerButtonHoverColor = props.hoverColor
     useEffect(()=> {
-        setButtonColor(props.outColor);
-    },[])
+        if(props.s_ButtonState === "In"){
+            setButtonColor(props.inColor);
+        } else if (props.s_ButtonState === "Out"){
+            setButtonColor(props.outColor);
+        }
+    },[props.s_ButtonState])
     
     switch (props.buttonImage) {
         case "1":
@@ -115,31 +117,32 @@ const HeaderButton = (props) => {
             break;
     }
 
-    function buttonFunc(){
-        
-        if(buttonState === "Out"){
-            setButtonState("In")
-            setButtonColor(props.inColor)
-        } else if (buttonState === "In") {
-            setButtonState("Out")
+    function hoverIn(){
+        setButtonColor(props.hoverColor);
+    }
+
+    function hoverOut(){
+        if(props.s_ButtonState === "Out"){
             setButtonColor(props.outColor)
+        } else if (props.s_ButtonState === "In") {
+            setButtonColor(props.inColor)
         }
-        console.log(buttonState);
     }
 
     return (
         <div id="header-button-container">
             {buttonImage}
-            <button type="button" id="file-button" className="empty-button" onClick={buttonFunc}/>
+            <button type="button" id="file-button" className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut}/>
         </div>
     )
 }
 
 HeaderButton.defaultProps = {
     buttonImage: "1",
-    inColor: "#00000c",
+    inColor: "#0000bc",
     outColor: "#0000dc",
-    hoverColor: "#002459",
+    hoverColor: "#0000bc",
+    s_ButtonState: "Out",
 }
 
 HeaderButton.propTypes = {
@@ -147,6 +150,7 @@ HeaderButton.propTypes = {
     inColor: PropTypes.string,
     outColor:PropTypes.string,
     hoverColor:PropTypes.string,
+    s_ButtonState: PropTypes.string,
 }
 
 export default HeaderButton
