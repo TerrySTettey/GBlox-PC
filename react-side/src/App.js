@@ -222,24 +222,30 @@ const WorkspaceTabs = () => {
     workspaces.splice(event.currentTarget.value - 1, 1)
     console.log("Deleted Workspace")
     console.log(workspaces)
+    try{
+    var button = document.getElementById(`workspace_${tab+1}`)
+    button.click()
+    }
+    catch(e){}
   }
 
   useEffect(() => {
+    try{
     var next_tab = document.getElementById(`workspaceTabs`).children
     console.log(next_tab)
     for (var i = 0; i < workspaces.length-1; i++) {
       next_tab[i].id=`Tab ${i+1}`;
       next_tab[i].children[0].id = `workspace_${i+1}`
       next_tab[i].children[0].innerHTML = `Workspace ${i+1}`
-      
       next_tab[i].children[1].id = `Close Button ${i+1}`
       next_tab[i].children[1].value=i+1
     }
-
+  }
+  catch(e){}
   })
 
   const addworkspaceTab = event => {
-    const currenttab = workspacebuttons.length + 1;
+    var currenttab = workspacebuttons.length + 1;
     if (document.getElementById(`Tab ${workspacebuttons.length + 1}`) === null) {
       console.log("New Workspace Created");
       setWorkspacebuttons(workspacebuttons.concat(
@@ -257,6 +263,7 @@ const WorkspaceTabs = () => {
     }
     else {
       console.log("New Workspace Created");
+      currenttab += 1;
       setWorkspacebuttons(workspacebuttons.concat(
         <div id={`Tab ${workspacebuttons.length + 2}`}>
           <button id={`workspace_${workspacebuttons.length + 2}`} onClick={(event, reason) => {

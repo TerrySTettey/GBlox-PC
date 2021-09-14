@@ -11,16 +11,6 @@ async function getPeripherals(){
     }
 }
 
-function dynamicVariables(new_var){
-    // console.log(variables_set.includes(new_var));
-    if (variables_set.includes(new_var) == 0) {
-        variables_set.push(new_var);
-        console.log(typeof new_var);
-    }
-    return variables_set;
-    
-}
-
 var Total_PreDeclarations = "";
 var Total_SetupCode = "void setup(){\n";
 var Total_BulkFunctions = "";
