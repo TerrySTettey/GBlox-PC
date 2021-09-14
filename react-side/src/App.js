@@ -9,11 +9,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
-import InputLabel from '@material-ui/core/InputLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -21,7 +17,6 @@ import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TextField from '@material-ui/core/TextField';
@@ -44,7 +39,7 @@ import Body from "./components/Body"
 import HeaderButton from "./components/HeaderButton";
 
 import { DeviceList } from "./deviceDef/device_list.js"
-import { toolboxCategories, newToolBox, MelloToolbox, MelloDOM } from "./customblocks/toolboxes/toolboxes"
+import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
 import { mainLoopCode } from "./customblocks/compiler/arduino_core"
 const { ipcRenderer } = window.require('electron')
 
@@ -465,6 +460,7 @@ function App() {
     var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
     default_workspace = DeviceList[chosen_device_list].default_workspace;
     current_device = DeviceList[chosen_device_list].device_name;
+    currentToolboxName = DeviceList[chosen_device_list].device_name;
     if (current_device.includes("Arduino")==0){
       currentToolbox = Blockly.utils.toolbox.convertToolboxDefToJson(DeviceList[chosen_device_list].toolbox)
     }
@@ -474,6 +470,7 @@ function App() {
     OurWorkspace.updateToolbox(currentToolbox);
     console.log(currentToolbox);
     console.log(current_device);
+    OurWorkspace.clear()
     if (newxml === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
       Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(default_workspace), Blockly.mainWorkspace);
     }

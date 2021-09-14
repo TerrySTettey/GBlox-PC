@@ -153,7 +153,6 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
         }
     }
     catch(e){
-        
     }
     var code = ""
         if (checkbox_loop=="TRUE"){
@@ -169,8 +168,7 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
     try{
         peripherals.clearvars();
     }
-    catch(e){
-    }
+    catch(e){}
     mainLoopCode = code;
     return code;
 };
