@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 
 import "./HeaderButton.scss"
+import variables from "./HeaderButton.scss"
 
 const HeaderButton = (props) => {
     var buttonImage;
     var [buttonState, setButtonState]= useState("Out");
     var [buttonColor, setButtonColor]= useState("#0000dc");
-
+    
+    console.log(variables)
+    variables.headerButtonHoverColor = props.hoverColor
     useEffect(()=> {
         setButtonColor(props.outColor);
     },[])
@@ -136,12 +139,14 @@ HeaderButton.defaultProps = {
     buttonImage: "1",
     inColor: "#00000c",
     outColor: "#0000dc",
+    hoverColor: "#002459",
 }
 
 HeaderButton.propTypes = {
     buttonImage: PropTypes.string,
     inColor: PropTypes.string,
     outColor:PropTypes.string,
+    hoverColor:PropTypes.string,
 }
 
 export default HeaderButton

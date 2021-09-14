@@ -1,3 +1,9 @@
+$header-button-hover-color: red;
+
+:export {
+    headerButtonHoverColor: $header-button-hover-color;
+}
+
 .empty-button {
     display: block;
     position: absolute;
@@ -19,7 +25,7 @@
 
     &:hover{
         #Path_33{
-            fill : rgb(255, 0, 0);
+            fill : $header-button-hover-color;
         }
     }
     
