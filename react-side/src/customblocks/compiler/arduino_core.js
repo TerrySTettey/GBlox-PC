@@ -107,23 +107,6 @@ Blockly.Blocks['communication_serial_print'] = {
     }
   };
 
-  Blockly.Blocks['variable_create_variable'] = {
-    init: function() {
-      this.appendValueInput("varname")
-          .setCheck(null)
-          .appendField("Create")
-          .appendField(new Blockly.FieldDropdown([["Float","float"], ["Integer","int"], ["Character","char"], ["String","char[]"]]), "variable type")
-          .appendField("Variable named");
-      this.setInputsInline(true);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(230);
-   this.setTooltip("");
-   this.setHelpUrl("");
-    }
-  };
-
-
   Blockly.Blocks['for_loop'] = {
     init: function() {
       this.appendDummyInput()
@@ -139,36 +122,6 @@ Blockly.Blocks['communication_serial_print'] = {
    this.setHelpUrl("");
     }
   };
-  
-
-  
-//   Blockly.Blocks['variable_create_int'] = {
-//     init: function() {
-//       this.appendDummyInput()
-//           .appendField("Create Integer Variable")
-//           .appendField(new Blockly.FieldTextInput("var_name"), "varname");
-//       this.setInputsInline(true);
-//       this.setPreviousStatement(true, null);
-//       this.setNextStatement(true, null);
-//       this.setColour(230);
-//    this.setTooltip("");
-//    this.setHelpUrl("");
-//     }
-//   };
-  
-//   Blockly.Blocks['variable_create_float'] = {
-//     init: function() {
-//       this.appendDummyInput()
-//           .appendField("Create Float Variable")
-//           .appendField(new Blockly.FieldTextInput("var_name"), "varname");
-//       this.setInputsInline(true);
-//       this.setPreviousStatement(true, null);
-//       this.setNextStatement(true, null);
-//       this.setColour(230);
-//    this.setTooltip("");
-//    this.setHelpUrl("");
-//     }
-//   };
 
 Blockly.JavaScript['m_mainloop'] = function(block) {
     getPeripherals();
@@ -184,13 +137,10 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
     }
     block.setColour(0x0000FF)
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-    //console.log(variables_set)
-    //console.log(variables_created.length)
     if (variables_created.length != 0){
         variables_set = variables_created;
         for (var i = 0; i < variables_set.length; i++) {
             Total_PreDeclarations += `${variables_set[i][0]};\n`;
-            //console.log(Total_PreDeclarations)
         }
     }
     var checkbox_loop = block.getFieldValue("LOOP");
@@ -203,16 +153,15 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
         }
     }
     catch(e){
-        console.log(e)
+        
     }
+    var code = ""
         if (checkbox_loop=="TRUE"){
-            var code = `${Total_PreDeclarations} ${Total_SetupCode} \n}\n\nvoid loop(){\n ${statements_mainloop}\n} \n ${Total_BulkFunctions}`;
+            code = `${Total_PreDeclarations} ${Total_SetupCode} \n}\n\nvoid loop(){\n ${statements_mainloop}\n} \n ${Total_BulkFunctions}`;
         }
         else{
-            var code = `${Total_PreDeclarations} \nint runOnce;\n ${Total_SetupCode} \nrunOnce = 0;\n}\n\nvoid loop(){\n\tif(runOnce == 0){\n${statements_mainloop}\nrunOnce = 1;}\n}\n${Total_BulkFunctions}`;
+            code = `${Total_PreDeclarations} \nint runOnce;\n ${Total_SetupCode} \nrunOnce = 0;\n}\n\nvoid loop(){\n\tif(runOnce == 0){\n${statements_mainloop}\nrunOnce = 1;}\n}\n${Total_BulkFunctions}`;
         }
-    
-    // console.log(Total_PreDeclarations);
     Total_PreDeclarations = "";
     Total_SetupCode = "\nvoid setup(){\n";
     Total_BulkFunctions = "";
@@ -221,22 +170,7 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
         peripherals.clearvars();
     }
     catch(e){
-        console.log(e);
     }
-    // var duplicate_number = 0;
-    // for (var i=0; i<(variables_set.length); i++){
-    //     console.log(variables_set);
-    //     console.log(variables_created);
-    //         if (variables_set[i][0].includes(variables_created[0])==1){
-    //             console.log("Duplicate found");
-    //             duplicate_number++;
-    //         }
-    //     }
-    // if (duplicate_number == 0){
-    //     variables_set.push(variables_created);
-    // }
-    // duplicate_number = 0;
-
     mainLoopCode = code;
     return code;
 };
