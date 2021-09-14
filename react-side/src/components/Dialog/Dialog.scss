@@ -1,0 +1,22 @@
+.dialog {
+    border: none;
+    padding: 15px 32px;
+    display: inline;
+    color: blue;
+    background: none;
+    height: 100%;
+    width: 100%;    
+}
+.button_round {
+    border-radius: 5px 5px;
+    border-style: groove;
+    text-align: center;
+}
+
+#dialog-box-container {
+    position:relative;
+    height:10%;
+    width:10%;
+    display: inline-flex;
+    border-radius: 25px;
+}

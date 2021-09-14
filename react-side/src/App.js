@@ -410,9 +410,9 @@ function App() {
           pinch: true
         }, grid:
         {
-          spacing: 20,
-          length: 3,
-          colour: '#03254c',
+          // spacing: 20,
+          // length: 3,
+          // colour: '#03254c',
           snap: true
         }, theme: test_theme
       });
@@ -468,8 +468,7 @@ function App() {
       currentToolbox = DeviceList[chosen_device_list].toolbox;
     }
     OurWorkspace.updateToolbox(currentToolbox);
-    console.log(currentToolbox);
-    console.log(current_device);
+
     OurWorkspace.clear()
     if (newxml === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
       Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(default_workspace), Blockly.mainWorkspace);
