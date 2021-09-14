@@ -21,8 +21,8 @@
         margin:0;
     }
 
-    .header-button-container {
-        display: flex;
+    .header-buttons-segment {
+        display: inline-flex;
     }
 
     #blank-space {
@@ -78,9 +78,6 @@
     
         .settings-component{
             color: white;
-            #close-settings-button {
-    
-            }
         }
     
     }
