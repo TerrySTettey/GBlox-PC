@@ -6,6 +6,12 @@
         opacity: 1;
     }
 }
+
+@font-face {
+    font-family: 'Baloo2-Regular';
+    src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
+  }
+
 .sidebar-nav {
     position: absolute;
     z-index: 1;
@@ -23,7 +29,7 @@
     padding: 22px 0px 0px 24px;
     text-align: left;
     font-size: 17px;
-    font-family: "Myriad Pro";
+    font-family: 'Baloo2-Regular';
     color: #ffffff;
     display: block;
     margin: 0px;

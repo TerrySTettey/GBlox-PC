@@ -2,6 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react'
 import Slide_Out_Menu from './Slide_Out_Menu'
 
+const svgcreated = () => {
+    var svg_number = 1;
+    
+}
+
+
 function Slide_Out_Menu_Component() {
     const [svgcolor, setSvgColor] = useState(`#0000dc`);
     const [device_selected, setDevice] = useState(1);

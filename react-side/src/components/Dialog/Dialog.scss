@@ -1,4 +1,9 @@
 
+@font-face {
+    font-family: 'Baloo2-Regular';
+    src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
+  }
+
 @keyframes fadein_dialog{
     from {
         opacity: 0;
@@ -65,10 +70,9 @@
     padding: 15px 32px;
     display: inline-block;
     color: rgb(255, 255, 255);
-    background-color: #0b0533;
+    background-color: #0B0533;
     box-shadow: 0px 30px 30px 0px grey;
-    font-family: "Myriad Pro";
-    font-size: 25px;
+    font-family: inherit;
     border-radius: 25px;
     animation: fadein_dialog forwards;
     animation-duration: 1s;
@@ -76,7 +80,8 @@
 .button_round {
     position: flex;
     border-radius: 5px 5px;
-    font-size: 25px;
+    font-size: inherit;
+    font-family: inherit;
     text-align: center;
     display: inline-block;
     margin: auto;
@@ -88,23 +93,27 @@
     position: flex;
     display: inline-flex;
     border-radius: 5px 5px;
-    font-size: 25px;
+    font-size: inherit;
     border-style: groove;
     text-align: center;
     margin: auto;
-    font-family: "Myriad Pro";
+    font-family: inherit;
     width: 50%;
     animation: fadein_select forwards;
     animation-duration: 2s;
+}
+.select_new option {
+    text-align: center;
+    margin: auto;
 }
 
 .input_new {
     position: flex;
     display: inline-block;
     border-radius: 5px 5px;
-    font-size: 25px;
+    font-size: 17px;
     text-align: center;
-    font-family: "Myriad Pro";
+    font-family: inherit;
     margin: auto;
     animation: fadein_input forwards;
     animation-duration: 2s;
@@ -119,4 +128,6 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    font-size: 25px;
+    font-family: "Baloo2-Regular";
 }
