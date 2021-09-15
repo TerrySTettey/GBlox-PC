@@ -36,30 +36,4 @@
         }
     }
 
-    #settings-dropdown-box {
-        display: none;
-        position:absolute;
-        background-color: none;
-        min-width: 160px;
-        /*HATE THIS PROPERTY*/
-        top:100%;
-        left: 5px;
-        margin: 0;
-        padding: 0;
-        z-index: 2;
-    }
-
-    .settings-dropdown {
-        background-color: #060841;
-        height:484px;
-        width: 396px;
-        right: -50px;
-        filter: drop-shadow(0 0 50px black);
-        border-radius: 20px;
-    
-        .settings-component{
-            color: white;
-        }
-    
-    }
 }

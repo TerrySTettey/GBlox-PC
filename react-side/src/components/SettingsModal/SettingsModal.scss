@@ -1,0 +1,34 @@
+.modal-container {
+    display: block;
+    background-color: #060841;
+    height:484px;
+    width: 396px;
+    right: -50px;
+    filter: drop-shadow(0 0 50px black);
+    border-radius: 10px;
+
+    h1{
+        color: white;
+        font-size: 21pt;
+    }
+    
+    p {
+        color: white;
+    }
+    .modal-section-break {
+        display:block;
+        position: relative;
+        height: 1px;
+        background-color: #3722FF;
+    }
+
+    .modal-section {
+        padding-top: 17px;
+        padding-left:31px;   
+        padding-bottom: 45px;;
+    }
+
+    .modal-lighting-buttons {
+        
+    }
+}
