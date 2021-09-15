@@ -1,0 +1,36 @@
+@keyframes fadein_menu {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+.sidebar-nav {
+    position: absolute;
+    z-index: 1;
+    height: 365px;
+    background-color:#0B0533;
+    margin: auto;
+    overflow-x: hidden;
+    padding-top: 22px;
+    padding-bottom: 23px;
+    animation: fadein_menu forwards;
+    animation-duration: 1s;
+}
+.sidebar-nav a {
+    position: flex;
+    padding-left: 24px;
+    text-align: left;
+    font-size: 17px;
+    font-family: "Myriad Pro";
+    color: #ffffff;
+    display: block;
+}
+.sidebar-nav svg {
+    position: flex;
+    align-self: center;
+    justify-content: center;
+    display: block;
+    margin: auto;
+}

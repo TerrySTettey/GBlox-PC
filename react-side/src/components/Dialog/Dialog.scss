@@ -1,22 +1,120 @@
-.dialog {
-    border: none;
-    padding: 15px 32px;
-    display: inline;
-    color: blue;
-    background: none;
-    height: 100%;
-    width: 100%;    
-}
-.button_round {
-    border-radius: 5px 5px;
-    border-style: groove;
-    text-align: center;
+
+@keyframes fadein_dialog{
+    from {
+        opacity: 0;
+        width: 0%;
+        height: 0%;
+    }
+    to {
+        opacity: 1;
+        width: 30%;
+        height: 30%;
+    }
+        
 }
 
-#dialog-box-container {
-    position:relative;
-    height:10%;
-    width:10%;
-    display: inline-flex;
+@keyframes fadein_button {
+    from {
+        opacity: 0;
+        top: 0%;
+        left: 50%;
+        width: 0%;
+    }
+    to {
+        opacity: 1;
+        
+        top: 50%;
+        left: 50%;
+        width: 20%;
+    }
+}
+
+@keyframes fadein_input {
+    from {
+        opacity: 0;
+        top: 0%;
+        left: 50%;
+        width: 0%;
+    }
+    to {
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+    }
+}
+
+@keyframes fadein_select {
+    from {
+        opacity: 0;
+        top: 0%;
+        left: 50%;
+        width: 0%;
+    }
+    to {
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+    }
+}
+
+.dialog {
+    position: flex;
+    border: none;
+    padding: 15px 32px;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    background: #0b0533;
+    box-shadow: 0px 30px 30px 0px grey;
+    font-family: sans-serif;
+    font-size: 25px;
     border-radius: 25px;
+    animation: fadein_dialog forwards;
+    animation-duration: 1s;
+}
+.button_round {
+    position: flex;
+    border-radius: 5px 5px;
+    font-size: 25px;
+    text-align: center;
+    display: inline-block;
+    margin: auto;
+    animation: fadein_button forwards;
+    animation-duration: 2s;
+}
+
+.select_new {
+    position: flex;
+    display: inline-flex;
+    border-radius: 5px 5px;
+    font-size: 25px;
+    border-style: groove;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    animation: fadein_select forwards;
+    animation-duration: 2s;
+}
+
+.input_new {
+    position: flex;
+    display: inline-block;
+    border-radius: 5px 5px;
+    font-size: 25px;
+    text-align: center;
+    margin: auto;
+    animation: fadein_input forwards;
+    animation-duration: 2s;
+}
+
+.dialog-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
