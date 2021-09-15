@@ -1,5 +1,6 @@
 .modal-container {
     display: block;
+    position: relative;
     background-color: #060841;
     height:484px;
     width: 396px;
@@ -10,6 +11,7 @@
     h1{
         color: white;
         font-size: 21pt;
+        margin: 0;
     }
     
     p {
@@ -25,10 +27,15 @@
     .modal-section {
         padding-top: 17px;
         padding-left:31px;   
-        padding-bottom: 45px;;
+        padding-bottom: 45px;
     }
 
     .modal-lighting-buttons {
-        
+        border-color: #3722FF ;
+        height: 43px;
+        width: 160px;
+        border-width: thin;
+        border-radius: 20px;
+        border-style: solid;
     }
 }
