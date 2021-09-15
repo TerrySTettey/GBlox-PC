@@ -1,0 +1,48 @@
+.empty-button {
+    display: block;
+    position: absolute;
+    border: none;
+    padding:0;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    background: none;
+    left:0;
+    top:0;
+}
+
+.modal-lighting-buttons {
+    border-color: #3722FF ;
+    height: 43px;
+    width: 160px;
+    border-width: thin;
+    border-radius: 20px;
+    border-style: solid;
+}
+
+#button-container {
+    display: inline-block;
+    position: relative;
+}
+
+#settings-close-button{
+    background-color:  #FFF0;
+    border-color: #FFF0;
+    color:  white;
+    margin-right: 0px;
+    position: relative;
+    
+}
+
+.modal-blank-space {
+    display: block;
+    min-width: 200px;
+}
+
+.button-text {
+    font-size: 21px;
+    color: white;
+
+}
