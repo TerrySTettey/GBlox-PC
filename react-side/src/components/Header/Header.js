@@ -222,7 +222,7 @@ const Header = ({ }) => {
                 <div className="header-buttons-segment">
                     <HeaderButton buttonImage="4"/>
                     <HeaderButton buttonImage="5"/>
-                    <HeaderButton buttonImage="6"/>
+                    <Dropdown buttonImage="6"/>
                 </div>
             </div>
 
