@@ -65,9 +65,9 @@
     padding: 15px 32px;
     display: inline-block;
     color: rgb(255, 255, 255);
-    background: #0b0533;
+    background-color: #0b0533;
     box-shadow: 0px 30px 30px 0px grey;
-    font-family: sans-serif;
+    font-family: "Myriad Pro";
     font-size: 25px;
     border-radius: 25px;
     animation: fadein_dialog forwards;
@@ -92,6 +92,7 @@
     border-style: groove;
     text-align: center;
     margin: auto;
+    font-family: "Myriad Pro";
     width: 50%;
     animation: fadein_select forwards;
     animation-duration: 2s;
@@ -103,6 +104,7 @@
     border-radius: 5px 5px;
     font-size: 25px;
     text-align: center;
+    font-family: "Myriad Pro";
     margin: auto;
     animation: fadein_input forwards;
     animation-duration: 2s;
