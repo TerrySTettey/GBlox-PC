@@ -5,7 +5,7 @@
     position: relative;
 
     .blue-dropdown-box {
-        display: block;
+        display: none;
         position:absolute;
         background-color: none;
         min-width: 160px;
@@ -32,12 +32,8 @@
 
             &:hover {
                 background-color: #0000ad;
-                
             }
         }
     }
 
-    #settings-dropdown-box {
-
-    }
 }

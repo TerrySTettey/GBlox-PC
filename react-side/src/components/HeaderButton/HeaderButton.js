@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 
 import "./HeaderButton.scss"
 
-
 const HeaderButton = (props) => {
     var buttonImage;
     
