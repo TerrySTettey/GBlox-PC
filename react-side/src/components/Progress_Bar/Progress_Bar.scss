@@ -1,15 +1,34 @@
-.progress-bar {
-    position: absolute;
+:root {
+    --percentage: 10;
+}
+@keyframes increase-percentage {
+    from {
+        --percentage: 0;
+        width: calc((0/100*659px));
+    }
+    to {
+        width: calc((55/100*659px));
+    }
+}
+.bar-overlay {
+    position: relative;
     display: inline-block;
 }
-.progress-bar svg {
+.bar-slider{
     position: absolute;
     display: inline-block;
-    fill: red;
+    // width: calc(var(--percentage)/100*659px);
+    padding-top: 6px;
+    padding-left: 4px;
+    transform: scale(1.01,1.2);
+    fill:white;
+    border: none;
+    animation: increase-percentage forwards 5s;
 }
-.bar_slider{
+
+.bar-background {
     position: absolute;
-    width: 90%;
-    fill: black;
+    padding-top: 6px;
+    padding-left: 10px;
 }
 //19.89
