@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import "./Header.scss"
 import Dropdown from '../Dropdown';
 import HeaderButton from '../HeaderButton';
+import Button from '../Button'
+import CustomDrop from '../CustomDrop';
 
 const Header = ({ }) => {
 
@@ -59,170 +61,54 @@ const Header = ({ }) => {
         <div>
             <div className="header-container">
                 <div id="logo">
-                    <h1>GBlox</h1>
-                </div>
-                <div className="header-buttons-segment">
-                    <div className="dropdown-button">
-                        <button type="button" id="file-button" className="button-no-border-drop glow" onClick={fileButtonClicked}>
-                            <svg id="Component_3_1" data-name="Component 3 – 1" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
-                                <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                                <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                                    <text id="File" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">File</tspan></text>
-                                    <g id="Group_424" data-name="Group 424" transform="translate(-4 -2.007)">
-                                        <g id="Group_30" data-name="Group 30" transform="translate(-9.427 4.252)">
-                                            <path id="Path_291" data-name="Path 291" d="M.573,1.451h6.5L9.17,3.514H18.6l1.81,2.435V18.564H.573Z" transform="translate(-0.573 -1.451)" fill="none" stroke="#fff" stroke-width="2" />
-                                        </g>
-                                        <path id="Path_292" data-name="Path 292" d="M10.157,9.272H3.734L1.982,11.389H-9.589" transform="translate(0 -0.16)" fill="none" stroke="#fff" stroke-width="2" />
-                                        <g id="Ellipse_9" data-name="Ellipse 9" transform="translate(4.433 15.795)" fill="none" stroke="#fff" stroke-width="2">
-                                            <circle cx="1.209" cy="1.209" r="1.209" stroke="none" />
-                                            <circle cx="1.209" cy="1.209" r="0.209" fill="none" />
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                        </button>
-                        <div className="dropdown-content" id="file-dropdown">
-                            <button className="button-no-border">New</button>
-                            <button className="button-no-border">Open</button>
-                            <button className="button-no-border">Save</button>
-                            <button className="button-no-border">Save As</button>
-                            <button className="button-no-border">Close</button>
-                        </div>
-                    </div>
-                    <div className="dropdown-button">
-                        <button type="button" id="edit-button" className="button-no-border-drop glow" onClick={editButtonClicked}>
-                            <svg id="Component_3_2" data-name="Component 3 – 2" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
-                                <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                                <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                                    <text id="Edit" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Edit</tspan></text>
-                                </g>
-                                <g id="Group_427" data-name="Group 427" transform="translate(-714.946 -406.786)">
-                                    <path id="Path_294" data-name="Path 294" d="M741.417,433.677l-4.545.909.909-4.545,12.691-12.691,2.764-2.764,3.636,3.636Z" transform="translate(-3.441 2.795)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                    <path id="Path_295" data-name="Path 295" d="M3.636,3.636l-.909-.909L0,0" transform="translate(747.953 420.108)" fill="#fff" stroke="#fff" stroke-width="2" />
-                                    <path id="Path_296" data-name="Path 296" d="M3.636,3.636l-.909-.909L0,0" transform="translate(735.451 430.793)" fill="#fff" stroke="#fff" stroke-width="2" />
-                                </g>
-                            </svg>
-                        </button>
-                        <div className="dropdown-content" id="edit-dropdown">
-                            <button className="button-no-border">Copy</button>
-                            <button className="button-no-border">Cut</button>
-                            <button className="button-no-border">Paste</button>
-                            <button className="button-no-border">Select All</button>
-                            <button className="button-no-border">Delete</button>
-                        </div>
-                    </div>
-                    <button type="button" id="save-button" className="button-no-border glow">
-                        <svg id="Component_14_1" data-name="Component 14 – 1" xmlns="http://www.w3.org/2000/svg" width="103.381" height="40" viewBox="0 0 103.381 40">
-                            <path id="Path_33" data-name="Path 33" d="M306.954,42h77.472c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                            <g id="Group_426" data-name="Group 426" transform="translate(-504.258 -38.405)">
-                                <path id="Path_252" data-name="Path 252" d="M0,0H19.035V13.274l-3.006,4.778H0Z" transform="translate(524.001 49.458)" fill="none" stroke="#fff" stroke-width="2" />
-                                <rect id="Rectangle_136" data-name="Rectangle 136" width="6.662" height="5.71" transform="translate(529.671 49.458)" fill="none" stroke="#fff" stroke-width="2" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="106.412" height="36.223" viewBox="0 0 106.412 36.223">
+                        <g id="Group_527" data-name="Group 527" transform="translate(-322.846 -396.538)">
+                            <g id="Group_521" data-name="Group 521" transform="translate(322.846 396.538)">
+                                <path id="Path_413" data-name="Path 413" d="M336.621,459.334a16.468,16.468,0,0,1-8.016-2.063,10.959,10.959,0,0,0-2.694,4.8,22.108,22.108,0,0,0,21.424,0,11.006,11.006,0,0,0-2.7-4.8A16.474,16.474,0,0,1,336.621,459.334Z" transform="matrix(1, -0.017, 0.017, 1, -333.135, -422.861)" fill="#fff" />
+                                <path id="Path_414" data-name="Path 414" d="M350.066,415.1a13.858,13.858,0,0,1-13.856,13.858,11.1,11.1,0,0,1-11.1-11.094v-.008a10.966,10.966,0,0,1,.812-4.158,11.093,11.093,0,0,1,20.558-.015.037.037,0,0,1,0,.015.028.028,0,0,1,0,.01.075.075,0,0,1-.005.012,11.091,11.091,0,0,1-4.814,5.479l-.007,0a.064.064,0,0,1-.017,0,.043.043,0,0,1-.042-.044v-.011a5.543,5.543,0,1,0-10.762.1A5.445,5.445,0,0,0,334.058,423a10.331,10.331,0,0,0,6.864-.22,14.558,14.558,0,0,0,8.749-9.932l.037-.169c.016-.078.019-.109.061-.112s.059.018.075.095c.008.034.041.19.041.19A14.068,14.068,0,0,1,350.066,415.1Z" transform="translate(-325.115 -403.848)" fill="#fff" />
+                                <path id="Path_415" data-name="Path 415" d="M373.51,407.344a.044.044,0,0,1-.045.044.041.041,0,0,1-.036-.023h0a2.437,2.437,0,0,0-1.54-1.236,2.307,2.307,0,0,0-.487-.076.874.874,0,0,0-.148-.009,2.326,2.326,0,0,0-.888.171,2.4,2.4,0,0,0-1.227,1.048c-.02.032-.037.064-.057.1,0,.005,0,.007-.006.011a.042.042,0,0,1-.035.019.047.047,0,0,1-.045-.046v0s.089-.587.143-.875v0a15.969,15.969,0,0,1,.38-1.58c.124-.423.267-.842.428-1.255a14.476,14.476,0,0,1,.589-1.356q.311-.642.677-1.252l0-.005a.051.051,0,0,1,.037-.019.045.045,0,0,1,.036.019l0,.005h0a16.574,16.574,0,0,1,2.215,6.306l0,.013Z" transform="translate(-346.799 -400.997)" fill="#fff" />
                             </g>
-                            <text id="Save" transform="translate(51.227 26.595)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Save</tspan></text>
-                        </svg>
-                    </button>
-                </div>
-                <div id="blank-space"></div>
-                <div className="header-buttons-segment">
-                    <button type="button" id="robocentre-button" className="button-no-border glow">
-                        <svg id="Component_3_6" data-name="Component 3 – 6" xmlns="http://www.w3.org/2000/svg" width="180" height="40" viewBox="0 0 180 40">
-                            <path id="Path_33" data-name="Path 33" d="M306.954,42H461.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                            <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                                <text id="RoboCentre" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">RoboCentre</tspan></text>
-                                <g id="Group_424" data-name="Group 424" transform="translate(-4 -2.007)">
-                                    <g id="Group_30" data-name="Group 30" transform="translate(-9.427 4.252)">
-                                        <path id="Path_291" data-name="Path 291" d="M.573,1.451h6.5L9.17,3.514H18.6l1.81,2.435V18.564H.573Z" transform="translate(-0.573 -1.451)" fill="none" stroke="#fff" stroke-width="2" />
-                                    </g>
-                                    <path id="Path_292" data-name="Path 292" d="M10.157,9.272H3.734L1.982,11.389H-9.589" transform="translate(0 -0.16)" fill="none" stroke="#fff" stroke-width="2" />
-                                    <g id="Ellipse_9" data-name="Ellipse 9" transform="translate(4.433 15.795)" fill="none" stroke="#fff" stroke-width="2">
-                                        <circle cx="1.209" cy="1.209" r="1.209" stroke="none" />
-                                        <circle cx="1.209" cy="1.209" r="0.209" fill="none" />
-                                    </g>
-                                </g>
+                            <g id="Group_522" data-name="Group 522" transform="translate(388.584 402.65)">
+                                <path id="Path_416" data-name="Path 416" d="M460.7,408.621a10.111,10.111,0,1,0,10.1,10.111A10.124,10.124,0,0,0,460.7,408.621Zm0,16.633a6.522,6.522,0,1,1,6.522-6.522A6.533,6.533,0,0,1,460.7,425.254Z" transform="translate(-450.59 -408.621)" fill="#fff" />
                             </g>
-                        </svg>
-                    </button>
-                    <button type="button" id="competitions-button" className="button-no-border glow">
-                        <svg id="Component_3_5" data-name="Component 3 – 5" xmlns="http://www.w3.org/2000/svg" width="170" height="40" viewBox="0 0 170 40">
-                            <path id="Path_33" data-name="Path 33" d="M306.954,42H451.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                            <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                                <text id="Competitions" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Competitions</tspan></text>
-                                <g id="Group_428" data-name="Group 428" transform="translate(-849.472 -404.742)">
-                                    <path id="Path_297" data-name="Path 297" d="M850.715,417.639V408H838v9.639l4.488,2.094v3.838h-.748V425.8h5.236v-2.224h-.748v-3.838Z" transform="translate(-0.358)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                    <path id="Path_298" data-name="Path 298" d="M857.732,417.374H855V411h3.642Z" transform="translate(-4.642 -0.268)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                    <path id="Path_299" data-name="Path 299" d="M834.911,417.374h2.732V411H834Z" transform="translate(0 -0.268)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                    <line id="Line_6" data-name="Line 6" x2="11.838" transform="translate(838.081 426.212)" fill="#fff" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                </g>
+                            <g id="Group_523" data-name="Group 523" transform="translate(354.73 396.538)">
+                                <path id="Path_417" data-name="Path 417" d="M393.764,402.65a10.173,10.173,0,0,0-5.29,1.506l-1.486.919v-8.536h-3.325V412.76a10.106,10.106,0,1,0,10.1-10.111Zm0,16.633a6.522,6.522,0,1,1,6.522-6.522A6.539,6.539,0,0,1,393.764,419.283Z" transform="translate(-383.663 -396.538)" fill="#fff" />
                             </g>
-                        </svg>
-                    </button>
-                    <div className="dropdown-button">
-                        <button type="button" id="help-button" className="button-no-border-drop glow" onClick={helpButtonClicked}>
-                            <svg id="Component_3_4" data-name="Component 3 – 4" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
-                                <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                                <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                                    <text id="Help" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Help</tspan></text>
-                                    <g id="Group_430" data-name="Group 430" transform="translate(-879.99 -411.199)">
-                                        <path id="Path_300" data-name="Path 300" d="M884,422a10,10,0,1,0-4.96,8.639c.2-.116.388-.246.578-.375L883.091,432l-1.132-3.962A9.816,9.816,0,0,0,884,422Z" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                        <g id="Group_429" data-name="Group 429">
-                                            <path id="Path_301" data-name="Path 301" d="M871.143,420.857A2.857,2.857,0,1,1,874,423.714v2.143" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                            <line id="Line_7" data-name="Line 7" y2="1.429" transform="translate(874 426.571)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                        </button>
-                        <div className="dropdown-content" id="help-dropdown">
-                            <button className="button-no-border">Support</button>
-                            <button className="button-no-border">Documentation</button>
-                            <button className="button-no-border">Check for Help</button>
-                        </div>
-                    </div>
-                    <div className="dropdown-button">
-                        <button type="button" id="settings-button" className="button-no-border-drop glow" onClick={settingsButtonClicked}>
-                            <svg id="Component_3_3" data-name="Component 3 – 3" xmlns="http://www.w3.org/2000/svg" width="130" height="40" viewBox="0 0 130 40">
-                                <path id="Path_33" data-name="Path 33" d="M306.954,42H411.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc" />
-                                <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                                    <text id="Settings" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Settings</tspan></text>
-                                    <path id="Path_302" data-name="Path 302" d="M928,500.214v-4.427h-2.214a8.033,8.033,0,0,0-.716-1.724l1.567-1.567-3.131-3.131-1.567,1.567a8.015,8.015,0,0,0-1.724-.716V488h-4.427v2.214a8.014,8.014,0,0,0-1.724.716l-1.567-1.567-3.131,3.131,1.567,1.567a8.009,8.009,0,0,0-.716,1.724H908v4.427h2.215a8,8,0,0,0,.716,1.724l-1.567,1.567,3.131,3.131,1.567-1.567a8.005,8.005,0,0,0,1.724.716V508h4.427v-2.214a8.006,8.006,0,0,0,1.724-.716l1.567,1.567,3.131-3.131-1.567-1.567a8.029,8.029,0,0,0,.716-1.724ZM920.5,498a2.5,2.5,0,0,1-3.979,2.015,2.524,2.524,0,0,1-.536-.536,2.5,2.5,0,0,1,0-2.959,2.523,2.523,0,0,1,.536-.536,2.5,2.5,0,0,1,2.959,0,2.52,2.52,0,0,1,.536.536A2.495,2.495,0,0,1,920.5,498Z" transform="translate(-922.426 -486.2)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2" />
-                                </g>
-                            </svg>
-                        </button>
-                        <div className="dropdown-content" id="settings-dropdown">
-                            <div className="settings-component">
-                                <h2>Language</h2>
-                                <button type="button" className="button-no-border" id="close-settings-button">x</button>
-                                <div id="language-select">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" id="menu-button" className="button-no-border grow">
-                    <svg id="Component_8_1" data-name="Component 8 – 1" xmlns="http://www.w3.org/2000/svg" width="48.476" height="40.339" viewBox="0 0 48.476 40.339">
-                        <path id="Path_246" data-name="Path 246" d="M0,0H48.476V5.008H0Z" fill="#e9e9ff" />
-                        <path id="Path_247" data-name="Path 247" d="M0,0H48.476V5.008H0Z" transform="translate(0 17.666)" fill="#e9e9ff" />
-                        <rect id="Rectangle_3" data-name="Rectangle 3" width="48.476" height="5.008" transform="translate(0 35.331)" fill="#e9e9ff" />
+                            <g id="Group_524" data-name="Group 524" transform="translate(380.115 396.538)">
+                                <path id="Path_418" data-name="Path 418" d="M437.192,396.538v25.688h-3.325c0-2-.019-6.435-.019-6.61,0-.226.01-.44.019-.685V396.538Z" transform="translate(-433.848 -396.538)" fill="#fff" />
+                            </g>
+                            <path id="Path_419" data-name="Path 419" d="M514.755,412.207v-3.589A10.106,10.106,0,0,0,506.437,413a10.089,10.089,0,0,0-8.311-4.377v3.589a6.532,6.532,0,0,1,6.52,6.478c0,.015,0,.03,0,.044s0,.03,0,.045a6.539,6.539,0,0,1-6.52,6.478v3.588a10.089,10.089,0,0,0,8.311-4.377,10.105,10.105,0,0,0,8.318,4.377v-3.588a6.522,6.522,0,0,1,0-13.045Z" transform="translate(-85.497 -5.97)" fill="#fff" />
+                        </g>
                     </svg>
-
-                </button>
-            </div>
-            <div id="blank-space"/>
-            <div className="header-container">
-                <div id="logo">
-                    <h1>GBlox</h1>
                 </div>
                 <div className="header-buttons-segment">
-                    <Dropdown buttonImage="1" list={["New","Open","Save", "Save As", "Share", "Close"]}/>
-                    <Dropdown buttonImage="2" list={["Cut","Copy","Paste", "Select All", "Delete"]}/>
-                    <HeaderButton buttonImage="3"/>
+                    <Dropdown buttonImage="1" list={["New", "Open", "Save", "Save As", "Share", "Close"]} />
+                    <Dropdown buttonImage="2" list={["Cut", "Copy", "Paste", "Select All", "Delete"]} />
+                    <HeaderButton buttonImage="3" />
                 </div>
-                <div id="blank-space"/>
+                <div id="blank-space" />
                 <div className="header-buttons-segment">
-                    <HeaderButton buttonImage="4"/>
-                    <HeaderButton buttonImage="5"/>
-                    <Dropdown buttonImage="6"/>
+                    <HeaderButton buttonImage="4" />
+                    <HeaderButton buttonImage="5" />
+                    <div style={{
+                        marginLeft: '5px'
+                    }}>
+                        <CustomDrop
+                            dropType="modal"
+                            funcsOnClick={[
+                                () => { },
+                                function noRefCheck() { }
+                            ]}
+                            list={[
+                                'Hello',
+                                'World'
+                            ]}
+                            modal="SettingsModal"
+                            hoverColor="#0000aa"
+                            inColor="#0000bc"
+                            outColor="#0000dc"
+                        />
+                    </div>
                 </div>
             </div>
 

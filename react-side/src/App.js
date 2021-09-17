@@ -36,7 +36,6 @@ import "./blocklyextras/toolbox_style.css"
 
 import Header from "./components/Header"
 import Body from "./components/Body"
-import HeaderButton from "./components/HeaderButton";
 import Dropdown from "./components/Dropdown"
 
 import { DeviceList } from "./deviceDef/device_list.js"
