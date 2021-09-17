@@ -1,0 +1,29 @@
+.c-CustomDrop-a-Container {
+    display: block;
+    position: relative;
+
+    .c-CustomDrop-a-Content {
+        display: none;
+        position:absolute;
+        background-color: none;
+        min-width: 160px;
+        /*HATE THIS PROPERTY*/
+        top:100%;
+        left: 0px;
+        margin: 0;
+        padding: 0;
+        z-index: 2;
+    }
+}
+
+.c-CustomDrop-a-MenuButton {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding:0;
+    left: 0;
+    transition: background-color 1s;
+    background-color: transparent;
+    width: 100%;
+    text-align: left;
+}

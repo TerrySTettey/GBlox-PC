@@ -14,12 +14,9 @@
 }
 
 .modal-lighting-buttons {
-    border-color: #3722FF ;
     height: 43px;
     width: 160px;
-    border-width: thin;
-    border-radius: 20px;
-    border-style: solid;
+    border: 1px solid #3722FF ;
 }
 
 #button-container {
@@ -46,3 +43,51 @@
     color: white;
 
 }
+
+.c-Button-a-LanguageMenuButton {
+    position: relative;
+    display:flex;
+    align-items: center;
+    width: 306px;
+    height: 20px;
+    background-color: #0b0533;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+
+    .i-FlagBox {
+        width: 29px;
+        height: 15px;
+        background-color: white;
+    }
+
+    .i-Text {
+        color: white;
+        font-size: 16px;
+        padding-left: 26px;
+    }
+}
+.c-Button-a-LanguageContentButton {
+    position: relative;
+    display:flex;
+    align-items: center;
+    width: 306px;
+    height: 20px;
+    background-color: #0000DC;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+
+    .i-FlagBox {
+        width: 29px;
+        height: 15px;
+        background-color: white;
+    }
+
+    .i-Text {
+        color: white;
+        font-size: 16px;
+        padding-left: 26px;
+    }
+}
+

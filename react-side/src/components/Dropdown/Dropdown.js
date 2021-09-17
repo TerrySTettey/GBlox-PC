@@ -38,7 +38,6 @@ const Dropdown = (props) => {
             dropdownBox.current.style.display = "none"
         }
         console.log(dropdownBox)
-
     }
 
     var ButtonHolder = [];
