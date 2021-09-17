@@ -66,3 +66,14 @@ LanguageContentButton.args = {
     text: "Insert Text Here",
     hoverEffect: "fill"
 }
+
+export const SettingsHeaderButton = Template.bind({})
+SettingsHeaderButton.args = {
+    type: "SettingsHeaderButton",
+    inColor: "#0000aa",
+    outColor: "#0000bc",
+    hoverColor: "#0000aa",
+    s_ButtonState: "Out",
+    text: "Insert Text Here",
+    hoverEffect: "fill"
+}

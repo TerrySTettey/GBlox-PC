@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Button from '../Button'
+import ModalSettings from '../ModalSettings';
 import './CustomDrop.scss'
 
 const CustomDrop = (props) => {
@@ -37,34 +38,52 @@ const CustomDrop = (props) => {
     }
 
     var ButtonHolder = [];
-    function populateDropbox() {
-        var i = 0;
-        if (props.list !== undefined && props.funcsOnClick !== undefined) {
-            for (i; i < props.list.length; i++) {
-                ButtonHolder.push(
-                    <div class="c-CustomDrop-a-MenuButton">
-                        <Button type={props.contentButtonType} onClick={props.funcsOnClick[i]} text={props.list[i]} inColor={props.contentInColor} outColor={props.contentOutColor}  hoverColor={props.contentHoverColor}/>
-                    </div>
-                )
+    switch (props.dropType) {
+        case "list":
+            var i = 0;
+            if (props.list !== undefined && props.funcsOnClick !== undefined) {
+                for (i; i < props.list.length; i++) {
+                    ButtonHolder.push(
+                        <div class="c-CustomDrop-a-MenuButton">
+                            <Button type={props.contentButtonType} onClick={props.funcsOnClick[i]} text={props.list[i]} inColor={props.contentInColor} outColor={props.contentOutColor} hoverColor={props.contentHoverColor} />
+                        </div>
+                    )
+                }
             }
-        }
+            break;
+        case "modal":
+            switch (props.modal) {
+                case "SettingsModal":
+                    ButtonHolder = (
+                    <div style={{
+                        position: 'absolute',
+                        right: '50px',
+                        filter: 'drop-shadow(0 0 50px black)'
+                    }}>
+                        <ModalSettings />
+                    </div>
+                    )
+                    break;
+                case " ":
+                    break;
+            }
+            break;
     }
 
     return (
         <div className="c-CustomDrop-a-Container" ref={dropContainer}>
-            <Button 
-            type={props.buttonType}
-            onClick={buttonClicked}
-            s_ButtonState={buttonState}
-            inColor={props.inColor}
-            outColor={props.outColor}
-            text={props.text}
-            contentInColor={props.contentInColor}
-            contentOutColor={props.contentOutColor}
-            contentHoverColor={props.contentHoverColor}
+            <Button
+                type={props.buttonType}
+                onClick={buttonClicked}
+                s_ButtonState={buttonState}
+                inColor={props.inColor}
+                outColor={props.outColor}
+                text={props.text}
+                contentInColor={props.contentInColor}
+                contentOutColor={props.contentOutColor}
+                contentHoverColor={props.contentHoverColor}
             />
             <div className="c-CustomDrop-a-Content" ref={dropContent}>
-                {populateDropbox()}
                 {ButtonHolder}
             </div>
         </div>
@@ -72,11 +91,12 @@ const CustomDrop = (props) => {
 }
 
 CustomDrop.defaultProps = {
-    buttonType: "LanguageMenuButton",
+    buttonType: "SettingsHeaderButton",
     contentButtonType: "LanguageContentButton",
     list: ["Hello", "World"],
     funcsOnClick: [() => { console.log("Hello") }, () => { console.log("World") }],
-
+    dropType: "list",
+    modal: "",
 }
 
 export default CustomDrop
