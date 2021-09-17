@@ -20,7 +20,7 @@ const ModalSettings = (props) => {
             left: '0px',
             marginTop: '24px'
         }}>
-            <CustomDrop buttonType="LanguageMenuButton" contentButtonTyype="LanguageContentButton" inColor="#0000AA" outColor="#0B0533" contentInColor="#0000aa" contentOutColor="#0000bc" contentHoverColor="#0000aa" text="English" list={['English', 'Francais']} dropType="list" />
+            <CustomDrop buttonType="LanguageMenuButton" contentButtonTyype="LanguageContentButton" inColor="#0000AA" outColor="#0B0533" contentInColor="#0000aa" contentOutColor="#0000bc" contentHoverColor="#0000aa" text="English" list={['Francais']} dropType="list" />
         </div>
     </div>
     <div className="modal-section-break" />
