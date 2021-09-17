@@ -4,31 +4,30 @@
 @keyframes increase-percentage {
     from {
         --percentage: 0;
-        width: calc((0/100*659px));
+        width: calc((0/100*681px));
     }
     to {
-        width: calc((55/100*659px));
+        width: calc((50/100*681px));
     }
 }
 .bar-overlay {
     position: relative;
     display: inline-block;
+    margin: -10px;
 }
 .bar-slider{
     position: absolute;
     display: inline-block;
     // width: calc(var(--percentage)/100*659px);
-    padding-top: 6px;
-    padding-left: 4px;
-    transform: scale(1.01,1.2);
+    // transform: scale(1.01,1.2);
     fill:white;
     border: none;
-    animation: increase-percentage forwards 5s;
+    animation: increase-percentage linear forwards 5s;
 }
 
 .bar-background {
     position: absolute;
-    padding-top: 6px;
-    padding-left: 10px;
+
+
 }
 //19.89
