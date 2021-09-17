@@ -7,13 +7,9 @@
 @keyframes fadein_dialog{
     from {
         opacity: 0;
-        width: 0%;
-        height: 0%;
     }
     to {
         opacity: 1;
-        width: 30%;
-        height: 30%;
     }
         
 }
@@ -21,13 +17,9 @@
 @keyframes fadein_button {
     from {
         opacity: 0;
-        left: 50%;
-        width: 0%;
     }
     to {
         opacity: 1;
-        left: 50%;
-        width: 50%;
     }
 }
 
@@ -67,14 +59,16 @@
     padding: 15px 32px;
     display: inline-block;
     background: #000533;
-    box-shadow: 0px 30px 30px 0px grey;
+    box-shadow: 0px 15px 15px 0px grey;
     font-family: inherit;
+    width: 40%;
     border-radius: 25px;
     animation: fadein_dialog forwards;
     animation-duration: 1s;
 }
 .dialog p {
     color: rgb(255, 255, 255);
+    text-align: center;
 }
 .button_round {
     position: flex;
@@ -87,7 +81,7 @@
     margin: auto;
     display: flex;
     animation: fadein_button forwards;
-    animation-duration: 2s;
+    animation-duration: 1s;
 }
 
 .dialog select {
@@ -101,12 +95,12 @@
     width: 50%;
     text-indent: 40%;
     animation: fadein_select forwards;
-    animation-duration: 2s;
+    animation-duration: 1s;
 }
+
 .select_new option {
     margin: auto;
     font-family: inherit;
-    
 }
 
 .input_new {
@@ -118,7 +112,7 @@
     font-family: inherit;
     margin: auto;
     animation: fadein_input forwards;
-    animation-duration: 2s;
+    animation-duration: 1s;
 }
 
 .dialog-container{
