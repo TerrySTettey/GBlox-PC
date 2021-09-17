@@ -6,26 +6,33 @@
         opacity: 1;
     }
 }
-
+@keyframes rotate_svg {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
 @font-face {
     font-family: 'Baloo2-Regular';
     src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
   }
 
 .sidebar-nav {
-    position: absolute;
+    position: relative;
+    display: inline-block;
     z-index: 1;
     height: 365px;
-    background-color:#0B0533;
-    margin: auto;
+    background:#0B0533;
     overflow-x: hidden;
     box-shadow: 15px 15px 15px 0px grey;
     padding-bottom: 23px;
     animation: fadein_menu forwards;
     animation-duration: 1s;
 }
-.sidebar-nav p {
-    position: flex;
+.initial-text {
+    position: relative;
     padding: 22px 0px 0px 24px;
     text-align: left;
     font-size: 17px;
@@ -34,19 +41,45 @@
     display: block;
     margin: 0px;
 }
-.sidebar-nav svg {
-    position: flex;
-    align-self: center;
-    fill: #0B0533;
-    justify-content: center;
+
+
+
+.border{
+    position: relative;
+    fill:inherit;
     display: block;
-    margin: -12px -6px -12px -6px;
+    // margin: -12px -6px -12px -6px;
 }
 
-.sidebar-nav svg:hover {
+.device_icon{
+    position: relative;
+    display: flex;
+}
+.device_icon:hover {
     fill: #0079dc;
 }
 
-.sidebar-nav svg:active {
+.device_icon:active {
     fill: #ffffff;
+}
+
+.children{
+    position: absolute;
+    display: flex;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 228px;
+    height: 175px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.children svg{
+    display: block;
+    fill: transparent;
+    margin: auto;
+}
+.children svg:hover{
+    animation: rotate_svg 10s linear infinite;
 }

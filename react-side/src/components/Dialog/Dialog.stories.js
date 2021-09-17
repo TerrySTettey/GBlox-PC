@@ -25,27 +25,26 @@ function Dialog_Component() {
     }
     return (
         <Dialog name="Variable-Selector">
-            <p><label>{`Variable Type: `}
-            <select>
+            <div>{`Variable Type: `}
+                <select>
                     <option>Float</option>
                     <option>Integer</option>
                     <option>String</option>
                 </select>
-            </label></p>
-            <p><label>{`Variable Name: `}
-                <input className={`input_new`} type="text" id={`variable_name`} onChange={variable_name_set}></input>
-            </label></p>
-            
+            </div>
+            <div>
+                {`Variable Name: `}
+                <input type="text" id={`variable_name`} onChange={variable_name_set}></input>
+            </div>
+
             <menu>
-                <button className={`button_round`} onClick={closedialog}>Create New Variable</button>
+                <button>Close</button>
+                <button onClick={closedialog}>Create New Variable</button>
             </menu>
         </Dialog>
 
     )
 }
-
-
-
 
 export default {
     title: "Dialog",

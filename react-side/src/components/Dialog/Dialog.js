@@ -6,13 +6,11 @@ var variables_created = [];
 function Dialog(props) {
     const { name, state, children, ...rest } = props;
     return (
-        <div>    
             <div className={`dialog-container`}>
-                <dialog className={`dialog`} id={name} display={`none`} {...rest}>
+                <dialog display={`none`} {...rest}>
                     {children}
                 </dialog>
             </div>
-        </div>
     )
 }
 
