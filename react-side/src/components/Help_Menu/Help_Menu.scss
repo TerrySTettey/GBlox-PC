@@ -28,7 +28,7 @@
     flex-direction: column;
 }
 
-.children{
+.children_help{
     position: absolute;
     top: 0;
     left: 0;
@@ -38,17 +38,15 @@
     width: 354px;
     height: 220px;
     align-items: center;
-
 }
-.children svg{
+.children_help svg{
     display: block;
     margin: auto;
 }
-.children div{
+.children_help div{
     position: relative;
     top: -24px;
     text-align: center;
     font-size:21px;
     font-weight: bold;
 }
-

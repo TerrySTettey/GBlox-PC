@@ -126,6 +126,15 @@ const Button = (props) => {
                 </div>
             )
             break;
+        case "WorkspaceButton":
+            buttonType = (
+                <div className="workspace-button" style={{
+                    backgroundColor: buttonColor
+                }}>
+                    <p className="button-text"> {props.text}</p>
+                </div>
+            )
+            break;
         case " ":
             buttonType = (
                 <div></div>

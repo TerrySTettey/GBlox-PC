@@ -91,3 +91,20 @@
     }
 }
 
+.workspace-button{
+    position: relative;
+    display: flex;
+    transform: skewX(-45deg);
+    width: 200px;
+
+    align-items: center;
+
+    .button-text{
+        font-size: 21px;
+        color: white;
+        margin: 0 auto;
+        
+        transform: skewX(45deg);
+        text-align: center;
+    }
+}
