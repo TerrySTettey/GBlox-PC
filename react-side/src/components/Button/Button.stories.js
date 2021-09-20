@@ -77,3 +77,14 @@ SettingsHeaderButton.args = {
     text: "Insert Text Here",
     hoverEffect: "fill"
 }
+
+export const WorkspaceButton = Template.bind({})
+WorkspaceButton.args = {
+    type: "WorkspaceButton",
+    inColor: "#060841",
+    outColor: "#0B0533",
+    hoverColor: "#0000FF",
+    s_ButtonState: "Out",
+    text: "Workspace 1",
+    hoverEffect: "fill"
+}

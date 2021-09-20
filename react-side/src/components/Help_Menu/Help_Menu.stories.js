@@ -72,7 +72,7 @@ function help_div(svg, text) {
                     <path d="M 19.1617431640625 1 L 1 23.41639709472656 L 1 219 L 333.3060607910156 219 L 353 197.8698425292969 L 353 1 L 19.1617431640625 1 M 18.68490600585938 0 L 354 0 L 354 198.2636413574219 L 333.7410583496094 220 L 0 220 L 0 23.0621337890625 L 18.68490600585938 0 Z" stroke="none" fill="#0000dc" />
                 </g>
             </svg>
-            <div className="children">
+            <div className="children_help">
             {svg}
             </div>
         </div>
