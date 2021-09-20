@@ -82,7 +82,7 @@ function help_div(svg, text) {
 function Help_Menu_component() {
     return (
         <Help_Menu>
-            <div className="text">Testing</div>
+            <div className="text">Help</div>
             {help_div(learn_svg,"Learn")}
             {help_div(support_svg,"Support")}
             {help_div(check_for_update_svg,"Check for Update")}

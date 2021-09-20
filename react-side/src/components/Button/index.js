@@ -13,12 +13,15 @@ const Button = (props) => {
     var [buttonColor, setButtonColor] = useState("#0000dc");
     var [borderColor, setBorderColor] = useState("#0000dc")
     var [hoverState, setHoverState] = useState(false);
+    var [svgColor, setSVGColor] = useState("#0000dc");
 
     useEffect(() => {
         if (props.s_ButtonState === "In") {
             setButtonColor(props.inColor);
+            setSVGColor(props.inColor);
         } else if (props.s_ButtonState === "Out") {
             setButtonColor(props.outColor);
+            setSVGColor(props.outColor);
         }
     }, [props.s_ButtonState])
 
@@ -46,6 +49,17 @@ const Button = (props) => {
                     setBorderColor(props.borderColor)
                     buttonTyper.current.style.margin = "4px";
                     buttonTyper.current.style.borderWidth = "2px"
+                }
+                break;
+            case "svg-fill":
+                if (hoverState) {
+                    setSVGColor(props.hoverColor)
+                } else if (!hoverState) {
+                    if (props.s_ButtonState === "Out") {
+                        setSVGColor(props.outColor)
+                    } else if (props.s_ButtonState === "In") {
+                        setSVGColor(props.inColor)
+                    }
                 }
                 break;
             case "":
@@ -126,12 +140,136 @@ const Button = (props) => {
                 </div>
             )
             break;
-        case "WorkspaceButton":
+        case "WorkspaceTabButton":
             buttonType = (
-                <div className="workspace-button" style={{
+                <div className="c-button-a-WorkspaceTabButton" style={{
                     backgroundColor: buttonColor
                 }}>
-                    <p className="button-text"> {props.text}</p>
+                    <p className="workspace-button-text"> {props.text}</p>
+                    <a className="workspace-close-button">
+                        X
+                    </a>
+                </div>
+            )
+            break;
+        case "CircularOverlayMenuButton":
+            buttonType = (
+                <div className="c-button-a-CircularOverlayMenuButton" style={{
+                    backgroundColor: buttonColor
+                }}>
+                    <div className="button-svg">{props.children}</div>
+                </div>
+            )
+            break;
+        case "WorkspaceControlButton":
+            buttonType = (
+                <div className="c-button-a-WorkspaceControlButton" ref={buttonTyper} style={{
+                    fill: `${svgColor}`
+                }}>
+                    <div className="button-svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="61.1" height="61.455" viewBox="0 0 61.1 61.455">
+                            <defs>
+                                <filter id="Path_388" x="0" y="0" width="61.1" height="61.455" filterUnits="userSpaceOnUse">
+                                    <feOffset input="SourceAlpha" />
+                                    <feGaussianBlur stdDeviation="3" result="blur" />
+                                    <feFlood flood-color="#0000dc" />
+                                    <feComposite operator="in" in2="blur" />
+                                    <feComposite in="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_388)">
+                                <path id="Path_388-2" data-name="Path 388" d="M-1108.511-437.532a17.964,17.964,0,0,0,14.112-9.719l3.564,1.822a21.96,21.96,0,0,1-17.249,11.879Zm1.058,1.434a1.093,1.093,0,0,0,1.093,1.093,1.093,1.093,0,0,0,1.094-1.093,1.094,1.094,0,0,0-1.094-1.094A1.093,1.093,0,0,0-1107.453-436.1Zm12.863-8.84a1.094,1.094,0,0,0,1.094,1.093h0a1.094,1.094,0,0,0,1.089-1.093,1.093,1.093,0,0,0-1.094-1.093A1.093,1.093,0,0,0-1094.59-444.938Zm-35.651-3.613-.562.2a21.58,21.58,0,0,1,10.7-26.369l.265.526a20.623,20.623,0,0,1,4.128-1.551l-.146-.57a21.645,21.645,0,0,1,5.405-.685h0a21.555,21.555,0,0,1,18.148,9.938,21.556,21.556,0,0,1,1.42,20.643l-2.18-1.008a19.138,19.138,0,0,0-4.763-22.4l-.912,1.036a17.741,17.741,0,0,0-4.253-2.775l.581-1.254a18.963,18.963,0,0,0-4.461-1.437l-.259,1.361a17.987,17.987,0,0,0-3.322-.311,17.616,17.616,0,0,0-12.686,5.335l-1-.978a19.047,19.047,0,0,0-5.46,13.4h1.392a17.964,17.964,0,0,0,.36,3.578A17.756,17.756,0,0,0-1110.45-437.7v3.2A20.953,20.953,0,0,1-1130.241-448.552Z" transform="translate(1141 486.01)" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div className="button-children-svg"> {props.children} </div>
+                </div>
+
+            )
+            break;
+        case "WorkspaceControlButton_Previous":
+            buttonType = (
+                <div className="c-button-WorkspaceControlButton_Previous-After" ref={buttonTyper} style={{
+                    fill: `${svgColor}`
+                }}>
+                    <div className="button-svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="66.398" height="60.152" viewBox="0 0 66.398 60.152">
+                            <defs>
+                                <filter id="Path_145" x="0" y="0" width="66.398" height="60.152" filterUnits="userSpaceOnUse">
+                                    <feOffset input="SourceAlpha" />
+                                    <feGaussianBlur stdDeviation="3" result="blur" />
+                                    <feFlood flood-color="#0000dc" />
+                                    <feComposite operator="in" in2="blur" />
+                                    <feComposite in="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_145)">
+                                <path id="Path_145-2" data-name="Path 145" d="M582.747,939.01l-.257.52A20.542,20.542,0,0,0,578.4,938l.142-.57a21.392,21.392,0,0,0-25.62,13.911q-.227.666-.406,1.348l-.453-1.021-2.662-6.018,1.067-2.754-4.312,1.15,4.97,11.221,1.039,2.346,1.836-.835,10.192-4.6,1.187-3.061-8.217,3.747-1.972-.76c.047-.141.081-.29.131-.43a19.136,19.136,0,0,1,5.342-7.806l.905,1.026a17.3,17.3,0,0,1,4.217-2.75L565.2,940.9a18.671,18.671,0,0,1,4.423-1.425l.256,1.354A17.574,17.574,0,0,1,585.76,945.8l.99-.968a18.875,18.875,0,0,1,5.413,13.283h-1.382a17.6,17.6,0,0,1-17.6,17.608V978.9A20.8,20.8,0,0,0,592.8,964.965l.556.193a21.384,21.384,0,0,0-10.613-26.148Z" transform="translate(-537.15 -927.75)" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            )
+            break;
+        case "WorkspaceControlButton_After":
+            buttonType = (
+                <div className="c-button-WorkspaceControlButton_Previous-After" ref={buttonTyper} style={{
+                    fill: `${svgColor}`
+                }}>
+                    <div className="button-svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="66.398" height="60.152" viewBox="0 0 66.398 60.152">
+                            <defs>
+                                <filter id="Path_146" x="0" y="0" width="66.398" height="60.152" filterUnits="userSpaceOnUse">
+                                    <feOffset input="SourceAlpha" />
+                                    <feGaussianBlur stdDeviation="3" result="blur" />
+                                    <feFlood flood-color="#0000dc" />
+                                    <feComposite operator="in" in2="blur" />
+                                    <feComposite in="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_146)">
+                                <path id="Path_146-2" data-name="Path 146" d="M557.953,939.01l.257.52A20.542,20.542,0,0,1,562.3,938l-.142-.57a21.392,21.392,0,0,1,25.62,13.911q.227.666.406,1.348l.453-1.021,2.662-6.018-1.067-2.754,4.312,1.15-4.97,11.221-1.039,2.346-1.836-.835-10.192-4.6-1.187-3.061,8.217,3.747,1.972-.76c-.047-.141-.081-.29-.131-.43a19.136,19.136,0,0,0-5.342-7.806l-.905,1.026a17.3,17.3,0,0,0-4.217-2.75l.577-1.246a18.671,18.671,0,0,0-4.423-1.425l-.256,1.354A17.574,17.574,0,0,0,554.94,945.8l-.99-.968a18.875,18.875,0,0,0-5.413,13.283h1.382a17.6,17.6,0,0,0,17.6,17.608V978.9A20.8,20.8,0,0,1,547.9,964.965l-.556.193a21.384,21.384,0,0,1,10.613-26.148Z" transform="translate(-537.15 -927.75)" />
+                            </g>
+                        </svg>
+
+                    </div>
+                </div>
+            )
+            break;
+        case "UploadButton":
+            buttonType = (
+                <div className="c-button-a-UploadButton" style={{
+                    fill: `${svgColor}`
+                }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="252.517" height="38.69" viewBox="0 0 252.517 38.69">
+                        <path id="Path_376" data-name="Path 376" d="M486.373,906.208H286.982v16.284l-12.6,12.6V943.9H525.172Z" transform="translate(-273.887 -905.708)" stroke="#0000dc" stroke-width="1" />
+                    </svg>
+                    <p className="button-text">{props.text}</p>
+                </div>
+            )
+            break;
+        case "ToolboxCategoryButton":
+            buttonType = (
+                <div className="c-button-a-ToolboxCategoryButton" style={{
+                    backgroundColor: buttonColor
+                }}>
+                    <div className="button-svg">
+                        {props.children}
+                    </div>
+                    <p className="button-text">
+                        {props.text}
+                    </p>
+                </div>
+            )
+            break;
+        case "ToolboxLevelButton":
+            buttonType = (
+                <div className="c-button-a-ToolboxLevel" style={{
+                    backgroundColor: buttonColor
+                }}>
+                    <p className="button-text">
+                        {props.text}
+                    </p>
                 </div>
             )
             break;

@@ -1,0 +1,61 @@
+.Toolbox {
+    position: relative;
+    display: block;
+    background-color: #0b0533;
+    align-items: center;
+    width: 197.61px;
+    .toolbox-title {
+        color: white;
+        margin: auto;
+        text-align: center;
+    }
+    .c-buttongroup-a-Levels {
+        display: flex;
+        margin: auto;
+        align-items: center;
+    }
+    .level-connector {
+        display: flex;
+        top: 50%;
+        width: 5.3px;
+        height: 2px;
+        background-color: #060841;
+    }
+    .svg-connector {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 24.4px;
+    }
+    .connector {
+        position: relative;
+        // display: inline-flex;
+        float: left;
+        width: 197.61px;
+        height: 24.46px;
+        align-items: center;
+        background-color: #060841;
+        #connector-top{
+            position: fixed;
+            display: flex;
+        }
+        #connector-middle {
+            position: absolute;
+            margin-top: -8.34px;
+            display: flex;
+            align-items: center;
+            left: 50%;
+            transform: scaleY(-1);
+            transform: scaleX(-1);
+            margin-bottom: 24.46px;
+            .middle{
+                transform-origin: left;
+            }
+        }
+        #connector-bottom {
+            position: absolute;
+            display: flex;
+            left: 50%;
+        }
+    }
+}

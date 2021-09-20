@@ -5,8 +5,10 @@ import './Upload_Circle.scss'
 
 function Upload_Circle_Component() {
     return (
+        <div>
         <Upload_Circle>
         </Upload_Circle>
+        </div>
     )
 }
 
