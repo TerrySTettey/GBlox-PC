@@ -215,7 +215,7 @@ function Toolbox(props) {
                 <div id="connector-middle"/>
                 <div id="connector-top"/>
             </div>
-            {children}
+            <div className  ="i-Buttons">{children}</div>
 
         </div >
     )

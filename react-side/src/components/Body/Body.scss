@@ -5,23 +5,44 @@
     position: relative;
     left:0;
     top:0;
-    width: calc(100vw-20px);
-    min-height: 90.84vh;
+    width: auto;
+    height: 1080px;
     background-color: #0B0533;
     overflow: hidden;
 
-    .c-Body-a-UploadCircle {
-        display: inline-block;
-        left: 69px;
-        top:0.59vh;
+    .c-Body-a-LeftSvg {
+        margin-top: 84.8px;
+        top: 0;
         position: absolute;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .c-Body-a-UploadCircle {
+        left: 67.6px;
+        top:92px;
+        position: absolute;
+    }
+
+    .c-Body-a-ToolBox {
+       position: absolute;
+       left: 45.3px;
+       top:  303.1px;
+    }
+
+    .c-Body-a-UploadButton {
+        display: block;
+        position: absolute;
+        left: 30px;
+        top: 981.2px;
     }
 
     .c-Body-a-ProgressBar {
         display: block;
         position: absolute;
-        left: 1.56vw;
-        bottom: 2.08vh
+        left: 30px;
+        top: 1030.1px;
     }
 }
 

@@ -74,6 +74,7 @@ function createWindow() {
         width: 1400,
         height: 800,
         title:"GBlox",
+        autoHideMenuBar: true,
         /*frame:false,*/
         webPreferences: {
             nodeIntegration: true,
