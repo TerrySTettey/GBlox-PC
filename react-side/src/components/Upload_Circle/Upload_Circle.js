@@ -104,6 +104,11 @@ function Upload_Circle(props) {
         <rect id="Rectangle_138" data-name="Rectangle 138" width="1.449" height="11.263" transform="translate(182.275 251.396)" fill="white" />
       </g>
     </svg>
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 
   return (
     <div className="circle-animation">

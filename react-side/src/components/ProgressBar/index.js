@@ -15,7 +15,7 @@ const ProgressBar = (props) => {
 
    var BarCode = [];
    var fillNum = 0;
-   if(props.progress % 2 === 0){
+   if (props.progress % 2 === 0) {
       fillNum = Math.round(props.progress / 2);
       console.log(fillNum)
    } else {
@@ -34,11 +34,14 @@ const ProgressBar = (props) => {
 
    return (
       <div className="c-ProgressBar-a-BarContainer">
-         <svg xmlns="http://www.w3.org/2000/svg" width="683.613" height="26.554" viewBox="0 0 683.613 26.554">
-            <path id="Path_379" data-name="Path 379" d="M974.108,957.482l25.554,25.554H317.756V957.482Z" transform="translate(-317.256 -956.982)" fill="#060841" stroke="#0000dc" stroke-width="1" />
-         </svg>
-         <div className="i-WhiteBarContainer">
-            {BarCode}
+         <div className="i-ProgressPercent">{props.progress}%</div>
+         <div className="i-ContainerHolder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="683.613" height="26.554" viewBox="0 0 683.613 26.554">
+               <path id="Path_379" data-name="Path 379" d="M974.108,957.482l25.554,25.554H317.756V957.482Z" transform="translate(-317.256 -956.982)" fill="#060841" stroke="#0000dc" stroke-width="1" />
+            </svg>
+            <div className="i-WhiteBarContainer">
+               {BarCode}
+            </div>
          </div>
       </div>
    )

@@ -34,13 +34,11 @@ import './App.css';
 import "./blocklyextras/custom_category"
 import "./blocklyextras/toolbox_style.css"
 
-import Header from "./components/Header"
-import Body from "./components/Body"
-import Dropdown from "./components/Dropdown"
 
 import { DeviceList } from "./deviceDef/device_list.js"
 import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
 import { mainLoopCode } from "./customblocks/compiler/arduino_core"
+import TestMain from "./components/TestMain";
 const { ipcRenderer } = window.require('electron')
 
 var currentToolbox;
@@ -503,8 +501,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <Body></Body>
+      <TestMain />
       <div id="ToolboxHolder"></div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <AppBar position="static">
