@@ -27,35 +27,109 @@
         align-items: center;
         height: 24.4px;
     }
+    .con-pos-1 {
+        #connector-top {
+            transform: translateX(1)
+        }
+
+        #connector-middle {
+            transform: scaleX(1)
+        }
+    }
+
+    .con-pos-2 {
+        #connector-top {
+            transform: translateX(1)
+        }
+
+        #connector-middle {
+            transform: scaleX(1)
+        }
+    }
+
+    .con-pos-3 {
+        #connector-top {
+            transform: translateX(1)
+        }
+
+        #connector-middle {
+            transform: scaleX(1)
+        }
+    }
+
+    .con-pos-4 {
+        #connector-top {
+            transform: translateX(1)
+        }
+
+        #connector-middle {
+            transform: scaleX(1)
+        }
+    }
+
+    .con-pos-5 {
+        #connector-top {
+            transform: translateX(1)
+        }
+
+        #connector-middle {
+            transform: scaleX(1)
+        }
+    }
+
     .connector {
         position: relative;
         // display: inline-flex;
-        float: left;
         width: 197.61px;
         height: 24.46px;
-        align-items: center;
         background-color: #060841;
-        #connector-top{
-            position: fixed;
-            display: flex;
+
+        &:hover {
+            #connector-middle {
+                transform: scaleX(19.2);
+            }
+
+            #connector-top {
+                transform: translateX(37px);
+            }
         }
+
+        #connector-top{
+            position: absolute;
+            width:2px;
+            height: 11.4px;
+            background-color: red;
+            left: 50%;
+            top: 0%;
+            margin-left: -1px;
+            transition: transform 0.3s;
+
+        }
+
         #connector-middle {
             position: absolute;
-            margin-top: -8.34px;
-            display: flex;
-            align-items: center;
+            width:2px;
+            height: 2px;
+            background-color: green;
             left: 50%;
-            transform: scaleY(-1);
-            transform: scaleX(-1);
-            margin-bottom: 24.46px;
+            margin-left: -1px;
+            top: 38.5%;
+            transform-origin: left 50%;
+            transition: transform 0.3s;
+            transform: scaleX(1);
+
             .middle{
                 transform-origin: left;
             }
         }
         #connector-bottom {
             position: absolute;
-            display: flex;
+            width: 2px;
+            height: 15px;
+            background-color: white;
             left: 50%;
+            margin-left: -1px;
+            bottom: 0%;
         }
     }
 }
