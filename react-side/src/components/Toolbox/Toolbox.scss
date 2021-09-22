@@ -29,27 +29,27 @@
     }
     .con-pos-1 {
         #connector-top {
-            transform: translateX(1)
+            transform: translateX(-82px)
         }
 
         #connector-middle {
-            transform: scaleX(1)
+            transform: scaleX(-40.5)
         }
     }
 
     .con-pos-2 {
         #connector-top {
-            transform: translateX(1)
+            transform: translateX(-42px)
         }
 
         #connector-middle {
-            transform: scaleX(1)
+            transform: scaleX(-20.2)
         }
     }
 
     .con-pos-3 {
         #connector-top {
-            transform: translateX(1)
+            transform: translateX(0px)
         }
 
         #connector-middle {
@@ -59,21 +59,21 @@
 
     .con-pos-4 {
         #connector-top {
-            transform: translateX(1)
+            transform: translateX(41px)
         }
 
         #connector-middle {
-            transform: scaleX(1)
+            transform: scaleX(21.2)
         }
     }
 
     .con-pos-5 {
         #connector-top {
-            transform: translateX(1)
+            transform: translateX(82px)
         }
 
         #connector-middle {
-            transform: scaleX(1)
+            transform: scaleX(41)
         }
     }
 
@@ -84,21 +84,11 @@
         height: 24.46px;
         background-color: #060841;
 
-        &:hover {
-            #connector-middle {
-                transform: scaleX(19.2);
-            }
-
-            #connector-top {
-                transform: translateX(37px);
-            }
-        }
-
         #connector-top{
             position: absolute;
             width:2px;
-            height: 11.4px;
-            background-color: red;
+            height: 11.44px;
+            background-color: #E9E9FF;
             left: 50%;
             top: 0%;
             margin-left: -1px;
@@ -110,13 +100,12 @@
             position: absolute;
             width:2px;
             height: 2px;
-            background-color: green;
+            background-color: #E9E9FF;
             left: 50%;
             margin-left: -1px;
-            top: 38.5%;
-            transform-origin: left 50%;
+            top: 38.7%;
+            transform-origin: left;
             transition: transform 0.3s;
-            transform: scaleX(1);
 
             .middle{
                 transform-origin: left;
@@ -126,7 +115,7 @@
             position: absolute;
             width: 2px;
             height: 15px;
-            background-color: white;
+            background-color: #E9E9FF;
             left: 50%;
             margin-left: -1px;
             bottom: 0%;
