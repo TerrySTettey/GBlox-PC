@@ -54,15 +54,14 @@ function Toolbox(props) {
             </div>
             <div className="connector">
                 <div id="connector-bottom">
-
                 </div>
                 <div id="connector-middle">
-
                 </div>
                 <div id="connector-top">
-
                 </div>
             </div>
+            {children}
+
         </div >
     )
 }

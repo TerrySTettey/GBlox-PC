@@ -250,8 +250,9 @@ const Button = (props) => {
             break;
         case "ToolboxCategoryButton":
             buttonType = (
-                <div className="c-button-a-ToolboxCategoryButton" style={{
-                    backgroundColor: buttonColor
+                <div className="c-button-a-ToolboxCategoryButton"  ref={buttonTyper} style={{
+                    backgroundColor: buttonColor,
+                    borderColor: borderColor
                 }}>
                     <div className="button-svg">
                         {props.children}
@@ -264,8 +265,9 @@ const Button = (props) => {
             break;
         case "ToolboxLevelButton":
             buttonType = (
-                <div className="c-button-a-ToolboxLevel" style={{
-                    backgroundColor: buttonColor
+                <div className="c-button-a-ToolboxLevel" ref={buttonTyper} style={{
+                    backgroundColor: buttonColor,
+                    borderColor: borderColor
                 }}>
                     <p className="button-text">
                         {props.text}
