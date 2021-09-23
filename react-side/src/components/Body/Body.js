@@ -223,7 +223,7 @@ const Body = ({ }) => {
 
             </div>
             <div className="c-Body-a-UploadButton">
-                <Button type="UploadButton" />
+                <Button type="UploadButton" text="Upload" outColor="#060841" hoverColor="#0000dc" hoverEffect="svg-fill"/>
             </div>
             <div className="c-Body-a-ProgressBar">
                 <ProgressBar progress={55} />
