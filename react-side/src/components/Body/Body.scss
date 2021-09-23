@@ -44,5 +44,17 @@
         left: 30px;
         top: 1030.1px;
     }
+
+    .c-Body-a-WorkspaceContainer {
+        display: block;
+        position: absolute;
+        left: 243px;
+        top: 80px;
+        width: 86.49vw/*1660.65px*/;
+        height: 90.46vh/*976.94px*/;
+        background-color: cyan;
+        clip-path: url(#my-clip-path);
+        filter: drop-shadow(0 0 0 50px black);
+    }
 }
 

@@ -9,7 +9,7 @@ import Toolbox from '../Toolbox/Toolbox';
 import Button from '../Button';
 import Header from '../Header/Header'
 
-const Body = ({ }) => {
+const Body = (props) => {
     return (
         <div className="body-container">
             <Header />
@@ -45,6 +45,16 @@ const Body = ({ }) => {
                 </svg>
 
             </div>
+
+            <div className="c-Body-a-WorkspaceContainer">
+                <svg>
+                    <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M1,0.46 l0,-0.426 L0.982,0.001 l-0.472,0.001,-0.149,0,-0.331,0 L0,0.051 v0.089 l0.015,0.026 V0.928 L0.035,0.96 l0.261,0,0.024,0.04 H0.976 l0.024,-0.041 V0.937 l0,-0.001,-0.001,-0.363 h-0.033 V0.516"></path></clipPath>
+                </svg>
+                <div id="blocklyDiv">
+
+                </div>
+            </div>
+
             <div className="c-Body-a-UploadCircle">
                 <Upload_Circle />
             </div>
@@ -223,14 +233,18 @@ const Body = ({ }) => {
 
             </div>
             <div className="c-Body-a-UploadButton">
-                <Button type="UploadButton" text="Upload" outColor="#060841" hoverColor="#0000dc" hoverEffect="svg-fill"/>
+                <Button type="UploadButton" text="Upload" outColor="#060841" hoverColor="#0000dc" hoverEffect="svg-fill" />
             </div>
             <div className="c-Body-a-ProgressBar">
                 <ProgressBar progress={55} />
             </div>
+
         </div>
     )
+
 }
+
+
 
 export default Body
 
