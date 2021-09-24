@@ -73,6 +73,9 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 1400,
         height: 800,
+        title:"GBlox",
+        autoHideMenuBar: true,
+        /*frame:false,*/
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -81,7 +84,7 @@ function createWindow() {
     })
 
     win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-    // win.removeMenu()
+    //win.removeMenu()
     win.setTitle("Arduino From Scratch")
 
     if (isDev) {

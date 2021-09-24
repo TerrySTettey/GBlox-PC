@@ -338,20 +338,20 @@ Blockly.JavaScript['led_rgb_led_all'] = function(block) {
 };
 
 
-Blockly.JavaScript['led_neo_led'] = function(block) {
-  var dropdown_neopixel_led = block.getFieldValue('NeoPixel LED');
-  var value_red_value = Blockly.JavaScript.valueToCode(block, 'Red Value', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_green_value = Blockly.JavaScript.valueToCode(block, 'Green Value', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_blue_value = Blockly.JavaScript.valueToCode(block, 'Blue Value', Blockly.JavaScript.ORDER_ATOMIC);
-  const block_count = Blockly.mainWorkspace.getBlocksByType('led_neo_led',true);
-  if (peripheral_PreDeclarations.includes(`#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(2, A6, NEO_GRB + NEO_KHZ800);\n`) ==0){
-    peripheral_PreDeclarations += `#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(2, A6, NEO_GRB + NEO_KHZ800);\n`;
-    peripheral_SetupCode += `pixels.begin();\n`;
-  }
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
-};
+// Blockly.JavaScript['led_neo_led'] = function(block) {
+//   var dropdown_neopixel_led = block.getFieldValue('NeoPixel LED');
+//   var value_red_value = Blockly.JavaScript.valueToCode(block, 'Red Value', Blockly.JavaScript.ORDER_ATOMIC);
+//   var value_green_value = Blockly.JavaScript.valueToCode(block, 'Green Value', Blockly.JavaScript.ORDER_ATOMIC);
+//   var value_blue_value = Blockly.JavaScript.valueToCode(block, 'Blue Value', Blockly.JavaScript.ORDER_ATOMIC);
+//   const block_count = Blockly.mainWorkspace.getBlocksByType('led_neo_led',true);
+//   if (peripheral_PreDeclarations.includes(`#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(2, A6, NEO_GRB + NEO_KHZ800);\n`) ==0){
+//     peripheral_PreDeclarations += `#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(2, A6, NEO_GRB + NEO_KHZ800);\n`;
+//     peripheral_SetupCode += `pixels.begin();\n`;
+//   }
+//   // TODO: Assemble JavaScript into code variable.
+//   var code = '...;\n';
+//   return code;
+// };
 
 
 

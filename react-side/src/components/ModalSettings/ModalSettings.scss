@@ -1,0 +1,46 @@
+.modal-container {
+    display: block;
+    position: relative;
+    background-color: #060841;
+    height:484px;
+    width: 396px;
+    right: -50px;
+    border-radius: 10px;
+
+    h1{
+        color: white;
+        font-size: 21px;
+        margin: 0;
+    }
+    
+    div {
+        color: white;
+    }
+    .modal-section-break {
+        display:block;
+        position: relative;
+        height: 1px;
+        background-color: #3722FF;
+    }
+
+    .modal-section {
+        padding-top: 17px;
+        padding-left:31px;   
+        padding-bottom: 45px;
+        position: relative;
+    }
+
+    .modal-lighting-buttons {
+        border-color: #3722FF ;
+        height: 43px;
+        width: 160px;
+        border-width: thin;
+        border-radius: 20px;
+        border-style: solid;
+    }
+}
+
+.modal-blank-space {
+    display: block;
+    min-width: 235px;
+}

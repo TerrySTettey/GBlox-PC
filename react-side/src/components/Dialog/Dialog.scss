@@ -1,0 +1,132 @@
+
+@font-face {
+    font-family: 'Baloo2-Regular';
+    src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
+  }
+  
+@keyframes fadein_dialog{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+        
+}
+
+@keyframes fadein_button {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein_input {
+    from {
+        opacity: 0;
+        top: 0%;
+        left: 50%;
+        width: 0%;
+    }
+    to {
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+    }
+}
+
+@keyframes fadein_select {
+    from {
+        opacity: 0;
+        top: 0%;
+        left: 50%;
+        width: 0%;
+    }
+    to {
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+    }
+}
+.dialog-container{
+    position: absolute;
+    align-items: center;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    font-family: "Baloo2-Regular";
+}
+
+.dialog-container dialog{
+    position: relative;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    background-color: #060841;
+    box-shadow: 0px 15px 15px 0px grey;
+    font-family: inherit;
+    margin: 0px;
+    border-radius: 25px;
+    animation: fadein_dialog forwards;
+    animation-duration: 1s;
+}
+.dialog-container div{
+    color: rgb(255, 255, 255);
+    padding-bottom: 12px;
+}
+
+.dialog-container menu{
+    position: relative;
+    padding: 0px;
+    display: inline-block;
+    text-align: center;
+    margin: 0px;
+    overflow-x: hidden;
+    align-items: center;
+    animation: fadein_button forwards;
+    animation-duration: 1s;
+}
+.dialog-container button{
+    border-radius: 5px 5px;
+    border: none;
+    font-family: inherit;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.dialog-container button:active{
+    box-sizing: border-box;
+    background-color: green;
+    outline: 5px solid;
+    outline-color: red;
+}
+
+.dialog-container select {
+    display: inline-block;
+    border-radius: 5px 5px;
+    font-size: inherit;
+    border-style: groove;
+    font-family: inherit;
+    text-indent: 40%;
+    animation: fadein_select forwards;
+    animation-duration: 1s;
+}
+
+.dialog-container input{
+    position: flex;
+    display: inline-block;
+    border-radius: 5px 5px;
+    font-size: 17px;
+    text-align: center;
+    font-family: inherit;
+    margin: auto;
+    animation: fadein_input forwards;
+    animation-duration: 1s;
+}
+

@@ -486,4 +486,4 @@ const toolboxCategories = {
   
   const MelloDOM = Blockly.Xml.textToDom(MelloToolbox);
 
-  export {toolboxCategories, newToolBox, MelloToolbox, MelloDOM}
+  export {MelloDOM}

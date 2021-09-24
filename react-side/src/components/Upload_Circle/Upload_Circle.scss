@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Baloo2-Regular';
+    src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
+  }
+
+.circle-animation {
+    position: absolute;
+    display: inline-block;
+}
+
+.circle-animation svg {
+    fill: #0000dc;
+}
+.circle-animation svg:active {
+    fill: red;
+}
+.circle-animation text{
+    font-family: 'Baloo2-Regular';
+    font-size: 17px;
+    fill: white;
+}
