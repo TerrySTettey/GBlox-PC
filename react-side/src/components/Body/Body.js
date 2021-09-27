@@ -12,40 +12,6 @@ import Header from '../Header/Header'
 const Body = (props) => {
     return (
         <div className="body-container">
-            <Header />
-            <div className="c-Body-a-LeftSvg">
-                {/** The Top */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="46.26" height="160.316" viewBox="0 0 46.26 160.316">
-                    <g id="Layer_2" data-name="Layer 2" transform="translate(0 0.006)">
-                        <g id="Layer_1" data-name="Layer 1">
-                            <path id="Path_424" data-name="Path 424" d="M.5,160.31V1.1l10.69,9.41L45.76,40.89v92.4l-10.9,10.9L21.5,158.3v2.01" fill="#060841" stroke="#0000dc" stroke-width="1" />
-                        </g>
-                    </g>
-                </svg>
-                {/** The Middle */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height=/*"741.611*/"68.66vh" viewBox="0 0 22 741.611" preserveAspectRatio="none">
-                    <g id="Group_533" data-name="Group 533" transform="translate(207.5 159.611)">
-                        <g id="Layer_2" data-name="Layer 2" transform="translate(-207 -159.611)">
-                            <g id="Layer_1" data-name="Layer 1">
-                                <path id="Path_425" data-name="Path 425" d="M0,741.59V0H21V741.56" fill="#060841" />
-                            </g>
-                        </g>
-                        <path id="Path_436" data-name="Path 436" d="M-207-159.611V582" fill="none" stroke="#0000dc" stroke-width="1" />
-                        <path id="Path_437" data-name="Path 437" d="M-207-159.611V582" transform="translate(21)" fill="none" stroke="#0000dc" stroke-width="1" />
-                    </g>
-                </svg>
-
-                {/** The Bottom */}
-                <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="22" height="97.57" viewBox="0 0 22 97.57">
-                    <g id="Layer_1" data-name="Layer 1">
-                        <path id="Path_426" data-name="Path 426" d="M21.5,0V5.8L7.15,20.23V97.57H.5V0" fill="#060841" />
-                        <path id="Path_427" data-name="Path 427" d="M.5,97.57V0" fill="none" stroke="#0000dc" stroke-width="1" />
-                        <path id="Path_428" data-name="Path 428" d="M21.5,0V5.8L7.15,20.23V97.57" fill="none" stroke="#0000dc" stroke-width="1" />
-                    </g>
-                </svg>
-
-            </div>
-
             <div className="c-Body-a-WorkspaceContainer">
                 <svg>
                     <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M1,0.46 l0,-0.426 L0.982,0.001 l-0.472,0.001,-0.149,0,-0.331,0 L0,0.051 v0.089 l0.015,0.026 V0.928 L0.035,0.96 l0.261,0,0.024,0.04 H0.976 l0.024,-0.041 V0.937 l0,-0.001,-0.001,-0.363 h-0.033 V0.516"></path></clipPath>
@@ -54,7 +20,23 @@ const Body = (props) => {
 
                 </div>
             </div>
-
+            <div className="c-Body-a-Overlay">
+                <svg xmlns="http://www.w3.org/2000/svg" width="2004" height="1163.999" viewBox="0 0 2004 1163.999">
+                    <defs>
+                        <filter id="Subtraction_2" x="0" y="0" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Subtraction_2)">
+                        <path id="Subtraction_2-2" data-name="Subtraction 2" d="M1452.5,3214.5H-463.34v-76.754l14.372-14.39-.832-748.627,25.13-25.16v-92.653l-34.621-30.461-10.209-8.983V2132.5h1922v1082ZM268.75,3152.865l39.639,39.586H1400l40-39.946v-22.576l.6-.682-.983-355.393h-54.357v-56.065l55.371-55.175-.36-417.085-30.047-32.731-785.49.98-247.589.2-550.769.383-48.991,48.014v87.638l25.194,25.161v745.979L-165.532,3153Z" transform="translate(510.5 -2094.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                    </g>
+                </svg>
+            </div>
+            <Header />
             <div className="c-Body-a-UploadCircle">
                 <Upload_Circle />
             </div>

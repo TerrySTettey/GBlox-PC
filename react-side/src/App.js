@@ -83,13 +83,11 @@ const App = () => {
           pinch: true
         }, grid:
         {
-          // spacing: 20,
-          // length: 3,
-          // colour: '#03254c',
           snap: true
         }, theme: test_theme
       });
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
+      OurWorkspace.toolbox_.setVisible(false);
     }
   })
   
