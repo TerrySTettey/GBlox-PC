@@ -4,33 +4,74 @@ import "./Pull_Out_Menu.scss"
 import Button from '../Button'
 import Help_Menu from '../Help_Menu'
 import Serial_Menu from '../Serial_Menu'
+import View_Code_Menu from '../View_Code_Menu'
+import Edit_Code_Menu from '../Edit_Code_Menu'
+import Example_Code_Menu from '../Example_Code_Menu'
 
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);
+    const [last_button_clicked, setLastButtonClicked] = useState("");
+    const [button_clicked, setButtonClicked] = useState(0);
     const { children } = props;
+    var pull_out_container = useRef(null);
 
     function Menu(event) {
         console.log(event.target.id);
-        switch (event.target.id) {
-            case "help-menu":
-                setContents([
-                    <Help_Menu>
-                    </Help_Menu>
-                ])
-                break;
-            case "serial-port":
-                setContents([<Serial_Menu/>])
-                break;
+        if (last_button_clicked !== event.target.id){
+            setLastButtonClicked(event.target.id);
+            switch (event.target.id) {
+                case "help-menu":
+                    setContents([<Help_Menu />]);
+                    break;
+                case "serial-port":
+                    setContents([<Serial_Menu />]);
+                    break;
+                case "code-editor":
+                    setContents([<Edit_Code_Menu />]);
+                    break;
+                case "view-code":
+                    setContents([<View_Code_Menu />]);
+                    break;
+                case "example-code":
+                    setContents([
+                        <Example_Code_Menu>
+                            <div className="code-example">
+                                <div className="code-example-header">Police Flash Light</div>
+                                <div className="example-details">
+                                    <div>Difficulty: level 3</div>
+                                    <div>Blocks used:</div>
+                                    <div>Movement, Light Effects, Loops, Math</div>
+                                    This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
+                                </div>
+                            </div>
+                            <div className="code-example">
+                                <div className="code-example-header">Police Flash Light</div>
+                                <div className="example-details">
+                                    <div>Difficulty: level 3</div>
+                                    <div>Blocks used:</div>
+                                    <div>Movement, Light Effects, Loops, Math</div>
+                                    This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
+                                </div>
+                            </div>
+                        </Example_Code_Menu>
+                    ]);
+                    break;
+            }
+            pull_out_container.current.style.marginLeft="30.4px"
+            pull_out_container.current.style.opacity = "1"
         }
-
+        else{
+            setLastButtonClicked("");
+            pull_out_container.current.style.marginLeft="500px"  
+            pull_out_container.current.style.opacity="0"
+        }
     }
 
-    return (
-        <div className="pull-out-menu">
-            <div className="c-Pull-Out-Menu-a-buttongroup">
+    return ( <div className="pull-out-menu" >
+            <div className="c-Pull-Out-Menu-a-buttongroup" >
                 <Button
                     id="view-code"
                     type="CircularOverlayMenuButton"
@@ -96,8 +137,6 @@ function Pull_Out_Menu(props) {
                     hoverEffect="fill"
                     onClick={Menu}
                 />
-
-
                 <Button
                     id="example-code"
                     type="CircularOverlayMenuButton"
@@ -138,7 +177,7 @@ function Pull_Out_Menu(props) {
                     onClick={Menu}
                 />
             </div>
-            <div className="pull-out-container">
+            <div className="pull-out-container" ref={pull_out_container}>
                 {contents}
             </div>
         </div>

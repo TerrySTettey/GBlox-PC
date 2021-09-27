@@ -1,7 +1,14 @@
+.slide-out-anim {
+    animation: slide-out 2s forwards ease-in-out;
+}
+.slide-in-anim {
+    animation: slide-out 2s reverse ease-in-out;
+}
+
 .pull-out-menu {
     position: relative;
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
+    
     .c-Pull-Out-Menu-a-buttongroup {
         display: flex;
         flex-direction: column;
@@ -11,6 +18,9 @@
         }
     }
     .pull-out-container {
+        margin-left: 500px;
+        opacity: 0;
+        transition: margin-left 1s, opacity 1s;
         position: relative;
     }
 }

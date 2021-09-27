@@ -2,6 +2,11 @@
     font-family: 'Baloo2-Regular';
     src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
   }
+.help-menu{
+    .text{
+        padding-bottom:16.9px;
+    }
+}
 
 .border_svg{
     position: relative;

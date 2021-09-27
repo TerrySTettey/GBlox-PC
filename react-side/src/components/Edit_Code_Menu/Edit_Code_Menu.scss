@@ -1,0 +1,21 @@
+.menu{
+    display: inline-flex;
+    margin-bottom: 251.8px;
+}
+
+#edit-code-menu{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0fr;
+    .text{
+        padding-bottom: 21px;
+        font-size: 21px;
+    }
+}
+.code-editor{
+    display: flex;
+    width: 352.96px;
+    height: 611px;
+    background-color: #0B0533;
+    margin-bottom: 12px;
+}

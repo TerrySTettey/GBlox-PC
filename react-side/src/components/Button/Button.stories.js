@@ -239,3 +239,14 @@ ToolboxLevelButton.args = {
     text: "1",
     hoverEffect: "fill"
 }
+
+export const FilterButton = Template.bind({})
+FilterButton.args = {
+    type: "FilterButton",
+    inColor: "#0000aa",
+    outColor: "#0000bc",
+    hoverColor: "#0000aa",
+    s_ButtonState: "Out",
+    text: "Filter",
+    hoverEffect: "fill"
+}

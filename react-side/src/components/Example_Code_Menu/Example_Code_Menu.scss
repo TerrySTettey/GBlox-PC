@@ -1,0 +1,29 @@
+.text{
+    padding-bottom:0px;
+}
+
+#example-code-menu{
+    position: relative;
+    display: grid;
+    grid-template-columns: 352px;
+    grid-template-rows: 0.0287fr 0.040984fr;
+    gap: 22px 18px;
+    #button-container{
+        width: 120px;
+    }
+}
+.code-example{
+    background-color: #0B0533;
+    border: 1px solid #0000DC;
+    padding: 18px 29px 18px 23px;
+    .code-example-header{
+        color: #4C97FF;
+        padding-bottom: 16px;
+        font-size: 21px;
+    }
+    .example-details{
+        display: grid;
+        gap: 10px;
+        color: #FFFFFF;
+    }
+}

@@ -82,14 +82,14 @@ function help_div(svg, text) {
 function Help_Menu(props) {
     const { name, children, ...rest } = props;
     return (
-        <div className="help-menu" >
-            <Menu>
-            <div className="text">Help</div>
-            {help_div(learn_svg, "Learn")}
-            {help_div(support_svg, "Support")}
-            {help_div(check_for_update_svg, "Check for Update")}
-            </Menu>
-        </div>
+        <Menu>
+            <div className="help-menu">
+                <div className="text">Help</div>
+                {help_div(learn_svg, "Learn")}
+                {help_div(support_svg, "Support")}
+                {help_div(check_for_update_svg, "Check for Update")}
+            </div>
+        </Menu>
     )
 }
 
