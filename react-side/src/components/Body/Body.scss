@@ -1,59 +1,78 @@
 
 
 .body-container {
-    display: block;
+    display:grid;
     position: relative;
     left:0;
     top:0;
     width: auto;
-    height: 1080px;
-    background-color: #0B0533;
-    overflow: hidden;
+    height: 100vh;
+    background-color: white; //#0B0533;
+    //overflow: hidden;
+    outline: 4px green solid;
+
+    grid-template-columns: [col-1] 0.0236fr [col-2] 0.103fr [col-3] auto;//0.8735fr;
+    grid-template-rows: 0.0741fr 0.151fr 0.6834fr 0.0812fr auto;//0.0103fr;
+    grid-template-areas:
+    "left header header"
+    "left device work"
+    "left tool work"
+    "left upload work"
+    "left prog work";
+
+    .c-Body-a-Header {
+        grid-area: header;
+    }
 
     .c-Body-a-LeftSvg {
+        grid-area: left;
         margin-top: 84.8px;
         top: 0;
-        position: absolute;
+        position: relative;
         display: flex;
         flex-direction: column;
-
     }
 
     .c-Body-a-UploadCircle {
-        left: 67.6px;
-        top:92px;
-        position: absolute;
+        grid-area: device;
+        //left: 67.6px;
+        //top:92px;
+        position: relative;
     }
 
     .c-Body-a-ToolBox {
-       position: absolute;
-       left: 45.3px;
-       top:  303.1px;
+       grid-area: tool;
+       position: relative;
+       //left: 45.3px;
+       //top:  303.1px;
     }
 
     .c-Body-a-UploadButton {
+        grid-area: upload;
         display: block;
-        position: absolute;
-        left: 30px;
-        top: 981.2px;
+        position: relative;
+        //left: 30px;
+        //top: 981.2px;
     }
 
     .c-Body-a-ProgressBar {
+        grid-area: prog;
         display: block;
-        position: absolute;
-        left: 30px;
-        top: 1030.1px;
+        position: relative;
+        //left: 30px;
+        //top: 1030.1px;
     }
 
     .c-Body-a-WorkspaceContainer {
+        grid-area: work;
         display: block;
-        position: absolute;
-        left: 243px;
-        top: 80px;
-        width: 86.49vw/*1660.65px*/;
-        height: 90.46vh/*976.94px*/;
+        position: relative;
+        //left: 243px;
+        //top: 80px;
+        //width: 86.49vw/*1660.65px*/;
+        //height: 90.46vh/*976.94px*/;
         background-color: cyan;
-        clip-path: url(#my-clip-path);
+        //clip-path: url(#my-clip-patho);
         filter: drop-shadow(0 0 0 50px black);
     }
 }
