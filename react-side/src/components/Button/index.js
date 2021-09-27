@@ -294,7 +294,7 @@ const Button = (props) => {
     return (
         <div id="button-container">
             {buttonType}
-            <button type="button" id="file-button" className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut} />
+            <button type="button" id={props.id} className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut} />
         </div>
     )
 }
