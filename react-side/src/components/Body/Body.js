@@ -20,10 +20,14 @@ const Body = (props) => {
 
                 </div>
             </div>
-            <div className="c-Body-a-Overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="2004" height="1163.999" viewBox="0 0 2004 1163.999">
+
+            <div className="tester">
+                <svg id="num4" xmlns="http://www.w3.org/2000/svg" width="770" height="288" viewBox="0 0 770 288">
                     <defs>
-                        <filter id="Subtraction_2" x="0" y="0" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_218" data-name="Rectangle 218" width="770" height="288" transform="translate(2354 -3220)" fill="rgba(25,255,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-41" y="-287" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
                             <feOffset dy="3" input="SourceAlpha" />
                             <feGaussianBlur stdDeviation="13.5" result="blur" />
                             <feFlood flood-color="#01f" flood-opacity="0.161" />
@@ -31,10 +35,348 @@ const Body = (props) => {
                             <feComposite in="SourceGraphic" />
                         </filter>
                     </defs>
-                    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Subtraction_2)">
-                        <path id="Subtraction_2-2" data-name="Subtraction 2" d="M1452.5,3214.5H-463.34v-76.754l14.372-14.39-.832-748.627,25.13-25.16v-92.653l-34.621-30.461-10.209-8.983V2132.5h1922v1082ZM268.75,3152.865l39.639,39.586H1400l40-39.946v-22.576l.6-.682-.983-355.393h-54.357v-56.065l55.371-55.175-.36-417.085-30.047-32.731-785.49.98-247.589.2-550.769.383-48.991,48.014v87.638l25.194,25.161v745.979L-165.532,3153Z" transform="translate(510.5 -2094.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                    <g id="Mask_Group_5" data-name="Mask Group 5" transform="translate(-2354 3220)" clip-path="url(#clip-path)">
+                        <g id="Group_550" data-name="Group 550">
+                            <g transform="matrix(1, 0, 0, 1, 2354, -3220)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(469.5 -2381.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
                     </g>
                 </svg>
+            </div>
+            <div className="c-Body-a-Overlay">
+                <svg id="num1" xmlns="http://www.w3.org/2000/svg" width="770" height="254" viewBox="0 0 770 250" preserveAspectRatio="none">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_216" data-name="Rectangle 216" width="770" height="250" transform="translate(2354 -3470)" fill="rgba(255,9,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-41" y="-37" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_4" data-name="Mask Group 4" transform="translate(-2354 3470)" clip-path="url(#clip-path)">
+                        <g id="Group_551" data-name="Group 551">
+                            <g transform="matrix(1, 0, 0, 1, 2354, -3470)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(469.5 -2131.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num4" xmlns="http://www.w3.org/2000/svg" width="770" height="288" viewBox="0 0 770 288">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_218" data-name="Rectangle 218" width="770" height="288" transform="translate(2354 -3220)" fill="rgba(25,255,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-41" y="-287" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_5" data-name="Mask Group 5" transform="translate(-2354 3220)" clip-path="url(#clip-path)">
+                        <g id="Group_550" data-name="Group 550">
+                            <g transform="matrix(1, 0, 0, 1, 2354, -3220)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(469.5 -2381.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num7" xmlns="http://www.w3.org/2000/svg" width="770" height="135" viewBox="0 0 770 135">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_219" data-name="Rectangle 219" width="770" height="135" transform="translate(2354 -2932)" fill="rgba(255,255,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-41" y="-575" width="2004" height="1163.998" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_6" data-name="Mask Group 6" transform="translate(-2354 2932)" clip-path="url(#clip-path)">
+                        <g id="Group_549" data-name="Group 549" transform="translate(2061 -3468.734)">
+                            <g transform="matrix(1, 0, 0, 1, 293, 536.73)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1922,1082H6.16v-76.754l14.372-14.39L19.7,242.229l25.13-25.16V124.415L10.209,93.954,0,84.971V0H1922V1082ZM731.25,1027.366l39.639,39.586H1862.505l40-39.946v-22.576l.6-.683-.982-355.394h-54.358V592.289l55.37-55.175-.36-417.085L1872.724,87.3l-785.49.981-247.589.2-550.769.384-48.991,48.013v87.639l25.195,25.16V995.656l31.888,31.846Z" transform="translate(0 -537)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(0 286.734)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num10" xmlns="http://www.w3.org/2000/svg" width="770" height="307" viewBox="0 0 770 307">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_220" data-name="Rectangle 220" width="770" height="307" transform="translate(2354 -2797)" fill="rgba(255,173,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-41" y="-687" width="2004" height="1127.002" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_7" data-name="Mask Group 7" transform="translate(-2354 2797)" clip-path="url(#clip-path)">
+                        <g id="Group_548" data-name="Group 548" transform="translate(2061 -3445.755)">
+                            <g transform="matrix(1, 0, 0, 1, 293, 648.75)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M750.6,1045H6.16V970.872l14.373-13.9L19.7,233.946l25.13-24.3V120.161L10.209,90.741,0,82.066V0H1922V1045h-39.2l19.706-19.68v-22.576l.6-.683-.982-355.394h-54.358V590.6l55.371-55.175-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.991,48.013v87.639l25.195,25.16V993.971l31.888,31.846,434.282-.136L750.6,1045Z" transform="translate(0 -649)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(0 276.755)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="362" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="361" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num13" xmlns="http://www.w3.org/2000/svg" width="770" height="96" viewBox="0 0 770 92">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_221" data-name="Rectangle 221" width="770" height="92" transform="translate(2354 -2479)" fill="rgba(255,9,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-41" y="-1028" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_8" data-name="Mask Group 8" transform="translate(-2354 2479)" clip-path="url(#clip-path)">
+                        <g id="Group_547" data-name="Group 547">
+                            <g transform="matrix(1, 0, 0, 1, 2354, -2479)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(469.5 -3122.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <svg id="num2" xmlns="http://www.w3.org/2000/svg" width="1077" height="250" viewBox="0 0 1077 250">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_216" data-name="Rectangle 216" width="1077" height="250" transform="translate(3124 -3470)" fill="rgba(255,9,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-811" y="-37" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_9" data-name="Mask Group 9" transform="translate(-3124 3470)" clip-path="url(#clip-path)">
+                        <g id="Group_556" data-name="Group 556">
+                            <g transform="matrix(1, 0, 0, 1, 3124, -3470)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(-300.5 -2131.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num8" xmlns="http://www.w3.org/2000/svg" width="1077" height="135" viewBox="0 0 1077 135">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_219" data-name="Rectangle 219" width="1077" height="135" transform="translate(3124 -2932)" fill="rgba(255,255,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-811" y="-575" width="2004" height="1163.998" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_10" data-name="Mask Group 10" transform="translate(-3124 2932)" clip-path="url(#clip-path)">
+                        <g id="Group_555" data-name="Group 555" transform="translate(2061 -3468.734)">
+                            <g transform="matrix(1, 0, 0, 1, 1063, 536.73)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1922,1082H6.16v-76.754l14.372-14.39L19.7,242.229l25.13-25.16V124.415L10.209,93.954,0,84.971V0H1922V1082ZM731.25,1027.366l39.639,39.586H1862.505l40-39.946v-22.576l.6-.683-.982-355.394h-54.358V592.289l55.37-55.175-.36-417.085L1872.724,87.3l-785.49.981-247.589.2-550.769.384-48.991,48.013v87.639l25.195,25.16V995.656l31.888,31.846Z" transform="translate(-770 -537)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(0 286.734)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num14" xmlns="http://www.w3.org/2000/svg" width="1077" height="92" viewBox="0 0 1077 92">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_221" data-name="Rectangle 221" width="1077" height="92" transform="translate(3124 -2479)" fill="rgba(255,9,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-811" y="-1028" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_11" data-name="Mask Group 11" transform="translate(-3124 2479)" clip-path="url(#clip-path)">
+                        <g id="Group_554" data-name="Group 554">
+                            <g transform="matrix(1, 0, 0, 1, 3124, -2479)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(-300.5 -3122.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <svg id="num3" xmlns="http://www.w3.org/2000/svg"  width="78" height="250" viewBox="0 0 78 250">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_216" data-name="Rectangle 216" width="78" height="250" transform="translate(4201 -3470)" fill="rgba(255,9,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-1888" y="-37" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_12" data-name="Mask Group 12" transform="translate(-4201 3470)" clip-path="url(#clip-path)">
+                        <g id="Group_561" data-name="Group 561">
+                            <g transform="matrix(1, 0, 0, 1, 4201, -3470)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(-1377.5 -2131.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num6" xmlns="http://www.w3.org/2000/svg"  width="78" height="288" viewBox="0 0 78 288">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_218" data-name="Rectangle 218" width="78" height="288" transform="translate(4201 -3220)" fill="rgba(25,255,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-1888" y="-287" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_13" data-name="Mask Group 13" transform="translate(-4201 3220)" clip-path="url(#clip-path)">
+                        <g id="Group_560" data-name="Group 560">
+                            <g transform="matrix(1, 0, 0, 1, 4201, -3220)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(-1377.5 -2381.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num9" xmlns="http://www.w3.org/2000/svg"  width="78" height="135" viewBox="0 0 78 135">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_219" data-name="Rectangle 219" width="78" height="135" transform="translate(4201 -2932)" fill="rgba(255,255,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-1888" y="-575" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_14" data-name="Mask Group 14" transform="translate(-4201 2932)" clip-path="url(#clip-path)">
+                        <g id="Group_559" data-name="Group 559">
+                            <g transform="matrix(1, 0, 0, 1, 4201, -2932)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(-1377.5 -2669.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num12" xmlns="http://www.w3.org/2000/svg"  width="78" height="307" viewBox="0 0 78 307">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_220" data-name="Rectangle 220" width="78" height="307" transform="translate(4201 -2797)" fill="rgba(255,173,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-1888" y="-708" width="2004" height="1127" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_15" data-name="Mask Group 15" transform="translate(-4201 2797)" clip-path="url(#clip-path)">
+                        <g id="Group_558" data-name="Group 558" transform="translate(2061 -3467)">
+                            <g transform="matrix(1, 0, 0, 1, 2140, 670)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M750.6,1045h0L6.16,1045v-74.13l14.372-13.9L19.7,233.945l25.13-24.3V120.161L10.209,90.741,0,82.065V0H1922V1045h-39.2l19.7-19.679v-22.576l.6-.683-.982-355.394h-54.358V590.6l55.37-55.175-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.991,48.013v87.64L265.08,247.99V993.97l31.888,31.846,434.282-.136L750.594,1045Z" transform="translate(-1847 -670)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(0 277)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="362" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="361" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num15" xmlns="http://www.w3.org/2000/svg"  width="78" height="92" viewBox="0 0 78 92">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_221" data-name="Rectangle 221" width="78" height="92" transform="translate(4201 -2479)" fill="rgba(255,9,9,0.4)" />
+                        </clipPath>
+                        <filter id="Subtraction_3" x="-1888" y="-1028" width="2004" height="1163.999" filterUnits="userSpaceOnUse">
+                            <feOffset dy="3" input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="13.5" result="blur" />
+                            <feFlood flood-color="#01f" flood-opacity="0.161" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Mask_Group_16" data-name="Mask Group 16" transform="translate(-4201 2479)" clip-path="url(#clip-path)">
+                        <g id="Group_557" data-name="Group 557">
+                            <g transform="matrix(1, 0, 0, 1, 4201, -2479)" filter="url(#Subtraction_3)">
+                                <path id="Subtraction_3-2" data-name="Subtraction 3" d="M1452.5,3214.5H-463.341v-76.754l14.373-14.39-.833-748.626,25.131-25.16v-92.652l-34.622-30.462-10.209-8.983V2132.5h1922v1082ZM261.75,3159.866l39.639,39.585H1393l40-39.946V3136.93l.6-.683-.982-355.394h-54.359v-56.064l55.371-55.176-.36-417.085-30.047-32.731-785.49.981-247.589.2-550.769.384-48.992,48.013v87.639l25.195,25.16v745.979L-172.533,3160l434.282-.136Z" transform="translate(-1377.5 -3122.5)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            </g>
+                            <g id="Rectangle_222" data-name="Rectangle 222" transform="translate(2061 -3182)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="58" height="375" stroke="none" />
+                                <rect x="0.5" y="0.5" width="57" height="374" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
             </div>
             <Header />
             <div className="c-Body-a-UploadCircle">
