@@ -17,7 +17,7 @@
 
     .c-Body-a-Overlay {
         margin-top: 0;
-        top: -2px;
+        top: -1px;
         left: -1px;
         position: absolute;
         display: grid;
@@ -25,8 +25,9 @@
         width: 100vw;
         height: 100vh;
         
-        grid-template-columns: [col-1] 40.104fr [col-2] 56.09fr [col-3] 4.0625fr;//0.8735fr;
-        grid-template-rows: [row-1] 23.148fr [row-2] 21.111fr [row-3] 12.5fr [row-4] 28.426fr [row-5] auto;//0.0103fr;
+        
+        grid-template-columns: [col-1] 772px [col-2] minmax(0px, 1076px) [col-3] 73px;//0.8735fr;
+        grid-template-rows: [row-1] 246px [row-2] minmax(0px,283px) [row-3] 113px [row-4] minmax(0px,345px) [row-5] 94px;//0.0103fr;
         grid-template-areas:
         "n1 n2 n3"
         "n4 emp n6"
@@ -64,45 +65,78 @@
 
             #num3 {
                 grid-area: n3;
+                margin-top: 0px;
+                margin-left:1px ;
             }
             #num6 {
                 grid-area: n6;
+                margin-top: 0px;
+                margin-left:1px ;
             }
             #num9 {
                 grid-area: n9;
+                margin-top: 0px;
+                margin-left:1px ;
             }
             #num12 {
                 grid-area: n12;
+                margin-top: 0px;
+                margin-left:1px ;
             }
             #num15 {
                 grid-area: n15;
+                margin-top: 0px;
+                margin-left:1px ;
             }
         }
+    
+    .c-Body-a-OverlayItems {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        top: 92px;
+        left: 45.3px;
+        width: 151px;
+
+        outline: 2px red solid;
+    }
 
     .c-Body-a-UploadCircle {
-        left: 67.6px;
-        top:92px;
-        position: absolute;
+        //left: 67.6px;
+        //top:92px;
+        left: 22px;
+        width: 151px;
+        height: 151px;
+        display: block;
+        position: relative;
     }
 
     .c-Body-a-ToolBox {
-       position: absolute;
-       left: 45.3px;
-       top:  303.1px;
+        display: block;
+       position: relative;
+       margin-left: 0px;
+       margin-top: 60.1px;
+       //left: 45.3px;
+       //top:  283.1px;
     }
 
     .c-Body-a-UploadButton {
         display: block;
-        position: absolute;
-        left: 30px;
-        top: 981.2px;
+        position: relative;
+
+        margin-left: -14px;
+        margin-top: 74.3px;
+        //left: 30px;
+        //top: 981.2px;
     }
 
     .c-Body-a-ProgressBar {
         display: block;
-        position: absolute;
-        left: 30px;
-        top: 1030.1px;
+        position: relative;
+        margin-left: -20px;
+        //margin-top: 74.3px;
+        //left: 30px;
+        //top: 1030.1px;
     }
 
     .c-Body-a-WorkspaceContainer {
