@@ -2,21 +2,12 @@
     font-family: 'Baloo2-Regular';
     src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
   }
+.help-menu{
+    .text{
+        padding-bottom:16.9px;
+    }
+}
 
-.help-menu {
-    position: relative;
-    display: inline-block;
-    background-color:#060841;
-    padding: 27px 30px 198px 30px;
-    box-shadow: 15px 15px 15px 0px grey;
-    font-family: 'Baloo2-Regular'
-}
-.text {
-    display: block;
-    color: white;
-    padding-bottom: 20px;
-    font-size: 21px;
-}
 .border_svg{
     position: relative;
     display: block;
@@ -26,7 +17,6 @@
 .help-icon {
     position: relative;
     display: block;
-    flex-direction: column;
 }
 
 .children_help{

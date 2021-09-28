@@ -250,7 +250,7 @@ const Button = (props) => {
             break;
         case "ToolboxCategoryButton":
             buttonType = (
-                <div className="c-button-a-ToolboxCategoryButton"  ref={buttonTyper} style={{
+                <div className="c-button-a-ToolboxCategoryButton" ref={buttonTyper} style={{
                     backgroundColor: buttonColor,
                     borderColor: borderColor
                 }}>
@@ -275,6 +275,20 @@ const Button = (props) => {
                 </div>
             )
             break;
+        case "FilterButton":
+            buttonType = (
+                <div>
+                    <svg id="Component_3_20" data-name="Component 3 – 20" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+                        <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill={buttonColor} />
+                        <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
+                            <text id="Filter" transform="translate(17.237 17.801)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Filter</tspan></text>
+                            <path id="Union_5" data-name="Union 5" d="M-2569.748-80.167l-6.242-11.041h16l-6.242,11.041v5.035l-3.515,1.424Z" transform="translate(2566 93.258)" fill="none" stroke="#fff" stroke-width="2" />
+                        </g>
+                    </svg>
+
+                </div>
+            )
+            break;
         case " ":
             buttonType = (
                 <div></div>
@@ -294,7 +308,7 @@ const Button = (props) => {
     return (
         <div id="button-container">
             {buttonType}
-            <button type="button" id="file-button" className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut} />
+            <button type="button" id={props.id} className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut} />
         </div>
     )
 }
