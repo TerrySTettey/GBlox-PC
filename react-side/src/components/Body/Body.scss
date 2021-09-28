@@ -1,4 +1,16 @@
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    border: solid 3px #0B0533;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #0000dc;
+    border: solid 3px transparent;
+    border-radius: 10px;
+  }
 
 .body-container {
     display: block;
@@ -151,9 +163,21 @@
         filter: drop-shadow(0 0 0 50px black);
     }
     #device-manager{
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+        ::-webkit-scrollbar-track {
+            border: solid 0px #0B0533;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0000dc;
+            border: solid 0px transparent;
+            border-radius: 10px;
+          }
         position: absolute;
         display: none;
-        margin-left: 286.1px;
+        margin-left: 236.1px;
         transition: display 1s;
         z-index: 2;
     }
