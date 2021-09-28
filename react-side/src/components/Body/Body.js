@@ -9,6 +9,7 @@ import Upload_Circle from '../Upload_Circle'
 import Toolbox from '../Toolbox/Toolbox';
 import Button from '../Button';
 import Header from '../Header/Header'
+import ToolSelector from '../ToolSelector/ToolSelector';
 
 const Arduino_Uno_SVG =
     [<svg xmlns="http://www.w3.org/2000/svg" width="143.754" height="102.44" viewBox="0 0 143.754 102.44">
@@ -3760,10 +3761,15 @@ const Body = (props) => {
             </div>
             <Header />
             <div className="c-Body-a-OverlayItems">
+                <div className="i-emptyDiv1"/>
                 <div className="c-Body-a-UploadCircle">
                     <Upload_Circle
                         onClick={device_drawer}
                     />
+                </div>
+                <div className="i-emptyDiv2"/>
+                <div className="c-Body-a-ToolSelector">
+                    <ToolSelector />
                 </div>
                 <div className="c-Body-a-ToolBox">
                     <Toolbox>
@@ -3939,12 +3945,16 @@ const Body = (props) => {
                     </Toolbox>
 
                 </div>
-                <div className="c-Body-a-UploadButton">
-                    <Button type="UploadButton" text="Upload" outColor="#060841" hoverColor="#0000dc" hoverEffect="svg-fill" />
+                <div className="i-emptyDiv3"/>
+                <div className="c-Body-a-UploadProg">
+                    <div className="c-Body-a-UploadButton">
+                        <Button type="UploadButton" text="Upload" outColor="#060841" hoverColor="#0000dc" hoverEffect="svg-fill" />
+                    </div>
+                    <div className="c-Body-a-ProgressBar">
+                        <ProgressBar progress={55} />
+                    </div>
                 </div>
-                <div className="c-Body-a-ProgressBar">
-                    <ProgressBar progress={55} />
-                </div>
+                <div className="i-emptyDiv4"/>
                 <div id="device-manager" ref={slide_out}>
                     <Slide_Out_Menu>
                         <div className="initial-text">Select Your Device</div>
@@ -3953,7 +3963,7 @@ const Body = (props) => {
                     </Slide_Out_Menu>
                 </div>
             </div>
-        </div>
+        </div >
     )
 
 }

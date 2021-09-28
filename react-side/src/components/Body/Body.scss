@@ -11,6 +11,7 @@
     border: solid 3px transparent;
     border-radius: 10px;
   }
+$shift: 0px;
 
 .body-container {
     display: block;
@@ -102,20 +103,48 @@
             }
         }
     
+    .i-emptyDiv1 {
+        height: 0px;
+    }
+    .i-emptyDiv2 {
+        max-height: 25px;
+        min-height: 5px;
+        flex-shrink: 1;
+        flex-grow: 1;
+    }
+    .i-emptyDiv3 {
+        max-height: 100px;
+        min-height: 10px;
+        flex-shrink: 1;
+        flex-grow: 1;
+    }
+
+    .i-emptyDiv4 {
+        max-height: 20px;
+        min-height: 20px;
+        flex-shrink: 4;
+        flex-grow: 1;
+    }
+    
     .c-Body-a-OverlayItems {
         display: flex;
+        justify-content:  center;
         position: absolute;
         flex-direction: column;
-        top: 92px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        top: 0px;//92px;
         left: 45.3px;
-        width: 151px;
-
-        outline: 2px red solid;
+        width: 200px;;//973px;//89.547vh;
+        height: 100vh;
+        //outline: 2px red solid;
     }
 
     .c-Body-a-UploadCircle {
         //left: 67.6px;
         //top:92px;
+        margin-top: 92px;
+        top: $shift;
         left: 22px;
         width: 151px;
         height: 151px;
@@ -124,31 +153,45 @@
     }
 
     .c-Body-a-ToolBox {
+        top:$shift;
         display: block;
-       position: relative;
-       margin-left: 0px;
-       margin-top: 60.1px;
-       //left: 45.3px;
-       //top:  283.1px;
+        position: relative;
+        margin-left: 0px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        max-height: 520px;
+        min-height: 0px;
+        flex-shrink: 1;
+        flex-grow: 1;
+        //margin-top: 60.1px;
+        //left: 45.3px;
+        //top:  283.1px;
     }
 
     .c-Body-a-UploadButton {
+        top: $shift;
         display: block;
         position: relative;
+        
 
         margin-left: -14px;
-        margin-top: 74.3px;
+        //margin-top: 74.3px;
         //left: 30px;
         //top: 981.2px;
     }
 
     .c-Body-a-ProgressBar {
+        top: $shift;
         display: block;
         position: relative;
         margin-left: -20px;
         //margin-top: 74.3px;
         //left: 30px;
         //top: 1030.1px;
+    }
+
+    .c-Body-a-UploadProg {
+        top: $shift;
     }
 
     .c-Body-a-WorkspaceContainer {
