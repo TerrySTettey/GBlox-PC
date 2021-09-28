@@ -6,7 +6,7 @@
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    border: solid 3px white;
+    border: solid 3px #0B0533;
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
@@ -19,16 +19,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    // grid-template-columns: 352px;
-    // grid-template-rows: 0.0287fr 0.040984fr;
     gap: 22px 18px;
     max-height: 920px;
-    
     #button-container {
         width: 120px;
     }
-
-
 }
 .code-example {
     display: inline-flex;

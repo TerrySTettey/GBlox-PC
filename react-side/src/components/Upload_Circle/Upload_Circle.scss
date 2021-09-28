@@ -3,19 +3,31 @@
     src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
   }
 
-.circle-animation {
-    position: absolute;
-    display: inline-block;
+#upload-container {
+    width: 151.1px;
+    height: 151.09px;
+    display: flex;
+    .circle{
+        position: absolute;
+        display: inline-block;
+    }
+    
+    #device-add-button{
+        position: absolute;
+        margin-top: 119.2px;
+        margin-left: 101.4px;
+    }
+    
+    .circle svg {
+        fill: #0000dc;
+    }
+    .circle svg:active {
+        fill: red;
+    }
+    .circle text{
+        font-family: 'Baloo2-Regular';
+        font-size: 17px;
+        fill: white;
+    }
 }
 
-.circle-animation svg {
-    fill: #0000dc;
-}
-.circle-animation svg:active {
-    fill: red;
-}
-.circle-animation text{
-    font-family: 'Baloo2-Regular';
-    font-size: 17px;
-    fill: white;
-}

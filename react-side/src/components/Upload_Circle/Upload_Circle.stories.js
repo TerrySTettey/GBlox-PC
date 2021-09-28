@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
-import Upload_Circle from './Upload_Circle'
+import Upload_Circle from './'
 import './Upload_Circle.scss'
 
 function Upload_Circle_Component() {

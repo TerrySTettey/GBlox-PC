@@ -6,23 +6,18 @@
         opacity: 1;
     }
 }
-@keyframes rotate_svg {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
+
 @font-face {
     font-family: 'Baloo2-Regular';
     src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
   }
 
-.sidebar-nav {
+#sidebar-nav {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
     z-index: 1;
+    width: 220px;
     height: 365px;
     background:#0B0533;
     overflow-x: hidden;
@@ -78,7 +73,4 @@
     display: block;
     fill: transparent;
     margin: auto;
-}
-.children svg:hover{
-    animation: rotate_svg 10s linear infinite;
 }

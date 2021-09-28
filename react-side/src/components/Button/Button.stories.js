@@ -250,3 +250,14 @@ FilterButton.args = {
     text: "Filter",
     hoverEffect: "fill"
 }
+
+export const DeviceAddButton = Template.bind({})
+DeviceAddButton.args = {
+    type: "DeviceAddButton",
+    inColor: "#0000aa",
+    outColor: "#0000bc",
+    hoverColor: "#0000aa",
+    s_ButtonState: "Out",
+    text: "Filter",
+    hoverEffect: "fill"
+}

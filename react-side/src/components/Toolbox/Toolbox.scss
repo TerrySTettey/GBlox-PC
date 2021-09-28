@@ -1,4 +1,4 @@
-.Toolbox {
+.Toolbox-Levels {
     position: relative;
     display: block;
     background-color: #0b0533;
@@ -121,4 +121,9 @@
             bottom: 0%;
         }
     }
+}
+.i-Buttons{
+    display: inline-flex;
+    flex-direction: column;
+    overflow-y: scroll;
 }

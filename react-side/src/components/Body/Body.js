@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Upload_Circle from '../Upload_Circle/Upload_Circle'
+import Device_Manager from '../Device_Manager';
 
 import "./Body.scss";
 import ProgressBar from '../ProgressBar';
@@ -248,7 +248,7 @@ const Body = (props) => {
             <Header />
             <div className="c-Body-a-OverlayItems">
                 <div className="c-Body-a-UploadCircle">
-                    <Upload_Circle />
+                    <Device_Manager />
                 </div>
                 <div className="c-Body-a-ToolBox">
                     <Toolbox>

@@ -22,6 +22,7 @@ function Example_Code_Menu_Component() {
                     This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
                 </div>
             </div>
+            
         </Example_Code_Menu>
     )
 }
