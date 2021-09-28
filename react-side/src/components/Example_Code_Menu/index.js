@@ -16,7 +16,9 @@ function index(props) {
                     hoverColor="#0000aa"
                     hoverEffect="fill"
                 />
+                <div id="examples">
                 {children}
+                </div>
                 
             </div>
         </Menu>

@@ -24,6 +24,12 @@
     #button-container {
         width: 120px;
     }
+    #examples{
+        display: flex;
+        height: 844.4px;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
 }
 .code-example {
     display: inline-flex;
@@ -32,6 +38,7 @@
     border: 1px solid #0000dc;
     height: 537px;
     padding: 18px 29px 0px 23px;
+    margin-bottom: 38px;
     .code-example-header {
         color: #4c97ff;
         padding-bottom: 16px;
