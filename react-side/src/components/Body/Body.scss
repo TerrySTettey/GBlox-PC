@@ -150,5 +150,12 @@
         //clip-path: url(#my-clip-path);
         filter: drop-shadow(0 0 0 50px black);
     }
+    #device-manager{
+        position: absolute;
+        display: none;
+        margin-left: 286.1px;
+        transition: display 1s;
+        z-index: 2;
+    }
 }
 
