@@ -3957,9 +3957,18 @@ const Body = (props) => {
                 <div className="i-emptyDiv4"/>
                 <div id="device-manager" ref={slide_out}>
                     <Slide_Out_Menu>
-                        <div className="initial-text">Select Your Device</div>
-                        {add_device(Arduino_Uno_SVG)}
-                        {add_device(mello_temp)}
+                        <div className="devices">
+                            {add_device(Arduino_Uno_SVG)}
+                            {add_device(mello_temp)}
+                            {add_device(Arduino_Uno_SVG)}
+                            {add_device(mello_temp)}
+                            {add_device(Arduino_Uno_SVG)}
+                            {add_device(mello_temp)}
+                            {add_device(Arduino_Uno_SVG)}
+                            {add_device(mello_temp)}
+                            {add_device(Arduino_Uno_SVG)}
+                            {add_device(mello_temp)}
+                        </div>
                     </Slide_Out_Menu>
                 </div>
             </div>

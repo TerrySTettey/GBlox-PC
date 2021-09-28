@@ -3505,7 +3505,14 @@ function Slide_Out_Menu_Component() {
 
     return (
         <Slide_Out_Menu>
-            <div className="initial-text">Select Your Device</div>
+            {add_device(Arduino_Uno_SVG)}
+            {add_device(mello_temp)}
+            {add_device(Arduino_Uno_SVG)}
+            {add_device(mello_temp)}
+            {add_device(Arduino_Uno_SVG)}
+            {add_device(mello_temp)}
+            {add_device(Arduino_Uno_SVG)}
+            {add_device(mello_temp)}
             {add_device(Arduino_Uno_SVG)}
             {add_device(mello_temp)}
         </Slide_Out_Menu>
@@ -3516,4 +3523,4 @@ export default {
     component: Slide_Out_Menu
 }
 
-export const Device_Manager = () => Slide_Out_Menu_Component();
+export const Slide_Out__Manager = () => Slide_Out_Menu_Component();
