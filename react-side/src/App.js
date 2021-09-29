@@ -21,7 +21,7 @@ var OurWorkspace;
 
 const component_styles = {
   "workspaceBackgroundColour": "#060841",
-  "toolboxBackgroundColour": "#03254c"
+  "flyoutBackgroundColour": "#0B0533"
 }
 
 const block_styles = {
@@ -95,7 +95,7 @@ const App = () => {
       });
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
       OurWorkspace.toolbox_.setVisible(false);
-      OurWorkspace.toolbox_.flyout_.positionAt_(0, 0, 0, 0)
+      console.log(OurWorkspace.toolbox_);
       //Blockly Alters
       AlterBlockly();
     }
@@ -103,8 +103,7 @@ const App = () => {
 
   function open_flyout(event) {
     var flyout = (event.target.id).split("_")[0].concat("_Toolbox");
-    console.log(flyout);
-    console.log(toolbox_selected);
+    //OurWorkspace.toolbox_.flyout_
 
     if (document.getElementById('blocklyDiv') !== null) {
       if(flyout!==toolbox_selected){
