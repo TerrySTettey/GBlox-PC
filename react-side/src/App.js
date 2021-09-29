@@ -7,16 +7,20 @@ import {MelloDOM, Basic_Flyouts} from "./customblocks/toolboxes/toolboxes"
 import { DeviceList } from "./deviceDef/device_list.js"
 import './App.css';
 import importblocks from "./customblocks/import"
+import AlterBlockly from "./blocklyextras/blocklyAlters";
 
 var currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
 var toolbox_selected = "";
 var variables_created = [];
 var OurWorkspace;
+
+
+
 //Blockly Themes
 
 const component_styles = {
-  "workspaceBackgroundColour": "#1f1254",
+  "workspaceBackgroundColour": "#060841",
   "toolboxBackgroundColour": "#03254c"
 }
 
@@ -91,6 +95,9 @@ const App = () => {
       });
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
       OurWorkspace.toolbox_.setVisible(false);
+
+      //Blockly Alters
+      AlterBlockly();
     }
   })
 
