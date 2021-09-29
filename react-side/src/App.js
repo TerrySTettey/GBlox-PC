@@ -81,7 +81,6 @@ const App = () => {
       OurWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: tb, renderer: "zelos", zoom:
         {
-          controls: true,
           wheel: true,
           startScale: 1,
           maxScale: 3,

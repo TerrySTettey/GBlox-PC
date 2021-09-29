@@ -3592,7 +3592,7 @@ const Body = (props) => {
                             </svg>
                         ]}
                         hoverEffect="svg-fill"
-                        onClick={props.workspaceInClick}
+                        onClick={props.workspaceClick}
                     />
                     <Button
                         id="zoom-out"
