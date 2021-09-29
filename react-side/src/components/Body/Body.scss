@@ -251,5 +251,12 @@ $shift: 0px;
         transition: display 1s;
         z-index: 2;
     }
+    .blocklyFlyout{
+        transform: translate(0px, 0px) !important;
+        position: relative;
+        margin-top: 87.3px;
+        margin-left: 36.1px;
+        height: 75%;
+      }
 }
 
