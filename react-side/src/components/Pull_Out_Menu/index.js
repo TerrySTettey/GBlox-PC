@@ -69,7 +69,7 @@ function Pull_Out_Menu(props) {
                     ]);
                     break;
             }
-            pull_out_menu.current.style.marginLeft = "500px"
+            pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
         }
         else {
@@ -79,7 +79,8 @@ function Pull_Out_Menu(props) {
         }
     }
 
-    return (<div className="pull-out-menu" ref={pull_out_menu}>
+    return (
+    <div className="pull-out-menu" ref={pull_out_menu}>
         <div className="c-Pull-Out-Menu-a-buttongroup" >
             <Button
                 id="view-code"
@@ -186,16 +187,13 @@ function Pull_Out_Menu(props) {
                 onClick={Menu}
             />
         </div>
-        <div id="shadow-container">
-        <div id="sidebar-overlay"></div>
         <div className="pull-out-container" ref={pull_out_container} >
             <div className="container-background">
                 {contents}
             </div>
         </div>
-        </div>
-
     </div>
+
     )
 }
 

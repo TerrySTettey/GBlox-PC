@@ -8,13 +8,15 @@ import TestMain from "./components/TestMain";
 import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
 import './App.css';
 
+import AlterBlockly from "./blocklyextras/blocklyAlters";
+
 var currentToolbox;
 currentToolbox = MelloDOM;
 var OurWorkspace;
 //Blockly Themes
 
 const component_styles = {
-  "workspaceBackgroundColour": "#1f1254",
+  "workspaceBackgroundColour": "#060841",
   "toolboxBackgroundColour": "#03254c"
 }
 
@@ -88,9 +90,12 @@ const App = () => {
       });
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
       OurWorkspace.toolbox_.setVisible(false);
+
+      //Blockly Alters
+      AlterBlockly();
     }
   })
-  
+
   return (
     <div>
       <TestMain />

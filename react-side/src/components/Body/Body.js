@@ -10,6 +10,8 @@ import Toolbox from '../Toolbox/Toolbox';
 import Button from '../Button';
 import Header from '../Header/Header'
 import ToolSelector from '../ToolSelector/ToolSelector';
+import Pull_Out_Menu from '../Pull_Out_Menu'
+
 
 const Arduino_Uno_SVG =
     [<svg xmlns="http://www.w3.org/2000/svg" width="143.754" height="102.44" viewBox="0 0 143.754 102.44">
@@ -3644,7 +3646,7 @@ const Body = (props) => {
                     </g>
                 </svg>
 
-                <svg id="num2" xmlns="http://www.w3.org/2000/svg" width="1076" height="246" viewBox="0 0 1076 245">
+                {/*<svg id="num2" xmlns="http://www.w3.org/2000/svg" width="1076" height="246" viewBox="0 0 1076 245">
                     <defs>
                         <clipPath id="clip-path">
                             <rect id="Rectangle_225" data-name="Rectangle 225" width="1076" height="245" transform="translate(3756 -4289)" fill="rgba(255,0,0,0.4)" />
@@ -3659,8 +3661,18 @@ const Body = (props) => {
                             </g>
                         </g>
                     </g>
+                </svg>*/}
+                <svg id="num2" xmlns="http://www.w3.org/2000/svg" width="1079" height="85" viewBox="0 0 1079 85" preserveAspectRatio="none">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_237" data-name="Rectangle 237" width="1079" height="85" transform="translate(1369 -6784)" fill="rgba(227,5,5,0.32)" />
+                        </clipPath>
+                    </defs>
+                    <g id="Mask_Group_14" data-name="Mask Group 14" transform="translate(-1369 6784)" clip-path="url(#clip-path)">
+                        <path id="Subtraction_9" data-name="Subtraction 9" d="M1920,1080H0V0H1920V1080ZM733.691,1017.475l39.577,39.476H1863.181l39.937-39.835V994.6l.6-.681-.98-354.408h-54.274V583.6l55.284-55.022-1.011-393.231-54.274-53.776H292.008l-48.914,47.88v87.4l25.155,25.091V985.854l31.837,31.756Z" transform="translate(599 -6784)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                    </g>
                 </svg>
-                <svg id="num14" xmlns="http://www.w3.org/2000/svg" width="1076" height="95" viewBox="0 0 1076 94">
+                <svg id="num14" xmlns="http://www.w3.org/2000/svg" width="1076" height="95" viewBox="0 0 1076 94" preserveAspectRatio="none">
                     <defs>
                         <clipPath id="clip-path">
                             <rect id="Rectangle_229" data-name="Rectangle 229" width="1076" height="94" transform="translate(3756 -3303)" fill="rgba(247,0,255,0.4)" />
@@ -3759,15 +3771,16 @@ const Body = (props) => {
                 </svg>
 
             </div>
+            <div className="c-Body-a-OverlayExtras"/>
             <Header />
             <div className="c-Body-a-OverlayItems">
-                <div className="i-emptyDiv1"/>
+                <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">
                     <Upload_Circle
                         onClick={device_drawer}
                     />
                 </div>
-                <div className="i-emptyDiv2"/>
+                <div className="i-emptyDiv2" />
                 <div className="c-Body-a-ToolSelector">
                     <ToolSelector />
                 </div>
@@ -3945,7 +3958,7 @@ const Body = (props) => {
                     </Toolbox>
 
                 </div>
-                <div className="i-emptyDiv3"/>
+                <div className="i-emptyDiv3" />
                 <div className="c-Body-a-UploadProg">
                     <div className="c-Body-a-UploadButton">
                         <Button type="UploadButton" text="Upload" outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" />
@@ -3954,7 +3967,7 @@ const Body = (props) => {
                         <ProgressBar progress={55} />
                     </div>
                 </div>
-                <div className="i-emptyDiv4"/>
+                <div className="i-emptyDiv4" />
                 <div id="device-manager" ref={slide_out}>
                     <Slide_Out_Menu>
                         <div className="devices">
@@ -3971,6 +3984,9 @@ const Body = (props) => {
                         </div>
                     </Slide_Out_Menu>
                 </div>
+            </div>
+            <div className="c-Body-a-PulloutMenu">
+                <Pull_Out_Menu />
             </div>
         </div >
     )
