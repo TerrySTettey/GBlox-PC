@@ -3511,6 +3511,8 @@ function add_device(svg) {
 
 }
 
+
+
 const Body = (props) => {
     var slide_out = useRef(null)
     const [drawerstate, setDrawerState] = useState(false);
@@ -3761,19 +3763,20 @@ const Body = (props) => {
             </div>
             <Header />
             <div className="c-Body-a-OverlayItems">
-                <div className="i-emptyDiv1"/>
+                <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">
                     <Upload_Circle
                         onClick={device_drawer}
                     />
                 </div>
-                <div className="i-emptyDiv2"/>
+                <div className="i-emptyDiv2" />
                 <div className="c-Body-a-ToolSelector">
                     <ToolSelector />
                 </div>
                 <div className="c-Body-a-ToolBox">
                     <Toolbox>
                         <Button
+                            id="Loop_Button"
                             type="ToolboxCategoryButton"
                             inColor="#060841"
                             outColor="#0000DC"
@@ -3792,8 +3795,10 @@ const Body = (props) => {
                             ]}
                             text="Loop"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="Logic_Button"
                             type="ToolboxCategoryButton"
                             inColor="#060841"
                             outColor="#4C97FF"
@@ -3809,8 +3814,10 @@ const Body = (props) => {
                             ]}
                             text="Logic"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="Math_Button"
                             type="ToolboxCategoryButton"
                             outColor="#8D00E8"
                             hoverColor="#0000dc"
@@ -3827,8 +3834,10 @@ const Body = (props) => {
                             ]}
                             text="Math"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="Text_Button"
                             type="ToolboxCategoryButton"
                             outColor="#16CE9C"
                             hoverColor="#0000dc"
@@ -3841,8 +3850,10 @@ const Body = (props) => {
                             ]}
                             text="Text"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="Actuators_Button"
                             type="ToolboxCategoryButton"
                             outColor="#FE8013"
                             hoverColor="#0000dc"
@@ -3858,8 +3869,10 @@ const Body = (props) => {
                             ]}
                             text="Actuators"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="Sensors_Button"
                             type="ToolboxCategoryButton"
                             outColor="#40BF4A"
                             hoverColor="#0000dc"
@@ -3879,8 +3892,10 @@ const Body = (props) => {
                             ]}
                             text="Sensors"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="COM_Button"
                             type="ToolboxCategoryButton"
                             outColor="#D51CD5"
                             hoverColor="#0000dc"
@@ -3899,8 +3914,10 @@ const Body = (props) => {
                             ]}
                             text="COM"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="Light_Button"
                             type="ToolboxCategoryButton"
                             outColor="#EFCA0F"
                             hoverColor="#0000dc"
@@ -3920,8 +3937,10 @@ const Body = (props) => {
                             ]}
                             text="Light"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                         <Button
+                            id="Sound_Button"
                             type="ToolboxCategoryButton"
                             inColor="#0000bc"
                             outColor="#FA857B"
@@ -3941,11 +3960,12 @@ const Body = (props) => {
                             ]}
                             text="Sound"
                             hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
                         />
                     </Toolbox>
 
                 </div>
-                <div className="i-emptyDiv3"/>
+                <div className="i-emptyDiv3" />
                 <div className="c-Body-a-UploadProg">
                     <div className="c-Body-a-UploadButton">
                         <Button type="UploadButton" text="Upload" outColor="#060841" hoverColor="#0000dc" hoverEffect="svg-fill" />
@@ -3954,7 +3974,7 @@ const Body = (props) => {
                         <ProgressBar progress={55} />
                     </div>
                 </div>
-                <div className="i-emptyDiv4"/>
+                <div className="i-emptyDiv4" />
                 <div id="device-manager" ref={slide_out}>
                     <Slide_Out_Menu>
                         <div className="devices">

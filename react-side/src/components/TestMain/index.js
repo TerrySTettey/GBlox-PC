@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Body  from '../Body'
 
 import "./TestMain.scss"
 
-const TestMain = () => {
+const TestMain = (props) => {
 
     var AllScrolls = document.getElementsByClassName("blocklyScrollbarHandle");
     var i = 0;
@@ -12,7 +13,7 @@ const TestMain = () => {
     }
     return (
         <div>
-            <Body />
+            <Body ToolboxFunction={props.ToolboxFunction}/>
         </div>
     )
 }

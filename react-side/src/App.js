@@ -1,15 +1,17 @@
 import Blockly from "blockly";
 import React, { useState, useEffect } from 'react';
-
 import PropTypes from 'prop-types';
-
 import TestMain from "./components/TestMain";
 
-import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
+import {MelloDOM, Basic_Flyouts} from "./customblocks/toolboxes/toolboxes"
+import { DeviceList } from "./deviceDef/device_list.js"
 import './App.css';
+import importblocks from "./customblocks/import"
 
-var currentToolbox;
-currentToolbox = MelloDOM;
+var currentToolbox = MelloDOM;
+var currentToolboxName = "Mello";
+var toolbox_selected = "";
+var variables_created = [];
 var OurWorkspace;
 //Blockly Themes
 
@@ -66,13 +68,14 @@ var newxmldom = Blockly.Xml.textToDom(newxml);
 
 
 const App = () => {
-
+  importblocks.importblocks();
   //Injecting Blockly
   useEffect(() => {
+    
     if (document.getElementById('blocklyDiv') !== null) {
       var tb = currentToolbox;
       OurWorkspace = Blockly.inject('blocklyDiv', {
-        toolbox: currentToolbox, renderer: "zelos", zoom:
+        toolbox: tb, renderer: "zelos", zoom:
         {
           controls: true,
           wheel: true,
@@ -90,12 +93,46 @@ const App = () => {
       OurWorkspace.toolbox_.setVisible(false);
     }
   })
-  
+
+  function open_flyout(event) {
+    var flyout = (event.target.id).split("_")[0].concat("_Toolbox");
+    console.log(flyout);
+    console.log(toolbox_selected);
+    OurWorkspace.toolbox_.flyout_.positionAt_(0, 0, 0, 0)
+    if (document.getElementById('blocklyDiv') !== null) {
+      if(flyout!==toolbox_selected){
+        toolbox_selected = flyout;
+        switch (flyout) {
+          case "Logic_Toolbox":
+            OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(Basic_Flyouts.Logic_Toolbox));
+            break;
+          case "Text_Toolbox":
+            OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(Basic_Flyouts.Text_Toolbox));
+            break;
+          case "Loop_Toolbox":
+            OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(Basic_Flyouts.Loop_Toolbox));
+            break;
+            case "Math_Toolbox":
+              OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(Basic_Flyouts.Math_Toolbox));
+              break;
+          default:
+            break;
+        } 
+      }
+      else{
+        console.log("HIDE")
+        toolbox_selected = ""
+        OurWorkspace.toolbox_.flyout_.hide();
+      }
+    }
+  }
+
   return (
     <div>
-      <TestMain />
+      <TestMain ToolboxFunction={open_flyout} />
     </div>
   )
 }
 
 export default App;
+export { currentToolboxName, variables_created };
