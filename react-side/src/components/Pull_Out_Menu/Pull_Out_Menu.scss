@@ -2,6 +2,7 @@
     position: relative;
     display: flex;
     transition: margin-left 1s, opacity 1s;
+    z-index: 3;
 
     #shadow-container{
         position: relative;

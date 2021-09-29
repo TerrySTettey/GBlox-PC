@@ -4006,7 +4006,7 @@ const Body = (props) => {
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu />
+                <Pull_Out_Menu MenuFunction={props.MenuFunction}/>
             </div>
         </div >
     )

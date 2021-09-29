@@ -71,6 +71,10 @@ function Pull_Out_Menu(props) {
             }
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
+            if(props.MenuFunction !==undefined){
+                props.MenuFunction()
+            }
+            
         }
         else {
             setLastButtonClicked("");

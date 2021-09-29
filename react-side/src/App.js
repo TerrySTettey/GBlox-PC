@@ -95,7 +95,7 @@ const App = () => {
       });
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
       OurWorkspace.toolbox_.setVisible(false);
-
+      OurWorkspace.toolbox_.flyout_.positionAt_(0, 0, 0, 0)
       //Blockly Alters
       AlterBlockly();
     }
@@ -105,7 +105,7 @@ const App = () => {
     var flyout = (event.target.id).split("_")[0].concat("_Toolbox");
     console.log(flyout);
     console.log(toolbox_selected);
-    OurWorkspace.toolbox_.flyout_.positionAt_(0, 0, 0, 0)
+
     if (document.getElementById('blocklyDiv') !== null) {
       if(flyout!==toolbox_selected){
         toolbox_selected = flyout;
