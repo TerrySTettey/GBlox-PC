@@ -86,8 +86,9 @@
 }
 
 .c-button-a-WorkspaceTabButton {
+    user-select: none;
     position: relative;
-    display: flex;
+    display: inline-flex;
     transform: skewX(-45deg);
     width: 162px;
     height: 36px;
@@ -99,15 +100,19 @@
         transform: skewX(45deg);
         text-align: center;
     }
+    .workspace-close-button {
+        position: relative;
+        display: block;
+        color: white;
+        transform: skewX(45deg);
+        margin:4.3px 10px 25px 0px;
+        font-size: 12px;
+    }
+    .empty-button{
+
+    }
 }
-.workspace-close-button {
-    position: relative;
-    display: block;
-    color: white;
-    transform: skewX(45deg);
-    margin:0px 10px 25px 0px;
-    font-size: 10px;
-}
+
 .workspace-close-button:hover {
     color: black;
     
@@ -116,7 +121,7 @@
 .c-button-a-CircularOverlayMenuButton {
     position: relative;
     border-radius: 50%;
-    border-color: #ffffff;
+    border: 2px solid white;
     width: 60px;
     height: 60px;
     align-items: center;

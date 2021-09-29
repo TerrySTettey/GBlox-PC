@@ -3537,6 +3537,71 @@ const Body = (props) => {
                 <div id="blocklyDiv">
 
                 </div>
+                <div className="workspace-controls">
+                    <Button
+                        id="zoom-in"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="16.745" viewBox="0 0 16.745 16.745">
+                                <rect id="Rectangle_6" data-name="Rectangle 6" width="16.745" height="2.155" transform="translate(0 7.295)" />
+                                <rect id="Rectangle_7" data-name="Rectangle 7" width="2.155" height="16.745" transform="translate(7.295)" />
+                            </svg>
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceInClick}
+                    />
+                    <Button
+                        id="zoom-out"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="2.232" viewBox="0 0 16.745 2.232">
+                                <rect id="Rectangle_8" data-name="Rectangle 8" width="16.745" height="2.232" />
+                            </svg>
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="zoom-to-fit"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="8.511" viewBox="0 0 16.745 8.511">
+                                <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" fill="#e9e9ff" />
+                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)" fill="#e9e9ff" />
+                            </svg>
+
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="workspace-previous"
+                        type="WorkspaceControlButton_Previous"
+                        inColor="#E9E9FF"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        s_ButtonState="Out"
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="workspace-after"
+                        type="WorkspaceControlButton_After"
+                        inColor="#060841"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        s_ButtonState="Out"
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                </div>
+
             </div>
 
             <div className="tester">
@@ -3773,7 +3838,7 @@ const Body = (props) => {
                 </svg>
 
             </div>
-            <div className="c-Body-a-OverlayExtras"/>
+            <div className="c-Body-a-OverlayExtras" />
             <Header />
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
@@ -4006,7 +4071,7 @@ const Body = (props) => {
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={props.MenuFunction}/>
+                <Pull_Out_Menu MenuFunction={props.MenuFunction} />
             </div>
         </div >
     )
