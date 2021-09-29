@@ -3513,6 +3513,48 @@ function add_device(svg) {
 
 }
 
+function PullOutPullOut(stateCheck) {
+    console.log(stateCheck)
+    var Overlay = document.getElementsByClassName("c-Body-a-Overlay")[0];
+    var OverlayExtras = document.getElementsByClassName("c-Body-a-OverlayExtras")[0];
+    if (stateCheck === "Closed") {
+        if (!Overlay.classList.contains("t-Transition")) {
+            Overlay.classList.add("t-Transition")
+        }
+        if (!OverlayExtras.classList.contains("t-Transition")) {
+            OverlayExtras.classList.add("t-Transition")
+        }
+        Overlay.style.width = "calc(100vw - 420px)"
+        OverlayExtras.style.width = "420px"
+        setTimeout(function(){
+            if (Overlay.classList.contains("t-Transition")) {
+                Overlay.classList.remove("t-Transition")
+            }
+            if (OverlayExtras.classList.contains("t-Transition")) {
+                OverlayExtras.classList.remove("t-Transition")
+            }
+        }, 800);
+        
+    } else {
+        if (!Overlay.classList.contains("t-Transition")) {
+            Overlay.classList.add("t-Transition")
+        }
+        if (!OverlayExtras.classList.contains("t-Transition")) {
+            OverlayExtras.classList.add("t-Transition")
+        }
+        Overlay.style.width = "100vw"
+        OverlayExtras.style.width = "0px"
+        setTimeout(function(){
+            if (Overlay.classList.contains("t-Transition")) {
+                Overlay.classList.remove("t-Transition")
+            }
+            if (OverlayExtras.classList.contains("t-Transition")) {
+                OverlayExtras.classList.remove("t-Transition")
+            }
+        }, 800);
+    }
+}
+
 
 
 const Body = (props) => {
@@ -3631,7 +3673,7 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
-                <svg id="num13" xmlns="http://www.w3.org/2000/svg" width="773" height="95" viewBox="0 0 772 94">
+                <svg id="num13" xmlns="http://www.w3.org/2000/svg" width="773" height="97" viewBox="0 0 772 94">
                     <defs>
                         <clipPath id="clip-path">
                             <rect id="Rectangle_229" data-name="Rectangle 229" width="772" height="94" transform="translate(2984 -3303)" fill="rgba(247,0,255,0.4)" />
@@ -3674,7 +3716,7 @@ const Body = (props) => {
                         <path id="Subtraction_9" data-name="Subtraction 9" d="M1920,1080H0V0H1920V1080ZM733.691,1017.475l39.577,39.476H1863.181l39.937-39.835V994.6l.6-.681-.98-354.408h-54.274V583.6l55.284-55.022-1.011-393.231-54.274-53.776H292.008l-48.914,47.88v87.4l25.155,25.091V985.854l31.837,31.756Z" transform="translate(599 -6784)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
                     </g>
                 </svg>
-                <svg id="num14" xmlns="http://www.w3.org/2000/svg" width="1076" height="95" viewBox="0 0 1076 94" preserveAspectRatio="none">
+                <svg id="num14" xmlns="http://www.w3.org/2000/svg" width="1076" height="97" viewBox="0 0 1076 94" preserveAspectRatio="none">
                     <defs>
                         <clipPath id="clip-path">
                             <rect id="Rectangle_229" data-name="Rectangle 229" width="1076" height="94" transform="translate(3756 -3303)" fill="rgba(247,0,255,0.4)" />
@@ -3755,7 +3797,7 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
-                <svg id="num15" xmlns="http://www.w3.org/2000/svg" width="76" height="95" viewBox="0 0 72 94">
+                <svg id="num15" xmlns="http://www.w3.org/2000/svg" width="76" height="97" viewBox="0 0 72 94">
                     <defs>
                         <clipPath id="clip-path">
                             <rect id="Rectangle_229" data-name="Rectangle 229" width="72" height="94" transform="translate(4832 -3303)" fill="rgba(247,0,255,0.4)" />
@@ -3773,7 +3815,7 @@ const Body = (props) => {
                 </svg>
 
             </div>
-            <div className="c-Body-a-OverlayExtras"/>
+            <div className="c-Body-a-OverlayExtras" />
             <Header />
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
@@ -4006,7 +4048,7 @@ const Body = (props) => {
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={props.MenuFunction}/>
+                <Pull_Out_Menu MenuFunction={PullOutPullOut} />
             </div>
         </div >
     )

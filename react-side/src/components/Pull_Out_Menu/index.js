@@ -10,7 +10,7 @@ import Example_Code_Menu from '../Example_Code_Menu'
 
 import { useRef, useState, useEffect } from 'react'
 
-
+var menuOpen = "Closed";
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);
     const [last_button_clicked, setLastButtonClicked] = useState("");
@@ -19,9 +19,10 @@ function Pull_Out_Menu(props) {
     var pull_out_container = useRef(null);
 
     function Menu(event) {
-        console.log(event.target.id);
+        menuOpen="Open"
         if (last_button_clicked !== event.target.id) {
             setLastButtonClicked(event.target.id);
+            menuOpen = "Closed"
             switch (event.target.id) {
                 case "help-menu":
                     setContents([<Help_Menu />]);
@@ -71,15 +72,17 @@ function Pull_Out_Menu(props) {
             }
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
-            if(props.MenuFunction !==undefined){
-                props.MenuFunction()
-            }
+            
             
         }
         else {
-            setLastButtonClicked("");
+            setLastButtonClicked("None");
             pull_out_menu.current.style.marginLeft = "0px"
             pull_out_container.current.style.opacity = "0"
+            
+        }
+        if(props.MenuFunction !==undefined){
+            props.MenuFunction(menuOpen)
         }
     }
 
