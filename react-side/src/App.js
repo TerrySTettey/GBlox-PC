@@ -8,6 +8,7 @@ import { DeviceList } from "./deviceDef/device_list.js"
 import './App.css';
 import importblocks from "./customblocks/import"
 import AlterBlockly from "./blocklyextras/blocklyAlters";
+import ToolSelector from "./components/ToolSelector/ToolSelector";
 
 var currentToolbox = MelloDOM;
 var currentToolboxName = "Mello";
@@ -81,6 +82,7 @@ const App = () => {
       OurWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: tb, renderer: "zelos", zoom:
         {
+          /*controls: true,*/
           wheel: true,
           startScale: 1,
           maxScale: 3,
@@ -94,6 +96,32 @@ const App = () => {
       });
       Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
       OurWorkspace.toolbox_.setVisible(false);
+      console.log(OurWorkspace.toolbox_);
+
+
+      // if (OurWorkspace !== null) {
+      //   var Toolboxer = document.getElementsByClassName("blocklyToolboxDiv")[0];
+      //   console.log(Toolboxer)
+      //   //var Destination = document.body.appendChild(Toolboxer)
+      //   Toolboxer.style.position = "absolute";
+      //   Toolboxer.style.width = "195px";
+      //   Toolboxer.style.height = "506px";
+      //   Toolboxer.style.left = "46px";
+      //   Toolboxer.style.top = "330px";
+      //   Toolboxer.style.pointerEvents = "none";
+
+      //   /*
+      //   var LogicButton=document.getElementById("blockly-0");
+      //   OurWorkspace.toolbox_.flyout_.positionAt_(500,500,0,0)
+      //   LogicButton.click();
+      //   */
+
+      //   //console.log(Blockly.utils.toolbox.convertToolboxDefToJson(MelloToolbox))
+      //   /*
+      //   OurWorkspace.refreshToolboxSelection()
+      //   OurWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(`<xml> <block type="variable_get"></block> </xml>`))
+      //   */
+      // }
 
       //Blockly Alters
       AlterBlockly();
@@ -118,9 +146,9 @@ const App = () => {
         case "workspace-previous":
           OurWorkspace.undo(false);
           break;
-          case "workspace-after":
-            OurWorkspace.undo(true);
-            break;
+        case "workspace-after":
+          OurWorkspace.undo(true);
+          break;
         default:
           break;
       }

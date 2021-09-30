@@ -3533,7 +3533,7 @@ function PullOutPullOut(stateCheck) {
             if (OverlayExtras.classList.contains("t-Transition")) {
                 OverlayExtras.classList.remove("t-Transition")
             }
-        }, 800);
+        }, 500);
         
     } else {
         if (!Overlay.classList.contains("t-Transition")) {
@@ -3551,11 +3551,9 @@ function PullOutPullOut(stateCheck) {
             if (OverlayExtras.classList.contains("t-Transition")) {
                 OverlayExtras.classList.remove("t-Transition")
             }
-        }, 800);
+        }, 500);
     }
 }
-
-
 
 const Body = (props) => {
     var slide_out = useRef(null)
