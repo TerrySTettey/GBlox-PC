@@ -7,6 +7,7 @@ import { MelloDOM, Basic_Flyouts } from "./customblocks/toolboxes/toolboxes"
 import { DeviceList } from "./deviceDef/device_list.js"
 import './App.css';
 import AlterBlockly from "./blocklyextras/blocklyAlters";
+import ToolSelector from "./components/ToolSelector/ToolSelector";
 
 import "./customblocks/customblocks";
 import "./customblocks/compiler/arduino_core";
@@ -108,6 +109,7 @@ const App = () => {
       OurWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: tb, renderer: "zelos", zoom:
         {
+          /*controls: true,*/
           wheel: true,
           startScale: 1,
           maxScale: 3,
