@@ -124,7 +124,7 @@ Blockly.Blocks['communication_serial_print'] = {
   };
 
 Blockly.JavaScript['m_mainloop'] = function(block) {
-    getPeripherals();
+    //getPeripherals();
     Blockly.HSV_SATURATION = 0.85;
     Blockly.HSV_VALUE = 1;
     if (currentToolboxName === "Mello"){
@@ -203,7 +203,7 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
     var text_varname = block.getFieldValue('variables_set');
     console.log(text_varname);
     var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
+
     var code = '';
     code = `${text_varname} = ${value_value};\n`
     return code;
@@ -211,11 +211,11 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
   
   Blockly.JavaScript['variable_get'] = function(block) {
     var text_varname = block.getFieldValue('variables_set');
-    // TODO: Assemble JavaScript into code variable.
+
     var code = '...';
     code = `${text_varname}`
     console.log(variables_set);
-    // TODO: Change ORDER_NONE to the correct strength.
+
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
@@ -226,76 +226,6 @@ Blockly.JavaScript['communication_serial_print'] = function(block) {
     var code = 'for (int i = 0;i<'+number_loop_amount+';i++) {\n'+statements_for_loop+'};\n';
     return code;
   };
-  
-//   Blockly.JavaScript['variable_create_variable'] = function(block) {
-//     var dropdown_variable_type = block.getFieldValue('variable type');
-//     var text_varname = Blockly.JavaScript.valueToCode(block, 'varname', Blockly.JavaScript.ORDER_ATOMIC);
-//     text_varname = text_varname.replaceAll(`'`,'');
-//     var code = `${dropdown_variable_type} ${text_varname};\n`
-//     if (text_varname !== ""){
-//         const temp_var = [`${dropdown_variable_type} ${text_varname}`,`${text_varname}`];
-//         var duplicate_number = 0;
-//         // console.log(temp_var[0]);
-//         // console.log("arr" + variables_set[0][1])
-//         for (var i=0; i<(variables_set.length); i++){
-//             // console.log(variables_set[i][0].includes(temp_var[0]));
-//                 if (variables_set[i][0].includes(temp_var[0])==1){
-//                     console.log("Duplicate found");
-//                     duplicate_number++;
-//                 }
-//             }
-//         if (duplicate_number == 0){
-//             variables_set.push(temp_var);
-//         }
-//         duplicate_number = 0;
 
-//     }
-//     return code;
-//   };
-
-
-//   Blockly.JavaScript['variable_create_int'] = function(block) {
-//     var text_varname = block.getFieldValue('varname');
-//     // TODO: Assemble JavaScript into code variable.
-//     var code = `int ${text_varname};\n`
-//     const temp_var = [`int ${text_varname}`,`${text_varname}`];
-//     var duplicate_number = 0;
-//     // console.log(temp_var[0]);
-//     // console.log("arr" + variables_set[0][1])
-//     for (var i=0; i<(variables_set.length); i++){
-//         // console.log(variables_set[i][0].includes(temp_var[0]));
-//             if (variables_set[i][0].includes(temp_var[0])==1){
-//                 console.log("Duplicate found");
-//                 duplicate_number++;
-//             }
-//         }
-//     if (duplicate_number == 0){
-//         variables_set.push(temp_var);
-//     }
-//     duplicate_number = 0;
-//     return code;
-//   };
-  
-//   Blockly.JavaScript['variable_create_float'] = function(block) {
-//     var text_varname = block.getFieldValue('varname');
-//     // TODO: Assemble JavaScript into code variable.
-//     var code = `float ${text_varname};\n`
-//     const temp_var = [`float ${text_varname}`,`${text_varname}`];
-//     var duplicate_number = 0;
-//     // console.log(temp_var[0]);
-//     // console.log("arr" + variables_set[0][1])
-//     for (var i=0; i<(variables_set.length); i++){
-//         // console.log(variables_set[i][0].includes(temp_var[0]));
-//             if (variables_set[i][0].includes(temp_var[0])==1){
-//                 console.log("Duplicate found");
-//                 duplicate_number++;
-//             }
-//         }
-//     if (duplicate_number == 0){
-//         variables_set.push(temp_var);
-//     }
-//     duplicate_number = 0;
-//     return code;
-//   };
 
 export {mainLoopCode}

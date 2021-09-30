@@ -257,7 +257,7 @@ const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id=
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
   </category>
-  <category name="Loops" colour="#5ba55b">
+  <category id="Loops" name="Loops" colour="#5ba55b">
       <block type="for_loop">
       </block>
       <block type="controls_whileUntil">

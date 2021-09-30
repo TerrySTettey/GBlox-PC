@@ -13,7 +13,7 @@ const TestMain = (props) => {
     }
     return (
         <div>
-            <Body ToolboxFunction={props.ToolboxFunction} MenuFunction={props.MenuFunction} workspaceClick={props.workspaceClick}/>
+            <Body ToolboxFunction={props.ToolboxFunction} MenuFunction={props.MenuFunction} workspaceClick={props.workspaceClick} viewCode={props.viewCode} toolboxButtons={props.toolboxButtons}/>
         </div>
     )
 }

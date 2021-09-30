@@ -34,7 +34,7 @@ function Pull_Out_Menu(props) {
                     setContents([<Edit_Code_Menu />]);
                     break;
                 case "view-code":
-                    setContents([<View_Code_Menu />]);
+                    setContents([<View_Code_Menu viewCode={props.viewCode}/>]);
                     break;
                 case "example-code":
                     setContents([

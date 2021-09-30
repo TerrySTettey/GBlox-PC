@@ -9,6 +9,7 @@ function index(props) {
             <div id="view-code-menu">
                 <div className="text">View Code</div>
                 <div className="code-viewer">
+                    {props.viewCode}
                 </div>
             </div>
         </Menu>
