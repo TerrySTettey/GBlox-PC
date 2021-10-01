@@ -11,6 +11,7 @@ import Button from '../Button';
 import Header from '../Header/Header'
 import ToolSelector from '../ToolSelector/ToolSelector';
 import Pull_Out_Menu from '../Pull_Out_Menu'
+import CustomDrop from '../CustomDrop';
 
 
 const Arduino_Uno_SVG =
@@ -3543,7 +3544,7 @@ const svgs = {
                 </g>
             </svg>
         </div>,
-    Communication:
+    COM:
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="25.691" height="20.751" viewBox="0 0 25.691 20.751">
                 <g id="Group_421" data-name="Group 421" transform="translate(-400.482 824.408) rotate(-90)">
@@ -3654,9 +3655,13 @@ const Body = (props) => {
     function genbuttons(toolbox_items) {
 
         var buttons = [];
+        var children = [];
+        var category = "";
+        var category_svg = [];
+        var children_count = 0;
         for (var i = 0; i < toolbox_items.length; i++) {
             var svg = []
-            console.log(toolbox_items[i][0])
+    
             switch (toolbox_items[i][0]) {
                 case "Loops":
                     svg = svgs.Loop;
@@ -3676,8 +3681,8 @@ const Body = (props) => {
                 case "Sensors":
                     svg = svgs.Sensors;
                     break;
-                case "Communication":
-                    svg = svgs.Communication;
+                case "COM":
+                    svg = svgs.COM;
                     break;
                 case "LEDs":
                     svg = svgs.LEDs;
@@ -3688,22 +3693,70 @@ const Body = (props) => {
                 default:
                     break;
             }
-            buttons.push(
-                <Button
-                    id={toolbox_items[i][1]}
-                    type="ToolboxCategoryButton"
-                    outColor={("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))}
-                    hoverColor="#0000dc"
-                    s_ButtonState="Out"
-                    children={[svg]}
-                        // {svg}
-                    
-                    text={toolbox_items[i][0]}
-                    level={toolbox_items[i][2]}
-                    hoverEffect="fill"
-                    onClick={props.ToolboxFunction}
-                />
-            )
+            if (toolbox_items[i][2]=="category"){
+                children_count = toolbox_items[i][3];
+                category = toolbox_items[i][0]
+                category_svg=svg;
+
+            }
+            else{
+                children_count -= 1;
+                if (children_count < 0){
+                    children_count = 0;
+                    //Level 0 Buttons
+                    buttons.push(
+                        <Button
+                            id={toolbox_items[i][1]}
+                            type="ToolboxCategoryButton"
+                            outColor={("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))}
+                            hoverColor="#0000dc"
+                            s_ButtonState="Out"
+                            children={[svg]}
+                            text={toolbox_items[i][0]}
+                            toolbox_type={toolbox_items[i][2]}
+                            child_count = {children_count}
+                            hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
+                        />
+                    )
+                }
+                else{
+                    children.push(
+                        <Button
+                            id={toolbox_items[i][1]}
+                            type="ToolboxCategoryButton"
+                            outColor={("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))}
+                            hoverColor="#0000dc"
+                            s_ButtonState="Out"
+                            children={[svg]}
+                            text={toolbox_items[i][0]}
+                            toolbox_type={toolbox_items[i][2]}
+                            child_count = {children_count}
+                            hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
+                        />
+                    )
+                    if (children_count === 0){
+                        buttons.push(
+                            <CustomDrop
+                            buttonType="ToolboxCategoryButton"
+                            text={category}
+                            childrenlist={children}
+                            outColor={("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))}
+                            dropType="toolbox_list"
+                            svg={[category_svg]}
+                            modal=""
+                            />
+                        )
+                        children = []
+                        category=""
+                        category_svg=[];
+                    }
+                }
+                
+            }
+
+            
         }
         return buttons;
     }

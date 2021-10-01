@@ -399,8 +399,8 @@ const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id=
         </block>
     </category>
   </category>
-  <category css-icon="customIcon fa fa-cog" name="Communication">
-    <category name="Infrared Remote Control">
+  <category css-icon="customIcon fa fa-cog" name="COM">
+    <category name="IR">
         <block type="communication_infrared_start"></block>
         <block type="communication_infrared_value">
             <field name="Received_Character">FF629D</field>

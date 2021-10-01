@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types'
 import './ToolSelector.scss'
 import Button from '../Button'
@@ -48,9 +48,10 @@ function level_group(level) {
 
 function ToolSelector(props) {
     var Connector = useRef(null);
-    var level = "Beginner"
+    const [level, setLevel] = useState("")
 
     function level1OnClick() {
+        setLevel("Beginner")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
         }
@@ -70,6 +71,7 @@ function ToolSelector(props) {
         Connector.current.classList.add("con-pos-1");
     }
     function level2OnClick() {
+        setLevel("Apprentice")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
         }
@@ -89,6 +91,7 @@ function ToolSelector(props) {
         Connector.current.classList.add("con-pos-2");
     }
     function level3OnClick() {
+        setLevel("Intermediate")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
         }
@@ -108,6 +111,7 @@ function ToolSelector(props) {
         Connector.current.classList.add("con-pos-3");
     }
     function level4OnClick() {
+        setLevel("Pro")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
         }
@@ -127,6 +131,7 @@ function ToolSelector(props) {
         Connector.current.classList.add("con-pos-4");
     }
     function level5OnClick() {
+        setLevel("Master")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
         }

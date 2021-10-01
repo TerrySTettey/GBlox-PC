@@ -186,6 +186,10 @@ $shift: 0px;
         //margin-top: 60.1px;
         //left: 45.3px;
         //top:  283.1px;
+        .c-Toolbox-a-ToolboxCategoryChild{
+            display: flex;
+            flex-direction: column;
+        }
     }
 
     .c-Body-a-UploadButton {

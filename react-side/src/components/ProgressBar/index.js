@@ -17,10 +17,10 @@ const ProgressBar = (props) => {
    var fillNum = 0;
    if (props.progress % 2 === 0) {
       fillNum = Math.round(props.progress / 2);
-      console.log(fillNum)
+      // console.log(fillNum)
    } else {
       fillNum = Math.round(props.progress / 2) - 1;
-      console.log(fillNum)
+      // console.log(fillNum)
    }
 
    for (var i = 1; i <= 50; i++) {

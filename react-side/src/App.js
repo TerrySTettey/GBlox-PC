@@ -80,17 +80,15 @@ var default_workspace = `<xml xmlns="https://developers.google.com/blockly/xml">
 var newxml = default_workspace;
 var newxmldom = Blockly.Xml.textToDom(newxml);
 
-
 const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
-  const [toolbox_categories, setToolboxCategories] = useState([]);
 
   function logbutton() {
     console.log("Button Pressed");
   }
 
-  function showCode(event) {
-    var code = Blockly.JavaScript.workspaceToCode(OurWorkspace);
+  function showCode() {
+    var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
     if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
       code = mainLoopCode;
     }
@@ -103,12 +101,12 @@ const App = () => {
     //   Blockly.Xml.domToWorkspace(newxmldom, workspace);
     // }
     setArduinoCode(code);
-    console.log(code);
   }
   //Injecting Blockly
   useEffect(() => {
-    toolbox_items = [];
-    if (document.getElementById('blocklyDiv') !== null) {
+    
+    if (initialized_workspace === false) {
+      toolbox_items = [];
       var tb = currentToolbox;
       OurWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: tb, renderer: "zelos", zoom:
@@ -124,7 +122,7 @@ const App = () => {
           snap: true
         }, theme: test_theme
       });
-
+      
       for (var i = 0; i < (OurWorkspace.toolbox_.getToolboxItems()).length; i++) {
         var items = OurWorkspace.toolbox_.getToolboxItems();
         var subcat = items[i].subcategoriesDiv_
@@ -141,19 +139,22 @@ const App = () => {
         else {
           var category = OurWorkspace.toolbox_.getToolboxItems()[i];
           category.setExpanded(true)
+          var children_count = (category.getChildToolboxItems()).length
           if (i >= 10) {
             id = String.fromCharCode(65 + (i - 10)).toLowerCase()
           }
-          toolbox_items.push([items[i].name_, `blockly-${id}`, "category"]);
+          toolbox_items.push([items[i].name_, `blockly-${id}`, "category", children_count]);
         }
-
       }
+      Blockly.Xml.clearWorkspaceAndLoadFromXml(newxmldom, OurWorkspace);
+      OurWorkspace.toolbox_.setVisible(false);
+      OurWorkspace.addChangeListener(showCode);
+      AlterBlockly();
+      initialized_workspace = true;
     }
-    Blockly.Xml.domToWorkspace(newxmldom, OurWorkspace);
-    console.log(OurWorkspace)
-    OurWorkspace.toolbox_.setVisible(false);
-    OurWorkspace.addChangeListener(showCode);
-    AlterBlockly();
+    
+   
+    
   })
 
 function workspaceClick(event) {
@@ -191,9 +192,9 @@ return (
       ToolboxFunction={open_flyout}
       workspaceClick={workspaceClick}
       viewCode={
-        <p>
-          {arduinocode}
-        </p>
+        <div>
+        {arduinocode}
+        </div>
       }
       toolboxButtons={toolbox_items}
     />

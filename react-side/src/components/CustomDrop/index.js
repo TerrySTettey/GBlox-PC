@@ -55,17 +55,26 @@ const CustomDrop = (props) => {
             switch (props.modal) {
                 case "SettingsModal":
                     ButtonHolder = (
-                    <div style={{
-                        position: 'absolute',
-                        right: '50px',
-                        filter: 'drop-shadow(0 0 50px black)'
-                    }}>
-                        <ModalSettings />
-                    </div>
+                        <div style={{
+                            position: 'absolute',
+                            right: '50px',
+                            filter: 'drop-shadow(0 0 50px black)'
+                        }}>
+                            <ModalSettings />
+                        </div>
                     )
                     break;
                 case " ":
                     break;
+            }
+            break;
+        case "toolbox_list":
+            for (var i=0 ; i < props.childrenlist.length; i++) {
+                ButtonHolder.push(
+                    <div class="c-CustomDrop-a-ToolboxChildButton">
+                        {props.childrenlist[i]}
+                    </div>
+                );
             }
             break;
     }
@@ -82,9 +91,10 @@ const CustomDrop = (props) => {
                 contentInColor={props.contentInColor}
                 contentOutColor={props.contentOutColor}
                 contentHoverColor={props.contentHoverColor}
+                children={props.svg}
             />
             <div className="c-CustomDrop-a-Content" ref={dropContent}>
-                {ButtonHolder}
+                {[ButtonHolder]}
             </div>
         </div>
     )

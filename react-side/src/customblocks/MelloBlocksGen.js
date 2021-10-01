@@ -189,7 +189,6 @@ Blockly.JavaScript['sensor_line_follower_left'] = function(block) {
 };
 
 Blockly.JavaScript['communication_infrared_start'] = function(block) {
-  console.log(block.getParent());
   if (peripheral_PreDeclarations.includes( `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`)==0){
     peripheral_PreDeclarations += `#include <IRremote.h>\nint IR_Remote=${IR_Remote};\n`;
     peripheral_SetupCode += `\n\tIrReceiver.begin(IR_Remote, ENABLE_LED_FEEDBACK);\n`;
