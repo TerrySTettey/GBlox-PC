@@ -3489,9 +3489,9 @@ const mello_temp = [<svg xmlns="http://www.w3.org/2000/svg" width="84.996" heigh
 </svg>
 ]
 const svgs = {
-    Loop: 
-       <div>
-           <svg xmlns="http://www.w3.org/2000/svg" width="21.961" height="25.013" viewBox="0 0 21.961 25.013">
+    Loop:
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="21.961" height="25.013" viewBox="0 0 21.961 25.013">
                 <g id="Group_406" data-name="Group 406" transform="translate(-2.905 -1314.595)">
                     <path id="Path_264" data-name="Path 264" d="M0,8.478V0H18.475" transform="translate(23.452 1334.96) rotate(180)" fill="none" stroke="#fff" stroke-width="2" />
                     <path id="Path_265" data-name="Path 265" d="M-20.935,1250.045v-8.478H-2.46" transform="translate(25.254 77.676)" fill="none" stroke="#fff" stroke-width="2" />
@@ -3499,17 +3499,17 @@ const svgs = {
                     <path id="Path_266" data-name="Path 266" d="M0,0H5.573V5.573" transform="translate(19.511 1315.302) rotate(45)" fill="none" stroke="#fff" stroke-width="2" />
                 </g>
             </svg>
-       </div>
-,
-    Logic: 
-    <div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24.041" height="20" viewBox="0 0 24.041 20">
-            <g id="Path_270" data-name="Path 270" fill="none">
-                <path d="M0,20H20V14.088l4.041,1.158V6.326L20,7.075V0H10.492l1.43,3.466h-4.9L8.653,0H0Z" stroke="none" />
-                <path d="M 17.99999618530273 18 L 17.99999618530273 11.4343900680542 L 22.04141616821289 12.59189128875732 L 22.04141616821289 8.730239868164062 L 17.99999618530273 9.479229927062988 L 17.99999618530273 2 L 13.48047924041748 2 L 14.91034603118896 5.465819835662842 L 3.865156173706055 5.465819835662842 L 5.499288558959961 2 L 1.999996185302734 2 L 1.999996185302734 18 L 17.99999618530273 18 M 19.99999618530273 20 L -3.823241968348157e-06 20 L -3.823241968348157e-06 0 L 8.653446197509766 0 L 7.01931619644165 3.465820074081421 L 11.92169570922852 3.465820074081421 L 10.49182605743408 0 L 19.99999618530273 0 L 19.99999618530273 7.074520111083984 L 24.04141616821289 6.325530052185059 L 24.04141616821289 15.24512004852295 L 19.99999618530273 14.08761978149414 L 19.99999618530273 20 Z" stroke="none" fill="#fff" />
-            </g>
-        </svg>
-    </div>,
+        </div>
+    ,
+    Logic:
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24.041" height="20" viewBox="0 0 24.041 20">
+                <g id="Path_270" data-name="Path 270" fill="none">
+                    <path d="M0,20H20V14.088l4.041,1.158V6.326L20,7.075V0H10.492l1.43,3.466h-4.9L8.653,0H0Z" stroke="none" />
+                    <path d="M 17.99999618530273 18 L 17.99999618530273 11.4343900680542 L 22.04141616821289 12.59189128875732 L 22.04141616821289 8.730239868164062 L 17.99999618530273 9.479229927062988 L 17.99999618530273 2 L 13.48047924041748 2 L 14.91034603118896 5.465819835662842 L 3.865156173706055 5.465819835662842 L 5.499288558959961 2 L 1.999996185302734 2 L 1.999996185302734 18 L 17.99999618530273 18 M 19.99999618530273 20 L -3.823241968348157e-06 20 L -3.823241968348157e-06 0 L 8.653446197509766 0 L 7.01931619644165 3.465820074081421 L 11.92169570922852 3.465820074081421 L 10.49182605743408 0 L 19.99999618530273 0 L 19.99999618530273 7.074520111083984 L 24.04141616821289 6.325530052185059 L 24.04141616821289 15.24512004852295 L 19.99999618530273 14.08761978149414 L 19.99999618530273 20 Z" stroke="none" fill="#fff" />
+                </g>
+            </svg>
+        </div>,
     Math: <div>
         <svg xmlns="http://www.w3.org/2000/svg" width="17.345" height="23" viewBox="0 0 17.345 23">
             <g id="Group_407" data-name="Group 407" transform="translate(-5.54 -1.246)">
@@ -3652,6 +3652,7 @@ function PullOutPullOut(stateCheck) {
 
 
 const Body = (props) => {
+    var TrashHolder = useRef(null);
     function genbuttons(toolbox_items) {
 
         var buttons = [];
@@ -3661,7 +3662,7 @@ const Body = (props) => {
         var children_count = 0;
         for (var i = 0; i < toolbox_items.length; i++) {
             var svg = []
-    
+
             switch (toolbox_items[i][0]) {
                 case "Loops":
                     svg = svgs.Loop;
@@ -3693,15 +3694,15 @@ const Body = (props) => {
                 default:
                     break;
             }
-            if (toolbox_items[i][2]=="category"){
+            if (toolbox_items[i][2] == "category") {
                 children_count = toolbox_items[i][3];
                 category = toolbox_items[i][0]
-                category_svg=svg;
+                category_svg = svg;
 
             }
-            else{
+            else {
                 children_count -= 1;
-                if (children_count < 0){
+                if (children_count < 0) {
                     children_count = 0;
                     //Level 0 Buttons
                     buttons.push(
@@ -3714,13 +3715,13 @@ const Body = (props) => {
                             children={[svg]}
                             text={toolbox_items[i][0]}
                             toolbox_type={toolbox_items[i][2]}
-                            child_count = {children_count}
+                            child_count={children_count}
                             hoverEffect="fill"
                             onClick={props.ToolboxFunction}
                         />
                     )
                 }
-                else{
+                else {
                     children.push(
                         <Button
                             id={toolbox_items[i][1]}
@@ -3731,35 +3732,48 @@ const Body = (props) => {
                             children={[svg]}
                             text={toolbox_items[i][0]}
                             toolbox_type={toolbox_items[i][2]}
-                            child_count = {children_count}
+                            child_count={children_count}
                             hoverEffect="fill"
                             onClick={props.ToolboxFunction}
                         />
                     )
-                    if (children_count === 0){
+                    if (children_count === 0) {
                         buttons.push(
                             <CustomDrop
-                            buttonType="ToolboxCategoryButton"
-                            text={category}
-                            childrenlist={children}
-                            outColor={("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))}
-                            dropType="toolbox_list"
-                            svg={[category_svg]}
-                            modal=""
+                                buttonType="ToolboxCategoryButton"
+                                text={category}
+                                childrenlist={children}
+                                outColor={("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))}
+                                dropType="toolbox_list"
+                                svg={[category_svg]}
+                                modal=""
                             />
                         )
                         children = []
-                        category=""
-                        category_svg=[];
+                        category = ""
+                        category_svg = [];
                     }
                 }
-                
+
             }
 
-            
+
         }
         return buttons;
     }
+
+    var TrashContainerChanged = false;
+    useEffect(() => {
+        if (TrashContainerChanged === false) {
+            var Trash = document.getElementsByClassName("blocklyTrash")[0];
+            if (Trash !== undefined) {
+                console.log(Trash.tagName)
+                TrashHolder.current.appendChild(Trash);
+                TrashContainerChanged = true;
+            }
+        }
+    })
+
     var slide_out = useRef(null)
     const [drawerstate, setDrawerState] = useState(false);
     function device_drawer(event) {
@@ -4048,6 +4062,13 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
+                <svg id="num9svg" xmlns="http://www.w3.org/2000/svg" width="28.25" height="19.392" viewBox="0 0 28.25 19.392">
+                    <g id="Group_383" data-name="Group 383" transform="translate(1.414 0.219)">
+                        <path id="Path_2" data-name="Path 2" d="M1855.634,371.3,1849,377.929l6.657,6.657" transform="translate(-1849 -368.216)" fill="none" stroke="#e9e9ff" stroke-miterlimit="10" stroke-width="2" />
+                        <path id="Path_3" data-name="Path 3" d="M1876.024,371.3l6.634,6.634L1876,384.586" transform="translate(-1857.236 -368.216)" fill="none" stroke="#e9e9ff" stroke-miterlimit="10" stroke-width="2" />
+                        <line id="Line_1" data-name="Line 1" x1="4.264" y2="18.953" transform="translate(11.072)" fill="none" stroke="#e9e9ff" stroke-miterlimit="10" stroke-width="2" />
+                    </g>
+                </svg>
                 <svg id="num12" xmlns="http://www.w3.org/2000/svg" width="76" height="345" viewBox="0 0 72 345">
                     <defs>
                         <clipPath id="clip-path">
@@ -4077,6 +4098,50 @@ const Body = (props) => {
                                 <rect width="71" height="400" stroke="none" />
                                 <rect x="0.5" y="0.5" width="70" height="399" fill="none" />
                             </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg id="num15trash" ref={TrashHolder}>
+                    {/*
+                    <svg xmlns="http://www.w3.org/2000/svg" class="blocklySvg" style="background-color: rgb(6, 8, 65);" width="1661px" height="920px" tabindex="0" version="1.1">
+                        <defs>
+                            <pattern id="blocklyGridPattern12675100857393296" patternUnits="userSpaceOnUse" x="149" y="0" width="100" height="100">
+                                <line stroke-width="1" x1="0" y1="0.5" x2="1" y2="0.5" />
+                            </pattern></defs><g class="blocklyWorkspace">
+                            <rect class="blocklyMainBackground" style="fill: url(#blocklyGridPattern12675100857393296); stroke: rgba(0, 0, 0, 0);" width="100%" height="100%" />
+                            <g class="blocklyTrash" style="opacity: 0.4;" transform="translate(1579 825)"><clipPath id="blocklyTrashBodyClipPath35066959827688216">
+                                <rect y="16" width="47" height="44" />
+                            </clipPath>
+                                <image clip-path="url(&quot;#blocklyTrashBodyClipPath35066959827688216&quot;)" x="0" y="-32" width="96" height="124" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://blockly-demo.appspot.com/static/media/sprites.png" />
+                                <clipPath id="blocklyTrashLidClipPath35066959827688216">
+                                    <rect width="47" height="16" />
+                                </clipPath>
+                                <image clip-path="url(&quot;#blocklyTrashLidClipPath35066959827688216&quot;)" transform="rotate(0)" x="0" y="-32" width="96" height="124" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://blockly-demo.appspot.com/static/media/sprites.png" />
+                            </g>
+                            <g class="blocklyBlockCanvas" transform="translate(149) scale(1)">
+                                <g class="blocklyCursor">
+                                    <g height="5" width="80">
+                                        <rect style="display: none;" width="80" height="5">
+                                            <animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="fill" attributeType="XML" />
+                                        </rect>
+                                        <rect class="blocklyVerticalMarker" style="display: none;" rx="10" ry="10" />
+                                        <path style="display: none;" transform="">
+                                            <animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="fill" attributeType="XML" /></path><path style="display: none;" fill="none" stroke-width="4" transform=""><animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="stroke" attributeType="XML" /></path><circle style="display: none;" stroke-width="4" r="5"><animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="fill" attributeType="XML" /></circle></g></g><g transform="translate(430 150)" data-id=")1~1ZMhC(_Q7wEByBRg]"><path class="blocklyPath" fill="#5c26ff" stroke="#451dbf" d="m 0 22 h 0 c 25 -22 71 -22 96 0 h 60 a 4 4 0 0 1 4 4 v 26 V 30 V 71 V 79 V 113 V 117 a 4 4 0 0 1 -4 4 H 64 c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 h -12 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2 h -8 a 4 4 0 0 0 -4 4 v 16 a 4 4 0 0 0 4 4 h 8 c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 h 12 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2 H 156 a 4 4 0 0 1 4 4 V 153 V 173 a 4 4 0 0 1 -4 4 h -152 a 4 4 0 0 1 -4 -4 Z" /><g transform="translate(8 30)"><image width="40px" height="40px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png" alt="[object Object]" /></g><g transform="translate(56 40)"><text class="blocklyText" dominant-baseline="central" x="0" y="10.5" /></g></g></g></g></svg>
+                */}
+                </svg>
+                <svg id="num15trash" xmlns="http://www.w3.org/2000/svg"  width="62.944" height="62.37" viewBox="0 0 62.944 62.37">
+                    <defs>
+                        <filter id="Path_82" x="0" y="0" width="62.944" height="62.37" filterUnits="userSpaceOnUse">
+                            <feOffset input="SourceAlpha" />
+                            <feGaussianBlur stdDeviation="4.5" result="blur" />
+                            <feFlood flood-color="#3a00ff" flood-opacity="0.659" />
+                            <feComposite operator="in" in2="blur" />
+                            <feComposite in="SourceGraphic" />
+                        </filter>
+                    </defs>
+                    <g id="Group_547" data-name="Group 547" transform="translate(9.218 0.652)">
+                        <g transform="matrix(1, 0, 0, 1, -9.22, -0.65)" filter="url(#Path_82)">
+                            <path id="Path_82-2" data-name="Path 82" d="M1812.688,946.74V957.9l2.371,2.371V977.33l4.78,4.78h25.428V967.541l3.365-3.364V946.74Zm10.129,32.425-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Zm5.8,1.919-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Z" transform="translate(-1799.19 -933.24)" fill="#e9e9ff" />
                         </g>
                     </g>
                 </svg>

@@ -96,6 +96,11 @@ $shift: 0px;
                 margin-top: 0px;
                 margin-left:1px ;
             }
+            #num9svg {
+                grid-area: n9;
+                margin-top: 64px;
+                margin-left: 18px;
+            }
             #num12 {
                 grid-area: n12;
                 margin-top: 0px;
@@ -105,6 +110,18 @@ $shift: 0px;
                 grid-area: n15;
                 margin-top: 0px;
                 margin-left:1px ;
+            }
+            #num15trash {
+                grid-area: n15;
+                margin-top:-73px;//-820px; //-73px;
+                margin-left:-67px ;//-1600px;//-67px ;
+                outline: green 2px solid;
+                position: absolute;
+                //transform: translate(-1579px,-825px);
+                //height: 86vh;
+                //width: 86vw;
+                height: 124px;
+                width: 96px;
             }
         }
     
@@ -275,3 +292,11 @@ $shift: 0px;
     }
 }
 
+.blocklyTrash {
+    //position: relative;
+    outline: red 2px solid;
+    pointer-events: all;
+    //transform: translate(1579px,825px);
+    transform: translate(0, 22px) !important;
+    opacity: 0 !important;
+}
