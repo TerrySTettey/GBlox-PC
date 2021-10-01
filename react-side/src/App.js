@@ -136,6 +136,8 @@ const App = () => {
           toolbox_items.push([items[i].name_, `blockly-${id}`, "non-category"]);
         }
         else {
+          var category = OurWorkspace.toolbox_.getToolboxItems()[i];
+          category.setExpanded(true)
           if (i >= 10) {
             id = String.fromCharCode(65 + (i - 10)).toLowerCase()
           }
@@ -180,28 +182,29 @@ function workspaceClick(event) {
 }
 
 function open_flyout(event) {
-  console.log(toolbox_items);
-  var flyout = (event.target.id).split("_")[0].concat("_Toolbox");
-  if (document.getElementById('blocklyDiv') !== null) {
-    toolbox_selected = flyout;
-    switch (flyout) {
-      case "Loop_Toolbox":
-        document.getElementById("blockly-0").click()
-        //Blockly.mainWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(Basic_Flyouts.Loop_Toolbox));
-        break;
-      case "Logic_Toolbox":
-        OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Logic_Toolbox));
-        break;
-      case "Text_Toolbox":
-        OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Text_Toolbox));
-        break;
-      case "Math_Toolbox":
-        OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Math_Toolbox));
-        break;
-      default:
-        break;
-    }
-  }
+  console.log(event.target.id);
+  document.getElementById(event.target.id).click()
+  // var flyout = (event.target.id).split("_")[0].concat("_Toolbox");
+  // if (document.getElementById('blocklyDiv') !== null) {
+  //   toolbox_selected = flyout;
+  //   switch (flyout) {
+  //     case "Loop_Toolbox":
+        
+  //       //Blockly.mainWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(Basic_Flyouts.Loop_Toolbox));
+  //       break;
+  //     case "Logic_Toolbox":
+  //       OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Logic_Toolbox));
+  //       break;
+  //     case "Text_Toolbox":
+  //       OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Text_Toolbox));
+  //       break;
+  //     case "Math_Toolbox":
+  //       OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Math_Toolbox));
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 }
 
 return (
