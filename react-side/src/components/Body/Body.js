@@ -4149,7 +4149,7 @@ const Body = (props) => {
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={PullOutPullOut} viewCode={props.viewCode} toolboxButtons={props.toolboxButtons} />
+                <Pull_Out_Menu MenuFunction={PullOutPullOut} viewCode={props.viewCode} toolboxButtons={props.toolboxButtons} serialport_monitor={props.serialport_monitor} />
             </div>
         </div >
     )

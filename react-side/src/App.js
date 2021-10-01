@@ -19,6 +19,8 @@ import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
 import { mainLoopCode } from "./customblocks/compiler/arduino_core"
 
+const { ipcRenderer } = window.require('electron')
+
 var currentToolbox = MelloDOM;
 var initialized_workspace = false;
 var currentToolboxName = "Mello";
@@ -82,7 +84,17 @@ var newxmldom = Blockly.Xml.textToDom(newxml);
 
 const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
-
+  const [serialport_monitor, setSerialPortMonitor] = useState("test");
+  const [serialport_value, setSerialPortWrite] = useState("");
+  // const serialport_change = (event) => {
+  //   setSerialPortWrite(event.target.value);
+  // }
+  function serialport_read() {
+    ipcRenderer.on('serialport_monitor', (event, result) => {
+      setSerialPortMonitor(result);
+      //console.log(serialport_results);
+    });
+  }
   function logbutton() {
     console.log("Button Pressed");
   }
@@ -97,7 +109,6 @@ const App = () => {
   }
   
   useEffect(() => {
-    
     if (initialized_workspace === false) {
       toolbox_items = [];
       var tb = currentToolbox;
@@ -145,9 +156,7 @@ const App = () => {
       AlterBlockly();
       initialized_workspace = true;
     }
-    
-   
-    
+    serialport_read();    
   })
 
 function workspaceClick(event) {
@@ -184,6 +193,7 @@ return (
     <TestMain
       ToolboxFunction={open_flyout}
       workspaceClick={workspaceClick}
+      toolboxButtons={toolbox_items}
       viewCode={
         <SyntaxHighlighter
             language="arduino"
@@ -192,7 +202,8 @@ return (
             {arduinocode}
           </SyntaxHighlighter>
       }
-      toolboxButtons={toolbox_items}
+      serialport_monitor={serialport_monitor}
+      
     />
 
   </div>

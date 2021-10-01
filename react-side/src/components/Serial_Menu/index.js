@@ -9,6 +9,7 @@ function index(props) {
             <div id="serial-menu">
                 <div className="text">Serial Monitor</div>
                 <div className="serial-monitor">
+                    {props.serialport_monitor}
                 </div>
                 <div className="serial-write">
                     <input className="serial-input" placeholder="Write To Serial monitor"></input>
