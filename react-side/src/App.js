@@ -83,14 +83,18 @@ var newxmldom = Blockly.Xml.textToDom(newxml);
 
 const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
-  const [toolbox_categories, setToolboxCategories] = useState([])
+  const [toolbox_categories, setToolboxCategories] = useState([]);
+
+  function logbutton() {
+    console.log("Button Pressed");
+  }
 
   function showCode(event) {
     var code = Blockly.JavaScript.workspaceToCode(OurWorkspace);
     if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
       code = mainLoopCode;
     }
-    // OurWorkspace.registerButtonCallback("createvar", logbutton)
+    OurWorkspace.registerButtonCallback("createvar", logbutton)
     // newxmldom = Blockly.Xml.workspaceToDom(workspace);
     // newxml = Blockly.Xml.domToText(newxmldom);
     // if (tabpanelval === 0) {
@@ -109,7 +113,6 @@ const App = () => {
       OurWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: tb, renderer: "zelos", zoom:
         {
-          /*controls: true,*/
           wheel: true,
           startScale: 1,
           maxScale: 3,
@@ -150,61 +153,36 @@ const App = () => {
     console.log(OurWorkspace)
     OurWorkspace.toolbox_.setVisible(false);
     OurWorkspace.addChangeListener(showCode);
-    
     AlterBlockly();
   })
 
 function workspaceClick(event) {
+  console.log(event.target.id)
   if (document.getElementById('blocklyDiv') !== null) {
     switch (event.target.id) {
       case "zoom-in":
-
-        OurWorkspace.zoom(0, 0, 2)
+        Blockly.mainWorkspace.zoom(0, 0, 2);
         break;
       case "zoom-out":
-
-        OurWorkspace.zoom(0, 0, -2)
+        Blockly.mainWorkspace.zoom(0, 0, -2)
         break;
       case "zoom-to-fit":
-        OurWorkspace.zoomToFit()
+        Blockly.mainWorkspace.zoomToFit()
         break;
       case "workspace-previous":
-        OurWorkspace.undo(false);
+        Blockly.mainWorkspace.undo(false);
         break;
       case "workspace-after":
-        OurWorkspace.undo(true);
+        Blockly.mainWorkspace.undo(true);
         break;
       default:
         break;
     }
-    OurWorkspace.toolbox_.flyout_.reflow();
   }
 }
 
 function open_flyout(event) {
-  console.log(event.target.id);
   document.getElementById(event.target.id).click()
-  // var flyout = (event.target.id).split("_")[0].concat("_Toolbox");
-  // if (document.getElementById('blocklyDiv') !== null) {
-  //   toolbox_selected = flyout;
-  //   switch (flyout) {
-  //     case "Loop_Toolbox":
-        
-  //       //Blockly.mainWorkspace.toolbox_.flyout_.show(Blockly.Xml.textToDom(Basic_Flyouts.Loop_Toolbox));
-  //       break;
-  //     case "Logic_Toolbox":
-  //       OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Logic_Toolbox));
-  //       break;
-  //     case "Text_Toolbox":
-  //       OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Text_Toolbox));
-  //       break;
-  //     case "Math_Toolbox":
-  //       OurWorkspace.getFlyout().show(Blockly.Xml.textToDom(Basic_Flyouts.Math_Toolbox));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
 }
 
 return (
