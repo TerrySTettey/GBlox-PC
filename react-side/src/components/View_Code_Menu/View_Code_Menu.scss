@@ -3,6 +3,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 0fr;
     .text{
+        user-select: none;
         padding-bottom: 21px;
         font-size: 21px;
     }
@@ -13,4 +14,7 @@
     height: 611px;
     color: #4C97FF;
     margin-bottom: 12px;
+    pre{
+        background: #060841 !important;
+    }
 }

@@ -44,7 +44,7 @@ function level_group(level) {
     return button_levels;
 }
 
-
+var init = false;
 
 function ToolSelector(props) {
     var Connector = useRef(null);
@@ -150,6 +150,12 @@ function ToolSelector(props) {
 
         Connector.current.classList.add("con-pos-5");
     }
+    useEffect(() => {
+        if (init===false){
+            init=true;
+            document.getElementById("toolbox_selector_level_3").click()
+        }
+    })
 
     return (
         <div className="c-ToolSelector">
@@ -179,6 +185,7 @@ function ToolSelector(props) {
                 </Button>
                 <div className="level-connector"></div>
                 <Button
+                    id="toolbox_selector_level_3"
                     type="ToolboxLevelButton"
                     s_ButtonState="Out"
                     inColor="#060841"

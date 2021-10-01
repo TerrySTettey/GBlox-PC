@@ -2,10 +2,13 @@ import Blockly from "blockly";
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TestMain from "./components/TestMain";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-import { MelloDOM, Basic_Flyouts } from "./customblocks/toolboxes/toolboxes"
-import { DeviceList } from "./deviceDef/device_list.js"
 import './App.css';
+
+import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
+import { DeviceList } from "./deviceDef/device_list.js"
 import AlterBlockly from "./blocklyextras/blocklyAlters";
 import ToolSelector from "./components/ToolSelector/ToolSelector";
 
@@ -16,7 +19,6 @@ import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
 import { mainLoopCode } from "./customblocks/compiler/arduino_core"
 
-// require('prismjs/components/prism-jsx');
 var currentToolbox = MelloDOM;
 var initialized_workspace = false;
 var currentToolboxName = "Mello";
@@ -24,8 +26,6 @@ var toolbox_selected = "";
 var variables_created = [];
 var OurWorkspace;
 var toolbox_items = [];
-
-
 
 //Blockly Themes
 
@@ -93,16 +93,9 @@ const App = () => {
       code = mainLoopCode;
     }
     OurWorkspace.registerButtonCallback("createvar", logbutton)
-    // newxmldom = Blockly.Xml.workspaceToDom(workspace);
-    // newxml = Blockly.Xml.domToText(newxmldom);
-    // if (tabpanelval === 0) {
-    // }
-    // else {
-    //   Blockly.Xml.domToWorkspace(newxmldom, workspace);
-    // }
     setArduinoCode(code);
   }
-  //Injecting Blockly
+  
   useEffect(() => {
     
     if (initialized_workspace === false) {
@@ -192,9 +185,12 @@ return (
       ToolboxFunction={open_flyout}
       workspaceClick={workspaceClick}
       viewCode={
-        <div>
-        {arduinocode}
-        </div>
+        <SyntaxHighlighter
+            language="arduino"
+            style={tomorrowNightBlue}
+            showLineNumbers={true}>
+            {arduinocode}
+          </SyntaxHighlighter>
       }
       toolboxButtons={toolbox_items}
     />
