@@ -34,7 +34,6 @@ const CustomDrop = (props) => {
             setButtonState("Out");
             dropContent.current.style.display = "none"
         }
-        console.log(dropContent)
     }
 
     var ButtonHolder = [];

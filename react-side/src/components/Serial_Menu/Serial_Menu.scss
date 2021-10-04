@@ -1,5 +1,6 @@
 
 .text{
+    user-select: none;
     padding-bottom: 0px;
 }
 #serial-menu{
@@ -13,6 +14,7 @@
     "input"
     ;
     .text{
+        user-select: none;
         grid-area: title;
         font-size: 21px;
     }
@@ -23,6 +25,7 @@
     height: 611px;
     background-color: #0B0533;
     margin-bottom: 12px;
+    color: white;
 }
 
 

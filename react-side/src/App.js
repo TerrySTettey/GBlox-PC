@@ -2,10 +2,13 @@ import Blockly from "blockly";
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TestMain from "./components/TestMain";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-import { MelloDOM, Basic_Flyouts } from "./customblocks/toolboxes/toolboxes"
-import { DeviceList } from "./deviceDef/device_list.js"
 import './App.css';
+
+import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
+import { DeviceList } from "./deviceDef/device_list.js"
 import AlterBlockly from "./blocklyextras/blocklyAlters";
 import ToolSelector from "./components/ToolSelector/ToolSelector";
 
@@ -16,7 +19,8 @@ import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
 import { mainLoopCode } from "./customblocks/compiler/arduino_core"
 
-// require('prismjs/components/prism-jsx');
+const { ipcRenderer } = window.require('electron')
+
 var currentToolbox = MelloDOM;
 var initialized_workspace = false;
 var currentToolboxName = "Mello";
@@ -24,8 +28,6 @@ var toolbox_selected = "";
 var variables_created = [];
 var OurWorkspace;
 var toolbox_items = [];
-
-
 
 //Blockly Themes
 
@@ -82,7 +84,17 @@ var newxmldom = Blockly.Xml.textToDom(newxml);
 
 const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
-
+  const [serialport_monitor, setSerialPortMonitor] = useState("test");
+  const [serialport_value, setSerialPortWrite] = useState("");
+  // const serialport_change = (event) => {
+  //   setSerialPortWrite(event.target.value);
+  // }
+  function serialport_read() {
+    ipcRenderer.on('serialport_monitor', (event, result) => {
+      setSerialPortMonitor(result);
+      //console.log(serialport_results);
+    });
+  }
   function logbutton() {
     console.log("Button Pressed");
   }
@@ -93,18 +105,10 @@ const App = () => {
       code = mainLoopCode;
     }
     OurWorkspace.registerButtonCallback("createvar", logbutton)
-    // newxmldom = Blockly.Xml.workspaceToDom(workspace);
-    // newxml = Blockly.Xml.domToText(newxmldom);
-    // if (tabpanelval === 0) {
-    // }
-    // else {
-    //   Blockly.Xml.domToWorkspace(newxmldom, workspace);
-    // }
     setArduinoCode(code);
   }
-  //Injecting Blockly
+  
   useEffect(() => {
-    
     if (initialized_workspace === false) {
       toolbox_items = [];
       var tb = currentToolbox;
@@ -152,9 +156,7 @@ const App = () => {
       AlterBlockly();
       initialized_workspace = true;
     }
-    
-   
-    
+    serialport_read();    
   })
 
 function workspaceClick(event) {
@@ -191,12 +193,17 @@ return (
     <TestMain
       ToolboxFunction={open_flyout}
       workspaceClick={workspaceClick}
-      viewCode={
-        <div>
-        {arduinocode}
-        </div>
-      }
       toolboxButtons={toolbox_items}
+      viewCode={
+        <SyntaxHighlighter
+            language="arduino"
+            style={tomorrowNightBlue}
+            showLineNumbers={true}>
+            {arduinocode}
+          </SyntaxHighlighter>
+      }
+      serialport_monitor={serialport_monitor}
+      
     />
 
   </div>
