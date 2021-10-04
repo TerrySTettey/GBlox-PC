@@ -3668,7 +3668,7 @@ const Body = (props) => {
         var children = [];
         var category = "";
         var category_svg = [];
-        var category_color="";
+        var category_color = "";
         var children_count = 0;
         for (var i = 0; i < toolbox_items.length; i++) {
             var svg = []
@@ -3676,49 +3676,49 @@ const Body = (props) => {
             switch (toolbox_items[i][0]) {
                 case "Loops":
                     svg = svgs.Loop;
-                    color=Toolbox_colors.Loop;
+                    color = Toolbox_colors.Loop;
                     break;
                 case "Logic":
                     svg = svgs.Logic;
-                    color=Toolbox_colors.Logic;
+                    color = Toolbox_colors.Logic;
                     break;
                 case "Math":
                     svg = svgs.Math;
-                    color=Toolbox_colors.Math;
+                    color = Toolbox_colors.Math;
                     break;
                 case "Text":
                     svg = svgs.Text;
-                    color=Toolbox_colors.Text;
+                    color = Toolbox_colors.Text;
                     break;
                 case "Actuators":
                     svg = svgs.Actuators;
-                    color=Toolbox_colors.Actuators;
+                    color = Toolbox_colors.Actuators;
                     break;
                 case "Sensors":
                     svg = svgs.Sensors;
-                    color=Toolbox_colors.Sensors;
+                    color = Toolbox_colors.Sensors;
                     break;
                 case "COM":
                     svg = svgs.COM;
-                    color=Toolbox_colors.COM;
+                    color = Toolbox_colors.COM;
                     break;
                 case "LEDs":
                     svg = svgs.LEDs;
-                    color=Toolbox_colors.Light;
+                    color = Toolbox_colors.Light;
                     break;
                 case "Sound":
                     svg = svgs.Sound;
-                    color=Toolbox_colors.Sound;
+                    color = Toolbox_colors.Sound;
                     break;
                 default:
-                    color=("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))
+                    color = ("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))
                     break;
             }
             if (toolbox_items[i][2] == "category") {
                 children_count = toolbox_items[i][3];
                 category = toolbox_items[i][0]
                 category_svg = svg;
-                category_color=color;
+                category_color = color;
             }
             else {
                 children_count -= 1;
@@ -3813,73 +3813,7 @@ const Body = (props) => {
                     <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M1,0.46 l0,-0.426 L0.982,0.001 l-0.472,0.001,-0.149,0,-0.331,0 L0,0.051 v0.089 l0.015,0.026 V0.928 L0.035,0.96 l0.261,0,0.024,0.04 H0.976 l0.024,-0.041 V0.937 l0,-0.001,-0.001,-0.363 h-0.033 V0.516"></path></clipPath>
                 </svg>
                 <div id="blocklyDiv">
-
                 </div>
-                <div className="workspace-controls">
-                    <Button
-                        id="zoom-in"
-                        type="WorkspaceControlButton"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        children={[
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="16.745" viewBox="0 0 16.745 16.745">
-                                <rect id="Rectangle_6" data-name="Rectangle 6" width="16.745" height="2.155" transform="translate(0 7.295)" />
-                                <rect id="Rectangle_7" data-name="Rectangle 7" width="2.155" height="16.745" transform="translate(7.295)" />
-                            </svg>
-                        ]}
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="zoom-out"
-                        type="WorkspaceControlButton"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        children={[
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="2.232" viewBox="0 0 16.745 2.232">
-                                <rect id="Rectangle_8" data-name="Rectangle 8" width="16.745" height="2.232" />
-                            </svg>
-                        ]}
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="zoom-to-fit"
-                        type="WorkspaceControlButton"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        children={[
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="8.511" viewBox="0 0 16.745 8.511">
-                                <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" fill="#e9e9ff" />
-                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)" fill="#e9e9ff" />
-                            </svg>
-
-                        ]}
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="workspace-previous"
-                        type="WorkspaceControlButton_Previous"
-                        inColor="#E9E9FF"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        s_ButtonState="Out"
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="workspace-after"
-                        type="WorkspaceControlButton_After"
-                        inColor="#060841"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        s_ButtonState="Out"
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                </div>
-
             </div>
 
             <div className="tester">
@@ -3990,6 +3924,70 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
+                <div className="workspace-controls">
+                    <Button
+                        id="zoom-in"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="16.745" viewBox="0 0 16.745 16.745">
+                                <rect id="Rectangle_6" data-name="Rectangle 6" width="16.745" height="2.155" transform="translate(0 7.295)" />
+                                <rect id="Rectangle_7" data-name="Rectangle 7" width="2.155" height="16.745" transform="translate(7.295)" />
+                            </svg>
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="zoom-out"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="2.232" viewBox="0 0 16.745 2.232">
+                                <rect id="Rectangle_8" data-name="Rectangle 8" width="16.745" height="2.232" />
+                            </svg>
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="zoom-to-fit"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="8.511" viewBox="0 0 16.745 8.511">
+                                <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" fill="#e9e9ff" />
+                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)" fill="#e9e9ff" />
+                            </svg>
+
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="workspace-previous"
+                        type="WorkspaceControlButton_Previous"
+                        inColor="#E9E9FF"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        s_ButtonState="Out"
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="workspace-after"
+                        type="WorkspaceControlButton_After"
+                        inColor="#060841"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        s_ButtonState="Out"
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                </div>
 
                 {/*<svg id="num2" xmlns="http://www.w3.org/2000/svg" width="1076" height="246" viewBox="0 0 1076 245">
                     <defs>
@@ -4121,8 +4119,42 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
-                <svg id="num15trash" ref={TrashHolder}>
-                    {/*
+                <div id="TrashTotal">
+                    <div id="num15HoverHolder">
+                        <svg id="lid" xmlns="http://www.w3.org/2000/svg" width="62.049" height="26.565" viewBox="0 0 62.049 26.565">
+                            <defs>
+                                <filter id="Path_81" x="0" y="0" width="62.049" height="26.565" filterUnits="userSpaceOnUse">
+                                    <feOffset input="SourceAlpha" />
+                                    <feGaussianBlur stdDeviation="3" result="blur" />
+                                    <feFlood flood-color="#2000ff" />
+                                    <feComposite operator="in" in2="blur" />
+                                    <feComposite in="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_81)">
+                                <path id="Path_81-2" data-name="Path 81" d="M1849.7,938.283h-10.84v-1.969l-1.052-1.052h-8.6L1827.943,934H1821.9v4.283h-10.4l-3.059,2.141v2.141h44.049v-2.141Z" transform="translate(-1799.44 -925)" fill="#e9e9ff" />
+                            </g>
+                        </svg>
+
+                        <svg id="bin" xmlns="http://www.w3.org/2000/svg" width="62.944" height="62.37" viewBox="0 0 62.944 62.37">
+                            <defs>
+                                <filter id="Path_82" x="0" y="0" width="62.944" height="62.37" filterUnits="userSpaceOnUse">
+                                    <feOffset input="SourceAlpha" />
+                                    <feGaussianBlur stdDeviation="4.5" result="blur" />
+                                    <feFlood flood-color="#3a00ff" flood-opacity="0.659" />
+                                    <feComposite operator="in" in2="blur" />
+                                    <feComposite in="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <g id="Group_547" data-name="Group 547" transform="translate(9.218 0.652)">
+                                <g transform="matrix(1, 0, 0, 1, -9.22, -0.65)" filter="url(#Path_82)">
+                                    <path id="Path_82-2" data-name="Path 82" d="M1812.688,946.74V957.9l2.371,2.371V977.33l4.78,4.78h25.428V967.541l3.365-3.364V946.74Zm10.129,32.425-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Zm5.8,1.919-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Z" transform="translate(-1799.19 -933.24)" fill="#e9e9ff" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <svg id="num15trash" ref={TrashHolder}>
+                        {/*
                     <svg xmlns="http://www.w3.org/2000/svg" class="blocklySvg" style="background-color: rgb(6, 8, 65);" width="1661px" height="920px" tabindex="0" version="1.1">
                         <defs>
                             <pattern id="blocklyGridPattern12675100857393296" patternUnits="userSpaceOnUse" x="149" y="0" width="100" height="100">
@@ -4148,23 +4180,8 @@ const Body = (props) => {
                                         <path style="display: none;" transform="">
                                             <animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="fill" attributeType="XML" /></path><path style="display: none;" fill="none" stroke-width="4" transform=""><animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="stroke" attributeType="XML" /></path><circle style="display: none;" stroke-width="4" r="5"><animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="fill" attributeType="XML" /></circle></g></g><g transform="translate(430 150)" data-id=")1~1ZMhC(_Q7wEByBRg]"><path class="blocklyPath" fill="#5c26ff" stroke="#451dbf" d="m 0 22 h 0 c 25 -22 71 -22 96 0 h 60 a 4 4 0 0 1 4 4 v 26 V 30 V 71 V 79 V 113 V 117 a 4 4 0 0 1 -4 4 H 64 c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 h -12 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2 h -8 a 4 4 0 0 0 -4 4 v 16 a 4 4 0 0 0 4 4 h 8 c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 h 12 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2 H 156 a 4 4 0 0 1 4 4 V 153 V 173 a 4 4 0 0 1 -4 4 h -152 a 4 4 0 0 1 -4 -4 Z" /><g transform="translate(8 30)"><image width="40px" height="40px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png" alt="[object Object]" /></g><g transform="translate(56 40)"><text class="blocklyText" dominant-baseline="central" x="0" y="10.5" /></g></g></g></g></svg>
                 */}
-                </svg>
-                <svg id="num15trash" xmlns="http://www.w3.org/2000/svg"  width="62.944" height="62.37" viewBox="0 0 62.944 62.37">
-                    <defs>
-                        <filter id="Path_82" x="0" y="0" width="62.944" height="62.37" filterUnits="userSpaceOnUse">
-                            <feOffset input="SourceAlpha" />
-                            <feGaussianBlur stdDeviation="4.5" result="blur" />
-                            <feFlood flood-color="#3a00ff" flood-opacity="0.659" />
-                            <feComposite operator="in" in2="blur" />
-                            <feComposite in="SourceGraphic" />
-                        </filter>
-                    </defs>
-                    <g id="Group_547" data-name="Group 547" transform="translate(9.218 0.652)">
-                        <g transform="matrix(1, 0, 0, 1, -9.22, -0.65)" filter="url(#Path_82)">
-                            <path id="Path_82-2" data-name="Path 82" d="M1812.688,946.74V957.9l2.371,2.371V977.33l4.78,4.78h25.428V967.541l3.365-3.364V946.74Zm10.129,32.425-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Zm5.8,1.919-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Z" transform="translate(-1799.19 -933.24)" fill="#e9e9ff" />
-                        </g>
-                    </g>
-                </svg>
+                    </svg>
+                </div>
 
             </div>
             <div className="c-Body-a-OverlayExtras" />

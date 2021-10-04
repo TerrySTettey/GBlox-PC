@@ -26,4 +26,3 @@ Index.propTypes = {
 }
 
 export default Index
-
