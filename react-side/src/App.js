@@ -81,22 +81,32 @@ var test_theme = Blockly.Theme.defineTheme('test_theme', {
 var default_workspace = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;
 var newxml = default_workspace;
 var newxmldom = Blockly.Xml.textToDom(newxml);
+var clicked = 0;
 
 const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
   const [serialport_monitor, setSerialPortMonitor] = useState("test");
-  const [serialport_value, setSerialPortWrite] = useState("");
-  // const serialport_change = (event) => {
-  //   setSerialPortWrite(event.target.value);
-  // }
+  const [serialport_status, setSerialPortStatus] = useState(false)
+
   function serialport_read() {
-    console.log("Serial Port Opened")
-    ipcRenderer.invoke(`serialport_retreive`);
-    ipcRenderer.on('serialport_monitor', (event, result) => {
-      setSerialPortMonitor(result);
-      //console.log(serialport_results);
-    });
+    console.log("Serial Port Button Clicked")
+    if (serialport_status === false) {
+      console.log("Serial Port Opened")
+      ipcRenderer.invoke(`serialport_retreive`);
+      ipcRenderer.on('serialport_monitor', (event, result) => {
+        console.log(result)
+        setSerialPortMonitor(result);
+      });
+      setSerialPortStatus(true);
+    }
+    else {
+      ipcRenderer.invoke(`serialport_close`);
+      setSerialPortMonitor([]);
+      console.log("Serial Port Closed")
+      setSerialPortStatus(false);
+    }
   }
+
   function logbutton() {
     console.log("Button Pressed");
   }
@@ -109,7 +119,7 @@ const App = () => {
     OurWorkspace.registerButtonCallback("createvar", logbutton)
     setArduinoCode(code);
   }
-  
+
   useEffect(() => {
     if (initialized_workspace === false) {
       toolbox_items = [];
@@ -128,7 +138,7 @@ const App = () => {
           snap: true
         }, theme: test_theme
       });
-      
+
       for (var i = 0; i < (OurWorkspace.toolbox_.getToolboxItems()).length; i++) {
         var items = OurWorkspace.toolbox_.getToolboxItems();
         var subcat = items[i].subcategoriesDiv_
@@ -158,58 +168,60 @@ const App = () => {
       AlterBlockly();
       initialized_workspace = true;
     }
-  
   })
 
-function workspaceClick(event) {
-  console.log(event.target.id)
-  if (document.getElementById('blocklyDiv') !== null) {
-    switch (event.target.id) {
-      case "zoom-in":
-        Blockly.mainWorkspace.zoom(0, 0, 2);
-        break;
-      case "zoom-out":
-        Blockly.mainWorkspace.zoom(0, 0, -2)
-        break;
-      case "zoom-to-fit":
-        Blockly.mainWorkspace.zoomToFit()
-        break;
-      case "workspace-previous":
-        Blockly.mainWorkspace.undo(false);
-        break;
-      case "workspace-after":
-        Blockly.mainWorkspace.undo(true);
-        break;
-      default:
-        break;
+  function workspaceClick(event) {
+    console.log(event.target.id)
+    if (document.getElementById('blocklyDiv') !== null) {
+      switch (event.target.id) {
+        case "zoom-in":
+          Blockly.mainWorkspace.zoom(0, 0, 2);
+          break;
+        case "zoom-out":
+          Blockly.mainWorkspace.zoom(0, 0, -2)
+          break;
+        case "zoom-to-fit":
+          Blockly.mainWorkspace.zoomToFit()
+          break;
+        case "workspace-previous":
+          Blockly.mainWorkspace.undo(false);
+          break;
+        case "workspace-after":
+          Blockly.mainWorkspace.undo(true);
+          break;
+        default:
+          break;
+      }
     }
   }
-}
 
-function open_flyout(event) {
-  document.getElementById(event.target.id).click()
-}
+  function open_flyout(event) {
+    document.getElementById(event.target.id).click()
+  }
 
-return (
-  <div>
-    <TestMain
-      ToolboxFunction={open_flyout}
-      workspaceClick={workspaceClick}
-      toolboxButtons={toolbox_items}
-      viewCode={
-        <SyntaxHighlighter
+  return (
+    <div>
+      <TestMain
+        ToolboxFunction={open_flyout}
+        workspaceClick={workspaceClick}
+        toolboxButtons={toolbox_items}
+        viewCode={
+          // <div>
+          //   {arduinocode}
+          // </div>
+          <SyntaxHighlighter
             language="arduino"
             style={tomorrowNightBlue}
             showLineNumbers={true}>
             {arduinocode}
           </SyntaxHighlighter>
-      }
-      serialport_monitor={serialport_monitor}
-      onSerialPortClick={serialport_read}
-    />
+        }
+        serialport_monitor={serialport_monitor}
+        onSerialPortClick={serialport_read}
+      />
 
-  </div>
-)
+    </div>
+  )
 }
 
 export default App;

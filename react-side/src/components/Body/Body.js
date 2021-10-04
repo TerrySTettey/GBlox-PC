@@ -3663,6 +3663,8 @@ function PullOutPullOut(stateCheck) {
 
 const Body = (props) => {
     var TrashHolder = useRef(null);
+    const [serialport_monitor, setSerialPortMonitor] = useState("")
+    const [viewCode, setViewCode] = useState("")
     function genbuttons(toolbox_items) {
         var buttons = [];
         var children = [];
@@ -3787,11 +3789,13 @@ const Body = (props) => {
         if (TrashContainerChanged === false) {
             var Trash = document.getElementsByClassName("blocklyTrash")[0];
             if (Trash !== undefined) {
-                console.log(Trash.tagName)
+                // console.log(Trash.tagName)
                 TrashHolder.current.appendChild(Trash);
                 TrashContainerChanged = true;
             }
         }
+            setViewCode(props.viewCode)
+            setSerialPortMonitor(props.serialport_monitor);
     })
 
     var slide_out = useRef(null)
@@ -4230,7 +4234,7 @@ const Body = (props) => {
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={PullOutPullOut} viewCode={props.viewCode} toolboxButtons={props.toolboxButtons} serialport_monitor={props.serialport_monitor} onSerialPortClick={props.onSerialPortClick}/>
+                <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor}/>
             </div>
         </div >
     )
