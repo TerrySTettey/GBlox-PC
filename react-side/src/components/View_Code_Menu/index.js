@@ -6,9 +6,9 @@ import './View_Code_Menu.scss'
 function Index(props) {
     const [view_code, setViewCode] = useState("");
     useEffect(() => {
-        setTimeout(function(){ setViewCode(props.viewCode); }, 1000);
+        setViewCode(props.viewCode);
         
-    });
+    },[props.viewCode]);
     return (
         <Menu>
             <div id="view-code-menu">
