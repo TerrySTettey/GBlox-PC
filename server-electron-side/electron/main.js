@@ -74,8 +74,8 @@ function createWindow() {
         width: 1400,
         height: 800,
         minHeight: 986,
-        minWidth:1284,
-        title:"GBlox",
+        minWidth: 1284,
+        title: "GBlox",
         autoHideMenuBar: true,
         /*frame:false,*/
         webPreferences: {
@@ -113,18 +113,18 @@ app.on('activate', () => {
 
 //Function which identifies the COM Port that Arduino is connected to...
 function CHECK_COMPORT(cb) {
-    try{
+    try {
         COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })  //,(error, stdout, stderr) => {
-            console.log(COMPORT);
-            if (COMPORT.includes('COM') == 1) {
-                COMPORT = COMPORT.split("    ")[3].split("\r")[0];
-                
-            }
-            else {
-                COMPORT = "No Arduino Detected";
-            }
+        console.log(COMPORT);
+        if (COMPORT.includes('COM') == 1) {
+            COMPORT = COMPORT.split("    ")[3].split("\r")[0];
+
+        }
+        else {
+            COMPORT = "No Arduino Detected";
+        }
     }
-    catch(e) {
+    catch (e) {
         COMPORT = "No Arduino Detected";
     }
     cb(COMPORT);
@@ -140,7 +140,7 @@ async function VERIFYCODE(cb) {
             console.log("INSIDE VERIFYCODE")
             if (error) {
                 output += error;
-                const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:","");
+                const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
                 console.log(mainerror);
                 cb(`Upload Failed : Error in Code\n\n  ${mainerror}`)
             }
@@ -154,45 +154,35 @@ async function VERIFYCODE(cb) {
     }
 }
 
-async function readSerialPort(cb){
+async function readSerialPort(cb) {
     // console.log(serial_monitor)
-    if (typeof serial_monitor === "undefined"){
-        serial_monitor =new serialport(COMPORT, {
+    if (typeof serial_monitor === "undefined") {
+        serial_monitor = new serialport(COMPORT, {
             baudRate: 9600,
             parser: new serialport.parsers.Readline('\r\n'),
         });
         console.log("Parsing Data for the first time")
-        
+
         serial_monitor.pipe(parser);
-        parser.on('data', function (data){
-            console.log(data)
-            // console.log("First Parse\n")
-            // console.log(data);
+        parser.on('data', function (data) {
             serial_monitor_results += data;
             cb(serial_monitor_results);
         });
     }
-    else{
+    else {
         serial_monitor.open();
         serial_monitor_results = "";
-    //     serial_monitor.pipe(parser);
-    //     parser.on('data', function (data){
-    //         console.log("Second Parse\n");
-    //         console.log(data);
-    //         cb(data);
-    // });
-    // serial_monitor.resume();
-}
+    }
 }
 
-ipcMain.handle("serialport_retreive", async function (event){
-    try{
+ipcMain.handle("serialport_retreive", async function (event) {
+    try {
         console.log("Opening SerialMonitor\n");
-        CHECK_COMPORT(function (res){
+        CHECK_COMPORT(function (res) {
             console.log(res);
         });
-        readSerialPort(function (res){
-            event.sender.send('serialport_monitor',res);
+        readSerialPort(function (res) {
+            event.sender.send('serialport_monitor', res);
         });
     }
     catch (e) {
@@ -200,19 +190,19 @@ ipcMain.handle("serialport_retreive", async function (event){
     }
 })
 
-ipcMain.handle("serialport_write", async function (event, value){
-    serial_monitor.write(value, function (err){
+ipcMain.handle("serialport_write", async function (event, value) {
+    serial_monitor.write(value, function (err) {
         serial_monitor_results += `\nSent ${value} to Arduino\n`;
     });
 })
 
-ipcMain.handle("serialport_close", function (event){
+ipcMain.handle("serialport_close", function (event) {
     try {
         console.log("Closing SerialMonitor\n");
         // if (typeof serial_monitor != "undefined"){
-            serial_monitor.close(function(err){
-                console.log(`Closed Serial Monitor ` + err);
-            });
+        serial_monitor.close(function (err) {
+            console.log(`Closed Serial Monitor ` + err);
+        });
         //     parser.on('close', function (data){
         //         console.log("Closing Parser\n");
         // });
@@ -229,8 +219,8 @@ ipcMain.handle("serialport_close", function (event){
 ipcMain.handle("upload-code", async function (event, jsCode) {
     try {
         fs.writeFileSync(path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino"), jsCode)
-        CHECK_COMPORT(function (res){
-            event.sender.send('arduino_comport',res);
+        CHECK_COMPORT(function (res) {
+            event.sender.send('arduino_comport', res);
         });
         VERIFYCODE(function (res) {
             //console.log("IT IS FINISHED");
@@ -243,12 +233,12 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
 })
 
 ipcMain.handle("check-comport", async function (event, jsCode) {
-    try{
-        CHECK_COMPORT(function (res){
-            event.sender.send('arduino_comport',res);
+    try {
+        CHECK_COMPORT(function (res) {
+            event.sender.send('arduino_comport', res);
         });
     }
-    catch(e){
+    catch (e) {
         console.log(e);
     }
 })

@@ -21,11 +21,14 @@
 }
 .serial-monitor{
     grid-area: monitor;
+    display: flex;
+    flex-direction: column-reverse;
     width: 352.96px;
     height: 611px;
     background-color: #0B0533;
     margin-bottom: 12px;
     color: white;
+    overflow-y: scroll;
 }
 
 

@@ -8,10 +8,15 @@
         font-size: 21px;
     }
 }
-.code-editor{
+#code-editor-textarea{
+    color: #4C97FF;
+    // text-align: top left;
     display: flex;
     width: 352.96px;
     height: 611px;
+    border: none;
     background-color: #0B0533;
+    outline: none;
     margin-bottom: 12px;
+    resize: none;
 }

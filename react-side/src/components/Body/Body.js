@@ -3794,8 +3794,11 @@ const Body = (props) => {
                 TrashContainerChanged = true;
             }
         }
-            setViewCode(props.viewCode)
+        setViewCode(props.viewCode)
+
+        if (serialport_monitor !== props.serialPortMonitor) {
             setSerialPortMonitor(props.serialport_monitor);
+        }
     })
 
     var slide_out = useRef(null)
@@ -4234,7 +4237,7 @@ const Body = (props) => {
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor}/>
+                <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} />
             </div>
         </div >
     )

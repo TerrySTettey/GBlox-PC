@@ -7,98 +7,41 @@ import Serial_Menu from '../Serial_Menu'
 import View_Code_Menu from '../View_Code_Menu'
 import Edit_Code_Menu from '../Edit_Code_Menu'
 import Example_Code_Menu from '../Example_Code_Menu'
-
 import { useRef, useState, useEffect } from 'react'
+
+var last_view_code = ""
 
 var menuOpen = "Closed";
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);
     const [last_button_clicked, setLastButtonClicked] = useState("");
+    const [currentMenu, setCurrentMenu] = useState("")
     const [serialport_monitor, setSerialPortMonitor] = useState("")
+    const [serialport_status, setSerialPortStatus] = useState(false)
     const [viewCode, setViewCode] = useState("")
     const { children } = props;
     var pull_out_menu = useRef(null);
     var pull_out_container = useRef(null);
+    var code_viewer = null;
 
 
-    function closeSerial(){
-        if (last_button_clicked==="serial-port"){
+    function closeSerial() {
+        if (serialport_status === true) {
+            setSerialPortStatus(false)
             { props.onSerialPortClick() }
         }
     }
 
-    useEffect(() =>
-    {
-        if(last_button_clicked==="view-code"){
-            setViewCode(props.viewCode)
-            setContents([<View_Code_Menu viewCode={viewCode}/>]);
-        }
-        if(last_button_clicked=="serial-port"){
-            setSerialPortMonitor(props.serialport_monitor);
-            setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
-        }
-    })
     function Menu(event) {
         menuOpen = "Open"
         if (last_button_clicked !== event.target.id) {
             setLastButtonClicked(event.target.id);
             menuOpen = "Closed"
-            switch (event.target.id) {
-                case "help-menu":
-                    setContents([<Help_Menu />]);
-                    closeSerial()
-                    break;
-                case "serial-port":
-                    setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
-                    { props.onSerialPortClick() }
-                    break;
-                case "code-editor":
-                    setContents([<Edit_Code_Menu />]);
-                    closeSerial()
-                    break;
-                case "view-code":
-                    setContents([<View_Code_Menu viewCode={viewCode}/>]);
-                    closeSerial()
-                    break;
-                case "example-code":
-                    setContents([
-                        <Example_Code_Menu>
-                            <div className="code-example">
-                                <div className="code-example-header">Police Flash Light</div>
-                                <div className="example-details">
-                                    <div>Difficulty: level 3</div>
-                                    <div>Blocks used:</div>
-                                    <div>Movement, Light Effects, Loops, Math</div>
-                                    This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
-                                </div>
-                            </div>
-                            <div className="code-example">
-                                <div className="code-example-header">Police Flash Light</div>
-                                <div className="example-details">
-                                    <div>Difficulty: level 3</div>
-                                    <div>Blocks used:</div>
-                                    <div>Movement, Light Effects, Loops, Math</div>
-                                    This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
-                                </div>
-                            </div>
-                            <div className="code-example">
-                                <div className="code-example-header">Police Flash Light</div>
-                                <div className="example-details">
-                                    <div>Difficulty: level 3</div>
-                                    <div>Blocks used:</div>
-                                    <div>Movement, Light Effects, Loops, Math</div>
-                                    This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
-                                </div>
-                            </div>
-                        </Example_Code_Menu>
-                    ]);
-                    break;
-            }
+
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
         }
         else {
-            closeSerial()
             setLastButtonClicked("None");
             pull_out_menu.current.style.marginLeft = "0px"
             pull_out_container.current.style.opacity = "0"
@@ -108,6 +51,90 @@ function Pull_Out_Menu(props) {
             props.MenuFunction(menuOpen)
         }
     }
+    useEffect(() => {
+        if (last_button_clicked !== "") {
+            switch (last_button_clicked) {
+                case "serial-port":
+                    if (serialport_status === false) {
+                        if (serialport_monitor !== props.serialport_monitor) {
+                            setTimeout(function () {
+                                setSerialPortMonitor(props.serialport_monitor);
+                                setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
+                            }, 150);
+                        }
+                        { props.onSerialPortClick() }
+                        setSerialPortStatus(true)
+                    }
+                    else {
+                        setSerialPortMonitor(props.serialport_monitor);
+                        setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
+                    }
+                    setCurrentMenu(last_button_clicked)
+                    break;
+                case "view-code":
+                    setViewCode(props.viewCode);
+                    setContents([<View_Code_Menu viewCode={viewCode} />])
+                    setCurrentMenu(last_button_clicked)
+                    break;
+                case "help-menu":
+                    if (currentMenu !== last_button_clicked) {
+                        setContents([<Help_Menu />]);
+                        setCurrentMenu(last_button_clicked)
+                    }
+                    break;
+
+                case "code-editor":
+                    if (currentMenu !== last_button_clicked) {
+                        setContents([<Edit_Code_Menu />]);
+                        setCurrentMenu(last_button_clicked)
+                    }
+                    break;
+
+                case "example-code":
+                    if (currentMenu !== last_button_clicked) {
+                        setContents([
+                            <Example_Code_Menu>
+                                <div className="code-example">
+                                    <div className="code-example-header">Police Flash Light</div>
+                                    <div className="example-details">
+                                        <div>Difficulty: level 3</div>
+                                        <div>Blocks used:</div>
+                                        <div>Movement, Light Effects, Loops, Math</div>
+                                        This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
+                                    </div>
+                                </div>
+                                <div className="code-example">
+                                    <div className="code-example-header">Police Flash Light</div>
+                                    <div className="example-details">
+                                        <div>Difficulty: level 3</div>
+                                        <div>Blocks used:</div>
+                                        <div>Movement, Light Effects, Loops, Math</div>
+                                        This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
+                                    </div>
+                                </div>
+                                <div className="code-example">
+                                    <div className="code-example-header">Police Flash Light</div>
+                                    <div className="example-details">
+                                        <div>Difficulty: level 3</div>
+                                        <div>Blocks used:</div>
+                                        <div>Movement, Light Effects, Loops, Math</div>
+                                        This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
+                                    </div>
+                                </div>
+                            </Example_Code_Menu>
+                        ])
+                        setCurrentMenu(last_button_clicked)
+                    }
+                    break;
+
+            }
+            if (last_button_clicked !== "serial-port") {
+                closeSerial();
+            }
+
+        }
+
+    })
 
     return (
         <div className="pull-out-menu" ref={pull_out_menu}>

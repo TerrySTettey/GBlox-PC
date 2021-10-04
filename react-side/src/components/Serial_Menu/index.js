@@ -8,8 +8,9 @@ function Index(props) {
 
     useEffect(() =>
     {
-        setSerialPortMonitor(props.serialport_monitor);
-        console.log(props.serialport_monitor)
+        if(serialport_monitor!==props.serialport_monitor){
+            setSerialPortMonitor(props.serialport_monitor);
+        }
     })
 
     return (

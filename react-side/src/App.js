@@ -94,7 +94,6 @@ const App = () => {
       console.log("Serial Port Opened")
       ipcRenderer.invoke(`serialport_retreive`);
       ipcRenderer.on('serialport_monitor', (event, result) => {
-        console.log(result)
         setSerialPortMonitor(result);
       });
       setSerialPortStatus(true);
@@ -171,7 +170,6 @@ const App = () => {
   })
 
   function workspaceClick(event) {
-    console.log(event.target.id)
     if (document.getElementById('blocklyDiv') !== null) {
       switch (event.target.id) {
         case "zoom-in":
