@@ -90,6 +90,8 @@ const App = () => {
   //   setSerialPortWrite(event.target.value);
   // }
   function serialport_read() {
+    console.log("Serial Port Opened")
+    ipcRenderer.invoke(`serialport_retreive`);
     ipcRenderer.on('serialport_monitor', (event, result) => {
       setSerialPortMonitor(result);
       //console.log(serialport_results);
@@ -156,7 +158,7 @@ const App = () => {
       AlterBlockly();
       initialized_workspace = true;
     }
-    serialport_read();    
+  
   })
 
 function workspaceClick(event) {
@@ -203,7 +205,7 @@ return (
           </SyntaxHighlighter>
       }
       serialport_monitor={serialport_monitor}
-      
+      onSerialPortClick={serialport_read}
     />
 
   </div>

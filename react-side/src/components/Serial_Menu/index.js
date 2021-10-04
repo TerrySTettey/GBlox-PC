@@ -6,7 +6,7 @@ import './Serial_Menu.scss'
 function index(props) {
     return (
         <Menu>
-            <div id="serial-menu">
+            <div id="serial-menu" onClick={props.onSerialPortClick}>
                 <div className="text">Serial Monitor</div>
                 <div className="serial-monitor">
                     {props.serialport_monitor}

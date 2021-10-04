@@ -162,6 +162,7 @@ async function readSerialPort(cb){
             parser: new serialport.parsers.Readline('\r\n'),
         });
         console.log("Parsing Data for the first time")
+        console.log(parser)
         serial_monitor.pipe(parser);
         parser.on('data', function (data){
             // console.log("First Parse\n")

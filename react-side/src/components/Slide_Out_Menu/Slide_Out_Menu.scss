@@ -1,55 +1,52 @@
 @keyframes fadein_menu {
-    from{
+    from {
         opacity: 0;
     }
-    to{
+    to {
         opacity: 1;
     }
 }
 @font-face {
-    font-family: 'Baloo2-Regular';
-    src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
-  }
+    font-family: "Baloo2-Regular";
+    src: local("Baloo2-Regular"), url(./../fonts/Baloo2-Regular.ttf) format("truetype");
+}
 
 #sidebar-nav {
     position: relative;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     z-index: 1;
-    background:#0b053373;
+    background: #0b053373;
     overflow-x: hidden;
-    fill: #0000DC;
-    // box-shadow: 2px 2px 2px 2px #00cadc;
+    fill: #0000dc;
     padding-bottom: 23px;
     animation: fadein_menu forwards;
     animation-duration: 1s;
+    .initial-text {
+        position: relative;
+        padding: 22px 0px 0px 24px;
+        text-align: left;
+        font-size: 17px;
+        font-family: "Baloo2-Regular";
+        color: #ffffff;
+        display: block;
+        margin: 0px;
+    }
+    .border {
+        position: relative;
+        fill: inherit;
+        display: block;
+        margin: -12px -6px -12px -6px;
+    }
 }
-.initial-text {
-    position: relative;
-    padding: 22px 0px 0px 24px;
-    text-align: left;
-    font-size: 17px;
-    font-family: 'Baloo2-Regular';
-    color: #ffffff;
-    display: block;
-    margin: 0px;
-}
-
-.border{
-    position: relative;
-    fill:inherit;
-    display: block;
-    margin: -12px -6px -12px -6px;
-}
-.devices{
+.devices {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-flow: column;
-    .device_icon{
+    grid-template-columns: repeat(auto-fill, minmax(215.9px, 1fr));
+    max-width: calc(215.9px*5);
+    .device_icon {
         position: relative;
         display: flex;
-        .children{
+        .children {
             position: absolute;
             display: flex;
             z-index: 0;
@@ -59,16 +56,26 @@
             flex-direction: column;
             align-items: center;
         }
-        
-        .children svg{
+
+        .children svg {
             display: block;
             fill: transparent;
             margin: auto;
         }
-        
-
     }
 }
+
+@media only screen and (max-width: 1275px) {
+    .devices{
+        grid-template-columns: repeat(3, minmax(215.9px, 1fr));
+    }
+}
+@media only screen and (min-width: 1275px) and (max-width: 1480px) {
+    .devices{
+        grid-template-columns: repeat(4, minmax(215.9px, 1fr));
+    }
+}
+
 .device_icon:hover {
     fill: #0079dc;
 }

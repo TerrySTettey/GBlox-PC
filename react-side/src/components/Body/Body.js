@@ -4207,14 +4207,13 @@ const Body = (props) => {
                             {add_device(mello_temp)}
                             {add_device(Arduino_Uno_SVG)}
                             {add_device(mello_temp)}
-                            {add_device(Arduino_Uno_SVG)}
-                            {add_device(mello_temp)}
+
                         </div>
                     </Slide_Out_Menu>
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={PullOutPullOut} viewCode={props.viewCode} toolboxButtons={props.toolboxButtons} serialport_monitor={props.serialport_monitor} />
+                <Pull_Out_Menu MenuFunction={PullOutPullOut} viewCode={props.viewCode} toolboxButtons={props.toolboxButtons} serialport_monitor={props.serialport_monitor} onSerialPortClick={props.onSerialPortClick}/>
             </div>
         </div >
     )

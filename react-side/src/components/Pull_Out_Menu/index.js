@@ -29,6 +29,7 @@ function Pull_Out_Menu(props) {
                     break;
                 case "serial-port":
                     setContents([<Serial_Menu serialport_monitor={props.serialport_monitor}/>]);
+                    {props.onSerialPortClick()}
                     break;
                 case "code-editor":
                     setContents([<Edit_Code_Menu />]);
