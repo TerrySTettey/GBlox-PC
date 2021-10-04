@@ -3813,73 +3813,7 @@ const Body = (props) => {
                     <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M1,0.46 l0,-0.426 L0.982,0.001 l-0.472,0.001,-0.149,0,-0.331,0 L0,0.051 v0.089 l0.015,0.026 V0.928 L0.035,0.96 l0.261,0,0.024,0.04 H0.976 l0.024,-0.041 V0.937 l0,-0.001,-0.001,-0.363 h-0.033 V0.516"></path></clipPath>
                 </svg>
                 <div id="blocklyDiv">
-
                 </div>
-                <div className="workspace-controls">
-                    <Button
-                        id="zoom-in"
-                        type="WorkspaceControlButton"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        children={[
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="16.745" viewBox="0 0 16.745 16.745">
-                                <rect id="Rectangle_6" data-name="Rectangle 6" width="16.745" height="2.155" transform="translate(0 7.295)" />
-                                <rect id="Rectangle_7" data-name="Rectangle 7" width="2.155" height="16.745" transform="translate(7.295)" />
-                            </svg>
-                        ]}
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="zoom-out"
-                        type="WorkspaceControlButton"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        children={[
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="2.232" viewBox="0 0 16.745 2.232">
-                                <rect id="Rectangle_8" data-name="Rectangle 8" width="16.745" height="2.232" />
-                            </svg>
-                        ]}
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="zoom-to-fit"
-                        type="WorkspaceControlButton"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        children={[
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="8.511" viewBox="0 0 16.745 8.511">
-                                <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" fill="#e9e9ff" />
-                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)" fill="#e9e9ff" />
-                            </svg>
-
-                        ]}
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="workspace-previous"
-                        type="WorkspaceControlButton_Previous"
-                        inColor="#E9E9FF"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        s_ButtonState="Out"
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                    <Button
-                        id="workspace-after"
-                        type="WorkspaceControlButton_After"
-                        inColor="#060841"
-                        outColor="#E9E9FF"
-                        hoverColor="#0000FF"
-                        s_ButtonState="Out"
-                        hoverEffect="svg-fill"
-                        onClick={props.workspaceClick}
-                    />
-                </div>
-
             </div>
 
             <div className="tester">
@@ -3990,6 +3924,70 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
+                <div className="workspace-controls">
+                    <Button
+                        id="zoom-in"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="16.745" viewBox="0 0 16.745 16.745">
+                                <rect id="Rectangle_6" data-name="Rectangle 6" width="16.745" height="2.155" transform="translate(0 7.295)" />
+                                <rect id="Rectangle_7" data-name="Rectangle 7" width="2.155" height="16.745" transform="translate(7.295)" />
+                            </svg>
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="zoom-out"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="2.232" viewBox="0 0 16.745 2.232">
+                                <rect id="Rectangle_8" data-name="Rectangle 8" width="16.745" height="2.232" />
+                            </svg>
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="zoom-to-fit"
+                        type="WorkspaceControlButton"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        children={[
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="8.511" viewBox="0 0 16.745 8.511">
+                                <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" fill="#e9e9ff" />
+                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)" fill="#e9e9ff" />
+                            </svg>
+
+                        ]}
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="workspace-previous"
+                        type="WorkspaceControlButton_Previous"
+                        inColor="#E9E9FF"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        s_ButtonState="Out"
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                    <Button
+                        id="workspace-after"
+                        type="WorkspaceControlButton_After"
+                        inColor="#060841"
+                        outColor="#E9E9FF"
+                        hoverColor="#0000FF"
+                        s_ButtonState="Out"
+                        hoverEffect="svg-fill"
+                        onClick={props.workspaceClick}
+                    />
+                </div>
 
                 {/*<svg id="num2" xmlns="http://www.w3.org/2000/svg" width="1076" height="246" viewBox="0 0 1076 245">
                     <defs>
