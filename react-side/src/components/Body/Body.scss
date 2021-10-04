@@ -70,6 +70,7 @@ $shift: 0px;
                 grid-area: n13;
             }
             .workspace-controls{
+                pointer-events: all;
                 grid-area: n13;
                 position: absolute;
                 top: -25px;
