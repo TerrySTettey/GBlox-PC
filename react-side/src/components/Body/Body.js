@@ -3668,7 +3668,7 @@ const Body = (props) => {
         var children = [];
         var category = "";
         var category_svg = [];
-        var category_color="";
+        var category_color = "";
         var children_count = 0;
         for (var i = 0; i < toolbox_items.length; i++) {
             var svg = []
@@ -3676,49 +3676,49 @@ const Body = (props) => {
             switch (toolbox_items[i][0]) {
                 case "Loops":
                     svg = svgs.Loop;
-                    color=Toolbox_colors.Loop;
+                    color = Toolbox_colors.Loop;
                     break;
                 case "Logic":
                     svg = svgs.Logic;
-                    color=Toolbox_colors.Logic;
+                    color = Toolbox_colors.Logic;
                     break;
                 case "Math":
                     svg = svgs.Math;
-                    color=Toolbox_colors.Math;
+                    color = Toolbox_colors.Math;
                     break;
                 case "Text":
                     svg = svgs.Text;
-                    color=Toolbox_colors.Text;
+                    color = Toolbox_colors.Text;
                     break;
                 case "Actuators":
                     svg = svgs.Actuators;
-                    color=Toolbox_colors.Actuators;
+                    color = Toolbox_colors.Actuators;
                     break;
                 case "Sensors":
                     svg = svgs.Sensors;
-                    color=Toolbox_colors.Sensors;
+                    color = Toolbox_colors.Sensors;
                     break;
                 case "COM":
                     svg = svgs.COM;
-                    color=Toolbox_colors.COM;
+                    color = Toolbox_colors.COM;
                     break;
                 case "LEDs":
                     svg = svgs.LEDs;
-                    color=Toolbox_colors.Light;
+                    color = Toolbox_colors.Light;
                     break;
                 case "Sound":
                     svg = svgs.Sound;
-                    color=Toolbox_colors.Sound;
+                    color = Toolbox_colors.Sound;
                     break;
                 default:
-                    color=("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))
+                    color = ("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))
                     break;
             }
             if (toolbox_items[i][2] == "category") {
                 children_count = toolbox_items[i][3];
                 category = toolbox_items[i][0]
                 category_svg = svg;
-                category_color=color;
+                category_color = color;
             }
             else {
                 children_count -= 1;
@@ -4121,8 +4121,42 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
-                <svg id="num15trash" ref={TrashHolder}>
-                    {/*
+                <div id="TrashTotal">
+                    <div id="num15HoverHolder">
+                        <svg id="lid" xmlns="http://www.w3.org/2000/svg" width="62.049" height="26.565" viewBox="0 0 62.049 26.565">
+                            <defs>
+                                <filter id="Path_81" x="0" y="0" width="62.049" height="26.565" filterUnits="userSpaceOnUse">
+                                    <feOffset input="SourceAlpha" />
+                                    <feGaussianBlur stdDeviation="3" result="blur" />
+                                    <feFlood flood-color="#2000ff" />
+                                    <feComposite operator="in" in2="blur" />
+                                    <feComposite in="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_81)">
+                                <path id="Path_81-2" data-name="Path 81" d="M1849.7,938.283h-10.84v-1.969l-1.052-1.052h-8.6L1827.943,934H1821.9v4.283h-10.4l-3.059,2.141v2.141h44.049v-2.141Z" transform="translate(-1799.44 -925)" fill="#e9e9ff" />
+                            </g>
+                        </svg>
+
+                        <svg id="bin" xmlns="http://www.w3.org/2000/svg" width="62.944" height="62.37" viewBox="0 0 62.944 62.37">
+                            <defs>
+                                <filter id="Path_82" x="0" y="0" width="62.944" height="62.37" filterUnits="userSpaceOnUse">
+                                    <feOffset input="SourceAlpha" />
+                                    <feGaussianBlur stdDeviation="4.5" result="blur" />
+                                    <feFlood flood-color="#3a00ff" flood-opacity="0.659" />
+                                    <feComposite operator="in" in2="blur" />
+                                    <feComposite in="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <g id="Group_547" data-name="Group 547" transform="translate(9.218 0.652)">
+                                <g transform="matrix(1, 0, 0, 1, -9.22, -0.65)" filter="url(#Path_82)">
+                                    <path id="Path_82-2" data-name="Path 82" d="M1812.688,946.74V957.9l2.371,2.371V977.33l4.78,4.78h25.428V967.541l3.365-3.364V946.74Zm10.129,32.425-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Zm5.8,1.919-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Z" transform="translate(-1799.19 -933.24)" fill="#e9e9ff" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <svg id="num15trash" ref={TrashHolder}>
+                        {/*
                     <svg xmlns="http://www.w3.org/2000/svg" class="blocklySvg" style="background-color: rgb(6, 8, 65);" width="1661px" height="920px" tabindex="0" version="1.1">
                         <defs>
                             <pattern id="blocklyGridPattern12675100857393296" patternUnits="userSpaceOnUse" x="149" y="0" width="100" height="100">
@@ -4148,23 +4182,8 @@ const Body = (props) => {
                                         <path style="display: none;" transform="">
                                             <animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="fill" attributeType="XML" /></path><path style="display: none;" fill="none" stroke-width="4" transform=""><animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="stroke" attributeType="XML" /></path><circle style="display: none;" stroke-width="4" r="5"><animate repeatCount="indefinite" values="#ffa200;transparent;transparent;" dur="1s" attributeName="fill" attributeType="XML" /></circle></g></g><g transform="translate(430 150)" data-id=")1~1ZMhC(_Q7wEByBRg]"><path class="blocklyPath" fill="#5c26ff" stroke="#451dbf" d="m 0 22 h 0 c 25 -22 71 -22 96 0 h 60 a 4 4 0 0 1 4 4 v 26 V 30 V 71 V 79 V 113 V 117 a 4 4 0 0 1 -4 4 H 64 c -2 0 -3 1 -4 2 l -4 4 c -1 1 -2 2 -4 2 h -12 c -2 0 -3 -1 -4 -2 l -4 -4 c -1 -1 -2 -2 -4 -2 h -8 a 4 4 0 0 0 -4 4 v 16 a 4 4 0 0 0 4 4 h 8 c 2 0 3 1 4 2 l 4 4 c 1 1 2 2 4 2 h 12 c 2 0 3 -1 4 -2 l 4 -4 c 1 -1 2 -2 4 -2 H 156 a 4 4 0 0 1 4 4 V 153 V 173 a 4 4 0 0 1 -4 4 h -152 a 4 4 0 0 1 -4 -4 Z" /><g transform="translate(8 30)"><image width="40px" height="40px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png" alt="[object Object]" /></g><g transform="translate(56 40)"><text class="blocklyText" dominant-baseline="central" x="0" y="10.5" /></g></g></g></g></svg>
                 */}
-                </svg>
-                <svg id="num15trash" xmlns="http://www.w3.org/2000/svg"  width="62.944" height="62.37" viewBox="0 0 62.944 62.37">
-                    <defs>
-                        <filter id="Path_82" x="0" y="0" width="62.944" height="62.37" filterUnits="userSpaceOnUse">
-                            <feOffset input="SourceAlpha" />
-                            <feGaussianBlur stdDeviation="4.5" result="blur" />
-                            <feFlood flood-color="#3a00ff" flood-opacity="0.659" />
-                            <feComposite operator="in" in2="blur" />
-                            <feComposite in="SourceGraphic" />
-                        </filter>
-                    </defs>
-                    <g id="Group_547" data-name="Group 547" transform="translate(9.218 0.652)">
-                        <g transform="matrix(1, 0, 0, 1, -9.22, -0.65)" filter="url(#Path_82)">
-                            <path id="Path_82-2" data-name="Path 82" d="M1812.688,946.74V957.9l2.371,2.371V977.33l4.78,4.78h25.428V967.541l3.365-3.364V946.74Zm10.129,32.425-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Zm5.8,1.919-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Z" transform="translate(-1799.19 -933.24)" fill="#e9e9ff" />
-                        </g>
-                    </g>
-                </svg>
+                    </svg>
+                </div>
 
             </div>
             <div className="c-Body-a-OverlayExtras" />

@@ -111,18 +111,64 @@ $shift: 0px;
                 margin-top: 0px;
                 margin-left:1px ;
             }
-            #num15trash {
+
+            #TrashTotal{
+                pointer-events: all;
+                position: absolute;
                 grid-area: n15;
                 margin-top:-73px;//-820px; //-73px;
-                margin-left:-67px ;//-1600px;//-67px ;
-                outline: green 2px solid;
-                position: absolute;
-                //transform: translate(-1579px,-825px);
-                //height: 86vh;
-                //width: 86vw;
-                height: 124px;
-                width: 96px;
+                margin-left:-67px ;
+
+                #num15trash {
+                    pointer-events: all;
+                    grid-area: n15;
+                    position: absolute;
+                    //transform: translate(-1579px,-825px);
+                    //height: 86vh;
+                    //width: 86vw;
+                    height: 124px;
+                    width: 96px;
+                    overflow: visible;
+                }
+
+                #num15HoverHolder {
+                    pointer-events: none;
+                    grid-area: n15;
+                    position: absolute;
+                    overflow: visible;
+                    height: 124px;
+                    width: 96px;
+                    //outline: 5px yellow dashed;
+                    
+
+                    #lid {
+                        position: absolute;
+                        top: 10px;
+                        transform: translateX(15px) scale(1.5);
+                        transition: transform 0.3s;
+                        transform-origin: right;
+
+                    }
+
+                    #bin {
+                        position: absolute;
+                        top: 30px;
+                        transform: scale(1.5);
+                    }
+                }
+
+                &:hover{
+                    pointer-events: all;
+                    #num15HoverHolder {
+                        pointer-events: all;
+                        #lid {
+                            pointer-events: all;
+                            transform: translateX(15px) rotate(45deg) scale(1.5);
+                        }
+                    }
+                }
             }
+
         }
     
     .c-Body-a-OverlayExtras {
@@ -294,9 +340,9 @@ $shift: 0px;
 
 .blocklyTrash {
     //position: relative;
-    outline: red 2px solid;
-    pointer-events: all;
+    //outline: red 2px solid;
+    pointer-events: none;
     //transform: translate(1579px,825px);
-    transform: translate(0, 22px) !important;
+    transform: translate(15px, 24px) scaleX(2) !important;
     opacity: 0 !important;
 }
