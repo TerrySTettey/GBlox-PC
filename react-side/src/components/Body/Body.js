@@ -12,6 +12,7 @@ import Header from '../Header/Header'
 import ToolSelector from '../ToolSelector/ToolSelector';
 import Pull_Out_Menu from '../Pull_Out_Menu'
 import CustomDrop from '../CustomDrop';
+import WorkTabHolder from '../WorkTabHolder';
 
 
 const Arduino_Uno_SVG =
@@ -4194,6 +4195,7 @@ const Body = (props) => {
             </div>
             <div className="c-Body-a-OverlayExtras" />
             <Header />
+            <WorkTabHolder />
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">

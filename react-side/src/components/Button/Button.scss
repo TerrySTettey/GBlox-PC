@@ -5,8 +5,8 @@
     padding: 0;
     margin-left: 0px;
     margin-right: 0px;
-    height: 100%;
-    width: 100%;
+    height: fit-content;
+    width: fit-content;
     text-decoration: none;
     background: none;
     left: 0;
@@ -22,6 +22,8 @@
 #button-container {
     display: inline-block;
     position: relative;
+    width: fit-content;
+    height: fit-content;
 }
 
 #settings-close-button {
@@ -90,9 +92,11 @@
     position: relative;
     display: inline-flex;
     transform: skewX(-45deg);
-    width: 162px;
+    //width: 162px;
+    padding-left: 20px;
     height: 36px;
     align-items: center;
+    white-space: nowrap;
     .workspace-button-text {
         font-size: 21px;
         color: white;
@@ -104,9 +108,10 @@
         position: relative;
         display: block;
         color: white;
+        margin-top: 4px;
         transform: skewX(45deg);
-        margin: 4.3px 10px 25px 0px;
-        font-size: 12px;
+        margin:4.3px 10px 25px 0px;
+        font-size: 15px;
     }
 }
 
