@@ -7,7 +7,7 @@ import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs
 
 import './App.css';
 
-import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
+import { MelloDOM, newToolBox } from "./customblocks/toolboxes/toolboxes"
 import { DeviceList } from "./deviceDef/device_list.js"
 import AlterBlockly from "./blocklyextras/blocklyAlters";
 import ToolSelector from "./components/ToolSelector/ToolSelector";
@@ -28,6 +28,7 @@ var toolbox_selected = "";
 var variables_created = [];
 var OurWorkspace;
 var toolbox_items = [];
+var response = "null";
 
 //Blockly Themes
 
@@ -86,6 +87,7 @@ const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
   const [serialport_monitor, setSerialPortMonitor] = useState("test");
   const [serialport_status, setSerialPortStatus] = useState(false)
+  const [upload_status, setUploadStatus] = useState("");
 
   function serialport_read() {
     console.log("Serial Port Button Clicked")
@@ -116,6 +118,53 @@ const App = () => {
     }
     OurWorkspace.registerButtonCallback("createvar", logbutton)
     setArduinoCode(code);
+  }
+  async function uploadCode_ipc() {
+    response = 'Uploading code';
+    setUploadStatus(response);
+    //console.log(response);
+    response = 'Awaiting Response from Arduino';
+    setUploadStatus(response);
+    //console.log(response);
+    //setUploadStatus(response);
+    ipcRenderer.invoke('upload-code', arduinocode);
+    ipcRenderer.on('arduino_comport', (event, result) => {
+      response = result;
+      setUploadStatus(`Arduino found on ${response}`);
+    });
+
+    ipcRenderer.on('arduino_upload_status', (event, result) => {
+      response = result;
+      setUploadStatus(response);
+    });
+  }
+
+  function workspaceClick(event) {
+    if (document.getElementById('blocklyDiv') !== null) {
+      switch (event.target.id) {
+        case "zoom-in":
+          Blockly.mainWorkspace.zoom(0, 0, 2);
+          break;
+        case "zoom-out":
+          Blockly.mainWorkspace.zoom(0, 0, -2)
+          break;
+        case "zoom-to-fit":
+          Blockly.mainWorkspace.zoomToFit()
+          break;
+        case "workspace-previous":
+          Blockly.mainWorkspace.undo(false);
+          break;
+        case "workspace-after":
+          Blockly.mainWorkspace.undo(true);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  function open_flyout(event) {
+    document.getElementById(event.target.id).click()
   }
 
   useEffect(() => {
@@ -167,35 +216,6 @@ const App = () => {
       initialized_workspace = true;
     }
   })
-
-  function workspaceClick(event) {
-    if (document.getElementById('blocklyDiv') !== null) {
-      switch (event.target.id) {
-        case "zoom-in":
-          Blockly.mainWorkspace.zoom(0, 0, 2);
-          break;
-        case "zoom-out":
-          Blockly.mainWorkspace.zoom(0, 0, -2)
-          break;
-        case "zoom-to-fit":
-          Blockly.mainWorkspace.zoomToFit()
-          break;
-        case "workspace-previous":
-          Blockly.mainWorkspace.undo(false);
-          break;
-        case "workspace-after":
-          Blockly.mainWorkspace.undo(true);
-          break;
-        default:
-          break;
-      }
-    }
-  }
-
-  function open_flyout(event) {
-    document.getElementById(event.target.id).click()
-  }
-
   return (
     <div>
       <TestMain
@@ -213,6 +233,7 @@ const App = () => {
         serialport_monitor={serialport_monitor}
         onSerialPortClick={serialport_read}
         example_codes={example_codes}
+        uploadFunction={uploadCode_ipc}
       />
 
     </div>

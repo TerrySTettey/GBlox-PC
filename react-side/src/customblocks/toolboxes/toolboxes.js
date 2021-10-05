@@ -1,115 +1,4 @@
 import Blockly from "blockly";
-const Basic_Flyouts = {
-  Logic_Toolbox: `<xml>
-  <block type="controls_if"></block>
-  <block type="logic_compare">
-      <field name="OP">EQ</field>
-  </block>
-  <block type="logic_operation">
-      <field name="OP">AND</field>
-  </block>
-  <block type="logic_negate"></block>
-  <block type="logic_boolean">
-      <field name="BOOL">TRUE</field>
-  </block>
-  <block type="logic_null"></block>
-  <block type="logic_ternary"></block>
-  </xml>`,
-  Loop_Toolbox: `
-  <xml>
-  <block type="for_loop"></block>
-      <block type="controls_whileUntil">
-          <field name="MODE">WHILE</field>
-      </block>
-      <block type="delay_core">
-      <field name= "seconds" type="number"></field>
-      </block>
-  </xml>`,
-  Math_Toolbox: `<xml>
-  <block type="math_number">
-          <field name="NUM">0</field>
-      </block>
-      <block type="math_arithmetic">
-          <field name="OP">ADD</field>
-          <value name="A">
-              <shadow type="math_number">
-                  <field name="NUM">1</field>
-              </shadow>
-          </value>
-          <value name="B">
-              <shadow type="math_number">
-                  <field name="NUM">1</field>
-              </shadow>
-          </value>
-      </block>
-      <block type="math_number_property">
-          <mutation divisor_input="false"></mutation>
-          <field name="PROPERTY">EVEN</field>
-          <value name="NUMBER_TO_CHECK">
-              <shadow type="math_number">
-                  <field name="NUM">0</field>
-              </shadow>
-          </value>
-      </block>
-      </xml>
-  `,
-  Text_Toolbox: `<xml>
-  <block type="text">
-  <field name="TEXT"></field>
-</block>
-<block type="text_join">
-  <mutation items="2"></mutation>
-</block>
-<block type="text_length">
-  <value name="VALUE">
-    <shadow type="text">
-      <field name="TEXT">abc</field>
-    </shadow>
-  </value>
-</block>
-<block type="text_isEmpty">
-  <value name="VALUE">
-    <shadow type="text">
-      <field name="TEXT"></field>
-    </shadow>
-  </value>
-</block>
-<block type="text_changeCase">
-  <field name="CASE">UPPERCASE</field>
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">abc</field>
-    </shadow>
-  </value>
-</block>
-<block type="text_trim">
-  <field name="MODE">BOTH</field>
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">abc</field>
-    </shadow>
-  </value>
-</block>
-<block type="text_print">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">abc</field>
-    </shadow>
-  </value>
-</block>
-<block type="text_prompt_ext">
-  <mutation type="TEXT"></mutation>
-  <field name="TYPE">TEXT</field>
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">abc</field>
-    </shadow>
-  </value>
-</block>
-  </xml>
-  `
-}
-
 // Beginner Toolbox
 const newToolBox = {
   kind: "categoryToolbox",
@@ -140,7 +29,7 @@ const newToolBox = {
         },
         {
           kind: "block",
-          type: "n_mainloop"
+          type: "m_mainloop"
         }
       ]
     },
@@ -234,12 +123,13 @@ const newToolBox = {
       contents: [
         {
           kind: "block",
-          type: "n_delay"
+          type: "delay_core"
         }
       ]
     }
   ]
 }
+
 //Mello Toolbox
 const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
   <category css-icon="customIcon fa fa-cog" name="Logic" colour="#5b80a5">
@@ -468,4 +358,4 @@ const MelloToolbox = `<xml xmlns="https://developers.google.com/blockly/xml" id=
 
 const MelloDOM = Blockly.Xml.textToDom(MelloToolbox);
 
-export { Basic_Flyouts, MelloDOM };
+export { MelloDOM, newToolBox };

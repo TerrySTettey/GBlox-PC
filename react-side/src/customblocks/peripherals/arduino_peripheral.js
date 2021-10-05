@@ -189,6 +189,9 @@ Blockly.JavaScript['n_servo_rotate'] = function(block) {
 Blockly.JavaScript['n_led_state'] = function(block) {
     var value_led_value = block.getFieldValue("led_state");
     // TODO: Assemble JavaScript into code variable.
+    if (peripheral_SetupCode.includes(`\tpinMode(LED_BUILTIN, OUTPUT)\n`)==0){
+        peripheral_SetupCode += `\tpinMode(LED_BUILTIN, OUTPUT);\n`;
+    }
     var code = `\n\tdigitalWrite(LED_BUILTIN,${value_led_value});\n`;
     return code;
 };

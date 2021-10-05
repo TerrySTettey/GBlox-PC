@@ -22,7 +22,7 @@ const TestMain = (props) => {
 
     return (
         <div>
-            <Body ToolboxFunction={props.ToolboxFunction} MenuFunction={props.MenuFunction} workspaceClick={props.workspaceClick} viewCode={viewCode} serialport_monitor={serialport_monitor} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} example_codes={props.example_codes}/>
+            <Body ToolboxFunction={props.ToolboxFunction} MenuFunction={props.MenuFunction} workspaceClick={props.workspaceClick} viewCode={viewCode} serialport_monitor={serialport_monitor} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} example_codes={props.example_codes} uploadFunction={props.uploadFunction}/>
         </div>
     )
 }

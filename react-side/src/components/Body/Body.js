@@ -4094,6 +4094,7 @@ const Body = (props) => {
                         <line id="Line_1" data-name="Line 1" x1="4.264" y2="18.953" transform="translate(11.072)" fill="none" stroke="#e9e9ff" stroke-miterlimit="10" stroke-width="2" />
                     </g>
                 </svg>
+
                 <svg id="num12" xmlns="http://www.w3.org/2000/svg" width="76" height="345" viewBox="0 0 72 345">
                     <defs>
                         <clipPath id="clip-path">
@@ -4213,7 +4214,7 @@ const Body = (props) => {
                 <div className="i-emptyDiv3" />
                 <div className="c-Body-a-UploadProg">
                     <div className="c-Body-a-UploadButton">
-                        <Button type="UploadButton" text="Upload" outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" />
+                        <Button type="UploadButton" text="Upload" outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" onClick={props.uploadFunction} />
                     </div>
                     <div className="c-Body-a-ProgressBar">
                         <ProgressBar progress={55} />
@@ -4237,7 +4238,7 @@ const Body = (props) => {
                 </div>
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes}/>
+                <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>
         </div >
     )
