@@ -18,7 +18,7 @@ import "./customblocks/peripherals/arduino_peripheral"
 import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
 import { mainLoopCode } from "./customblocks/compiler/arduino_core"
-
+import example_codes from "./example_codes"
 const { ipcRenderer } = window.require('electron')
 
 var currentToolbox = MelloDOM;
@@ -81,7 +81,6 @@ var test_theme = Blockly.Theme.defineTheme('test_theme', {
 var default_workspace = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;
 var newxml = default_workspace;
 var newxmldom = Blockly.Xml.textToDom(newxml);
-var clicked = 0;
 
 const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
@@ -204,9 +203,6 @@ const App = () => {
         workspaceClick={workspaceClick}
         toolboxButtons={toolbox_items}
         viewCode={
-          // <div>
-          //   {arduinocode}
-          // </div>
           <SyntaxHighlighter
             language="arduino"
             style={tomorrowNightBlue}
@@ -216,6 +212,7 @@ const App = () => {
         }
         serialport_monitor={serialport_monitor}
         onSerialPortClick={serialport_read}
+        example_codes={example_codes}
       />
 
     </div>

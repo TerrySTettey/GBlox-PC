@@ -17,14 +17,12 @@ const TestMain = (props) => {
         if (serialport_monitor !== props.serialPortMonitor) {
             setSerialPortMonitor(props.serialport_monitor);
         }
-    })
-    useEffect(() => {
         
-    },[viewCode]);
+    })
 
     return (
         <div>
-            <Body ToolboxFunction={props.ToolboxFunction} MenuFunction={props.MenuFunction} workspaceClick={props.workspaceClick} viewCode={viewCode} serialport_monitor={serialport_monitor} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} />
+            <Body ToolboxFunction={props.ToolboxFunction} MenuFunction={props.MenuFunction} workspaceClick={props.workspaceClick} viewCode={viewCode} serialport_monitor={serialport_monitor} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} example_codes={props.example_codes}/>
         </div>
     )
 }

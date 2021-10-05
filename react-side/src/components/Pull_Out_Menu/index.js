@@ -51,6 +51,7 @@ function Pull_Out_Menu(props) {
             props.MenuFunction(menuOpen)
         }
     }
+    
     useEffect(() => {
         if (last_button_clicked !== "") {
             switch (last_button_clicked) {
@@ -93,34 +94,7 @@ function Pull_Out_Menu(props) {
                 case "example-code":
                     if (currentMenu !== last_button_clicked) {
                         setContents([
-                            <Example_Code_Menu>
-                                <div className="code-example">
-                                    <div className="code-example-header">Police Flash Light</div>
-                                    <div className="example-details">
-                                        <div>Difficulty: level 3</div>
-                                        <div>Blocks used:</div>
-                                        <div>Movement, Light Effects, Loops, Math</div>
-                                        This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
-                                    </div>
-                                </div>
-                                <div className="code-example">
-                                    <div className="code-example-header">Police Flash Light</div>
-                                    <div className="example-details">
-                                        <div>Difficulty: level 3</div>
-                                        <div>Blocks used:</div>
-                                        <div>Movement, Light Effects, Loops, Math</div>
-                                        This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
-                                    </div>
-                                </div>
-                                <div className="code-example">
-                                    <div className="code-example-header">Police Flash Light</div>
-                                    <div className="example-details">
-                                        <div>Difficulty: level 3</div>
-                                        <div>Blocks used:</div>
-                                        <div>Movement, Light Effects, Loops, Math</div>
-                                        This example is like the 'Random Walk' example in Mode 4, but this time the movements aren't so random! That's because the 'random number generator seed' causes the same sequence of random numbers to appear, depending on the range of integers given. Run this program multiple times to see that you will get the same sequence of actions every time.
-                                    </div>
-                                </div>
+                            <Example_Code_Menu example_codes={props.example_codes}> 
                             </Example_Code_Menu>
                         ])
                         setCurrentMenu(last_button_clicked)

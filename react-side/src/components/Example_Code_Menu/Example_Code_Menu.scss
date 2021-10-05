@@ -6,14 +6,14 @@
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    border: solid 3px #0B0533;
+    border: solid 3px #0b0533;
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
     background: #0000dc;
     border: solid 3px transparent;
     border-radius: 10px;
-  }
+}
 
 #example-code-menu {
     position: relative;
@@ -24,29 +24,59 @@
     #button-container {
         width: 120px;
     }
-    #examples{
+    #examples {
         display: flex;
         height: 844.4px;
         flex-direction: column;
         overflow-y: scroll;
     }
-}
-.code-example {
-    display: inline-flex;
-    flex-direction: column;
-    background-color: #0b0533;
-    border: 1px solid #0000dc;
-    height: 537px;
-    padding: 18px 29px 0px 23px;
-    margin-bottom: 38px;
-    .code-example-header {
-        color: #4c97ff;
-        padding-bottom: 16px;
-        font-size: 21px;
-    }
-    .example-details {
-        display: flex;
+    .code-example {
+        display: inline-flex;
         flex-direction: column;
-        color: #ffffff;
+        background-color: #0b0533;
+        border: 1px solid #0000dc;
+        // height: 537px;
+        padding: 18px 29px 0px 23px;
+        margin-bottom: 38px;
+        .code-example-header {
+            color: #4c97ff;
+            padding-bottom: 16px;
+            font-size: 21px;
+        }
+        .example-details {
+            display: flex;
+            flex-direction: column;
+            color: #ffffff;
+            margin-bottom: 10px;
+            > div {
+                padding-bottom: 5px;
+            }
+            .blocks_used {
+                margin-bottom: -5px;
+                padding: 0px;
+            }
+        }
+        .example-buttons {
+            display: inline-flex;
+            .example-devices {
+                display: grid;
+                grid-template-columns: repeat(2, 63px);
+                gap: 10px;
+                margin-bottom: 10px;
+                .device {
+                    width: 63px;
+                    height: 25px;
+                    background-color: #0000dc;
+                    color: white;
+                    text-align: center;
+                    user-select: none;
+                }
+            }
+            #button-container {
+                left: 35%;
+                transform: translateX(-50%);
+                margin-bottom: 20px;
+            }
+        }
     }
 }

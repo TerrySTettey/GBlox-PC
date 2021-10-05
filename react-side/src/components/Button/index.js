@@ -358,23 +358,36 @@ const Button = (props) => {
                 </div>
             )
             break;
+        case "ExampleButton":
+            buttonType = (
+                <div>
+                    <div className="c-button-a-ExampleButton" ref={buttonTyper} style={{
+                        backgroundColor: buttonColor,
+                        borderColor: borderColor
+                    }}>
+                        <p className="button-text"> {props.text}</p>
+                    </div>
+                    {emptybutton}
+                </div>
+            )
+            break;
         case " ":
             buttonType = (
                 <div>
                     {emptybutton}
                 </div >
             )
-break;
+            break;
 
     }
 
 
 
-return (
-    <div id="button-container">
-        {buttonType}
-    </div>
-)
+    return (
+        <div id="button-container">
+            {buttonType}
+        </div>
+    )
 }
 
 Button.defaultProps = {
