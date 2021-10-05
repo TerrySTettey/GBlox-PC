@@ -105,14 +105,13 @@
         display: block;
         color: white;
         transform: skewX(45deg);
-        margin:4.3px 10px 25px 0px;
+        margin: 4.3px 10px 25px 0px;
         font-size: 12px;
     }
 }
 
 .workspace-close-button:hover {
     color: black;
-    
 }
 
 .c-button-a-CircularOverlayMenuButton {
@@ -131,7 +130,28 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
+    .tooltiptext {
+        position: absolute;
+        filter: none;
+        background:#0B0533;
+        border: 1px solid #0000DC;
+        font-family: "Baloo2-Regular";
+        align-items: center;
+        transition: opacity 1s;
+        transition-delay: 1s;
+        margin-left: -47.3px;
+        white-space: nowrap;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        margin-top: -20px;
+        padding: 5px 0;
+        z-index: 1;
+        user-select: none;
+        pointer-events: none;
+    }
 }
+
 
 .c-button-a-WorkspaceControlButton {
     position: relative;
@@ -196,7 +216,7 @@
     align-items: center;
     width: 196px;
     height: 58px;
-    .c-button-a-ToolboxCategoryContents{
+    .c-button-a-ToolboxCategoryContents {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -216,24 +236,23 @@
             margin: auto;
         }
     }
-
 }
-.c-button-a-ExampleButton{
+.c-button-a-ExampleButton {
     height: 40px;
     align-items: center;
-    p{
+    p {
         margin: 0;
         text-align: center;
     }
 }
-.c-button-a-ToolboxLevel{
+.c-button-a-ToolboxLevel {
     position: relative;
     width: 35.24px;
     height: 30.59px;
     display: flex;
     align-items: center;
-    .button-text{
-        left:50%;
-        margin:0 auto;
+    .button-text {
+        left: 50%;
+        margin: 0 auto;
     }
 }

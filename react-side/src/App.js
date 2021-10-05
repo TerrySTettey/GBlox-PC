@@ -88,6 +88,7 @@ const App = () => {
   const [serialport_monitor, setSerialPortMonitor] = useState("test");
   const [serialport_status, setSerialPortStatus] = useState(false)
   const [upload_status, setUploadStatus] = useState("");
+  const [toolbox_level, setToolboxLevel] = useState("3");
 
   function serialport_read() {
     console.log("Serial Port Button Clicked")
@@ -216,6 +217,10 @@ const App = () => {
       initialized_workspace = true;
     }
   })
+
+  useEffect(() =>{
+
+  },[toolbox_level])
   return (
     <div>
       <TestMain

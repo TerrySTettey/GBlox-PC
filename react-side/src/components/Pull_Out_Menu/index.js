@@ -37,7 +37,6 @@ function Pull_Out_Menu(props) {
         if (last_button_clicked !== event.target.id) {
             setLastButtonClicked(event.target.id);
             menuOpen = "Closed"
-
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
         }
@@ -128,8 +127,9 @@ function Pull_Out_Menu(props) {
                             </g>
                         </svg>
                     ]}
-                    hoverEffect="fill"
+                    hoverEffect="fill-tooltip"
                     onClick={Menu}
+                    tooltip="View Code"
                 />
 
                 <Button
@@ -150,8 +150,10 @@ function Pull_Out_Menu(props) {
                             <path id="Path_316" data-name="Path 316" d="M1599.352,105.366l4.772-5.617,4.724,3.021,5.467-7.346,1.989,5.567,7.9-10.538" transform="translate(-1596.291 -87.011)" fill="none" stroke="#fff" stroke-width="1" />
                         </svg>
                     ]}
-                    hoverEffect="fill"
+                   
                     onClick={Menu}
+                    hoverEffect="fill-tooltip"
+                    tooltip="Serial Monitor"
                 />
                 <Button
                     id="code-editor"
@@ -175,8 +177,9 @@ function Pull_Out_Menu(props) {
                         </svg>
 
                     ]}
-                    hoverEffect="fill"
                     onClick={Menu}
+                    hoverEffect="fill-tooltip"
+                    tooltip="Code Editor"
                 />
                 <Button
                     id="example-code"
@@ -193,8 +196,9 @@ function Pull_Out_Menu(props) {
                             </g>
                         </svg>
                     ]}
-                    hoverEffect="fill"
                     onClick={Menu}
+                    hoverEffect="fill-tooltip"
+                    tooltip="Sample Codes"
                 />
 
                 <Button
@@ -214,8 +218,9 @@ function Pull_Out_Menu(props) {
                             </g>
                         </svg>
                     ]}
-                    hoverEffect="fill"
                     onClick={Menu}
+                    hoverEffect="fill-tooltip"
+                    tooltip="Help"
                 />
             </div>
             <div className="pull-out-container" ref={pull_out_container} >

@@ -40,6 +40,20 @@ const Button = (props) => {
                     }
                 }
                 break;
+            case "fill-tooltip":
+                var tooltip = document.getElementById(`tooltip-${props.id}`)
+                if (hoverState) {
+                    setButtonColor(props.hoverColor);
+                    tooltip.style.opacity = "1"
+                } else if (!hoverState) {
+                    tooltip.style.opacity = "0"
+                    if (props.s_ButtonState === "Out") {
+                        setButtonColor(props.outColor)
+                    } else if (props.s_ButtonState === "In") {
+                        setButtonColor(props.inColor)
+                    }
+                }
+                break;
             case "border":
                 if (hoverState) {
                     setBorderColor(props.hoverColor);
@@ -189,7 +203,9 @@ const Button = (props) => {
                         backgroundColor: buttonColor
                     }}>
                         <div className="button-svg">{props.children}</div>
+                        <span id={`tooltip-${props.id}`} className="tooltiptext">{props.tooltip}</span>
                     </div>
+                    
                     {emptybutton}
                 </div>
             )
@@ -217,8 +233,10 @@ const Button = (props) => {
                             </svg>
                         </div>
                         <div className="button-children-svg"> {props.children} </div>
+
                     </div>
                     {emptybutton}
+
                 </div>
             )
             break;
