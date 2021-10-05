@@ -135,26 +135,30 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    .tooltiptext {
-        position: absolute;
-        filter: none;
-        background:#0B0533;
-        border: 1px solid #0000DC;
-        font-family: "Baloo2-Regular";
-        align-items: center;
-        transition: opacity 1s;
-        transition-delay: 1s;
-        margin-left: -47.3px;
-        white-space: nowrap;
-        color: white;
-        text-align: center;
-        border-radius: 6px;
-        margin-top: -20px;
-        padding: 5px 0;
-        z-index: 1;
-        user-select: none;
-        pointer-events: none;
-    }
+
+}
+.tooltiptext {
+    position: absolute;
+    filter: none;
+    background:#0B0533;
+    border: 1px solid #0000DC;
+    font-family: "Baloo2-Regular";
+    font-size: 10pt;
+    align-items: center;
+    transition: opacity 1s;
+    transition-delay: 1s;
+    width: 80px;
+    margin-left: -8px;
+    white-space: nowrap;
+    color: white;
+    align-items: center;
+    text-align: center;
+    border-radius: 6px;
+    margin-top: -20px;
+    padding: 5px 0;
+    z-index: 1;
+    user-select: none;
+    pointer-events: none;
 }
 
 

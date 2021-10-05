@@ -204,8 +204,9 @@ const Button = (props) => {
                         backgroundColor: buttonColor
                     }}>
                         <div className="button-svg">{props.children}</div>
-                        <span id={`tooltip-${props.id}`} className="tooltiptext">{props.tooltip}</span>
+                        
                     </div>
+                    <span id={`tooltip-${props.id}`} className="tooltiptext">{props.tooltip}</span>
                     
                     {emptybutton}
                 </div>
