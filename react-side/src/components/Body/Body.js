@@ -3968,10 +3968,9 @@ const Body = (props) => {
                         hoverColor="#0000FF"
                         children={[
                             <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="8.511" viewBox="0 0 16.745 8.511">
-                                <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" fill="#e9e9ff" />
-                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)" fill="#e9e9ff" />
+                                <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" />
+                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)"/>
                             </svg>
-
                         ]}
                         hoverEffect="svg-fill"
                         onClick={props.workspaceClick}
