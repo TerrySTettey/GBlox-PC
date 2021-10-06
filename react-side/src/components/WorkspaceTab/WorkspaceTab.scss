@@ -1,0 +1,56 @@
+.c-WorkspaceTab-a-Container {
+    display: inline-flex;
+    position: relative;
+    height: 36px;
+    max-width: 180px;
+    min-width: 10px;
+    flex-shrink: 1;
+
+    background-color: #0B0533CC;
+    //outline: 2px red d#0B0533ashed;
+    margin: 0 0 0 0px;
+    justify-content: center;
+    transform: skewX(-45deg);
+
+    
+
+    .c-WorkspaceTab-a-Text {
+        user-select: none;
+        color: #FFF6;
+        transform: skewX(45deg);
+        font-size: 16px;
+        max-width: 162px;
+        min-width: 10px;
+        overflow: hidden;
+        margin: 5px 4px 0px 16px;
+        white-space: nowrap;  
+
+        .i-dropShadow {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 20px;
+            width: 20%;
+            margin-left: 0px;
+            margin-top: 5px;
+            background-image: linear-gradient(to right, #0000,#0B0533DD);
+            //background-color: #0B0533;
+            //transform: skewX(45deg);
+            //outline: green 2px solid;
+            //box-shadow: -2px 0px 1px 1px #0B0533;
+        }
+    }
+
+    .c-WorkspaceTab-a-Close {
+        user-select: none;
+        color: #3A7FFF66;
+        transform: skewX(45deg);
+        font-size: 20px;
+        padding-right: 10px;
+        margin: 1px 10px 25px -4px;
+
+        &:hover {
+            color: white;
+        }
+    }
+}
