@@ -1,8 +1,11 @@
 .pull-out-menu {
     position: relative;
-    display: flex;
+    display: inline-flex;
     transition: margin-left 0.5s, opacity 0.5s;
     z-index: 3;
+    top: 0;
+    height: 421px;
+    pointer-events: none;
 
     #shadow-container{
         position: relative;
@@ -30,6 +33,7 @@
         display: inline-flex;
         flex-direction: column;
         z-index: 1;
+        pointer-events: all;
         #button-container {
             display: flex;
             margin-bottom: 10px;
@@ -41,5 +45,6 @@
         margin-left: 72px;        
         position: relative;
         transition: opacity 1s;
+        pointer-events: all;
     }
 }
