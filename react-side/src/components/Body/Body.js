@@ -13,6 +13,7 @@ import ToolSelector from '../ToolSelector/ToolSelector';
 import Pull_Out_Menu from '../Pull_Out_Menu'
 import CustomDrop from '../CustomDrop';
 import WorkTabHolder from '../WorkTabHolder';
+import SplashScreen from '../SplashScreen'
 
 
 const Arduino_Uno_SVG =
@@ -4241,6 +4242,11 @@ const Body = (props) => {
             </div>
             <div className="c-Body-a-PulloutMenu">
                 <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
+            </div>
+            <div id="c-Body-a-SplashScreen">
+                <SplashScreen 
+                onSplashClick={props.onSplashClick} 
+                Splashurl={props.Splashurl}/>
             </div>
         </div >
     )

@@ -139,7 +139,18 @@ const App = () => {
       setUploadStatus(response);
     });
   }
-
+  function closeSplash() {
+    var splash = document.getElementById('c-Body-a-SplashScreen')
+    splash.style.backgroundColor = "transparent";
+    splash.style.backdropFilter = "none"
+    splash.style.opacity = "0"
+    // setTimeout(() => {
+    //   splash.style.marginTop = "20000px"
+    // }, 1000)
+    setTimeout(() => {
+      splash.style.display = "none"
+    }, 600)
+  }
   function workspaceClick(event) {
     if (document.getElementById('blocklyDiv') !== null) {
       switch (event.target.id) {
@@ -218,9 +229,9 @@ const App = () => {
     }
   })
 
-  useEffect(() =>{
+  useEffect(() => {
 
-  },[toolbox_level])
+  }, [toolbox_level])
   return (
     <div>
       <TestMain
@@ -239,6 +250,8 @@ const App = () => {
         onSerialPortClick={serialport_read}
         example_codes={example_codes}
         uploadFunction={uploadCode_ipc}
+        onSplashClick={closeSplash}
+        Splashurl={"https://www.google.com"}
       />
 
     </div>

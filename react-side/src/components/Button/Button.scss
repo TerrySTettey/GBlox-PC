@@ -160,7 +160,25 @@
     pointer-events: none;
 }
 
-
+.c-Button-a-FancyButton{
+    display: inline-flex;
+    width: 322px;
+    font-family: "Baloo2-Regular";
+    font-size: 34pt;
+    align-items: center;
+    clip-path : polygon(23.200px 0.000px, 298.900px 0.000px, 322.100px 23.500px, 322.100px 72.000px, 0.000px 72.000px, 0.000px 23.500px, 23.200px 0.000px);
+    p{
+        left: 50%;
+        transform: translateX(-50%);
+        margin:0;
+        white-space: nowrap;
+        user-select: none;
+        pointer-events: none;
+        text-align: center;
+        color: white;
+        position: absolute;
+    }
+}
 .c-button-a-WorkspaceControlButton {
     position: relative;
     display: flex;

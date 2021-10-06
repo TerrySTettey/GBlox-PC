@@ -2,86 +2,196 @@
     0% {
         transform: scale(0);
     }
+    60% {
+        transform: scale(1.2);
+    }
     100% {
         transform: scale(1);
     }
 }
-@keyframes bounce-rotate {
-    from{
-        transform: rotate(-13deg);
+
+@keyframes bounce-extra {
+    0% {
+        transform: scale(0);
     }
-    to{
-            transform: rotate(-1deg);
+    40% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
     }
 }
-.Splash{
+
+@keyframes bounce-rotate {
+    from {
+        transform: rotate(-13deg);
+    }
+    to {
+        transform: rotate(-1deg);
+    }
+}
+@keyframes rotate-right {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes reveal {
+    from {
+        clip: rect(0px, 0px, 200px, 0px);
+    }
+    to {
+        clip: rect(0px, 300px, 200px, 0px);
+    }
+}
+
+
+.Splash {
     display: inline-flex;
-    // padding: 50px;
-    // width: 849.61px;
-    background-color: #0b0533;
-    #Leaves {
-        transform-origin: bottom;
+    flex-direction: column;
+    width: 1492.98px;
+    height: 849.61px;
+    font-family: "Baloo2-Regular";
+    #Splash-Background{
         position: absolute;
-        margin-left: 623px;
-        margin-top: 50px;
-        #Leaf-Right {
-            position: absolute;
-            transform: scale(0) ;
-            margin-left: 80.9px;
-            margin-top: 65px;
-            animation: bounce forwards 1.5s cubic-bezier(.47,1.64,.41,.8);
-            animation-delay: 0.2s;
-        }
-        #Leaf-Middle{
-            position: absolute;
-            transform: scale(0);
-            margin-left: 70.4px;
-            animation: bounce forwards 1.5s cubic-bezier(.47,1.64,.41,.8);
-        }
-        #Leaf-Pot{
-            position: absolute;
-            transform: scale(0);
-            margin-left: 105px;
-            margin-top: 310px;
-            animation: bounce forwards 1.5s cubic-bezier(.47,1.64,.41,.8);
-        }
-        #Leaf-Left{
-            position: absolute;
-            transform: scale(0);
-            margin-top: 57px;
-            margin-left: -40px;
-            animation: bounce forwards 1.5s cubic-bezier(.47,1.64,.41,.8);
-            animation-delay: 0.4s;
-        }
-        #Leaf-Small{
-            position: absolute;
-            transform: scale(0);
-            margin-top: 160px;
-            margin-left: 100.4px;
-            animation: bounce forwards 1.5s cubic-bezier(.47,1.64,.41,.8);
-            animation-delay: 0.4s;
-        }
+        z-index: 0;
     }
-    #LaptopDisplay{
-        animation: bounce forwards 0.7s cubic-bezier(.47,1.64,.41,.8);
-    }
-    #Blocks{
-        position: absolute;
-        margin-left: 213px;
-        margin-top: 50px;
-        animation: bounce forwards 1.2s cubic-bezier(.47,1.64,.41,.8);
-        animation-delay: 0.3;
-    }
-    #MingoBlocks{
-        position: absolute;
-        margin-top: 230px;
-        margin-left: 509px;
-        animation: bounce forwards 2s;
-        svg{
+    .Animation {
+        display: inline-flex;
+        justify-content: center;
+        margin-top: 94px;
+        #Leaves {
+            transform-origin: bottom;
+            position: absolute;
+            margin-left: 280px;
+            margin-top: 50px;
+            #Leaf-Right {
+                position: absolute;
+                transform: scale(0);
+                margin-left: 80.9px;
+                margin-top: 65px;
+                animation: bounce forwards 1.5s;
+                animation-delay: 0.2s;
+            }
+            #Leaf-Middle {
+                position: absolute;
+                transform: scale(0);
+                margin-left: 70.4px;
+                animation: bounce forwards 1.5s;
+            }
+            #Leaf-Pot {
+                position: absolute;
+                transform: scale(0);
+                margin-left: 105px;
+                margin-top: 310px;
+                animation: bounce forwards 1.5s;
+            }
+            #Leaf-Left {
+                position: absolute;
+                transform: scale(0);
+                margin-top: 57px;
+                margin-left: -40px;
+                animation: bounce forwards 1.5s;
+                animation-delay: 0.4s;
+            }
+            #Leaf-Small {
+                position: absolute;
+                transform: scale(0);
+                margin-top: 160px;
+                margin-left: 100.4px;
+                animation: bounce forwards 1.5s;
+                animation-delay: 0.4s;
+            }
+        }
+        #Gear {
+            position: absolute;
+            margin-top: 45px;
+            margin-left: -515px;
+            transform: scale(0);
+            animation: bounce forwards 0.7s;
+            animation-delay: 0.3;
+            svg {
+                animation: rotate-right infinite linear 10s;
+                animation-delay: 0.6s;
+            }
+        }
+        #LaptopDisplay {
+            animation: bounce forwards 0.7s;
+        }
+        #Line {
+            position: absolute;
+            margin-top: 45.8px;
+            margin-left: 0px;
+            clip: rect(0px, 100px, 200px, 0px);
+            animation: reveal forwards 3s;
+        }
+        #Blocks {
+            position: absolute;
+            margin-left: -139.5px;
+            margin-top: 123.3px;
+            transform: scale(0);
+            animation: bounce forwards 1.2s;
+            animation-delay: 0.3;
+        }
+        #MingoBlocks {
+            position: absolute;
+            margin-top: 306.9px;
+            margin-left: 160px;
+            transform: scale(0);
             transform-origin: bottom right;
-            transform: rotate(-13deg);
-            animation: bounce-rotate 1s forwards ease-in-out;
-            animation-delay: 0.5s;
+            animation: bounce forwards 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+            animation-delay: 0.6s;
+            svg {
+                transform-origin: bottom right;
+                transform: rotate(-13deg);
+                animation: bounce-rotate 1.5s forwards ease-in-out;
+                animation-delay: 0.6s;
+            }
         }
+        #Mingo {
+            position: absolute;
+            margin-top: 233.8px;
+            margin-left: 530.4px;
+            transform: scale(0);
+            animation: bounce forwards 1.2s;
+            animation-delay: 0.2s;
+            svg {
+                transform-origin: bottom right;
+                transform: rotate(-13deg);
+                animation: bounce-rotate 0.5s forwards ease-in-out;
+                animation-delay: 0.5s;
+            }
+        }
+    }
+    .Splash-Title{
+        justify-content: center;
+        z-index: 1;
+        user-select: none;
+        text-align: center;
+        color: white;
+        
+        font-size: 62pt;
+    }
+    .Splash-Content{
+        justify-content: center;
+        user-select: none;
+        z-index: 1;
+        pointer-events: all;
+        text-align: center;
+        color: white;
+        white-space: pre-wrap;
+        font-size: 21pt;
+        p{
+            margin: 0;
+            margin-bottom: -10px;
+        }
+    }
+    .Start-Button{
+        display: inline-flex;
+        justify-content: flex-end;
+        margin-top: 85.61px;
+        margin-right: 119px;
     }
 }

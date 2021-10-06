@@ -194,7 +194,7 @@ const Button = (props) => {
                         </div>
                     </div>
                 </div>
-                
+
             )
             break;
         case "CircularOverlayMenuButton":
@@ -204,10 +204,10 @@ const Button = (props) => {
                         backgroundColor: buttonColor
                     }}>
                         <div className="button-svg">{props.children}</div>
-                        
+
                     </div>
                     <span id={`tooltip-${props.id}`} className="tooltiptext">{props.tooltip}</span>
-                    
+
                     {emptybutton}
                 </div>
             )
@@ -389,6 +389,25 @@ const Button = (props) => {
                     </div>
                     {emptybutton}
                 </div>
+            )
+            break;
+        case "FancyButton":
+            buttonType = (
+                    <div className="c-Button-a-FancyButton" ref={buttonTyper} style={{
+                        fill: `${svgColor}`,
+                        backgroundColor: buttonColor,
+                        borderColor: borderColor
+                    }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="322" height="72" viewBox="0 0 322 72">
+                            <path id="Path_33" data-name="Path 33" d="M317.173,42H592.825C601.876,51.182,606.95,56.33,616,65.513V114H294V65.513Z" transform="translate(-294 -42)"/>
+                        </svg>
+
+                        <p>
+                            {props.text}
+                        </p>
+                        {emptybutton}
+                    </div>
+                    
             )
             break;
         case " ":

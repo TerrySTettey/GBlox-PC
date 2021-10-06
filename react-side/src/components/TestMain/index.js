@@ -17,12 +17,22 @@ const TestMain = (props) => {
         if (serialport_monitor !== props.serialPortMonitor) {
             setSerialPortMonitor(props.serialport_monitor);
         }
-        
     })
 
     return (
         <div>
-            <Body ToolboxFunction={props.ToolboxFunction} MenuFunction={props.MenuFunction} workspaceClick={props.workspaceClick} viewCode={viewCode} serialport_monitor={serialport_monitor} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} example_codes={props.example_codes} uploadFunction={props.uploadFunction}/>
+            <Body 
+            ToolboxFunction={props.ToolboxFunction} 
+            MenuFunction={props.MenuFunction} 
+            workspaceClick={props.workspaceClick} 
+            viewCode={viewCode} 
+            serialport_monitor={serialport_monitor} 
+            toolboxButtons={props.toolboxButtons} 
+            onSerialPortClick={props.onSerialPortClick} 
+            example_codes={props.example_codes} 
+            uploadFunction={props.uploadFunction} 
+            onSplashClick={props.onSplashClick}
+            Splashurl={props.Splashurl}/>
         </div>
     )
 }
