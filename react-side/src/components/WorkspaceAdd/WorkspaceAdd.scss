@@ -1,0 +1,82 @@
+$color: #0B0533;
+
+.c-WorkspaceAdd-a-Container {
+    position: relative;
+    height: 35px;
+    width: 80px;
+    
+    .i-DivBox {
+        position: absolute;
+        height: 36px;
+        width: 20px;
+
+        background-color: $color;
+        //outline: 2px red dashed;
+        //margin: 0 0 0 100px;
+        justify-content: center;
+        transform: skewX(-45deg);
+    }
+
+    .c-WorkspaceAdd-a-Plus {
+        top: -14px;
+        left: 21px;
+        position: absolute;
+        user-select: none;
+        color: #3A7FFF;
+        //transform: skewX(45deg);
+        font-size: 40px;
+        padding-right: 10px;
+        margin: 1px 10px 25px -4px;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    .i-DivBox-1 {
+        position: absolute;
+        top: 0;
+        left:18px;
+        background-color: $color;
+        height: 36px;
+        width: 20px;
+        //transform: skewX(45deg);
+        //outline: red 1px dashed;
+    }
+
+    .i-DivBox-2 {
+        position: absolute;
+        top: 18px;
+        left:2px;
+        background-color: $color;
+        height: 18px;
+        width: 20px;
+        //transform: skewX(45deg);
+        //outline: red 1px dashed;
+    }
+
+    .i-DivBox-3{
+        position: absolute;
+        height: 36px;
+        width: 20px;
+        top: 0;
+        left:36px;
+
+        background-color: $color;
+        //outline: 1px red dashed;
+        //margin: 0 0 0 100px;
+        justify-content: center;
+        transform: skewX(45deg);
+    }
+
+    .i-DivBox-4{
+        position: absolute;
+        top: 18px;
+        left:35px;
+        background-color: $color;
+        height: 18px;
+        width: 20px;
+        //transform: skewX(45deg);
+        //outline: red 1px dashed;
+    }
+}
