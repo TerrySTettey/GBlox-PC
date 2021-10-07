@@ -73,7 +73,7 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 1400,
         height: 800,
-        minHeight: 986,
+        minHeight: 713,
         minWidth: 1284,
         title: "GBlox",
         autoHideMenuBar: true,

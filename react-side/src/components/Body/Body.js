@@ -3888,6 +3888,22 @@ const Body = (props) => {
                 <svg id="num7" xmlns="http://www.w3.org/2000/svg" width="773" height="113" viewBox="0 0 772 113">
                     <defs>
                         <clipPath id="clip-path">
+                            <rect id="Rectangle_226" data-name="Rectangle 226" width="772" height="283" transform="translate(2984 -4044)" fill="rgba(255,204,0,0.4)" />
+                        </clipPath>
+                    </defs>
+                    <g id="Mask_Group_5" data-name="Mask Group 5" transform="translate(-2984 4044)" clip-path="url(#clip-path)">
+                        <g id="Group_540" data-name="Group 540">
+                            <path id="Subtraction_5" data-name="Subtraction 5" d="M3120,4098H1200v-.392h6.651v-76.649l14.35-14.35-.831-746.552,25.091-25.091v-92.4l-34.568-30.378L1200,3102.8V3018H3120V4098Zm-1186.4-62.539,39.576,39.477H3063.087l39.937-39.834V4012.59l.6-.681-.981-354.408h-54.273v-55.909l55.284-55.023-.359-415.93-30-32.639-784.264.978-247.2.2-549.91.383L1443,3147.442v87.4l25.155,25.09v743.912l31.838,31.757Z" transform="translate(1784 -7307)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            <g id="Rectangle_230" data-name="Rectangle 230" transform="translate(2763 -3949)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="71" height="400" stroke="none" />
+                                <rect x="0.5" y="0.5" width="70" height="399" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                {/*<svg id="num7" xmlns="http://www.w3.org/2000/svg" width="773" height="113" viewBox="0 0 772 113">
+                    <defs>
+                        <clipPath id="clip-path">
                             <rect id="Rectangle_227" data-name="Rectangle 227" width="772" height="113" transform="translate(2984 -3761)" fill="rgba(214,255,0,0.4)" />
                         </clipPath>
                     </defs>
@@ -3900,7 +3916,7 @@ const Body = (props) => {
                             </g>
                         </g>
                     </g>
-                </svg>
+    </svg>*/}
                 <svg id="num10" xmlns="http://www.w3.org/2000/svg" width="773" height="345" viewBox="0 0 772 345">
                     <defs>
                         <clipPath id="clip-path">
@@ -3969,7 +3985,7 @@ const Body = (props) => {
                         children={[
                             <svg xmlns="http://www.w3.org/2000/svg" width="16.745" height="8.511" viewBox="0 0 16.745 8.511">
                                 <rect id="Rectangle_9" data-name="Rectangle 9" width="16.745" height="2.232" />
-                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)"/>
+                                <rect id="Rectangle_10" data-name="Rectangle 10" width="16.745" height="2.232" transform="translate(0 6.279)" />
                             </svg>
                         ]}
                         hoverEffect="svg-fill"
@@ -4072,7 +4088,24 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
+
                 <svg id="num9" xmlns="http://www.w3.org/2000/svg" width="76" height="113" viewBox="0 0 72 113">
+                    <defs>
+                        <clipPath id="clip-path">
+                            <rect id="Rectangle_226" data-name="Rectangle 226" width="72" height="283" transform="translate(4832 -4044)" fill="rgba(255,204,0,0.4)" />
+                        </clipPath>
+                    </defs>
+                    <g id="Mask_Group_12" data-name="Mask Group 12" transform="translate(-4832 4044)" clip-path="url(#clip-path)">
+                        <g id="Group_543" data-name="Group 543">
+                            <path id="Subtraction_5" data-name="Subtraction 5" d="M3120,4098H1200v-.392h6.651v-76.649l14.35-14.35-.831-746.552,25.091-25.091v-92.4l-34.568-30.378L1200,3102.8V3018H3120V4098Zm-1186.4-62.539,39.576,39.477H3063.087l39.937-39.834V4012.59l.6-.681-.981-354.408h-54.273v-55.909l55.284-55.023-.359-415.93-30-32.639-784.264.978-247.2.2-549.91.383L1443,3147.442v87.4l25.155,25.09v743.912l31.838,31.757Z" transform="translate(1784 -7307)" fill="#0b0533" stroke="#0000dc" stroke-width="1" />
+                            <g id="Rectangle_230" data-name="Rectangle 230" transform="translate(2763 -3949)" fill="#fff" stroke="#707070" stroke-width="1">
+                                <rect width="71" height="400" stroke="none" />
+                                <rect x="0.5" y="0.5" width="70" height="399" fill="none" />
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                {/*<svg id="num9" xmlns="http://www.w3.org/2000/svg" width="76" height="113" viewBox="0 0 72 113">
                     <defs>
                         <clipPath id="clip-path">
                             <rect id="Rectangle_227" data-name="Rectangle 227" width="72" height="113" transform="translate(4832 -3761)" fill="rgba(214,255,0,0.4)" />
@@ -4087,14 +4120,14 @@ const Body = (props) => {
                             </g>
                         </g>
                     </g>
-                </svg>
+            </svg>
                 <svg id="num9svg" xmlns="http://www.w3.org/2000/svg" width="28.25" height="19.392" viewBox="0 0 28.25 19.392">
                     <g id="Group_383" data-name="Group 383" transform="translate(1.414 0.219)">
                         <path id="Path_2" data-name="Path 2" d="M1855.634,371.3,1849,377.929l6.657,6.657" transform="translate(-1849 -368.216)" fill="none" stroke="#e9e9ff" stroke-miterlimit="10" stroke-width="2" />
                         <path id="Path_3" data-name="Path 3" d="M1876.024,371.3l6.634,6.634L1876,384.586" transform="translate(-1857.236 -368.216)" fill="none" stroke="#e9e9ff" stroke-miterlimit="10" stroke-width="2" />
                         <line id="Line_1" data-name="Line 1" x1="4.264" y2="18.953" transform="translate(11.072)" fill="none" stroke="#e9e9ff" stroke-miterlimit="10" stroke-width="2" />
                     </g>
-                </svg>
+                </svg>*/}
 
                 <svg id="num12" xmlns="http://www.w3.org/2000/svg" width="76" height="345" viewBox="0 0 72 345">
                     <defs>
@@ -4112,7 +4145,7 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
-                <svg id="num15" xmlns="http://www.w3.org/2000/svg" width="76" height="97" viewBox="0 0 72 94">
+                <svg id="num15" xmlns="http://www.w3.org/2000/svg" width="77" height="97" viewBox="0 0 72 94">
                     <defs>
                         <clipPath id="clip-path">
                             <rect id="Rectangle_229" data-name="Rectangle 229" width="72" height="94" transform="translate(4832 -3303)" fill="rgba(247,0,255,0.4)" />
@@ -4243,9 +4276,9 @@ const Body = (props) => {
                 <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>
             <div id="c-Body-a-SplashScreen">
-                <SplashScreen 
-                onSplashClick={props.onSplashClick} 
-                Splashurl={props.Splashurl}/>
+                <SplashScreen
+                    onSplashClick={props.onSplashClick}
+                    Splashurl={props.Splashurl} />
             </div>
         </div >
     )
