@@ -238,3 +238,20 @@
         transform: scale(0.8);
     }
 }
+
+@media only screen and (max-height: 800px) {
+    .Animation{
+        transform: scale(0.8);
+    }
+    .Splash-Title{
+        margin-top: -5%;
+        transform: scale(0.8);
+    }
+    .Splash-Content{
+        margin-top: -3%;
+        transform: scale(0.8);
+    }
+    .Start-Button{
+        transform: scale(0.8);
+    }
+}
