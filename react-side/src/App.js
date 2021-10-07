@@ -85,7 +85,7 @@ var newxmldom = Blockly.Xml.textToDom(newxml);
 
 const App = () => {
   const [arduinocode, setArduinoCode] = useState("");
-  const [serialport_monitor, setSerialPortMonitor] = useState("test");
+  const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
   const [serialport_status, setSerialPortStatus] = useState(false)
   const [upload_status, setUploadStatus] = useState("");
   const [toolbox_level, setToolboxLevel] = useState("3");
