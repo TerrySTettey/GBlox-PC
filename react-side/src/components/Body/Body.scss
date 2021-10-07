@@ -309,6 +309,7 @@ $shift: 0px;
 
     .c-Body-a-PulloutMenu {
         position: absolute;
+        pointer-events: none;
         left: calc(100vw - 106px);
 
     }

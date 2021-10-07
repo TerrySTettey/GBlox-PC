@@ -4,8 +4,22 @@ import PropTypes from "prop-types"
 import "./WorkspaceTab.scss"
 
 const WorkspaceTab = (props) => {
+
+    var [clickState, setClickState] = useState("Off");
+
+    const container = useRef(null);
+
+    function RunOnClick() {
+        
+
+        //Changing Transparency and Size
+        if (props.ChangeTab !== undefined) {
+            props.ChangeTab();
+        }
+    }
+
     return (
-        <div className="c-WorkspaceTab-a-Container">
+        <div className="c-WorkspaceTab-a-Container" ref={container} onClick={props.onClick}>
             <p className="c-WorkspaceTab-a-Text"> {props.text}
                 <div className="i-dropShadow" />
             </p>

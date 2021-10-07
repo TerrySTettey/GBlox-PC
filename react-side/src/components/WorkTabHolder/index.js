@@ -10,16 +10,16 @@ const WorkTabHolder = () => {
         <div className="c-WorkTabHolder-a-container">
             <WorkspaceTab text="Hello World, its me"/>
             <WorkspaceTab text="Best Program in the world"/>
-            <WorkspaceTab text="Lost and Found"/>
             <WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
+            <WorkspaceTab text="Best Program in the world"/><WorkspaceTab text="Hello World, its me"/>
             <WorkspaceTab text="Best Program in the world"/>
-            <WorkspaceTab text="Lost and Found"/>
-            <WorkspaceTab text="Hello World, its me"/>
-            <WorkspaceTab text="Best Program in the world"/>
-            <WorkspaceTab text="Lost and Found"/>
-            <WorkspaceTab text="Hello World, its me"/>
-            <WorkspaceTab text="Best Program in the world"/>
-            <WorkspaceTab text="Lost and Found"/>
             <WorkspaceAdd />
         </div>
     )

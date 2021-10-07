@@ -2,13 +2,20 @@ $color: #0B0533;
 
 .c-WorkspaceAdd-a-Container {
     position: relative;
-    height: 35px;
+    height: 36px;
     width: 80px;
-    
+    margin-left: -17px;
+
+    &:hover {
+        .c-WorkspaceAdd-a-Plus {
+            color: white;
+        }
+    }
     .i-DivBox {
         position: absolute;
         height: 36px;
         width: 20px;
+        pointer-events: none;
 
         background-color: $color;
         //outline: 2px red dashed;
@@ -25,12 +32,9 @@ $color: #0B0533;
         color: #3A7FFF;
         //transform: skewX(45deg);
         font-size: 40px;
-        padding-right: 10px;
-        margin: 1px 10px 25px -4px;
-
-        &:hover {
-            color: white;
-        }
+        //padding-right: 10px;
+        margin: 1px 0px 25px 8px;
+        pointer-events: none;
     }
 
     .i-DivBox-1 {
@@ -40,6 +44,7 @@ $color: #0B0533;
         background-color: $color;
         height: 36px;
         width: 20px;
+        pointer-events: none;
         //transform: skewX(45deg);
         //outline: red 1px dashed;
     }
@@ -51,6 +56,7 @@ $color: #0B0533;
         background-color: $color;
         height: 18px;
         width: 20px;
+        pointer-events: none;
         //transform: skewX(45deg);
         //outline: red 1px dashed;
     }
@@ -61,6 +67,7 @@ $color: #0B0533;
         width: 20px;
         top: 0;
         left:36px;
+        pointer-events: none;
 
         background-color: $color;
         //outline: 1px red dashed;
@@ -76,6 +83,7 @@ $color: #0B0533;
         background-color: $color;
         height: 18px;
         width: 20px;
+        pointer-events: none;
         //transform: skewX(45deg);
         //outline: red 1px dashed;
     }
