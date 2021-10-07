@@ -223,6 +223,7 @@
 
 @media only screen and (max-width: 1500px) {
     .Animation {
+        margin-top: 2vh;
         transform: scale(0.8);
     }
     .Splash-Title {
@@ -243,6 +244,7 @@
 
 @media only screen and (max-height: 800px) {
     .Animation {
+        margin-top: 2vh;
         transform: scale(0.7);
     }
     .Splash-Title {
