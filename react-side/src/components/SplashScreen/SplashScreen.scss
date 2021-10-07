@@ -46,6 +46,7 @@
         clip: rect(0px, 300px, 200px, 0px);
     }
 }
+
 #Splash-Background {
 
         position: absolute;
@@ -59,6 +60,7 @@
         z-index: 1;
         position: absolute;
         height: 100%;
+        // min-width: 100vw;
         left: 50%;
         transform: translateX(-50%);
         grid-template-areas:
@@ -66,26 +68,23 @@
             "title"
             "contents"
             "button";
-        grid-template-rows: fit-content(40%) fit-content(40%) fit-content(40%) 1fr;
+        grid-template-rows: fit-content(10%) fit-content(10%) fit-content(10%) 1fr;
         grid-template-columns: 1fr;
         font-family: "Baloo2-Regular";
         bottom: 0;
-    
-        svg {
-            max-height: 100vh;
-            max-width: 100vw;
-        }
+
         .Animation {
             grid-area: anim;
             display: inline-flex;
             justify-content: center;
             width: 100%;
-            margin-top: 10vh;
+            margin-top: 10vh; 
+            transition: transform 2s;           
             #Leaves {
                 transform-origin: bottom;
                 position: absolute;
-                margin-left: 280px;
-                margin-top: 50px;
+                margin-left: 25%;
+                margin-top: 5%;
                 #Leaf-Right {
                     position: absolute;
                     transform: scale(0);
@@ -191,7 +190,7 @@
             user-select: none;
             text-align: center;
             color: white;
-    
+            transition: transform 2s; 
             font-size: 62pt;
         }
         .Splash-Content {
@@ -204,6 +203,7 @@
             color: white;
             white-space: pre-wrap;
             font-size: 21pt;
+            transition: transform 2s; 
             p {
                 margin: 0;
                 margin-bottom: -10px;
@@ -216,9 +216,23 @@
             bottom: 1.2%;
             margin-bottom: 0.5vh;
             margin-left: 47vw;
+            transition: transform 2s; 
             // transform: translate(-90%, -50%);
         }
-    }
+    } 
+}
 
-    
+@media only screen and (max-width: 1500px) {
+    .Animation{
+        transform: scale(0.8);
+    }
+    .Splash-Title{
+        transform: scale(0.8);
+    }
+    .Splash-Content{
+        transform: scale(0.8);
+    }
+    .Start-Button{
+        transform: scale(0.8);
+    }
 }

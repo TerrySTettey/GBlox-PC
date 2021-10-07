@@ -385,8 +385,6 @@ function index(props) {
                     />
                 </div>
             </div>
-
-
         </div>
         // </div>
     )
