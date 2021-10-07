@@ -4,29 +4,26 @@ $color: #0B0533;
     position: relative;
     height: 36px;
     width: 80px;
-    margin-left: -17px;
+    margin-left: -5px;
+    outline: red 2px dashed;
+
+    svg {
+        path {
+            //fill: red;
+        }
+        margin-left: -15px;
+        pointer-events: none;
+    }
 
     &:hover {
         .c-WorkspaceAdd-a-Plus {
             color: white;
         }
     }
-    .i-DivBox {
-        position: absolute;
-        height: 36px;
-        width: 20px;
-        pointer-events: none;
-
-        background-color: $color;
-        //outline: 2px red dashed;
-        //margin: 0 0 0 100px;
-        justify-content: center;
-        transform: skewX(-45deg);
-    }
 
     .c-WorkspaceAdd-a-Plus {
         top: -14px;
-        left: 21px;
+        left: 10px;
         position: absolute;
         user-select: none;
         color: #3A7FFF;
@@ -35,56 +32,5 @@ $color: #0B0533;
         //padding-right: 10px;
         margin: 1px 0px 25px 8px;
         pointer-events: none;
-    }
-
-    .i-DivBox-1 {
-        position: absolute;
-        top: 0;
-        left:18px;
-        background-color: $color;
-        height: 36px;
-        width: 20px;
-        pointer-events: none;
-        //transform: skewX(45deg);
-        //outline: red 1px dashed;
-    }
-
-    .i-DivBox-2 {
-        position: absolute;
-        top: 18px;
-        left:2px;
-        background-color: $color;
-        height: 18px;
-        width: 20px;
-        pointer-events: none;
-        //transform: skewX(45deg);
-        //outline: red 1px dashed;
-    }
-
-    .i-DivBox-3{
-        position: absolute;
-        height: 36px;
-        width: 20px;
-        top: 0;
-        left:36px;
-        pointer-events: none;
-
-        background-color: $color;
-        //outline: 1px red dashed;
-        //margin: 0 0 0 100px;
-        justify-content: center;
-        transform: skewX(45deg);
-    }
-
-    .i-DivBox-4{
-        position: absolute;
-        top: 18px;
-        left:35px;
-        background-color: $color;
-        height: 18px;
-        width: 20px;
-        pointer-events: none;
-        //transform: skewX(45deg);
-        //outline: red 1px dashed;
     }
 }

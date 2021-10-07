@@ -34,7 +34,7 @@ $shift: 0px;
         position: absolute;
         display: grid;
         pointer-events: none;
-        width: calc(100vw - 0px /*420px*/);
+        width: calc(auto - 0px /*420px*/);
         height: 100vh;
         z-index: 2;
             
@@ -43,13 +43,18 @@ $shift: 0px;
         
         
         grid-template-columns: [col-1] 772px [col-2] minmax(0px, 1076px) [col-3] 73px;//0.8735fr;
-        grid-template-rows: [row-1] 246px [row-2] minmax(0px,283px) [row-3] 113px [row-4] minmax(0px,345px) [row-5] 94px;//0.0103fr;
+        grid-template-rows: [row-1] 246px [row-2] minmax(0px,283px/*396px*/) [row-3] 113px [row-4] minmax(0px,345px) [row-5] 94px;//0.0103fr;
         grid-template-areas:
         "n1 n2 n3"
         "n4 emp n6"
         "n7 n8 n9"
         "n10 emp2 n12"
         "n13 n14 n15";
+        //"n1 n2 n3"
+        //"n4 emp n6"
+        //"n7 n8 n9"
+        //"n10 emp2 n12"
+        //"n13 n14 n15";
 
             #num1 {
                 grid-area: n1;
@@ -122,7 +127,7 @@ $shift: 0px;
             #num15 {
                 grid-area: n15;
                 margin-top: 0px;
-                margin-left:1px ;
+                margin-left:0px ;
             }
 
             #TrashTotal{
