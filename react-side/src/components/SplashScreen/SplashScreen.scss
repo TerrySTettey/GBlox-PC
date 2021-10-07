@@ -48,13 +48,12 @@
 }
 
 #Splash-Background {
-
-        position: absolute;
-        z-index: 0;
-        #background-svg {
-            height: 90vh;
-            width: 90vw;
-        }
+    position: absolute;
+    z-index: 0;
+    #background-svg {
+        height: 90vh;
+        width: 90vw;
+    }
     .Splash-Items {
         display: grid;
         z-index: 1;
@@ -78,8 +77,8 @@
             display: inline-flex;
             justify-content: center;
             width: 100%;
-            margin-top: 10vh; 
-            transition: transform 2s, margin-top 1s;         
+            margin-top: 8vh;
+            transition: transform 2s, margin-top 1s;
             #Leaves {
                 transform-origin: bottom;
                 position: absolute;
@@ -190,7 +189,7 @@
             user-select: none;
             text-align: center;
             color: white;
-            transition: transform 2s, margin-top 1s;  
+            transition: transform 2s, margin-top 1s;
             font-size: 62pt;
         }
         .Splash-Content {
@@ -203,7 +202,7 @@
             color: white;
             white-space: pre-wrap;
             font-size: 21pt;
-            transition: transform 2s, margin-top 1s; 
+            transition: transform 2s, margin-top 1s;
             p {
                 margin: 0;
                 margin-bottom: -10px;
@@ -212,46 +211,52 @@
         .Start-Button {
             grid-area: button;
             position: absolute;
-            display: inline-flex;
+            display: inline-block;
             bottom: 1.2%;
             margin-bottom: 0.5vh;
             margin-left: 47vw;
-            transition: transform 2s, margin-top 1s; 
+            transition: transform 2s, margin-top 1s;
             // transform: translate(-90%, -50%);
         }
-    } 
+    }
 }
 
 @media only screen and (max-width: 1500px) {
-    .Animation{
+    .Animation {
         transform: scale(0.8);
     }
-    .Splash-Title{
+    .Splash-Title {
         margin-top: -5%;
         transform: scale(0.8);
     }
-    .Splash-Content{
+    .Splash-Content {
         margin-top: -3%;
         transform: scale(0.8);
     }
-    .Start-Button{
+    .Start-Button {
         transform: scale(0.8);
+        svg {
+            transform: scale(1);
+        }
     }
 }
 
 @media only screen and (max-height: 800px) {
-    .Animation{
-        transform: scale(0.6);
+    .Animation {
+        transform: scale(0.7);
     }
-    .Splash-Title{
-        margin-top: -5%;
-        transform: scale(0.6);
+    .Splash-Title {
+        margin-top: -10%;
+        transform: scale(0.7);
     }
-    .Splash-Content{
+    .Splash-Content {
         margin-top: -3%;
-        transform: scale(0.6);
+        transform: scale(0.7);
     }
-    .Start-Button{
-        transform: scale(0.6);
+    .Start-Button {
+        transform: scale(0.8);
+        svg {
+            transform: scale(2);
+        }
     }
 }
