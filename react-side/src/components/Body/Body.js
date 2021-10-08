@@ -3703,7 +3703,7 @@ const Body = (props) => {
                     svg = svgs.Sensors;
                     color = Toolbox_colors.Sensors;
                     break;
-                case "COM":
+                case "Communication":
                     svg = svgs.COM;
                     color = Toolbox_colors.COM;
                     break;

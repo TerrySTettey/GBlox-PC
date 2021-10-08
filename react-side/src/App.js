@@ -165,6 +165,9 @@ const App = () => {
           break;
         case "workspace-previous":
           Blockly.mainWorkspace.undo(false);
+          if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(OurWorkspace))===`<xml xmlns="https://developers.google.com/blockly/xml"></xml>`){
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace),OurWorkspace);
+          }
           break;
         case "workspace-after":
           Blockly.mainWorkspace.undo(true);
@@ -198,7 +201,19 @@ const App = () => {
     }
     setToolboxItems(toolbox_temp)
   }
+  function device_manager(event) {
+    console.log(event.target.id)
+    var popout = document.getElementById("c-device-manager")
+    if (event.target.id === "device-add-button") {
+      popout.style.display = "inline-flex"
+    }
+    else {
+      setDeviceChosen(event.target.id)
+      popout.style.display = "none"
+    }
+  }
   useEffect(() => {
+    if(device_chosen !== ""){
     if (initialized_workspace === false) {
       var tb = currentToolbox;
       OurWorkspace = Blockly.inject('blocklyDiv', {
@@ -222,21 +237,11 @@ const App = () => {
       AlterBlockly();
       initialized_workspace = true;
     }
-  })
-  function device_manager(event) {
-    console.log(event.target.id)
-    var popout = document.getElementById("c-device-manager")
-    if (event.target.id === "device-add-button") {
-      popout.style.display = "inline-flex"
-    }
-    else {
-      setDeviceChosen(event.target.id)
-      popout.style.display = "none"
-    }
   }
+  })
+
   useEffect(() => {
     if (device_chosen !== "") {
-      
       var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
       default_workspace = DeviceList[chosen_device_list].default_workspace;
       current_device = DeviceList[chosen_device_list].device_name;
