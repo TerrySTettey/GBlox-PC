@@ -5,8 +5,6 @@ import Button from "../Button"
 
 function index(props) {
     return (
-        // <div className="Splash">
-
         <div id="Splash-Background">
             <svg id="background-svg" xmlns="http://www.w3.org/2000/svg" width="1507.982" height="869.612" viewBox="0 0 1507.982 869.612" preserveAspectRatio="none">
                 <defs>

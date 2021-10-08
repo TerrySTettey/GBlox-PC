@@ -29,11 +29,10 @@ function index(props) {
   return (
     <div id="upload-container">
       {circle}
-
-
       {children}
-      <div id="device-add-button">
+      <div className="device-add-button">
         <Button
+          id="device-add-button"
           type="DeviceAddButton"
           outColor="#0000bc"
           hoverColor="#0000aa"

@@ -32,7 +32,8 @@ const TestMain = (props) => {
             example_codes={props.example_codes} 
             uploadFunction={props.uploadFunction} 
             onSplashClick={props.onSplashClick}
-            Splashurl={props.Splashurl}/>
+            Splashurl={props.Splashurl}
+            deviceOnClick={props.deviceOnClick}/>
         </div>
     )
 }

@@ -21,15 +21,14 @@ import { mainLoopCode } from "./customblocks/compiler/arduino_core"
 import example_codes from "./example_codes"
 const { ipcRenderer } = window.require('electron')
 
-var currentToolbox = MelloDOM;
 var initialized_workspace = false;
 var currentToolboxName = "Mello";
 var toolbox_selected = "";
 var variables_created = [];
 var OurWorkspace;
-var toolbox_items = [];
 var response = "null";
-
+var current_device = `No Device Selected`;
+var currentToolbox = MelloDOM;
 //Blockly Themes
 
 const component_styles = {
@@ -88,7 +87,8 @@ const App = () => {
   const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
   const [serialport_status, setSerialPortStatus] = useState(false)
   const [upload_status, setUploadStatus] = useState("");
-  const [toolbox_level, setToolboxLevel] = useState("3");
+  const [device_chosen, setDeviceChosen] = useState("");
+  const [toolbox_items, setToolboxItems] = useState([]);
 
   function serialport_read() {
     console.log("Serial Port Button Clicked")
@@ -178,10 +178,28 @@ const App = () => {
   function open_flyout(event) {
     document.getElementById(event.target.id).click()
   }
-
+  function toolbox_maker() {
+    console.log("New TOolbox")
+    var toolbox_temp = [];
+    for (var i = 0; i < (OurWorkspace.toolbox_.getToolboxItems()).length; i++) {
+      var items = OurWorkspace.toolbox_.getToolboxItems();
+      var subcat = items[i].subcategoriesDiv_
+      var id = items[i].id_
+      var name = items[i].name_
+      if (items[i].subcategoriesDiv_ === undefined) {
+        toolbox_temp.push([name, id, "non-category"]);
+      }
+      else {
+        var category = OurWorkspace.toolbox_.getToolboxItems()[i];
+        category.setExpanded(true)
+        var children_count = (category.getChildToolboxItems()).length
+        toolbox_temp.push([name, id, "category", children_count]);
+      }
+    }
+    setToolboxItems(toolbox_temp)
+  }
   useEffect(() => {
     if (initialized_workspace === false) {
-      toolbox_items = [];
       var tb = currentToolbox;
       OurWorkspace = Blockly.inject('blocklyDiv', {
         toolbox: tb, renderer: "zelos", zoom:
@@ -197,30 +215,7 @@ const App = () => {
           snap: true
         }, theme: test_theme
       });
-
-      for (var i = 0; i < (OurWorkspace.toolbox_.getToolboxItems()).length; i++) {
-        var items = OurWorkspace.toolbox_.getToolboxItems();
-        var subcat = items[i].subcategoriesDiv_
-        var id = ""
-        if (items[i].subcategoriesDiv_ === undefined) {
-          if (i >= 10) {
-            id = String.fromCharCode(65 + (i - 10)).toLowerCase()
-          }
-          else {
-            id = i;
-          }
-          toolbox_items.push([items[i].name_, `blockly-${id}`, "non-category"]);
-        }
-        else {
-          var category = OurWorkspace.toolbox_.getToolboxItems()[i];
-          category.setExpanded(true)
-          var children_count = (category.getChildToolboxItems()).length
-          if (i >= 10) {
-            id = String.fromCharCode(65 + (i - 10)).toLowerCase()
-          }
-          toolbox_items.push([items[i].name_, `blockly-${id}`, "category", children_count]);
-        }
-      }
+      toolbox_maker();
       Blockly.Xml.clearWorkspaceAndLoadFromXml(newxmldom, OurWorkspace);
       OurWorkspace.toolbox_.setVisible(false);
       OurWorkspace.addChangeListener(showCode);
@@ -228,10 +223,37 @@ const App = () => {
       initialized_workspace = true;
     }
   })
-
+  function device_manager(event) {
+    console.log(event.target.id)
+    var popout = document.getElementById("c-device-manager")
+    if (event.target.id === "device-add-button") {
+      popout.style.display = "inline-flex"
+    }
+    else {
+      setDeviceChosen(event.target.id)
+      popout.style.display = "none"
+    }
+  }
   useEffect(() => {
+    if (device_chosen !== "") {
+      
+      var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
+      default_workspace = DeviceList[chosen_device_list].default_workspace;
+      current_device = DeviceList[chosen_device_list].device_name;
+      currentToolboxName = DeviceList[chosen_device_list].device_name;
+      if (current_device.includes("Arduino") == 0) {
+        currentToolbox = Blockly.Xml.textToDom(DeviceList[chosen_device_list].toolbox);
+      }
+      else {
+        currentToolbox = DeviceList[chosen_device_list].toolbox;
+      }
+      OurWorkspace.updateToolbox(currentToolbox);
+      OurWorkspace.clear();
+      toolbox_maker();
+      Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace),OurWorkspace);
+    }
+  }, [device_chosen]);
 
-  }, [toolbox_level])
   return (
     <div>
       <TestMain
@@ -252,6 +274,7 @@ const App = () => {
         uploadFunction={uploadCode_ipc}
         onSplashClick={closeSplash}
         Splashurl={"https://www.google.com"}
+        deviceOnClick={device_manager}
       />
 
     </div>
