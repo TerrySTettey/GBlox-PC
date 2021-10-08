@@ -5,10 +5,13 @@
 
 .menu {
     position: absolute;
-    display: grid;
+    display: inline-flex;
+    width: 80%;
+    height: 85vh;
     background:#060841;
     padding: 27px 30px 0px 30px;
     margin-left: -1px;
+    align-items: top;
     border: none;
     max-height: 976.94px;
     // box-shadow: 15px 15px 15px 0px grey;

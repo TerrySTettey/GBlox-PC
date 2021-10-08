@@ -1,43 +1,51 @@
 @font-face {
-    font-family: 'Baloo2-Regular';
-    src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
-  }
-.help-menu{
-    .text{
-        padding-bottom:16.9px;
+    font-family: "Baloo2-Regular";
+    src: local("Baloo2-Regular"), url(./../fonts/Baloo2-Regular.ttf) format("truetype");
+}
+.help-menu {
+    display: grid;
+    height: 95%;
+    
+    .text {
+        padding-bottom: 16.9px;
     }
-}
-
-.border_svg{
-    position: relative;
-    display: block;
-    margin-bottom: 22px;
-}
-
-.help-icon {
-    position: relative;
-    display: block;
-}
-
-.children_help{
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    color: #3A7FFF;
-    width: 354px;
-    height: 220px;
-    align-items: center;
-}
-.children_help svg{
-    display: block;
-    margin: auto;
-}
-.children_help div{
-    position: relative;
-    top: -24px;
-    text-align: center;
-    font-size:21px;
-    font-weight: bold;
+    .border_svg {
+        position: relative;
+        display: block;
+        margin-bottom: 22px;
+    }
+    .Help-Buttons{
+        display: grid;
+        width: 120%;
+        margin-left: -4%;
+        overflow: auto;
+        .help-icon {
+            position: relative;
+            display: block;
+        }
+    
+        .children_help {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            color: #3a7fff;
+            width: 354px;
+            height: 220px;
+            align-items: center;
+            svg {
+                display: block;
+                margin: auto;
+            }
+            div {
+                position: relative;
+                top: -24px;
+                text-align: center;
+                font-size: 21px;
+                font-weight: bold;
+            }
+        }
+    }
+    
 }
