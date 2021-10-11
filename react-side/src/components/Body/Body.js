@@ -3622,49 +3622,8 @@ function add_device(svg) {
 
 }
 
-function PullOutPullOut(stateCheck) {
-    var Overlay = document.getElementsByClassName("c-Body-a-Overlay")[0];
-    var OverlayExtras = document.getElementsByClassName("c-Body-a-OverlayExtras")[0];
-    if (stateCheck === "Closed") {
-        if (!Overlay.classList.contains("t-Transition")) {
-            Overlay.classList.add("t-Transition")
-        }
-        if (!OverlayExtras.classList.contains("t-Transition")) {
-            OverlayExtras.classList.add("t-Transition")
-        }
-        Overlay.style.width = "calc(100vw - 420px)"
-        OverlayExtras.style.width = "420px"
-        setTimeout(function () {
-            if (Overlay.classList.contains("t-Transition")) {
-                Overlay.classList.remove("t-Transition")
-            }
-            if (OverlayExtras.classList.contains("t-Transition")) {
-                OverlayExtras.classList.remove("t-Transition")
-            }
-        }, 800);
-
-    } else {
-        if (!Overlay.classList.contains("t-Transition")) {
-            Overlay.classList.add("t-Transition")
-        }
-        if (!OverlayExtras.classList.contains("t-Transition")) {
-            OverlayExtras.classList.add("t-Transition")
-        }
-        Overlay.style.width = "100vw"
-        OverlayExtras.style.width = "0px"
-        setTimeout(function () {
-            if (Overlay.classList.contains("t-Transition")) {
-                Overlay.classList.remove("t-Transition")
-            }
-            if (OverlayExtras.classList.contains("t-Transition")) {
-                OverlayExtras.classList.remove("t-Transition")
-            }
-        }, 800);
-    }
-}
-
-
 const Body = (props) => {
+    var [PullOutState,setPullOutState] = useState("Closed")
     var TrashHolder = useRef(null);
     const [serialport_monitor, setSerialPortMonitor] = useState("")
     const [viewCode, setViewCode] = useState("")
@@ -3801,6 +3760,7 @@ const Body = (props) => {
             setSerialPortMonitor(props.serialport_monitor);
         }
     })
+    
     return (
         <div className="body-container">
             <div className="c-Body-a-WorkspaceContainer">
@@ -4244,7 +4204,7 @@ const Body = (props) => {
                 <div className="i-emptyDiv4" />
             </div>
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu MenuFunction={PullOutPullOut} toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
+                <Pull_Out_Menu toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>
             <div id="c-device-manager">
                     <NewDeviceManager deviceOnClick={props.deviceOnClick}/>

@@ -11,7 +11,7 @@ import { useRef, useState, useEffect } from 'react'
 
 var last_view_code = ""
 
-var menuOpen = "Closed";
+
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);
     const [last_button_clicked, setLastButtonClicked] = useState("");
@@ -20,6 +20,7 @@ function Pull_Out_Menu(props) {
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [viewCode, setViewCode] = useState("")
     const { children } = props;
+    var [menuOpen, setMenuOpen] = useState("Open");
     var pull_out_menu = useRef(null);
     var pull_out_container = useRef(null);
     var code_viewer = null;
@@ -33,10 +34,10 @@ function Pull_Out_Menu(props) {
     }
 
     function Menu(event) {
-        menuOpen = "Open"
+        setMenuOpen("Open")
         if (last_button_clicked !== event.target.id) {
             setLastButtonClicked(event.target.id);
-            menuOpen = "Closed"
+            setMenuOpen("Closed")
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
         }
@@ -46,11 +47,9 @@ function Pull_Out_Menu(props) {
             pull_out_container.current.style.opacity = "0"
 
         }
-        if (props.MenuFunction !== undefined) {
-            props.MenuFunction(menuOpen)
-        }
+        
     }
-    
+
     useEffect(() => {
         if (last_button_clicked !== "") {
             switch (last_button_clicked) {
@@ -93,7 +92,7 @@ function Pull_Out_Menu(props) {
                 case "example-code":
                     if (currentMenu !== last_button_clicked) {
                         setContents([
-                            <Example_Code_Menu example_codes={props.example_codes}> 
+                            <Example_Code_Menu example_codes={props.example_codes}>
                             </Example_Code_Menu>
                         ])
                         setCurrentMenu(last_button_clicked)
@@ -109,6 +108,49 @@ function Pull_Out_Menu(props) {
 
     })
 
+    useEffect(() => {
+        var Overlay = document.getElementsByClassName("c-Body-a-Overlay")[0];
+        var OverlayExtras = document.getElementsByClassName("c-Body-a-OverlayExtras")[0];
+        if (menuOpen === "Closed") {
+            if (!Overlay.classList.contains("t-Transition")) {
+                Overlay.classList.add("t-Transition")
+            }
+            if (!OverlayExtras.classList.contains("t-Transition")) {
+                OverlayExtras.classList.add("t-Transition")
+            }
+            Overlay.style.width = "calc(100vw - 420px)"
+            OverlayExtras.style.width = "420px"
+            setTimeout(function () {
+                if (Overlay.classList.contains("t-Transition")) {
+                    Overlay.classList.remove("t-Transition")
+                }
+                if (OverlayExtras.classList.contains("t-Transition")) {
+                    OverlayExtras.classList.remove("t-Transition")
+                }
+            }, 500);
+
+        } else {
+            if (!Overlay.classList.contains("t-Transition")) {
+                Overlay.classList.add("t-Transition")
+            }
+            if (!OverlayExtras.classList.contains("t-Transition")) {
+                OverlayExtras.classList.add("t-Transition")
+            }
+            Overlay.style.width = "100vw"
+            OverlayExtras.style.width = "0px"
+            setTimeout(function () {
+                if (Overlay.classList.contains("t-Transition")) {
+                    Overlay.classList.remove("t-Transition")
+                }
+                if (OverlayExtras.classList.contains("t-Transition")) {
+                    OverlayExtras.classList.remove("t-Transition")
+                }
+            }, 500);
+        }
+    }, [menuOpen])
+
+
+    
     return (
         <div className="pull-out-menu" ref={pull_out_menu}>
             <div className="c-Pull-Out-Menu-a-buttongroup" >
@@ -150,7 +192,7 @@ function Pull_Out_Menu(props) {
                             <path id="Path_316" data-name="Path 316" d="M1599.352,105.366l4.772-5.617,4.724,3.021,5.467-7.346,1.989,5.567,7.9-10.538" transform="translate(-1596.291 -87.011)" fill="none" stroke="#fff" stroke-width="1" />
                         </svg>
                     ]}
-                   
+
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
                     tooltip="Serial Monitor"
