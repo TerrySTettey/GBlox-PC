@@ -182,7 +182,6 @@ const App = () => {
     document.getElementById(event.target.id).click()
   }
   function toolbox_maker() {
-    console.log("New TOolbox")
     var toolbox_temp = [];
     for (var i = 0; i < (OurWorkspace.toolbox_.getToolboxItems()).length; i++) {
       var items = OurWorkspace.toolbox_.getToolboxItems();
@@ -202,7 +201,6 @@ const App = () => {
     setToolboxItems(toolbox_temp)
   }
   function device_manager(event) {
-    console.log(event.target.id)
     var popout = document.getElementById("c-device-manager")
     if (event.target.id === "device-add-button") {
       popout.style.display = "inline-flex"
@@ -212,7 +210,16 @@ const App = () => {
       popout.style.display = "none"
     }
   }
+
+  async function check_comport_constant(){
+    var comport = await ipcRenderer.sendSync('check_comport_constant');
+    console.log(comport)
+    return comport;
+  }
   useEffect(() => {
+
+    // check_comport_constant();
+
     if(device_chosen !== ""){
     if (initialized_workspace === false) {
       var tb = currentToolbox;

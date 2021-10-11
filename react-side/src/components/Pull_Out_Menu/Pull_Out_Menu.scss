@@ -33,6 +33,8 @@
         display: inline-flex;
         flex-direction: column;
         z-index: 1;
+        transform-origin: top center;
+        transition: transform 1s;
         pointer-events: all;
         #button-container {
             display: flex;
@@ -46,5 +48,12 @@
         position: relative;
         transition: opacity 1s;
         pointer-events: all;
+    }
+}
+@media only screen and (max-width: 1500px),
+    screen and (max-height: 800px){
+    .c-Pull-Out-Menu-a-buttongroup{
+        transform: scale(0.8);
+        margin-bottom: 50vh;
     }
 }
