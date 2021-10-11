@@ -9,6 +9,7 @@ var prevWSNum = 0;
 var currentWSNum = 0;
 var WSNumTracker = 0;
 var TabDOM = [];
+var TabNums = [];
 
 const WorkTabHolder = (props) => {
     var [buttonPressed, setButtonPressed] = useState(0);
@@ -51,12 +52,30 @@ const WorkTabHolder = (props) => {
         TabDOM = [...TabDOM, <WorkspaceTab id={"i-WSButton-" + WSNumTracker} text={"Workspace " + WSNumTracker} ChangeTab={ChangeTab} closeOnClick={CloseOnClick}/>]
         //console.log(TabDOM)
         currentWSNum = WSNumTracker;
+        TabNums.push(WSNumTracker);
         setButtonPressed(1);
     }
 
     function CloseOnClick(container) {
         //Set focus to prev tab 
+        var NumToDelete = container.id.split("-")[2];
+        console.log(container.id.split("-")[2])
+        TabNums = TabNums.filter(function(ele){
+            return ele != NumToDelete;
+        });
+
+        prevWSNum = TabNums[0];
+        currentWSNum = TabNums[TabNums.length-1]
+
+        // if(NumToDelete <= TabNums.length){
+            
+        //     currentWSNum = TabNums[NumId];
+        // } else {
+        //     currentWSNum = TabNums[TabNums.length-1];
+        // }
+        console.log(TabNums)        
         container.remove()
+        setButtonPressed(1);
     }
 
     function ChangeTab(e) {
