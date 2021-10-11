@@ -144,9 +144,7 @@ const App = () => {
     splash.style.backgroundColor = "transparent";
     splash.style.backdropFilter = "none"
     splash.style.opacity = "0"
-    // setTimeout(() => {
-    //   splash.style.marginTop = "20000px"
-    // }, 1000)
+
     setTimeout(() => {
       splash.style.display = "none"
     }, 600)
@@ -203,11 +201,17 @@ const App = () => {
   function device_manager(event) {
     var popout = document.getElementById("c-device-manager")
     if (event.target.id === "device-add-button") {
+      popout.style.opacity = "1"
+      popout.style.backgroundColor = "#0B0533dd";
       popout.style.display = "inline-flex"
     }
     else {
       setDeviceChosen(event.target.id)
-      popout.style.display = "none"
+      popout.style.opacity = "0"
+      popout.style.backgroundColor = "transparent";
+      setTimeout(() => {
+        popout.style.display = "none"
+      },1)
     }
   }
 
