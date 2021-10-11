@@ -110,39 +110,31 @@ app.on('activate', () => {
         createWindow();
     }
 })
-async function COMPORT_CONSTANT(cb){
-    var ports = [];
-    try{
-        var COMPORT_constant = execSync(path.resolve(__dirname,"arduino-cli board list"));
-        COMPORT_constant = String.fromCharCode.apply(null, COMPORT_constant);
-        COMPORT_constant = COMPORT_constant.split(`\n`)
-        if(COMPORT_constant[0][0].includes("No boards found") !== false){
-            for (var i = 1; i < COMPORT_constant.length;i++){
-                var com = COMPORT_constant[i].split(" Serial Port")[0]
-                var afterserial = COMPORT_constant[i].split(" Serial Port")[1]
-                console.log(afterserial)
-                // if (afterserial.indexOf('USB') >= 0){
-                //     console.log(com)
-                //     ports.push(com)
-                // }
+async function COMPORT_CONSTANT(cb) {
+    var ports = ["No Board Detected"]
+    try {
+        var comport = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })
+        comport = comport.split(`\n`)
+        var temp_ports = []
+        for (var i = 0; i < comport.length; i++) {
+            if (comport[i].includes("\\Device\\Serial") == true) {
+                temp_ports.push(comport[i].split("REG_SZ    ")[1].split("\r")[0]);
             }
-
         }
-        else{
-            COMPORT_constant = "No boards found";     
+        if (temp_ports !== []) {
+            ports = temp_ports
         }
     }
-    catch(e){console.log(e)}
-    return COMPORT_constant;
+    catch (e) {
+    }
+    cb(ports)
 }
 //Function which identifies the COM Port that Arduino is connected to...
 function CHECK_COMPORT(cb) {
     try {
         COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })  //,(error, stdout, stderr) => {
-        console.log(COMPORT);
         if (COMPORT.includes('COM') == 1) {
             COMPORT = COMPORT.split("    ")[3].split("\r")[0];
-
         }
         else {
             COMPORT = "No Arduino Detected";
@@ -213,13 +205,17 @@ ipcMain.handle("serialport_retreive", async function (event) {
         console.log(e);
     }
 })
-ipcMain.on("check_comport_constant", async function (event) {
-    try{
-        COMPORT_CONSTANT(function (res){
-            event.returnValue = res;
-        });
+ipcMain.handle("check_comport_constant", async function (event) {
+    var result = []
+    try {
+        COMPORT_CONSTANT(function (res) {
+            result = res
+            event.sender.send('comport_constant', result)
+        });;
+
     }
-    catch(e){console.log(e)}
+    catch (e) { console.log(e) }
+
 })
 
 ipcMain.handle("serialport_write", async function (event, value) {
@@ -231,16 +227,9 @@ ipcMain.handle("serialport_write", async function (event, value) {
 ipcMain.handle("serialport_close", function (event) {
     try {
         console.log("Closing SerialMonitor\n");
-        // if (typeof serial_monitor != "undefined"){
         serial_monitor.close(function (err) {
             console.log(`Closed Serial Monitor ` + err);
         });
-        //     parser.on('close', function (data){
-        //         console.log("Closing Parser\n");
-        // });
-        //     serial_monitor.unpipe(parser);
-        // }
-        // serial_monitor.pause();
     }
     catch (e) {
         console.log(e);
@@ -255,7 +244,6 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
             event.sender.send('arduino_comport', res);
         });
         VERIFYCODE(function (res) {
-            //console.log("IT IS FINISHED");
             event.sender.send('arduino_upload_status', res);
         });
     }
@@ -264,10 +252,11 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
     }
 })
 
-ipcMain.handle("check-comport", async function (event, jsCode) {
+ipcMain.on("check-comport", async function (event, jsCode) {
     try {
         CHECK_COMPORT(function (res) {
-            event.sender.send('arduino_comport', res);
+            // event.sender.send('arduino_comport', res);
+            return res;
         });
     }
     catch (e) {

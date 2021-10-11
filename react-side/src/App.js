@@ -29,7 +29,6 @@ var OurWorkspace;
 var response = "null";
 var current_device = `No Device Selected`;
 var currentToolbox = MelloDOM;
-//Blockly Themes
 
 const component_styles = {
   "workspaceBackgroundColour": "#060841",
@@ -89,6 +88,7 @@ const App = () => {
   const [upload_status, setUploadStatus] = useState("");
   const [device_chosen, setDeviceChosen] = useState("");
   const [toolbox_items, setToolboxItems] = useState([]);
+  const [available_com_ports, setAvailableCOMports] = useState(["No Arduino Detected"]);
 
   function serialport_read() {
     console.log("Serial Port Button Clicked")
@@ -212,14 +212,18 @@ const App = () => {
   }
 
   async function check_comport_constant(){
-    var comport = await ipcRenderer.sendSync('check_comport_constant');
-    console.log(comport)
-    return comport;
+    ipcRenderer.invoke('check_comport_constant');
+    ipcRenderer.on('comport_constant', (event, result) => {
+      console.log(result);
+      setAvailableCOMports(result);
+    });
+    
   }
   useEffect(() => {
-
-    // check_comport_constant();
-
+    setTimeout(()=>{
+      check_comport_constant();
+    },3000)
+    
     if(device_chosen !== ""){
     if (initialized_workspace === false) {
       var tb = currentToolbox;
@@ -246,7 +250,17 @@ const App = () => {
     }
   }
   })
-
+  useEffect(() => {
+    var outer_circle = document.getElementById("Outer_Circle");
+    
+    if (available_com_ports.length>0){
+      outer_circle.style.fill = "green"
+    }
+    else{
+      outer_circle.style.fill = "red"
+    }
+    
+  },[available_com_ports])
   useEffect(() => {
     if (device_chosen !== "") {
       var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
