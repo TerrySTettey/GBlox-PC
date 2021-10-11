@@ -9,19 +9,10 @@ const WorkspaceTab = (props) => {
 
     const container = useRef(null);
 
-    function RunOnClick() {
+    useEffect(()=> {
         let aText = container.current.querySelectorAll(".c-WorkspaceTab-a-Text")[0];
         let aShadow = container.current.querySelectorAll(".i-dropShadow")[0];
 
-        /*
-        if(clickState==="On"){
-            setClickState("Off")
-        } else if(clickState==="Off"){
-            setClickState("On")
-        }
-        */
-        
-        //Changing Transparency and Size
         if(props.clickState === "On"){
             container.current.style.maxWidth = "fit-content";
             container.current.style.backgroundColor = "#0B0533";
@@ -39,9 +30,12 @@ const WorkspaceTab = (props) => {
             aText.style.maxWidth = "162px"
             aShadow.style.backgroundImage = "linear-gradient(to right, #0000,#0B0533CC)"
         }
+    },[props.clickState])
 
+    function RunOnClick(e) {
+        //Changing Transparency and Size
         if (props.ChangeTab !== undefined) {
-            props.ChangeTab();
+            props.ChangeTab(e);
         }
     }
 
@@ -50,7 +44,7 @@ const WorkspaceTab = (props) => {
     }
 
     return (
-        <div className="c-WorkspaceTab-a-Container" ref={container} onClick={RunOnClick}>
+        <div className="c-WorkspaceTab-a-Container" ref={container} onClick={RunOnClick} id={props.id}>
             <p className="c-WorkspaceTab-a-Text"> {props.text}
                 <div className="i-dropShadow" />
             </p>
@@ -67,7 +61,7 @@ export default WorkspaceTab
 
 WorkspaceTab.defaultProps = {
     text: "Hello World",
-    clickState: "On",
+    clickState: "Off",
 }
 
 WorkspaceTab.propTypes = {
