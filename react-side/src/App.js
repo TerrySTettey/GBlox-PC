@@ -88,7 +88,7 @@ const App = () => {
   const [upload_status, setUploadStatus] = useState("");
   const [device_chosen, setDeviceChosen] = useState("");
   const [toolbox_items, setToolboxItems] = useState([]);
-  const [available_com_ports, setAvailableCOMports] = useState(["No Arduino Detected"]);
+  const [available_com_ports, setAvailableCOMports] = useState([]);
 
   function serialport_read() {
     console.log("Serial Port Button Clicked")
@@ -214,7 +214,6 @@ const App = () => {
   async function check_comport_constant(){
     ipcRenderer.invoke('check_comport_constant');
     ipcRenderer.on('comport_constant', (event, result) => {
-      console.log(result);
       setAvailableCOMports(result);
     });
     
@@ -252,14 +251,14 @@ const App = () => {
   })
   useEffect(() => {
     var outer_circle = document.getElementById("Outer_Circle");
-    
     if (available_com_ports.length>0){
       outer_circle.style.fill = "green"
+      outer_circle.style.animation = ("none")
     }
     else{
       outer_circle.style.fill = "red"
+      outer_circle.style.animation = "saturate 2s infinite ease-in-out alternate-reverse"
     }
-    
   },[available_com_ports])
   useEffect(() => {
     if (device_chosen !== "") {
