@@ -85,9 +85,11 @@ function Help_Menu(props) {
         <Menu>
             <div className="help-menu">
                 <div className="text">Help</div>
-                {help_div(learn_svg, "Learn")}
-                {help_div(support_svg, "Support")}
-                {help_div(check_for_update_svg, "Check for Update")}
+                <div className="Help-Buttons">
+                    {help_div(learn_svg, "Learn")}
+                    {help_div(support_svg, "Support")}
+                    {help_div(check_for_update_svg, "Check for Update")}
+                </div>
             </div>
         </Menu>
     )

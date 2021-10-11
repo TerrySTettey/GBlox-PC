@@ -51,8 +51,8 @@
     position: absolute;
     z-index: 0;
     #background-svg {
-        height: 90vh;
-        width: 90vw;
+        height: 85vh;
+        width: 85vw;
         transition: width 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67), height 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67);
     }
     .Splash-Items {
@@ -191,6 +191,7 @@
             text-align: center;
             color: white;
             margin-top: 5%;
+            pointer-events: none;
             transition: transform 2s, margin-top 1s;
             font-size: 62pt;
         }
@@ -203,6 +204,7 @@
             text-align: center;
             color: white;
             white-space: pre-wrap;
+            pointer-events: none;
             font-size: 21pt;
             transition: transform 2s, margin-top 1s;
             p {
@@ -229,7 +231,7 @@
         transform: scale(0.8);
     }
     .Splash-Title {
-        margin-top: -1vh !important;
+        margin-top: -1vh;
         transform: scale(0.8);
     }
     .Splash-Content {
@@ -238,9 +240,6 @@
     }
     .Start-Button {
         transform: scale(0.8);
-        svg {
-            transform: scale(1);
-        }
     }
 }
 
@@ -249,15 +248,14 @@
         transform: scale(0.7);
     }
     .Splash-Title {
+        margin-top: -5% !important;
         transform: scale(0.7);
     }
     .Splash-Content {
+        margin-top: -5%;
         transform: scale(0.7);
     }
     .Start-Button {
         transform: scale(0.8);
-        svg {
-            transform: scale(2);
-        }
     }
 }
