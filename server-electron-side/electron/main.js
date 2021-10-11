@@ -110,7 +110,31 @@ app.on('activate', () => {
         createWindow();
     }
 })
+async function COMPORT_CONSTANT(cb){
+    var ports = [];
+    try{
+        var COMPORT_constant = execSync(path.resolve(__dirname,"arduino-cli board list"));
+        COMPORT_constant = String.fromCharCode.apply(null, COMPORT_constant);
+        COMPORT_constant = COMPORT_constant.split(`\n`)
+        if(COMPORT_constant[0][0].includes("No boards found") !== false){
+            for (var i = 1; i < COMPORT_constant.length;i++){
+                var com = COMPORT_constant[i].split(" Serial Port")[0]
+                var afterserial = COMPORT_constant[i].split(" Serial Port")[1]
+                console.log(afterserial)
+                // if (afterserial.indexOf('USB') >= 0){
+                //     console.log(com)
+                //     ports.push(com)
+                // }
+            }
 
+        }
+        else{
+            COMPORT_constant = "No boards found";     
+        }
+    }
+    catch(e){console.log(e)}
+    return COMPORT_constant;
+}
 //Function which identifies the COM Port that Arduino is connected to...
 function CHECK_COMPORT(cb) {
     try {
@@ -134,10 +158,10 @@ function CHECK_COMPORT(cb) {
 async function VERIFYCODE(cb) {
     var VERIFICATION = null;
     var output = "";
-    console.log("INSIDE VER2")
+
     if (COMPORT != "No Arduino Detected") {
         VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT, (error, stdout, stderr) => {
-            console.log("INSIDE VERIFYCODE")
+
             if (error) {
                 output += error;
                 const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
@@ -188,6 +212,14 @@ ipcMain.handle("serialport_retreive", async function (event) {
     catch (e) {
         console.log(e);
     }
+})
+ipcMain.on("check_comport_constant", async function (event) {
+    try{
+        COMPORT_CONSTANT(function (res){
+            event.returnValue = res;
+        });
+    }
+    catch(e){console.log(e)}
 })
 
 ipcMain.handle("serialport_write", async function (event, value) {
