@@ -17,6 +17,7 @@
 
     .c-WorkspaceTab-a-Text {
         user-select: none;
+        pointer-events: none;
         color: #FFF6;
         transform: skewX(45deg);
         font-size: 16px;
@@ -29,6 +30,7 @@
 
         .i-dropShadow {
             position: absolute;
+            pointer-events: none;
             top: 0;
             right: -5px;
             height: 20px;
