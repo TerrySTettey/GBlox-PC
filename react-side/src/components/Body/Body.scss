@@ -36,7 +36,7 @@ $shift: 0px;
         pointer-events: none;
         width: calc(auto - 0px /*420px*/);
         height: 100vh;
-        z-index: 2;
+        z-index: 50;
             
         filter: drop-shadow(0px 3px 10px #0011AA);
         
@@ -197,7 +197,7 @@ $shift: 0px;
         background-color: #0B0533;
         height: 100vh;
         width:0px;
-        z-index: 2;
+        z-index: 51;
     }
 
     .t-Transition {
@@ -228,6 +228,7 @@ $shift: 0px;
     }
     
     .c-Body-a-OverlayItems {
+        user-select: none;
         display: flex;
         justify-content:  center;
         position: absolute;
@@ -238,11 +239,12 @@ $shift: 0px;
         left: 45.3px;
         width: 200px;;//973px;//89.547vh;
         height: 100vh;
-        z-index: 3;
+        z-index: 52;
         //outline: 2px red solid;
     }
 
     .c-Body-a-UploadCircle {
+        user-select: none;
         //left: 67.6px;
         //top:92px;
         margin-top: 92px;
@@ -314,6 +316,7 @@ $shift: 0px;
         position: absolute;
         pointer-events: none;
         left: calc(100vw - 106px);
+        z-index: 52;
 
     }
 

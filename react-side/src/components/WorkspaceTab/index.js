@@ -40,7 +40,10 @@ const WorkspaceTab = (props) => {
     }
 
     function CloseOnClick() {
-        container.current.remove();
+        if(props.closeOnClick !== undefined){
+            props.closeOnClick(container.current)
+        }
+        //container.current.remove();
     }
 
     return (

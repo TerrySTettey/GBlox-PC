@@ -3,7 +3,7 @@
     background-color: transparent;//#0B0533;
     position: relative;
     top: 0;
-    z-index: 11;
+    z-index: 52;
     display: flex;
     flex-direction: row;
     height: 86px;//8.63vh/*86px*/ ;
@@ -11,6 +11,7 @@
     padding-left: 42px;
     padding-right: 42px;
     -webkit-app-region: drag;
+    user-select: none;
     
     #logo svg {
         position: relative;
