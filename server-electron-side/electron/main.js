@@ -142,12 +142,16 @@ async function COMPORT_CONSTANT(cb) {
 //Function which identifies the COM Port that Arduino is connected to...
 function CHECK_COMPORT(cb) {
     try {
-        COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })  //,(error, stdout, stderr) => {
-        if (COMPORT.includes('COM') == 1) {
-            COMPORT = COMPORT.split("    ")[3].split("\r")[0];
+        COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })
+        COMPORT = COMPORT.split(`\n`)
+        var temp_ports = []
+        for (var i = 0; i < COMPORT.length; i++) {
+            if (COMPORT[i].includes("\\Device\\Serial") == true) {
+                temp_ports.push(COMPORT[i].split("REG_SZ    ")[1].split("\r")[0]);
+            }
         }
-        else {
-            COMPORT = "No Arduino Detected";
+        if (temp_ports !== []) {
+            COMPORT = temp_ports
         }
     }
     catch (e) {
@@ -162,7 +166,7 @@ async function VERIFYCODE(cb) {
     var output = "";
 
     if (COMPORT != "No Arduino Detected") {
-        VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT, (error, stdout, stderr) => {
+        VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
 
             if (error) {
                 output += error;
@@ -183,7 +187,7 @@ async function VERIFYCODE(cb) {
 async function readSerialPort(cb) {
     // console.log(serial_monitor)
     if (typeof serial_monitor === "undefined") {
-        serial_monitor = new serialport(COMPORT, {
+        serial_monitor = new serialport(COMPORT[0], {
             baudRate: 9600,
             parser: new serialport.parsers.Readline('\r\n'),
         });

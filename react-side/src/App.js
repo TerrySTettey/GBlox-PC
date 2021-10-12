@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TestMain from "./components/TestMain";
 
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
 import './App.css';
 
 import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
@@ -299,6 +298,14 @@ const App = () => {
       Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace),OurWorkspace);
     }
   }, [device_chosen]);
+  useEffect(() => {
+    if (system_settings[1]!== undefined){
+    var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
+    writeSystemSettings(temp_settings)
+    setSystemSettings(temp_settings)
+    console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
+    }
+  },[current_theme,device_chosen,splash_status])
   useEffect(()=>{
     for(var i = 0; i<system_settings.length; i++){
       if (system_settings[i]!== undefined){
@@ -327,14 +334,7 @@ const App = () => {
     //document.getElementById("SplashStatus").checked
   },[system_settings])
 
-  useEffect(() => {
-    if (system_settings[1]!== undefined){
-    var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
-    writeSystemSettings(temp_settings)
-    setSystemSettings(temp_settings)
-    console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
-    }
-  },[current_theme,device_chosen,splash_status])
+
 
   return (
     <div>
@@ -343,12 +343,7 @@ const App = () => {
         workspaceClick={workspaceClick}
         toolboxButtons={toolbox_items}
         viewCode={
-          <SyntaxHighlighter
-            language="arduino"
-            style={tomorrowNightBlue}
-            showLineNumbers={true}>
-            {arduinocode}
-          </SyntaxHighlighter>
+          arduinocode
         }
         serialport_monitor={serialport_monitor}
         onSerialPortClick={serialport_read}

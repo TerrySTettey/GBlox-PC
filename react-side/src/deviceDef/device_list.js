@@ -321,7 +321,7 @@ const Mello_Bot = new device(
     </category>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Communication">
-    <category name="Infrared Remote Control">
+    <category name="IR Control">
         <block type="communication_infrared_start"></block>
         <block type="communication_infrared_value">
             <field name="Received_Character">FF629D</field>

@@ -13,27 +13,30 @@ const TestMain = (props) => {
         AllScrolls[i].style.display = "none !important";
     }
     useEffect(() => {
-        setViewCode(props.viewCode)
-        if (serialport_monitor !== props.serialPortMonitor) {
+        if (viewCode !== props.viewCode) {
+            setViewCode(props.viewCode)
+        }
+        if (serialport_monitor !== props.serialport_monitor) {
             setSerialPortMonitor(props.serialport_monitor);
         }
+
     })
 
     return (
         <div>
-            <Body 
-            ToolboxFunction={props.ToolboxFunction} 
-            MenuFunction={props.MenuFunction} 
-            workspaceClick={props.workspaceClick} 
-            viewCode={viewCode} 
-            serialport_monitor={serialport_monitor} 
-            toolboxButtons={props.toolboxButtons} 
-            onSerialPortClick={props.onSerialPortClick} 
-            example_codes={props.example_codes} 
-            uploadFunction={props.uploadFunction} 
-            onSplashClick={props.onSplashClick}
-            Splashurl={props.Splashurl}
-            deviceOnClick={props.deviceOnClick}/>
+            <Body
+                ToolboxFunction={props.ToolboxFunction}
+                MenuFunction={props.MenuFunction}
+                workspaceClick={props.workspaceClick}
+                viewCode={viewCode}
+                serialport_monitor={serialport_monitor}
+                toolboxButtons={props.toolboxButtons}
+                onSerialPortClick={props.onSerialPortClick}
+                example_codes={props.example_codes}
+                uploadFunction={props.uploadFunction}
+                onSplashClick={props.onSplashClick}
+                Splashurl={props.Splashurl}
+                deviceOnClick={props.deviceOnClick} />
         </div>
     )
 }

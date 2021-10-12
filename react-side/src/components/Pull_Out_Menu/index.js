@@ -47,7 +47,7 @@ function Pull_Out_Menu(props) {
             pull_out_container.current.style.opacity = "0"
 
         }
-        
+
     }
 
     useEffect(() => {
@@ -55,24 +55,17 @@ function Pull_Out_Menu(props) {
             switch (last_button_clicked) {
                 case "serial-port":
                     if (serialport_status === false) {
-                        if (serialport_monitor !== props.serialport_monitor) {
-                            setTimeout(function () {
-                                setSerialPortMonitor(props.serialport_monitor);
-                                setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
-                            }, 150);
-                        }
-                        { props.onSerialPortClick() }
+                        setSerialPortMonitor(props.serialport_monitor);
+                        props.onSerialPortClick()
                         setSerialPortStatus(true)
                     }
                     else {
                         setSerialPortMonitor(props.serialport_monitor);
-                        setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
                     }
                     setCurrentMenu(last_button_clicked)
                     break;
                 case "view-code":
                     setViewCode(props.viewCode);
-                    setContents([<View_Code_Menu viewCode={viewCode} />])
                     setCurrentMenu(last_button_clicked)
                     break;
                 case "help-menu":
@@ -108,6 +101,12 @@ function Pull_Out_Menu(props) {
 
     })
 
+    useEffect(() => {
+        setContents([<View_Code_Menu viewCode={viewCode} />])
+    }, [viewCode]);
+    useEffect(() => {
+        setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
+    }, [serialport_monitor]);
     useEffect(() => {
         var Overlay = document.getElementsByClassName("c-Body-a-Overlay")[0];
         var OverlayExtras = document.getElementsByClassName("c-Body-a-OverlayExtras")[0];
@@ -150,7 +149,7 @@ function Pull_Out_Menu(props) {
     }, [menuOpen])
 
 
-    
+
     return (
         <div className="pull-out-menu" ref={pull_out_menu}>
             <div className="c-Pull-Out-Menu-a-buttongroup" >

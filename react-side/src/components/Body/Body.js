@@ -3623,7 +3623,7 @@ function add_device(svg) {
 }
 
 const Body = (props) => {
-    var [PullOutState,setPullOutState] = useState("Closed")
+    var [PullOutState, setPullOutState] = useState("Closed")
     var TrashHolder = useRef(null);
     const [serialport_monitor, setSerialPortMonitor] = useState("")
     const [viewCode, setViewCode] = useState("")
@@ -3754,13 +3754,15 @@ const Body = (props) => {
                 TrashContainerChanged = true;
             }
         }
-        setViewCode(props.viewCode)
+        if (viewCode !== props.viewCode) {
+            setViewCode(props.viewCode)
+        }
 
         if (serialport_monitor !== props.serialPortMonitor) {
             setSerialPortMonitor(props.serialport_monitor);
         }
     })
-    
+
     return (
         <div className="body-container">
             <div className="c-Body-a-WorkspaceContainer">
@@ -4207,7 +4209,7 @@ const Body = (props) => {
                 <Pull_Out_Menu toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>
             <div id="c-device-manager">
-                    <NewDeviceManager deviceOnClick={props.deviceOnClick}/>
+                <NewDeviceManager deviceOnClick={props.deviceOnClick} />
             </div>
             <div id="c-Body-a-SplashScreen">
                 <SplashScreen
