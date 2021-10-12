@@ -14,10 +14,11 @@ const TestMain = (props) => {
     }
     useEffect(() => {
         setViewCode(props.viewCode)
+        console.log(props.viewCode)
         if (serialport_monitor !== props.serialPortMonitor) {
             setSerialPortMonitor(props.serialport_monitor);
         }
-    })
+    },[viewCode])
 
     return (
         <div>
