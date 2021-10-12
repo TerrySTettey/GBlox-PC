@@ -1,0 +1,3 @@
+theme: 
+hideSplash: false
+device: Arduino Uno

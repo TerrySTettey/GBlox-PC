@@ -2,12 +2,12 @@ import Blockly from "blockly";
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TestMain from "./components/TestMain";
+
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
 import './App.css';
 
-import { MelloDOM, newToolBox } from "./customblocks/toolboxes/toolboxes"
+import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
 import { DeviceList } from "./deviceDef/device_list.js"
 import AlterBlockly from "./blocklyextras/blocklyAlters";
 import ToolSelector from "./components/ToolSelector/ToolSelector";
@@ -19,6 +19,7 @@ import "./customblocks/MelloBlocks"
 import "./customblocks/MelloBlocksGen"
 import { mainLoopCode } from "./customblocks/compiler/arduino_core"
 import example_codes from "./example_codes"
+
 const { ipcRenderer } = window.require('electron')
 
 var initialized_workspace = false;
@@ -89,6 +90,9 @@ const App = () => {
   const [device_chosen, setDeviceChosen] = useState("");
   const [toolbox_items, setToolboxItems] = useState([]);
   const [available_com_ports, setAvailableCOMports] = useState([]);
+  const [system_settings, setSystemSettings] = useState([]);
+  const [current_theme, setCurrentTheme] = useState("")
+  const [splash_status, setSplashStatus] = useState("false");
 
   function serialport_read() {
     console.log("Serial Port Button Clicked")
@@ -142,7 +146,7 @@ const App = () => {
     splash.style.backgroundColor = "transparent";
     splash.style.backdropFilter = "none"
     splash.style.opacity = "0"
-
+    setSplashStatus((document.getElementById('SplashStatus').checked).toString())
     setTimeout(() => {
       splash.style.display = "none"
     }, 600)
@@ -218,11 +222,26 @@ const App = () => {
     });
     
   }
+  async function readSystemSettings() {
+    ipcRenderer.invoke("load-settings");
+    ipcRenderer.on('current-settings', (event, result) => {
+      if (result !== "nil"){
+        console.log(result);
+        setSystemSettings(result);
+      }
+    })
+  }
+  async function writeSystemSettings(system_settings) {
+    ipcRenderer.invoke("write-settings", system_settings)
+  }
+
   useEffect(() => {
     setTimeout(()=>{
       check_comport_constant();
     },3000)
-    
+    if (system_settings.length<1){
+      readSystemSettings();
+    }
     if(device_chosen !== ""){
     if (initialized_workspace === false) {
       var tb = currentToolbox;
@@ -278,6 +297,42 @@ const App = () => {
       Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace),OurWorkspace);
     }
   }, [device_chosen]);
+  useEffect(()=>{
+    for(var i = 0; i<system_settings.length; i++){
+      if (system_settings[i]!== undefined){
+        var property = system_settings[i].toString().split(":")[0]
+        switch(property){
+          case "hideSplash":
+            setSplashStatus(system_settings[i].toString().replaceAll(";\r","").replace("hideSplash: ",""))
+            if (system_settings[i].toString().replaceAll(";\r","").replace("hideSplash: ","")=="true"){
+              document.getElementById("SplashStatus").checked = true;
+            }
+            else{
+              document.getElementById("SplashStatus").checked = false;
+              document.getElementById('c-Body-a-SplashScreen').style.display = "inline-flex";
+            }
+            break;
+          case "theme":
+            setCurrentTheme(system_settings[i].toString().replaceAll(";\r","").replace("theme: ",""));
+            break;
+          case "device":
+            setDeviceChosen(system_settings[i].toString().replaceAll(";\r","").replace("device: ",""))
+            break;
+        }
+      }
+    }
+    //.replaceAll(";\r","").replace("splash: ","")
+    //document.getElementById("SplashStatus").checked
+  },[system_settings])
+
+  useEffect(() => {
+    if (system_settings[1]!== undefined){
+    var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
+    writeSystemSettings(temp_settings)
+    setSystemSettings(temp_settings)
+    console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
+    }
+  },[current_theme,device_chosen,splash_status])
 
   return (
     <div>

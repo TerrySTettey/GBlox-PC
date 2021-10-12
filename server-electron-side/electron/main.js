@@ -13,61 +13,6 @@ var serial_monitor;
 var serial_monitor_results = "";
 const { execSync, exec } = require('child_process');
 
-//When save button is pressed...
-ipcMain.on("save-file", function (event, xml_data) {
-    saveFile(xml_data)
-})
-
-//When load button is pressed...
-ipcMain.on("load-file", async function (event) {
-    var data = await loadFile()
-    event.returnValue = data;
-})
-
-//Load function
-async function loadFile() {
-    var ourdata = "nil";
-    const { filePaths, canceled } = await dialog.showOpenDialog({
-        defaultPath: "project.xml",
-        buttonLabel: "Load Project",
-        title: "Load Project",
-        filters: [
-            { name: 'Project File', extensions: ['txt', 'xml'] }
-        ]
-    });
-
-    console.log("File Path: " + filePaths[0])
-    if (filePaths[0] && !canceled) {
-        try {
-            ourdata = fs.readFileSync(filePaths[0], 'utf8')
-            console.log('The file has been loaded!')
-            console.log(String("Data from Load: " + ourdata.toString()))
-        } catch (err) {
-            throw err;
-        }
-    }
-    return ourdata;
-}
-
-//Save Function
-async function saveFile(data) {
-    const { filePath, canceled } = await dialog.showSaveDialog({
-        defaultPath: "project.xml",
-        buttonLabel: "Save Project",
-        title: "Save Project As...",
-        filters: [
-            { name: 'Project File', extensions: ['txt', 'xml'] }
-        ]
-    });
-
-    if (filePath && !canceled) {
-        fs.writeFile(filePath, data, (err) => {
-            if (err) throw err;
-            console.log('The file has been saved!');
-        });
-    }
-}
-
 //Creation of Application Window
 function createWindow() {
     const win = new BrowserWindow({
@@ -93,23 +38,88 @@ function createWindow() {
         win.webContents.openDevTools({ mode: 'detach' })
     }
 }
-
 //When the app is ready to launch...
 app.whenReady().then(() => {
     createWindow()
 })
-
 //When all the windows of the app are closed...
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
 })
-
 //On 'activate' ...
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
 })
+//When save button is pressed...
+
+
+//Load function
+async function loadFile() {
+    var ourdata = "nil";
+    const { filePaths, canceled } = await dialog.showOpenDialog({
+        defaultPath: "project.xml",
+        buttonLabel: "Load Project",
+        title: "Load Project",
+        filters: [
+            { name: 'Project File', extensions: ['txt', 'xml'] }
+        ]
+    });
+
+    console.log("File Path: " + filePaths[0])
+    if (filePaths[0] && !canceled) {
+        try {
+            ourdata = fs.readFileSync(filePaths[0], 'utf8')
+            console.log('The file has been loaded!')
+            console.log(String("Data from Load: " + ourdata.toString()))
+        } catch (err) {
+            throw err;
+        }
+    }
+    return ourdata;
+}
+//Save Function
+async function saveFile(data) {
+    const { filePath, canceled } = await dialog.showSaveDialog({
+        defaultPath: "project.xml",
+        buttonLabel: "Save Project",
+        title: "Save Project As...",
+        filters: [
+            { name: 'Project File', extensions: ['txt', 'xml'] }
+        ]
+    });
+
+    if (filePath && !canceled) {
+        fs.writeFile(filePath, data, (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        });
+    }
+}
+
+async function writeSystemSettings(data) {
+    var filePath = path.resolve(__dirname, "settings.txt");
+    fs.writeFile(filePath, data, (err) => {
+        if (err) throw err;
+        console.log("Settings Updated")
+    })
+}
+
+async function retrieveSystemSettings(cb) {
+    var settings = "nil";
+    var filePath = path.resolve(__dirname, "settings.txt");
+    try {
+        settings = fs.readFileSync(filePath, "utf8")
+        settings = settings.split(`\n`)
+    }
+    catch (e) {
+        console.log(e)
+    }
+    cb(settings)
+}
+
+
 async function COMPORT_CONSTANT(cb) {
     var ports = ["No Board Detected"]
     try {
@@ -190,6 +200,30 @@ async function readSerialPort(cb) {
         serial_monitor_results = "";
     }
 }
+ipcMain.on("save-file", function (event, xml_data) {
+    saveFile(xml_data)
+})
+
+//When load button is pressed...
+ipcMain.on("load-file", async function (event) {
+    var data = await loadFile()
+    event.returnValue = data;
+})
+
+ipcMain.handle("load-settings", async function (event) {
+    try {
+        retrieveSystemSettings(function (res) {
+            event.sender.send("current-settings", res)
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
+})
+
+ipcMain.handle("write-settings", async function (event, settings) {
+    writeSystemSettings(settings)
+})
 
 ipcMain.handle("serialport_retreive", async function (event) {
     try {

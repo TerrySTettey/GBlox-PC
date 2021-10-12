@@ -196,7 +196,7 @@
             font-size: 62pt;
         }
         .Splash-Content {
-            grid-area: contents;
+            // grid-area: contents;
             justify-content: center;
             user-select: none;
             z-index: 1;
@@ -212,14 +212,71 @@
                 margin-bottom: -10px;
             }
         }
+        .Splash-checkbox {
+            background-color: transparent;
+            grid-area: splash-check;
+            color: white;
+            font-size: 21pt;
+            font-family: "Baloo2-Regular";
+        }
         .Start-Button {
             grid-area: button;
             position: absolute;
-            display: inline-block;
-            bottom: 1.2%;
-            margin-bottom: 0.5vh;
-            margin-left: 47vw;
+            display: grid;
+            bottom: 8vh;
+            //margin-top: 4%;
+            grid-template-rows: 0;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30vw;
+            grid-template-areas: "check getstart";
             transition: transform 2s, margin-top 1s;
+            .Splash-checkbox {
+                grid-area: check;
+                display: inline-flex;
+                margin-top: 3%;
+                margin-left: -5vw;
+                white-space: nowrap;
+                input[type="checkbox"] {
+                    position: relative;
+                    cursor: pointer;
+                    margin-top: 3.5%;
+                }
+                input[type="checkbox"]:before {
+                    content: "";
+                    display: flex;
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    left: 0;
+                    background-color: #0B0533;
+                    border: 2px white solid;
+                }
+                input[type="checkbox"]:checked:before {
+                    display: block;
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    top: 0;
+                    left: 0;
+                    background-color: #0000DC;                    
+                }
+                input[type="checkbox"]:checked:after {
+                    position: absolute;
+                    display: block;
+                    width: 4px;
+                    height: 8px;
+                    top: 25%;
+                    left: 60%;
+                }
+                label{
+                    margin-left: 8%;
+                    user-select: none;
+                }
+            }
+            .button-container {
+                grid-area: getstart;
+            }
+
             // transform: translate(-90%, -50%);
         }
     }
@@ -248,7 +305,7 @@
         transform: scale(0.7);
     }
     .Splash-Title {
-        margin-top: -5% !important;
+        margin-top: -7% !important;
         transform: scale(0.7);
     }
     .Splash-Content {
@@ -257,5 +314,7 @@
     }
     .Start-Button {
         transform: scale(0.8);
+        bottom: 10.5vh !important;
+
     }
 }
