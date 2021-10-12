@@ -7,7 +7,7 @@ import HeaderButton from '../HeaderButton';
 import Button from '../Button'
 import CustomDrop from '../CustomDrop';
 
-const Header = ({ }) => {
+const Header = (props) => {
 
     /**Create Overlay for DropList*/
     var overlay = document.createElement('div')
@@ -82,14 +82,14 @@ const Header = ({ }) => {
                     </svg>
                 </div>
                 <div className="header-buttons-segment">
-                    <Dropdown buttonImage="1" list={["New", "Open", "Save", "Save As", "Share", "Close"]} />
-                    <Dropdown buttonImage="2" list={["Cut", "Copy", "Paste", "Select All", "Delete"]} />
-                    <HeaderButton buttonImage="3" />
+                    <Dropdown buttonImage="1" list={["New", "Open", "Save", "Save As", "Share", "Close"]} funcsOnClick={props.fileheaderfunc}/>
+                    <Dropdown buttonImage="2" list={["Cut", "Copy", "Paste", "Select All", "Delete"]} funcsOnClick={props.editheaderfunc}/>
+                    <HeaderButton buttonImage="3" onClick={props.saveFile} />
                 </div>
                 <div id="blank-space" />
                 <div className="header-buttons-segment">
-                    <HeaderButton buttonImage="4" />
-                    <HeaderButton buttonImage="5" />
+                    <HeaderButton buttonImage="4"/>
+                    <HeaderButton buttonImage="5"/>
                     <div style={{
                         marginLeft: '5px'
                     }}>

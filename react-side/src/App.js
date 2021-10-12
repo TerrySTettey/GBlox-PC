@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TestMain from "./components/TestMain";
 
-
 import './App.css';
 
 import { MelloDOM } from "./customblocks/toolboxes/toolboxes"
 import { DeviceList } from "./deviceDef/device_list.js"
 import AlterBlockly from "./blocklyextras/blocklyAlters";
-import ToolSelector from "./components/ToolSelector/ToolSelector";
 
 import "./customblocks/customblocks";
 import "./customblocks/compiler/arduino_core";
@@ -29,6 +27,7 @@ var OurWorkspace;
 var response = "null";
 var current_device = `No Device Selected`;
 var currentToolbox = MelloDOM;
+var currentBlock = null;
 
 const component_styles = {
   "workspaceBackgroundColour": "#060841",
@@ -93,6 +92,48 @@ const App = () => {
   const [current_theme, setCurrentTheme] = useState("")
   const [splash_status, setSplashStatus] = useState("false");
 
+  var fileheader = [
+    //New File
+    () => {
+      if (document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0] !== undefined) {
+        OurWorkspace.clear();
+        document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0].click()
+      }
+    },
+    //Open File
+    () => {
+      loadBlocks()
+    },
+    //Save File
+    () => {
+      exportBlocks()
+    },
+    //Save As File
+    () => {
+      exportBlocks()
+    }
+  ]
+  var editheader = [
+    () => {
+      Blockly.copy(currentBlock)
+      Blockly.deleteBlock(currentBlock)
+    },
+    () => {
+      Blockly.copy(currentBlock)
+    },
+    () => {
+      Blockly.paste(currentBlock)
+    },
+    () => {
+      var allblocks = OurWorkspace.getAllBlocks(true);
+      for (var i = 0; i < allblocks.length; i++) {
+        allblocks[i].select();
+      }
+    },
+  () => {
+    Blockly.deleteBlock(currentBlock)
+    }
+  ]
   function serialport_read() {
     console.log("Serial Port Button Clicked")
     if (serialport_status === false) {
@@ -112,6 +153,11 @@ const App = () => {
   }
   function logbutton() {
     console.log("Button Pressed")
+  }
+  function selectedBlock(event) {
+    if (event.type == Blockly.Events.SELECTED){
+      currentBlock = OurWorkspace.getBlockById(event.newElementId);
+    }
   }
   function showCode() {
     var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
@@ -140,6 +186,7 @@ const App = () => {
       setUploadStatus(response);
     });
   }
+
   function closeSplash() {
     var splash = document.getElementById('c-Body-a-SplashScreen')
     splash.style.backgroundColor = "transparent";
@@ -164,8 +211,8 @@ const App = () => {
           break;
         case "workspace-previous":
           Blockly.mainWorkspace.undo(false);
-          if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(OurWorkspace))===`<xml xmlns="https://developers.google.com/blockly/xml"></xml>`){
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace),OurWorkspace);
+          if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(OurWorkspace)) === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace), OurWorkspace);
           }
           break;
         case "workspace-after":
@@ -211,20 +258,44 @@ const App = () => {
       popout.style.backgroundColor = "transparent";
       setTimeout(() => {
         popout.style.display = "none"
-      },1)
+      }, 1)
     }
   }
-  async function check_comport_constant(){
+  function exportBlocks() {
+    try {
+      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var xml_text = Blockly.Xml.domToText(xml);
+      console.log("Saving the following: " + xml_text);
+      ipcRenderer.send('save-file', xml_text)
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  function loadBlocks() {
+    try {
+      console.log("Loading a file...")
+      var hold = ipcRenderer.sendSync('load-file')
+      if (hold !== "nil") {
+        var xmlss = Blockly.Xml.textToDom(hold)
+        Blockly.mainWorkspace.clear();
+        Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+  async function check_comport_constant() {
     ipcRenderer.invoke('check_comport_constant');
     ipcRenderer.on('comport_constant', (event, result) => {
       setAvailableCOMports(result);
     });
-    
+
   }
   async function readSystemSettings() {
     ipcRenderer.invoke("load-settings");
     ipcRenderer.on('current-settings', (event, result) => {
-      if (result !== "nil"){
+      if (result !== "nil") {
         console.log(result);
         setSystemSettings(result);
       }
@@ -235,49 +306,50 @@ const App = () => {
   }
 
   useEffect(() => {
-    setTimeout(()=>{
+    setTimeout(() => {
       check_comport_constant();
-    },3000)
-    if (system_settings.length<1){
+    }, 3000)
+    if (system_settings.length < 1) {
       readSystemSettings();
     }
-    if(device_chosen !== ""){
-    if (initialized_workspace === false) {
-      var tb = currentToolbox;
-      OurWorkspace = Blockly.inject('blocklyDiv', {
-        toolbox: tb, renderer: "zelos", zoom:
-        {
-          wheel: true,
-          startScale: 1,
-          maxScale: 3,
-          minScale: 0.3,
-          scaleSpeed: 1.2,
-          pinch: true
-        }, grid:
-        {
-          snap: true
-        }, theme: test_theme
-      });
-      toolbox_maker();
-      Blockly.Xml.clearWorkspaceAndLoadFromXml(newxmldom, OurWorkspace);
-      OurWorkspace.toolbox_.setVisible(false);
-      OurWorkspace.addChangeListener(showCode);
-      AlterBlockly();
-      initialized_workspace = true;
+    if (device_chosen !== "") {
+      if (initialized_workspace === false) {
+        var tb = currentToolbox;
+        OurWorkspace = Blockly.inject('blocklyDiv', {
+          toolbox: tb, renderer: "zelos", zoom:
+          {
+            wheel: true,
+            startScale: 1,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2,
+            pinch: true
+          }, grid:
+          {
+            snap: true
+          }, theme: test_theme
+        });
+        toolbox_maker();
+        Blockly.Xml.clearWorkspaceAndLoadFromXml(newxmldom, OurWorkspace);
+        OurWorkspace.toolbox_.setVisible(false);
+        OurWorkspace.addChangeListener(showCode);
+        OurWorkspace.addChangeListener(selectedBlock);
+        AlterBlockly();
+        initialized_workspace = true;
+      }
     }
-  }
   })
   useEffect(() => {
     var outer_circle = document.getElementById("Outer_Circle");
-    if (available_com_ports.length>0){
+    if (available_com_ports.length > 0) {
       outer_circle.style.fill = "green"
       outer_circle.style.animation = ("none")
     }
-    else{
+    else {
       outer_circle.style.fill = "red"
       outer_circle.style.animation = "saturate 2s infinite ease-in-out alternate-reverse"
     }
-  },[available_com_ports])
+  }, [available_com_ports])
   useEffect(() => {
     if (device_chosen !== "") {
       var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
@@ -293,44 +365,44 @@ const App = () => {
       OurWorkspace.updateToolbox(currentToolbox);
       OurWorkspace.clear();
       toolbox_maker();
-      Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace),OurWorkspace);
+      Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace), OurWorkspace);
     }
   }, [device_chosen]);
   useEffect(() => {
-    if (system_settings[1]!== undefined){
-    var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
-    writeSystemSettings(temp_settings)
-    setSystemSettings(temp_settings)
-    console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
+    if (system_settings[1] !== undefined) {
+      var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
+      writeSystemSettings(temp_settings)
+      setSystemSettings(temp_settings)
+      console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
     }
-  },[current_theme,device_chosen,splash_status])
-  useEffect(()=>{
-    for(var i = 0; i<system_settings.length; i++){
-      if (system_settings[i]!== undefined){
+  }, [current_theme, device_chosen, splash_status])
+  useEffect(() => {
+    for (var i = 0; i < system_settings.length; i++) {
+      if (system_settings[i] !== undefined) {
         var property = system_settings[i].toString().split(":")[0]
-        switch(property){
+        switch (property) {
           case "hideSplash":
-            setSplashStatus(system_settings[i].toString().replaceAll(";\r","").replace("hideSplash: ",""))
-            if (system_settings[i].toString().replaceAll(";\r","").replace("hideSplash: ","")=="true"){
+            setSplashStatus(system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", ""))
+            if (system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", "") == "true") {
               document.getElementById("SplashStatus").checked = true;
             }
-            else{
+            else {
               document.getElementById("SplashStatus").checked = false;
               document.getElementById('c-Body-a-SplashScreen').style.display = "inline-flex";
             }
             break;
           case "theme":
-            setCurrentTheme(system_settings[i].toString().replaceAll(";\r","").replace("theme: ",""));
+            setCurrentTheme(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
             break;
           case "device":
-            setDeviceChosen(system_settings[i].toString().replaceAll(";\r","").replace("device: ",""))
+            setDeviceChosen(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
             break;
         }
       }
     }
     //.replaceAll(";\r","").replace("splash: ","")
     //document.getElementById("SplashStatus").checked
-  },[system_settings])
+  }, [system_settings])
 
 
 
@@ -350,6 +422,9 @@ const App = () => {
         onSplashClick={closeSplash}
         Splashurl={"https://www.google.com"}
         deviceOnClick={device_manager}
+        fileheaderfunc={fileheader}
+        editheaderfunc={editheader}
+        saveFile={exportBlocks}
       />
 
     </div>

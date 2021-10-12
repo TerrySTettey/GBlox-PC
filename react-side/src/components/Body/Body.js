@@ -4178,7 +4178,7 @@ const Body = (props) => {
 
             </div>
             <div className="c-Body-a-OverlayExtras" />
-            <Header />
+            <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile}/>
             <WorkTabHolder />
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />

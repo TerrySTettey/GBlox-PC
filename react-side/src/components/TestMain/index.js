@@ -36,7 +36,11 @@ const TestMain = (props) => {
                 uploadFunction={props.uploadFunction}
                 onSplashClick={props.onSplashClick}
                 Splashurl={props.Splashurl}
-                deviceOnClick={props.deviceOnClick} />
+                deviceOnClick={props.deviceOnClick}
+                fileheaderfunc={props.fileheaderfunc}
+                editheaderfunc={props.editheaderfunc}
+                saveFile={props.saveFile}
+                />
         </div>
     )
 }
