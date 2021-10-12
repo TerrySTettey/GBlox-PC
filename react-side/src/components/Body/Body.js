@@ -3625,6 +3625,7 @@ function add_device(svg) {
 const Body = (props) => {
     var [PullOutState, setPullOutState] = useState("Closed")
     var TrashHolder = useRef(null);
+    var FlyOutHolder = useRef(null)
     const [serialport_monitor, setSerialPortMonitor] = useState("")
     const [viewCode, setViewCode] = useState("")
     function genbuttons(toolbox_items) {
@@ -3745,6 +3746,8 @@ const Body = (props) => {
     }
 
     var TrashContainerChanged = false;
+    var FlyoutContainerChanged = false;
+
     useEffect(() => {
         if (TrashContainerChanged === false) {
             var Trash = document.getElementsByClassName("blocklyTrash")[0];
@@ -4205,6 +4208,7 @@ const Body = (props) => {
                 </div>
                 <div className="i-emptyDiv4" />
             </div>
+            {/*<div className="c-Body-a-FlyoutHolder" ref={FlyOutHolder}/>*/}
             <div className="c-Body-a-PulloutMenu">
                 <Pull_Out_Menu toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>

@@ -110,11 +110,9 @@ const App = () => {
       setSerialPortStatus(false);
     }
   }
-
   function logbutton() {
-    console.log("Button Pressed");
+    console.log("Button Pressed")
   }
-
   function showCode() {
     var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
     if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
