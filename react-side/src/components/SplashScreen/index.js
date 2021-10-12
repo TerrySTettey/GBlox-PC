@@ -372,6 +372,10 @@ function index(props) {
                     </p>
                 </div>
                 <div className="Start-Button">
+                    <div className="Splash-checkbox">
+                        <input type="checkbox" id="SplashStatus" name="SplashStatus" value="false" />
+                        <label for="SplashStatus"> Don't show me this again</label>
+                    </div>
                     <Button
                         type="FancyButton"
                         outColor="#0000bc"
