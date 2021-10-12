@@ -305,7 +305,7 @@
         transform: scale(0.7);
     }
     .Splash-Title {
-        margin-top: -5% !important;
+        margin-top: -7% !important;
         transform: scale(0.7);
     }
     .Splash-Content {
@@ -314,5 +314,7 @@
     }
     .Start-Button {
         transform: scale(0.8);
+        bottom: 10.5vh !important;
+
     }
 }
