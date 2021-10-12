@@ -107,11 +107,9 @@ const App = () => {
       setSerialPortStatus(false);
     }
   }
-
   function logbutton() {
-    console.log("Button Pressed");
+    console.log("Button Pressed")
   }
-
   function showCode() {
     var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
     if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
@@ -175,7 +173,6 @@ const App = () => {
       }
     }
   }
-
   function open_flyout(event) {
     document.getElementById(event.target.id).click()
   }
@@ -214,7 +211,6 @@ const App = () => {
       },1)
     }
   }
-
   async function check_comport_constant(){
     ipcRenderer.invoke('check_comport_constant');
     ipcRenderer.on('comport_constant', (event, result) => {

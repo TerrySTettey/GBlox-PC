@@ -101,7 +101,7 @@ const WorkTabHolder = (props) => {
 
     //AddOnClick();
     return (
-        <div className="c-WorkTabHolder-a-container">
+        <div id="c-WorkTabHolder-B-Container" className="c-WorkTabHolder-a-container">
             {TabDOM}
             <WorkspaceAdd onClick={AddOnClick} />
         </div>

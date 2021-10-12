@@ -111,6 +111,8 @@ function Pull_Out_Menu(props) {
     useEffect(() => {
         var Overlay = document.getElementsByClassName("c-Body-a-Overlay")[0];
         var OverlayExtras = document.getElementsByClassName("c-Body-a-OverlayExtras")[0];
+        var TabHolder = document.getElementById("c-WorkTabHolder-B-Container");
+
         if (menuOpen === "Closed") {
             if (!Overlay.classList.contains("t-Transition")) {
                 Overlay.classList.add("t-Transition")
@@ -118,14 +120,21 @@ function Pull_Out_Menu(props) {
             if (!OverlayExtras.classList.contains("t-Transition")) {
                 OverlayExtras.classList.add("t-Transition")
             }
+            if (!TabHolder.classList.contains("t-Transition")) {
+                TabHolder.classList.add("t-Transition")
+            }
             Overlay.style.width = "calc(100vw - 420px)"
             OverlayExtras.style.width = "420px"
+            TabHolder.style.width = "calc(100vw - 706px)"
             setTimeout(function () {
                 if (Overlay.classList.contains("t-Transition")) {
                     Overlay.classList.remove("t-Transition")
                 }
                 if (OverlayExtras.classList.contains("t-Transition")) {
                     OverlayExtras.classList.remove("t-Transition")
+                }
+                if (TabHolder.classList.contains("t-Transition")) {
+                    TabHolder.classList.remove("t-Transition")
                 }
             }, 500);
 
@@ -136,14 +145,21 @@ function Pull_Out_Menu(props) {
             if (!OverlayExtras.classList.contains("t-Transition")) {
                 OverlayExtras.classList.add("t-Transition")
             }
+            if (!TabHolder.classList.contains("t-Transition")) {
+                TabHolder.classList.add("t-Transition")
+            }
             Overlay.style.width = "100vw"
             OverlayExtras.style.width = "0px"
+            TabHolder.style.width = "calc(100vw - 286px)"
             setTimeout(function () {
                 if (Overlay.classList.contains("t-Transition")) {
                     Overlay.classList.remove("t-Transition")
                 }
                 if (OverlayExtras.classList.contains("t-Transition")) {
                     OverlayExtras.classList.remove("t-Transition")
+                }
+                if (TabHolder.classList.contains("t-Transition")) {
+                    TabHolder.classList.remove("t-Transition")
                 }
             }, 500);
         }
