@@ -50,6 +50,18 @@ const CustomDrop = (props) => {
                 }
             }
             break;
+        case "variable-list":
+            var i = 0;
+            if (props.list !== undefined && props.funcsOnClick !== undefined) {
+                for (i; i < props.list.length; i++) {
+                    ButtonHolder.push(
+                        <div class="c-CustomDrop-a-MenuButton">
+                            <Button type={props.contentButtonType} onClick={props.funcsOnClick[i]} text={props.list[i]} inColor={props.contentInColor} outColor={props.contentOutColor} hoverColor={props.contentHoverColor} />
+                        </div>
+                    )
+                }
+            }
+            break;
         case "modal":
             switch (props.modal) {
                 case "SettingsModal":

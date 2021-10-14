@@ -1,17 +1,15 @@
-
 @font-face {
-    font-family: 'Baloo2-Regular';
-    src: local('Baloo2-Regular'), url(./../fonts/Baloo2-Regular.ttf) format('truetype');
-  }
-  
-@keyframes fadein_dialog{
+    font-family: "Baloo2-Regular";
+    src: local("Baloo2-Regular"), url(./../fonts/Baloo2-Regular.ttf) format("truetype");
+}
+
+@keyframes fadein_dialog {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
     }
-        
 }
 
 @keyframes fadein_button {
@@ -52,81 +50,110 @@
         width: 50%;
     }
 }
-.dialog-container{
-    position: absolute;
-    align-items: center;
-    display: block;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 25px;
-    font-family: "Baloo2-Regular";
-}
-
-.dialog-container dialog{
-    position: relative;
+select {
+    // A reset of styles, including removing the default dropdown arrow
+    appearance: none;
+    background-color: transparent;
     border: none;
-    display: inline-block;
-    text-align: center;
-    background-color: #060841;
-    box-shadow: 0px 15px 15px 0px grey;
+    // padding: 0 1em 0 0;
+    margin: 0;
+    width: 140%;
     font-family: inherit;
-    margin: 0px;
-    border-radius: 25px;
-    animation: fadein_dialog forwards;
-    animation-duration: 1s;
-}
-.dialog-container div{
-    color: rgb(255, 255, 255);
-    padding-bottom: 12px;
-}
-
-.dialog-container menu{
-    position: relative;
-    padding: 0px;
-    display: inline-block;
-    text-align: center;
-    margin: 0px;
-    overflow-x: hidden;
-    align-items: center;
-    animation: fadein_button forwards;
-    animation-duration: 1s;
-}
-.dialog-container button{
-    border-radius: 5px 5px;
-    border: none;
-    font-family: inherit;
-    margin-right: 5px;
-    font-size: 20px;
-}
-
-.dialog-container button:active{
-    box-sizing: border-box;
-    background-color: green;
-    outline: 5px solid;
-    outline-color: red;
-}
-
-.dialog-container select {
-    display: inline-block;
-    border-radius: 5px 5px;
     font-size: inherit;
-    border-style: groove;
-    font-family: inherit;
-    text-indent: 40%;
-    animation: fadein_select forwards;
-    animation-duration: 1s;
+    cursor: inherit;
+    line-height: inherit;
+    z-index: 1;
 }
 
-.dialog-container input{
-    position: flex;
-    display: inline-block;
-    border-radius: 5px 5px;
-    font-size: 17px;
-    text-align: center;
-    font-family: inherit;
-    margin: auto;
-    animation: fadein_input forwards;
-    animation-duration: 1s;
-}
+.dialog-container {
+    display: grid;
+    grid-template-areas:
+        "vartypetext vartypeselect"
+        "varnametext varnameinput"
+        "close ok";
+    width: 398px;
+    max-height: 151px;
+    background-color: #dedef1;
+    border: 1px solid #9898f0;
+    font-size: 17pt;
+    font-family: "Baloo2-Regular";
+    padding: 21px;
+    gap: 19px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
+    #variable-type-text {
+        white-space: nowrap;
+        grid-area: vartypetext;
+        display: inline-flex;
+        color: #0000dc;
+    }
+    #variable-type-select {
+        white-space: nowrap;
+        grid-area: vartypeselect;
+        display: inline-flex;
+        outline: none;
+        cursor: pointer;
+        line-height: 1.1;
+        font-size: 1.25rem;
+        background-color: white;
+        height: 28px;
+        border: 1px solid #9898F0;
+        
+        select{
+            text-indent: 5%;
+            color: #000092;
+            padding-right: 14.58px;
+            outline: none;
+        }
+        &:not(.select--multiple)::after {
+            pointer-events: none;
+            position: absolute;
+            content: "";
+            margin-left: 200px;
+            margin-top: 8px;
+            justify-self: end;
+            width: 0.8em;
+            height: 0.5em;
+            background-color: #9898F0;
+            clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+            z-index: 2;
+        }
+
+
+    }
+
+
+    #variable-name-text {
+        white-space: nowrap;
+        grid-area: varnametext;
+        display: inline-flex;
+        color: #0000dc;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    #variable-name-input {
+        white-space: nowrap;
+        grid-area: varnameinput;
+        height: 28px;
+        color: #000092;
+        border: 1px solid #9898F0;
+        font-size: 17px;
+    }
+    #close-button {
+        grid-area: close;
+        display: inline-flex;
+        #button-container {
+            width: 78px;
+        }
+    }
+    #ok-button {
+        grid-area: ok;
+        display: inline-flex;
+        #button-container {
+            width: 250px;
+            margin-left: -25px;
+        }
+    }
+}

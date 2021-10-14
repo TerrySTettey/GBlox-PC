@@ -1,0 +1,63 @@
+#code-editor{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0fr;
+    height: 70%;
+    .text{
+        padding-bottom: 1%;
+        font-size: 21px;
+    }
+    #code-editor-textarea{
+        color: #4C97FF;
+        display: inline-flex; 
+        // width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        margin-bottom: 0px;
+        #line-numbers{
+            margin-top: 10px;
+            position: absolute;
+            white-space: nowrap;
+        }
+        
+    }
+    #editing, #highlighting {
+      /* Both elements need the same text and space styling so they are directly on top of each other */
+      border: 0;
+      background-color: #0B0533;
+      outline: none;
+      width: 80%;
+      height: 80%;
+      margin: 0;
+      padding: 10px 10px 0px 10px;
+      resize: none;
+    }
+    #editing, #highlighting, #highlighting * {
+      /* Also add text styles to highlighting tokens */
+      font-size: 17pt;
+      font-family: "Baloo2-Regular";
+      line-height: 20pt;
+      tab-size: 5;
+    }
+  
+    #editing, #highlighting {
+      position: absolute;
+      left: 80px;
+      white-space: nowrap;
+      overflow: auto;
+    }
+  
+    #editing {
+      z-index: 1;
+    }
+    #highlighting {
+      z-index: 0;
+  
+    }
+    #editing {
+      color: transparent;
+      background: transparent;
+      caret-color: white; /* Or choose your favorite color */
+    }
+}
