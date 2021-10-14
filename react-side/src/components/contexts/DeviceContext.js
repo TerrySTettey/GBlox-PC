@@ -155,7 +155,7 @@ const DeviceContextProvider = (props) => {
     }
 
     return (
-        <DeviceContext.Provider value={[
+        <DeviceContext.Provider value={{
             current_device,
             currentToolboxName,
             default_workspace,
@@ -175,8 +175,9 @@ const DeviceContextProvider = (props) => {
             toolbox_items,
             setToolboxItems,
             arduinocode,
-            setArduinoCode
-        ]}>
+            setArduinoCode,
+            DeviceList
+        }}>
             {props.children}
         </DeviceContext.Provider >
     )

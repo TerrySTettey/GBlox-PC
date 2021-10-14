@@ -1,4 +1,5 @@
 import React from 'react';
+import DeviceContextProvider from '../contexts/DeviceContext';
 import PropTypes from 'prop-types';
 import Device_Manager from '../Device_Manager';
 import { useState, useEffect, useRef } from 'react'
@@ -15,6 +16,7 @@ import CustomDrop from '../CustomDrop';
 import WorkTabHolder from '../WorkTabHolder';
 import SplashScreen from '../SplashScreen'
 import NewDeviceManager from '../NewDeviceManager';
+
 
 
 const Arduino_Uno_SVG =
@@ -4178,8 +4180,10 @@ const Body = (props) => {
 
             </div>
             <div className="c-Body-a-OverlayExtras" />
-            <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile}/>
-            <WorkTabHolder />
+            <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile} />
+            
+                <WorkTabHolder />
+            
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">

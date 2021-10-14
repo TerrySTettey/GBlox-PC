@@ -32,7 +32,7 @@ const TestMain = (props) => {
 
     // })
 
-    const [current_device,currentToolboxName,default_workspace,newxml,newxmldom,currentToolbox,OurWorkspace,toolbox_selected,variables_created,currentBlock,block_styles,component_styles,test_theme,initialized_workspace,device_chosen,setDeviceChosen,toolbox_items,setToolboxItems,arduinocode,setArduinoCode] = useContext(DeviceContext)
+    const {current_device,currentToolboxName,default_workspace,newxml,newxmldom,currentToolbox,OurWorkspace,toolbox_selected,variables_created,currentBlock,block_styles,component_styles,test_theme,initialized_workspace,device_chosen,setDeviceChosen,toolbox_items,setToolboxItems,arduinocode,setArduinoCode} = useContext(DeviceContext)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [upload_status, setUploadStatus] = useState("");
