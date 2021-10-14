@@ -71,7 +71,7 @@
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.8",
     "concurrently": "^6.2.0",
-    "electron": "^13.1.6",
+    "electron": "^13.5.2",
     "electron-is-dev": "^2.0.0",
     "wait-on": "^6.0.0"
   }

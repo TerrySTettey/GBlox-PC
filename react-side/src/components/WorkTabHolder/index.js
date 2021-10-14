@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from '../Button'
+import { DeviceContext } from '../contexts/DeviceContext'
 import WorkspaceAdd from '../WorkspaceAdd'
 import WorkspaceTab from '../WorkspaceTab'
 
@@ -10,7 +11,36 @@ var WSNumTracker = 0;
 var TabDOM = [];
 var TabNums = [];
 
+
 const WorkTabHolder = (props) => {
+
+    const {} = useContext(DeviceContext)
+
+    class TabItem {
+
+        selectedDevice;
+        workSpace;
+    
+        tabID;
+        tabNum;
+        tabJsx;
+        tabName;
+    
+        constructor(tabNum){
+            this.tabNum = tabNum;
+            this.tabID = `i-WSButton-${this.tabNum}`;
+            this.tabName = `Workspace ${this.tabNum}`;
+            this.tabJsx = (<WorkspaceTab id={"i-WSButton-" + this.tabNum} text={"Workspace " + this.tabNum} ChangeTab={ChangeTab} closeOnClick={CloseOnClick} />);
+            //Set Selected Device to Default Selected Devices
+            
+            //Set Workspace to Default Workspace according to Selected Device
+        }
+    
+        loadWorkspace(){
+            //Sets the device to the right device and loads the attached workspace
+        }
+    }
+
     var [buttonPressed, setButtonPressed] = useState(0);
     useEffect(() => {
         AddOnClick();
@@ -19,10 +49,10 @@ const WorkTabHolder = (props) => {
     useEffect(() => {
 
         if (buttonPressed === 1) {
-            console.log("---------")
-            console.log("Current: " + currentWSNum)
-            console.log("Latest: " + WSNumTracker)
-            console.log("---------")
+            // console.log("---------")
+            // console.log("Current: " + currentWSNum)
+            // console.log("Latest: " + WSNumTracker)
+            // console.log("---------")
 
             setButtonPressed(0);
 
@@ -78,7 +108,7 @@ const WorkTabHolder = (props) => {
 
         //prevWSNum = TabNums[0];
         //container.remove()
-        currentWSNum = TabNums[TabNums.length - 1]
+        currentWSNum = TabNums[0]
 
         // if(NumToDelete <= TabNums.length){
 
