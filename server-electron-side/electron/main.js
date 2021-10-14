@@ -18,8 +18,11 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 1400,
         height: 800,
-        minHeight: 713,
-        minWidth: 1284,
+        minHeight: 713, //678
+        minWidth: 1284, //1271
+        maxWidth: 1933, //1920
+        maxHeight: 1115, //1080
+        maximizable: true,
         title: "GBlox",
         autoHideMenuBar: true,
         /*frame:false,*/
@@ -33,7 +36,6 @@ function createWindow() {
     win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
     //win.removeMenu()
     win.setTitle("Arduino From Scratch")
-
     if (isDev) {
         win.webContents.openDevTools({ mode: 'detach' })
     }

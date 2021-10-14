@@ -1,5 +1,5 @@
 import Blockly from 'blockly';
-import { currentToolboxName, variables_created } from '../../App.js';
+import { currentToolboxName, variables_created } from '../../components/contexts/DeviceContext.js';
 var peripherals = null;
 var variables_set = [["int sample_var", "Test"]];
 async function getPeripherals(){
