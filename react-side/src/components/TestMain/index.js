@@ -284,10 +284,6 @@ const TestMain = (props) => {
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}
                 toolboxButtons={toolbox_items}
-                viewCode={
-                    arduinocode
-
-                }
                 serialport_monitor={serialport_monitor}
                 onSerialPortClick={serialport_read}
                 example_codes={example_codes}

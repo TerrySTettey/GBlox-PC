@@ -75,6 +75,7 @@ const DeviceContextProvider = (props) => {
     const [arduinocode, setArduinoCode] = useState("");
 
     useEffect(() => {
+        console.log(arduinocode)
         if (device_chosen !== "") {
             if (initialized_workspace === false) {
                 var tb = currentToolbox;
@@ -151,7 +152,6 @@ const DeviceContextProvider = (props) => {
         console.log("Button Pressed")
     }
     function showCode() {
-       
         var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
         if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
             code = mainLoopCode;
