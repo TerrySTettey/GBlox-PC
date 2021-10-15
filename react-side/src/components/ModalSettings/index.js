@@ -12,7 +12,7 @@ const ModalSettings = (props) => {
                 }}>
                     <h1>Language</h1>
                     <div className="modal-blank-space" />
-                    <Button type="SettingsXButton" />
+                    {/*<Button type="SettingsXButton" />*/}
                 </div>
                 <div style={{
                     display: 'block',

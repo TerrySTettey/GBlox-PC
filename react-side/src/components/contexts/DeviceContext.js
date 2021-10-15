@@ -19,6 +19,7 @@ var OurWorkspace;
 var toolbox_selected = "";
 var variables_created = [];
 var currentBlock = null;
+var currentDeviceVar = "";
 const block_styles = {
     "loop_blocks": {
         "colourPrimary": "#c7b01a",
@@ -103,6 +104,7 @@ const DeviceContextProvider = (props) => {
     })
     useEffect(() => {
         if (device_chosen !== "") {
+            //currentDeviceVar = device_chosen;
             var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
             default_workspace = DeviceList[chosen_device_list].default_workspace;
             current_device = DeviceList[chosen_device_list].device_name;
@@ -158,13 +160,14 @@ const DeviceContextProvider = (props) => {
         setArduinoCode(code);
     }
     return (
-        <DeviceContext.Provider value={[
+        <DeviceContext.Provider value={{
             current_device,
             currentToolboxName,
             default_workspace,
             newxml,
             newxmldom,
             currentToolbox,
+            DeviceList,
             OurWorkspace,
             toolbox_selected,
             variables_created,
@@ -179,7 +182,7 @@ const DeviceContextProvider = (props) => {
             setToolboxItems,
             arduinocode,
             setArduinoCode
-        ]}>
+        }}>
             {props.children}
         </DeviceContext.Provider >
     )
