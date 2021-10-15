@@ -32,7 +32,7 @@ const TestMain = (props) => {
 
     // })
 
-    const {current_device,currentToolboxName,default_workspace,newxml,newxmldom,currentToolbox,OurWorkspace,toolbox_selected,variables_created,currentBlock,block_styles,component_styles,test_theme,initialized_workspace,device_chosen,setDeviceChosen,toolbox_items,setToolboxItems,arduinocode,setArduinoCode} = useContext(DeviceContext)
+    const {default_workspace,OurWorkspace,currentBlock,device_chosen,setDeviceChosen,toolbox_items,arduinocode} = useContext(DeviceContext)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [upload_status, setUploadStatus] = useState("");
@@ -167,6 +167,7 @@ const TestMain = (props) => {
         }
         else {
             setDeviceChosen(event.target.id)
+            //setCurrentDeviceVar( event.target.id)
             popout.style.opacity = "0"
             popout.style.backgroundColor = "transparent";
             setTimeout(() => {
@@ -208,7 +209,7 @@ const TestMain = (props) => {
         ipcRenderer.invoke("load-settings");
         ipcRenderer.on('current-settings', (event, result) => {
             if (result !== "nil") {
-                console.log(result);
+                //console.log(result);
                 setSystemSettings(result);
             }
         })
@@ -238,10 +239,13 @@ const TestMain = (props) => {
 
     useEffect(() => {
         if (system_settings[1] !== undefined) {
-            var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
-            writeSystemSettings(temp_settings)
-            setSystemSettings(temp_settings)
-            console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
+            try{
+                var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
+                writeSystemSettings(temp_settings)
+                setSystemSettings(temp_settings)
+                //console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
+            }
+            catch(e){}
         }
     }, [current_theme, device_chosen, splash_status])
     useEffect(() => {
