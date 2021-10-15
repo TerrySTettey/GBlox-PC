@@ -4181,7 +4181,11 @@ const Body = (props) => {
 
             </div>
             <div className="c-Body-a-OverlayExtras" />
+<<<<<<< HEAD
             <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile} />
+=======
+            <Header />
+>>>>>>> parent of 25e6019 (Header Buttons Pt.1)
             <WorkTabHolder />
             
                 <WorkTabHolder />

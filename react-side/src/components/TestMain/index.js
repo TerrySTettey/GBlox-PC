@@ -289,6 +289,7 @@ const TestMain = (props) => {
 
                 }
                 serialport_monitor={serialport_monitor}
+<<<<<<< HEAD
                 onSerialPortClick={serialport_read}
                 example_codes={example_codes}
                 uploadFunction={uploadCode_ipc}
@@ -299,6 +300,15 @@ const TestMain = (props) => {
                 editheaderfunc={editheader}
                 saveFile={exportBlocks}
             />
+=======
+                toolboxButtons={props.toolboxButtons}
+                onSerialPortClick={props.onSerialPortClick}
+                example_codes={props.example_codes}
+                uploadFunction={props.uploadFunction}
+                onSplashClick={props.onSplashClick}
+                Splashurl={props.Splashurl}
+                deviceOnClick={props.deviceOnClick} />
+>>>>>>> parent of 25e6019 (Header Buttons Pt.1)
         </div>
     )
 }
