@@ -15,6 +15,7 @@ import CustomDrop from '../CustomDrop';
 import WorkTabHolder from '../WorkTabHolder';
 import SplashScreen from '../SplashScreen'
 import NewDeviceManager from '../NewDeviceManager';
+import Code_Editor from '../Code_Editor'
 
 
 const Arduino_Uno_SVG =
@@ -4178,7 +4179,7 @@ const Body = (props) => {
 
             </div>
             <div className="c-Body-a-OverlayExtras" />
-            <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile}/>
+            <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile} />
             <WorkTabHolder />
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
@@ -4210,10 +4211,13 @@ const Body = (props) => {
             </div>
             {/*<div className="c-Body-a-FlyoutHolder" ref={FlyOutHolder}/>*/}
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} viewCode={viewCode} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
+                <Pull_Out_Menu toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>
             <div id="c-device-manager">
                 <NewDeviceManager deviceOnClick={props.deviceOnClick} />
+            </div>
+            <div id="c-codeEditor">
+                    <Code_Editor />
             </div>
             <div id="c-Body-a-SplashScreen">
                 <SplashScreen

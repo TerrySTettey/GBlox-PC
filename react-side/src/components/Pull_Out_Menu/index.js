@@ -18,7 +18,6 @@ function Pull_Out_Menu(props) {
     const [currentMenu, setCurrentMenu] = useState("")
     const [serialport_monitor, setSerialPortMonitor] = useState("")
     const [serialport_status, setSerialPortStatus] = useState(false)
-    const [viewCode, setViewCode] = useState("")
     const { children } = props;
     var [menuOpen, setMenuOpen] = useState("Open");
     var pull_out_menu = useRef(null);
@@ -45,12 +44,12 @@ function Pull_Out_Menu(props) {
             setLastButtonClicked("None");
             pull_out_menu.current.style.marginLeft = "0px"
             pull_out_container.current.style.opacity = "0"
-
         }
 
     }
 
     useEffect(() => {
+
         if (last_button_clicked !== "") {
             switch (last_button_clicked) {
                 case "serial-port":
@@ -65,7 +64,8 @@ function Pull_Out_Menu(props) {
                     setCurrentMenu(last_button_clicked)
                     break;
                 case "view-code":
-                    setViewCode(props.viewCode);
+
+                    setContents([<View_Code_Menu/>]);
                     setCurrentMenu(last_button_clicked)
                     break;
                 case "help-menu":
@@ -77,7 +77,7 @@ function Pull_Out_Menu(props) {
 
                 case "code-editor":
                     if (currentMenu !== last_button_clicked) {
-                        setContents([<Edit_Code_Menu />]);
+                        setContents([<Edit_Code_Menu />])
                         setCurrentMenu(last_button_clicked)
                     }
                     break;
@@ -101,9 +101,6 @@ function Pull_Out_Menu(props) {
 
     })
 
-    useEffect(() => {
-        setContents([<View_Code_Menu viewCode={viewCode} />])
-    }, [viewCode]);
     useEffect(() => {
         setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
     }, [serialport_monitor]);

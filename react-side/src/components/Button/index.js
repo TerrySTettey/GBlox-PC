@@ -393,21 +393,63 @@ const Button = (props) => {
             break;
         case "FancyButton":
             buttonType = (
-                    <div className="c-Button-a-FancyButton" ref={buttonTyper} style={{
-                        fill: `${svgColor}`,
-                        backgroundColor: buttonColor,
-                        borderColor: borderColor
-                    }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="322" height="72" viewBox="0 0 322 72">
-                            <path id="Path_33" data-name="Path 33" d="M317.173,42H592.825C601.876,51.182,606.95,56.33,616,65.513V114H294V65.513Z" transform="translate(-294 -42)"/>
-                        </svg>
+                <div className="c-Button-a-FancyButton" ref={buttonTyper} style={{
+                    fill: `${svgColor}`,
+                    backgroundColor: buttonColor,
+                    borderColor: borderColor
+                }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="322" height="72" viewBox="0 0 322 72">
+                        <path id="Path_33" data-name="Path 33" d="M317.173,42H592.825C601.876,51.182,606.95,56.33,616,65.513V114H294V65.513Z" transform="translate(-294 -42)" />
+                    </svg>
 
-                        <p>
-                            {props.text}
-                        </p>
+                    <p>
+                        {props.text}
+                    </p>
+                    {emptybutton}
+                </div>
+
+            )
+            break;
+        case "CollapseEditor":
+            buttonType = (
+                <div className="c-Button-a-CollapseEditor">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg" width="27.212" height="22" viewBox="0 0 27.212 22">
+                        <g id="Path_461" data-name="Path 461" transform="translate(19.212)" fill="none">
+                            <path d="M0,0H8V22H0Z" stroke={props.outColor} />
+                            <path d="M 3 3 L 3 19 L 5 19 L 5 3 L 3 3 M 0 0 L 8 0 L 8 22 L 0 22 L 0 0 Z" stroke={props.outColor} fill={props.outColor} />
+                        </g>
+                        <path id="Path_460" data-name="Path 460" d="M0,0H14.833" transform="translate(0 11)" fill="none" stroke={props.outColor} stroke-width="3" />
+                        <path id="Path_459" data-name="Path 459" d="M3006.783,118.152l6.449,6.449-6.449,6.449" transform="translate(-2998.084 -113.601)" stroke={props.outColor} fill="none" stroke-width="3" />
+                    </svg>
+                    {emptybutton}
+                </div>
+            )
+            break;
+        case "ExpandEditor":
+            buttonType = (
+                <div className="c-Button-a-ExpandEditor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29.334" height="22" viewBox="0 0 29.334 22">
+                        <g id="Path_463" data-name="Path 463" transform="translate(11.334)" fill="none" stroke-dasharray="64 11">
+                            <path d="M0,0H18V22H0Z" stroke="none" />
+                            <path d="M 0 0 L 18 0 L 18 3 C 18 9.019613265991211 18 22 18 22 L 15 22 C 9.879446029663086 22 0 22 0 22 L 0 16 L 3 16 L 3 19 L 15 19 L 15 3 L 3 3 L 3 5 L 0 5 L 0 0 Z" stroke="none" fill={props.outColor} />
+                        </g>
+                        <path id="Path_462" data-name="Path 462" d="M14.833,0H0" transform="translate(2.437 11)" fill="none" stroke={props.outColor} stroke-width="3" />
+                        <path id="Path_459" data-name="Path 459" d="M3013.232,118.152l-6.449,6.449,6.449,6.449" transform="translate(-3004.661 -113.601)" fill="none" stroke={props.outColor} stroke-width="3" />
+                    </svg>
+                    {emptybutton}
+                </div>
+            )
+            break;
+        case "MenuXButton":
+            buttonType = (
+                    <div className="c-Button-a-MenuCloseButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22.121" height="22.121" viewBox="0 0 22.121 22.121">
+                            <line id="Line_34" data-name="Line 34" x2="20" y2="20" transform="translate(1.061 1.061)" fill="none" stroke={props.outColor} stroke-width="3" />
+                            <line id="Line_35" data-name="Line 35" x1="19" y2="19" transform="translate(1.561 1.561)" fill="none" stroke={props.outColor} stroke-width="3" />
+                        </svg>
                         {emptybutton}
                     </div>
-                    
             )
             break;
         case " ":

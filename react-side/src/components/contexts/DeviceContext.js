@@ -5,6 +5,8 @@ import AlterBlockly from "../../blocklyextras/blocklyAlters";
 import { mainLoopCode } from "../../customblocks/compiler/arduino_core";
 import { MelloDOM } from "../../customblocks/toolboxes/toolboxes";
 
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 export const DeviceContext = createContext();
 
 var current_device = `No Device Selected`;
@@ -137,14 +139,7 @@ const DeviceContextProvider = (props) => {
         }
         setToolboxItems(toolbox_temp)
     }
-    function showCode() {
-        var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
-        if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
-            code = mainLoopCode;
-        }
-        OurWorkspace.registerButtonCallback("createvar", logbutton)
-        setArduinoCode(code);
-    }
+
     function selectedBlock(event) {
         if (event.type == Blockly.Events.SELECTED) {
             currentBlock = OurWorkspace.getBlockById(event.newElementId);
@@ -153,7 +148,15 @@ const DeviceContextProvider = (props) => {
     function logbutton() {
         console.log("Button Pressed")
     }
-
+    function showCode() {
+       
+        var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
+        if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
+            code = mainLoopCode;
+        }
+        OurWorkspace.registerButtonCallback("createvar", logbutton)
+        setArduinoCode(code);
+    }
     return (
         <DeviceContext.Provider value={[
             current_device,

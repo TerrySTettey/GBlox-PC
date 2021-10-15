@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import PropTypes from 'prop-types'
+import { DeviceContext } from '../contexts/DeviceContext';
 import Menu from '../Menu'
 import './View_Code_Menu.scss'
 
 function Index(props) {
-    const [viewCode, setViewCode] = useState("")
-    useEffect(() => {
-        // if (viewCode !== props.viewCode) {
-        setViewCode(props.viewCode);
-        // }
-    });
+    const {arduinocode} = useContext(DeviceContext)
+    //const [viewCode, setViewCode] = useState("")
     return (
         <Menu>
             <div id="view-code-menu">
@@ -21,7 +18,7 @@ function Index(props) {
                         language="arduino"
                         style={tomorrowNightBlue}
                         showLineNumbers={true}>
-                        {viewCode}
+                        {arduinocode}
                     </SyntaxHighlighter>
                 </div>
             </div>

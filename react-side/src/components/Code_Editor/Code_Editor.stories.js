@@ -7,7 +7,7 @@ function Code_Editor_Component() {
     )
 }
 export default {
-    title: 'Production/Code_Editor Menu',
+    title: 'Production/Code_Editor',
     component: Code_Editor
 }
 
