@@ -3523,10 +3523,9 @@ function Index(props) {
         )
     
     }
-
     return (
         <div id="c-NewDeviceManager">
-            <div id="Device-Background" ref={slide_out} >
+            <div id="Device-Background" ref={slide_out}>
                 <svg id="background-svg" xmlns="http://www.w3.org/2000/svg" width="1507.982" height="869.612" viewBox="0 0 1507.982 869.612" preserveAspectRatio="none">
                     <defs>
                         <filter id="Path_366" x="0" y="0" width="1507.982" height="869.612" filterUnits="userSpaceOnUse">

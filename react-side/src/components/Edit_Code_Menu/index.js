@@ -47,45 +47,25 @@ function Index(props) {
             update(event);
         }
     }
-    function expandEditor() {
+    function expandEditor(){
         document.getElementById("full-editing").value = document.getElementById("menu-editing").value
         document.querySelector("#full-highlighting-content").innerHTML = document.querySelector("#menu-highlighting-content").innerHTML
         var code_editor = document.getElementById("c-codeEditor")
-        code_editor.style.marginLeft = "0";
-        code_editor.style.opacity = "1"
-
+        code_editor.style.display = "flex";
+        code_editor.style.marginLeft="0"
+        
     }
-    function closeEditorMenu() {
+    function closeEditorMenu(){
         document.getElementById("code-editor").click();
     }
-    useEffect(()=>{
-        
-        var result_element = document.querySelector("#menu-highlighting-content");
-        // Update code
-        if(result_element.innerHTML === "") {
-            result_element.innerHTML = document.getElementById("menu-editing").value.replace(new RegExp("&", "g"), "&").replace(new RegExp("<", "g"), "<"); /* Global RegExp */
-            // Syntax Highlight
-    
-            Prism.highlightElement(result_element);
-        }
-
-    })
     return (
         <Menu>
             <div id="edit-code-menu">
                 <div className="text">Code Editor</div>
                 <div id="code-editor-menu-textarea">
-                    <textarea id="menu-editing" ref={editor} spellcheck="false" onInput={e => {update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab}>
-                        {`void setup(){
- 
-}
-
-void loop(){
- 
-} `}</textarea>
+                    <textarea id="menu-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab}></textarea>
                     <pre id="menu-highlighting" ref={slider_highlighting} aria-hidden="true">
-                        <code className="language-arduino" id="menu-highlighting-content">
-                        </code>
+                        <code className="language-arduino" id="menu-highlighting-content"></code>
                     </pre>
                 </div>
                 <div id="code-editor-buttons">
