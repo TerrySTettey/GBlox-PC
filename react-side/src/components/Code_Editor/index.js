@@ -67,9 +67,7 @@ function Index(props) {
         var code_editor = document.getElementById("c-codeEditor")
         if (event.target.id == "code-editor-collapse-button"){
             code_editor.style.marginLeft="1920px"
-            setTimeout(()=>{
-                code_editor.style.display = "none";
-            },1000);
+            code_editor.style.opacity = "0"
             
         }
         else{

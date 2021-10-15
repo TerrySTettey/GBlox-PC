@@ -3768,7 +3768,14 @@ const Body = (props) => {
             setSerialPortMonitor(props.serialport_monitor);
         }
     })
-
+    function closeManager() {
+        var popout = document.getElementById("c-device-manager");
+        popout.style.opacity = "0"
+        popout.style.backgroundColor = "transparent";
+        setTimeout(() => {
+            popout.style.display = "none"
+        }, 1)
+    }
     return (
         <div className="body-container">
             <div className="c-Body-a-WorkspaceContainer">
@@ -4187,9 +4194,9 @@ const Body = (props) => {
             <Header />
 >>>>>>> parent of 25e6019 (Header Buttons Pt.1)
             <WorkTabHolder />
-            
-                <WorkTabHolder />
-            
+
+            <WorkTabHolder />
+
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">
@@ -4222,11 +4229,11 @@ const Body = (props) => {
             <div className="c-Body-a-PulloutMenu">
                 <Pull_Out_Menu toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>
-            <div id="c-device-manager">
+            <div id="c-device-manager" onClick={closeManager}>
                 <NewDeviceManager deviceOnClick={props.deviceOnClick} />
             </div>
             <div id="c-codeEditor">
-                    <Code_Editor />
+                <Code_Editor />
             </div>
             <div id="c-Body-a-SplashScreen">
                 <SplashScreen
