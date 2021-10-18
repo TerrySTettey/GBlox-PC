@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types'
 import Body from '../Body'
 import Blockly from 'blockly';
-import { DeviceContext } from '../contexts/DeviceContext';
 
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 
 import "./TestMain.scss"
-
 import "../../customblocks/customblocks";
 import "../../customblocks/compiler/arduino_core";
 import "../../customblocks/peripherals/arduino_peripheral"
@@ -15,25 +14,13 @@ import "../../customblocks/MelloBlocksGen"
 
 import example_codes from "../../example_codes"
 
+
 const { ipcRenderer } = window.require('electron')
 
 var response = "null";
 
 const TestMain = (props) => {
-    //const [serialport_monitor, setSerialPortMonitor] = useState("")
-    //const [viewCode, setViewCode] = useState("")
-
-    // useEffect(() => {
-    //     if (viewCode !== props.viewCode) {
-    //         setViewCode(props.viewCode)
-    //     }
-    //     if (serialport_monitor !== props.serialport_monitor) {
-    //         setSerialPortMonitor(props.serialport_monitor);
-    //     }
-
-    // })
-
-    const {default_workspace,OurWorkspace,currentBlock,device_chosen,setDeviceChosen,toolbox_items,arduinocode} = useContext(DeviceContext)
+    const { currentDeviceName, setCurrentDeviceName, currentWorkspace, currentBlock, deviceCode, selectedDevice, toolboxItems } = useContext(Ctxt_SingletonManager)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [upload_status, setUploadStatus] = useState("");
@@ -42,11 +29,69 @@ const TestMain = (props) => {
     const [current_theme, setCurrentTheme] = useState("")
     const [splash_status, setSplashStatus] = useState("false");
 
+    useEffect(() => {
+        setTimeout(() => {
+            check_comport_constant();
+        }, 3000)
+        if (system_settings.length < 1) {
+            readSystemSettings();
+        }
+    })
+    useEffect(() => {
+        var outer_circle = document.getElementById("Outer_Circle");
+        if (available_com_ports.length > 0) {
+            outer_circle.style.fill = "green"
+            outer_circle.style.animation = ("none")
+        }
+        else {
+            outer_circle.style.fill = "red"
+            outer_circle.style.animation = "saturate 2s infinite ease-in-out alternate-reverse"
+        }
+    }, [available_com_ports])
+    useEffect(() => {
+        if (system_settings[1] !== undefined) {
+            try {
+                var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`
+                writeSystemSettings(temp_settings)
+                setSystemSettings(temp_settings)
+                //console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`)
+            }
+            catch (e) { }
+        }
+    }, [current_theme, currentDeviceName, splash_status])
+    useEffect(() => {
+        for (var i = 0; i < system_settings.length; i++) {
+            if (system_settings[i] !== undefined) {
+                var property = system_settings[i].toString().split(":")[0]
+                switch (property) {
+                    case "hideSplash":
+                        setSplashStatus(system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", ""))
+                        if (system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", "") == "true") {
+                            document.getElementById("SplashStatus").checked = true;
+                        }
+                        else {
+                            document.getElementById("SplashStatus").checked = false;
+                            document.getElementById('c-Body-a-SplashScreen').style.display = "inline-flex";
+                        }
+                        break;
+                    case "theme":
+                        setCurrentTheme(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
+                        break;
+                    case "device":
+                        setCurrentDeviceName(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
+                        break;
+                }
+            }
+        }
+        //.replaceAll(";\r","").replace("splash: ","")
+        //document.getElementById("SplashStatus").checked
+    }, [system_settings])
+
     var fileheader = [
         //New File
         () => {
             if (document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0] !== undefined) {
-                OurWorkspace.clear();
+                currentWorkspace.clear();
                 document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0].click()
             }
         },
@@ -75,7 +120,7 @@ const TestMain = (props) => {
             Blockly.paste(currentBlock)
         },
         () => {
-            var allblocks = OurWorkspace.getAllBlocks(true);
+            var allblocks = currentWorkspace.getAllBlocks(true);
             for (var i = 0; i < allblocks.length; i++) {
                 allblocks[i].select();
             }
@@ -109,7 +154,7 @@ const TestMain = (props) => {
         setUploadStatus(response);
         //console.log(response);
         //setUploadStatus(response);
-        ipcRenderer.invoke('upload-code', arduinocode);
+        ipcRenderer.invoke('upload-code', deviceCode);
         ipcRenderer.on('arduino_comport', (event, result) => {
             response = result;
             setUploadStatus(`Arduino found on ${response}`);
@@ -144,8 +189,8 @@ const TestMain = (props) => {
                     break;
                 case "workspace-previous":
                     Blockly.mainWorkspace.undo(false);
-                    if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(OurWorkspace)) === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
-                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace), OurWorkspace);
+                    if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(currentWorkspace)) === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
+                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(selectedDevice.default_workspace), currentWorkspace);
                     }
                     break;
                 case "workspace-after":
@@ -167,7 +212,7 @@ const TestMain = (props) => {
             popout.style.display = "inline-flex"
         }
         else {
-            setDeviceChosen(event.target.id)
+            setCurrentDeviceName(event.target.id)
             //setCurrentDeviceVar( event.target.id)
             popout.style.opacity = "0"
             popout.style.backgroundColor = "transparent";
@@ -199,7 +244,6 @@ const TestMain = (props) => {
             throw e;
         }
     }
-
     async function check_comport_constant() {
         ipcRenderer.invoke('check_comport_constant');
         ipcRenderer.on('comport_constant', (event, result) => {
@@ -213,83 +257,22 @@ const TestMain = (props) => {
             if (result !== "nil") {
                 //console.log(result);
                 setSystemSettings(result);
+                
             }
         })
     }
     async function writeSystemSettings(system_settings) {
         ipcRenderer.invoke("write-settings", system_settings)
     }
-    useEffect(() => {
-        setTimeout(() => {
-            check_comport_constant();
-        }, 3000)
-        if (system_settings.length < 1) {
-            readSystemSettings();
-        }
-    })
-    useEffect(() => {
-        var outer_circle = document.getElementById("Outer_Circle");
-        if (available_com_ports.length > 0) {
-            outer_circle.style.fill = "green"
-            outer_circle.style.animation = ("none")
-        }
-        else {
-            outer_circle.style.fill = "red"
-            outer_circle.style.animation = "saturate 2s infinite ease-in-out alternate-reverse"
-        }
-    }, [available_com_ports])
-
-    useEffect(() => {
-        if (system_settings[1] !== undefined) {
-            try{
-                var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
-                writeSystemSettings(temp_settings)
-                setSystemSettings(temp_settings)
-                //console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
-            }
-            catch(e){}
-        }
-    }, [current_theme, device_chosen, splash_status])
-    useEffect(() => {
-        for (var i = 0; i < system_settings.length; i++) {
-            if (system_settings[i] !== undefined) {
-                var property = system_settings[i].toString().split(":")[0]
-                switch (property) {
-                    case "hideSplash":
-                        setSplashStatus(system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", ""))
-                        if (system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", "") == "true") {
-                            document.getElementById("SplashStatus").checked = true;
-                        }
-                        else {
-                            document.getElementById("SplashStatus").checked = false;
-                            document.getElementById('c-Body-a-SplashScreen').style.display = "inline-flex";
-                        }
-                        break;
-                    case "theme":
-                        setCurrentTheme(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
-                        break;
-                    case "device":
-                        setDeviceChosen(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
-                        break;
-                }
-            }
-        }
-        //.replaceAll(";\r","").replace("splash: ","")
-        //document.getElementById("SplashStatus").checked
-    }, [system_settings])
 
     return (
         <div>
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}
-                toolboxButtons={toolbox_items}
-                viewCode={
-                    arduinocode
-
-                }
+                toolboxButtons={toolboxItems}
+                viewCode={deviceCode}
                 serialport_monitor={serialport_monitor}
-<<<<<<< HEAD
                 onSerialPortClick={serialport_read}
                 example_codes={example_codes}
                 uploadFunction={uploadCode_ipc}
@@ -300,15 +283,6 @@ const TestMain = (props) => {
                 editheaderfunc={editheader}
                 saveFile={exportBlocks}
             />
-=======
-                toolboxButtons={props.toolboxButtons}
-                onSerialPortClick={props.onSerialPortClick}
-                example_codes={props.example_codes}
-                uploadFunction={props.uploadFunction}
-                onSplashClick={props.onSplashClick}
-                Splashurl={props.Splashurl}
-                deviceOnClick={props.deviceOnClick} />
->>>>>>> parent of 25e6019 (Header Buttons Pt.1)
         </div>
     )
 }

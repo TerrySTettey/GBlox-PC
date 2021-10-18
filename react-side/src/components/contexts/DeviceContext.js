@@ -20,48 +20,48 @@ var toolbox_selected = "";
 var variables_created = [];
 var currentBlock = null;
 var currentDeviceVar = "";
-const block_styles = {
-    "loop_blocks": {
-        "colourPrimary": "#c7b01a",
-        "colourSecondary": "#AD7BE9",
-        "colourTertiary": "#CDB6E9"
-    },
-    "logic_blocks": {
-        "colourPrimary": "#c91818",
-        "colourSecondary": "#64C7FF",
-        "colourTertiary": "#C5EAFF"
-    },
-    "math_blocks": {
-        "colourPrimary": "#03254c",
-        "colourSecondary": "#A334C5",
-        "colourTertiary": "#A3DB55"
-    },
-    "colour_blocks": {
-        "colourPrimary": "#23445b",
-        "colourSecondary": "#dbc7bd",
-        "colourTertiary": "#845d49"
-    },
-    "variable_blocks": {
-        "colourPrimary": "#525b99",
-        "colourSecondary": "#dbbdd6",
-        "colourTertiary": "#84497a"
-    },
-    "procedure_blocks": {
-        "colourPrimary": "#995ba5",
-        "colourSecondary": "#d6bddb",
-        "colourTertiary": "#7a4984"
-    },
+// const block_styles = {
+//     "loop_blocks": {
+//         "colourPrimary": "#c7b01a",
+//         "colourSecondary": "#AD7BE9",
+//         "colourTertiary": "#CDB6E9"
+//     },
+//     "logic_blocks": {
+//         "colourPrimary": "#c91818",
+//         "colourSecondary": "#64C7FF",
+//         "colourTertiary": "#C5EAFF"
+//     },
+//     "math_blocks": {
+//         "colourPrimary": "#03254c",
+//         "colourSecondary": "#A334C5",
+//         "colourTertiary": "#A3DB55"
+//     },
+//     "colour_blocks": {
+//         "colourPrimary": "#23445b",
+//         "colourSecondary": "#dbc7bd",
+//         "colourTertiary": "#845d49"
+//     },
+//     "variable_blocks": {
+//         "colourPrimary": "#525b99",
+//         "colourSecondary": "#dbbdd6",
+//         "colourTertiary": "#84497a"
+//     },
+//     "procedure_blocks": {
+//         "colourPrimary": "#995ba5",
+//         "colourSecondary": "#d6bddb",
+//         "colourTertiary": "#7a4984"
+//     },
 
-}
-const component_styles = {
-    "workspaceBackgroundColour": "#060841",
-    "flyoutBackgroundColour": "#0B0533"
-}
-var test_theme = Blockly.Theme.defineTheme('test_theme', {
-    'blockStyles': block_styles,
-    'componentStyles': component_styles,
-    'startHats': true
-});
+// }
+// const component_styles = {
+//     "workspaceBackgroundColour": "#060841",
+//     "flyoutBackgroundColour": "#0B0533"
+// }
+// var test_theme = Blockly.Theme.defineTheme('test_theme', {
+//     'blockStyles': block_styles,
+//     'componentStyles': component_styles,
+//     'startHats': true
+// });
 
 
 
@@ -74,34 +74,34 @@ const DeviceContextProvider = (props) => {
     const [toolbox_items, setToolboxItems] = useState([]);
     const [arduinocode, setArduinoCode] = useState("");
 
-    useEffect(() => {
-        if (device_chosen !== "") {
-            if (initialized_workspace === false) {
-                var tb = currentToolbox;
-                OurWorkspace = Blockly.inject('blocklyDiv', {
-                    toolbox: tb, renderer: "zelos", zoom:
-                    {
-                        wheel: true,
-                        startScale: 1,
-                        maxScale: 3,
-                        minScale: 0.3,
-                        scaleSpeed: 1.2,
-                        pinch: true
-                    }, grid:
-                    {
-                        snap: true
-                    }, theme: test_theme
-                });
-                toolbox_maker();
-                Blockly.Xml.clearWorkspaceAndLoadFromXml(newxmldom, OurWorkspace);
-                OurWorkspace.toolbox_.setVisible(false);
-                OurWorkspace.addChangeListener(showCode);
-                OurWorkspace.addChangeListener(selectedBlock);
-                AlterBlockly();
-                initialized_workspace = true;
-            }
-        }
-    })
+    // useEffect(() => {
+    //     if (device_chosen !== "") {
+    //         if (initialized_workspace === false) {
+    //             var tb = currentToolbox;
+    //             OurWorkspace = Blockly.inject('blocklyDiv', {
+    //                 toolbox: tb, renderer: "zelos", zoom:
+    //                 {
+    //                     wheel: true,
+    //                     startScale: 1,
+    //                     maxScale: 3,
+    //                     minScale: 0.3,
+    //                     scaleSpeed: 1.2,
+    //                     pinch: true
+    //                 }, grid:
+    //                 {
+    //                     snap: true
+    //                 }, theme: test_theme
+    //             });
+    //             toolbox_maker();
+    //             Blockly.Xml.clearWorkspaceAndLoadFromXml(newxmldom, OurWorkspace);
+    //             OurWorkspace.toolbox_.setVisible(false);
+    //             OurWorkspace.addChangeListener(showCode);
+    //             OurWorkspace.addChangeListener(selectedBlock);
+    //             AlterBlockly();
+    //             initialized_workspace = true;
+    //         }
+    //     }
+    // })
     useEffect(() => {
         if (device_chosen !== "") {
             //currentDeviceVar = device_chosen;
@@ -172,9 +172,6 @@ const DeviceContextProvider = (props) => {
             toolbox_selected,
             variables_created,
             currentBlock,
-            block_styles,
-            component_styles,
-            test_theme,
             initialized_workspace,
             device_chosen,
             setDeviceChosen,

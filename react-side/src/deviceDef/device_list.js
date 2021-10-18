@@ -162,7 +162,7 @@ const Mello_Bot = new device(
     "Mello",
     "Arduino",
     "Arduino Nano",
-    `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    [`<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
   <category css-icon="customIcon fa fa-cog" name="Logic" colour="#5b80a5">
       <block type="controls_if"></block>
       <block type="logic_compare">
@@ -385,7 +385,7 @@ const Mello_Bot = new device(
 <block type="variable_set"></block>
   </category>
   
-  </xml>`,
+  </xml>`],
     `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`,
     [`Ultrasonic Sensor`, `Wheel Servo Motor A`, `Wheel Servo Motor B`, `Forklift Servo Motor C`, `Light Follower A`, `Light Follower B`, `Line Follower A`, `Line Follower B`, `Infrared Receiver`, `Bluetooth Receiver`, `RGB Led`, `Buzzer`],
     [[`Ultrasonic`, [11, 10]], [`Light Follower`, [`A0`, `A1`]], [`Line Follower`, [`A2`, `A3`]], [`Servo`, [9, 8, 10]], [`IR_Remote`, 3], [`Bluetooth`, [12, 13]], [`RGB Led`, [6, 4, 5]], [`Buzzer`, 7]]

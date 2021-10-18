@@ -1,7 +1,5 @@
 import React from 'react';
-import DeviceContextProvider from '../contexts/DeviceContext';
 import PropTypes from 'prop-types';
-import Device_Manager from '../Device_Manager';
 import { useState, useEffect, useRef } from 'react'
 import "./Body.scss";
 import ProgressBar from '../ProgressBar';
@@ -4181,14 +4179,8 @@ const Body = (props) => {
 
             </div>
             <div className="c-Body-a-OverlayExtras" />
-<<<<<<< HEAD
-            <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile} />
-=======
             <Header />
->>>>>>> parent of 25e6019 (Header Buttons Pt.1)
             <WorkTabHolder />
-            
-                <WorkTabHolder />
             
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />

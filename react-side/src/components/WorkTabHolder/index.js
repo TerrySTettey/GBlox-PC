@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { DeviceContext } from '../contexts/DeviceContext'
 import WorkspaceAdd from '../WorkspaceAdd'
 import WorkspaceTab from '../WorkspaceTab'
 import Blockly, { Block } from 'blockly'
 import "./WorkTabHolder.scss"
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 
 var currentWSNum = 0;
 var WSNumTracker = 0;
@@ -13,12 +13,13 @@ var TabXMLs = [];
 
 var TabHolder = [];
 var currentTab = null;
-var currentDeviceVar = null;
+var done = false;
 
 
 const WorkTabHolder = (props) => {
-    const { initialized_workspace, OurWorkspace, device_chosen, DeviceList, setDeviceChosen} = useContext(DeviceContext);
+    const { initialized_workspace, setInitializedWorkspace, currentWorkspace, selectedDevice, setCurrentDeviceName, currentDeviceName } = useContext(Ctxt_SingletonManager);
     //const [currentTab, setCurrentTab] = useState(null)
+
     var [buttonPressed, setButtonPressed] = useState(0);
 
     class Tab {
@@ -30,19 +31,18 @@ const WorkTabHolder = (props) => {
         constructor(TabNum) {
             this.tabID = TabNum
             this.tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabNum} text={"Workspace " + TabNum} ChangeTab={ChangeTab} closeOnClick={CloseOnClick} />)
-            var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
-            var device_default_workspace = DeviceList[chosen_device_list].default_workspace;
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(device_default_workspace), OurWorkspace);
+            var device_default_workspace = selectedDevice.default_workspace;
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(device_default_workspace), currentWorkspace);
             this.tabXML = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-            this.tabDevice = currentDeviceVar
+            this.tabDevice = currentDeviceName
             this.tabSet = false;
-            console.log(this.tabDevice)
         }
     }
     useEffect(() => {
-        if (initialized_workspace === true) {
+        if (initialized_workspace === true && done == false) {
+            console.log("INIT: " + initialized_workspace)
             AddOnClick();
-            //console.log(initialized_workspace + " has initialized")
+            done = true;
         }
     }, [initialized_workspace])
     // useEffect(() => {
@@ -75,36 +75,26 @@ const WorkTabHolder = (props) => {
             }
             TabHolder = [...TabHolder]
             //Change Current Device to Current Tab's 
-                
-            
-            
+
+
+
 
             //Load Current Tab's XML Data
-            Blockly.Xml.domToWorkspace(TabHolder[getTabPosition(currentTab)].tabXML, OurWorkspace)
-            setDeviceChosen(TabHolder[getTabPosition(currentTab)].tabDevice)
+            Blockly.Xml.domToWorkspace(TabHolder[getTabPosition(currentTab)].tabXML, currentWorkspace)
+            setCurrentDeviceName(TabHolder[getTabPosition(currentTab)].tabDevice)
 
             setButtonPressed(0)
         }
     }, [buttonPressed])
-    useEffect(()=> {
-        try{
-            currentDeviceVar = device_chosen;
-            currentTab.tabDevice = device_chosen;
-            console.log(currentTab)
-            TabHolder[getTabPosition(currentTab)] = currentTab;
-            TabHolder = [...TabHolder]
-        }
-        catch(e){}
-        
-    }, [device_chosen])
 
 
     function AddOnClick() {
         //Increment Total Tab Number
+        console.log("I am Here")
         WSNumTracker = WSNumTracker + 1;
         //Create New Tab
         var newTab = new Tab(WSNumTracker);
-        newTab.tabDevice = device_chosen;
+        newTab.tabDevice = currentDeviceName;
         //Add it to TabHolder
         TabHolder = [...TabHolder, newTab];
         //Set New Tab as Current 
@@ -120,9 +110,8 @@ const WorkTabHolder = (props) => {
         //Change CurrentTab to new Tab
         var SelectedTabID = e.target.id.split("-")[2]
         setCurrentTab(TabHolder[getTabPositionByID(SelectedTabID)])
-        OurWorkspace.clear()
+        currentWorkspace.clear()
         setButtonPressed(1)
-
     }
 
     function ChangeTasb(e) {
@@ -130,8 +119,8 @@ const WorkTabHolder = (props) => {
         var currPos = TabXMLs.findIndex((el) => el.id == currentWSNum)
 
         //Saving Tab Data
-        console.log(device_chosen)
-        TabXMLs[currPos].device = currentDeviceVar;
+        console.log(currentDeviceName)
+        TabXMLs[currPos].device = currentDeviceName;
         TabXMLs[currPos].xmlData = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         console.log(TabXMLs[currPos])
         //Changes to Current Tab to Target Tab
@@ -139,9 +128,9 @@ const WorkTabHolder = (props) => {
         //Loads Current Tab WorkspaceXML to tab
         currPos = TabXMLs.findIndex((el) => el.id == currentWSNum)
         console.log(currPos)
-        OurWorkspace.clear()
-        Blockly.Xml.domToWorkspace(TabXMLs[currPos].xmlData, OurWorkspace)
-        
+        currentWorkspace.clear()
+        Blockly.Xml.domToWorkspace(TabXMLs[currPos].xmlData, currentWorkspace)
+
         setButtonPressed(1);
     }
 
@@ -157,10 +146,10 @@ const WorkTabHolder = (props) => {
     //     TabDOM = [...TabDOM, <WorkspaceTab id={"i-WSButton-" + WSNumTracker} text={"Workspace " + WSNumTracker} ChangeTab={ChangeTab} closeOnClick={CloseOnClick} />]
     //     currentWSNum = WSNumTracker;
     //     TabNums.push(WSNumTracker);
-    //     OurWorkspace.clear();
-    //     var chosen_device_list = DeviceList.findIndex(o => o.device_name === device_chosen)
+    //     currentWorkspace.clear();
+    //     var chosen_device_list = DeviceList.findIndex(o => o.device_name === currentDeviceName)
     //     var device_default_workspace = DeviceList[chosen_device_list].default_workspace;
-    //     Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(device_default_workspace), OurWorkspace);
+    //     Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(device_default_workspace), currentWorkspace);
     //     TabXMLs = [...TabXMLs, { id: currentWSNum, xmlData: Blockly.Xml.workspaceToDom(Blockly.mainWorkspace), device: currentDeviceVar }]
     //     console.log(TabXMLs)
     //     setButtonPressed(1);
@@ -187,8 +176,8 @@ const WorkTabHolder = (props) => {
     //         //container.remove()
     //         currentWSNum = TabNums[0]
     //         //Load first Workspace
-    //         OurWorkspace.clear()
-    //         Blockly.Xml.domToWorkspace(TabXMLs[0].xmlData, OurWorkspace)
+    //         currentWorkspace.clear()
+    //         Blockly.Xml.domToWorkspace(TabXMLs[0].xmlData, currentWorkspace)
 
     //         // if(NumToDelete <= TabNums.length){
 
@@ -202,7 +191,7 @@ const WorkTabHolder = (props) => {
     //     }
     // }
 
-    
+
 
     function getTabHolderJSX() {
         var RetArr = []
