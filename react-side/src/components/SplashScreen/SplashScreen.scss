@@ -55,6 +55,10 @@
         height: 85vh;
         width: 85vw;
         transition: width 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67), height 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67);
+        #Path_366{
+            fill: var(--primary-color);
+            stroke: var(--border-color);
+        }
     }
     .Splash-Items {
         display: grid;

@@ -8,7 +8,7 @@ function index(props) {
         <div id="Splash-Background">
             <svg id="background-svg" xmlns="http://www.w3.org/2000/svg" width="1493.979" height="851.612" viewBox="0 0 1493.979 851.612">
                 <g id="Group_532" data-name="Group 532" transform="translate(-210.01 -117.194)">
-                    <path id="Path_366" data-name="Path 366" d="M470.259,1507.169H1739l106.454,106.454-1.579,226.161L1805,1883.5v444.283l-29,29H446.746l-89.271-89.271V1733.755l63.436-63.436v-163.15Z" transform="translate(-146.464 -1388.975)" fill="#0b0533" stroke="#0000dc" stroke-width="2" />
+                    <path id="Path_366" data-name="Path 366" d="M470.259,1507.169H1739l106.454,106.454-1.579,226.161L1805,1883.5v444.283l-29,29H446.746l-89.271-89.271V1733.755l63.436-63.436v-163.15Z" transform="translate(-146.464 -1388.975)" stroke-width="2" />
                     <path id="Path_368" data-name="Path 368" d="M1703.99,480.6l-21.552,21.552V924.55L1703.99,903Z" transform="translate(0 3)" fill="#0000dc" />
                     <path id="Path_372" data-name="Path 372" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -671.104)" fill="none" stroke="#0000dc" stroke-width="2" />
                     <path id="Path_373" data-name="Path 373" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -631.104)" fill="none" stroke="#0000dc" stroke-width="2" />

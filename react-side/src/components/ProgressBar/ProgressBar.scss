@@ -12,6 +12,12 @@
         top: 0%;
         left: 44px;
         margin: 6px;
+        svg{
+            #Path_379{
+                fill: var(--tetiary-color);
+            }
+            
+        }
     }
 
     .i-WhiteBarContainer {
@@ -29,7 +35,7 @@
         position: relative;
         transform: translateX(7px) translateY(-3.2px) skewX(45deg);
         top: 0%;
-        background-color: white;
+        background-color: var(--progress-filled-bar-color);
         filter: drop-shadow(0 0 6px #0000DC);
         margin-right: 6px;
         width: 7px;
@@ -41,7 +47,7 @@
         position: relative;
         transform: translateX(7px) translateY(-3.2px) skewX(45deg);
         top: 0%;
-        background-color: #1C1E4D;
+        background-color: var(--progress-empty-bar-color);
         margin-right: 6px;
         width: 7px;
         height: 14px;

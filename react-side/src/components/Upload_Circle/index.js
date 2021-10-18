@@ -23,7 +23,7 @@ function index(props) {
             </g>
           </g>
         </svg>
-            <p className="upload-text" id="Add_device" data-name="Add device" fill="#fff" font-size="17">Add device</p>
+            <p className="upload-text" id="Add_device" data-name="Add device" font-size="17">Add device</p>
       </div>]
 
   return (

@@ -54,8 +54,6 @@ app.on('activate', () => {
         createWindow();
     }
 })
-//When save button is pressed...
-
 
 //Load function
 async function loadFile() {
@@ -99,15 +97,14 @@ async function saveFile(data) {
         });
     }
 }
-
+//Function to write settings of the application to the settings.txt file
 async function writeSystemSettings(data) {
     var filePath = path.resolve(__dirname, "settings.txt");
     fs.writeFile(filePath, data, (err) => {
         if (err) throw err;
-        console.log("Settings Updated")
     })
 }
-
+//Function to retrieve settings of the application
 async function retrieveSystemSettings(cb) {
     var settings = "nil";
     var filePath = path.resolve(__dirname, "settings.txt");
@@ -116,30 +113,30 @@ async function retrieveSystemSettings(cb) {
         settings = settings.split(`\n`)
     }
     catch (e) {
-        console.log(e)
     }
     cb(settings)
 }
 
-
+//Function to constantly retrieve available USB COMPORTs
 async function COMPORT_CONSTANT(cb) {
-    var ports = ["No Board Detected"]
+    
+    var ports = ["No Board Detected"]   //Array for all available COM ports connected via USB
     try {
-        var comport = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })
-        comport = comport.split(`\n`)
-        var temp_ports = []
-        for (var i = 0; i < comport.length; i++) {
-            if (comport[i].includes("\\Device\\Serial") == true) {
-                temp_ports.push(comport[i].split("REG_SZ    ")[1].split("\r")[0]);
+        var comport = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" }) //Check system registry for all available serial ports
+        comport = comport.split(`\n`)   //Split all values by new line and put them in an array
+        var temp_ports = [] //Temporary ports value
+        for (var i = 0; i < comport.length; i++) {  //Cycle through all the values
+            if (comport[i].includes("\\Device\\Serial") == true) {      //Check if the COMPORT is connected via US
+                temp_ports.push(comport[i].split("REG_SZ    ")[1].split("\r")[0]);  //Remove all unwanted data leaving only the COMPORT number
             }
         }
         if (temp_ports !== []) {
-            ports = temp_ports
+            ports = temp_ports  //If a comport is found, push it into main ports array
         }
     }
     catch (e) {
     }
-    cb(ports)
+    cb(ports) //callback for main ports
 }
 //Function which identifies the COM Port that Arduino is connected to...
 function CHECK_COMPORT(cb) {
@@ -185,16 +182,13 @@ async function VERIFYCODE(cb) {
         cb("No Arduino Detected");
     }
 }
-
+//Function to read the serial port of the device via COMPORT
 async function readSerialPort(cb) {
-    // console.log(serial_monitor)
     if (typeof serial_monitor === "undefined") {
         serial_monitor = new serialport(COMPORT[0], {
             baudRate: 9600,
             parser: new serialport.parsers.Readline('\r\n'),
         });
-        console.log("Parsing Data for the first time")
-
         serial_monitor.pipe(parser);
         parser.on('data', function (data) {
             serial_monitor_results += data;
@@ -206,16 +200,18 @@ async function readSerialPort(cb) {
         serial_monitor_results = "";
     }
 }
+
+//ipc call for "save-file" which is responsible for saving the XML data of a workspace to a directory chosen by the user
 ipcMain.on("save-file", function (event, xml_data) {
     saveFile(xml_data)
 })
 
-//When load button is pressed...
+//ipc call for "load-file" which is responsible for loading the desired XML data from the directory chosen by the user
 ipcMain.on("load-file", async function (event) {
     var data = await loadFile()
     event.returnValue = data;
 })
-
+//ipc call for "load-settings" which is responsible for loading the current settings.txt file and sending it back to react for use
 ipcMain.handle("load-settings", async function (event) {
     try {
         retrieveSystemSettings(function (res) {
@@ -223,28 +219,14 @@ ipcMain.handle("load-settings", async function (event) {
         })
     }
     catch (e) {
-        console.log(e)
     }
 })
-
+//ipc call for "load-settings" which is responsible for writing to the current settings.txt file with new settings
 ipcMain.handle("write-settings", async function (event, settings) {
     writeSystemSettings(settings)
 })
 
-ipcMain.handle("serialport_retreive", async function (event) {
-    try {
-        console.log("Opening SerialMonitor\n");
-        CHECK_COMPORT(function (res) {
-            console.log(res);
-        });
-        readSerialPort(function (res) {
-            event.sender.send('serialport_monitor', res);
-        });
-    }
-    catch (e) {
-        console.log(e);
-    }
-})
+//ipc call for "check_comport_constant" which is responsible for constantly checking the available comports for react use
 ipcMain.handle("check_comport_constant", async function (event) {
     var result = []
     try {
@@ -254,10 +236,24 @@ ipcMain.handle("check_comport_constant", async function (event) {
         });;
 
     }
-    catch (e) { console.log(e) }
+    catch (e) {}
 
 })
 
+//ipc call for "serialport_retreive" which checks for an available COMPORT and reads the serial data being transmitted.
+ipcMain.handle("serialport_retreive", async function (event) {
+    try {
+        CHECK_COMPORT(function (res) {
+        });
+        readSerialPort(function (res) {
+            event.sender.send('serialport_monitor', res);
+        });
+    }
+    catch (e) {
+    }
+})
+
+//ipc call for "serialport_write" which sends a value via serial communication to the existing COMPORT
 ipcMain.handle("serialport_write", async function (event, value) {
     serial_monitor.write(value, function (err) {
         serial_monitor_results += `\nSent ${value} to Arduino\n`;
@@ -266,17 +262,14 @@ ipcMain.handle("serialport_write", async function (event, value) {
 
 ipcMain.handle("serialport_close", function (event) {
     try {
-        console.log("Closing SerialMonitor\n");
         serial_monitor.close(function (err) {
-            console.log(`Closed Serial Monitor ` + err);
         });
     }
     catch (e) {
-        console.log(e);
     }
 })
 
-//When the upload button is pressed...
+//ipc call for "upload-code" which checks for an available COMPORT and attempts to uplaod arduino code to the device
 ipcMain.handle("upload-code", async function (event, jsCode) {
     try {
         fs.writeFileSync(path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino"), jsCode)
@@ -288,18 +281,5 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
         });
     }
     catch (e) {
-        console.log(e)
-    }
-})
-
-ipcMain.on("check-comport", async function (event, jsCode) {
-    try {
-        CHECK_COMPORT(function (res) {
-            // event.sender.send('arduino_comport', res);
-            return res;
-        });
-    }
-    catch (e) {
-        console.log(e);
     }
 })

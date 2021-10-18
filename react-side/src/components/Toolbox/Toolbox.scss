@@ -2,11 +2,11 @@
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    border: solid 10px #0b0533;
+    border: solid 10px transparent;
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #ffffff;
+    background: var(--secondary-color);
     border: solid 10px transparent;
     border-radius: 10px;
 }

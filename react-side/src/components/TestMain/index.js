@@ -14,26 +14,15 @@ import "../../customblocks/MelloBlocks"
 import "../../customblocks/MelloBlocksGen"
 
 import example_codes from "../../example_codes"
-
 const { ipcRenderer } = window.require('electron')
+
+
 
 var response = "null";
 
 const TestMain = (props) => {
-    //const [serialport_monitor, setSerialPortMonitor] = useState("")
-    //const [viewCode, setViewCode] = useState("")
 
-    // useEffect(() => {
-    //     if (viewCode !== props.viewCode) {
-    //         setViewCode(props.viewCode)
-    //     }
-    //     if (serialport_monitor !== props.serialport_monitor) {
-    //         setSerialPortMonitor(props.serialport_monitor);
-    //     }
-
-    // })
-
-    const {default_workspace,OurWorkspace,currentBlock,device_chosen,setDeviceChosen,toolbox_items,arduinocode} = useContext(DeviceContext)
+    const {default_workspace,OurWorkspace,currentBlock,device_chosen,setDeviceChosen,toolbox_items,arduinocode, exportBlocks} = useContext(DeviceContext)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [upload_status, setUploadStatus] = useState("");
@@ -42,59 +31,20 @@ const TestMain = (props) => {
     const [current_theme, setCurrentTheme] = useState("")
     const [splash_status, setSplashStatus] = useState("false");
 
-    var fileheader = [
-        //New File
-        () => {
-            if (document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0] !== undefined) {
-                OurWorkspace.clear();
-                document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0].click()
-            }
-        },
-        //Open File
-        () => {
-            loadBlocks()
-        },
-        //Save File
-        () => {
-            exportBlocks()
-        },
-        //Save As File
-        () => {
-            exportBlocks()
-        }
-    ]
-    var editheader = [
-        () => {
-            Blockly.copy(currentBlock)
-            Blockly.deleteBlock(currentBlock)
-        },
-        () => {
-            Blockly.copy(currentBlock)
-        },
-        () => {
-            Blockly.paste(currentBlock)
-        },
-        () => {
-            var allblocks = OurWorkspace.getAllBlocks(true);
-            for (var i = 0; i < allblocks.length; i++) {
-                allblocks[i].select();
-            }
-        },
-        () => {
-            Blockly.deleteBlock(currentBlock)
-        }
-    ]
+
     function serialport_read() {
-        console.log("Serial Port Button Clicked")
-        if (serialport_status === false) {
-            console.log("Serial Port Opened")
+        //Starts the serial port monitor
+        if (serialport_status === false) {      
+            //Checks if serial port is already opened. If it is not opened, then start reading the serial port
             ipcRenderer.invoke(`serialport_retreive`);
             ipcRenderer.on('serialport_monitor', (event, result) => {
                 setSerialPortMonitor(result);
             });
+            //Set the Serial port status to ensure that the port does not attempt to open multiple times
             setSerialPortStatus(true);
         }
         else {
+            //If Serial port is already opened, close the serial monitor and reset the values
             ipcRenderer.invoke(`serialport_close`);
             setSerialPortMonitor([]);
             console.log("Serial Port Closed")
@@ -102,19 +52,14 @@ const TestMain = (props) => {
         }
     }
     async function uploadCode_ipc() {
-        response = 'Uploading code';
-        setUploadStatus(response);
-        //console.log(response);
-        response = 'Awaiting Response from Arduino';
-        setUploadStatus(response);
-        //console.log(response);
-        //setUploadStatus(response);
+        //Invokes upload-code from electron with the current code
         ipcRenderer.invoke('upload-code', arduinocode);
+        //Waits for results on which comport arduino is found on
         ipcRenderer.on('arduino_comport', (event, result) => {
             response = result;
             setUploadStatus(`Arduino found on ${response}`);
         });
-
+        //Returns a confirmation for when the upload is done
         ipcRenderer.on('arduino_upload_status', (event, result) => {
             response = result;
             setUploadStatus(response);
@@ -176,29 +121,7 @@ const TestMain = (props) => {
             }, 1)
         }
     }
-    function exportBlocks() {
-        try {
-            var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-            var xml_text = Blockly.Xml.domToText(xml);
-            console.log("Saving the following: " + xml_text);
-            ipcRenderer.send('save-file', xml_text)
-        } catch (e) {
-            alert(e);
-        }
-    }
-    function loadBlocks() {
-        try {
-            console.log("Loading a file...")
-            var hold = ipcRenderer.sendSync('load-file')
-            if (hold !== "nil") {
-                var xmlss = Blockly.Xml.textToDom(hold)
-                Blockly.mainWorkspace.clear();
-                Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
-            }
-        } catch (e) {
-            throw e;
-        }
-    }
+
 
     async function check_comport_constant() {
         ipcRenderer.invoke('check_comport_constant');
@@ -277,6 +200,7 @@ const TestMain = (props) => {
         //.replaceAll(";\r","").replace("splash: ","")
         //document.getElementById("SplashStatus").checked
     }, [system_settings])
+    
 
     return (
         <div>
@@ -289,26 +213,14 @@ const TestMain = (props) => {
 
                 }
                 serialport_monitor={serialport_monitor}
-<<<<<<< HEAD
                 onSerialPortClick={serialport_read}
                 example_codes={example_codes}
                 uploadFunction={uploadCode_ipc}
                 onSplashClick={closeSplash}
                 Splashurl={"https://www.google.com"}
                 deviceOnClick={device_manager}
-                fileheaderfunc={fileheader}
-                editheaderfunc={editheader}
                 saveFile={exportBlocks}
             />
-=======
-                toolboxButtons={props.toolboxButtons}
-                onSerialPortClick={props.onSerialPortClick}
-                example_codes={props.example_codes}
-                uploadFunction={props.uploadFunction}
-                onSplashClick={props.onSplashClick}
-                Splashurl={props.Splashurl}
-                deviceOnClick={props.deviceOnClick} />
->>>>>>> parent of 25e6019 (Header Buttons Pt.1)
         </div>
     )
 }
