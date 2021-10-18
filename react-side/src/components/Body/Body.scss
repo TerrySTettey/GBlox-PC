@@ -4,11 +4,13 @@
     --tetiary-color: #060841;
     --border-color: #0000DC;
     --inner-shadow-color: #0713BF52;
+    --title-text-color: #0000DC;
     --text-color: #fff;
     --primary-color-light: #0b0533dd;
     --logo-color: #fff;
     --progress-empty-bar-color: #1C1E4D;
     --progress-filled-bar-color: #E9E9FF;
+    --primary-button-color: #FFFFFF;
 }
 
 ::-webkit-scrollbar {
@@ -73,32 +75,37 @@ $shift: 0px;
             margin-left: 0px;
             #Subtraction_5{
                 fill: var(--primary-color);
+                stroke: var(--border-color);
             }
             
         }
         #num4 {
             grid-area: n4;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
             
         }
         #num7 {
             grid-area: n7;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
         #num10 {
             grid-area: n10;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
         #num13 {
             grid-area: n13;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
         .workspace-controls {
@@ -120,6 +127,7 @@ $shift: 0px;
             overflow: hidden;
             #Subtraction_9{
                 fill: var(--primary-color);
+                stroke: var(--border-color);
             }
             
         }
@@ -129,7 +137,8 @@ $shift: 0px;
         #num14 {
             grid-area: n14;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
 
@@ -138,7 +147,8 @@ $shift: 0px;
             margin-top: -0.5px;
             margin-left: 1px;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
         #num6 {
@@ -146,7 +156,8 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 1px;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
         #num9 {
@@ -154,7 +165,8 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 1px;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
         #num9svg {
@@ -167,7 +179,8 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 1px;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
         #num15 {
@@ -175,7 +188,8 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 0px;
             #Subtraction_5{
-                fill: var(--primary-color) !important;
+                fill: var(--primary-color);
+                stroke: var(--border-color);
             }
         }
 
@@ -400,7 +414,7 @@ $shift: 0px;
         height: 100%;
     }
     #c-Body-a-SplashScreen {
-        background-color: var(--primary-color-light);
+        background-color: var(--primary-color);
         position: absolute;
         display: none;
         width: 100%;

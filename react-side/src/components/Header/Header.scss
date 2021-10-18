@@ -71,7 +71,7 @@
     border: none;
 
     #settings-dropdown {
-        background-color: #060841;
+        background-color: var(--tetiary-color);
         height:484px;
         width: 396px;
         right: -50px;
@@ -79,7 +79,7 @@
         border-radius: 20px;
     
         .settings-component{
-            color: white;
+            color: var(--title-text-color);
         }
     
     }

@@ -7,15 +7,18 @@ import HeaderButton from '../HeaderButton';
 import Button from '../Button'
 import CustomDrop from '../CustomDrop';
 import { DeviceContext } from '../contexts/DeviceContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const Header = (props) => {
     const {
         fileheader, 
-        editheader, 
-        OurWorkspace,
-        dark_theme,
-        light_theme
+        editheader,
+        OurWorkspace
     } = useContext(DeviceContext)
+    
+    const { 
+        changeTheme
+    } = useContext(ThemeContext)
     /**Create Overlay for DropList*/
     var overlay = document.createElement('div')
     overlay.classList.add("focusOverlay")
@@ -30,34 +33,6 @@ const Header = (props) => {
         overlay.remove()
     }
 //Function to change the theme as per the theme selected
-    function changeTheme(event) {
-        if (event.target.id == "dark-theme"){
-            //Change Blockly Workspace theme
-            OurWorkspace.setTheme(dark_theme)
-            OurWorkspace.toolbox_.setVisible(false);
-            //Change root CSS variables
-            document.documentElement.style.setProperty('--primary-color', '#0B0533');
-            document.documentElement.style.setProperty('--tetiary-color', '#060841');
-            document.documentElement.style.setProperty('--logo-color', '#fff');
-            document.documentElement.style.setProperty('--text-color', '#fff');
-            document.documentElement.style.setProperty('--logo-color', '#fff');
-            document.documentElement.style.setProperty('--progress-empty-bar-color', '#1C1E4D');
-            document.documentElement.style.setProperty('--progress-filled-bar-color', '#E9E9FF');
-        }
-        else{
-            //Change Blockly Workspace theme
-            OurWorkspace.setTheme(light_theme)
-            OurWorkspace.toolbox_.setVisible(false);
-            //Change root CSS variables
-            document.documentElement.style.setProperty('--primary-color', '#DEDEF1');
-            document.documentElement.style.setProperty('--tetiary-color', '#fff');
-            document.documentElement.style.setProperty('--border-color', '#9898F0');
-            document.documentElement.style.setProperty('--text-color', '#0000DC');
-            document.documentElement.style.setProperty('--logo-color', '#0000DC');
-            document.documentElement.style.setProperty('--progress-empty-bar-color', '#BCBCEE');
-            document.documentElement.style.setProperty('--progress-filled-bar-color', '#0000DC');
-        }
-    }
 
     return (
         <div>

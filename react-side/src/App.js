@@ -1,6 +1,7 @@
 import React from 'react';
 import TestMain from "./components/TestMain";
 import DeviceContextProvider from "./components/contexts/DeviceContext";
+import ThemeContextProvider from "./components/contexts/ThemeContext";
 
 
 import './App.css';
@@ -10,10 +11,12 @@ import './App.css';
 //Default Workspace
 
 const App = () => {
-  return(
-    <DeviceContextProvider>
-      <TestMain/>
-    </DeviceContextProvider>
+  return (
+    <ThemeContextProvider>
+      <DeviceContextProvider>
+        <TestMain />
+      </DeviceContextProvider>
+    </ThemeContextProvider>
   )
 }
 

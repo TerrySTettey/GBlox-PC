@@ -24,6 +24,7 @@ $shift: 0px;
     position: absolute;
     top: 0;
     width: 100%;
+    
   }
   #code-sidebar {
     position: absolute;
@@ -111,6 +112,7 @@ $shift: 0px;
       padding: 22px;
       .text {
         grid-area: headertext;
+        color: var(--title-text-color);
         display: inline-flex;
         font-size: 21px;
         height: 21px;
@@ -145,7 +147,7 @@ $shift: 0px;
         display: grid;
         grid-template-areas: "codelines editor";
         grid-template-columns: 0.03fr 1fr;
-        color: #4c97ff;
+        color: var(--text-color);
         border: none;
         outline: none;
         margin-bottom: 0px;
@@ -193,6 +195,7 @@ $shift: 0px;
             font-family: "Baloo2-Regular";
             line-height: 20pt;
             tab-size: 5;
+            caret-color: var(--text-color);
           }
 
           #full-editing,
@@ -200,6 +203,7 @@ $shift: 0px;
             position: absolute;
             white-space: nowrap;
             overflow: auto;
+            
           }
 
           #full-editing {
@@ -211,7 +215,7 @@ $shift: 0px;
           #full-editing {
             color: transparent;
             background: transparent;
-            caret-color: white; /* Or choose your favorite color */
+            
           }
         }
       }

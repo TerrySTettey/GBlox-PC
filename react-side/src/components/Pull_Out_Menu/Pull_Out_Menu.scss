@@ -39,6 +39,14 @@
         #button-container {
             display: flex;
             margin-bottom: 10px;
+            .c-button-a-CircularOverlayMenuButton{
+                background-color: var(--primary-color) !important;
+            }
+            .button-svg{
+                g, path, line{
+                    stroke: var(--primary-button-color);
+                }
+            }
         }
     }
     .pull-out-container {

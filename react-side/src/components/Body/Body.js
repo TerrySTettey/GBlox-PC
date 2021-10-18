@@ -1,8 +1,7 @@
-import React from 'react';
-import DeviceContextProvider from '../contexts/DeviceContext';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Device_Manager from '../Device_Manager';
-import { useState, useEffect, useRef } from 'react'
+import { ThemeContext } from '../contexts/ThemeContext';
 import "./Body.scss";
 import ProgressBar from '../ProgressBar';
 import Slide_Out_Menu from '../Slide_Out_Menu'
@@ -3629,6 +3628,7 @@ const Body = (props) => {
     var [PullOutState, setPullOutState] = useState("Closed")
     var TrashHolder = useRef(null);
     var FlyOutHolder = useRef(null)
+
     const [serialport_monitor, setSerialPortMonitor] = useState("")
     const [viewCode, setViewCode] = useState("")
     function genbuttons(toolbox_items) {
