@@ -12,10 +12,10 @@ var Upload_Status = null;
 var serial_monitor;
 var serial_monitor_results = "";
 const { execSync, exec } = require('child_process');
-
+var win = null;
 //Creation of Application Window
 function createWindow() {
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 1400,
         height: 800,
         minHeight: 713, //678
@@ -283,3 +283,14 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
     catch (e) {
     }
 })
+try {
+setInterval(()=>{
+    var result = []
+
+        COMPORT_CONSTANT(function (res) {
+            result = res
+            win.webContents.send('comport_constant', result)
+        });;
+},3000)
+}
+catch (e) {}

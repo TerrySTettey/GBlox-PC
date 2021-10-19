@@ -131,7 +131,6 @@ const TestMain = (props) => {
             if (result !== "nil") {
                 //console.log(result);
                 setSystemSettings(result);
-                
             }
         })
     }
@@ -140,11 +139,16 @@ const TestMain = (props) => {
     }
     
     useEffect(() => {
-        setTimeout(() => {
-            check_comport_constant();
-        }, 3000)
+        // setTimeout(() => {
+        //     check_comport_constant();
+        // }, 3000)
+
         if (system_settings.length < 1) {
             readSystemSettings();
+            ipcRenderer.on('comport_constant', (event, result) => {
+                console.log(result);
+                setAvailableCOMports(result);
+            });
         }
     })
     useEffect(() => {
