@@ -5,7 +5,7 @@
 .help-menu {
     display: grid;
     height: 95%;
-    
+
     .text {
         padding-bottom: 16.9px;
     }
@@ -14,7 +14,7 @@
         display: block;
         margin-bottom: 22px;
     }
-    .Help-Buttons{
+    .Help-Buttons {
         display: grid;
         width: 120%;
         margin-left: -4%;
@@ -22,8 +22,14 @@
         .help-icon {
             position: relative;
             display: block;
+            #Path_330 {
+                fill: var(--primary-color);
+                #border-stroke {
+                    fill: var(--border-color);
+                }
+            }
         }
-    
+
         .children_help {
             position: absolute;
             top: 0;
@@ -37,6 +43,9 @@
             svg {
                 display: block;
                 margin: auto;
+                g, line, path {
+                    stroke: var(--text-color) !important;
+                }
             }
             div {
                 position: relative;
@@ -44,8 +53,9 @@
                 text-align: center;
                 font-size: 21px;
                 font-weight: bold;
+                color: var(--text-color);
+                user-select: none;
             }
         }
     }
-    
 }

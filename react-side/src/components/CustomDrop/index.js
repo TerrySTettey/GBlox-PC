@@ -71,7 +71,7 @@ const CustomDrop = (props) => {
                             right: '50px',
                             filter: 'drop-shadow(0 0 50px black)'
                         }}>
-                            <ModalSettings />
+                            <ModalSettings themeOnClick={props.themeOnClick}/>
                         </div>
                     )
                     break;

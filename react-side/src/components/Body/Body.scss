@@ -1,12 +1,27 @@
+:root{
+    --primary-color: #0B0533;
+    --secondary-color: #0000DC;
+    --tetiary-color: #060841;
+    --border-color: #0000DC;
+    --inner-shadow-color: #0713BF52;
+    --title-text-color: #0000DC;
+    --text-color: #fff;
+    --primary-color-light: #0b0533dd;
+    --logo-color: #fff;
+    --progress-empty-bar-color: #1C1E4D;
+    --progress-filled-bar-color: #E9E9FF;
+    --primary-button-color: #FFFFFF;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    border: solid 3px #0b0533;
+    border: solid 3px var(--primary-color);
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #0000dc;
+    background: var(--secondary-color);
     border: solid 3px transparent;
     border-radius: 10px;
 }
@@ -19,7 +34,7 @@ $shift: 0px;
     top: 0;
     width: auto;
     height: 100vh;
-    background-color: #060841;
+    background-color: var(--primary-color);
     overflow: hidden;
 
     .tester {
@@ -58,18 +73,40 @@ $shift: 0px;
             grid-area: n1;
             margin-top: 0px;
             margin-left: 0px;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
+            
         }
         #num4 {
             grid-area: n4;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
+            
         }
         #num7 {
             grid-area: n7;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
         #num10 {
             grid-area: n10;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
         #num13 {
             grid-area: n13;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
         .workspace-controls {
             pointer-events: all;
@@ -88,28 +125,49 @@ $shift: 0px;
         #num2 {
             grid-area: n2;
             overflow: hidden;
+            #Subtraction_9{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
+            
         }
         #num8 {
             grid-area: n8;
         }
         #num14 {
             grid-area: n14;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
 
         #num3 {
             grid-area: n3;
             margin-top: -0.5px;
             margin-left: 1px;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
         #num6 {
             grid-area: n6;
             margin-top: 0px;
             margin-left: 1px;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
         #num9 {
             grid-area: n9;
             margin-top: 0px;
             margin-left: 1px;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
         #num9svg {
             grid-area: n9;
@@ -120,11 +178,19 @@ $shift: 0px;
             grid-area: n12;
             margin-top: 0px;
             margin-left: 1px;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
         #num15 {
             grid-area: n15;
             margin-top: 0px;
             margin-left: 0px;
+            #Subtraction_5{
+                fill: var(--primary-color);
+                stroke: var(--border-color);
+            }
         }
 
         #TrashTotal {
@@ -188,7 +254,7 @@ $shift: 0px;
         position: absolute;
         top: 0;
         right: 0;
-        background-color: #0b0533;
+        background-color: var(--primary-color);
         height: 100vh;
         width: 0px;
         z-index: 51;
@@ -197,7 +263,6 @@ $shift: 0px;
     .t-Transition {
         transition: width 0.5s;
     }
-
     .i-emptyDiv1 {
         height: 0px;
     }
@@ -300,7 +365,7 @@ $shift: 0px;
         top: 80px;
         width: 86.49vw /*1660.65px*/;
         height: 90.46vh /*976.94px*/;
-        background-color: #0b0533;
+        background-color: var(--primary-color);
         //clip-path: url(#my-clip-path);
         filter: drop-shadow(0 0 0 50px black);
     }
@@ -317,11 +382,11 @@ $shift: 0px;
             width: 0px;
         }
         ::-webkit-scrollbar-track {
-            border: solid 0px #0b0533;
+            border: solid 0px var(--primary-color);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #0000dc;
+            background: var(--secondary-color);
             border: solid 0px transparent;
             border-radius: 10px;
         }
@@ -349,7 +414,7 @@ $shift: 0px;
         height: 100%;
     }
     #c-Body-a-SplashScreen {
-        background-color: #0b0533dd;
+        background-color: var(--primary-color);
         position: absolute;
         display: none;
         width: 100%;
@@ -371,7 +436,7 @@ $shift: 0px;
         height: 100%;
         top: 0;
         left: 0;
-        background-color: #0b0533dd;
+        background-color: var(--primary-color);
         backdrop-filter: blur(10px);
         align-items: center;
         justify-content: center;

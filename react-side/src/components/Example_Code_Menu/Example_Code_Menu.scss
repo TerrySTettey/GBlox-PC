@@ -2,19 +2,6 @@
     padding-bottom: 0px;
 }
 
-// ::-webkit-scrollbar {
-//     width: 5px;
-// }
-// ::-webkit-scrollbar-track {
-//     border: solid 3px #0b0533;
-//     border-radius: 10px;
-// }
-// ::-webkit-scrollbar-thumb {
-//     background: #0000dc;
-//     border: solid 3px transparent;
-//     border-radius: 10px;
-// }
-
 #example-code-menu {
     position: relative;
     display: grid;
@@ -32,8 +19,8 @@
     .code-example {
         display: inline-flex;
         flex-direction: column;
-        background-color: #0b0533;
-        border: 1px solid #0000dc;
+        background-color: var(--primary-color);
+        border: 1px solid var(--border-color);
         // height: 537px;
         padding: 18px 29px 0px 23px;
         margin-bottom: 5%;
@@ -45,7 +32,7 @@
         .example-details {
             display: flex;
             flex-direction: column;
-            color: #ffffff;
+            color: var(--text-color);
             margin-bottom: 10px;
             > div {
                 padding-bottom: 5px;
@@ -65,8 +52,8 @@
                 .device {
                     width: 63px;
                     height: 25px;
-                    background-color: #0000dc;
-                    color: white;
+                    background-color: var(--secondary-color);
+                    color: var(--text-color);
                     text-align: center;
                     user-select: none;
                 }

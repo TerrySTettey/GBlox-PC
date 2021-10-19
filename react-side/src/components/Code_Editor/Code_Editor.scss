@@ -5,21 +5,30 @@ $shift: 0px;
   align-items: center;
   justify-items: center;
   display: inline-flex;
+
   #code-editor-background {
     position: absolute;
     z-index: 0;
+    
     svg {
       height: 100vh;
       width: 100vw;
+      path{
+        fill: var(--primary-color);
+      }
+      
+      
     }
   }
   #code-editor-header {
     position: absolute;
     top: 0;
     width: 100%;
+    
   }
   #code-sidebar {
     position: absolute;
+    background-color: var(--primary-color);
     z-index: 1;
     left: 0;
     top: 0;
@@ -33,20 +42,39 @@ $shift: 0px;
       "n7"
       "n10"
       "n13";
-    #num1 {
-      grid-area: n1;
+      #num1 {
+        grid-area: n1;
+        margin-top: 0px;
+        margin-left: 0px;
+        #Subtraction_5{
+            fill: var(--primary-color);
+        }
+        
     }
     #num4 {
-      grid-area: n4;
+        grid-area: n4;
+        #Subtraction_5{
+            fill: var(--primary-color) !important;
+        }
+        
     }
     #num7 {
-      grid-area: n7;
+        grid-area: n7;
+        #Subtraction_5{
+            fill: var(--primary-color) !important;
+        }
     }
     #num10 {
-      grid-area: n10;
+        grid-area: n10;
+        #Subtraction_5{
+            fill: var(--primary-color) !important;
+        }
     }
     #num13 {
-      grid-area: n13;
+        grid-area: n13;
+        #Subtraction_5{
+            fill: var(--primary-color) !important;
+        }
     }
   }
   #upload-container {
@@ -57,7 +85,7 @@ $shift: 0px;
   }
   #outline {
     position: absolute;
-    background-color: #0b0533;
+    background-color: var(--primary-color);
     padding: 22px;
     top: 70px;
     left: 270px;
@@ -71,7 +99,7 @@ $shift: 0px;
     #code-editor-items {
       position: absolute;
       display: grid;
-      background-color: #060841;
+      background-color: var(--tetiary-color);
       grid-template-areas:
         "headertext buttons"
         "textarea textarea";
@@ -84,6 +112,7 @@ $shift: 0px;
       padding: 22px;
       .text {
         grid-area: headertext;
+        color: var(--title-text-color);
         display: inline-flex;
         font-size: 21px;
         height: 21px;
@@ -118,7 +147,7 @@ $shift: 0px;
         display: grid;
         grid-template-areas: "codelines editor";
         grid-template-columns: 0.03fr 1fr;
-        color: #4c97ff;
+        color: var(--text-color);
         border: none;
         outline: none;
         margin-bottom: 0px;
@@ -151,7 +180,7 @@ $shift: 0px;
           #full-editing,
           #full-highlighting {
             border: 0;
-            background-color: #0b0533;
+            background-color: var(--primary-color);
             outline: none;
             width: 94%;
             height: 88%;
@@ -166,6 +195,7 @@ $shift: 0px;
             font-family: "Baloo2-Regular";
             line-height: 20pt;
             tab-size: 5;
+            caret-color: var(--text-color);
           }
 
           #full-editing,
@@ -173,6 +203,7 @@ $shift: 0px;
             position: absolute;
             white-space: nowrap;
             overflow: auto;
+            
           }
 
           #full-editing {
@@ -184,7 +215,7 @@ $shift: 0px;
           #full-editing {
             color: transparent;
             background: transparent;
-            caret-color: white; /* Or choose your favorite color */
+            
           }
         }
       }

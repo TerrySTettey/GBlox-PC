@@ -35,11 +35,11 @@ const ModalSettings = (props) => {
                 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '5px', flexGrow: '0', flexShrink: '0' }}>
                         <p>Dark Mode</p>
-                        <Button type="SettingsColor" outColor="#0b0533" hoverEffect="border" />
+                        <Button id="dark-theme" type="SettingsColor" outColor="#0b0533" hoverEffect="border" onClick={props.themeOnClick}/>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', margin: '5px', flexGrow: '0', flexShrink: '0' }}>
                         <p>Light Mode</p>
-                        <Button type="SettingsColor" outColor="#FFF" hoverEffect="border" />
+                        <Button id="light-theme" type="SettingsColor" outColor="#FFF" hoverEffect="border" onClick={props.themeOnClick}/>
                     </div>
                 </div>
             </div>

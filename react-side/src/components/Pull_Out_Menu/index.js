@@ -9,8 +9,6 @@ import Edit_Code_Menu from '../Edit_Code_Menu'
 import Example_Code_Menu from '../Example_Code_Menu'
 import { useRef, useState, useEffect } from 'react'
 
-var last_view_code = ""
-
 
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);

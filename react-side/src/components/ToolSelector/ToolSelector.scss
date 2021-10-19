@@ -1,14 +1,14 @@
 .c-ToolSelector {
     position: relative;
     display: block;
-    background-color: #0b0533;
+    background-color: var(--primary-color);
     align-items: center;
     width: 195.88px;
     .toolbox-title {
-        color: white;
+        color: var(--text-color);
         margin: auto;
         text-align: center;
-        font: "Baloo"
+        font-family: "Baloo2-Regular"
     }
     .c-buttongroup-a-Levels {
         display: flex;
@@ -20,7 +20,7 @@
         top: 50%;
         width: 5.3px;
         height: 2px;
-        background-color: #060841;
+        background-color: var(--tetiary-color);
     }
     .svg-connector {
         position: relative;
@@ -83,7 +83,7 @@
         // display: inline-flex;
         width: 195.88px;
         height: 24.46px;
-        background-color: #060841;
+        background-color: var(--tetiary-color);
 
         #connector-top{
             position: absolute;
