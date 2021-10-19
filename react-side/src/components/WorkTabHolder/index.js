@@ -17,7 +17,7 @@ var done = false;
 
 
 const WorkTabHolder = (props) => {
-    const { initialized_workspace, setInitializedWorkspace, currentWorkspace, selectedDevice, setCurrentDeviceName, currentDeviceName } = useContext(Ctxt_SingletonManager);
+    const { initialized_workspace, setInitializedWorkspace, currentWorkspace, selectedDevice, setCurrentDeviceName, currentDeviceName, setCurrentToolBoxLevel, currentToolBoxLevel, setToolBoxInit, toolBoxInit } = useContext(Ctxt_SingletonManager);
     //const [currentTab, setCurrentTab] = useState(null)
 
     var [buttonPressed, setButtonPressed] = useState(0);
@@ -28,6 +28,7 @@ const WorkTabHolder = (props) => {
         tabXML
         tabDevice
         tabSet
+        tabLevel
         constructor(TabNum) {
             this.tabID = TabNum
             this.tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabNum} text={"Workspace " + TabNum} ChangeTab={ChangeTab} closeOnClick={CloseOnClick} />)
@@ -36,6 +37,8 @@ const WorkTabHolder = (props) => {
             this.tabXML = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
             this.tabDevice = currentDeviceName
             this.tabSet = false;
+            this.tabLevel = 2;
+            //console.log(this)
         }
     }
     useEffect(() => {
@@ -45,6 +48,13 @@ const WorkTabHolder = (props) => {
             done = true;
         }
     }, [initialized_workspace])
+
+    useEffect(() => {
+        if(initialized_workspace){
+            console.log("I just changed" + currentDeviceName)
+            TabHolder[getTabPosition(currentTab)].tabDevice = currentDeviceName
+        }
+    },[currentDeviceName])
     // useEffect(() => {
 
     //     if (buttonPressed === 1) {
@@ -90,7 +100,6 @@ const WorkTabHolder = (props) => {
 
     function AddOnClick() {
         //Increment Total Tab Number
-        console.log("I am Here")
         WSNumTracker = WSNumTracker + 1;
         //Create New Tab
         var newTab = new Tab(WSNumTracker);
@@ -104,13 +113,20 @@ const WorkTabHolder = (props) => {
     }
 
     function ChangeTab(e) {
-        //Save Current Tab's Device and 
+        //console.log(selectedToo)
+        //Save Current Tab's Device and
+        console.log("CURRENTDEV = " + currentDeviceName)
+        console.log("BEFORE:" + TabHolder[getTabPosition(currentTab)].tabDevice)
+        TabHolder[getTabPosition(currentTab)].tabDevice = currentDeviceName
+        console.log("AFTER:" + TabHolder[getTabPosition(currentTab)].tabDevice)
         //TabHolder[getTabPosition(currentTab)].tabDevice = currentDeviceVar;
         TabHolder[getTabPosition(currentTab)].tabXML = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         //Change CurrentTab to new Tab
         var SelectedTabID = e.target.id.split("-")[2]
         setCurrentTab(TabHolder[getTabPositionByID(SelectedTabID)])
         currentWorkspace.clear()
+        setCurrentDeviceName(TabHolder[getTabPositionByID(SelectedTabID)].tabDevice)
+        setToolBoxInit(1)
         setButtonPressed(1)
     }
 
@@ -190,8 +206,6 @@ const WorkTabHolder = (props) => {
     //         setButtonPressed(1);
     //     }
     // }
-
-
 
     function getTabHolderJSX() {
         var RetArr = []

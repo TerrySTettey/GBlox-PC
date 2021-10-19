@@ -10,7 +10,7 @@ import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs
 
 export const Ctxt_SingletonManager = createContext()
 
-var selectedDevice=DeviceList[0];
+var selectedDevice = DeviceList[0];
 var selectedToolbox = MelloDOM;
 var currentWorkspace;
 var createdVariables = [];
@@ -62,11 +62,12 @@ var test_theme = Blockly.Theme.defineTheme('test_theme', {
 
 const CtxtP_SingletonManager = (props) => {
 
-    const [currentDeviceName, setCurrentDeviceName] = useState("Empty");        //Used to set and check the current device selected
-    const [currentToolBoxLevel, setCurrentToolBoxLevel] = useState(1);          //Used to set and check the current Toolbox Level
+    const [currentDeviceName, setCurrentDeviceName] = useState("Mello");        //Used to set and check the current device selected
+    const [currentToolBoxLevel, setCurrentToolBoxLevel] = useState(0);          //Used to set and check the current Toolbox Level
     const [toolboxItems, setToolboxItems] = useState([]);                       //Used to set and check the current items in the Toolbox
     const [deviceCode, setDeviceCode] = useState("");                           //Used to set and check the generated code for the current device
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
+    const [toolBoxInit, setToolBoxInit] = useState(selectedDevice.toolbox)
 
     useEffect(() => {
         /*When Current Device is changed:
@@ -78,6 +79,7 @@ const CtxtP_SingletonManager = (props) => {
             if (tmp !== -1) {
                 //Assign device to (g_v)selectedDevice
                 selectedDevice = DeviceList[tmp];
+                selectedToolbox = selectedDevice.toolbox[0]
             } else {
                 //setCurrentDeviceName((prevState) => prevState)
             }
@@ -88,13 +90,21 @@ const CtxtP_SingletonManager = (props) => {
         /*When currentToolBoxLevel is changed: Change the toolbox */
         if (currentWorkspace !== undefined) {
             if (currentToolBoxLevel > 0 && currentToolBoxLevel <= 5) {
-                selectedToolbox = selectedDevice.toolbox[currentToolBoxLevel];
-                currentWorkspace.updateToolbox(selectedToolbox);
+
 
             }
         }
 
     }, [currentToolBoxLevel])
+    useEffect(() => {
+        if (toolBoxInit === 1) {
+            //console.log(selectedToolbox)
+            //selectedToolbox = selectedDevice.toolbox[0];
+            //currentWorkspace.updateToolbox(selectedToolbox);
+            setToolBoxInit(0)
+        }
+    }, [toolBoxInit])
+
     useEffect(() => {
         /*Initializes Blockly injection */
         if (currentDeviceName !== "") {
@@ -176,7 +186,10 @@ const CtxtP_SingletonManager = (props) => {
                 currentWorkspace,
                 selectedDevice,
                 initialized_workspace,
-                setInitializedWorkspace
+                setInitializedWorkspace,
+                toolBoxInit,
+                setToolBoxInit,
+                selectedToolbox
             }}
         >
             {props.children}
