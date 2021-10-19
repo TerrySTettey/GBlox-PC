@@ -11,6 +11,7 @@ import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs
 export const DeviceContext = createContext();
 const { ipcRenderer } = window.require('electron')
 
+
 var current_device = `No Device Selected`;
 var currentToolboxName = "Mello";
 var default_workspace = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;
@@ -22,8 +23,6 @@ var toolbox_selected = "";
 var variables_created = [];
 var currentBlock = null;
 var currentDeviceVar = "";
-
-
 
 
 var initialized_workspace = false;
@@ -153,7 +152,6 @@ const DeviceContextProvider = (props) => {
         console.log("Button Pressed")
     }
     function showCode() {
-
         var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
         if (currentToolboxName === "Mello" || currentToolboxName === "Basic") {
             code = mainLoopCode;

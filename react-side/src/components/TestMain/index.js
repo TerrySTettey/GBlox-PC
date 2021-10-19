@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types'
 import Body from '../Body'
 import Blockly from 'blockly';
-import { DeviceContext } from '../contexts/DeviceContext';
 
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 
 import "./TestMain.scss"
-
 import "../../customblocks/customblocks";
 import "../../customblocks/compiler/arduino_core";
 import "../../customblocks/peripherals/arduino_peripheral"
@@ -16,13 +15,11 @@ import "../../customblocks/MelloBlocksGen"
 import example_codes from "../../example_codes"
 const { ipcRenderer } = window.require('electron')
 
-
-
 var response = "null";
 
 const TestMain = (props) => {
 
-    const {default_workspace,OurWorkspace,currentBlock,device_chosen,setDeviceChosen,toolbox_items,arduinocode, exportBlocks} = useContext(DeviceContext)
+    const {selectedDevice,currentWorkspace,currentBlock,currentDeviceName,setCurrentDeviceName,toolboxItems,deviceCode, exportBlocks} = useContext(Ctxt_SingletonManager)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [upload_status, setUploadStatus] = useState("");
@@ -30,7 +27,6 @@ const TestMain = (props) => {
     const [system_settings, setSystemSettings] = useState([]);
     const [current_theme, setCurrentTheme] = useState("")
     const [splash_status, setSplashStatus] = useState("false");
-
 
     function serialport_read() {
         //Starts the serial port monitor
@@ -53,7 +49,7 @@ const TestMain = (props) => {
     }
     async function uploadCode_ipc() {
         //Invokes upload-code from electron with the current code
-        ipcRenderer.invoke('upload-code', arduinocode);
+        ipcRenderer.invoke('upload-code', deviceCode);
         //Waits for results on which comport arduino is found on
         ipcRenderer.on('arduino_comport', (event, result) => {
             response = result;
@@ -89,8 +85,8 @@ const TestMain = (props) => {
                     break;
                 case "workspace-previous":
                     Blockly.mainWorkspace.undo(false);
-                    if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(OurWorkspace)) === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
-                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(default_workspace), OurWorkspace);
+                    if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(currentWorkspace)) === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
+                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(selectedDevice.selectedDevice.default_workspace), currentWorkspace);
                     }
                     break;
                 case "workspace-after":
@@ -112,7 +108,7 @@ const TestMain = (props) => {
             popout.style.display = "inline-flex"
         }
         else {
-            setDeviceChosen(event.target.id)
+            setCurrentDeviceName(event.target.id)
             //setCurrentDeviceVar( event.target.id)
             popout.style.opacity = "0"
             popout.style.backgroundColor = "transparent";
@@ -121,7 +117,6 @@ const TestMain = (props) => {
             }, 1)
         }
     }
-
 
     async function check_comport_constant() {
         ipcRenderer.invoke('check_comport_constant');
@@ -136,12 +131,14 @@ const TestMain = (props) => {
             if (result !== "nil") {
                 //console.log(result);
                 setSystemSettings(result);
+                
             }
         })
     }
     async function writeSystemSettings(system_settings) {
         ipcRenderer.invoke("write-settings", system_settings)
     }
+    
     useEffect(() => {
         setTimeout(() => {
             check_comport_constant();
@@ -161,18 +158,17 @@ const TestMain = (props) => {
             outer_circle.style.animation = "saturate 2s infinite ease-in-out alternate-reverse"
         }
     }, [available_com_ports])
-
     useEffect(() => {
         if (system_settings[1] !== undefined) {
             try{
-                var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`
+                var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`
                 writeSystemSettings(temp_settings)
                 setSystemSettings(temp_settings)
-                //console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${device_chosen.toString()}`)
+                //console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`)
             }
             catch(e){}
         }
-    }, [current_theme, device_chosen, splash_status])
+    }, [current_theme, currentDeviceName, splash_status])
     useEffect(() => {
         for (var i = 0; i < system_settings.length; i++) {
             if (system_settings[i] !== undefined) {
@@ -192,7 +188,7 @@ const TestMain = (props) => {
                         setCurrentTheme(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
                         break;
                     case "device":
-                        setDeviceChosen(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
+                        setCurrentDeviceName(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
                         break;
                 }
             }
@@ -207,11 +203,8 @@ const TestMain = (props) => {
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}
-                toolboxButtons={toolbox_items}
-                viewCode={
-                    arduinocode
-
-                }
+                toolboxButtons={toolboxItems}
+                viewCode={deviceCode}
                 serialport_monitor={serialport_monitor}
                 onSerialPortClick={serialport_read}
                 example_codes={example_codes}

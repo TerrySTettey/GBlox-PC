@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import PropTypes from 'prop-types';
-import Device_Manager from '../Device_Manager';
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
+import PropTypes from 'prop-types';
+
 import "./Body.scss";
+
 import ProgressBar from '../ProgressBar';
 import Slide_Out_Menu from '../Slide_Out_Menu'
 import Upload_Circle from '../Upload_Circle'
@@ -16,7 +18,6 @@ import WorkTabHolder from '../WorkTabHolder';
 import SplashScreen from '../SplashScreen'
 import NewDeviceManager from '../NewDeviceManager';
 import Code_Editor from '../Code_Editor'
-
 
 
 const Arduino_Uno_SVG =
@@ -4182,7 +4183,8 @@ const Body = (props) => {
             </div>
             <div className="c-Body-a-OverlayExtras" />
             <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile} />
-            <WorkTabHolder />            
+            <WorkTabHolder />
+            
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">

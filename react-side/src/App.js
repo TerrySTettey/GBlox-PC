@@ -1,21 +1,17 @@
 import React from 'react';
 import TestMain from "./components/TestMain";
-import DeviceContextProvider from "./components/contexts/DeviceContext";
-import ThemeContextProvider from "./components/contexts/ThemeContext";
 
+import ThemeContextProvider from "./components/contexts/ThemeContext";
+import CtxtP_SingletonManager from './components/contexts/Ctxt_SingletonManager';
 
 import './App.css';
-
-
-
-//Default Workspace
 
 const App = () => {
   return (
     <ThemeContextProvider>
-      <DeviceContextProvider>
+      <CtxtP_SingletonManager>
         <TestMain />
-      </DeviceContextProvider>
+      </CtxtP_SingletonManager>
     </ThemeContextProvider>
   )
 }
