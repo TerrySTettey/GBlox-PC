@@ -104,7 +104,8 @@ const ThemeContextProvider = (props) => {
         progressEmptyBarColor
         progressFilledBarColor
         primaryButtonColor
-        constructor(primary, secondary, tetiary, border, innerShadow, titleTextColor, textColor, logoColor, progressEmptyBarColor, progressFilledBarColor, primaryButtonColor) {
+        tabColor
+        constructor(primary, secondary, tetiary, border, innerShadow, titleTextColor, textColor, logoColor, progressEmptyBarColor, progressFilledBarColor, primaryButtonColor, tabColor) {
             this.primaryColor = primary;
             this.secondaryColor = secondary;
             this.tetiaryColor = tetiary;
@@ -116,11 +117,12 @@ const ThemeContextProvider = (props) => {
             this.progressEmptyBarColor = progressEmptyBarColor
             this.progressFilledBarColor = progressFilledBarColor;
             this.primaryButtonColor = primaryButtonColor;
+            this.tabColor = tabColor
         }
     }
 
-    var globalDarkTheme = new Theme("#0B0533", "#0000DC", "#060841", "#0000DC", "#0713BF52", "#4C97FF", "#FFFFFF", "#FFFFFF", "#1C1E4D", "#E9E9FF","#FFFFFF");
-    var globalLightTheme = new Theme("#DEDEF1", "#0000DC", "#FFFFFF", "#9898F0", "#BCBCEE", "#0000DC", "#000092", "#0000DC", "#BCBCEE", "#0000DC","#0000DC");
+    var globalDarkTheme = new Theme("#0B0533", "#0000DC", "#060841", "#0000DC", "#0713BF52", "#4C97FF", "#FFFFFF", "#FFFFFF", "#1C1E4D", "#E9E9FF","#FFFFFF","#0B0533");
+    var globalLightTheme = new Theme("#DEDEF1", "#0000DC", "#FFFFFF", "#9898F0", "#BCBCEE", "#0000DC", "#000092", "#0000DC", "#BCBCEE", "#0000DC","#0000DC","#DEDEF1");
 
     function changeTheme(event) {
         console.log(event.target.id)
@@ -141,6 +143,7 @@ const ThemeContextProvider = (props) => {
             document.documentElement.style.setProperty('--progress-empty-bar-color', globalDarkTheme.progressEmptyBarColor);
             document.documentElement.style.setProperty('--progress-filled-bar-color', globalDarkTheme.progressFilledBarColor);
             document.documentElement.style.setProperty('--primary-button-color', globalDarkTheme.primaryButtonColor);
+            document.documentElement.style.setProperty('--tab-color', globalDarkTheme.tabColor)
             setCurrentTheme(globalDarkTheme)
         }
         else {
@@ -160,6 +163,7 @@ const ThemeContextProvider = (props) => {
             document.documentElement.style.setProperty('--progress-empty-bar-color', globalLightTheme.progressEmptyBarColor);
             document.documentElement.style.setProperty('--progress-filled-bar-color', globalLightTheme.progressFilledBarColor);
             document.documentElement.style.setProperty('--primary-button-color', globalLightTheme.primaryButtonColor);
+            document.documentElement.style.setProperty('--tab-color', globalLightTheme.tabColor)
             setCurrentTheme(globalLightTheme)
         }
     }

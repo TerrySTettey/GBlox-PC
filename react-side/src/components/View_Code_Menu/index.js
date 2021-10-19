@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import PropTypes from 'prop-types'
 
 import Menu from '../Menu'
@@ -17,7 +17,7 @@ function Index(props) {
                 <div className="code-viewer">
                     <SyntaxHighlighter
                         language="arduino"
-                        style={tomorrowNightBlue}
+                        style={hybrid}
                         showLineNumbers={true}>
                         {deviceCode}
                     </SyntaxHighlighter>

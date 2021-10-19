@@ -146,7 +146,6 @@ const TestMain = (props) => {
         if (system_settings.length < 1) {
             readSystemSettings();
             ipcRenderer.on('comport_constant', (event, result) => {
-                console.log(result);
                 setAvailableCOMports(result);
             });
         }

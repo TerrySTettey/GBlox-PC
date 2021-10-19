@@ -19,48 +19,6 @@ var createdVariables = [];
 var currentBlock = null;
 
 
-const block_styles = {
-    "loop_blocks": {
-        "colourPrimary": "#c7b01a",
-        "colourSecondary": "#AD7BE9",
-        "colourTertiary": "#CDB6E9"
-    },
-    "logic_blocks": {
-        "colourPrimary": "#c91818",
-        "colourSecondary": "#64C7FF",
-        "colourTertiary": "#C5EAFF"
-    },
-    "math_blocks": {
-        "colourPrimary": "#03254c",
-        "colourSecondary": "#A334C5",
-        "colourTertiary": "#A3DB55"
-    },
-    "colour_blocks": {
-        "colourPrimary": "#23445b",
-        "colourSecondary": "#dbc7bd",
-        "colourTertiary": "#845d49"
-    },
-    "variable_blocks": {
-        "colourPrimary": "#525b99",
-        "colourSecondary": "#dbbdd6",
-        "colourTertiary": "#84497a"
-    },
-    "procedure_blocks": {
-        "colourPrimary": "#995ba5",
-        "colourSecondary": "#d6bddb",
-        "colourTertiary": "#7a4984"
-    },
-
-}
-const component_styles = {
-    "workspaceBackgroundColour": "#060841",
-    "flyoutBackgroundColour": "#0B0533"
-}
-var test_theme = Blockly.Theme.defineTheme('test_theme', {
-    'blockStyles': block_styles,
-    'componentStyles': component_styles,
-    'startHats': true
-});
 
 const CtxtP_SingletonManager = (props) => {
 
@@ -71,7 +29,7 @@ const CtxtP_SingletonManager = (props) => {
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
     const [toolBoxInit, setToolBoxInit] = useState(selectedDevice.toolbox)
 
-    const { 
+    const {
         dark_theme,
         light_theme
     } = useContext(ThemeContext)
@@ -99,40 +57,40 @@ const CtxtP_SingletonManager = (props) => {
     ]
     var editheader = [
         () => {
-            try{
+            try {
                 Blockly.copy(currentBlock)
                 Blockly.deleteBlock(currentBlock)
             }
-            catch(e){}
-            
+            catch (e) { }
+
         },
         () => {
-            try{
+            try {
                 Blockly.copy(currentBlock)
             }
-            catch (e) {}
-            
+            catch (e) { }
+
         },
         () => {
-            try{
+            try {
                 Blockly.paste(currentBlock)
             }
-            catch(e){}
+            catch (e) { }
         },
         () => {
-            try{
+            try {
                 var allblocks = currentWorkspace.getAllBlocks(true);
                 for (var i = 0; i < allblocks.length; i++) {
                     allblocks[i].select();
                 }
             }
-            catch(e){}
+            catch (e) { }
         },
         () => {
-            try{
+            try {
                 Blockly.deleteBlock(currentBlock)
             }
-            catch(e){}
+            catch (e) { }
         }
     ]
 
@@ -189,7 +147,7 @@ const CtxtP_SingletonManager = (props) => {
                     }, grid:
                     {
                         snap: true
-                    }, theme: test_theme
+                    }, theme: dark_theme
                 });
                 generateToolbox();
                 currentWorkspace.clear();
@@ -255,6 +213,13 @@ const CtxtP_SingletonManager = (props) => {
         if (selectedDevice.device_name === "Mello" || selectedDevice.device_name === "Basic") {
             code = mainLoopCode;
         }
+        // var dropdowns = document.getElementsByClassName("c-CustomDrop-a-Content")
+        // for (var i = 0; i < dropdowns.length; i++) {
+        //     dropdowns[i].style.display = "none"
+        // }
+
+
+
         //currentWorkspace.registerButtonCallback("createvar", logbutton)
         setDeviceCode(code);
     }
@@ -285,7 +250,8 @@ const CtxtP_SingletonManager = (props) => {
                 setToolBoxInit,
                 selectedToolbox,
                 fileheader,
-                editheader
+                editheader,
+                exportBlocks
             }}
         >
             {props.children}

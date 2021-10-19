@@ -13,6 +13,7 @@ const Header = (props) => {
     const {
         fileheader, 
         editheader,
+        exportBlocks,
         currentWorkspace
     } = useContext(Ctxt_SingletonManager)
     
@@ -61,7 +62,7 @@ const Header = (props) => {
                 <div className="header-buttons-segment">
                     <Dropdown buttonImage="1" list={["New", "Open", "Save", "Save As", "Share", "Close"]} funcsOnClick={fileheader}/>
                     <Dropdown buttonImage="2" list={["Cut", "Copy", "Paste", "Select All", "Delete"]} funcsOnClick={editheader}/>
-                    <HeaderButton buttonImage="3" />
+                    <HeaderButton buttonImage="3" onClick={exportBlocks}/>
                 </div>
                 <div id="blank-space" />
                 <div className="header-buttons-segment">
