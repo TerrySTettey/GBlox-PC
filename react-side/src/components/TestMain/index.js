@@ -86,7 +86,7 @@ const TestMain = (props) => {
                 case "workspace-previous":
                     Blockly.mainWorkspace.undo(false);
                     if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(currentWorkspace)) === `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`) {
-                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(selectedDevice.selectedDevice.default_workspace), currentWorkspace);
+                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(selectedDevice.default_workspace), currentWorkspace);
                     }
                     break;
                 case "workspace-after":
@@ -142,11 +142,10 @@ const TestMain = (props) => {
         // setTimeout(() => {
         //     check_comport_constant();
         // }, 3000)
-
         if (system_settings.length < 1) {
             readSystemSettings();
             ipcRenderer.on('comport_constant', (event, result) => {
-                console.log(result);
+                //console.log(result);
                 setAvailableCOMports(result);
             });
         }

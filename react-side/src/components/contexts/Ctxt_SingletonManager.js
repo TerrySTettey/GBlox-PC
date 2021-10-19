@@ -64,12 +64,12 @@ var test_theme = Blockly.Theme.defineTheme('test_theme', {
 
 const CtxtP_SingletonManager = (props) => {
 
-    const [currentDeviceName, setCurrentDeviceName] = useState("Mello");        //Used to set and check the current device selected
+    const [currentDeviceName, setCurrentDeviceName] = useState("");        //Used to set and check the current device selected
     const [currentToolBoxLevel, setCurrentToolBoxLevel] = useState(0);          //Used to set and check the current Toolbox Level
     const [toolboxItems, setToolboxItems] = useState([]);                       //Used to set and check the current items in the Toolbox
     const [deviceCode, setDeviceCode] = useState("");                           //Used to set and check the generated code for the current device
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
-    const [toolBoxInit, setToolBoxInit] = useState(selectedDevice.toolbox)
+    const [toolBoxInit, setToolBoxInit] = useState(selectedDevice.toolbox)      //Used to initiate the change of a toolbox.
 
     const { 
         dark_theme,
@@ -143,10 +143,13 @@ const CtxtP_SingletonManager = (props) => {
         */
         //Checking List to see if Device exists:
         if (initialized_workspace === true) {
+            console.log(`Selected Device updated in Singleton. Name: ${selectedDevice.device_name}; CurrentName: ${currentDeviceName}`)
             var tmp = DeviceList.findIndex((ele) => (ele.device_name == currentDeviceName))
+            console.log(tmp)
             if (tmp !== -1) {
                 //Assign device to (g_v)selectedDevice
                 selectedDevice = DeviceList[tmp];
+                console.log(selectedDevice.device_name)
                 selectedToolbox = selectedDevice.toolbox[0]
             } else {
                 //setCurrentDeviceName((prevState) => prevState)
@@ -285,7 +288,7 @@ const CtxtP_SingletonManager = (props) => {
                 setToolBoxInit,
                 selectedToolbox,
                 fileheader,
-                editheader
+                editheader,
             }}
         >
             {props.children}
