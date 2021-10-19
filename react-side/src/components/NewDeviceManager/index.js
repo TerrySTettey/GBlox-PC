@@ -3502,7 +3502,7 @@ function Index(props) {
     function add_device(svg, device_name) {
         return (
             <div className="device_icon" id={device_name} onClick={props.deviceOnClick}>
-                <svg className="border" xmlns="http://www.w3.org/2000/svg" width="227.914" height="175.467" viewBox="0 0 227.914 175.467">
+                <svg id={device_name} className="border" xmlns="http://www.w3.org/2000/svg" width="227.914" height="175.467" viewBox="0 0 227.914 175.467">
                     <defs>
                         <filter id="Union_3" x="0" y="0" width="227.914" height="175.467" filterUnits="userSpaceOnUse">
                             <feOffset input="SourceAlpha" />
