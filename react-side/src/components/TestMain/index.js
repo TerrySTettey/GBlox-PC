@@ -108,7 +108,6 @@ const TestMain = (props) => {
             popout.style.display = "inline-flex"
         }
         else {
-            console.log(event.target.id)
             setCurrentDeviceName(event.target.id)
             //setCurrentDeviceVar( event.target.id)
             popout.style.opacity = "0"

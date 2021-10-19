@@ -105,7 +105,6 @@ const CtxtP_SingletonManager = (props) => {
             console.log(`Selected Device updated in Singleton. Name: ${selectedDevice.device_name}; CurrentName: ${currentDeviceName}`)
             console.log(currentDeviceName)
             var tmp = DeviceList.findIndex((ele) => (ele.device_name == currentDeviceName))
-            console.log(tmp)
             if (tmp !== -1) {
                 //Assign device to (g_v)selectedDevice
                 console.log(DeviceList[tmp])

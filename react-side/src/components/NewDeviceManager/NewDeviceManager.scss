@@ -58,12 +58,13 @@
                 position: relative;
                 display: flex;
                 fill: var(--tetiary-color);
+                user-select: none;
                 .border {
-                    
                     position: relative;
                     fill: inherit;
                     display: block;
                     margin: -12px -6px -12px -6px;
+                    
                 }
                 .children {
                     pointer-events: none;
