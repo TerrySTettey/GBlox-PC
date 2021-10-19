@@ -4182,10 +4182,7 @@ const Body = (props) => {
             </div>
             <div className="c-Body-a-OverlayExtras" />
             <Header fileheaderfunc={props.fileheaderfunc} editheaderfunc={props.editheaderfunc} saveFile={props.saveFile} />
-            <WorkTabHolder />
-            
-                <WorkTabHolder />
-            
+            <WorkTabHolder />            
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">

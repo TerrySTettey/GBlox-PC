@@ -180,7 +180,8 @@ $shift: 0px;
           #full-editing,
           #full-highlighting {
             border: 0;
-            background-color: var(--primary-color);
+            
+            
             outline: none;
             width: 94%;
             height: 88%;
@@ -192,6 +193,8 @@ $shift: 0px;
           #full-highlighting,
           #full-highlighting * {
             font-size: 17pt;
+            background-image: none !important;
+            background-color: var(--primary-color) !important;
             font-family: "Baloo2-Regular";
             line-height: 20pt;
             tab-size: 5;
@@ -215,6 +218,7 @@ $shift: 0px;
           #full-editing {
             color: transparent;
             background: transparent;
+            background-color: var(--primary-color) !important;
             
           }
         }
