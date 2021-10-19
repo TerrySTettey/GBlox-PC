@@ -1,3 +1,5 @@
+//Currently not in use
+
 import { createContext, useState, useEffect, useContext } from "react"
 import { DeviceList } from "../../deviceDef/device_list";
 import { ThemeContext } from "./ThemeContext";

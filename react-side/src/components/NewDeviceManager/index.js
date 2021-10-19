@@ -3546,7 +3546,7 @@ function Index(props) {
                     <g id="Group_532" data-name="Group 532" transform="translate(-201.01 -108.194)">
                         <g data-type="innerShadowGroup">
                             <g transform="matrix(1, 0, 0, 1, 201.01, 108.19)" filter="url(#Path_366)">
-                                <path id="Path_366-3" data-name="Path 366" d="M470.259,1507.169H1739l106.454,106.454-1.579,226.161L1805,1883.5v444.283l-29,29H446.746l-89.271-89.271V1733.755l63.436-63.436v-163.15Z" transform="translate(-347.47 -1497.17)" fill="#0b0533" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_366-3" data-name="Path 366" d="M470.259,1507.169H1739l106.454,106.454-1.579,226.161L1805,1883.5v444.283l-29,29H446.746l-89.271-89.271V1733.755l63.436-63.436v-163.15Z" transform="translate(-347.47 -1497.17)" stroke-width="2" />
                             </g>
                             <path id="Path_366-4" data-name="Path 366" d="M470.259,1507.169H1739l106.454,106.454-1.579,226.161L1805,1883.5v444.283l-29,29H446.746l-89.271-89.271V1733.755l63.436-63.436v-163.15Z" transform="translate(-146.464 -1388.975)" fill="#0b0533" />
                             <g transform="matrix(1, 0, 0, 1, 201.01, 108.19)" filter="url(#Path_366-2)">
@@ -3554,7 +3554,7 @@ function Index(props) {
                             </g>
                             <path id="Path_366-6" data-name="Path 366" d="M470.259,1507.169H1739l106.454,106.454-1.579,226.161L1805,1883.5v444.283l-29,29H446.746l-89.271-89.271V1733.755l63.436-63.436v-163.15Z" transform="translate(-146.464 -1388.975)" fill="none" stroke="#0000dc" stroke-width="2" />
                         </g>
-                        <path id="Path_368" data-name="Path 368" d="M1703.99,480.6l-21.552,21.552V924.55L1703.99,903Z" transform="translate(0 3)" fill="#0000dc" />
+                        <path id="Path_368" data-name="Path 368" d="M1703.99,480.6l-21.552,21.552V924.55L1703.99,903Z" transform="translate(0 3)"  />
                         <path id="Path_372" data-name="Path 372" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -671.104)" fill="none" stroke="#0000dc" stroke-width="2" />
                         <path id="Path_373" data-name="Path 373" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -631.104)" fill="none" stroke="#0000dc" stroke-width="2" />
                         <path id="Path_374" data-name="Path 374" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -591.104)" fill="none" stroke="#0000dc" stroke-width="2" />

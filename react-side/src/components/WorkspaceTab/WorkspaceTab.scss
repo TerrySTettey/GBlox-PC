@@ -7,7 +7,7 @@
     transition: max-width 1s;
     
 
-    background-color: #0B0533CC;
+    background-color: var(--tab-color);
     //outline: 2px red d#0B0533ashed;
     margin: 0 0 0 0px;
     justify-content: center;
@@ -20,6 +20,7 @@
         pointer-events: none;
         color: #FFF6;
         transform: skewX(45deg);
+        font-family: "Baloo2-Regular";
         font-size: 16px;
         max-width: 1000px;
         min-width: 10px;

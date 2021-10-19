@@ -20,7 +20,7 @@
         top: 50%;
         width: 5.3px;
         height: 2px;
-        background-color: var(--tetiary-color);
+        background-color: var(--primary-color);
     }
     .svg-connector {
         position: relative;
@@ -83,13 +83,13 @@
         // display: inline-flex;
         width: 195.88px;
         height: 24.46px;
-        background-color: var(--tetiary-color);
+        background-color: var(--primary-color);
 
         #connector-top{
             position: absolute;
             width:2px;
             height: 11.44px;
-            background-color: #E9E9FF;
+            background-color: var(--progress-filled-bar-color);
             left: 50%;
             top: 0%;
             margin-left: -1px;
@@ -101,7 +101,7 @@
             position: absolute;
             width:2px;
             height: 2px;
-            background-color: #E9E9FF;
+            background-color: var(--progress-filled-bar-color);
             left: 50%;
             margin-left: -1px;
             top: 38.7%;
@@ -116,7 +116,7 @@
             position: absolute;
             width: 2px;
             height: 15px;
-            background-color: #E9E9FF;
+            background-color: var(--progress-filled-bar-color);
             left: 50%;
             margin-left: -1px;
             bottom: 0%;
