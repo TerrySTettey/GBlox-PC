@@ -1,12 +1,14 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { DeviceList } from "../../deviceDef/device_list";
 import Blockly from "blockly";
 import AlterBlockly from "../../blocklyextras/blocklyAlters";
 import { mainLoopCode } from "../../customblocks/compiler/arduino_core";
 import { MelloDOM } from "../../customblocks/toolboxes/toolboxes";
-
+import { ThemeContext } from "./ThemeContext";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+const { ipcRenderer } = window.require('electron');
 
 export const Ctxt_SingletonManager = createContext()
 
@@ -69,6 +71,72 @@ const CtxtP_SingletonManager = (props) => {
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
     const [toolBoxInit, setToolBoxInit] = useState(selectedDevice.toolbox)
 
+    const { 
+        dark_theme,
+        light_theme
+    } = useContext(ThemeContext)
+
+    var fileheader = [
+        //New File
+        () => {
+            if (document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0] !== undefined) {
+                currentWorkspace.clear();
+                document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0].click()
+            }
+        },
+        //Open File
+        () => {
+            loadBlocks()
+        },
+        //Save File
+        () => {
+            exportBlocks()
+        },
+        //Save As File
+        () => {
+            exportBlocks()
+        }
+    ]
+    var editheader = [
+        () => {
+            try{
+                Blockly.copy(currentBlock)
+                Blockly.deleteBlock(currentBlock)
+            }
+            catch(e){}
+            
+        },
+        () => {
+            try{
+                Blockly.copy(currentBlock)
+            }
+            catch (e) {}
+            
+        },
+        () => {
+            try{
+                Blockly.paste(currentBlock)
+            }
+            catch(e){}
+        },
+        () => {
+            try{
+                var allblocks = currentWorkspace.getAllBlocks(true);
+                for (var i = 0; i < allblocks.length; i++) {
+                    allblocks[i].select();
+                }
+            }
+            catch(e){}
+        },
+        () => {
+            try{
+                Blockly.deleteBlock(currentBlock)
+            }
+            catch(e){}
+        }
+    ]
+
+
     useEffect(() => {
         /*When Current Device is changed:
             -> Change the device in the Device List
@@ -104,7 +172,6 @@ const CtxtP_SingletonManager = (props) => {
             setToolBoxInit(0)
         }
     }, [toolBoxInit])
-
     useEffect(() => {
         /*Initializes Blockly injection */
         if (currentDeviceName !== "") {
@@ -134,6 +201,33 @@ const CtxtP_SingletonManager = (props) => {
             }
         }
     })
+
+    //Exports Blocks
+    function exportBlocks() {
+        try {
+            var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+            var xml_text = Blockly.Xml.domToText(xml);
+            console.log("Saving the following: " + xml_text);
+            ipcRenderer.send('save-file', xml_text)
+        } catch (e) {
+            alert(e);
+        }
+    }
+
+    //Loads Blocks
+    function loadBlocks() {
+        try {
+            console.log("Loading a file...")
+            var hold = ipcRenderer.sendSync('load-file')
+            if (hold !== "nil") {
+                var xmlss = Blockly.Xml.textToDom(hold)
+                Blockly.mainWorkspace.clear();
+                Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
 
     //Generates toolbox list for the GUI
     function generateToolbox() {
@@ -189,7 +283,9 @@ const CtxtP_SingletonManager = (props) => {
                 setInitializedWorkspace,
                 toolBoxInit,
                 setToolBoxInit,
-                selectedToolbox
+                selectedToolbox,
+                fileheader,
+                editheader
             }}
         >
             {props.children}

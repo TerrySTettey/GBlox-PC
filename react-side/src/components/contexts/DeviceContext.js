@@ -11,6 +11,7 @@ import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs
 export const DeviceContext = createContext();
 const { ipcRenderer } = window.require('electron')
 
+
 var current_device = `No Device Selected`;
 var currentToolboxName = "Mello";
 var default_workspace = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`;

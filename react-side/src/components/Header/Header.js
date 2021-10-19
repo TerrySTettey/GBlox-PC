@@ -6,15 +6,15 @@ import Dropdown from '../Dropdown';
 import HeaderButton from '../HeaderButton';
 import Button from '../Button'
 import CustomDrop from '../CustomDrop';
-import { DeviceContext } from '../contexts/DeviceContext';
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 const Header = (props) => {
     const {
         fileheader, 
         editheader,
-        OurWorkspace
-    } = useContext(DeviceContext)
+        currentWorkspace
+    } = useContext(Ctxt_SingletonManager)
     
     const { 
         changeTheme
