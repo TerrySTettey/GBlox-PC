@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext, useReducer} from "react";
+import { createContext, useEffect, useState, useContext, useReducer } from "react";
 import { DeviceList } from "../../deviceDef/device_list";
 import Blockly from "blockly";
 import AlterBlockly from "../../blocklyextras/blocklyAlters";
@@ -14,7 +14,6 @@ const { ipcRenderer } = window.require('electron');
 export const Ctxt_SingletonManager = createContext()
 
 //var selectedDevice = DeviceList[0];
-var selectedToolbox = MelloDOM;
 var currentWorkspace;
 var createdVariables = [];
 var currentBlock = null;
@@ -25,14 +24,14 @@ var currentTab = null;
 
 const CtxtP_SingletonManager = (props) => {
 
-    const [currentDeviceName, setCurrentDeviceName] = useState("");        //Used to set and check the current device selected
+    const [currentDeviceName, setCurrentDeviceName] = useState("");             //Used to set and check the current device selected
     const [currentToolBoxLevel, setCurrentToolBoxLevel] = useState(0);          //Used to set and check the current Toolbox Level
     const [toolboxItems, setToolboxItems] = useState([]);                       //Used to set and check the current items in the Toolbox
     const [deviceCode, setDeviceCode] = useState("");                           //Used to set and check the generated code for the current device
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
-    var [selectedDevice, setSelectedDevice] = useState(DeviceList[0]);
-    const [toolBoxInit, setToolBoxInit] = useState(selectedDevice.toolbox)      //Used to initiate the change of a toolbox.
-    
+    var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);          //Used to set and check the selected device's data    //Used to initiate the change of a toolbox.
+    const [currentDeviceChanged, setCurrentDeviceChanged] = useState(0)
+    const [selectedToolbox, setSelectedToolbox] = useState(MelloDOM)
     const {
         dark_theme,
         light_theme
@@ -114,14 +113,14 @@ const CtxtP_SingletonManager = (props) => {
         //Checking List to see if Device exists:
         if (initialized_workspace === true) {
             //console.log(`Selected Device updated in Singleton. Name: ${selectedDevice.device_name}; CurrentName: ${currentDeviceName}`)
-            console.log(currentDeviceName)
             var tmp = DeviceList.findIndex((ele) => (ele.device_name == currentDeviceName))
             if (tmp !== -1) {
                 //Assign device to (g_v)selectedDevice
-                console.log(DeviceList[tmp])
                 setSelectedDevice(DeviceList[tmp]);
-                console.log(selectedDevice.device_name)
-                selectedToolbox = selectedDevice.toolbox[0]
+                setSelectedToolbox(DeviceList[tmp].toolbox[0])
+                setCurrentDeviceChanged(1)
+                //Blockly.Xml.clearWorkspaceAndLoadFromXml(DeviceList[tmp].toolbox[0], currentWorkspace)
+                //selectedToolbox = selectedDevice.toolbox[0]
             } else {
                 //setCurrentDeviceName((prevState) => prevState)
             }
@@ -139,13 +138,12 @@ const CtxtP_SingletonManager = (props) => {
 
     }, [currentToolBoxLevel])
     useEffect(() => {
-        if (toolBoxInit === 1) {
-            //console.log(selectedToolbox)
-            //selectedToolbox = selectedDevice.toolbox[0];
-            //currentWorkspace.updateToolbox(selectedToolbox);
-            setToolBoxInit(0)
+        if (initialized_workspace) {
+            console.log(selectedToolbox)
+            currentWorkspace.updateToolbox(selectedToolbox);
+            generateToolbox();
         }
-    }, [toolBoxInit])
+    }, [selectedToolbox])
     useEffect(() => {
         /*Initializes Blockly injection */
         if (currentDeviceName !== "") {
@@ -270,12 +268,13 @@ const CtxtP_SingletonManager = (props) => {
                 selectedDevice,
                 initialized_workspace,
                 setInitializedWorkspace,
-                toolBoxInit,
-                setToolBoxInit,
                 selectedToolbox,
                 fileheader,
                 editheader,
                 exportBlocks,
+                currentDeviceChanged,
+                setCurrentDeviceChanged,
+                selectedToolbox, setSelectedToolbox
             }}
         >
             {props.children}

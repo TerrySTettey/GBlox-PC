@@ -1,5 +1,5 @@
 var DeviceList = []
-const full_toolbox = {
+const full_toolbox = [{
     kind: "categoryToolbox",
     contents: [
         {
@@ -127,7 +127,8 @@ const full_toolbox = {
             ],
         },
     ],
-}
+}]
+
 function device(device_name, compiler, microcontroller, toolbox, default_workspace, peripherals_used, peripherals_pins) {
     this.device_name = device_name;
     this.compiler = compiler;
