@@ -180,10 +180,8 @@ $shift: 0px;
           #full-editing,
           #full-highlighting {
             border: 0;
-            
-            
             outline: none;
-            width: 94%;
+            width: 92%;
             height: 88%;
             margin: 0;
             padding: 10px 10px 0px 10px;
@@ -198,7 +196,7 @@ $shift: 0px;
             font-family: "Baloo2-Regular";
             line-height: 20pt;
             tab-size: 5;
-            caret-color: var(--text-color);
+
           }
 
           #full-editing,
@@ -216,9 +214,10 @@ $shift: 0px;
             z-index: 0;
           }
           #full-editing {
-            color: transparent;
+            color: transparent !important;
             background: transparent;
-            background-color: var(--primary-color) !important;
+            background-color: transparent !important;
+            caret-color: var(--text-color);
             
           }
         }

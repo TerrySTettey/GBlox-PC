@@ -61,6 +61,10 @@ const Body = (props) => {
     var [PullOutState, setPullOutState] = useState("Closed")
     var TrashHolder = useRef(null);
     var FlyOutHolder = useRef(null)
+    const [device_svg, setDeviceSVG] = useState(svg_dictionary.devices.Arduino_Uno_SVG)
+    const {
+        selectedDevice
+    } = useContext(Ctxt_SingletonManager)
 
     const [serialport_monitor, setSerialPortMonitor] = useState("")
 
@@ -185,6 +189,7 @@ const Body = (props) => {
     var FlyoutContainerChanged = false;
 
     useEffect(() => {
+        
         if (TrashContainerChanged === false) {
             var Trash = document.getElementsByClassName("blocklyTrash")[0];
             if (Trash !== undefined) {
@@ -197,6 +202,22 @@ const Body = (props) => {
             setSerialPortMonitor(props.serialport_monitor);
         }
     })
+    useEffect(() => {
+        console.log(selectedDevice.device_name)
+        switch(selectedDevice.device_name){
+            case "Mello":
+                setDeviceSVG(svg_dictionary.devices.mello_temp);
+                document.getElementById("Add_device").style.display = "none"
+                break;
+            case "Arduino Uno":
+                setDeviceSVG(svg_dictionary.devices.Arduino_Uno_SVG);
+                document.getElementById("Add_device").style.display = "none"
+                break;
+            default:
+                document.getElementById("Add_device").style.display = "block"
+                break;
+        }
+    },[selectedDevice])
 
     return (
         <div className="body-container">
@@ -416,7 +437,7 @@ const Body = (props) => {
                     </defs>
                     <g id="Mask_Group_10" data-name="Mask Group 10" transform="translate(-3756 3303)" clip-path="url(#clip-path)">
                         <g id="Group_545" data-name="Group 545">
-                            <path id="Subtraction_5" data-name="Subtraction 5" d="M3120,4098H1200v-.392h6.651v-76.649l14.35-14.35-.831-746.552,25.091-25.091v-92.4l-34.568-30.378L1200,3102.8V3018H3120V4098Zm-1186.4-62.539,39.576,39.477H3063.087l39.937-39.834V4012.59l.6-.681-.981-354.408h-54.273v-55.909l55.284-55.023-.359-415.93-30-32.639-784.264.978-247.2.2-549.91.383L1443,3147.442v87.4l25.155,25.09v743.912l31.838,31.757Z" transform="translate(1784 -7307)"  stroke="#0000dc" stroke-width="1" />
+                            <path id="Subtraction_5" data-name="Subtraction 5" d="M3120,4098H1200v-.392h6.651v-76.649l14.35-14.35-.831-746.552,25.091-25.091v-92.4l-34.568-30.378L1200,3102.8V3018H3120V4098Zm-1186.4-62.539,39.576,39.477H3063.087l39.937-39.834V4012.59l.6-.681-.981-354.408h-54.273v-55.909l55.284-55.023-.359-415.93-30-32.639-784.264.978-247.2.2-549.91.383L1443,3147.442v87.4l25.155,25.09v743.912l31.838,31.757Z" transform="translate(1784 -7307)" stroke="#0000dc" stroke-width="1" />
                             <g id="Rectangle_230" data-name="Rectangle 230" transform="translate(2763 -3949)" fill="#fff" stroke="#707070" stroke-width="1">
                                 <rect width="71" height="400" stroke="none" />
                                 <rect x="0.5" y="0.5" width="70" height="399" fill="none" />
@@ -522,7 +543,7 @@ const Body = (props) => {
                     </defs>
                     <g id="Mask_Group_15" data-name="Mask Group 15" transform="translate(-4832 3303)" clip-path="url(#clip-path)">
                         <g id="Group_547" data-name="Group 547">
-                            <path id="Subtraction_5" data-name="Subtraction 5" d="M3120,4098H1200v-.392h6.651v-76.649l14.35-14.35-.831-746.552,25.091-25.091v-92.4l-34.568-30.378L1200,3102.8V3018H3120V4098Zm-1186.4-62.539,39.576,39.477H3063.087l39.937-39.834V4012.59l.6-.681-.981-354.408h-54.273v-55.909l55.284-55.023-.359-415.93-30-32.639-784.264.978-247.2.2-549.91.383L1443,3147.442v87.4l25.155,25.09v743.912l31.838,31.757Z" transform="translate(1784 -7307)"  stroke="#0000dc" stroke-width="1" />
+                            <path id="Subtraction_5" data-name="Subtraction 5" d="M3120,4098H1200v-.392h6.651v-76.649l14.35-14.35-.831-746.552,25.091-25.091v-92.4l-34.568-30.378L1200,3102.8V3018H3120V4098Zm-1186.4-62.539,39.576,39.477H3063.087l39.937-39.834V4012.59l.6-.681-.981-354.408h-54.273v-55.909l55.284-55.023-.359-415.93-30-32.639-784.264.978-247.2.2-549.91.383L1443,3147.442v87.4l25.155,25.09v743.912l31.838,31.757Z" transform="translate(1784 -7307)" stroke="#0000dc" stroke-width="1" />
                             <g id="Rectangle_230" data-name="Rectangle 230" transform="translate(2763 -3949)" fill="#fff" stroke="#707070" stroke-width="1">
                                 <rect width="71" height="400" stroke="none" />
                                 <rect x="0.5" y="0.5" width="70" height="399" fill="none" />
@@ -563,7 +584,7 @@ const Body = (props) => {
                                 </g>
                             </g>
                         </svg>
-                        
+
                     </div>
                     <svg id="num15trash" ref={TrashHolder}>
                         {/*
@@ -599,13 +620,13 @@ const Body = (props) => {
             <div className="c-Body-a-OverlayExtras" />
             <Header />
             <WorkTabHolder />
-            
+
             <div className="c-Body-a-OverlayItems">
                 <div className="i-emptyDiv1" />
                 <div className="c-Body-a-UploadCircle">
-                    <Upload_Circle
-                        onClick={props.deviceOnClick}
-                    />
+                    <Upload_Circle onClick={props.deviceOnClick}>
+                        {device_svg}
+                    </Upload_Circle>
                 </div>
                 <div className="i-emptyDiv2" />
                 <div className="c-Body-a-ToolSelector">
@@ -636,7 +657,7 @@ const Body = (props) => {
                 <NewDeviceManager deviceOnClick={props.deviceOnClick} />
             </div>
             <div id="c-codeEditor">
-                    <Code_Editor />
+                <Code_Editor />
             </div>
             <div id="c-Body-a-SplashScreen">
                 <SplashScreen
