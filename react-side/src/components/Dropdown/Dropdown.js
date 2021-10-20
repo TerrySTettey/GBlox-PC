@@ -37,7 +37,7 @@ const Dropdown = (props) => {
             setButtonState("Out");
             dropdownBox.current.style.display = "none"
         }
-        console.log(dropdownBox)
+        //console.log(dropdownBox)
     }
 
     var ButtonHolder = [];

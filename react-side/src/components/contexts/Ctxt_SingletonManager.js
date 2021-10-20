@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState, useContext, useReducer} from "react";
 import { DeviceList } from "../../deviceDef/device_list";
 import Blockly from "blockly";
 import AlterBlockly from "../../blocklyextras/blocklyAlters";
@@ -7,6 +7,7 @@ import { MelloDOM } from "../../customblocks/toolboxes/toolboxes";
 import { ThemeContext } from "./ThemeContext";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import WorkspaceTab from "../WorkspaceTab";
 
 const { ipcRenderer } = window.require('electron');
 
@@ -19,6 +20,8 @@ var currentWorkspace;
 var createdVariables = [];
 var currentBlock = null;
 
+var WSNumTracker = 0;
+var currentTab = null;
 
 
 const CtxtP_SingletonManager = (props) => {
@@ -43,18 +46,22 @@ const CtxtP_SingletonManager = (props) => {
                 currentWorkspace.clear();
                 document.getElementsByClassName("c-WorkspaceAdd-a-Container")[0].click()
             }
+            clearDropdowns()
         },
         //Open File
         () => {
             loadBlocks()
+            clearDropdowns()
         },
         //Save File
         () => {
             exportBlocks()
+            clearDropdowns()
         },
         //Save As File
         () => {
             exportBlocks()
+            clearDropdowns()
         }
     ]
     var editheader = [
@@ -64,6 +71,7 @@ const CtxtP_SingletonManager = (props) => {
                 Blockly.deleteBlock(currentBlock)
             }
             catch (e) { }
+            clearDropdowns()
 
         },
         () => {
@@ -71,13 +79,14 @@ const CtxtP_SingletonManager = (props) => {
                 Blockly.copy(currentBlock)
             }
             catch (e) { }
-
+            clearDropdowns()
         },
         () => {
             try {
                 Blockly.paste(currentBlock)
             }
             catch (e) { }
+            clearDropdowns()
         },
         () => {
             try {
@@ -87,12 +96,14 @@ const CtxtP_SingletonManager = (props) => {
                 }
             }
             catch (e) { }
+            clearDropdowns()
         },
         () => {
             try {
                 Blockly.deleteBlock(currentBlock)
             }
             catch (e) { }
+            clearDropdowns()
         }
     ]
 
@@ -103,7 +114,7 @@ const CtxtP_SingletonManager = (props) => {
         */
         //Checking List to see if Device exists:
         if (initialized_workspace === true) {
-            console.log(`Selected Device updated in Singleton. Name: ${selectedDevice.device_name}; CurrentName: ${currentDeviceName}`)
+            //console.log(`Selected Device updated in Singleton. Name: ${selectedDevice.device_name}; CurrentName: ${currentDeviceName}`)
             console.log(currentDeviceName)
             var tmp = DeviceList.findIndex((ele) => (ele.device_name == currentDeviceName))
             if (tmp !== -1) {
@@ -254,6 +265,12 @@ const CtxtP_SingletonManager = (props) => {
             document.getElementById("c-variableSelector").style.display = "none";
         }
         
+    //Used after dropdown functions to clear the dropdown off the screen
+    function clearDropdowns() {
+        var Boxes = document.getElementsByClassName("blue-dropdown-box")
+        for (var i = 0; i < Boxes.length; i++) {
+            Boxes[i].style.display = "none"
+        }
     }
 
     return (
