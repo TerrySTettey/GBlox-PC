@@ -62,6 +62,9 @@ const CtxtP_SingletonManager = (props) => {
         () => {
             exportBlocks()
             clearDropdowns()
+        },
+        () => {
+            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!`)
         }
     ]
     var editheader = [

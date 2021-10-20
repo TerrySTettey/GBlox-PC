@@ -12,6 +12,8 @@ var Upload_Status = null;
 var serial_monitor;
 var serial_monitor_results = "";
 const { execSync, exec } = require('child_process');
+const { shell } = require('electron');
+var loaded_path = "";
 var win = null;
 //Creation of Application Window
 function createWindow() {
@@ -68,6 +70,7 @@ async function loadFile() {
     });
 
     console.log("File Path: " + filePaths[0])
+    loaded_path = filePaths[0];
     if (filePaths[0] && !canceled) {
         try {
             ourdata = fs.readFileSync(filePaths[0], 'utf8')
@@ -117,9 +120,13 @@ async function retrieveSystemSettings(cb) {
     cb(settings)
 }
 
+async function sendMail() {
+    
+}
+
 //Function to constantly retrieve available USB COMPORTs
 async function COMPORT_CONSTANT(cb) {
-    
+
     var ports = []   //Array for all available COM ports connected via USB
     try {
         var comport = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" }) //Check system registry for all available serial ports
@@ -182,6 +189,7 @@ async function VERIFYCODE(cb) {
         cb("No Arduino Detected");
     }
 }
+
 //Function to read the serial port of the device via COMPORT
 async function readSerialPort(cb) {
     if (typeof serial_monitor === "undefined") {
@@ -211,6 +219,9 @@ ipcMain.on("load-file", async function (event) {
     var data = await loadFile()
     event.returnValue = data;
 })
+ipcMain.on("send-file-mail", async function (event) {
+    sendMail();
+})
 //ipc call for "load-settings" which is responsible for loading the current settings.txt file and sending it back to react for use
 ipcMain.handle("load-settings", async function (event) {
     try {
@@ -236,7 +247,7 @@ ipcMain.handle("check_comport_constant", async function (event) {
         });;
 
     }
-    catch (e) {}
+    catch (e) { }
 
 })
 
@@ -284,13 +295,13 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
     }
 })
 try {
-setInterval(()=>{
-    var result = []
+    setInterval(() => {
+        var result = []
 
         COMPORT_CONSTANT(function (res) {
             result = res
             win.webContents.send('comport_constant', result)
         });;
-},3000)
+    }, 3000)
 }
-catch (e) {}
+catch (e) { }
