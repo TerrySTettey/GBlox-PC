@@ -82,12 +82,14 @@ select {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    transition: all 0.5s;
 
     #variable-type-text {
         white-space: nowrap;
         grid-area: vartypetext;
         display: inline-flex;
         color: var(--text-color);
+        transition: inherit;
     }
     #variable-type-select {
         white-space: nowrap;
@@ -101,6 +103,7 @@ select {
         height: 28px;
         border: 1px solid var(--border-color);
         user-select: none;
+        transition: inherit;
         
         select{
             text-indent: 5%;
@@ -134,6 +137,7 @@ select {
         overflow-x: auto;
         overflow-y: hidden;
         user-select: none;
+        transition: inherit;
     }
     #variable-name-input {
         white-space: nowrap;
@@ -143,6 +147,7 @@ select {
         border: 1px solid var(--border-color);
         font-size: 17px;
         padding-left: 5px;
+        transition: inherit;
     }
     #close-button {
         grid-area: close;

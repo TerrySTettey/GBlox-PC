@@ -75,6 +75,7 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 0px;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -83,6 +84,7 @@ $shift: 0px;
         #num4 {
             grid-area: n4;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -91,6 +93,7 @@ $shift: 0px;
         #num7 {
             grid-area: n7;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -98,6 +101,7 @@ $shift: 0px;
         #num10 {
             grid-area: n10;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -105,6 +109,7 @@ $shift: 0px;
         #num13 {
             grid-area: n13;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -123,6 +128,7 @@ $shift: 0px;
             }
             svg{
                 fill: var(--progress-filled-bar-color) !important;
+                transition: fill 0.5s, stroke 0.5s;
             }
         }
 
@@ -130,6 +136,7 @@ $shift: 0px;
             grid-area: n2;
             overflow: hidden;
             #Subtraction_9{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -141,6 +148,7 @@ $shift: 0px;
         #num14 {
             grid-area: n14;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -151,6 +159,7 @@ $shift: 0px;
             margin-top: -0.5px;
             margin-left: 1px;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -160,6 +169,7 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 1px;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -169,6 +179,7 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 1px;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -183,6 +194,7 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 1px;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -192,6 +204,7 @@ $shift: 0px;
             margin-top: 0px;
             margin-left: 0px;
             #Subtraction_5{
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -259,6 +272,7 @@ $shift: 0px;
         top: 0;
         right: 0;
         background-color: var(--primary-color);
+        transition: background-color 0.5s;
         height: 100vh;
         width: 0px;
         z-index: 51;
@@ -372,6 +386,7 @@ $shift: 0px;
         background-color: var(--primary-color);
         //clip-path: url(#my-clip-path);
         filter: drop-shadow(0 0 0 50px black);
+        transition: background-color 0.5s;
     }
 
     .c-Body-a-PulloutMenu {

@@ -26,6 +26,7 @@
         background-color: var(--primary-color);
         width: 412.54px;
         height: 976.94px;
+        transition: all 0.5s;
     }
     .c-Pull-Out-Menu-a-buttongroup {
         margin-top: 51.1px;
@@ -41,15 +42,18 @@
             margin-bottom: 10px;
             .c-button-a-CircularOverlayMenuButton{
                 background-color: var(--primary-color) !important;
+                transition: all 0.5s;
             }
             .button-svg{
                 g, path, line{
                     stroke: var(--primary-button-color);
+                    transition: all 0.5s;
                 }
             }
             &:hover{
                 .c-button-a-CircularOverlayMenuButton{
                 background-color: var(--border-color) !important;
+                transition: all 0.5s;
                 }
             }
 

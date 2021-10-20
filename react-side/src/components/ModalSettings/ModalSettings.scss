@@ -7,21 +7,27 @@
     right: -50px;
     border-radius: 10px;
     z-index: 55;
+    transition: all 0.5s;
+    font-family: "Baloo2-Regular";
+    font-size: 15pt;
 
     h1{
         color: var(--text-color);
         font-size: 21px;
         margin: 0;
+        transition: inherit;
     }
     
     div {
         color: var(--text-color);
+        transition: inherit;
     }
     .modal-section-break {
         display:block;
         position: relative;
         height: 1px;
         background-color: var(--logo-color);
+        transition: inherit;
     }
 
     .modal-section {
@@ -38,6 +44,7 @@
         border-width: thin;
         border-radius: 20px;
         border-style: solid;
+        transition: inherit;
     }
 }
 
