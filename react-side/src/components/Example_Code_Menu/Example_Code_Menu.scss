@@ -26,7 +26,7 @@
         margin-bottom: 5%;
         transition: all 0.5s;
         .code-example-header {
-            color: #4c97ff;
+            color: var(--title-text-color);
             padding-bottom: 16px;
             font-size: 21px;
         }
@@ -55,7 +55,7 @@
                     width: 63px;
                     height: 25px;
                     background-color: var(--secondary-color);
-                    color: var(--text-color);
+                    color: white;
                     transition: all 0.5s;
                     text-align: center;
                     user-select: none;

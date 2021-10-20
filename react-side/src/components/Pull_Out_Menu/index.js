@@ -31,9 +31,61 @@ function Pull_Out_Menu(props) {
     }
 
     function Menu(event) {
+        var button_clicked = event.target.id;
         setMenuOpen("Open")
-        if (last_button_clicked !== event.target.id) {
-            setLastButtonClicked(event.target.id);
+        
+        if (button_clicked !== "") {
+            switch (button_clicked) {
+                case "serial-port":
+                    if (serialport_status === false) {
+                        setSerialPortMonitor(props.serialport_monitor);
+                        props.onSerialPortClick()
+                        setSerialPortStatus(true)
+                        setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
+                    }
+                    else {
+                        setSerialPortMonitor(props.serialport_monitor);
+                    }
+                    setCurrentMenu(button_clicked)
+                    break;
+                case "view-code":
+                    if (currentMenu !== button_clicked) {
+                    setContents([<View_Code_Menu/>]);
+                    setCurrentMenu(button_clicked)
+                    }
+                    break;
+                case "help-menu":
+                    if (currentMenu !== button_clicked) {
+                        setContents([<Help_Menu />]);
+                        setCurrentMenu(button_clicked)
+                    }
+                    break;
+
+                case "code-editor":
+                    if (currentMenu !== button_clicked) {
+                        setContents([<Edit_Code_Menu />])
+                        setCurrentMenu(button_clicked)
+                    }
+                    break;
+
+                case "example-code":
+                    if (currentMenu !== button_clicked) {
+                        setContents([
+                            <Example_Code_Menu example_codes={props.example_codes}>
+                            </Example_Code_Menu>
+                        ])
+                        setCurrentMenu(button_clicked)
+                    }
+                    break;
+
+            }
+            if (button_clicked !== "serial-port") {
+                closeSerial();
+            }
+        }
+
+        if (currentMenu !== button_clicked) {
+            setLastButtonClicked(button_clicked);
             setMenuOpen("Closed")
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
@@ -46,62 +98,7 @@ function Pull_Out_Menu(props) {
 
     }
 
-    useEffect(() => {
 
-        if (last_button_clicked !== "") {
-            switch (last_button_clicked) {
-                case "serial-port":
-                    if (serialport_status === false) {
-                        setSerialPortMonitor(props.serialport_monitor);
-                        props.onSerialPortClick()
-                        setSerialPortStatus(true)
-                    }
-                    else {
-                        setSerialPortMonitor(props.serialport_monitor);
-                    }
-                    setCurrentMenu(last_button_clicked)
-                    break;
-                case "view-code":
-
-                    setContents([<View_Code_Menu/>]);
-                    setCurrentMenu(last_button_clicked)
-                    break;
-                case "help-menu":
-                    if (currentMenu !== last_button_clicked) {
-                        setContents([<Help_Menu />]);
-                        setCurrentMenu(last_button_clicked)
-                    }
-                    break;
-
-                case "code-editor":
-                    if (currentMenu !== last_button_clicked) {
-                        setContents([<Edit_Code_Menu />])
-                        setCurrentMenu(last_button_clicked)
-                    }
-                    break;
-
-                case "example-code":
-                    if (currentMenu !== last_button_clicked) {
-                        setContents([
-                            <Example_Code_Menu example_codes={props.example_codes}>
-                            </Example_Code_Menu>
-                        ])
-                        setCurrentMenu(last_button_clicked)
-                    }
-                    break;
-
-            }
-            if (last_button_clicked !== "serial-port") {
-                closeSerial();
-            }
-
-        }
-
-    })
-
-    useEffect(() => {
-        setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
-    }, [serialport_monitor]);
     useEffect(() => {
         var Overlay = document.getElementsByClassName("c-Body-a-Overlay")[0];
         var OverlayExtras = document.getElementsByClassName("c-Body-a-OverlayExtras")[0];
