@@ -105,8 +105,10 @@ const ThemeContextProvider = (props) => {
         progressFilledBarColor
         primaryButtonColor
         tabColor
+        trashColor
         dropShadowStatus
-        constructor(primary, secondary, tetiary, border, innerShadow, titleTextColor, textColor, logoColor, progressEmptyBarColor, progressFilledBarColor, primaryButtonColor, tabColor, dropShadowStatus) {
+
+        constructor(primary, secondary, tetiary, border, innerShadow, titleTextColor, textColor, logoColor, progressEmptyBarColor, progressFilledBarColor, primaryButtonColor, tabColor, trashColor, dropShadowStatus) {
             this.primaryColor = primary;
             this.secondaryColor = secondary;
             this.tetiaryColor = tetiary;
@@ -119,7 +121,9 @@ const ThemeContextProvider = (props) => {
             this.progressFilledBarColor = progressFilledBarColor;
             this.primaryButtonColor = primaryButtonColor;
             this.tabColor = tabColor
+            this.trashColor = trashColor;
             this.dropShadowStatus = dropShadowStatus;
+
         }
     }
 
@@ -136,9 +140,10 @@ const ThemeContextProvider = (props) => {
         "#E9E9FF",  //progressFilledBar
         "#FFFFFF",  //primaryButtonColor
         "#0B0533",   //tabColor
+        "#E9E9FF",  //trashColor
         true        //dropShadowStatus
-        )
-        ; 
+    )
+        ;
     var globalLightTheme = new Theme(
         "#DEDEF1",  //primaryColor
         "#0000DC",  //secondaryColor
@@ -152,8 +157,9 @@ const ThemeContextProvider = (props) => {
         "#0000DC",  //progressFilledBar
         "#0000DC",  //primaryButtonColor
         "#DEDEF1",   //tabColor
+        "#9898F0",  //trashColor
         false       //dropShadowStatus
-        );
+    );
 
     function changeTheme(event) {
         if (event.target.id == "dark-theme") {
@@ -169,7 +175,7 @@ const ThemeContextProvider = (props) => {
     }
 
     useEffect(() => {
-        if(current_theme !== null) {
+        if (current_theme !== null) {
             document.documentElement.style.setProperty('--primary-color', current_theme.primaryColor);
             document.documentElement.style.setProperty('--secondary-color', current_theme.secondaryColor);
             document.documentElement.style.setProperty('--tetiary-color', current_theme.tetiaryColor);
@@ -183,8 +189,28 @@ const ThemeContextProvider = (props) => {
             document.documentElement.style.setProperty('--progress-filled-bar-color', current_theme.progressFilledBarColor);
             document.documentElement.style.setProperty('--primary-button-color', current_theme.primaryButtonColor);
             document.documentElement.style.setProperty('--tab-color', current_theme.tabColor)
+            document.documentElement.style.setProperty('--trash-color', current_theme.trashColor)
+            if (current_theme.dropShadowStatus == true) {
+                var bars = document.getElementsByClassName("i-FilledBar")
+                document.getElementById("lid").style.filter = "drop-shadow(0 0 9px #3A00FF)"
+                document.getElementById("bin").style.filter = "drop-shadow(0 0 9px #3A00FF)"
+                for (var i = 0; i < bars.length; i++) {
+                    bars[i].style.filter = "drop-shadow(0 0 6px var(--secondary-color))"
+                }
+            }
+            else {
+                var bars = document.getElementsByClassName("i-FilledBar")
+                document.getElementById("lid").style.filter = "none !important"
+                
+                document.getElementById("bin").style.filter = "none !important"
+                for (var i = 0; i < bars.length; i++) {
+                    bars[i].style.filter = "none"
+                }
+            }
+
         }
-    },[current_theme])
+
+    }, [current_theme])
 
     return (<ThemeContext.Provider value={{
         current_theme,
@@ -198,4 +224,4 @@ const ThemeContextProvider = (props) => {
 }
 
 export default ThemeContextProvider
-export {dark_theme}
+export { dark_theme }

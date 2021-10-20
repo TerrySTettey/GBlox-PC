@@ -563,6 +563,7 @@ const Body = (props) => {
                                 </g>
                             </g>
                         </svg>
+                        
                     </div>
                     <svg id="num15trash" ref={TrashHolder}>
                         {/*

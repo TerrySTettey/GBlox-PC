@@ -5,9 +5,6 @@ import {ThemeContext} from '../contexts/ThemeContext'
 import "./ProgressBar.scss"
 
 const ProgressBar = (props) => {
-   const {
-      current_theme
-   } = useContext(ThemeContext)
 
    const FilledBar = (
       <div className="i-FilledBar" />
@@ -36,23 +33,7 @@ const ProgressBar = (props) => {
       }
    }
 
-   useEffect(()=>{
-      if (current_theme !== null){
-         if (current_theme.dropShadowStatus == true){
-            var bars = document.getElementsByClassName("i-FilledBar")
-            for (var i = 0; i < bars.length; i++) {
-               bars[i].style.filter = "drop-shadow(0 0 6px var(--secondary-color))"
-            }
-         }
-         else{
-            var bars = document.getElementsByClassName("i-FilledBar")
-            for (var i = 0; i < bars.length; i++) {
-               bars[i].style.filter = "none"
-            }
-         }
-      }
 
-   },[current_theme])
    return (
       <div className="c-ProgressBar-a-BarContainer">
          <div className="i-ProgressPercent">{props.progress}%</div>
