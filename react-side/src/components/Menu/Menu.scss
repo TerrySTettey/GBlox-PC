@@ -17,10 +17,12 @@
     // box-shadow: 15px 15px 15px 0px grey;
     
     font-family: 'Baloo2-Regular';
+    transition: all 0.5s;
 }
 .text {
     display: block;
     color: var(--text-color);
     padding-bottom: 20px;
     font-size: 21px;
+    transition: all 0.5s;
 }

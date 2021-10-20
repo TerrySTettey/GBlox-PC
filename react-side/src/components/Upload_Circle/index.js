@@ -4,7 +4,6 @@ import './Upload_Circle.scss'
 import Button from '../Button'
 
 function index(props) {
-  const { children } = props;
 
   const circle =
     [
@@ -23,13 +22,16 @@ function index(props) {
             </g>
           </g>
         </svg>
-            <p className="upload-text" id="Add_device" data-name="Add device" font-size="17">Add device</p>
+        <p className="upload-text" id="Add_device" data-name="Add device" font-size="17">Add device</p>
       </div>]
 
   return (
     <div id="upload-container">
       {circle}
-      {children}
+      <div id="selected-device">
+        {props.children}
+      </div>
+
       <div className="device-add-button">
         <Button
           id="device-add-button"

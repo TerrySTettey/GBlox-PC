@@ -1,17 +1,18 @@
-:root{
-    --primary-color: #0B0533;
-    --secondary-color: #0000DC;
+:root {
+    --primary-color: #0b0533;
+    --secondary-color: #0000dc;
     --tetiary-color: #060841;
-    --border-color: #0000DC;
-    --inner-shadow-color: #0713BF52;
-    --title-text-color: #0000DC;
+    --border-color: #0000dc;
+    --inner-shadow-color: #0713bf52;
+    --title-text-color: #0000dc;
     --text-color: #fff;
     --primary-color-light: #0b0533dd;
     --logo-color: #fff;
-    --progress-empty-bar-color: #1C1E4D;
-    --progress-filled-bar-color: #E9E9FF;
-    --primary-button-color: #FFFFFF;
-    --tab-color: #0B0533CC;
+    --progress-empty-bar-color: #1c1e4d;
+    --progress-filled-bar-color: #e9e9ff;
+    --primary-button-color: #ffffff;
+    --tab-color: #0b0533cc;
+    --trash-color: #e9e9ff;
 }
 
 ::-webkit-scrollbar {
@@ -74,37 +75,40 @@ $shift: 0px;
             grid-area: n1;
             margin-top: 0px;
             margin-left: 0px;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
-            
         }
         #num4 {
             grid-area: n4;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
-            
         }
         #num7 {
             grid-area: n7;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
         }
         #num10 {
             grid-area: n10;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
         }
         #num13 {
             grid-area: n13;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -121,23 +125,28 @@ $shift: 0px;
             > div {
                 margin-left: 4.92%;
             }
+            svg {
+                fill: var(--progress-filled-bar-color) !important;
+                transition: fill 0.5s, stroke 0.5s;
+            }
         }
 
         #num2 {
             grid-area: n2;
             overflow: hidden;
-            #Subtraction_9{
+            #Subtraction_9 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
-            
         }
         #num8 {
             grid-area: n8;
         }
         #num14 {
             grid-area: n14;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -147,7 +156,8 @@ $shift: 0px;
             grid-area: n3;
             margin-top: -0.5px;
             margin-left: 1px;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -156,7 +166,8 @@ $shift: 0px;
             grid-area: n6;
             margin-top: 0px;
             margin-left: 1px;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -165,7 +176,8 @@ $shift: 0px;
             grid-area: n9;
             margin-top: 0px;
             margin-left: 1px;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -179,7 +191,8 @@ $shift: 0px;
             grid-area: n12;
             margin-top: 0px;
             margin-left: 1px;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -188,7 +201,8 @@ $shift: 0px;
             grid-area: n15;
             margin-top: 0px;
             margin-left: 0px;
-            #Subtraction_5{
+            #Subtraction_5 {
+                transition: fill 0.5s, stroke 0.5s;
                 fill: var(--primary-color);
                 stroke: var(--border-color);
             }
@@ -229,12 +243,20 @@ $shift: 0px;
                     transform: translateX(15px) scale(1.5);
                     transition: transform 0.3s;
                     transform-origin: right;
+                    path {
+                        fill: var(--trash-color) !important;
+                    }
                 }
 
                 #bin {
                     position: absolute;
                     top: 30px;
                     transform: scale(1.5);
+                    g {
+                        path {
+                            fill: var(--trash-color) !important;
+                        }
+                    }
                 }
             }
 
@@ -256,6 +278,7 @@ $shift: 0px;
         top: 0;
         right: 0;
         background-color: var(--primary-color);
+        transition: background-color 0.5s;
         height: 100vh;
         width: 0px;
         z-index: 51;
@@ -369,6 +392,7 @@ $shift: 0px;
         background-color: var(--primary-color);
         //clip-path: url(#my-clip-path);
         filter: drop-shadow(0 0 0 50px black);
+        transition: background-color 0.5s;
     }
 
     .c-Body-a-PulloutMenu {
@@ -404,7 +428,7 @@ $shift: 0px;
         justify-content: center;
         align-items: center;
         transition: display 2s, background-color 1s linear, opacity 0.6s ease-in-out;
-        z-index: 200;
+        z-index: 55;
     }
     .blocklyFlyout {
         transform-origin: top left;
@@ -454,6 +478,13 @@ $shift: 0px;
         font-family: "Baloo 2", cursive;
         -webkit-font-smoothing: antialiased;
         font: bold 12pt "Helvetica Neue", "Segoe UI", Helvetica, sans-serif;
+    }
+    #c-variableSelector {
+        position: absolute;
+        display: none;
+        left: 370px;
+        top: 177px;
+        z-index: 53;
     }
 }
 

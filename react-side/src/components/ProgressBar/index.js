@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types'
+import {ThemeContext} from '../contexts/ThemeContext'
 
 import "./ProgressBar.scss"
 
@@ -31,6 +32,7 @@ const ProgressBar = (props) => {
          BarCode.push(EmptyBar);
       }
    }
+
 
    return (
       <div className="c-ProgressBar-a-BarContainer">

@@ -60,6 +60,9 @@ const CtxtP_SingletonManager = (props) => {
         () => {
             exportBlocks()
             clearDropdowns()
+        },
+        () => {
+            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!`)
         }
     ]
     var editheader = [
@@ -168,6 +171,7 @@ const CtxtP_SingletonManager = (props) => {
                 currentWorkspace.toolbox_.setVisible(false);
                 currentWorkspace.addChangeListener(showCode);
                 currentWorkspace.addChangeListener(selectedBlock);
+                currentWorkspace.registerButtonCallback("createvar", openVariableDialog)
                 AlterBlockly();
                 setInitializedWorkspace(true)
             }
@@ -245,6 +249,21 @@ const CtxtP_SingletonManager = (props) => {
         }
     }
 
+    function openVariableDialog(){
+        document.getElementById("c-variableSelector").style.display = "block";
+    }
+    function closeVariableDialog(event){
+        console.log(event.target.id);
+        if (event.target.id == "a-CloseButton"){
+            document.getElementById("c-variableSelector").style.display = "none";
+        }
+        else{
+            var newvariable_type = document.getElementById("variable-type-select").firstChild.value.toLowerCase();
+            var newvariable_name = document.getElementById("variable-name-input").value
+            createdVariables.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
+            document.getElementById("c-variableSelector").style.display = "none";
+        }
+    }
     //Used after dropdown functions to clear the dropdown off the screen
     function clearDropdowns() {
         var Boxes = document.getElementsByClassName("blue-dropdown-box")
@@ -274,7 +293,10 @@ const CtxtP_SingletonManager = (props) => {
                 exportBlocks,
                 currentDeviceChanged,
                 setCurrentDeviceChanged,
-                selectedToolbox, setSelectedToolbox
+                selectedToolbox, 
+                setSelectedToolbox,
+                closeVariableDialog,
+                createdVariables
             }}
         >
             {props.children}
@@ -283,3 +305,4 @@ const CtxtP_SingletonManager = (props) => {
 }
 
 export default CtxtP_SingletonManager
+export {selectedToolboxName, createdVariables}
