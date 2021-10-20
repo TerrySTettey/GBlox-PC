@@ -264,7 +264,7 @@ const CtxtP_SingletonManager = (props) => {
             createdVariables.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
             document.getElementById("c-variableSelector").style.display = "none";
         }
-        
+    }
     //Used after dropdown functions to clear the dropdown off the screen
     function clearDropdowns() {
         var Boxes = document.getElementsByClassName("blue-dropdown-box")
