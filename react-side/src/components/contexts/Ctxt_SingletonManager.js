@@ -14,6 +14,7 @@ export const Ctxt_SingletonManager = createContext()
 
 //var selectedDevice = DeviceList[0];
 var selectedToolbox = MelloDOM;
+var selectedToolboxName = "Mello"
 var currentWorkspace;
 var createdVariables = [];
 var currentBlock = null;
@@ -27,7 +28,7 @@ const CtxtP_SingletonManager = (props) => {
     const [toolboxItems, setToolboxItems] = useState([]);                       //Used to set and check the current items in the Toolbox
     const [deviceCode, setDeviceCode] = useState("");                           //Used to set and check the generated code for the current device
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
-    var [selectedDevice, setSelectedDevice] = useState(DeviceList[0]);
+    var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);
     const [toolBoxInit, setToolBoxInit] = useState(selectedDevice.toolbox)      //Used to initiate the change of a toolbox.
     
     const {
@@ -111,6 +112,7 @@ const CtxtP_SingletonManager = (props) => {
                 setSelectedDevice(DeviceList[tmp]);
                 console.log(selectedDevice.device_name)
                 selectedToolbox = selectedDevice.toolbox[0]
+                selectedToolboxName = selectedDevice.device_name
             } else {
                 //setCurrentDeviceName((prevState) => prevState)
             }
@@ -159,6 +161,7 @@ const CtxtP_SingletonManager = (props) => {
                 currentWorkspace.toolbox_.setVisible(false);
                 currentWorkspace.addChangeListener(showCode);
                 currentWorkspace.addChangeListener(selectedBlock);
+                currentWorkspace.registerButtonCallback("createvar", openVariableDialog)
                 AlterBlockly();
                 setInitializedWorkspace(true)
             }
@@ -236,6 +239,23 @@ const CtxtP_SingletonManager = (props) => {
         }
     }
 
+    function openVariableDialog(){
+        document.getElementById("c-variableSelector").style.display = "block";
+    }
+    function closeVariableDialog(event){
+        console.log(event.target.id);
+        if (event.target.id == "a-CloseButton"){
+            document.getElementById("c-variableSelector").style.display = "none";
+        }
+        else{
+            var newvariable_type = document.getElementById("variable-type-select").firstChild.value.toLowerCase();
+            var newvariable_name = document.getElementById("variable-name-input").value
+            createdVariables.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
+            document.getElementById("c-variableSelector").style.display = "none";
+        }
+        
+    }
+
     return (
         <Ctxt_SingletonManager.Provider
             value={{
@@ -256,7 +276,9 @@ const CtxtP_SingletonManager = (props) => {
                 selectedToolbox,
                 fileheader,
                 editheader,
-                exportBlocks
+                exportBlocks,
+                closeVariableDialog,
+                createdVariables
             }}
         >
             {props.children}
@@ -265,3 +287,4 @@ const CtxtP_SingletonManager = (props) => {
 }
 
 export default CtxtP_SingletonManager
+export {selectedToolboxName, createdVariables}

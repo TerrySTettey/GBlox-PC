@@ -1,12 +1,12 @@
 import Blockly from 'blockly';
-import { currentToolboxName, variables_created } from '../../components/contexts/DeviceContext.js';
+import { selectedToolboxName , createdVariables } from '../../components/contexts/Ctxt_SingletonManager.js';
 var peripherals = null;
 var variables_set = [["int sample_var", "Test"]];
 async function getPeripherals(){
-    if (currentToolboxName === "Basic"){
+    if (selectedToolboxName === "Basic"){
         peripherals = await import('./../peripherals/arduino_peripheral.js')
     }
-    else if (currentToolboxName === "Mello"){
+    else if (selectedToolboxName === "Mello"){
         peripherals = await import('./../MelloBlocksGen.js')
     }
 }
@@ -127,7 +127,7 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
     getPeripherals();
     Blockly.HSV_SATURATION = 0.85;
     Blockly.HSV_VALUE = 1;
-    if (currentToolboxName === "Mello"){
+    if (selectedToolboxName === "Mello"){
         block.setDeletable(false);
         block.setMovable(false);
     }
@@ -137,8 +137,9 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
     }
     block.setColour(0x0000FF)
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-    if (variables_created.length != 0){
-        variables_set = variables_created;
+    console.log(createdVariables)
+    if (createdVariables.length != 0){
+        variables_set = createdVariables;
         for (var i = 0; i < variables_set.length; i++) {
             Total_PreDeclarations += `${variables_set[i][0]};\n`;
         }

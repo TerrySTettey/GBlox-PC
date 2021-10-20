@@ -135,8 +135,13 @@
         transform: translate(-50%, -50%);
         svg{
             fill: var(--tetiary-color);
+            :hover{
+                fill: var(--border-color) !important;
+            }
         }
     }
+
+
 }
 .tooltiptext {
     position: absolute;
@@ -150,14 +155,14 @@
     transition: opacity 0.5s;
     transition-delay: 0.5s;
     width: 80px;
-    margin-left: -8px;
+    margin-left: -12px;
     white-space: nowrap;
     color: white;
     align-items: center;
     text-align: center;
     border-radius: 6px;
     margin-top: -20px;
-    padding: 5px 0;
+    padding: 5px;
     z-index: 1;
     user-select: none;
     pointer-events: none;

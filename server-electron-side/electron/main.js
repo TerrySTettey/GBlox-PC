@@ -120,7 +120,7 @@ async function retrieveSystemSettings(cb) {
 //Function to constantly retrieve available USB COMPORTs
 async function COMPORT_CONSTANT(cb) {
     
-    var ports = ["No Board Detected"]   //Array for all available COM ports connected via USB
+    var ports = []   //Array for all available COM ports connected via USB
     try {
         var comport = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" }) //Check system registry for all available serial ports
         comport = comport.split(`\n`)   //Split all values by new line and put them in an array

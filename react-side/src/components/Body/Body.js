@@ -18,6 +18,7 @@ import WorkTabHolder from '../WorkTabHolder';
 import SplashScreen from '../SplashScreen'
 import NewDeviceManager from '../NewDeviceManager';
 import Code_Editor from '../Code_Editor'
+import VariableSelector from '../VariableSelector'
 
 
 const Arduino_Uno_SVG =
@@ -3667,7 +3668,7 @@ const Body = (props) => {
                     svg = svgs.Sensors;
                     color = Toolbox_colors.Sensors;
                     break;
-                case "Communication":
+                case "COM":
                     svg = svgs.COM;
                     color = Toolbox_colors.COM;
                     break;
@@ -4227,6 +4228,9 @@ const Body = (props) => {
                 <SplashScreen
                     onSplashClick={props.onSplashClick}
                     Splashurl={props.Splashurl} />
+            </div>
+            <div id="c-variableSelector">
+                <VariableSelector />
             </div>
         </div >
     )

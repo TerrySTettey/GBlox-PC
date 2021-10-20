@@ -15,18 +15,18 @@ const WorkspaceTab = (props) => {
 
         if(props.clickState === "On"){
             container.current.style.maxWidth = "fit-content";
-            container.current.style.backgroundColor = "#0B0533";
+            container.current.style.opacity = "1";
             container.current.style.flexGrow = "1";
             container.current.style.flexShrink = "0";
-            aText.style.color = "#FFF"
+
             aText.style.maxWidth = "1000px"
             aShadow.style.backgroundImage = "linear-gradient(to right, #0000,#0B0533)"
         } else  if (props.clickState === "Off") {
             container.current.style.maxWidth = "180px";
-            container.current.style.backgroundColor = "#0B0533CC";
+            container.current.style.opacity = "0.5";
             container.current.style.flexGrow = "0";
             container.current.style.flexShrink = "1";
-            aText.style.color = "#FFF6"
+
             aText.style.maxWidth = "162px"
             aShadow.style.backgroundImage = "linear-gradient(to right, #0000,#0B0533CC)"
         }

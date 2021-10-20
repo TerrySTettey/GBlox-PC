@@ -43,7 +43,6 @@ const Button = (props) => {
             case "fill-tooltip":
                 var tooltip = document.getElementById(`tooltip-${props.id}`)
                 if (hoverState) {
-                    setButtonColor(props.hoverColor);
                     tooltip.style.opacity = "1"
                 } else if (!hoverState) {
                     tooltip.style.opacity = "0"

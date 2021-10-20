@@ -90,7 +90,7 @@ var light_theme = Blockly.Theme.defineTheme('light_theme', {
 
 
 const ThemeContextProvider = (props) => {
-    const [current_theme, setCurrentTheme] = useState("")
+    const [current_theme, setCurrentTheme] = useState(null)
 
     class Theme {
         primaryColor
@@ -105,7 +105,8 @@ const ThemeContextProvider = (props) => {
         progressFilledBarColor
         primaryButtonColor
         tabColor
-        constructor(primary, secondary, tetiary, border, innerShadow, titleTextColor, textColor, logoColor, progressEmptyBarColor, progressFilledBarColor, primaryButtonColor, tabColor) {
+        dropShadowStatus
+        constructor(primary, secondary, tetiary, border, innerShadow, titleTextColor, textColor, logoColor, progressEmptyBarColor, progressFilledBarColor, primaryButtonColor, tabColor, dropShadowStatus) {
             this.primaryColor = primary;
             this.secondaryColor = secondary;
             this.tetiaryColor = tetiary;
@@ -118,57 +119,72 @@ const ThemeContextProvider = (props) => {
             this.progressFilledBarColor = progressFilledBarColor;
             this.primaryButtonColor = primaryButtonColor;
             this.tabColor = tabColor
+            this.dropShadowStatus = dropShadowStatus;
         }
     }
 
-    var globalDarkTheme = new Theme("#0B0533", "#0000DC", "#060841", "#0000DC", "#0713BF52", "#4C97FF", "#FFFFFF", "#FFFFFF", "#1C1E4D", "#E9E9FF","#FFFFFF","#0B0533");
-    var globalLightTheme = new Theme("#DEDEF1", "#0000DC", "#FFFFFF", "#9898F0", "#BCBCEE", "#0000DC", "#000092", "#0000DC", "#BCBCEE", "#0000DC","#0000DC","#DEDEF1");
+    var globalDarkTheme = new Theme(
+        "#0B0533",  //primaryColor
+        "#0000DC",  //secondaryColor
+        "#060841",  //tetiaryColor
+        "#0000DC",  //borderColor
+        "#0713BF52",    //innerShadowColor
+        "#4C97FF",  //titleTextColor
+        "#FFFFFF",  //textColor
+        "#FFFFFF",  //logoColor
+        "#1C1E4D",  //progressEmptyBar
+        "#E9E9FF",  //progressFilledBar
+        "#FFFFFF",  //primaryButtonColor
+        "#0B0533",   //tabColor
+        true        //dropShadowStatus
+        )
+        ; 
+    var globalLightTheme = new Theme(
+        "#DEDEF1",  //primaryColor
+        "#0000DC",  //secondaryColor
+        "#FFFFFF",  //tetiaryColor
+        "#9898F0",  //borderColor
+        "#BCBCEE",  //innerShadowColor
+        "#0000DC",  //titleTextColor
+        "#000092",  //textColor
+        "#0000DC",  //logoColor
+        "#BCBCEE",  //progressEmptyBar
+        "#0000DC",  //progressFilledBar
+        "#0000DC",  //primaryButtonColor
+        "#DEDEF1",   //tabColor
+        false       //dropShadowStatus
+        );
 
     function changeTheme(event) {
-        console.log(event.target.id)
         if (event.target.id == "dark-theme") {
-            //Change Blockly Blockly.mainWorkspace theme
+            setCurrentTheme(globalDarkTheme);
             Blockly.mainWorkspace.setTheme(dark_theme)
             Blockly.mainWorkspace.toolbox_.setVisible(false);
-            //Change root CSS variables
-            document.documentElement.style.setProperty('--primary-color', globalDarkTheme.primaryColor);
-            document.documentElement.style.setProperty('--secondary-color', globalDarkTheme.secondaryColor);
-            document.documentElement.style.setProperty('--tetiary-color', globalDarkTheme.tetiaryColor);
-            document.documentElement.style.setProperty('--border-color', globalDarkTheme.borderColor);
-            document.documentElement.style.setProperty('--logo-color', globalDarkTheme.logoColor);
-            document.documentElement.style.setProperty('--inner-shadow-color', globalDarkTheme.innerShadowColor)
-            document.documentElement.style.setProperty('--title-text-color', globalDarkTheme.titleTextColor);
-            document.documentElement.style.setProperty('--text-color', globalDarkTheme.textColor)
-            document.documentElement.style.setProperty('--logo-color', globalDarkTheme.logoColor);
-            document.documentElement.style.setProperty('--progress-empty-bar-color', globalDarkTheme.progressEmptyBarColor);
-            document.documentElement.style.setProperty('--progress-filled-bar-color', globalDarkTheme.progressFilledBarColor);
-            document.documentElement.style.setProperty('--primary-button-color', globalDarkTheme.primaryButtonColor);
-            document.documentElement.style.setProperty('--tab-color', globalDarkTheme.tabColor)
-            setCurrentTheme(globalDarkTheme)
         }
         else {
-            //Change Blockly Blockly.mainWorkspace theme
+            setCurrentTheme(globalLightTheme);
             Blockly.mainWorkspace.setTheme(light_theme)
             Blockly.mainWorkspace.toolbox_.setVisible(false);
-            //Change root CSS variables
-            document.documentElement.style.setProperty('--primary-color', globalLightTheme.primaryColor);
-            document.documentElement.style.setProperty('--secondary-color', globalLightTheme.secondaryColor);
-            document.documentElement.style.setProperty('--tetiary-color', globalLightTheme.tetiaryColor);
-            document.documentElement.style.setProperty('--border-color', globalLightTheme.borderColor);
-            document.documentElement.style.setProperty('--logo-color', globalLightTheme.logoColor);
-            document.documentElement.style.setProperty('--inner-shadow-color', globalLightTheme.innerShadowColor)
-            document.documentElement.style.setProperty('--title-text-color', globalLightTheme.titleTextColor);
-            document.documentElement.style.setProperty('--text-color', globalLightTheme.textColor)
-            document.documentElement.style.setProperty('--logo-color', globalLightTheme.logoColor);
-            document.documentElement.style.setProperty('--progress-empty-bar-color', globalLightTheme.progressEmptyBarColor);
-            document.documentElement.style.setProperty('--progress-filled-bar-color', globalLightTheme.progressFilledBarColor);
-            document.documentElement.style.setProperty('--primary-button-color', globalLightTheme.primaryButtonColor);
-            document.documentElement.style.setProperty('--tab-color', globalLightTheme.tabColor)
-            setCurrentTheme(globalLightTheme)
         }
     }
 
-
+    useEffect(() => {
+        if(current_theme !== null) {
+            document.documentElement.style.setProperty('--primary-color', current_theme.primaryColor);
+            document.documentElement.style.setProperty('--secondary-color', current_theme.secondaryColor);
+            document.documentElement.style.setProperty('--tetiary-color', current_theme.tetiaryColor);
+            document.documentElement.style.setProperty('--border-color', current_theme.borderColor);
+            document.documentElement.style.setProperty('--logo-color', current_theme.logoColor);
+            document.documentElement.style.setProperty('--inner-shadow-color', current_theme.innerShadowColor)
+            document.documentElement.style.setProperty('--title-text-color', current_theme.titleTextColor);
+            document.documentElement.style.setProperty('--text-color', current_theme.textColor)
+            document.documentElement.style.setProperty('--logo-color', current_theme.logoColor);
+            document.documentElement.style.setProperty('--progress-empty-bar-color', current_theme.progressEmptyBarColor);
+            document.documentElement.style.setProperty('--progress-filled-bar-color', current_theme.progressFilledBarColor);
+            document.documentElement.style.setProperty('--primary-button-color', current_theme.primaryButtonColor);
+            document.documentElement.style.setProperty('--tab-color', current_theme.tabColor)
+        }
+    },[current_theme])
 
     return (<ThemeContext.Provider value={{
         current_theme,

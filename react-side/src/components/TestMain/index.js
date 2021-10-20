@@ -118,13 +118,6 @@ const TestMain = (props) => {
         }
     }
 
-    async function check_comport_constant() {
-        ipcRenderer.invoke('check_comport_constant');
-        ipcRenderer.on('comport_constant', (event, result) => {
-            setAvailableCOMports(result);
-        });
-
-    }
     async function readSystemSettings() {
         ipcRenderer.invoke("load-settings");
         ipcRenderer.on('current-settings', (event, result) => {

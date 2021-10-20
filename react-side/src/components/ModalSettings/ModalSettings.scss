@@ -1,7 +1,7 @@
 .modal-container {
     display: block;
     position: relative;
-    background-color: #060841;
+    background-color: var(--primary-color);
     height:484px;
     width: 396px;
     right: -50px;
@@ -9,19 +9,19 @@
     z-index: 55;
 
     h1{
-        color: white;
+        color: var(--text-color);
         font-size: 21px;
         margin: 0;
     }
     
     div {
-        color: white;
+        color: var(--text-color);
     }
     .modal-section-break {
         display:block;
         position: relative;
         height: 1px;
-        background-color: #3722FF;
+        background-color: var(--logo-color);
     }
 
     .modal-section {
@@ -32,7 +32,7 @@
     }
 
     .modal-lighting-buttons {
-        border-color: #3722FF ;
+        border-color: var(--border-color) ;
         height: 43px;
         width: 160px;
         border-width: thin;

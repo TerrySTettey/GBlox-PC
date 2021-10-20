@@ -8,7 +8,8 @@
     
 
     background-color: var(--tab-color);
-    //outline: 2px red d#0B0533ashed;
+    border: var(--border-color);
+    outline: 2px red  var(--border-color);
     margin: 0 0 0 0px;
     justify-content: center;
     transform: skewX(-45deg);
@@ -18,7 +19,7 @@
     .c-WorkspaceTab-a-Text {
         user-select: none;
         pointer-events: none;
-        color: #FFF6;
+        color: var(--logo-color) !important;
         transform: skewX(45deg);
         font-family: "Baloo2-Regular";
         font-size: 16px;
@@ -55,7 +56,7 @@
         margin: 1px 10px 25px -4px;
 
         &:hover {
-            color: white;
+            color: var(--text-color);
         }
     }
 }

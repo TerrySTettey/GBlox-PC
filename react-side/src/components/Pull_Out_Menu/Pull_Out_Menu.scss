@@ -47,6 +47,12 @@
                     stroke: var(--primary-button-color);
                 }
             }
+            &:hover{
+                .c-button-a-CircularOverlayMenuButton{
+                background-color: var(--border-color) !important;
+                }
+            }
+
         }
     }
     .pull-out-container {
