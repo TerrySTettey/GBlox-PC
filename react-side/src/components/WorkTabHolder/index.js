@@ -10,7 +10,7 @@ var TabHolder = [];
 var currentTab = null;
 
 const WorkTabHolder = (props) => {
-    const { initialized_workspace, setInitializedWorkspace, currentWorkspace, selectedDevice, setCurrentDeviceName, currentDeviceName, setCurrentToolBoxLevel, currentToolBoxLevel, setToolBoxInit, toolBoxInit, currentDeviceChanged, setCurrentDeviceChanged, selectedToolbox, setSelectedToolbox } = useContext(Ctxt_SingletonManager);
+    const { initialized_workspace, setInitializedWorkspace, currentWorkspace, selectedDevice, setCurrentDeviceName, currentDeviceName, setCurrentToolBoxLevel, currentToolBoxLevel, setToolBoxInit, toolBoxInit, currentDeviceChanged, setCurrentDeviceChanged, selectedToolbox, setSelectedToolbox, toolboxLevel, setToolboxLevel,setToolboxUpdate} = useContext(Ctxt_SingletonManager);
     const [tabAddedState, setTabAddedState] = useState(0);
     const [tabChangedState, setTabChangedState] = useState(0)
     const [tabClosedState, setTabClosedState] = useState(0)
@@ -25,7 +25,7 @@ const WorkTabHolder = (props) => {
             this.tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabNum} text={"Workspace " + TabNum} ChangeTab={ChangeTab} closeOnClick={CloseTab} />)
             this.tabXML = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
             this.tabDevice = currentDeviceName
-            this.tabLevel = 0;
+            this.tabLevel = 1;
         }
     }
 
@@ -67,7 +67,7 @@ const WorkTabHolder = (props) => {
     useEffect(() => {
         if (tabChangedState === 1) {
             TabHolder[getTabPosition(currentTab)] = currentTab
-
+            document.getElementById("toolbox_selector_level_" + toolboxLevel).click()
             for (var i = 0; i < TabHolder.length; i++) {
                 if (TabHolder[i].tabID === currentTab.tabID) {
                     TabHolder[i].tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabHolder[i].tabID} text={"Workspace " + TabHolder[i].tabID} ChangeTab={ChangeTab} closeOnClick={CloseTab} clickState="On" />)
@@ -77,8 +77,10 @@ const WorkTabHolder = (props) => {
                     TabHolder[i].tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabHolder[i].tabID} text={"Workspace " + TabHolder[i].tabID} ChangeTab={ChangeTab} closeOnClick={CloseTab} clickState="Off" />)
                 }
             }
-
+            setToolboxLevel(currentTab.tabLevel)
+            setToolboxUpdate(1)
             console.log(currentTab)
+            
             setTabChangedState(0)
         }
     }, [tabChangedState])
@@ -103,7 +105,10 @@ const WorkTabHolder = (props) => {
     function AddTab() {
         WSNumTracker = WSNumTracker + 1;
         currentTab = new Tab(WSNumTracker);
+        currentTab.tabLevel = toolboxLevel;
+        setToolboxUpdate(1)
         TabHolder = [...TabHolder, currentTab]
+        
         setTabAddedState(1)
     }
     function CloseTab(e) {
@@ -117,12 +122,14 @@ const WorkTabHolder = (props) => {
     function ChangeTab(e) {
         var SelectedID = e.target.id.split("-")[2];
         currentTab.tabXML = Blockly.Xml.workspaceToDom(currentWorkspace)
+        currentTab.tabLevel = toolboxLevel
         TabHolder[getTabPosition(currentTab)] = currentTab
         currentTab = TabHolder[getTabPositionByID(SelectedID)]
         Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
+        console.log(currentTab.tabLevel)
+        
         setCurrentDeviceName(currentTab.tabDevice)
         setTabChangedState(1)
-
     }
     function getTabHolderJSX() {
         var RetArr = []
@@ -138,7 +145,6 @@ const WorkTabHolder = (props) => {
         return TabHolder.findIndex(tabElement => tabElement.tabID == inTab)
     }
 
-    //AddOnClick();
     return (
         <div id="c-WorkTabHolder-B-Container" className="c-WorkTabHolder-a-container">
             {getTabHolderJSX()}
