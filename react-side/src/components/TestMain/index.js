@@ -152,12 +152,16 @@ const TestMain = (props) => {
                     setUploadStatus("Uploading Code");
                     console.log("Uploading the code now")
                 }
+                else if(response.includes("An error occurred while uploading the sketch")==true){
+                    setUploadStatus("Upload Failed");
+                    console.log("Upload Failed")
+                }
                 else if(response.includes("Upload Failed")==true){
                     setUploadStatus("Upload Failed : Error in Code")
                 }
                 else if(response.includes("Upload Successful")==true){
                     setUploadStatus("Upload Successful")
-                    console.log("Uplaod Successful")
+                    console.log("Upload Successful")
                 }
             });
         }

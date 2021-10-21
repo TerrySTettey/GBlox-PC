@@ -173,14 +173,15 @@ async function VERIFYCODE(cb) {
                 output += error;
                 const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
                 console.log(mainerror);
-                win.webContents.send(`Upload Failed : Error in Code\n\n  ${mainerror}`)
+                win.webContents.send("arduino_upload_status",`Upload Failed : Error in Code\n\n  ${mainerror}`)
             }
             else {
-                win.webContents.send("Upload Successful")
+                win.webContents.send("arduino_upload_status","Upload Successful")
             }
         })
         VERIFICATION.stderr.on('data', function(data) {
             win.webContents.send("arduino_upload_status",data);
+            console.log(data)
         });
         
     }
@@ -287,10 +288,11 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
             event.sender.send('arduino_comport', res);
         });
         VERIFYCODE(function (res) {
-            event.sender.send('arduino_upload_status', res);
+            // event.sender.send('arduino_upload_status', res);
         });
     }
     catch (e) {
+        //win.webContents.send("arduino_upload_status",`Upload Failed`)
     }
 })
 try {
@@ -303,4 +305,4 @@ try {
         });;
     }, 3000)
 }
-catch (e) { }
+catch (e) {}

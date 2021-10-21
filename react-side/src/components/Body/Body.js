@@ -221,6 +221,7 @@ const Body = (props) => {
         }
     }, [selectedDevice])
     useEffect(() => {
+        console.log(progress_value)
         if (upload_status === "No Arduino Detected" || upload_status.includes("Upload Failed") === true || upload_status === "") {
             setProgressValue(0);
         }
@@ -230,12 +231,11 @@ const Body = (props) => {
                     setProgressValue(50);
                     break;
                 case "Uploading Code":
-                    setProgressValue(80);
+                    setProgressValue(70);
                 case "Upload Successful":
                     setProgressValue(100);
                     break;
             }
-
         }
     }, [upload_status])
 
