@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types'
 import Body from '../Body'
 import Blockly from 'blockly';
+import { DeviceList } from '../../deviceDef/device_list';
 
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 
@@ -108,7 +109,13 @@ const TestMain = (props) => {
             popout.style.display = "inline-flex"
         }
         else {
-            setCurrentDeviceName(event.target.id)
+            if(currentDeviceName !== event.target.id){
+                setCurrentDeviceName(event.target.id)
+                console.log(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace)
+                console.log(currentWorkspace)
+                currentWorkspace.clear()
+                //Blockly.Xml.clearWorkspaceAndLoadFromXml(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace, currentWorkspace)
+            }
             //setCurrentDeviceVar( event.target.id)
             popout.style.opacity = "0"
             popout.style.backgroundColor = "transparent";
@@ -183,7 +190,12 @@ const TestMain = (props) => {
                         setCurrentTheme(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
                         break;
                     case "device":
-                        setCurrentDeviceName(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
+                        var devName = system_settings[i].toString().replaceAll(";\r", "").replace("device: ", "")
+                        var tmp = DeviceList.findIndex((ele)=>ele.device_name == devName)
+                        if (tmp != -1 ){
+                            setCurrentDeviceName(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
+
+                        }
                         break;
                 }
             }

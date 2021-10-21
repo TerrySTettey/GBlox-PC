@@ -18,8 +18,6 @@ var currentWorkspace;
 var createdVariables = [];
 var currentBlock = null;
 var selectedToolboxName = "Mello"
-var WSNumTracker = 0;
-var currentTab = null;
 
 
 const CtxtP_SingletonManager = (props) => {
@@ -29,7 +27,7 @@ const CtxtP_SingletonManager = (props) => {
     const [toolboxItems, setToolboxItems] = useState([]);                       //Used to set and check the current items in the Toolbox
     const [deviceCode, setDeviceCode] = useState("");                           //Used to set and check the generated code for the current device
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
-    var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);          //Used to set and check the selected device's data    //Used to initiate the change of a toolbox.
+    var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);          //Used to set and check the selected device's data
     const [currentDeviceChanged, setCurrentDeviceChanged] = useState(0)
     const [selectedToolbox, setSelectedToolbox] = useState(MelloDOM)
     const {
@@ -123,8 +121,6 @@ const CtxtP_SingletonManager = (props) => {
                 setSelectedToolbox(DeviceList[tmp].toolbox[0])
                 selectedToolboxName = DeviceList[tmp].device_name
                 setCurrentDeviceChanged(1)
-                //Blockly.Xml.clearWorkspaceAndLoadFromXml(DeviceList[tmp].toolbox[0], currentWorkspace)
-                //selectedToolbox = selectedDevice.toolbox[0]
             } else {
                 //setCurrentDeviceName((prevState) => prevState)
             }
@@ -143,7 +139,6 @@ const CtxtP_SingletonManager = (props) => {
     }, [currentToolBoxLevel])
     useEffect(() => {
         if (initialized_workspace) {
-            console.log(selectedToolbox)
             currentWorkspace.updateToolbox(selectedToolbox);
             generateToolbox();
         }
