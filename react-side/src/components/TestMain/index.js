@@ -20,10 +20,9 @@ var response = "null";
 
 const TestMain = (props) => {
 
-    const {selectedDevice,currentWorkspace,currentBlock,currentDeviceName,setCurrentDeviceName,toolboxItems,deviceCode, exportBlocks} = useContext(Ctxt_SingletonManager)
+    const {selectedDevice,currentWorkspace,currentBlock,currentDeviceName,setCurrentDeviceName,toolboxItems,deviceCode, exportBlocks, upload_status, setUploadStatus} = useContext(Ctxt_SingletonManager)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
-    const [upload_status, setUploadStatus] = useState("");
     const [available_com_ports, setAvailableCOMports] = useState([]);
     const [system_settings, setSystemSettings] = useState([]);
     const [current_theme, setCurrentTheme] = useState("")
@@ -57,10 +56,7 @@ const TestMain = (props) => {
             setUploadStatus(`Arduino found on ${response}`);
         });
         //Returns a confirmation for when the upload is done
-        ipcRenderer.on('arduino_upload_status', (event, result) => {
-            response = result;
-            setUploadStatus(response);
-        });
+        
     }
     function closeSplash() {
         var splash = document.getElementById('c-Body-a-SplashScreen')
@@ -146,6 +142,24 @@ const TestMain = (props) => {
             ipcRenderer.on('comport_constant', (event, result) => {
                 setAvailableCOMports(result);
             });
+            ipcRenderer.on('arduino_upload_status', (event, result) => {
+                response = result;
+                if(response.includes("Verifying...")==true){
+                    setUploadStatus("Verifying Code");
+                    console.log("Verifying the code now")
+                }
+                else if(response.includes("Uploading...")==true){
+                    setUploadStatus("Uploading Code");
+                    console.log("Uploading the code now")
+                }
+                else if(response.includes("Upload Failed")==true){
+                    setUploadStatus("Upload Failed : Error in Code")
+                }
+                else if(response.includes("Upload Successful")==true){
+                    setUploadStatus("Upload Successful")
+                    console.log("Uplaod Successful")
+                }
+            });
         }
     })
     useEffect(() => {
@@ -165,7 +179,6 @@ const TestMain = (props) => {
                 var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`
                 writeSystemSettings(temp_settings)
                 setSystemSettings(temp_settings)
-                //console.log(`theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`)
             }
             catch(e){}
         }
@@ -193,7 +206,6 @@ const TestMain = (props) => {
                         var tmp = DeviceList.findIndex((ele)=>ele.device_name == devName)
                         if (tmp != -1 ){
                             setCurrentDeviceName(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
-
                         }
                         break;
                 }
