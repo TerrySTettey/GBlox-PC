@@ -1,169 +1,190 @@
 var DeviceList = []
 const full_toolbox = [{
-    kind: "categoryToolbox",
-    contents: [
+  kind: "categoryToolbox",
+  contents: [
+    {
+      kind: "category",
+      name: "Logic",
+      colour: "#5C81A6",
+      contents: [
         {
-            kind: "category",
-            name: "Logic",
-            colour: "#5C81A6",
-            contents: [
-                {
-                    kind: "block",
-                    type: "controls_if",
-                },
-                {
-                    kind: "block",
-                    type: "logic_compare",
-                },
-            ],
+          kind: "block",
+          type: "controls_if",
         },
         {
-            kind: "category",
-            name: "Loops",
-            colour: "#5C81A6",
-            contents: [
-                {
-                    kind: "block",
-                    type: "for_loop",
-                },
-                {
-                    kind: "block",
-                    type: "controls_whileUntil",
-                },
-            ],
+          kind: "block",
+          type: "logic_compare",
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Loops",
+      colour: "#5C81A6",
+      contents: [
+        {
+          kind: "block",
+          type: "for_loop",
         },
         {
-            kind: "category",
-            name: "Math",
-            colour: "#5CA65C",
-            contents: [
-                {
-                    kind: "block",
-                    type: "math_round",
-                },
-                {
-                    kind: "block",
-                    type: "math_number",
-                },
-            ],
+          kind: "block",
+          type: "controls_whileUntil",
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Math",
+      colour: "#5CA65C",
+      contents: [
+        {
+          kind: "block",
+          type: "math_round",
         },
         {
-            kind: "category",
-            name: "Functional Blocks",
-            colour: "#5CA699",
-            contents: [
-                {
-                    kind: "block",
-                    type: "main_block",
-                },
-                {
-                    kind: "block",
-                    type: "delay",
-                },
-            ],
+          kind: "block",
+          type: "math_number",
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Functional Blocks",
+      colour: "#5CA699",
+      contents: [
+        {
+          kind: "block",
+          type: "main_block",
         },
         {
-            kind: "category",
-            name: "Digital",
-            colour: "#5DB254",
-            contents: [
-                {
-                    kind: "block",
-                    type: "pin_setup"
-                },
-                {
-                    kind: "block",
-                    type: "digital_pin_write"
-                },
-                {
-                    kind: "block",
-                    type: "digital_read"
-                },
-            ],
+          kind: "block",
+          type: "delay",
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Digital",
+      colour: "#5DB254",
+      contents: [
+        {
+          kind: "block",
+          type: "pin_setup"
         },
         {
-            kind: "category",
-            name: "Analog",
-            colour: "#2DB254",
-            contents: [
-                {
-                    kind: "block",
-                    type: "pin_setup"
-                },
-                {
-                    kind: "block",
-                    type: "analog_write"
-                },
-                {
-                    kind: "block",
-                    type: "analog_read"
-                },
-            ],
+          kind: "block",
+          type: "digital_pin_write"
         },
         {
-            kind: "category",
-            name: "Sensors",
-            colour: "#4DB254",
-            contents: [
-                {
-                    kind: "block",
-                    type: "ultrasonic_sensor"
-                },
-                {
-                    kind: "block",
-                    type: "ultrasonic_sensor_setup"
-                },
-            ],
+          kind: "block",
+          type: "digital_read"
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Analog",
+      colour: "#2DB254",
+      contents: [
+        {
+          kind: "block",
+          type: "pin_setup"
         },
         {
-            kind: "category",
-            name: "Actuators",
-            colour: "#2CB254",
-            contents: [
-                {
-                    kind: "block",
-                    type: "servo_write"
-                },
-            ],
+          kind: "block",
+          type: "analog_write"
         },
-    ],
+        {
+          kind: "block",
+          type: "analog_read"
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Sensors",
+      colour: "#4DB254",
+      contents: [
+        {
+          kind: "block",
+          type: "ultrasonic_sensor"
+        },
+        {
+          kind: "block",
+          type: "ultrasonic_sensor_setup"
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Actuators",
+      colour: "#2CB254",
+      contents: [
+        {
+          kind: "block",
+          type: "servo_write"
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "Variables",
+      colour: "#2CB254",
+      contents: [
+        {
+          kind: "button",
+          text: "Create New Variable",
+          callbackKey: "createvar"
+        },
+        {
+          kind: "block",
+          type: "variable_get"
+        },
+        {
+          kind: "block",
+          type: "variable_set"
+        },
+
+      ],
+    },
+  ],
 }]
 
 function device(device_name, compiler, microcontroller, toolbox, default_workspace, peripherals_used, peripherals_pins) {
-    this.device_name = device_name;
-    this.compiler = compiler;
-    this.microcontroller = microcontroller;
-    this.toolbox = toolbox;
-    this.default_workspace = default_workspace;
-    this.peripherals_used = peripherals_used;
-    this.peripherals_pins = peripherals_pins;
+  this.device_name = device_name;
+  this.compiler = compiler;
+  this.microcontroller = microcontroller;
+  this.toolbox = toolbox;
+  this.default_workspace = default_workspace;
+  this.peripherals_used = peripherals_used;
+  this.peripherals_pins = peripherals_pins;
 }
 
 const Arduino_Uno = new device(
-    "Arduino Uno",
-    "Arduino",
-    "Arduino Uno",
-    full_toolbox,
-    `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
-    [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
-    undefined
+  "Arduino Uno",
+  "Arduino",
+  "Arduino Uno",
+  full_toolbox,
+  `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
+  [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
+  undefined
 );
 
 const Arduino_Nano = new device(
-    "Arduino Nano",
-    "Arduino",
-    "Arduino Nano",
-    full_toolbox,
-    `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
-    [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
-    undefined
+  "Arduino Nano",
+  "Arduino",
+  "Arduino Nano",
+  full_toolbox,
+  `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
+  [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
+  undefined
 );
 
 const Mello_Bot = new device(
-    "Mello",
-    "Arduino",
-    "Arduino Nano",
-    [`<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  "Mello",
+  "Arduino",
+  "Arduino Nano",
+  [`<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
   <category css-icon="customIcon fa fa-cog" name="Logic" colour="#5b80a5">
       <block type="controls_if"></block>
       <block type="logic_compare">
@@ -321,7 +342,7 @@ const Mello_Bot = new device(
         </block>
     </category>
   </category>
-  <category css-icon="customIcon fa fa-cog" name="Communication">
+  <category css-icon="customIcon fa fa-cog" name="COM">
     <category name="IR Control">
         <block type="communication_infrared_start"></block>
         <block type="communication_infrared_value">
@@ -387,19 +408,19 @@ const Mello_Bot = new device(
   </category>
   
   </xml>`],
-    `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`,
-    [`Ultrasonic Sensor`, `Wheel Servo Motor A`, `Wheel Servo Motor B`, `Forklift Servo Motor C`, `Light Follower A`, `Light Follower B`, `Line Follower A`, `Line Follower B`, `Infrared Receiver`, `Bluetooth Receiver`, `RGB Led`, `Buzzer`],
-    [[`Ultrasonic`, [11, 10]], [`Light Follower`, [`A0`, `A1`]], [`Line Follower`, [`A2`, `A3`]], [`Servo`, [9, 8, 10]], [`IR_Remote`, 3], [`Bluetooth`, [12, 13]], [`RGB Led`, [6, 4, 5]], [`Buzzer`, 7]]
+  `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`,
+  [`Ultrasonic Sensor`, `Wheel Servo Motor A`, `Wheel Servo Motor B`, `Forklift Servo Motor C`, `Light Follower A`, `Light Follower B`, `Line Follower A`, `Line Follower B`, `Infrared Receiver`, `Bluetooth Receiver`, `RGB Led`, `Buzzer`],
+  [[`Ultrasonic`, [11, 10]], [`Light Follower`, [`A0`, `A1`]], [`Line Follower`, [`A2`, `A3`]], [`Servo`, [9, 8, 10]], [`IR_Remote`, 3], [`Bluetooth`, [12, 13]], [`RGB Led`, [6, 4, 5]], [`Buzzer`, 7]]
 );
 
 const Mingo_Bot = new device(
-    "Mingo",
-    "Arduino",
-    "Arduino Nano",
-    full_toolbox,
-    `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
-    [`Line Follower`, `Ultrasonic Sensor`, `Infrared Receiver`, `Light Sensor`, `DC Motor (TB6612)`, `NeoPixel Led`],
-    undefined
+  "Mingo",
+  "Arduino",
+  "Arduino Nano",
+  full_toolbox,
+  `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
+  [`Line Follower`, `Ultrasonic Sensor`, `Infrared Receiver`, `Light Sensor`, `DC Motor (TB6612)`, `NeoPixel Led`],
+  undefined
 );
 
 DeviceList.push(Arduino_Uno)
