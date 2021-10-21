@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
+import Blockly from 'blockly'
 import Menu from '../Menu'
 import Button from '../Button'
 import PropTypes from 'prop-types'
@@ -21,6 +22,16 @@ function Index(props) {
         return devices;
     }
 
+    function loadXML(event){
+        const example_object = props.example_codes;
+        var i = parseInt (event.target.id.replace("code-open-",""));
+        try{
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(example_object[i].xml),Blockly.mainWorkspace);
+        }
+        catch(e){}
+        
+        
+    }
 
     function addExample() {
         const example_object = props.example_codes;
@@ -43,10 +54,11 @@ function Index(props) {
                             {addDevices(example_object[i].devices)}
                         </div>
                         <Button
-                            id="code-open"
+                            id={`code-open-${i}`}
                             type="ExampleButton"
                             outColor="#0000DC"
                             text="Open Code"
+                            onClick={loadXML}
                         />
                     </div>
                 </div>])

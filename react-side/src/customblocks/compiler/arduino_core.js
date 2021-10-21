@@ -26,7 +26,7 @@ Blockly.Blocks['m_mainloop'] = {
           .appendField(new Blockly.FieldCheckbox("TRUE"),"LOOP");
       this.appendStatementInput("mainLoop")
           .setCheck(null);
-      this.setColour(135);
+      this.setColour("#4C97FF");
     this.setTooltip("The Main Loop of the program.");
     this.setHelpUrl("");
     },
@@ -135,7 +135,7 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
         block.setDeletable(true);
         block.setMovable(true);
     }
-    block.setColour(0x0000FF)
+
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
     console.log(createdVariables)
     if (createdVariables.length != 0){

@@ -21,15 +21,16 @@ import Code_Editor from '../Code_Editor'
 import VariableSelector from '../VariableSelector'
 
 const Toolbox_colors = {
-    Logic: "#0000DC",
-    Loop: "#4C97FF",
+    Logic: "#4C97FF",
+    Loop: "#DD0A18",
     Math: "#8D00E8",
     Text: "#16CE9C",
     Actuators: "#FE8013",
     Sensors: "#40BF4A",
     COM: "#D51CD5",
     Light: "#EFCA0F",
-    Sound: "#FA857B"
+    Sound: "#FA857B",
+    Default: "#DD0A18"
 }
 function add_device(svg) {
     return (
@@ -116,7 +117,7 @@ const Body = (props) => {
                     color = Toolbox_colors.Sound;
                     break;
                 default:
-                    color = ("#" + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))
+                    color = Toolbox_colors.Default;
                     break;
             }
             if (toolbox_items[i][2] == "category") {
