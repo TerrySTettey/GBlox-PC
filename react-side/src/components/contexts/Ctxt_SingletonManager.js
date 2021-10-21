@@ -29,6 +29,7 @@ const CtxtP_SingletonManager = (props) => {
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
     var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);          //Used to set and check the selected device's data
     const [currentDeviceChanged, setCurrentDeviceChanged] = useState(0)
+    const [upload_status, setUploadStatus] = useState("");
     const [selectedToolbox, setSelectedToolbox] = useState(MelloDOM)
     const {
         dark_theme,
@@ -223,8 +224,9 @@ const CtxtP_SingletonManager = (props) => {
 
     //Used to show the generated Blockly code.
     function showCode() {
-        var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
-        if (selectedDevice.device_name === "Mello" || selectedDevice.device_name === "Basic") {
+        var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
+        console.log(selectedToolboxName)
+        if (selectedToolboxName === "Mello") {
             code = mainLoopCode;
         }
         // var dropdowns = document.getElementsByClassName("c-CustomDrop-a-Content")
@@ -292,7 +294,9 @@ const CtxtP_SingletonManager = (props) => {
                 selectedToolbox, 
                 setSelectedToolbox,
                 closeVariableDialog,
-                createdVariables
+                createdVariables,
+                upload_status, 
+                setUploadStatus
             }}
         >
             {props.children}

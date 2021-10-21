@@ -120,10 +120,6 @@ async function retrieveSystemSettings(cb) {
     cb(settings)
 }
 
-async function sendMail() {
-    
-}
-
 //Function to constantly retrieve available USB COMPORTs
 async function COMPORT_CONSTANT(cb) {
 
@@ -173,17 +169,20 @@ async function VERIFYCODE(cb) {
 
     if (COMPORT != "No Arduino Detected") {
         VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
-
             if (error) {
                 output += error;
                 const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
                 console.log(mainerror);
-                cb(`Upload Failed : Error in Code\n\n  ${mainerror}`)
+                win.webContents.send(`Upload Failed : Error in Code\n\n  ${mainerror}`)
             }
             else {
-                cb("Upload Successful")
+                win.webContents.send("Upload Successful")
             }
         })
+        VERIFICATION.stderr.on('data', function(data) {
+            win.webContents.send("arduino_upload_status",data);
+        });
+        
     }
     else {
         cb("No Arduino Detected");

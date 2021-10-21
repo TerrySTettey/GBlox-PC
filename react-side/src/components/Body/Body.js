@@ -63,8 +63,10 @@ const Body = (props) => {
     var TrashHolder = useRef(null);
     var FlyOutHolder = useRef(null)
     const [device_svg, setDeviceSVG] = useState(svg_dictionary.devices.Arduino_Uno_SVG)
+    const [progress_value, setProgressValue] = useState(0)
     const {
-        selectedDevice
+        selectedDevice,
+        upload_status
     } = useContext(Ctxt_SingletonManager)
 
     const [serialport_monitor, setSerialPortMonitor] = useState("")
@@ -190,7 +192,7 @@ const Body = (props) => {
     var FlyoutContainerChanged = false;
 
     useEffect(() => {
-        
+
         if (TrashContainerChanged === false) {
             var Trash = document.getElementsByClassName("blocklyTrash")[0];
             if (Trash !== undefined) {
@@ -204,7 +206,7 @@ const Body = (props) => {
         }
     })
     useEffect(() => {
-        switch(selectedDevice.device_name){
+        switch (selectedDevice.device_name) {
             case "Mello":
                 setDeviceSVG(svg_dictionary.devices.mello_temp);
                 document.getElementById("Add_device").style.display = "none"
@@ -217,7 +219,25 @@ const Body = (props) => {
                 document.getElementById("Add_device").style.display = "block"
                 break;
         }
-    },[selectedDevice])
+    }, [selectedDevice])
+    useEffect(() => {
+        if (upload_status === "No Arduino Detected" || upload_status.includes("Upload Failed") === true || upload_status === "") {
+            setProgressValue(0);
+        }
+        else {
+            switch (upload_status) {
+                case "Verifying Code":
+                    setProgressValue(50);
+                    break;
+                case "Uploading Code":
+                    setProgressValue(80);
+                case "Upload Successful":
+                    setProgressValue(100);
+                    break;
+            }
+
+        }
+    }, [upload_status])
 
     return (
         <div className="body-container">
@@ -644,7 +664,7 @@ const Body = (props) => {
                         <Button type="UploadButton" text="Upload" outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" onClick={props.uploadFunction} />
                     </div>
                     <div className="c-Body-a-ProgressBar">
-                        <ProgressBar progress={55} />
+                        <ProgressBar progress={progress_value} />
                     </div>
                 </div>
                 <div className="i-emptyDiv4" />

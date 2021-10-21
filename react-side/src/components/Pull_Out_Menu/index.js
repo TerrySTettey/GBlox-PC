@@ -61,14 +61,12 @@ function Pull_Out_Menu(props) {
                         setCurrentMenu(button_clicked)
                     }
                     break;
-
                 case "code-editor":
                     if (currentMenu !== button_clicked) {
                         setContents([<Edit_Code_Menu />])
                         setCurrentMenu(button_clicked)
                     }
                     break;
-
                 case "example-code":
                     if (currentMenu !== button_clicked) {
                         setContents([
@@ -78,7 +76,6 @@ function Pull_Out_Menu(props) {
                         setCurrentMenu(button_clicked)
                     }
                     break;
-
             }
             if (button_clicked !== "serial-port") {
                 closeSerial();
@@ -86,13 +83,13 @@ function Pull_Out_Menu(props) {
         }
 
         if (currentMenu !== button_clicked) {
-            setLastButtonClicked(button_clicked);
+            setCurrentMenu(button_clicked);
             setMenuOpen("Closed")
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
         }
         else {
-            setLastButtonClicked("None");
+            setCurrentMenu("None");
             pull_out_menu.current.style.marginLeft = "0px"
             pull_out_container.current.style.opacity = "0"
         }
