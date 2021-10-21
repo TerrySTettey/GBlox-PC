@@ -17,7 +17,7 @@ export const Ctxt_SingletonManager = createContext()
 var currentWorkspace;
 var createdVariables = [];
 var currentBlock = null;
-
+var selectedToolboxName = "Mello"
 var WSNumTracker = 0;
 var currentTab = null;
 
@@ -121,6 +121,7 @@ const CtxtP_SingletonManager = (props) => {
                 //Assign device to (g_v)selectedDevice
                 setSelectedDevice(DeviceList[tmp]);
                 setSelectedToolbox(DeviceList[tmp].toolbox[0])
+                selectedToolboxName = DeviceList[tmp].device_name
                 setCurrentDeviceChanged(1)
                 //Blockly.Xml.clearWorkspaceAndLoadFromXml(DeviceList[tmp].toolbox[0], currentWorkspace)
                 //selectedToolbox = selectedDevice.toolbox[0]
