@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import WorkspaceAdd from '../WorkspaceAdd'
 import WorkspaceTab from '../WorkspaceTab'
 import Blockly, { Block } from 'blockly'
@@ -13,6 +13,7 @@ const WorkTabHolder = (props) => {
     const { initialized_workspace, setInitializedWorkspace, currentWorkspace, selectedDevice, setCurrentDeviceName, currentDeviceName, setCurrentToolBoxLevel, currentToolBoxLevel, setToolBoxInit, toolBoxInit, currentDeviceChanged, setCurrentDeviceChanged, selectedToolbox, setSelectedToolbox } = useContext(Ctxt_SingletonManager);
     const [tabAddedState, setTabAddedState] = useState(0);
     const [tabChangedState, setTabChangedState] = useState(0)
+    const [tabClosedState, setTabClosedState] = useState(0)
     class Tab {
         tabID
         tabJSX
@@ -32,10 +33,7 @@ const WorkTabHolder = (props) => {
     useEffect(() => {
         if (currentDeviceChanged === 1) {
             currentTab.tabDevice = currentDeviceName
-            console.log(selectedDevice.toolbox)
             TabHolder[getTabPosition(currentTab)] = currentTab;
-            //console.log(selectedToolbox)
-            
             setCurrentDeviceChanged(0)
         }
     }, [currentDeviceChanged])
@@ -59,9 +57,8 @@ const WorkTabHolder = (props) => {
                     TabHolder[i].tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabHolder[i].tabID} text={"Workspace " + TabHolder[i].tabID} ChangeTab={ChangeTab} closeOnClick={CloseTab} clickState="Off" />)
                 }
             }
-            
+
             Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(selectedDevice.default_workspace), currentWorkspace);
-            console.log(currentTab)
             setTabAddedState(0)
         }
     }, [tabAddedState])
@@ -85,6 +82,23 @@ const WorkTabHolder = (props) => {
             setTabChangedState(0)
         }
     }, [tabChangedState])
+    //After Tab is closed
+    useEffect(() => {
+        if (tabClosedState === 1) {
+
+            for (var i = 0; i < TabHolder.length; i++) {
+                if (TabHolder[i].tabID === currentTab.tabID) {
+                    TabHolder[i].tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabHolder[i].tabID} text={"Workspace " + TabHolder[i].tabID} ChangeTab={ChangeTab} closeOnClick={CloseTab} clickState="On" />)
+                    currentTab = TabHolder[i]
+                }
+                else {
+                    TabHolder[i].tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabHolder[i].tabID} text={"Workspace " + TabHolder[i].tabID} ChangeTab={ChangeTab} closeOnClick={CloseTab} clickState="Off" />)
+                }
+            }
+
+            setTabClosedState(0)
+        }
+    }, [tabClosedState])
 
     function AddTab() {
         WSNumTracker = WSNumTracker + 1;
@@ -92,8 +106,13 @@ const WorkTabHolder = (props) => {
         TabHolder = [...TabHolder, currentTab]
         setTabAddedState(1)
     }
-    function CloseTab() {
-
+    function CloseTab(e) {
+        if (TabHolder.length > 1) {
+            var SelectedID = e.target.parentNode.id.split("-")[2];
+            TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
+            currentTab = TabHolder[TabHolder.length - 1]
+            setTabClosedState(1)
+        }
     }
     function ChangeTab(e) {
         var SelectedID = e.target.id.split("-")[2];

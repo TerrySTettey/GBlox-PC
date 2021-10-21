@@ -41,7 +41,7 @@ const WorkspaceTab = (props) => {
 
     function CloseOnClick(e) {
         if(props.closeOnClick !== undefined){
-            props.closeOnClick(container.current)
+            props.closeOnClick(e)
         }
         e.stopPropagation();
         //container.current.remove();

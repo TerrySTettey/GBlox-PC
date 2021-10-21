@@ -203,7 +203,6 @@ const Body = (props) => {
         }
     })
     useEffect(() => {
-        console.log(selectedDevice.device_name)
         switch(selectedDevice.device_name){
             case "Mello":
                 setDeviceSVG(svg_dictionary.devices.mello_temp);

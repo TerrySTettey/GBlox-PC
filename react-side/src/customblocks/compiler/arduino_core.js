@@ -137,7 +137,6 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
     }
     block.setColour(0x0000FF)
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
-    console.log(createdVariables)
     if (createdVariables.length != 0){
         variables_set = createdVariables;
         for (var i = 0; i < variables_set.length; i++) {
