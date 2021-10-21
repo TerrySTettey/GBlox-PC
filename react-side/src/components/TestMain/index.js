@@ -124,7 +124,6 @@ const TestMain = (props) => {
             }, 1)
         }
     }
-
     async function readSystemSettings() {
         ipcRenderer.invoke("load-settings");
         ipcRenderer.on('current-settings', (event, result) => {
