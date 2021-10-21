@@ -141,16 +141,15 @@ const CtxtP_SingletonManager = (props) => {
     useEffect(() => {
         if (toolboxUpdate === 1)
             if (initialized_workspace) {
-
                 if(selectedDevice.toolbox[toolboxLevel - 1] !== undefined){
                     setSelectedToolbox(selectedDevice.toolbox[toolboxLevel - 1])
+                    currentWorkspace.updateToolbox(selectedDevice.toolbox[toolboxLevel - 1]);
                 } else {
                     setToolboxLevel(1)
                     document.getElementById("toolbox_selector_level_1").click()
                     setSelectedToolbox(selectedDevice.toolbox[0])
+                    currentWorkspace.updateToolbox(selectedDevice.toolbox[0]);
                 }
-
-                currentWorkspace.updateToolbox(selectedToolbox);
                 generateToolbox();
             }
         setToolboxUpdate(0)
