@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState, useContext, useReducer } from "react";
 import { DeviceList } from "../../deviceDef/device_list";
-import Blockly from "blockly";
+import Blockly, { selected } from "blockly";
 import AlterBlockly from "../../blocklyextras/blocklyAlters";
 import { mainLoopCode } from "../../customblocks/compiler/arduino_core";
 import { MelloDOM } from "../../customblocks/toolboxes/toolboxes";
@@ -23,7 +23,6 @@ var selectedToolboxName = "Mello"
 const CtxtP_SingletonManager = (props) => {
 
     const [currentDeviceName, setCurrentDeviceName] = useState("");             //Used to set and check the current device selected
-    const [currentToolBoxLevel, setCurrentToolBoxLevel] = useState(0);          //Used to set and check the current Toolbox Level
     const [toolboxItems, setToolboxItems] = useState([]);                       //Used to set and check the current items in the Toolbox
     const [deviceCode, setDeviceCode] = useState("");                           //Used to set and check the generated code for the current device
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
@@ -31,6 +30,8 @@ const CtxtP_SingletonManager = (props) => {
     const [currentDeviceChanged, setCurrentDeviceChanged] = useState(0)
     const [upload_status, setUploadStatus] = useState("");
     const [selectedToolbox, setSelectedToolbox] = useState(MelloDOM)
+    const [toolboxUpdate, setToolboxUpdate] = useState(0)
+    const [toolboxLevel, setToolboxLevel] = useState(1)
     const {
         dark_theme,
         light_theme
@@ -119,31 +120,41 @@ const CtxtP_SingletonManager = (props) => {
             if (tmp !== -1) {
                 //Assign device to (g_v)selectedDevice
                 setSelectedDevice(DeviceList[tmp]);
-                setSelectedToolbox(DeviceList[tmp].toolbox[0])
+                if(DeviceList[tmp].toolbox[toolboxLevel - 1] !== undefined){
+                    setSelectedToolbox(DeviceList[tmp].toolbox[toolboxLevel - 1])
+                } else {
+                    setToolboxLevel(1)
+                    document.getElementById("toolbox_selector_level_1").click()
+                    setSelectedToolbox(DeviceList[tmp].toolbox[0])
+                }
+                
                 selectedToolboxName = DeviceList[tmp].device_name
                 setCurrentDeviceChanged(1)
+                setToolboxUpdate(1)
             } else {
                 //setCurrentDeviceName((prevState) => prevState)
             }
         }
 
     }, [currentDeviceName])
+
     useEffect(() => {
-        /*When currentToolBoxLevel is changed: Change the toolbox */
-        if (currentWorkspace !== undefined) {
-            if (currentToolBoxLevel > 0 && currentToolBoxLevel <= 5) {
+        if (toolboxUpdate === 1)
+            if (initialized_workspace) {
 
+                if(selectedDevice.toolbox[toolboxLevel - 1] !== undefined){
+                    setSelectedToolbox(selectedDevice.toolbox[toolboxLevel - 1])
+                } else {
+                    setToolboxLevel(1)
+                    document.getElementById("toolbox_selector_level_1").click()
+                    setSelectedToolbox(selectedDevice.toolbox[0])
+                }
 
+                currentWorkspace.updateToolbox(selectedToolbox);
+                generateToolbox();
             }
-        }
-
-    }, [currentToolBoxLevel])
-    useEffect(() => {
-        if (initialized_workspace) {
-            currentWorkspace.updateToolbox(selectedToolbox);
-            generateToolbox();
-        }
-    }, [selectedToolbox])
+        setToolboxUpdate(0)
+    }, [toolboxUpdate])
     useEffect(() => {
         /*Initializes Blockly injection */
         if (currentDeviceName !== "") {
@@ -247,15 +258,15 @@ const CtxtP_SingletonManager = (props) => {
         }
     }
 
-    function openVariableDialog(){
+    function openVariableDialog() {
         document.getElementById("c-variableSelector").style.display = "block";
     }
-    function closeVariableDialog(event){
+    function closeVariableDialog(event) {
         console.log(event.target.id);
-        if (event.target.id == "a-CloseButton"){
+        if (event.target.id == "a-CloseButton") {
             document.getElementById("c-variableSelector").style.display = "none";
         }
-        else{
+        else {
             var newvariable_type = document.getElementById("variable-type-select").firstChild.value.toLowerCase();
             var newvariable_name = document.getElementById("variable-name-input").value
             createdVariables.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
@@ -275,8 +286,6 @@ const CtxtP_SingletonManager = (props) => {
             value={{
                 currentDeviceName,
                 setCurrentDeviceName,
-                currentToolBoxLevel,
-                setCurrentToolBoxLevel,
                 toolboxItems,
                 setToolboxItems,
                 deviceCode,
@@ -291,12 +300,16 @@ const CtxtP_SingletonManager = (props) => {
                 exportBlocks,
                 currentDeviceChanged,
                 setCurrentDeviceChanged,
-                selectedToolbox, 
+                selectedToolbox,
                 setSelectedToolbox,
                 closeVariableDialog,
                 createdVariables,
                 upload_status, 
-                setUploadStatus
+                setUploadStatus,
+                toolboxUpdate, 
+                setToolboxUpdate,
+                toolboxLevel, 
+                setToolboxLevel
             }}
         >
             {props.children}
@@ -305,4 +318,4 @@ const CtxtP_SingletonManager = (props) => {
 }
 
 export default CtxtP_SingletonManager
-export {selectedToolboxName, createdVariables}
+export { selectedToolboxName, createdVariables }
