@@ -34,7 +34,7 @@ function Pull_Out_Menu(props) {
     function Menu(event) {
         var button_clicked = event.target.id;
         setMenuOpen("Open")
-        
+
         if (button_clicked !== "") {
             switch (button_clicked) {
                 case "serial-port":
@@ -51,8 +51,8 @@ function Pull_Out_Menu(props) {
                     break;
                 case "view-code":
                     if (currentMenu !== button_clicked) {
-                    setContents([<View_Code_Menu/>]);
-                    setCurrentMenu(button_clicked)
+                        setContents([<View_Code_Menu />]);
+                        setCurrentMenu(button_clicked)
                     }
                     break;
                 case "help-menu":
@@ -65,6 +65,9 @@ function Pull_Out_Menu(props) {
                     if (currentMenu !== button_clicked) {
                         setContents([<Edit_Code_Menu />])
                         setCurrentMenu(button_clicked)
+                        var code_editor = document.getElementById("c-codeEditor")
+                        code_editor.style.display = "none";
+                        code_editor.style.transform = "scaleX(0.35)"
                     }
                     break;
                 case "example-code":
