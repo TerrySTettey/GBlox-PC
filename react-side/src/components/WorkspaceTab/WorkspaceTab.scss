@@ -30,21 +30,22 @@
         white-space: nowrap;  
         transition: max-width 1s;
 
-        .i-dropShadow {
-            position: absolute;
-            pointer-events: none;
-            top: 0;
-            right: -5px;
-            height: 20px;
-            width: 8%;
-            margin-left: 0px;
-            margin-top: 5px;
-            background-image: linear-gradient(to right, #0000,#0B053300);
-            //background-color: #0B0533;
-            //transform: skewX(45deg);
-            //outline: green 2px solid;
-            //box-shadow: -2px 0px 1px 1px #0B0533;
-        }
+
+    }
+    .i-dropShadow {
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        right: -5px;
+        height: 20px;
+        width: 2%;
+        margin-left: 0px;
+        margin-top: 5px;
+        background-image: linear-gradient(to right, #0000,#0B053300);
+        //background-color: #0B0533;
+        //transform: skewX(45deg);
+        //outline: green 2px solid;
+        //box-shadow: -2px 0px 1px 1px #0B0533;
     }
 
     .c-WorkspaceTab-a-Close {
