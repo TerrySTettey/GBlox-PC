@@ -172,7 +172,6 @@ const Body = (props) => {
                 cur++;
             }
             else {
-                console.log("YA FAT BASTARD")
                 clearInterval(interv)
             }
         }, 50)
@@ -210,7 +209,6 @@ const Body = (props) => {
         }
     }, [selectedDevice])
     useEffect(() => {
-        console.log(progress_value)
         if (upload_status === "No Arduino Detected" || upload_status.includes("Upload Failed") === true || upload_status === "") {
             setProgressValue(0);
         }
