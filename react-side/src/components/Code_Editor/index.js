@@ -65,17 +65,19 @@ function Index(props) {
         document.getElementById("menu-editing").value = document.getElementById("full-editing").value
         document.querySelector("#menu-highlighting-content").innerHTML = document.querySelector("#full-highlighting-content").innerHTML
         var code_editor = document.getElementById("c-codeEditor")
+        var toolbox = document.getElementById("Toolbox");
         if (event.target.id == "code-editor-collapse-button") {
-
+            toolbox.style.filter = "none"
+            toolbox.style.pointerEvents = "auto"
             code_editor.style.transform = "scaleX(0.35)"
             code_editor.style.opacity = "0";
             setTimeout(() => {
                 code_editor.style.display = "none";
             }, 500);
-
         }
         else {
-
+            toolbox.style.filter = "none"
+            toolbox.style.pointerEvents = "auto"
             code_editor.style.transform = "scaleX(0)"
             code_editor.style.opacity = "0";
             document.getElementById("code-editor").click();

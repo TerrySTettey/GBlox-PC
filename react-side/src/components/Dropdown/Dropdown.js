@@ -19,6 +19,7 @@ const Dropdown = (props) => {
                 if (ref.current && !ref.current.contains(event.target)) {
                     setButtonState("Out");
                     dropdownBox.current.style.display = "none"
+                    document.getElementById("blocklyDiv").style.pointerEvents = "auto"
                 }
             }
 
@@ -33,9 +34,11 @@ const Dropdown = (props) => {
         if (buttonState === "Out") {
             setButtonState("In");
             dropdownBox.current.style.display = "block"
+            document.getElementById("blocklyDiv").style.pointerEvents = "none"
         } else if (buttonState === "In") {
             setButtonState("Out");
             dropdownBox.current.style.display = "none"
+            document.getElementById("blocklyDiv").style.pointerEvents = "auto"
         }
         //console.log(dropdownBox)
     }

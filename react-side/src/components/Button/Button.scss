@@ -110,7 +110,7 @@
         color: white;
         margin-top: 4px;
         transform: skewX(45deg);
-        margin:4.3px 10px 25px 0px;
+        margin: 4.3px 10px 25px 0px;
         font-size: 15px;
     }
 }
@@ -126,29 +126,27 @@
     width: 60px;
     height: 60px;
     align-items: center;
-    filter: drop-shadow(0px 0px 15px #0000dc);
+    filter: drop-shadow(0px 0px 15px var(--inner-shadow-color));
     .button-svg {
         position: absolute;
         display: flex;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        svg{
+        svg {
             fill: var(--tetiary-color);
-            :hover{
+            :hover {
                 fill: var(--border-color) !important;
             }
         }
     }
-
-
 }
 .tooltiptext {
     position: absolute;
     opacity: 0;
     filter: none;
-    background:#0B0533;
-    border: 1px solid #0000DC;
+    background: #0b0533;
+    border: 1px solid #0000dc;
     font-family: "Baloo2-Regular";
     font-size: 10pt;
     align-items: center;
@@ -168,17 +166,17 @@
     pointer-events: none;
 }
 
-.c-Button-a-FancyButton{
+.c-Button-a-FancyButton {
     display: inline-flex;
     width: 322px;
     font-family: "Baloo2-Regular";
     font-size: 34pt;
     align-items: center;
-    clip-path : polygon(23.200px 0.000px, 298.900px 0.000px, 322.100px 23.500px, 322.100px 72.000px, 0.000px 72.000px, 0.000px 23.500px, 23.200px 0.000px);
-    p{
+    clip-path: polygon(23.2px 0px, 298.9px 0px, 322.1px 23.5px, 322.1px 72px, 0px 72px, 0px 23.5px, 23.2px 0px);
+    p {
         left: 50%;
         transform: translateX(-50%);
-        margin:0;
+        margin: 0;
         white-space: nowrap;
         user-select: none;
         pointer-events: none;
@@ -193,10 +191,19 @@
     height: 43px;
     width: 43px;
 
-    .button-svg {
+    .workspace-control-bordersvg {
         position: absolute;
         display: flex;
-        transform: translate(-15%, -15%);
+        margin-top: -27px;
+        margin-left: -32px;
+        svg {
+            g {
+                p {
+                    fill: var(--border-color) !important;
+                }
+            }
+        }
+        // transform: translate(-50%, -50%);
     }
     .button-text {
         position: absolute;
@@ -221,10 +228,19 @@
     height: 43px;
     width: 49px;
 
-    .button-svg {
+    .workspace-control-bordersvg {
         position: absolute;
         display: flex;
-        margin: -9px;
+        margin-top: -27px;
+        margin-left: -32px;
+        svg {
+            g {
+                p {
+                    fill: var(--border-color) !important;
+                }
+            }
+        }
+
         // top: 50%;
         // left: 50%;
     }
@@ -290,10 +306,10 @@
         margin: 0 auto;
     }
 }
-.c-Button-a-MenuCloseButton{
+.c-Button-a-MenuCloseButton {
     position: absolute;
     height: 30px;
-    a{
+    a {
         font-size: 20px;
     }
 }

@@ -51,6 +51,9 @@ function Index(props) {
         document.getElementById("full-editing").value = document.getElementById("menu-editing").value
         document.querySelector("#full-highlighting-content").innerHTML = document.querySelector("#menu-highlighting-content").innerHTML
         var code_editor = document.getElementById("c-codeEditor")
+        var toolbox = document.getElementById("Toolbox");
+        toolbox.style.filter = "blur(10px)"
+        toolbox.style.pointerEvents = "none"
         code_editor.style.display = "flex";
         setTimeout(() => {
             code_editor.style.opacity = 1

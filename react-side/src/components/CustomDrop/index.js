@@ -16,6 +16,7 @@ const CustomDrop = (props) => {
                 if (ref.current && !ref.current.contains(event.target)) {
                     setButtonState("Out");
                     dropContent.current.style.display = "none"
+                    document.getElementById("blocklyDiv").style.pointerEvents = "auto"
                 }
             }
 
@@ -30,9 +31,11 @@ const CustomDrop = (props) => {
         if (buttonState === "Out") {
             setButtonState("In");
             dropContent.current.style.display = "block"
+            document.getElementById("blocklyDiv").style.pointerEvents = "none"
         } else if (buttonState === "In") {
             setButtonState("Out");
             dropContent.current.style.display = "none"
+            document.getElementById("blocklyDiv").style.pointerEvents = "auto"
         }
     }
 

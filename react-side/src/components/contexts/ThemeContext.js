@@ -194,15 +194,22 @@ const ThemeContextProvider = (props) => {
                 var bars = document.getElementsByClassName("i-FilledBar")
                 document.getElementById("lid").style.filter = "drop-shadow(0 0 9px #3A00FF)"
                 document.getElementById("bin").style.filter = "drop-shadow(0 0 9px #3A00FF)"
+                var border_svgs = document.getElementsByClassName("workspace-control-bordersvg")
+                for(var i = 0; i <border_svgs.length; i++) {
+                    border_svgs[i].style.filter = "drop-shadow(0 0 6px var(--secondary-color))"
+                }
                 for (var i = 0; i < bars.length; i++) {
                     bars[i].style.filter = "drop-shadow(0 0 6px var(--secondary-color))"
                 }
             }
             else {
                 var bars = document.getElementsByClassName("i-FilledBar")
-                document.getElementById("lid").style.filter = "none !important"
-                
-                document.getElementById("bin").style.filter = "none !important"
+                document.getElementById("lid").style.filter = "none"
+                document.getElementById("bin").style.filter = "none"
+                var border_svgs = document.getElementsByClassName("workspace-control-bordersvg")
+                for(var i = 0; i <border_svgs.length; i++) {
+                    border_svgs[i].style.filter = "none"
+                }
                 for (var i = 0; i < bars.length; i++) {
                     bars[i].style.filter = "none"
                 }

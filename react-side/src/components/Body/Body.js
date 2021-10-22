@@ -564,7 +564,7 @@ const Body = (props) => {
                 </svg>
                 <div id="TrashTotal">
                     <div id="num15HoverHolder">
-                        <svg id="lid" xmlns="http://www.w3.org/2000/svg" width="62.049" height="26.565" viewBox="0 0 62.049 26.565">
+                        {/* <svg id="lid" xmlns="http://www.w3.org/2000/svg" width="62.049" height="26.565" viewBox="0 0 62.049 26.565">
                             <defs>
                                 <filter id="Path_81" x="0" y="0" width="62.049" height="26.565" filterUnits="userSpaceOnUse">
                                     <feOffset input="SourceAlpha" />
@@ -577,9 +577,13 @@ const Body = (props) => {
                             <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_81)">
                                 <path id="Path_81-2" data-name="Path 81" d="M1849.7,938.283h-10.84v-1.969l-1.052-1.052h-8.6L1827.943,934H1821.9v4.283h-10.4l-3.059,2.141v2.141h44.049v-2.141Z" transform="translate(-1799.44 -925)" fill="#e9e9ff" />
                             </g>
+                        </svg> */}
+                        <svg id="lid" xmlns="http://www.w3.org/2000/svg" width="45.049" height="9.565" viewBox="0 0 45.049 9.565">
+                            <path id="Path_81" data-name="Path 81" d="M1849.7,938.283h-10.84v-1.969l-1.052-1.052h-8.6L1827.943,934H1821.9v4.283h-10.4l-3.059,2.141v2.141h44.049v-2.141Z" transform="translate(-1807.942 -933.5)" stroke="rgba(0,0,0,0)" stroke-width="1" />
                         </svg>
 
-                        <svg id="bin" xmlns="http://www.w3.org/2000/svg" width="62.944" height="62.37" viewBox="0 0 62.944 62.37">
+
+                        {/* <svg id="bin" xmlns="http://www.w3.org/2000/svg" width="62.944" height="62.37" viewBox="0 0 62.944 62.37">
                             <defs>
                                 <filter id="Path_82" x="0" y="0" width="62.944" height="62.37" filterUnits="userSpaceOnUse">
                                     <feOffset input="SourceAlpha" />
@@ -594,7 +598,11 @@ const Body = (props) => {
                                     <path id="Path_82-2" data-name="Path 82" d="M1812.688,946.74V957.9l2.371,2.371V977.33l4.78,4.78h25.428V967.541l3.365-3.364V946.74Zm10.129,32.425-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Zm5.8,1.919-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Z" transform="translate(-1799.19 -933.24)" fill="#e9e9ff" />
                                 </g>
                             </g>
+                        </svg> */}
+                        <svg id="bin" xmlns="http://www.w3.org/2000/svg" width="36.944" height="36.37" viewBox="0 0 36.944 36.37">
+                            <path id="Path_82" data-name="Path 82" d="M1812.688,946.74V957.9l2.371,2.371V977.33l4.78,4.78h25.428V967.541l3.365-3.364V946.74Zm10.129,32.425-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Zm5.8,1.919-2.175-1.919V951.023h2.175Zm5.8-1.919-2.175,1.919V951.023h2.175Z" transform="translate(-1812.188 -946.24)" stroke="rgba(0,0,0,0)" stroke-width="1" />
                         </svg>
+
 
                     </div>
                     <svg id="num15trash" ref={TrashHolder}>
