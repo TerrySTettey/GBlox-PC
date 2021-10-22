@@ -665,6 +665,11 @@ const Body = (props) => {
                 <Pull_Out_Menu toolboxButtons={props.toolboxButtons} onSerialPortClick={props.onSerialPortClick} serialport_monitor={serialport_monitor} example_codes={props.example_codes} />
             </div>
             <div id="c-device-manager">
+                <div id="closeDeviceBackground" onClick={(e) => {
+                    document.getElementById("c-device-manager").style.display = 'none'
+                    e.stopPropagation();
+                }}>
+                </div>
                 <NewDeviceManager deviceOnClick={props.deviceOnClick} />
             </div>
             <div id="c-codeEditor">

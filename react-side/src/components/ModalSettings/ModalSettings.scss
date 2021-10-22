@@ -1,8 +1,9 @@
 .modal-container {
-    display: block;
+    display: flex;
     position: relative;
     background-color: var(--primary-color);
-    height:484px;
+    //height:484px;
+    flex-direction: column;
     width: 396px;
     right: -50px;
     border-radius: 10px;
