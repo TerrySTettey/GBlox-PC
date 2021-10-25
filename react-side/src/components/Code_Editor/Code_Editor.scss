@@ -74,6 +74,7 @@
         border: none;
         outline: none;
         margin-bottom: 0px;
+        pointer-events: all;
         // height: 100%;
         #code-lines {
           grid-area: codelines;

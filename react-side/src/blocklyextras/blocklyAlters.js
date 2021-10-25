@@ -1,3 +1,5 @@
+import Blockly from "blockly";
+
 const AlterBlockly = () => {
     var AllScrolls = document.getElementsByClassName("blocklyScrollbarHandle");
     var i = 0;
@@ -10,6 +12,9 @@ const AlterBlockly = () => {
     for (i = 0; i < BackgroundStrokes.length; i++) {
         BackgroundStrokes[i].style.stroke = "#0000";
     }
+
+    Blockly.HSV_SATURATION = 0.85;
+    Blockly.HSV_VALUE = 1;
     
 }
 
