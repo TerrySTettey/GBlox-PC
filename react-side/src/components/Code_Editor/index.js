@@ -10,7 +10,7 @@ import ProgressBar from '../ProgressBar';
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
 import "prismjs/components/prism-arduino";
-import "prismjs/themes/prism-solarizedlight.css"
+import "prismjs/themes/prism-synthwave84.css"
 import './Code_Editor.scss'
 
 const { ipcRenderer } = window.require('electron')
@@ -81,6 +81,12 @@ function Index(props) {
             code_editor.style.transform = "scaleX(0)"
             code_editor.style.opacity = "0";
             document.getElementById("code-editor").click();
+//             document.getElementById("menu-editing").value = `void setup(){
+
+// }
+// void loop(){
+                
+// }`
             setTimeout(() => {
                 code_editor.style.display = "none";
             }, 500);

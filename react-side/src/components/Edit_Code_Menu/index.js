@@ -6,7 +6,7 @@ import Button from "../Button"
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
 import "prismjs/components/prism-arduino";
-import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/themes/prism-synthwave84.css";
 import './Edit_Code_Menu.scss'
 import { MATH_SINGLE_OP_ABSOLUTE } from 'blockly/msg/en';
 
@@ -65,14 +65,31 @@ function Index(props) {
     function closeEditorMenu() {
         document.getElementById("code-editor").click();
     }
+
+    useEffect(() => {
+        var result_element = document.querySelector("#menu-highlighting-content");
+        // Update code
+        result_element.innerHTML = document.getElementById("menu-editing").value.replace(new RegExp("&", "g"), "&").replace(new RegExp("<", "g"), "<"); /* Global RegExp */
+        // Syntax Highlight
+
+        Prism.highlightElement(result_element);
+    })
     return (
         <Menu>
             <div id="edit-code-menu">
                 <div className="text">Code Editor</div>
                 <div id="code-editor-menu-textarea">
-                    <textarea id="menu-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab}></textarea>
+                    <textarea id="menu-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab}>
+                        {`void setup(){
+
+}
+void loop(){
+
+}`}
+                    </textarea>
                     <pre id="menu-highlighting" ref={slider_highlighting} aria-hidden="true">
-                        <code className="language-arduino" id="menu-highlighting-content"></code>
+                        <code className="language-arduino" id="menu-highlighting-content">
+                        </code>
                     </pre>
                 </div>
                 <div id="code-editor-buttons">
