@@ -125,7 +125,7 @@ Blockly.Blocks['communication_serial_print'] = {
 
 Blockly.JavaScript['m_mainloop'] = function(block) {
     getPeripherals();
-    if (selectedToolboxName === "Mello"){
+    if (globalToolboxName === "Mello"){
         block.setDeletable(false);
         block.setMovable(false);
     }
