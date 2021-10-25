@@ -464,6 +464,13 @@ const Button = (props) => {
                 </div>
             )
             break;
+        case "TitleButton":
+            buttonType = (
+                <div className="c-Button-a-TitleButton">
+                    {props.children}
+                </div>
+            )
+            break;
         case " ":
             buttonType = (
                 <div>

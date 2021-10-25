@@ -103,7 +103,6 @@ const WorkTabHolder = (props) => {
     }, [tabClosedState])
 
     useEffect(()=>{
-        console.log(document.getElementById("toolbox_selector_level_" + toolboxLevel))
         if (currentTab !== null){
             currentTab.tabLevel = toolboxLevel
         }
