@@ -20,7 +20,7 @@ var response = "null";
 
 const TestMain = (props) => {
 
-    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
+    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName,deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -222,6 +222,7 @@ const TestMain = (props) => {
                         if (tmp != -1) {
                             setCurrentDeviceName(devName)
                             setSelectedDevice(DeviceList[tmp])
+                            setSelectedToolboxName(devName)
                         }
                         break;
                 }

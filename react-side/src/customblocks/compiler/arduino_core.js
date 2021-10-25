@@ -1,12 +1,12 @@
 import Blockly from 'blockly';
-import { selectedToolboxName , createdVariables } from '../../components/contexts/Ctxt_SingletonManager.js';
+import { globalToolboxName , createdVariables } from '../../components/contexts/Ctxt_SingletonManager.js';
 var peripherals = null;
 var variables_set = [["int sample_var", "Test"]];
 async function getPeripherals(){
-    if (selectedToolboxName === "Basic"){
+    if (globalToolboxName === "Basic"){
         peripherals = await import('./../peripherals/arduino_peripheral.js')
     }
-    else if (selectedToolboxName === "Mello"){
+    else if (globalToolboxName === "Mello"){
         peripherals = await import('./../MelloBlocksGen.js')
     }
 }
@@ -127,7 +127,7 @@ Blockly.JavaScript['m_mainloop'] = function(block) {
     getPeripherals();
     Blockly.HSV_SATURATION = 0.85;
     Blockly.HSV_VALUE = 1;
-    if (selectedToolboxName === "Mello"){
+    if (globalToolboxName === "Mello"){
         block.setDeletable(false);
         block.setMovable(false);
     }

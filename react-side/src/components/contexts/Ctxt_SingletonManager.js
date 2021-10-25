@@ -17,7 +17,7 @@ export const Ctxt_SingletonManager = createContext()
 var currentWorkspace;
 var createdVariables = [];
 var currentBlock = null;
-var selectedToolboxName = "Mello"
+var globalToolboxName = "Mello"
 
 
 const CtxtP_SingletonManager = (props) => {
@@ -32,6 +32,7 @@ const CtxtP_SingletonManager = (props) => {
     const [selectedToolbox, setSelectedToolbox] = useState(MelloDOM)
     const [toolboxUpdate, setToolboxUpdate] = useState(0)
     const [toolboxLevel, setToolboxLevel] = useState(1)
+    const [selectedToolboxName, setSelectedToolboxName] = useState("")
     const {
         dark_theme,
         light_theme
@@ -128,7 +129,7 @@ const CtxtP_SingletonManager = (props) => {
                     setSelectedToolbox(DeviceList[tmp].toolbox[0])
                 }
                 
-                selectedToolboxName = DeviceList[tmp].device_name
+                setSelectedToolboxName(DeviceList[tmp].device_name);
                 setCurrentDeviceChanged(1)
                 setToolboxUpdate(1)
             } else {
@@ -137,6 +138,10 @@ const CtxtP_SingletonManager = (props) => {
         }
 
     }, [currentDeviceName])
+
+    useEffect(() => {
+        globalToolboxName = selectedToolboxName;
+    },[selectedToolboxName])
 
     useEffect(() => {
         if (toolboxUpdate === 1)
@@ -309,7 +314,8 @@ const CtxtP_SingletonManager = (props) => {
                 toolboxUpdate, 
                 setToolboxUpdate,
                 toolboxLevel, 
-                setToolboxLevel
+                setToolboxLevel,
+                setSelectedToolboxName
             }}
         >
             {props.children}
@@ -318,4 +324,4 @@ const CtxtP_SingletonManager = (props) => {
 }
 
 export default CtxtP_SingletonManager
-export { selectedToolboxName, createdVariables }
+export { globalToolboxName, createdVariables }
