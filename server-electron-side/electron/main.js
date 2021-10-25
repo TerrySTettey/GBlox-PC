@@ -168,6 +168,7 @@ async function VERIFYCODE(cb) {
     var output = "";
 
     if (COMPORT != "No Arduino Detected") {
+        alert(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload "))
         VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
             if (error) {
                 output += error;
