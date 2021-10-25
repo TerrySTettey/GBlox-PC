@@ -125,9 +125,7 @@ Blockly.Blocks['communication_serial_print'] = {
 
 Blockly.JavaScript['m_mainloop'] = function(block) {
     getPeripherals();
-    Blockly.HSV_SATURATION = 0.85;
-    Blockly.HSV_VALUE = 1;
-    if (globalToolboxName === "Mello"){
+    if (selectedToolboxName === "Mello"){
         block.setDeletable(false);
         block.setMovable(false);
     }
