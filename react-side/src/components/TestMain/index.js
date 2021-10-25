@@ -20,7 +20,7 @@ var response = "null";
 
 const TestMain = (props) => {
 
-    const {selectedDevice,currentWorkspace,currentBlock,currentDeviceName,setCurrentDeviceName,toolboxItems,deviceCode, exportBlocks, upload_status, setUploadStatus} = useContext(Ctxt_SingletonManager)
+    const {selectedDevice,setSelectedDevice, currentWorkspace,currentBlock,currentDeviceName,setCurrentDeviceName,toolboxItems,deviceCode, exportBlocks, upload_status, setUploadStatus} = useContext(Ctxt_SingletonManager)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -183,6 +183,7 @@ const TestMain = (props) => {
                 var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`
                 writeSystemSettings(temp_settings)
                 setSystemSettings(temp_settings)
+                
             }
             catch(e){}
         }
@@ -210,6 +211,7 @@ const TestMain = (props) => {
                         var tmp = DeviceList.findIndex((ele)=>ele.device_name == devName)
                         if (tmp != -1 ){
                             setCurrentDeviceName(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
+                            setSelectedDevice(DeviceList[tmp])
                         }
                         break;
                 }

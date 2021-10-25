@@ -291,6 +291,7 @@ const CtxtP_SingletonManager = (props) => {
                 setDeviceCode,
                 currentWorkspace,
                 selectedDevice,
+                setSelectedDevice,
                 initialized_workspace,
                 setInitializedWorkspace,
                 selectedToolbox,
