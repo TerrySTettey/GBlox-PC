@@ -26,7 +26,7 @@ function createWindow() {
         maxHeight: 1115, //1080
         maximizable: true,
         title: "GBlox",
-        frame: false,
+        frame: true,
         autoHideMenuBar: true,
         isResizable: true,
         /*frame:false,*/
