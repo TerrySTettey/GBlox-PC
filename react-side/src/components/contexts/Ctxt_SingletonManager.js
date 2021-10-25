@@ -196,7 +196,14 @@ const CtxtP_SingletonManager = (props) => {
             var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
             var xml_text = Blockly.Xml.domToText(xml);
             console.log("Saving the following: " + xml_text);
-            ipcRenderer.send('save-file', xml_text)
+            
+            ipcRenderer.send('save-file', 
+            {
+                device: currentDeviceName,
+                toolLevel: toolboxLevel, 
+                variables: createdVariables,
+                xml: xml_text
+            })
         } catch (e) {
             alert(e);
         }
@@ -208,7 +215,11 @@ const CtxtP_SingletonManager = (props) => {
             console.log("Loading a file...")
             var hold = ipcRenderer.sendSync('load-file')
             if (hold !== "nil") {
-                var xmlss = Blockly.Xml.textToDom(hold)
+                var xmlss = Blockly.Xml.textToDom(hold.xml)
+                setToolboxLevel(hold.toolLevel)
+                document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
+                setCurrentDeviceName(hold.device)
+                createdVariables = hold.variables;
                 Blockly.mainWorkspace.clear();
                 Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
             }

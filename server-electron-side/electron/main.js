@@ -61,13 +61,13 @@ app.on('activate', () => {
 
 //Load function
 async function loadFile() {
-    var ourdata = "nil";
+    var ourdata = "nil"
     const { filePaths, canceled } = await dialog.showOpenDialog({
-        defaultPath: "project.xml",
+        defaultPath: "project.gbx",
         buttonLabel: "Load Project",
         title: "Load Project",
         filters: [
-            { name: 'Project File', extensions: ['txt', 'xml'] }
+            { name: 'GBlox Project File', extensions: ['gbx'] }
         ]
     });
 
@@ -76,6 +76,7 @@ async function loadFile() {
     if (filePaths[0] && !canceled) {
         try {
             ourdata = fs.readFileSync(filePaths[0], 'utf8')
+            ourdata = JSON.parse(ourdata)
             console.log('The file has been loaded!')
             console.log(String("Data from Load: " + ourdata.toString()))
         } catch (err) {
@@ -84,19 +85,21 @@ async function loadFile() {
     }
     return ourdata;
 }
-//Save Function
+//Save As Function
 async function saveFile(data) {
     const { filePath, canceled } = await dialog.showSaveDialog({
-        defaultPath: "project.xml",
+        defaultPath: "project.gbx",
         buttonLabel: "Save Project",
         title: "Save Project As...",
         filters: [
-            { name: 'Project File', extensions: ['txt', 'xml'] }
+            { name: 'Project File', extensions: ['gbx'] }
         ]
     });
 
+    //var saveData = `{device: "${data.device}",toolboxLevel:${data.toolboxLevel},variables:"${data.variables}",xml:"${data.xml}"}`
+    var saveData = JSON.stringify(data);
     if (filePath && !canceled) {
-        fs.writeFile(filePath, data, (err) => {
+        fs.writeFile(filePath, saveData, (err) => {
             if (err) throw err;
             console.log('The file has been saved!');
         });

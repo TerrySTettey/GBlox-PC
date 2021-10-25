@@ -87,7 +87,8 @@ const WorkTabHolder = (props) => {
     //After Tab is closed
     useEffect(() => {
         if (tabClosedState === 1) {
-
+            TabHolder[getTabPosition(currentTab)] = currentTab
+            document.getElementById("toolbox_selector_level_" + currentTab.tabLevel).click()
             for (var i = 0; i < TabHolder.length; i++) {
                 if (TabHolder[i].tabID === currentTab.tabID) {
                     TabHolder[i].tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabHolder[i].tabID} text={"Workspace " + TabHolder[i].tabID} ChangeTab={ChangeTab} closeOnClick={CloseTab} clickState="On" />)
@@ -97,7 +98,9 @@ const WorkTabHolder = (props) => {
                     TabHolder[i].tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabHolder[i].tabID} text={"Workspace " + TabHolder[i].tabID} ChangeTab={ChangeTab} closeOnClick={CloseTab} clickState="Off" />)
                 }
             }
-
+            setToolboxLevel(currentTab.tabLevel)
+            setToolboxUpdate(1)
+            console.log(currentTab)
             setTabClosedState(0)
         }
     }, [tabClosedState])
@@ -122,6 +125,8 @@ const WorkTabHolder = (props) => {
             var SelectedID = e.target.parentNode.id.split("-")[2];
             TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
             currentTab = TabHolder[TabHolder.length - 1]
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
+            setCurrentDeviceName(currentTab.tabDevice)
             setTabClosedState(1)
         }
     }
