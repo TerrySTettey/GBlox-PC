@@ -1,3 +1,3 @@
 theme: 
-hideSplash: true
-device: Arduino Uno
+hideSplash: false
+device: Mello
