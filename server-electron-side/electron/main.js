@@ -102,7 +102,7 @@ async function saveFile(data) {
 }
 //Function to write settings of the application to the settings.txt file
 async function writeSystemSettings(data) {
-    var filePath = path.resolve(__dirname, "settings.txt");
+    var filePath = isDev ? path.resolve(__dirname, "settings.txt") : path.join(process.resourcesPath, "settings.txt");
     fs.writeFile(filePath, data, (err) => {
         if (err) throw err;
     })
@@ -110,7 +110,7 @@ async function writeSystemSettings(data) {
 //Function to retrieve settings of the application
 async function retrieveSystemSettings(cb) {
     var settings = "nil";
-    var filePath = path.resolve(__dirname, "settings.txt");
+    var filePath = isDev ? path.resolve(__dirname, "settings.txt") : path.join(process.resourcesPath, "settings.txt");
     try {
         settings = fs.readFileSync(filePath, "utf8")
         settings = settings.split(`\n`)
@@ -166,25 +166,41 @@ function CHECK_COMPORT(cb) {
 async function VERIFYCODE(cb) {
     var VERIFICATION = null;
     var output = "";
-
+    const arduinoIDE = path.join(process.resourcesPath, "arduino-1.8.15/arduino_debug --upload ");
+    const arduinoOutput = path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino")
     if (COMPORT != "No Arduino Detected") {
-        alert(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload "))
-        VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
-            if (error) {
-                output += error;
-                const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
-                console.log(mainerror);
-                win.webContents.send("arduino_upload_status",`Upload Failed : Error in Code\n\n  ${mainerror}`)
-            }
-            else {
-                win.webContents.send("arduino_upload_status","Upload Successful")
-            }
-        })
-        VERIFICATION.stderr.on('data', function(data) {
-            win.webContents.send("arduino_upload_status",data);
+        if (isDev == true) {
+            VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
+                if (error) {
+                    output += error;
+                    const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
+                    console.log(mainerror);
+                    win.webContents.send("arduino_upload_status", `Upload Failed : Error in Code\n\n  ${mainerror}`)
+                }
+                else {
+                    win.webContents.send("arduino_upload_status", "Upload Successful")
+                }
+            })
+        }
+        else {
+            VERIFICATION = exec(arduinoIDE + arduinoOutput + " --port " + COMPORT[0], (error, stdout, stderr) => {
+                if (error) {
+                    output += error;
+                    const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
+                    console.log(mainerror);
+                    win.webContents.send("arduino_upload_status", `Upload Failed : Error in Code\n\n  ${mainerror}`)
+                }
+                else {
+                    win.webContents.send("arduino_upload_status", "Upload Successful")
+                }
+            })
+        }
+
+        VERIFICATION.stderr.on('data', function (data) {
+            win.webContents.send("arduino_upload_status", data);
             console.log(data)
         });
-        
+
     }
     else {
         cb("No Arduino Detected");
@@ -284,7 +300,7 @@ ipcMain.handle("serialport_close", function (event) {
 //ipc call for "upload-code" which checks for an available COMPORT and attempts to uplaod arduino code to the device
 ipcMain.handle("upload-code", async function (event, jsCode) {
     try {
-        fs.writeFileSync(path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino"), jsCode)
+        fs.writeFileSync( isDev ? path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") : path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino"), jsCode)
         CHECK_COMPORT(function (res) {
             event.sender.send('arduino_comport', res);
         });
@@ -306,4 +322,4 @@ try {
         });;
     }, 3000)
 }
-catch (e) {}
+catch (e) { }

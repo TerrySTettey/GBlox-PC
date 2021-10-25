@@ -20,7 +20,7 @@ var response = "null";
 
 const TestMain = (props) => {
 
-    const {selectedDevice,setSelectedDevice, currentWorkspace,currentBlock,currentDeviceName,setCurrentDeviceName,toolboxItems,deviceCode, exportBlocks, upload_status, setUploadStatus} = useContext(Ctxt_SingletonManager)
+    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -30,7 +30,7 @@ const TestMain = (props) => {
 
     function serialport_read() {
         //Starts the serial port monitor
-        if (serialport_status === false) {      
+        if (serialport_status === false) {
             //Checks if serial port is already opened. If it is not opened, then start reading the serial port
             ipcRenderer.invoke(`serialport_retreive`);
             ipcRenderer.on('serialport_monitor', (event, result) => {
@@ -48,15 +48,22 @@ const TestMain = (props) => {
         }
     }
     async function uploadCode_ipc() {
-        //Invokes upload-code from electron with the current code
-        ipcRenderer.invoke('upload-code', deviceCode);
+        if (document.getElementById("c-codeEditor").style.display !== "flex") {
+            //Invokes upload-code from electron with the current code
+            ipcRenderer.invoke('upload-code', deviceCode);
+        }
+        else {
+            var code = document.getElementById("full-editing").value
+            ipcRenderer.invoke('upload-code', code);
+        }
+
         //Waits for results on which comport arduino is found on
         ipcRenderer.on('arduino_comport', (event, result) => {
             response = result;
             setUploadStatus(`Arduino found on ${response}`);
         });
         //Returns a confirmation for when the upload is done
-        
+
     }
     function closeSplash() {
         var splash = document.getElementById('c-Body-a-SplashScreen')
@@ -105,7 +112,7 @@ const TestMain = (props) => {
             popout.style.display = "inline-flex"
         }
         else {
-            if(currentDeviceName !== event.target.id){
+            if (currentDeviceName !== event.target.id) {
                 setCurrentDeviceName(event.target.id)
                 console.log(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace)
                 console.log(currentWorkspace)
@@ -132,7 +139,7 @@ const TestMain = (props) => {
     async function writeSystemSettings(system_settings) {
         ipcRenderer.invoke("write-settings", system_settings)
     }
-    
+
     useEffect(() => {
         // setTimeout(() => {
         //     check_comport_constant();
@@ -144,27 +151,30 @@ const TestMain = (props) => {
             });
             ipcRenderer.on('arduino_upload_status', (event, result) => {
                 response = result;
-                if(response.includes("Verifying...")==true){
+                if (response.includes("Verifying...") == true) {
                     setUploadStatus("Verifying Code");
                     console.log("Verifying the code now")
                 }
-                else if(response.includes("Uploading...")==true){
+                else if (response.includes("Uploading...") == true) {
                     setUploadStatus("Uploading Code");
                     console.log("Uploading the code now")
                 }
-                else if(response.includes("An error occurred while uploading the sketch")==true){
+                else if (response.includes("An error occurred while uploading the sketch") == true) {
                     setUploadStatus("Upload Failed");
                     console.log("Upload Failed")
                 }
-                else if(response.includes("Upload Failed")==true){
+                else if (response.includes("Upload Failed") == true) {
                     setUploadStatus("Upload Failed : Error in Code")
                 }
-                else if(response.includes("Upload Successful")==true){
+                else if (response.includes("Upload Successful") == true) {
                     setUploadStatus("Upload Successful")
                     console.log("Upload Successful")
                 }
             });
         }
+        ipcRenderer.on("temp_log", (event, result) => {
+            console.log(result);
+        })
     })
     useEffect(() => {
         var outer_circle = document.getElementById("Outer_Circle");
@@ -179,13 +189,13 @@ const TestMain = (props) => {
     }, [available_com_ports])
     useEffect(() => {
         if (system_settings[1] !== undefined) {
-            try{
+            try {
                 var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`
                 writeSystemSettings(temp_settings)
                 setSystemSettings(temp_settings)
-                
+
             }
-            catch(e){}
+            catch (e) { }
         }
     }, [current_theme, currentDeviceName, splash_status])
     useEffect(() => {
@@ -208,9 +218,9 @@ const TestMain = (props) => {
                         break;
                     case "device":
                         var devName = system_settings[i].toString().replaceAll(";\r", "").replace("device: ", "")
-                        var tmp = DeviceList.findIndex((ele)=>ele.device_name == devName)
-                        if (tmp != -1 ){
-                            setCurrentDeviceName(system_settings[i].toString().replaceAll(";\r", "").replace("device: ", ""))
+                        var tmp = DeviceList.findIndex((ele) => ele.device_name == devName)
+                        if (tmp != -1) {
+                            setCurrentDeviceName(devName)
                             setSelectedDevice(DeviceList[tmp])
                         }
                         break;
@@ -220,7 +230,7 @@ const TestMain = (props) => {
         //.replaceAll(";\r","").replace("splash: ","")
         //document.getElementById("SplashStatus").checked
     }, [system_settings])
-    
+
 
     return (
         <div>

@@ -660,7 +660,7 @@ const Body = (props) => {
                 <div className="i-emptyDiv3" />
                 <div className="c-Body-a-UploadProg">
                     <div className="c-Body-a-UploadButton">
-                        <Button type="UploadButton" text="Upload" outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" onClick={props.uploadFunction} />
+                        <Button type="UploadButton" text="Upload" outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" onClick={(e) => {setProgressValue(0);props.uploadFunction()}} />
                     </div>
                     <div className="c-Body-a-ProgressBar">
                         <ProgressBar progress={progress_value} />
