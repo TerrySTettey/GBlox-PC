@@ -77,6 +77,7 @@ async function loadFile() {
         try {
             ourdata = fs.readFileSync(filePaths[0], 'utf8')
             ourdata = JSON.parse(ourdata)
+            ourdata.location = filePaths[0]
             console.log('The file has been loaded!')
             console.log(String("Data from Load: " + ourdata.toString()))
         } catch (err) {
@@ -86,25 +87,37 @@ async function loadFile() {
     return ourdata;
 }
 //Save As Function
-async function saveFile(data) {
-    const { filePath, canceled } = await dialog.showSaveDialog({
-        defaultPath: "project.gbx",
-        buttonLabel: "Save Project",
-        title: "Save Project As...",
-        filters: [
-            { name: 'Project File', extensions: ['gbx'] }
-        ]
-    });
+async function saveFile(data, loc) {
+    if (loc === "") {
+        const { filePath, canceled } = await dialog.showSaveDialog({
+            defaultPath: "project.gbx",
+            buttonLabel: "Save Project",
+            title: "Save Project As...",
+            filters: [
+                { name: 'Project File', extensions: ['gbx'] }
+            ]
+        });
 
-    //var saveData = `{device: "${data.device}",toolboxLevel:${data.toolboxLevel},variables:"${data.variables}",xml:"${data.xml}"}`
-    var saveData = JSON.stringify(data);
-    if (filePath && !canceled) {
-        fs.writeFile(filePath, saveData, (err) => {
+        var saveData = JSON.stringify(data);
+        if (filePath && !canceled) {
+            fs.writeFile(filePath, saveData, (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+            });
+        }
+
+        return filePath;
+    } else {
+        var saveData = JSON.stringify(data);
+        fs.writeFile(loc, saveData, (err) => {
             if (err) throw err;
             console.log('The file has been saved!');
         });
+        return loc
     }
+    
 }
+
 //Function to write settings of the application to the settings.txt file
 async function writeSystemSettings(data) {
     var filePath = isDev ? path.resolve(__dirname, "settings.txt") : path.join(process.resourcesPath, "settings.txt");
@@ -232,9 +245,11 @@ async function readSerialPort(cb) {
 }
 
 //ipc call for "save-file" which is responsible for saving the XML data of a workspace to a directory chosen by the user
-ipcMain.on("save-file", function (event, xml_data) {
-    saveFile(xml_data)
+ipcMain.on("save-file", async function (event, xml_data, loc) {
+    var data = await saveFile(xml_data, loc)
+    event.returnValue = data
 })
+
 
 //ipc call for "load-file" which is responsible for loading the desired XML data from the directory chosen by the user
 ipcMain.on("load-file", async function (event) {
@@ -305,7 +320,7 @@ ipcMain.handle("serialport_close", function (event) {
 //ipc call for "upload-code" which checks for an available COMPORT and attempts to uplaod arduino code to the device
 ipcMain.handle("upload-code", async function (event, jsCode) {
     try {
-        fs.writeFileSync( isDev ? path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") : path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino"), jsCode)
+        fs.writeFileSync(isDev ? path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") : path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino"), jsCode)
         CHECK_COMPORT(function (res) {
             event.sender.send('arduino_comport', res);
         });
