@@ -408,7 +408,7 @@ const Mello_Bot = new device(
   "Arduino",
   "Arduino Nano",
   [`<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-  <category css-icon="customIcon fa fa-cog" name="Logic" colour="#5b80a5">
+  <category css-icon="customIcon fa fa-cog" name="Logic">
       <block type="controls_if"></block>
       <block type="logic_compare">
           <field name="OP">EQ</field>
@@ -423,17 +423,21 @@ const Mello_Bot = new device(
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
   </category>
-  <category name="Loops" colour="#5ba55b">
+  <category name="Loops">
       <block type="for_loop">
       </block>
       <block type="controls_whileUntil">
           <field name="MODE">WHILE</field>
       </block>
       <block type="delay_core">
-      <field name= "seconds" type="number"></field>
+      <field name= "seconds" type="number">
+      <shadow type="math_number">
+      <field name="NUM">1</field>
+  </shadow>
+  </field>
       </block>
   </category>
-  <category css-icon="customIcon fa fa-cog" name="Math" colour="#5b67a5">
+  <category css-icon="customIcon fa fa-cog" name="Math">
       <block type="math_number">
           <field name="NUM">0</field>
       </block>
@@ -460,7 +464,7 @@ const Mello_Bot = new device(
           </value>
       </block>
   </category>
-  <category css-icon="customIcon fa fa-cog" name="Text" colour="#5ba58c">
+  <category css-icon="customIcon fa fa-cog" name="Text">
       <block type="text">
         <field name="TEXT"></field>
       </block>
@@ -514,7 +518,7 @@ const Mello_Bot = new device(
         </value>
       </block>
     </category>
-  <category css-icon="customIcon fa fa-cog" name="Actuators" colour="#05386B">
+  <category css-icon="customIcon fa fa-cog" name="Actuators">
     <category name="Motor">
       <block type="motor_move_indef">
         <field name="direction">forward</field>

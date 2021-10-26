@@ -352,7 +352,7 @@ Blockly.Blocks['for_loop'] = {
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setStyle("loop_blocks")
  this.setTooltip("");
  this.setHelpUrl("");
   }

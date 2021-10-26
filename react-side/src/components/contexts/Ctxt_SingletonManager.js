@@ -121,14 +121,14 @@ const CtxtP_SingletonManager = (props) => {
             if (tmp !== -1) {
                 //Assign device to (g_v)selectedDevice
                 setSelectedDevice(DeviceList[tmp]);
-                if(DeviceList[tmp].toolbox[toolboxLevel - 1] !== undefined){
+                if (DeviceList[tmp].toolbox[toolboxLevel - 1] !== undefined) {
                     setSelectedToolbox(DeviceList[tmp].toolbox[toolboxLevel - 1])
                 } else {
                     setToolboxLevel(1)
                     document.getElementById("toolbox_selector_level_1").click()
                     setSelectedToolbox(DeviceList[tmp].toolbox[0])
                 }
-                
+
                 setSelectedToolboxName(DeviceList[tmp].device_name);
                 setCurrentDeviceChanged(1)
                 setToolboxUpdate(1)
@@ -141,12 +141,12 @@ const CtxtP_SingletonManager = (props) => {
 
     useEffect(() => {
         globalToolboxName = selectedToolboxName;
-    },[selectedToolboxName])
+    }, [selectedToolboxName])
 
     useEffect(() => {
         if (toolboxUpdate === 1)
             if (initialized_workspace) {
-                if(selectedDevice.toolbox[toolboxLevel - 1] !== undefined){
+                if (selectedDevice.toolbox[toolboxLevel - 1] !== undefined) {
                     setSelectedToolbox(selectedDevice.toolbox[toolboxLevel - 1])
                     currentWorkspace.updateToolbox(selectedDevice.toolbox[toolboxLevel - 1]);
                 } else {
@@ -188,6 +188,16 @@ const CtxtP_SingletonManager = (props) => {
                 setInitializedWorkspace(true)
             }
         }
+        //Disables pointer events for blockly if Modal settings is opened
+        var dropdowns = document.getElementsByClassName("c-CustomDrop-a-Content")
+        for (var i = 0; i < dropdowns.length; i++) {
+            if (dropdowns[i].style.display !== "none"){
+                document.getElementById("blocklyDiv").style.pointerEvents = "none";
+            }
+            else{
+                // document.getElementById("blocklyDiv").style.pointerEvents = "auto";
+            }
+        }
     })
 
     //Exports Blocks
@@ -196,14 +206,14 @@ const CtxtP_SingletonManager = (props) => {
             var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
             var xml_text = Blockly.Xml.domToText(xml);
             console.log("Saving the following: " + xml_text);
-            
-            ipcRenderer.send('save-file', 
-            {
-                device: currentDeviceName,
-                toolLevel: toolboxLevel, 
-                variables: createdVariables,
-                xml: xml_text
-            })
+
+            ipcRenderer.send('save-file',
+                {
+                    device: currentDeviceName,
+                    toolLevel: toolboxLevel,
+                    variables: createdVariables,
+                    xml: xml_text
+                })
         } catch (e) {
             alert(e);
         }
@@ -255,13 +265,6 @@ const CtxtP_SingletonManager = (props) => {
         if (selectedToolboxName === "Mello") {
             code = mainLoopCode;
         }
-        // var dropdowns = document.getElementsByClassName("c-CustomDrop-a-Content")
-        // for (var i = 0; i < dropdowns.length; i++) {
-        //     dropdowns[i].style.display = "none"
-        // }
-
-
-
         //currentWorkspace.registerButtonCallback("createvar", logbutton)
         setDeviceCode(code);
     }
@@ -320,11 +323,11 @@ const CtxtP_SingletonManager = (props) => {
                 setSelectedToolbox,
                 closeVariableDialog,
                 createdVariables,
-                upload_status, 
+                upload_status,
                 setUploadStatus,
-                toolboxUpdate, 
+                toolboxUpdate,
                 setToolboxUpdate,
-                toolboxLevel, 
+                toolboxLevel,
                 setToolboxLevel,
                 setSelectedToolboxName
             }}

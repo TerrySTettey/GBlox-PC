@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types'
-
-import Menu from '../Menu'
 import Prism from "prismjs";
 import Button from "../Button"
-import Upload_Circle from '../Upload_Circle'
-import Header from '../Header/Header'
-import ProgressBar from '../ProgressBar';
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
 import "prismjs/components/prism-arduino";
-import "prismjs/themes/prism-synthwave84.css"
+import "../prismjsTheme/gbloxTheme.css";
 import './Code_Editor.scss'
 
 const { ipcRenderer } = window.require('electron')
@@ -25,18 +20,16 @@ function Index(props) {
 
     function update(event) {
         var result_element = document.querySelector("#full-highlighting-content");
-        // Update code
-        result_element.innerHTML = event.target.value.replace(new RegExp("&", "g"), "&").replace(new RegExp("<", "g"), "<"); /* Global RegExp */
-        // Syntax Highlight
         var textarea = document.getElementById("full-editing");
-
-        lines = textarea.value.substr(0, textarea.selectionStart).split("\n").length
+        // Update code
+        result_element.innerHTML = textarea.value.replace(new RegExp("&", "g"), "&").replace(new RegExp("<", "g"), "<"); /* Global RegExp */
+        
+        lines = textarea.value.split("\n").length
         var temp_line_array = [];
         for (var i = 0; i < lines; i++) {
             temp_line_array.push(<p>{i + 1}</p>)
         }
         setLineNumber(temp_line_array)
-
         Prism.highlightElement(result_element);
     }
     function sync_scroll(element) {
@@ -95,6 +88,16 @@ function Index(props) {
 
     }
 
+    useEffect(() => {
+        var textarea = document.getElementById("full-editing");
+        lines = textarea.value.split("\n").length
+                var temp_line_array = [];
+                for (var i = 0; i < lines; i++) {
+                    temp_line_array.push(<p>{i + 1}</p>)
+                }
+                setLineNumber(temp_line_array)
+    })
+
     return (
         <div id="code-editor-container">
             <div id="outline">
@@ -124,7 +127,7 @@ function Index(props) {
                         </div>
 
                         <div id="full-editor">
-                            <textarea id="full-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab} rows={50}></textarea>
+                            <textarea id="full-editing" ref={editor} spellcheck="false" onInput={e => { update(e);setEditedCode(e.target.value); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab} rows={50}></textarea>
                             <pre id="full-highlighting" ref={slider_highlighting} aria-hidden="true">
                                 <code className="language-arduino" id="full-highlighting-content"></code>
                             </pre>

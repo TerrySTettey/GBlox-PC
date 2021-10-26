@@ -6,7 +6,7 @@ import Button from "../Button"
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
 import "prismjs/components/prism-arduino";
-import "prismjs/themes/prism-synthwave84.css";
+import "../prismjsTheme/gbloxTheme.css";
 import './Edit_Code_Menu.scss'
 import { MATH_SINGLE_OP_ABSOLUTE } from 'blockly/msg/en';
 

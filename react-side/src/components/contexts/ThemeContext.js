@@ -2,87 +2,76 @@ import { createContext, useState, useEffect, useContext } from "react";
 import Blockly from "blockly";
 
 export const ThemeContext = createContext();
-const dark_block_styles = {
-    "loop_blocks": {
-        "colourPrimary": "#c7b01a",
-        "colourSecondary": "#AD7BE9",
-        "colourTertiary": "#CDB6E9"
-    },
+const block_styles = {
     "logic_blocks": {
-        "colourPrimary": "#c91818",
-        "colourSecondary": "#64C7FF",
+        "colourPrimary": "#4C97FF",
+        "colourSecondary": "#FFFFFF",
         "colourTertiary": "#C5EAFF"
     },
+    "loop_blocks": {
+        "colourPrimary": "#DD0A18",
+        "colourSecondary": "#DD0A18",
+        "colourTertiary": "#DD0A18"
+    },
+    "text_blocks": {
+        "colourPrimary": "#16CE9C",
+        "colourSecondary": "#16CE9C",
+        "colourTertiary": "#16CE9C"
+    },
     "math_blocks": {
-        "colourPrimary": "#03254c",
-        "colourSecondary": "#A334C5",
-        "colourTertiary": "#A3DB55"
+        "colourPrimary": "#8D00E8",
+        "colourSecondary": "#8D00E8",
+        "colourTertiary": "#8D00E8"
     },
-    "colour_blocks": {
-        "colourPrimary": "#23445b",
-        "colourSecondary": "#dbc7bd",
-        "colourTertiary": "#845d49"
-    },
+
     "variable_blocks": {
         "colourPrimary": "#525b99",
         "colourSecondary": "#dbbdd6",
         "colourTertiary": "#84497a"
     },
-    "procedure_blocks": {
-        "colourPrimary": "#995ba5",
-        "colourSecondary": "#d6bddb",
+    "actuator_blocks": {
+        "colourPrimary": "#FE8013",
+        "colourSecondary": "#FFFFFF",
         "colourTertiary": "#7a4984"
     },
+    "sensor_blocks": {
+        "colourPrimary": "#40BF4A",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#845d49"
+    },
+    "led_blocks": {
+        "colourPrimary": "#EFCA0F",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#7a4984"
+    },
+    "sound_blocks": {
+        "colourPrimary": "#FA857B",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#7a4984"
+    },
+    "communication_blocks": {
+        "colourPrimary": "#D51CD5",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#7a4984"
+    }
 
 }
 const dark_component_styles = {
     "workspaceBackgroundColour": "#060841",
     "flyoutBackgroundColour": "#0B0533"
 }
-const light_block_styles = {
-    "loop_blocks": {
-        "colourPrimary": "#c7b01a",
-        "colourSecondary": "#AD7BE9",
-        "colourTertiary": "#CDB6E9"
-    },
-    "logic_blocks": {
-        "colourPrimary": "#c91818",
-        "colourSecondary": "#64C7FF",
-        "colourTertiary": "#C5EAFF"
-    },
-    "math_blocks": {
-        "colourPrimary": "#03254c",
-        "colourSecondary": "#A334C5",
-        "colourTertiary": "#A3DB55"
-    },
-    "colour_blocks": {
-        "colourPrimary": "#23445b",
-        "colourSecondary": "#dbc7bd",
-        "colourTertiary": "#845d49"
-    },
-    "variable_blocks": {
-        "colourPrimary": "#525b99",
-        "colourSecondary": "#dbbdd6",
-        "colourTertiary": "#84497a"
-    },
-    "procedure_blocks": {
-        "colourPrimary": "#995ba5",
-        "colourSecondary": "#d6bddb",
-        "colourTertiary": "#7a4984"
-    },
 
-}
 const light_component_styles = {
     "workspaceBackgroundColour": "#EFEFF2",
     "flyoutBackgroundColour": "#DEDEF1"
 }
 var dark_theme = Blockly.Theme.defineTheme('dark_theme', {
-    'blockStyles': dark_block_styles,
+    'blockStyles': block_styles,
     'componentStyles': dark_component_styles,
     'startHats': true
 });
 var light_theme = Blockly.Theme.defineTheme('light_theme', {
-    'blockStyles': light_block_styles,
+    'blockStyles': block_styles,
     'componentStyles': light_component_styles,
     'startHats': true
 });
@@ -107,8 +96,35 @@ const ThemeContextProvider = (props) => {
         tabColor
         trashColor
         dropShadowStatus
+        keyword_code_color
+        operator_code_color
+        builtin_code_color
+        directive_hash_code
+        directive_keyword_code
+        punctuation_code_color
+        function_code_color
 
-        constructor(primary, secondary, tetiary, border, innerShadow, titleTextColor, textColor, logoColor, progressEmptyBarColor, progressFilledBarColor, primaryButtonColor, tabColor, trashColor, dropShadowStatus) {
+        constructor(primary,
+            secondary,
+            tetiary,
+            border,
+            innerShadow,
+            titleTextColor,
+            textColor,
+            logoColor,
+            progressEmptyBarColor,
+            progressFilledBarColor,
+            primaryButtonColor,
+            tabColor,
+            trashColor,
+            dropShadowStatus,
+            keyword_code_color,
+            operator_code_color,
+            builtin_code_color,
+            directive_hash_code,
+            directive_keyword_code,
+            punctuation_code_color,
+            function_code_color) {
             this.primaryColor = primary;
             this.secondaryColor = secondary;
             this.tetiaryColor = tetiary;
@@ -123,7 +139,13 @@ const ThemeContextProvider = (props) => {
             this.tabColor = tabColor
             this.trashColor = trashColor;
             this.dropShadowStatus = dropShadowStatus;
-
+            this.keyword_code_color = keyword_code_color;
+            this.operator_code_color = operator_code_color;
+            this.builtin_code_color = builtin_code_color;
+            this.directive_hash_code = directive_hash_code;
+            this.directive_keyword_code = directive_keyword_code;
+            this.punctuation_code_color = punctuation_code_color;
+            this.function_code_color = function_code_color
         }
     }
 
@@ -141,7 +163,14 @@ const ThemeContextProvider = (props) => {
         "#FFFFFF",  //primaryButtonColor
         "#0B0533",   //tabColor
         "#E9E9FF",  //trashColor
-        true        //dropShadowStatus
+        true,        //dropShadowStatus
+        "rgba(255, 0, 0, 0.534)", //keyword_code_color
+        "grey", //operator_code_color
+        "plum", //builtin_code_color
+        "goldenrod", //directive_hash_code
+        "goldenrod", //directive_keyword_code
+        "grey", //punctuation_code_color
+        "rgb(205, 5, 255)" //function_code_color
     )
         ;
     var globalLightTheme = new Theme(
@@ -158,7 +187,14 @@ const ThemeContextProvider = (props) => {
         "#0000DC",  //primaryButtonColor
         "#DEDEF1",   //tabColor
         "#9898F0",  //trashColor
-        false       //dropShadowStatus
+        false,       //dropShadowStatus
+        "rgba(255, 0, 0, 0.534)", //keyword_code_color
+        "grey", //operator_code_color
+        "plum", //builtin_code_color
+        "black", //directive_hash_code
+        "black", //directive_keyword_code
+        "grey", //punctuation_code_color
+        "rgb(205, 5, 255)" //function_code_color
     );
 
     function changeTheme(event) {
@@ -195,7 +231,7 @@ const ThemeContextProvider = (props) => {
                 document.getElementById("lid").style.filter = "drop-shadow(0 0 9px #3A00FF)"
                 document.getElementById("bin").style.filter = "drop-shadow(0 0 9px #3A00FF)"
                 var border_svgs = document.getElementsByClassName("workspace-control-bordersvg")
-                for(var i = 0; i <border_svgs.length; i++) {
+                for (var i = 0; i < border_svgs.length; i++) {
                     border_svgs[i].style.filter = "drop-shadow(0 0 6px var(--secondary-color))"
                 }
                 for (var i = 0; i < bars.length; i++) {
@@ -207,14 +243,20 @@ const ThemeContextProvider = (props) => {
                 document.getElementById("lid").style.filter = "none"
                 document.getElementById("bin").style.filter = "none"
                 var border_svgs = document.getElementsByClassName("workspace-control-bordersvg")
-                for(var i = 0; i <border_svgs.length; i++) {
+                for (var i = 0; i < border_svgs.length; i++) {
                     border_svgs[i].style.filter = "none"
                 }
                 for (var i = 0; i < bars.length; i++) {
                     bars[i].style.filter = "none"
                 }
             }
-
+            document.documentElement.style.setProperty('--keyword_code_color', current_theme.keyword_code_color);
+            document.documentElement.style.setProperty('--operator_code_color', current_theme.operator_code_color);
+            document.documentElement.style.setProperty('--builtin_code_color', current_theme.builtin_code_color);
+            document.documentElement.style.setProperty('--directive_hash_code', current_theme.directive_hash_code);
+            document.documentElement.style.setProperty('--directive_keyword_code', current_theme.directive_keyword_code);
+            document.documentElement.style.setProperty('--punctuation_code_color', current_theme.punctuation_code_color);
+            document.documentElement.style.setProperty('--function_code_color', current_theme.function_code_color);
         }
 
     }, [current_theme])
