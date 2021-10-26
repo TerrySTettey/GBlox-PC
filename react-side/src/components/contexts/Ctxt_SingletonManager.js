@@ -33,6 +33,8 @@ const CtxtP_SingletonManager = (props) => {
     const [toolboxUpdate, setToolboxUpdate] = useState(0)
     const [toolboxLevel, setToolboxLevel] = useState(1)
     const [selectedToolboxName, setSelectedToolboxName] = useState("")
+    const [currentTabPath, setCurrentTabPath] = useState("")
+    const [savedOrLoaded, setSavedOrLoaded] = useState(0)
     const {
         dark_theme,
         light_theme
@@ -59,7 +61,7 @@ const CtxtP_SingletonManager = (props) => {
         },
         //Save As File
         () => {
-            exportBlocks()
+            exportBlocks(true)
             clearDropdowns()
         },
         () => {
@@ -121,14 +123,14 @@ const CtxtP_SingletonManager = (props) => {
             if (tmp !== -1) {
                 //Assign device to (g_v)selectedDevice
                 setSelectedDevice(DeviceList[tmp]);
-                if(DeviceList[tmp].toolbox[toolboxLevel - 1] !== undefined){
+                if (DeviceList[tmp].toolbox[toolboxLevel - 1] !== undefined) {
                     setSelectedToolbox(DeviceList[tmp].toolbox[toolboxLevel - 1])
                 } else {
                     setToolboxLevel(1)
                     document.getElementById("toolbox_selector_level_1").click()
                     setSelectedToolbox(DeviceList[tmp].toolbox[0])
                 }
-                
+
                 setSelectedToolboxName(DeviceList[tmp].device_name);
                 setCurrentDeviceChanged(1)
                 setToolboxUpdate(1)
@@ -141,12 +143,12 @@ const CtxtP_SingletonManager = (props) => {
 
     useEffect(() => {
         globalToolboxName = selectedToolboxName;
-    },[selectedToolboxName])
+    }, [selectedToolboxName])
 
     useEffect(() => {
         if (toolboxUpdate === 1)
             if (initialized_workspace) {
-                if(selectedDevice.toolbox[toolboxLevel - 1] !== undefined){
+                if (selectedDevice.toolbox[toolboxLevel - 1] !== undefined) {
                     setSelectedToolbox(selectedDevice.toolbox[toolboxLevel - 1])
                     currentWorkspace.updateToolbox(selectedDevice.toolbox[toolboxLevel - 1]);
                 } else {
@@ -191,29 +193,42 @@ const CtxtP_SingletonManager = (props) => {
     })
 
     //Exports Blocks
-    function exportBlocks() {
+    async function exportBlocks(isSaveAs = false) {
         try {
             var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
             var xml_text = Blockly.Xml.domToText(xml);
             console.log("Saving the following: " + xml_text);
-            
-            ipcRenderer.send('save-file', 
-            {
-                device: currentDeviceName,
-                toolLevel: toolboxLevel, 
-                variables: createdVariables,
-                xml: xml_text
-            })
+            var loc;
+            if (isSaveAs === true) {
+                loc = await ipcRenderer.sendSync('save-file',
+                    {
+                        device: currentDeviceName,
+                        toolLevel: toolboxLevel,
+                        variables: createdVariables,
+                        xml: xml_text
+                    }, "")
+            } else {
+                loc = await ipcRenderer.sendSync('save-file',
+                    {
+                        device: currentDeviceName,
+                        toolLevel: toolboxLevel,
+                        variables: createdVariables,
+                        xml: xml_text
+                    }, currentTabPath)
+            }
+            setCurrentTabPath(loc)
         } catch (e) {
             alert(e);
         }
+
+        setSavedOrLoaded(1)
     }
 
     //Loads Blocks
     function loadBlocks() {
         try {
-            console.log("Loading a file...")
             var hold = ipcRenderer.sendSync('load-file')
+            console.log(hold)
             if (hold !== "nil") {
                 var xmlss = Blockly.Xml.textToDom(hold.xml)
                 setToolboxLevel(hold.toolLevel)
@@ -222,10 +237,14 @@ const CtxtP_SingletonManager = (props) => {
                 createdVariables = hold.variables;
                 Blockly.mainWorkspace.clear();
                 Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+
+                setCurrentTabPath(hold.location)
             }
         } catch (e) {
             throw e;
         }
+
+        setSavedOrLoaded(1)
     }
 
     //Generates toolbox list for the GUI
@@ -251,7 +270,7 @@ const CtxtP_SingletonManager = (props) => {
     //Used to show the generated Blockly code.
     function showCode() {
         var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
-        console.log(selectedToolboxName)
+        //console.log(selectedToolboxName)
         if (selectedToolboxName === "Mello") {
             code = mainLoopCode;
         }
@@ -320,13 +339,17 @@ const CtxtP_SingletonManager = (props) => {
                 setSelectedToolbox,
                 closeVariableDialog,
                 createdVariables,
-                upload_status, 
+                upload_status,
                 setUploadStatus,
-                toolboxUpdate, 
+                toolboxUpdate,
                 setToolboxUpdate,
-                toolboxLevel, 
+                toolboxLevel,
                 setToolboxLevel,
-                setSelectedToolboxName
+                setSelectedToolboxName,
+                currentTabPath,
+                setCurrentTabPath,
+                savedOrLoaded,
+                setSavedOrLoaded
             }}
         >
             {props.children}
