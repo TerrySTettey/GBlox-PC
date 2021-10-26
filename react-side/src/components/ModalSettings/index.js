@@ -4,8 +4,11 @@ import CustomDrop from '../CustomDrop'
 import './ModalSettings.scss'
 
 const ModalSettings = (props) => {
+    function removepointerEvent(){
+        document.getElementById("blocklyDiv").style.pointerEvents="none";
+    }
     return (
-        <div className="modal-container">
+        <div className="modal-container" onClick={removepointerEvent}>
             <div className="modal-section">
                 <h1>Themes</h1>
                 <div style={{

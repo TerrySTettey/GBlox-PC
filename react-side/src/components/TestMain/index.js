@@ -5,6 +5,7 @@ import Blockly from 'blockly';
 import { DeviceList } from '../../deviceDef/device_list';
 
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
+import {ThemeContext} from '../contexts/ThemeContext';
 
 import "./TestMain.scss"
 import "../../customblocks/customblocks";
@@ -21,6 +22,7 @@ var response = "null";
 const TestMain = (props) => {
 
     const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName,deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
+    const {currentThemeName, setCurrentThemeName} = useContext(ThemeContext)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -190,14 +192,14 @@ const TestMain = (props) => {
     useEffect(() => {
         if (system_settings[1] !== undefined) {
             try {
-                var temp_settings = `theme: ${current_theme.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`
+                var temp_settings = `theme: ${currentThemeName.toString()}\nhideSplash: ${splash_status.toString()}\ndevice: ${currentDeviceName.toString()}`
                 writeSystemSettings(temp_settings)
                 setSystemSettings(temp_settings)
 
             }
             catch (e) { }
         }
-    }, [current_theme, currentDeviceName, splash_status])
+    }, [currentThemeName, currentDeviceName, splash_status])
     useEffect(() => {
         for (var i = 0; i < system_settings.length; i++) {
             if (system_settings[i] !== undefined) {
@@ -214,7 +216,7 @@ const TestMain = (props) => {
                         }
                         break;
                     case "theme":
-                        setCurrentTheme(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
+                        setCurrentThemeName(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
                         break;
                     case "device":
                         var devName = system_settings[i].toString().replaceAll(";\r", "").replace("device: ", "")

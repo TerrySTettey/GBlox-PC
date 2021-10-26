@@ -23,7 +23,7 @@ function Index(props) {
         var textarea = document.getElementById("full-editing");
         // Update code
         result_element.innerHTML = textarea.value.replace(new RegExp("&", "g"), "&").replace(new RegExp("<", "g"), "<"); /* Global RegExp */
-        
+
         lines = textarea.value.split("\n").length
         var temp_line_array = [];
         for (var i = 0; i < lines; i++) {
@@ -74,12 +74,6 @@ function Index(props) {
             code_editor.style.transform = "scaleX(0)"
             code_editor.style.opacity = "0";
             document.getElementById("code-editor").click();
-//             document.getElementById("menu-editing").value = `void setup(){
-
-// }
-// void loop(){
-                
-// }`
             setTimeout(() => {
                 code_editor.style.display = "none";
             }, 500);
@@ -89,13 +83,17 @@ function Index(props) {
     }
 
     useEffect(() => {
+
         var textarea = document.getElementById("full-editing");
-        lines = textarea.value.split("\n").length
-                var temp_line_array = [];
-                for (var i = 0; i < lines; i++) {
-                    temp_line_array.push(<p>{i + 1}</p>)
-                }
-                setLineNumber(temp_line_array)
+        if (textarea.value !== edited_code) {
+            setEditedCode(textarea.value);
+            lines = textarea.value.split("\n").length
+            var temp_line_array = [];
+            for (var i = 0; i < lines; i++) {
+                temp_line_array.push(<p>{i + 1}</p>)
+            }
+            setLineNumber(temp_line_array)
+        }
     })
 
     return (
@@ -127,7 +125,7 @@ function Index(props) {
                         </div>
 
                         <div id="full-editor">
-                            <textarea id="full-editing" ref={editor} spellcheck="false" onInput={e => { update(e);setEditedCode(e.target.value); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab} rows={50}></textarea>
+                            <textarea id="full-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab} rows={50}></textarea>
                             <pre id="full-highlighting" ref={slider_highlighting} aria-hidden="true">
                                 <code className="language-arduino" id="full-highlighting-content"></code>
                             </pre>

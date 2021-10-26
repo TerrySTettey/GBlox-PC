@@ -80,6 +80,7 @@ var light_theme = Blockly.Theme.defineTheme('light_theme', {
 
 const ThemeContextProvider = (props) => {
     const [current_theme, setCurrentTheme] = useState(null)
+    const [currentThemeName, setCurrentThemeName] = useState("")
 
     class Theme {
         primaryColor
@@ -199,14 +200,10 @@ const ThemeContextProvider = (props) => {
 
     function changeTheme(event) {
         if (event.target.id == "dark-theme") {
-            setCurrentTheme(globalDarkTheme);
-            Blockly.mainWorkspace.setTheme(dark_theme)
-            Blockly.mainWorkspace.toolbox_.setVisible(false);
+            setCurrentThemeName(event.target.id) 
         }
         else {
-            setCurrentTheme(globalLightTheme);
-            Blockly.mainWorkspace.setTheme(light_theme)
-            Blockly.mainWorkspace.toolbox_.setVisible(false);
+            setCurrentThemeName(event.target.id)
         }
     }
 
@@ -260,12 +257,33 @@ const ThemeContextProvider = (props) => {
         }
 
     }, [current_theme])
+    useEffect(() => {
+        if(currentThemeName == "dark-theme"){
+            setCurrentTheme(globalDarkTheme);
+            if (Blockly.mainWorkspace!== null){
+                Blockly.mainWorkspace.setTheme(dark_theme)
+                Blockly.mainWorkspace.toolbox_.setVisible(false);
+            }
+            
+        }
+        else{
+            
+            setCurrentTheme(globalLightTheme);
+            if (Blockly.mainWorkspace!== null){
+            Blockly.mainWorkspace.setTheme(light_theme)
+            Blockly.mainWorkspace.toolbox_.setVisible(false);
+            }
+        }
+    },[currentThemeName])
 
-    return (<ThemeContext.Provider value={{
+    return (
+    <ThemeContext.Provider value={{
         current_theme,
         dark_theme,
         light_theme,
-        changeTheme
+        changeTheme,
+        currentThemeName,
+        setCurrentThemeName
     }}>
         {props.children}
     </ThemeContext.Provider>

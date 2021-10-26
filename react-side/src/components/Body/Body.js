@@ -180,7 +180,7 @@ const Body = (props) => {
     var FlyoutContainerChanged = false;
 
     useEffect(() => {
-
+        
         if (TrashContainerChanged === false) {
             var Trash = document.getElementsByClassName("blocklyTrash")[0];
             if (Trash !== undefined) {

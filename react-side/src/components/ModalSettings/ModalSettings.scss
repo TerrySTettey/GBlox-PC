@@ -17,6 +17,7 @@
         font-size: 21px;
         margin: 0;
         transition: inherit;
+        pointer-events: none;
     }
     
     div {
@@ -46,6 +47,9 @@
         border-radius: 20px;
         border-style: solid;
         transition: inherit;
+    }
+    p{
+        pointer-events: none;
     }
 }
 

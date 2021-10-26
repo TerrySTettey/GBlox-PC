@@ -79,13 +79,13 @@ function Index(props) {
             <div id="edit-code-menu">
                 <div className="text">Code Editor</div>
                 <div id="code-editor-menu-textarea">
-                    <textarea id="menu-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab}>
-                        {`void setup(){
+                    <textarea id="menu-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab} defaultValue={`void setup(){
 
 }
 void loop(){
 
-}`}
+}`}>
+
                     </textarea>
                     <pre id="menu-highlighting" ref={slider_highlighting} aria-hidden="true">
                         <code className="language-arduino" id="menu-highlighting-content">
