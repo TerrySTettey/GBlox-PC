@@ -97,12 +97,18 @@
                     margin-top: 65px;
                     animation: bounce forwards 1.5s;
                     animation-delay: 0.2s;
+                    #Path_405{
+                        fill: var(--progress-empty-bar-color)
+                    }
                 }
                 #Leaf-Middle {
                     position: absolute;
                     transform: scale(0);
                     margin-left: 70.4px;
                     animation: bounce forwards 1.5s;
+                    #Path_405{
+                        fill: var(--progress-empty-bar-color)
+                    }
                 }
                 #Leaf-Pot {
                     position: absolute;
@@ -110,6 +116,7 @@
                     margin-left: 105px;
                     margin-top: 310px;
                     animation: bounce forwards 1.5s;
+
                 }
                 #Leaf-Left {
                     position: absolute;
@@ -118,6 +125,9 @@
                     margin-left: -40px;
                     animation: bounce forwards 1.5s;
                     animation-delay: 0.4s;
+                    #Path_405{
+                        fill: var(--progress-empty-bar-color)
+                    }
                 }
                 #Leaf-Small {
                     position: absolute;
@@ -126,6 +136,9 @@
                     margin-left: 100.4px;
                     animation: bounce forwards 1.5s;
                     animation-delay: 0.4s;
+                    #Path_405{
+                        fill: var(--progress-empty-bar-color)
+                    }
                 }
             }
             #Gear {
@@ -138,10 +151,28 @@
                 svg {
                     animation: rotate-right infinite linear 10s;
                     animation-delay: 0.6s;
+                    #Path_276{
+                        fill: var(--progress-empty-bar-color);
+                    }
                 }
             }
             #LaptopDisplay {
                 animation: bounce forwards 0.7s;
+                #Path_80{
+                    fill: var(--primary-color);
+                }
+                #Rectangle_157{
+                    fill: var(--primary-color);
+                }
+                #Ellipse_49{
+                    fill: var(--progress-empty-bar-color);
+                }
+                #Path_355{
+                    fill: var(--primary-color);
+                }
+                #Rectangle_159{
+                    fill: var(--primary-color);
+                }
             }
             #Line {
                 position: absolute;
@@ -194,7 +225,7 @@
             z-index: 1;
             user-select: none;
             text-align: center;
-            color: white;
+            color: var(--title-text-color);
             margin-top: 5%;
             pointer-events: none;
             transition: transform 2s, margin-top 1s;
@@ -207,20 +238,22 @@
             z-index: 1;
             pointer-events: all;
             text-align: center;
-            color: white;
+            color: var(--text-color);
             white-space: pre-wrap;
-            pointer-events: none;
             font-size: 21pt;
             transition: transform 2s, margin-top 1s;
             p {
                 margin: 0;
                 margin-bottom: -10px;
+                a{
+                    text-decoration: none;
+                }
             }
         }
         .Splash-checkbox {
             background-color: transparent;
             grid-area: splash-check;
-            color: white;
+            color: var(--text-color);
             font-size: 21pt;
             font-family: "Baloo2-Regular";
         }
@@ -253,7 +286,7 @@
                     width: 20px;
                     height: 20px;
                     left: 0;
-                    background-color: #0B0533;
+                    background-color: var(--primary-color);
                     border: 2px white solid;
                 }
                 input[type="checkbox"]:checked:before {
@@ -263,7 +296,7 @@
                     height: 20px;
                     top: 0;
                     left: 0;
-                    background-color: #0000DC;                    
+                    background-color: var(--secondary-color);                    
                 }
                 input[type="checkbox"]:checked:after {
                     position: absolute;

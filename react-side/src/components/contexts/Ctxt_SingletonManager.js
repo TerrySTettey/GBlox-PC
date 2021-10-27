@@ -163,7 +163,7 @@ const CtxtP_SingletonManager = (props) => {
     }, [toolboxUpdate])
     useEffect(() => {
         /*Initializes Blockly injection */
-        if (currentDeviceName === "") {
+        if (currentDeviceName !== "") {
             if (initialized_workspace === false) {
                 var tb = selectedToolbox;
                 currentWorkspace = Blockly.inject('blocklyDiv', {

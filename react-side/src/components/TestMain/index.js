@@ -116,8 +116,6 @@ const TestMain = (props) => {
         else {
             if (currentDeviceName !== event.target.id) {
                 setCurrentDeviceName(event.target.id)
-                console.log(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace)
-                console.log(currentWorkspace)
                 currentWorkspace.clear()
                 Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
             }

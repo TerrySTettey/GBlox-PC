@@ -30,7 +30,8 @@ const Toolbox_colors = {
     COM: "#D51CD5",
     Light: "#EFCA0F",
     Sound: "#FA857B",
-    Default: "#DD0A18"
+    Variables: "#878787",
+    Default: "#000000"
 }
 
 const Body = (props) => {
@@ -39,9 +40,11 @@ const Body = (props) => {
     var FlyOutHolder = useRef(null)
     const [device_svg, setDeviceSVG] = useState(svg_dictionary.devices.Arduino_Uno_SVG)
     const [progress_value, setProgressValue] = useState(0)
+    const [toolboxButtons, setToolboxButtons] = useState([])
     const {
         selectedDevice,
-        upload_status
+        upload_status, setUploadStatus,
+        toolboxItems
     } = useContext(Ctxt_SingletonManager)
 
     const [serialport_monitor, setSerialPortMonitor] = useState("")
@@ -93,7 +96,12 @@ const Body = (props) => {
                     svg = svg_dictionary.toolbox.Sound;
                     color = Toolbox_colors.Sound;
                     break;
+                case "Variables":
+                    svg = svg_dictionary.toolbox.Variables;
+                    color = Toolbox_colors.Variables;
+                    break;
                 default:
+                    svg = svg_dictionary.toolbox.Default;
                     color = Toolbox_colors.Default;
                     break;
             }
@@ -132,7 +140,7 @@ const Body = (props) => {
                             outColor={category_color}
                             hoverColor="#0000dc"
                             s_ButtonState="Out"
-                            children={[svg]}
+                            children={[category_svg]}
                             text={toolbox_items[i][0]}
                             toolbox_type={toolbox_items[i][2]}
                             child_count={children_count}
@@ -157,7 +165,6 @@ const Body = (props) => {
                         category_svg = [];
                     }
                 }
-
             }
         }
         return buttons;
@@ -178,6 +185,127 @@ const Body = (props) => {
     }
     var TrashContainerChanged = false;
     var FlyoutContainerChanged = false;
+
+    useEffect(() => {
+        var buttons = [];
+        var children = [];
+        var category = "";
+        var category_svg = [];
+        var category_color = "";
+        var children_count = 0;
+        for (var i = 0; i < toolboxItems.length; i++) {
+            var svg = []
+            var color = "";
+            switch (toolboxItems[i][0]) {
+                case "Loops":
+                    svg = svg_dictionary.toolbox.Loop
+                    color = Toolbox_colors.Loop;
+                    break;
+                case "Logic":
+                    svg = svg_dictionary.toolbox.Logic;
+                    color = Toolbox_colors.Logic;
+                    break;
+                case "Math":
+                    svg = svg_dictionary.toolbox.Math;
+                    color = Toolbox_colors.Math;
+                    break;
+                case "Text":
+                    svg = svg_dictionary.toolbox.Text;
+                    color = Toolbox_colors.Text;
+                    break;
+                case "Actuators":
+                    svg = svg_dictionary.toolbox.Actuators;
+                    color = Toolbox_colors.Actuators;
+                    break;
+                case "Sensors":
+                    svg = svg_dictionary.toolbox.Sensors;
+                    color = Toolbox_colors.Sensors;
+                    break;
+                case "COM":
+                    svg = svg_dictionary.toolbox.COM;
+                    color = Toolbox_colors.COM;
+                    break;
+                case "LEDs":
+                    svg = svg_dictionary.toolbox.LEDs;
+                    color = Toolbox_colors.Light;
+                    break;
+                case "Sound":
+                    svg = svg_dictionary.toolbox.Sound;
+                    color = Toolbox_colors.Sound;
+                    break;
+                case "Variables":
+                    svg = svg_dictionary.toolbox.Variables;
+                    color = Toolbox_colors.Variables;
+                    break;
+                default:
+                    svg = svg_dictionary.toolbox.Default;
+                    color = Toolbox_colors.Default;
+                    break;
+            }
+            if (toolboxItems[i][2] == "category") {
+                children_count = toolboxItems[i][3];
+                category = toolboxItems[i][0]
+                category_svg = svg;
+                category_color = color;
+            }
+            else {
+                children_count -= 1;
+                if (children_count < 0) {
+                    children_count = 0;
+                    //Level 0 Buttons
+                    buttons.push(
+                        <Button
+                            id={toolboxItems[i][1]}
+                            type="ToolboxCategoryButton"
+                            outColor={color}
+                            hoverColor="#0000dc"
+                            s_ButtonState="Out"
+                            children={[svg]}
+                            text={toolboxItems[i][0]}
+                            toolbox_type={toolboxItems[i][2]}
+                            child_count={children_count}
+                            hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
+                        />
+                    )
+                }
+                else {
+                    children.push(
+                        <Button
+                            id={toolboxItems[i][1]}
+                            type="ToolboxCategoryButton"
+                            outColor={category_color}
+                            hoverColor="#0000dc"
+                            s_ButtonState="Out"
+                            children={[category_svg]}
+                            text={toolboxItems[i][0]}
+                            toolbox_type={toolboxItems[i][2]}
+                            child_count={children_count}
+                            hoverEffect="fill"
+                            onClick={props.ToolboxFunction}
+                        />
+                    )
+                    if (children_count === 0) {
+                        buttons.push(
+                            <CustomDrop
+                                buttonType="ToolboxCategoryButton"
+                                text={category}
+                                childrenlist={children}
+                                outColor={category_color}
+                                dropType="toolbox_list"
+                                svg={[category_svg]}
+                                modal=""
+                            />
+                        )
+                        children = []
+                        category = ""
+                        category_svg = [];
+                    }
+                }
+            }
+        }
+        setToolboxButtons(buttons)
+    },[toolboxItems])
 
     useEffect(() => {
         
@@ -229,7 +357,8 @@ const Body = (props) => {
     // useEffect(()=>{
     //     updateProgress()
     // })
-
+    var toolbox = genbuttons(props.toolboxButtons)
+    toolbox = [...toolbox]
     return (
         <div className="body-container">
             <div className="c-Body-a-WorkspaceContainer">
@@ -653,7 +782,7 @@ const Body = (props) => {
                 </div>
                 <div className="c-Body-a-ToolBox">
                     <Toolbox>
-                        {genbuttons(props.toolboxButtons)}
+                        {toolboxButtons}
                     </Toolbox>
 
                 </div>

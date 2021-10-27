@@ -6,55 +6,68 @@ const block_styles = {
     "logic_blocks": {
         "colourPrimary": "#4C97FF",
         "colourSecondary": "#FFFFFF",
-        "colourTertiary": "#C5EAFF"
+        "colourTertiary": "#FFFFFF"
     },
     "loop_blocks": {
         "colourPrimary": "#DD0A18",
-        "colourSecondary": "#DD0A18",
-        "colourTertiary": "#DD0A18"
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
     },
     "text_blocks": {
         "colourPrimary": "#16CE9C",
-        "colourSecondary": "#16CE9C",
-        "colourTertiary": "#16CE9C"
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
     },
     "math_blocks": {
         "colourPrimary": "#8D00E8",
-        "colourSecondary": "#8D00E8",
-        "colourTertiary": "#8D00E8"
-    },
-
-    "variable_blocks": {
-        "colourPrimary": "#525b99",
-        "colourSecondary": "#dbbdd6",
-        "colourTertiary": "#84497a"
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
     },
     "actuator_blocks": {
         "colourPrimary": "#FE8013",
         "colourSecondary": "#FFFFFF",
-        "colourTertiary": "#7a4984"
+        "colourTertiary": "#FFFFFF"
     },
     "sensor_blocks": {
         "colourPrimary": "#40BF4A",
         "colourSecondary": "#FFFFFF",
-        "colourTertiary": "#845d49"
-    },
-    "led_blocks": {
-        "colourPrimary": "#EFCA0F",
-        "colourSecondary": "#FFFFFF",
-        "colourTertiary": "#7a4984"
-    },
-    "sound_blocks": {
-        "colourPrimary": "#FA857B",
-        "colourSecondary": "#FFFFFF",
-        "colourTertiary": "#7a4984"
+        "colourTertiary": "#FFFFFF"
     },
     "communication_blocks": {
         "colourPrimary": "#D51CD5",
         "colourSecondary": "#FFFFFF",
-        "colourTertiary": "#7a4984"
+        "colourTertiary": "#FFFFFF"
+    },
+    "led_blocks": {
+        "colourPrimary": "#EFCA0F",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
+    },
+    "sound_blocks": {
+        "colourPrimary": "#FA857B",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
+    },
+    "variable_blocks": {
+        "colourPrimary": "#878787",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
+    },
+    "digital_blocks":{
+        "colourPrimary": "#1F5D00",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
+    },
+    "analog_blocks":{
+        "colourPrimary": "#FF00BB",
+        "colourSecondary": "#FFFFFF",
+        "colourTertiary": "#FFFFFF"
     }
 
+}
+const font_styles = {
+    "family": "Baloo2-Regular",
+    "size": 14
 }
 const dark_component_styles = {
     "workspaceBackgroundColour": "#060841",
@@ -67,11 +80,13 @@ const light_component_styles = {
 }
 var dark_theme = Blockly.Theme.defineTheme('dark_theme', {
     'blockStyles': block_styles,
+    'fontStyle': font_styles,
     'componentStyles': dark_component_styles,
     'startHats': true
 });
 var light_theme = Blockly.Theme.defineTheme('light_theme', {
     'blockStyles': block_styles,
+    'fontStyle': font_styles,
     'componentStyles': light_component_styles,
     'startHats': true
 });
