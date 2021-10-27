@@ -373,6 +373,144 @@ const full_toolbox = [{
 
 </xml>`]
 
+const ft = [`
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+<category css-icon="customIcon fa fa-cog" name="Logic">
+      <block type="controls_if"></block>
+      <block type="logic_compare">
+          <field name="OP">EQ</field>
+      </block>
+      <block type="logic_operation">
+          <field name="OP">AND</field>
+      </block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean">
+          <field name="BOOL">TRUE</field>
+      </block>
+      <block type="logic_null"></block>
+      <block type="logic_ternary"></block>
+  </category>
+  <category name="Loops">
+      <block type="for_loop">
+      </block>
+      <block type="controls_whileUntil">
+          <field name="MODE">WHILE</field>
+      </block>
+      <block type="delay_core">
+      <field name= "seconds" type="number">
+      <shadow type="math_number">
+      <field name="NUM">1</field>
+  </shadow>
+  </field>
+      </block>
+  </category>
+  <category css-icon="customIcon fa fa-cog" name="Math">
+      <block type="math_number">
+          <field name="NUM">0</field>
+      </block>
+      <block type="math_arithmetic">
+          <field name="OP">ADD</field>
+          <value name="A">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+          <value name="B">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_number_property">
+          <mutation divisor_input="false"></mutation>
+          <field name="PROPERTY">EVEN</field>
+          <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
+      </block>
+  </category>
+  <category css-icon="customIcon fa fa-cog" name="Text">
+      <block type="text">
+        <field name="TEXT"></field>
+      </block>
+      <block type="text_join">
+        <mutation items="2"></mutation>
+      </block>
+      <block type="text_length">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_changeCase">
+        <field name="CASE">UPPERCASE</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_trim">
+        <field name="MODE">BOTH</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>  
+    <category name="Digital">
+    <block type="arduino_digital_write">
+      <field name="On/Off">HIGH</field>
+    </block>
+    <block type="arduino_digital_read"></block>
+  </category>
+<category name="Sensors">
+    <block type="arduino_ultrasonic_read"></block>
+  </category>
+  <category name="Actuators">
+    <block type="arduino_servo_write"></block>
+  </category>
+  <category css-icon="customIcon fa fa-cog" name="COM">
+      <category name="Serial">
+        <block type="communication_serial_print"></block>
+        <block type="communication_serial_read"></block>
+      </category>
+  </category>
+  <category name="Variables">
+  <button text="Create New Variable" callbackKey="createvar"></button>
+  <block type="variable_get"></block>
+<block type="variable_set"></block>
+  </category>
+</xml>
+`]
+
 function device(device_name, compiler, microcontroller, toolbox, default_workspace, peripherals_used, peripherals_pins) {
   this.device_name = device_name;
   this.compiler = compiler;
@@ -387,8 +525,8 @@ const Arduino_Uno = new device(
   "Arduino Uno",
   "Arduino",
   "Arduino Uno",
-  full_toolbox,
-  `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
+  ft,
+  `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`,
   [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
   undefined
 );

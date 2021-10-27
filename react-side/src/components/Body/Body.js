@@ -31,6 +31,7 @@ const Toolbox_colors = {
     Light: "#EFCA0F",
     Sound: "#FA857B",
     Variables: "#878787",
+    Digital: "#1F5D00",
     Default: "#000000"
 }
 
@@ -99,6 +100,10 @@ const Body = (props) => {
                 case "Variables":
                     svg = svg_dictionary.toolbox.Variables;
                     color = Toolbox_colors.Variables;
+                    break;
+                case "Digital":
+                    svg = svg_dictionary.toolbox.Default;
+                    color = Toolbox_colors.Digital;
                     break;
                 default:
                     svg = svg_dictionary.toolbox.Default;
