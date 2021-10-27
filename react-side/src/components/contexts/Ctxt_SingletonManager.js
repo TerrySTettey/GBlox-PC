@@ -242,8 +242,11 @@ const CtxtP_SingletonManager = (props) => {
                 document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
                 setCurrentDeviceName(hold.device)
                 createdVariables = hold.variables;
-                Blockly.mainWorkspace.clear();
-                Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+                setTimeout(function() {
+                    Blockly.mainWorkspace.clear();
+                    Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+                }, 500);
+                
 
                 setCurrentTabPath(hold.location)
             }
@@ -277,11 +280,7 @@ const CtxtP_SingletonManager = (props) => {
     //Used to show the generated Blockly code.
     function showCode() {
         var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
-        //console.log(selectedToolboxName)
-        if (selectedToolboxName === "Mello") {
-            code = mainLoopCode;
-        }
-        //currentWorkspace.registerButtonCallback("createvar", logbutton)
+        code = mainLoopCode;
         setDeviceCode(code);
     }
 
@@ -302,9 +301,16 @@ const CtxtP_SingletonManager = (props) => {
         }
         else {
             var newvariable_type = document.getElementById("variable-type-select").firstChild.value.toLowerCase();
+            if (newvariable_type === "integer"){
+                newvariable_type = "int"
+            }
+            else if(newvariable_type === "String"){
+                newvariable_type = "string"
+            }
             var newvariable_name = document.getElementById("variable-name-input").value
             createdVariables.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
             document.getElementById("c-variableSelector").style.display = "none";
+            
         }
     }
     //Used after dropdown functions to clear the dropdown off the screen
@@ -358,4 +364,4 @@ const CtxtP_SingletonManager = (props) => {
 }
 
 export default CtxtP_SingletonManager
-export { globalToolboxName, createdVariables }
+export { globalToolboxName, createdVariables, currentWorkspace }

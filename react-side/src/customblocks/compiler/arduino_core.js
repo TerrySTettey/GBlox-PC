@@ -1,13 +1,20 @@
 import Blockly from 'blockly';
-import { globalToolboxName, createdVariables } from '../../components/contexts/Ctxt_SingletonManager.js';
+import { globalToolboxName, createdVariables, currentWorkspace } from '../../components/contexts/Ctxt_SingletonManager.js';
 var peripherals = null;
-var variables_set = [["int sample_var", "Test"]];
+var variables_set = [["sample_variable","0"]];
 async function getPeripherals() {
-    if (globalToolboxName === "Basic") {
-        peripherals = await import('./../peripherals/arduino_peripheral.js')
-    }
-    else if (globalToolboxName === "Mello") {
-        peripherals = await import('./../MelloBlocksGen.js')
+    switch(globalToolboxName){
+        case "Basic":
+            peripherals = await import('./../peripherals/arduino_peripheral.js');
+            break;
+        case "Mello":
+            peripherals = await import('./../MelloBlocksGen.js')
+            break;
+        case "Arduino Uno":
+            peripherals = await import('./../customblocks.js')
+            break;
+        default:
+            break;
     }
 }
 
@@ -58,7 +65,7 @@ Blockly.Blocks['communication_serial_print'] = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(230);
+        this.setStyle("communication_blocks");
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -70,40 +77,80 @@ Blockly.Blocks['communication_serial_read'] = {
             .appendField("Read From Serial Monitor");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(230);
+        this.setStyle("communication_blocks");
         this.setTooltip("");
         this.setHelpUrl("");
     }
 };
 
+Blockly.Blocks['arduino_digital_write'] = {
+    init: function() {
+      this.appendValueInput("Digital Pin Number")
+          .setCheck("Number")
+          .appendField("Set Digital Pin");
+      this.appendDummyInput()
+          .appendField("to")
+          .appendField(new Blockly.FieldDropdown([["On","HIGH"], ["Off","LOW"]]), "On/Off");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setStyle("digital_blocks");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+  Blockly.Blocks['arduino_digital_read'] = {
+    init: function() {
+      this.appendValueInput("Digital Pin")
+          .setCheck(null)
+          .appendField("Read Digital Pin");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setStyle("digital_blocks");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
 Blockly.Blocks['variable_set'] = {
     init: function () {
-        this.appendDummyInput()
+        var input = this.appendDummyInput()
             .appendField("Set Variable")
-            .appendField(new Blockly.FieldDropdown(variables_set), `variables_set`);
+            .appendField(new Blockly.FieldDropdown(this.generateOptions), `variables_set`);
         this.appendValueInput("value")
             .setCheck(["Number", "String"])
             .appendField("to");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(230);
+        this.setStyle("variable_blocks");
         this.setTooltip("");
         this.setHelpUrl("");
+        
+    },
+    generateOptions: function() {
+        var options = []
+        options = variables_set;
+        return options;
     }
 };
 
 Blockly.Blocks['variable_get'] = {
     init: function () {
-        this.appendDummyInput()
+        var input = this.appendDummyInput()
             .appendField("Get Variable")
-            .appendField(new Blockly.FieldDropdown(variables_set), `variables_set`)
+            .appendField(new Blockly.FieldDropdown(this.generateOptions), `variables_set`)
             .appendField("'s value");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(230);
+        this.setStyle("variable_blocks");
         this.setTooltip("");
         this.setHelpUrl("");
+    },
+    generateOptions: function() {
+        var options = []
+        options = variables_set;
+        return options;
     }
 };
 
@@ -125,14 +172,8 @@ Blockly.Blocks['for_loop'] = {
 
 Blockly.JavaScript['m_mainloop'] = function (block) {
     getPeripherals();
-    if (globalToolboxName === "Mello") {
-        block.setDeletable(false);
-        block.setMovable(false);
-    }
-    else {
-        block.setDeletable(true);
-        block.setMovable(true);
-    }
+    block.setDeletable(false);
+    block.setMovable(false);
 
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
     if (createdVariables.length != 0) {
@@ -146,7 +187,7 @@ Blockly.JavaScript['m_mainloop'] = function (block) {
         Total_PreDeclarations += peripherals.peripheral_PreDeclarations;
         Total_SetupCode += peripherals.peripheral_SetupCode;
         Total_BulkFunctions += peripherals.peripheral_BulkFunctions;
-        if (peripherals.IR_Loop != ``) {
+        if (peripherals.IR_Loop !== ``) {
             statements_mainloop += `\tif(IrReceiver.decode()){\n\t\t${peripherals.IR_Loop}\nIrReceiver.resume();\n}`;
         }
     }
@@ -183,7 +224,9 @@ Blockly.JavaScript['communication_serial_print'] = function (block) {
         value_serial_print = value_serial_print.replaceAll(`'`, `"`);
     }
     if (Total_SetupCode.includes(`Serial.begin(9600);`) == 0) {
+        if (block.getRootBlock().type == "m_mainloop") {
         Total_SetupCode += `\tSerial.begin(9600);\n`;
+        }
     }
     var code = `\tSerial.println(${value_serial_print});\n`;
     return code;
@@ -199,7 +242,6 @@ Blockly.JavaScript['communication_serial_read'] = function (block) {
 
 Blockly.JavaScript['variable_set'] = function (block) {
     var text_varname = block.getFieldValue('variables_set');
-    console.log(text_varname);
     var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
 
     var code = '';
@@ -224,6 +266,29 @@ Blockly.JavaScript['for_loop'] = function (block) {
     var code = 'for (int i = 0;i<' + number_loop_amount + ';i++) {\n' + statements_for_loop + '};\n';
     return code;
 };
+
+Blockly.JavaScript['arduino_digital_write'] = function(block) {
+    var value_digital_pin_number = Blockly.JavaScript.valueToCode(block, 'Digital Pin Number', Blockly.JavaScript.ORDER_ATOMIC);
+    var dropdown_on_off = block.getFieldValue('On/Off');
+    if (Total_SetupCode.includes(`pinMode(${value_digital_pin_number}, OUTPUT)`) == 0){
+        if (block.getRootBlock().type == "m_mainloop") {
+        Total_SetupCode+=`pinMode(${value_digital_pin_number}, OUTPUT);\n`
+        }
+    }
+    var code = `digitalWrite(${value_digital_pin_number},${dropdown_on_off});\n`;
+    return code;
+  };
+  Blockly.JavaScript['arduino_digital_read'] = function(block) {
+    var value_digital_pin_number = Blockly.JavaScript.valueToCode(block, 'Digital Pin', Blockly.JavaScript.ORDER_ATOMIC);
+    if (Total_SetupCode.includes(`pinMode(${value_digital_pin_number}, INPUT)`) == 0){
+        if (block.getRootBlock().type == "m_mainloop") {
+        Total_SetupCode+=`pinMode(${value_digital_pin_number}, INPUT);\n`
+        }
+    }
+    var code = `digitalRead(${value_digital_pin_number})`;
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.JavaScript.ORDER_NONE];
+  };
 
 
 export { mainLoopCode }
