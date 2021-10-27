@@ -344,3 +344,8 @@ try {
     }, 3000)
 }
 catch (e) { }
+
+//ipc call for "close-app" which closes the application
+ipcMain.handle("close-app", async function(event, args){
+    app.quit()
+})
