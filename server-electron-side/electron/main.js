@@ -310,6 +310,7 @@ ipcMain.handle("serialport_write", async function (event, value) {
 
 ipcMain.handle("serialport_close", function (event) {
     try {
+        console.log("CLOSING")
         serial_monitor.close(function (err) {
         });
     }

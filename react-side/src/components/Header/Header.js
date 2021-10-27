@@ -66,7 +66,7 @@ const Header = (props) => {
                 </div>
                 <div id="blank-space" />
                 <div className="header-buttons-segment">
-                    <HeaderButton buttonImage="4" />
+                    <HeaderButton buttonImage="4" onClick="http://robocentregh.com" target="_blank"/>
                     <HeaderButton buttonImage="5" />
                     <div style={{
                         marginLeft: '5px'

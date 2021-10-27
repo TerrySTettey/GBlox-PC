@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import "./Pull_Out_Menu.scss"
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import svg_dictionary from "../svg_dictionary"
 import Button from '../Button'
 import Help_Menu from '../Help_Menu'
@@ -8,26 +9,24 @@ import Serial_Menu from '../Serial_Menu'
 import View_Code_Menu from '../View_Code_Menu'
 import Edit_Code_Menu from '../Edit_Code_Menu'
 import Example_Code_Menu from '../Example_Code_Menu'
-import { useRef, useState, useEffect } from 'react'
-
+const { ipcRenderer } = window.require('electron');
 
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);
-    const [last_button_clicked, setLastButtonClicked] = useState("");
+    const {setSerialPortMonitor, serialport_read, serialport_status, setSerialPortStatus} = useContext(Ctxt_SingletonManager)
     const [currentMenu, setCurrentMenu] = useState("")
-    const [serialport_monitor, setSerialPortMonitor] = useState("")
-    const [serialport_status, setSerialPortStatus] = useState(false)
-    const { children } = props;
     var [menuOpen, setMenuOpen] = useState("Open");
     var pull_out_menu = useRef(null);
     var pull_out_container = useRef(null);
-    var code_viewer = null;
+
+
+
 
 
     function closeSerial() {
         if (serialport_status === true) {
             setSerialPortStatus(false)
-            { props.onSerialPortClick() }
+            serialport_read()
         }
     }
 
@@ -39,13 +38,12 @@ function Pull_Out_Menu(props) {
             switch (button_clicked) {
                 case "serial-port":
                     if (serialport_status === false) {
-                        setSerialPortMonitor(props.serialport_monitor);
-                        props.onSerialPortClick()
+                        serialport_read();
                         setSerialPortStatus(true)
-                        setContents([<Serial_Menu serialport_monitor={serialport_monitor} />]);
+                        setContents([<Serial_Menu/>]);
                     }
                     else {
-                        setSerialPortMonitor(props.serialport_monitor);
+                        closeSerial();
                     }
                     setCurrentMenu(button_clicked)
                     break;

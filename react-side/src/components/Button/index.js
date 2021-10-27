@@ -218,30 +218,31 @@ const Button = (props) => {
                         fill: `${svgColor}`
                     }}>
                         <div className="workspace-control-bordersvg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="106.098" height="106.454" viewBox="0 0 106.098 106.454">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="61.098" height="61.454" viewBox="0 0 61.098 61.454">
                                 <defs>
-                                    <filter id="Path_83" x="0" y="0" width="106.098" height="105.507" filterUnits="userSpaceOnUse">
-                                        <feOffset dy="3" input="SourceAlpha" />
-                                        <feGaussianBlur stdDeviation="10.5" result="blur" />
-                                        <feFlood flood-color="#0000dc" flood-opacity="0.2" />
+                                    <filter id="Path_83" x="0" y="0" width="61.098" height="60.507" filterUnits="userSpaceOnUse">
+                                        <feOffset input="SourceAlpha" />
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feFlood flood-color="#0000dc" />
                                         <feComposite operator="in" in2="blur" />
                                         <feComposite in="SourceGraphic" />
                                     </filter>
-                                    <filter id="Path_84" x="23.492" y="29.754" width="80.676" height="76.7" filterUnits="userSpaceOnUse">
-                                        <feOffset dy="3" input="SourceAlpha" />
-                                        <feGaussianBlur stdDeviation="10.5" result="blur-2" />
-                                        <feFlood flood-color="#0000dc" flood-opacity="0.2" />
+                                    <filter id="Path_84" x="23.492" y="29.754" width="35.676" height="31.7" filterUnits="userSpaceOnUse">
+                                        <feOffset input="SourceAlpha" />
+                                        <feGaussianBlur stdDeviation="3" result="blur-2" />
+                                        <feFlood flood-color="#0000dc" />
                                         <feComposite operator="in" in2="blur-2" />
                                         <feComposite in="SourceGraphic" />
                                     </filter>
                                 </defs>
                                 <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_83)">
-                                    <path id="Path_83-2" data-name="Path 83" d="M383.6,936.475a21.615,21.615,0,0,0-5.405.685l.146.569a20.633,20.633,0,0,0-4.129,1.551l-.264-.526a21.58,21.58,0,0,0-10.7,26.369l.561-.195A20.956,20.956,0,0,0,383.6,978.982v-3.2a17.755,17.755,0,0,1-17.393-14.174,17.9,17.9,0,0,1-.361-3.581h-1.392a19.048,19.048,0,0,1,5.46-13.4l1,.978A17.616,17.616,0,0,1,383.6,940.27a17.944,17.944,0,0,1,3.324.311l.257-1.361a18.956,18.956,0,0,1,4.462,1.437l-.582,1.254a17.733,17.733,0,0,1,4.254,2.774l.911-1.036a19.138,19.138,0,0,1,4.763,22.4l2.18,1.008A21.558,21.558,0,0,0,383.6,936.475Z" transform="translate(-330.55 -907.98)"/>
+                                    <path id="Path_83-2" data-name="Path 83" d="M383.6,936.475a21.615,21.615,0,0,0-5.405.685l.146.569a20.633,20.633,0,0,0-4.129,1.551l-.264-.526a21.58,21.58,0,0,0-10.7,26.369l.561-.195A20.956,20.956,0,0,0,383.6,978.982v-3.2a17.755,17.755,0,0,1-17.393-14.174,17.9,17.9,0,0,1-.361-3.581h-1.392a19.048,19.048,0,0,1,5.46-13.4l1,.978A17.616,17.616,0,0,1,383.6,940.27a17.944,17.944,0,0,1,3.324.311l.257-1.361a18.956,18.956,0,0,1,4.462,1.437l-.582,1.254a17.733,17.733,0,0,1,4.254,2.774l.911-1.036a19.138,19.138,0,0,1,4.763,22.4l2.18,1.008A21.558,21.558,0,0,0,383.6,936.475Z" transform="translate(-353.05 -927.48)" />
                                 </g>
                                 <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_84)">
-                                    <path id="Path_84-2" data-name="Path 84" d="M399.461,965.979a17.965,17.965,0,0,1-14.112,9.719l.426,3.981A21.958,21.958,0,0,0,403.025,967.8ZM387.5,978.224a1.093,1.093,0,1,1,1.093-1.093A1.093,1.093,0,0,1,387.5,978.224Zm12.864-8.84a1.093,1.093,0,1,1,1.092-1.093A1.093,1.093,0,0,1,400.367,969.384Z" transform="translate(-330.36 -907.73)" />
+                                    <path id="Path_84-2" data-name="Path 84" d="M399.461,965.979a17.965,17.965,0,0,1-14.112,9.719l.426,3.981A21.958,21.958,0,0,0,403.025,967.8ZM387.5,978.224a1.093,1.093,0,1,1,1.093-1.093A1.093,1.093,0,0,1,387.5,978.224Zm12.864-8.84a1.093,1.093,0,1,1,1.092-1.093A1.093,1.093,0,0,1,400.367,969.384Z" transform="translate(-352.86 -927.23)" />
                                 </g>
                             </svg>
+
 
                         </div>
                         <div className="button-children-svg"> {props.children} </div>
@@ -260,20 +261,21 @@ const Button = (props) => {
                         fill: `${svgColor}`
                     }}>
                         <div className="workspace-control-bordersvg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="111.398" height="105.152" viewBox="0 0 111.398 105.152">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="66.398" height="60.152" viewBox="0 0 66.398 60.152">
                                 <defs>
-                                    <filter id="Path_145" x="0" y="0" width="111.398" height="105.152" filterUnits="userSpaceOnUse">
-                                        <feOffset dy="3" input="SourceAlpha" />
-                                        <feGaussianBlur stdDeviation="10.5" result="blur" />
-                                        <feFlood flood-color="#0000dc" flood-opacity="0.2" />
+                                    <filter id="Path_145" x="0" y="0" width="66.398" height="60.152" filterUnits="userSpaceOnUse">
+                                        <feOffset input="SourceAlpha" />
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feFlood flood-color="#0000dc" />
                                         <feComposite operator="in" in2="blur" />
                                         <feComposite in="SourceGraphic" />
                                     </filter>
                                 </defs>
                                 <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_145)">
-                                    <path id="Path_145-2" data-name="Path 145" d="M582.747,939.01l-.257.52A20.542,20.542,0,0,0,578.4,938l.142-.57a21.392,21.392,0,0,0-25.62,13.911q-.227.666-.406,1.348l-.453-1.021-2.662-6.018,1.067-2.754-4.312,1.15,4.97,11.221,1.039,2.346,1.836-.835,10.192-4.6,1.187-3.061-8.217,3.747-1.972-.76c.047-.141.081-.29.131-.43a19.136,19.136,0,0,1,5.342-7.806l.905,1.026a17.3,17.3,0,0,1,4.217-2.75L565.2,940.9a18.671,18.671,0,0,1,4.423-1.425l.256,1.354A17.574,17.574,0,0,1,585.76,945.8l.99-.968a18.875,18.875,0,0,1,5.413,13.283h-1.382a17.6,17.6,0,0,1-17.6,17.608V978.9A20.8,20.8,0,0,0,592.8,964.965l.556.193a21.384,21.384,0,0,0-10.613-26.148Z" transform="translate(-514.65 -908.25)" />
+                                    <path id="Path_145-2" data-name="Path 145" d="M582.747,939.01l-.257.52A20.542,20.542,0,0,0,578.4,938l.142-.57a21.392,21.392,0,0,0-25.62,13.911q-.227.666-.406,1.348l-.453-1.021-2.662-6.018,1.067-2.754-4.312,1.15,4.97,11.221,1.039,2.346,1.836-.835,10.192-4.6,1.187-3.061-8.217,3.747-1.972-.76c.047-.141.081-.29.131-.43a19.136,19.136,0,0,1,5.342-7.806l.905,1.026a17.3,17.3,0,0,1,4.217-2.75L565.2,940.9a18.671,18.671,0,0,1,4.423-1.425l.256,1.354A17.574,17.574,0,0,1,585.76,945.8l.99-.968a18.875,18.875,0,0,1,5.413,13.283h-1.382a17.6,17.6,0,0,1-17.6,17.608V978.9A20.8,20.8,0,0,0,592.8,964.965l.556.193a21.384,21.384,0,0,0-10.613-26.148Z" transform="translate(-537.15 -927.75)" />
                                 </g>
                             </svg>
+
 
                         </div>
                     </div>
@@ -288,20 +290,21 @@ const Button = (props) => {
                         fill: `${svgColor}`
                     }}>
                         <div className="workspace-control-bordersvg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="111.398" height="105.152" viewBox="0 0 111.398 105.152">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="66.398" height="60.152" viewBox="0 0 66.398 60.152">
                                 <defs>
-                                    <filter id="Path_146" x="0" y="0" width="111.398" height="105.152" filterUnits="userSpaceOnUse">
-                                        <feOffset dy="3" input="SourceAlpha" />
-                                        <feGaussianBlur stdDeviation="10.5" result="blur" />
-                                        <feFlood flood-color="#0000dc" flood-opacity="0.2" />
+                                    <filter id="Path_146" x="0" y="0" width="66.398" height="60.152" filterUnits="userSpaceOnUse">
+                                        <feOffset input="SourceAlpha" />
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feFlood flood-color="#0000dc" />
                                         <feComposite operator="in" in2="blur" />
                                         <feComposite in="SourceGraphic" />
                                     </filter>
                                 </defs>
                                 <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_146)">
-                                    <path id="Path_146-2" data-name="Path 146" d="M557.953,939.01l.257.52A20.542,20.542,0,0,1,562.3,938l-.142-.57a21.392,21.392,0,0,1,25.62,13.911q.227.666.406,1.348l.453-1.021,2.662-6.018-1.067-2.754,4.312,1.15-4.97,11.221-1.039,2.346-1.836-.835-10.192-4.6-1.187-3.061,8.217,3.747,1.972-.76c-.047-.141-.081-.29-.131-.43a19.136,19.136,0,0,0-5.342-7.806l-.905,1.026a17.3,17.3,0,0,0-4.217-2.75l.577-1.246a18.671,18.671,0,0,0-4.423-1.425l-.256,1.354A17.574,17.574,0,0,0,554.94,945.8l-.99-.968a18.875,18.875,0,0,0-5.413,13.283h1.382a17.6,17.6,0,0,0,17.6,17.608V978.9A20.8,20.8,0,0,1,547.9,964.965l-.556.193a21.384,21.384,0,0,1,10.613-26.148Z" transform="translate(-514.65 -908.25)" />
+                                    <path id="Path_146-2" data-name="Path 146" d="M557.953,939.01l.257.52A20.542,20.542,0,0,1,562.3,938l-.142-.57a21.392,21.392,0,0,1,25.62,13.911q.227.666.406,1.348l.453-1.021,2.662-6.018-1.067-2.754,4.312,1.15-4.97,11.221-1.039,2.346-1.836-.835-10.192-4.6-1.187-3.061,8.217,3.747,1.972-.76c-.047-.141-.081-.29-.131-.43a19.136,19.136,0,0,0-5.342-7.806l-.905,1.026a17.3,17.3,0,0,0-4.217-2.75l.577-1.246a18.671,18.671,0,0,0-4.423-1.425l-.256,1.354A17.574,17.574,0,0,0,554.94,945.8l-.99-.968a18.875,18.875,0,0,0-5.413,13.283h1.382a17.6,17.6,0,0,0,17.6,17.608V978.9A20.8,20.8,0,0,1,547.9,964.965l-.556.193a21.384,21.384,0,0,1,10.613-26.148Z" transform="translate(-537.15 -927.75)" />
                                 </g>
                             </svg>
+
 
 
                         </div>

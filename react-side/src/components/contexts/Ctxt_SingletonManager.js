@@ -35,6 +35,8 @@ const CtxtP_SingletonManager = (props) => {
     const [selectedToolboxName, setSelectedToolboxName] = useState("")
     const [currentTabPath, setCurrentTabPath] = useState("")
     const [savedOrLoaded, setSavedOrLoaded] = useState(0)
+    const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
+    const [serialport_status, setSerialPortStatus] = useState(false)
     const {
         dark_theme,
         light_theme
@@ -321,6 +323,31 @@ const CtxtP_SingletonManager = (props) => {
         }
     }
 
+    function serialport_read() {
+        //Starts the serial port monitor
+        if (serialport_status === false) {
+            //Checks if serial port is already opened. If it is not opened, then start reading the serial port
+            ipcRenderer.invoke(`serialport_retreive`);
+            ipcRenderer.on('serialport_monitor', (event, result) => {
+                setSerialPortMonitor(result);
+            });
+            //Set the Serial port status to ensure that the port does not attempt to open multiple times
+            setSerialPortStatus(true);
+        }
+        else {
+            console.log("CLOSING SERIAL PORT")
+            //If Serial port is already opened, close the serial monitor and reset the values
+            ipcRenderer.invoke(`serialport_close`);
+            setSerialPortMonitor([]);
+            console.log("Serial Port Closed")
+            setSerialPortStatus(false);
+        }
+    }
+
+    function serialport_write(val) {
+        ipcRenderer.invoke("serialport_write", val);
+      }
+
     return (
         <Ctxt_SingletonManager.Provider
             value={{
@@ -355,7 +382,13 @@ const CtxtP_SingletonManager = (props) => {
                 currentTabPath,
                 setCurrentTabPath,
                 savedOrLoaded,
-                setSavedOrLoaded
+                setSavedOrLoaded,
+                serialport_monitor,
+                setSerialPortMonitor,
+                serialport_read,
+                serialport_status,
+                setSerialPortStatus,
+                serialport_write
             }}
         >
             {props.children}

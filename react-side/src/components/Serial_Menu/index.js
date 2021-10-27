@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import PropTypes from 'prop-types'
 import Menu from '../Menu'
 import './Serial_Menu.scss'
 
 function Index(props) {
-    const [serialport_monitor, setSerialPortMonitor] = useState("")
+    const {serialport_monitor, serialport_write} = useContext(Ctxt_SingletonManager)
 
-    useEffect(() =>
-    {
-        if(serialport_monitor!==props.serialport_monitor){
-            setSerialPortMonitor(props.serialport_monitor);
+    function sendSerial(e){
+        if (e.key == "Enter"){
+            var value = document.getElementById("serial-input").value;
+            serialport_write(value)
+            document.getElementById("serial-input").value = ""
         }
-    })
-
+    }
     return (
         <Menu>
             <div id="serial-menu">
@@ -21,7 +22,7 @@ function Index(props) {
                     {serialport_monitor}
                 </div>
                 <div className="serial-write">
-                    <input className="serial-input" placeholder="Write To Serial monitor"></input>
+                    <input id="serial-input" placeholder="Write To Serial monitor" onKeyPress={sendSerial}></input>
                 </div>
             </div>
         </Menu>

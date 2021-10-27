@@ -1,155 +1,203 @@
 var DeviceList = []
-const full_toolbox = [{
-  kind: "categoryToolbox",
-  contents: [
-    {
-      kind: "category",
-      name: "Logic",
-      colour: "#5C81A6",
-      contents: [
-        {
-          kind: "block",
-          type: "controls_if",
-        },
-        {
-          kind: "block",
-          type: "logic_compare",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Loops",
-      colour: "#5C81A6",
-      contents: [
-        {
-          kind: "block",
-          type: "for_loop",
-        },
-        {
-          kind: "block",
-          type: "controls_whileUntil",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Math",
-      colour: "#5CA65C",
-      contents: [
-        {
-          kind: "block",
-          type: "math_round",
-        },
-        {
-          kind: "block",
-          type: "math_number",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Functional Blocks",
-      colour: "#5CA699",
-      contents: [
-        {
-          kind: "block",
-          type: "main_block",
-        },
-        {
-          kind: "block",
-          type: "delay",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Digital",
-      colour: "#5DB254",
-      contents: [
-        {
-          kind: "block",
-          type: "pin_setup"
-        },
-        {
-          kind: "block",
-          type: "digital_pin_write"
-        },
-        {
-          kind: "block",
-          type: "digital_read"
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Analog",
-      colour: "#2DB254",
-      contents: [
-        {
-          kind: "block",
-          type: "pin_setup"
-        },
-        {
-          kind: "block",
-          type: "analog_write"
-        },
-        {
-          kind: "block",
-          type: "analog_read"
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Sensors",
-      colour: "#4DB254",
-      contents: [
-        {
-          kind: "block",
-          type: "ultrasonic_sensor"
-        },
-        {
-          kind: "block",
-          type: "ultrasonic_sensor_setup"
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Actuators",
-      colour: "#2CB254",
-      contents: [
-        {
-          kind: "block",
-          type: "servo_write"
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Variables",
-      colour: "#2CB254",
-      contents: [
-        {
-          kind: "button",
-          text: "Create New Variable",
-          callbackKey: "createvar"
-        },
-        {
-          kind: "block",
-          type: "variable_get"
-        },
-        {
-          kind: "block",
-          type: "variable_set"
-        },
 
-      ],
-    },
-  ],
-}, `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-<category css-icon="customIcon fa fa-cog" name="Logic" colour="#5b80a5">
+const ft = [`
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+<category css-icon="customIcon fa fa-cog" name="Logic">
+      <block type="controls_if"></block>
+      <block type="logic_compare">
+          <field name="OP">EQ</field>
+      </block>
+      <block type="logic_operation">
+          <field name="OP">AND</field>
+      </block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean">
+          <field name="BOOL">TRUE</field>
+      </block>
+      <block type="logic_null"></block>
+      <block type="logic_ternary"></block>
+  </category>
+  <category name="Loops">
+      <block type="for_loop">
+      </block>
+      <block type="controls_whileUntil">
+          <field name="MODE">WHILE</field>
+      </block>
+      <block type="delay_core">
+      <field name= "seconds" type="number">
+      <shadow type="math_number">
+      <field name="NUM">1</field>
+  </shadow>
+  </field>
+      </block>
+  </category>
+  <category css-icon="customIcon fa fa-cog" name="Math">
+      <block type="math_number">
+          <field name="NUM">0</field>
+      </block>
+      <block type="math_arithmetic">
+          <field name="OP">ADD</field>
+          <value name="A">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+          <value name="B">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_number_property">
+          <mutation divisor_input="false"></mutation>
+          <field name="PROPERTY">EVEN</field>
+          <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
+      </block>
+  </category>
+  <category css-icon="customIcon fa fa-cog" name="Text">
+      <block type="text">
+        <field name="TEXT"></field>
+      </block>
+      <block type="text_join">
+        <mutation items="2"></mutation>
+      </block>
+      <block type="text_length">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_changeCase">
+        <field name="CASE">UPPERCASE</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_trim">
+        <field name="MODE">BOTH</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>  
+    <category name="Digital">
+    <block type="arduino_digital_write">
+      <field name="On/Off">HIGH</field>
+      <value name="Digital Pin Number">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+    </block>
+    <block type="arduino_digital_read">
+    <value name="Digital Pin">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        </block>
+  </category>
+  <category name="Analog">
+  <block type="arduino_analog_read">
+      <value name="analog pin">
+      <block type="text">
+      <field name="A1"></field>
+    </block>
+    </value>
+  </block>
+  <block type="arduino_analog_write">
+    <value name="analog pin">
+    <block type="text">
+    <field name="A1"></field>
+  </block>
+    </value>
+  <value name="output">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+  </block>
+</category>
+<category name="Sensors">
+    <block type="arduino_ultrasonic_read">
+    <value name="trigger">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+  <value name="echo">
+  <block type="math_number">
+    <field name="NUM">0</field>
+  </block>
+</value>
+    </block>
+  </category>
+  <category name="Actuators">
+    <block type="arduino_servo_write">
+    <value name="Servo Pin">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+  </value>
+  <value name="Servo Position">
+  <block type="math_number">
+    <field name="NUM">0</field>
+  </block>
+</value>
+    </block>
+  </category>
+  <category css-icon="customIcon fa fa-cog" name="COM">
+      <category name="Serial">
+        <block type="communication_serial_print">
+        <value name="Serial_Print">
+        <block type="text">
+        <field name="A1"></field>
+      </block>
+        </value>
+        </block>
+        <block type="communication_serial_read"></block>
+      </category>
+  </category>
+  <category name="Variables">
+  <button text="Create New Variable" callbackKey="createvar"></button>
+  <block type="variable_get"></block>
+<block type="variable_set"></block>
+  </category>
+</xml>
+`, `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+<category css-icon="customIcon fa fa-cog" name="Logic">
     <block type="controls_if"></block>
     <block type="logic_compare">
         <field name="OP">EQ</field>
@@ -164,17 +212,21 @@ const full_toolbox = [{
     <block type="logic_null"></block>
     <block type="logic_ternary"></block>
 </category>
-<category name="Loops" colour="#5ba55b">
+<category name="Loops">
     <block type="for_loop">
     </block>
     <block type="controls_whileUntil">
         <field name="MODE">WHILE</field>
     </block>
     <block type="delay_core">
-    <field name= "seconds" type="number"></field>
+    <field name= "seconds" type="number">
+    <shadow type="math_number">
+    <field name="NUM">1</field>
+</shadow>
+</field>
     </block>
 </category>
-<category css-icon="customIcon fa fa-cog" name="Math" colour="#5b67a5">
+<category css-icon="customIcon fa fa-cog" name="Math">
     <block type="math_number">
         <field name="NUM">0</field>
     </block>
@@ -201,7 +253,7 @@ const full_toolbox = [{
         </value>
     </block>
 </category>
-<category css-icon="customIcon fa fa-cog" name="Text" colour="#5ba58c">
+<category css-icon="customIcon fa fa-cog" name="Text">
     <block type="text">
       <field name="TEXT"></field>
     </block>
@@ -255,7 +307,7 @@ const full_toolbox = [{
       </value>
     </block>
   </category>
-<category css-icon="customIcon fa fa-cog" name="Actuators" colour="#05386B">
+<category css-icon="customIcon fa fa-cog" name="Actuators">
   <category name="Motor">
     <block type="motor_move_indef">
       <field name="direction">forward</field>
@@ -373,144 +425,6 @@ const full_toolbox = [{
 
 </xml>`]
 
-const ft = [`
-<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-<category css-icon="customIcon fa fa-cog" name="Logic">
-      <block type="controls_if"></block>
-      <block type="logic_compare">
-          <field name="OP">EQ</field>
-      </block>
-      <block type="logic_operation">
-          <field name="OP">AND</field>
-      </block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean">
-          <field name="BOOL">TRUE</field>
-      </block>
-      <block type="logic_null"></block>
-      <block type="logic_ternary"></block>
-  </category>
-  <category name="Loops">
-      <block type="for_loop">
-      </block>
-      <block type="controls_whileUntil">
-          <field name="MODE">WHILE</field>
-      </block>
-      <block type="delay_core">
-      <field name= "seconds" type="number">
-      <shadow type="math_number">
-      <field name="NUM">1</field>
-  </shadow>
-  </field>
-      </block>
-  </category>
-  <category css-icon="customIcon fa fa-cog" name="Math">
-      <block type="math_number">
-          <field name="NUM">0</field>
-      </block>
-      <block type="math_arithmetic">
-          <field name="OP">ADD</field>
-          <value name="A">
-              <shadow type="math_number">
-                  <field name="NUM">1</field>
-              </shadow>
-          </value>
-          <value name="B">
-              <shadow type="math_number">
-                  <field name="NUM">1</field>
-              </shadow>
-          </value>
-      </block>
-      <block type="math_number_property">
-          <mutation divisor_input="false"></mutation>
-          <field name="PROPERTY">EVEN</field>
-          <value name="NUMBER_TO_CHECK">
-              <shadow type="math_number">
-                  <field name="NUM">0</field>
-              </shadow>
-          </value>
-      </block>
-  </category>
-  <category css-icon="customIcon fa fa-cog" name="Text">
-      <block type="text">
-        <field name="TEXT"></field>
-      </block>
-      <block type="text_join">
-        <mutation items="2"></mutation>
-      </block>
-      <block type="text_length">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_isEmpty">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT"></field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_changeCase">
-        <field name="CASE">UPPERCASE</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_trim">
-        <field name="MODE">BOTH</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_print">
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_prompt_ext">
-        <mutation type="TEXT"></mutation>
-        <field name="TYPE">TEXT</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-    </category>  
-    <category name="Digital">
-    <block type="arduino_digital_write">
-      <field name="On/Off">HIGH</field>
-    </block>
-    <block type="arduino_digital_read"></block>
-  </category>
-<category name="Sensors">
-    <block type="arduino_ultrasonic_read"></block>
-  </category>
-  <category name="Actuators">
-    <block type="arduino_servo_write"></block>
-  </category>
-  <category css-icon="customIcon fa fa-cog" name="COM">
-      <category name="Serial">
-        <block type="communication_serial_print"></block>
-        <block type="communication_serial_read"></block>
-      </category>
-  </category>
-  <category name="Variables">
-  <button text="Create New Variable" callbackKey="createvar"></button>
-  <block type="variable_get"></block>
-<block type="variable_set"></block>
-  </category>
-</xml>
-`]
-
 function device(device_name, compiler, microcontroller, toolbox, default_workspace, peripherals_used, peripherals_pins) {
   this.device_name = device_name;
   this.compiler = compiler;
@@ -535,7 +449,7 @@ const Arduino_Nano = new device(
   "Arduino Nano",
   "Arduino",
   "Arduino Nano",
-  full_toolbox,
+  ft,
   `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
   [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
   undefined
@@ -782,7 +696,7 @@ const Mingo_Bot = new device(
   "Mingo",
   "Arduino",
   "Arduino Nano",
-  full_toolbox,
+  ft,
   `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
   [`Line Follower`, `Ultrasonic Sensor`, `Infrared Receiver`, `Light Sensor`, `DC Motor (TB6612)`, `NeoPixel Led`],
   undefined

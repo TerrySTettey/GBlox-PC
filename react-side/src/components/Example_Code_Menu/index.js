@@ -22,15 +22,15 @@ function Index(props) {
         return devices;
     }
 
-    function loadXML(event){
+    function loadXML(event) {
         const example_object = props.example_codes;
-        var i = parseInt (event.target.id.replace("code-open-",""));
-        try{
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(example_object[i].xml),Blockly.mainWorkspace);
+        var i = parseInt(event.target.id.replace("code-open-", ""));
+        try {
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(example_object[i].xml), Blockly.mainWorkspace);
         }
-        catch(e){}
-        
-        
+        catch (e) { }
+
+
     }
 
     function addExample() {
@@ -69,13 +69,15 @@ function Index(props) {
     return (
         <Menu>
             <div id="example-code-menu">
-                <div className="text">Example Codes</div>
-                <Button
-                    type="FilterButton"
-                    outColor="#0000bc"
-                    hoverColor="#0000aa"
-                    hoverEffect="fill"
-                />
+                <div id="example-header-text">Example Codes</div>
+                <div id="example-filter-button">
+                    <Button
+                        type="FilterButton"
+                        outColor="#0000bc"
+                        hoverColor="#0000aa"
+                        hoverEffect="fill"
+                    />
+                </div>
                 <div id="examples">
                     {addExample()}
                 </div>

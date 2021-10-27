@@ -35,7 +35,6 @@
     border-radius: 10px;
 }
 
-
 .body-container {
     --shift: 0px;
     display: block;
@@ -130,17 +129,17 @@
             left: 300px;
             display: flex;
             flex-direction: row;
-            >div {
+            > div {
                 margin-left: 4.92%;
             }
-            svg {
-                fill: var(--progress-filled-bar-color) !important;
-                transition: fill 0.5s, stroke 0.5s;
-                &:hover {
-                            fill: var(--secondary-color) !important;
+            #button-container{
+            &:hover {
+                svg,g,p{
+                        fill: var(--secondary-color) !important;
+                    
                 }
             }
-
+        }
         }
 
         #num2 {

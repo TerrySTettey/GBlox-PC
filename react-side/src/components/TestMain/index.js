@@ -23,32 +23,13 @@ const TestMain = (props) => {
 
     const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName,deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
     const {currentThemeName, setCurrentThemeName} = useContext(ThemeContext)
-    const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
-    const [serialport_status, setSerialPortStatus] = useState(false)
+
     const [available_com_ports, setAvailableCOMports] = useState([]);
     const [system_settings, setSystemSettings] = useState([]);
     const [current_theme, setCurrentTheme] = useState("")
     const [splash_status, setSplashStatus] = useState("false");
 
-    function serialport_read() {
-        //Starts the serial port monitor
-        if (serialport_status === false) {
-            //Checks if serial port is already opened. If it is not opened, then start reading the serial port
-            ipcRenderer.invoke(`serialport_retreive`);
-            ipcRenderer.on('serialport_monitor', (event, result) => {
-                setSerialPortMonitor(result);
-            });
-            //Set the Serial port status to ensure that the port does not attempt to open multiple times
-            setSerialPortStatus(true);
-        }
-        else {
-            //If Serial port is already opened, close the serial monitor and reset the values
-            ipcRenderer.invoke(`serialport_close`);
-            setSerialPortMonitor([]);
-            console.log("Serial Port Closed")
-            setSerialPortStatus(false);
-        }
-    }
+
     async function uploadCode_ipc() {
         if (document.getElementById("c-codeEditor").style.display !== "flex") {
             //Invokes upload-code from electron with the current code
@@ -240,12 +221,10 @@ const TestMain = (props) => {
                 workspaceClick={workspaceClick}
                 toolboxButtons={toolboxItems}
                 viewCode={deviceCode}
-                serialport_monitor={serialport_monitor}
-                onSerialPortClick={serialport_read}
                 example_codes={example_codes}
                 uploadFunction={uploadCode_ipc}
                 onSplashClick={closeSplash}
-                Splashurl={"https://www.google.com"}
+                Splashurl={"http://robocentregh.com"}
                 deviceOnClick={device_manager}
                 saveFile={exportBlocks}
             />

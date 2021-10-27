@@ -23,10 +23,9 @@ const TrafficLight = new example(
     1,
     "Loops, LEDS, Math",
     "This example simulates a simple traffic light. It consists of 3 LEDs; red, amber and green.",
-    ["Mingo", "Arduino"],
+    ["Mingo"],
     `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" id="GdX2^=Jfq;Vwb*}r--iT" deletable="false" movable="false" x="430" y="150"><field name="LOOP">TRUE</field><statement name="mainLoop"><block type="led_rgb_led_all" id="u*qw/%W%1/uw^~ilj??I"><field name="colour">Red</field><next><block type="delay_core" id=":@1xwfNMpc*u}0y4j*Hz"><value name="seconds"><block type="math_number" id="N+T6%yHo@tujQ#?RyV85"><field name="NUM">5</field></block></value><next><block type="led_rgb_led_all" id=":Uwl`+`*?*t|w}XpNpmMR2"><field name="colour">Green</field><next><block type="delay_core" id=",Z2c.5QiNM4RsfX#EaaG"><value name="seconds"><block type="math_number" id="h=Rz9zV_m2)(pK0X`+`j=w"><field name="NUM">5</field></block></value><next><block type="led_rgb_led_all" id="`+`Vp]vDD{Zfl2+za7s?FT"><field name="colour">Yellow</field><next><block type="delay_core" id="5L{Ma_]buv]*AS8V)mnt"><value name="seconds"><block type="math_number" id="POTN7^CTYKXKtcNbp=`+`l"><field name="NUM">2.5</field></block></value></block></next></block></next></block></next></block></next></block></next></block></statement></block></xml>`
 )
 
-example_codes.push(PoliceFlashLight);
 example_codes.push(TrafficLight);
 export default example_codes
