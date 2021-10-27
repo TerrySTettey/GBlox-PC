@@ -173,7 +173,15 @@ const WorkTabHolder = (props) => {
             currentTab.tabXML = Blockly.Xml.workspaceToDom(currentWorkspace)
             TabHolder[getTabPosition(currentTab)] = currentTab
         }
-        WSNumTracker = WSNumTracker + 1;
+        var IDArray = []
+        for(var i = 0; i < TabHolder.length; i++){
+            IDArray.push(TabHolder[i].tabID)
+        }
+        if(IDArray.length !== 0){
+            WSNumTracker = Math.max(...IDArray) + 1;
+        } else {
+            WSNumTracker = 1;
+        }
         currentTab = new Tab(WSNumTracker);
         //currentTab.tabLevel = toolboxLevel;
         setCurrentTabPath("")

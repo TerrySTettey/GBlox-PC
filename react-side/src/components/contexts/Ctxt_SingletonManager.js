@@ -64,8 +64,14 @@ const CtxtP_SingletonManager = (props) => {
             exportBlocks(true)
             clearDropdowns()
         },
+        //Share
         () => {
             window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!`)
+            clearDropdowns();
+        },
+        //Close
+        () => {
+            closeApp()
         }
     ]
     var editheader = [
@@ -88,16 +94,6 @@ const CtxtP_SingletonManager = (props) => {
         () => {
             try {
                 Blockly.paste(currentBlock)
-            }
-            catch (e) { }
-            clearDropdowns()
-        },
-        () => {
-            try {
-                var allblocks = currentWorkspace.getAllBlocks(true);
-                for (var i = 0; i < allblocks.length; i++) {
-                    allblocks[i].select();
-                }
             }
             catch (e) { }
             clearDropdowns()
@@ -315,6 +311,12 @@ const CtxtP_SingletonManager = (props) => {
         }
     }
 
+    //Used to close the app from React
+    function closeApp(){
+        ipcRenderer.send("close-app");
+        console.log("app closed")
+    }
+
     return (
         <Ctxt_SingletonManager.Provider
             value={{
@@ -349,7 +351,7 @@ const CtxtP_SingletonManager = (props) => {
                 currentTabPath,
                 setCurrentTabPath,
                 savedOrLoaded,
-                setSavedOrLoaded
+                setSavedOrLoaded,
             }}
         >
             {props.children}
