@@ -287,8 +287,8 @@ Blockly.JavaScript['led_rgb_led'] = function (block) {
   if (RGBDefined === false) {
     if (block.getRootBlock().type == "m_mainloop") {
       peripheral_SetupCode += `\tpinMode(${RGB_R}, OUTPUT);\n\tpinMode(${RGB_G}, OUTPUT);\n\tpinMode(${RGB_B}, OUTPUT);\n`
+      RGBDefined = true;
     }
-    RGBDefined = true;
 
   }
   var code = '...;\n';
@@ -326,8 +326,9 @@ Blockly.JavaScript['led_rgb_led_all'] = function (block) {
   if (RGBDefined === false) {
     if (block.getRootBlock().type == "m_mainloop") {
       peripheral_SetupCode += `\tpinMode(${RGB_R}, OUTPUT);\n\tpinMode(${RGB_G}, OUTPUT);\n\tpinMode(${RGB_B}, OUTPUT);\n`
+      RGBDefined = true;
     }
-    RGBDefined = true;
+    
   }
   var code = '...;\n';
   switch (dropdown_colour) {
@@ -383,8 +384,8 @@ Blockly.JavaScript['motor_move_indef'] = function (block) {
       peripheral_PreDeclarations += ServoSetup.PreDec;
       peripheral_SetupCode += ServoSetup.Setup;
       peripheral_BulkFunctions += ServoSetup.Bulk;
+      ServoDefined = true;
     }
-    ServoDefined = true;
   }
   var code = '...;\n';
   switch (dropdown_direction) {
@@ -421,8 +422,8 @@ Blockly.JavaScript['motor_single_move_indef'] = function (block) {
       peripheral_PreDeclarations += ServoSetup.PreDec;
       peripheral_SetupCode += ServoSetup.Setup;
       peripheral_BulkFunctions += ServoSetup.Bulk;
+      ServoDefined = true;
     }
-    ServoDefined = true;
   }
   var code = '...;\n';
   switch (dropdown_direction) {
@@ -459,8 +460,8 @@ Blockly.JavaScript['motor_move_seconds'] = function (block) {
       peripheral_PreDeclarations += ServoSetup.PreDec;
       peripheral_SetupCode += ServoSetup.Setup;
       peripheral_BulkFunctions += ServoSetup.Bulk;
+      ServoDefined = true;
     }
-    ServoDefined = true;
   }
   var code = '...;\n';
   switch (dropdown_direction) {
@@ -492,8 +493,8 @@ Blockly.JavaScript['forklift_move_seconds'] = function (block) {
       peripheral_PreDeclarations += ServoSetup.PreDec;
       peripheral_SetupCode += ServoSetup.Setup;
       peripheral_BulkFunctions += ServoSetup.Bulk;
+      ServoDefined = true;
     }
-    ServoDefined = true;
   }
 
   var code = '...;\n';
@@ -519,8 +520,8 @@ Blockly.JavaScript['forklift_move_indef'] = function (block) {
       peripheral_PreDeclarations += ServoSetup.PreDec;
       peripheral_SetupCode += ServoSetup.Setup;
       peripheral_BulkFunctions += ServoSetup.Bulk;
+      ServoDefined = true;
     }
-    ServoDefined = true;
   }
   var code = '...;\n';
   switch (dropdown_direction) {
@@ -552,8 +553,8 @@ Blockly.JavaScript['servo_rotate_to_degrees'] = function (block) {
       peripheral_PreDeclarations += ServoSetup.PreDec;
       peripheral_SetupCode += ServoSetup.Setup;
       peripheral_BulkFunctions += ServoSetup.Bulk;
+      ServoDefined = true;
     }
-    ServoDefined = true;
   }
   var code = '...;\n';
   return code;
@@ -567,8 +568,8 @@ Blockly.JavaScript['servo_360_rotate_direction'] = function (block) {
       peripheral_PreDeclarations += ServoSetup.PreDec;
       peripheral_SetupCode += ServoSetup.Setup;
       peripheral_BulkFunctions += ServoSetup.Bulk;
+      ServoDefined = true;
     }
-    ServoDefined = true;
   }
   var code = '...;\n';
   return code;
