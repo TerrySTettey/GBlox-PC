@@ -39,6 +39,7 @@ const CtxtP_SingletonManager = (props) => {
     const [savedOrLoaded, setSavedOrLoaded] = useState(0)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
+    const [blocklyVariables, setBlocklyVariables] = useState([])
     const {
         dark_theme,
         light_theme
@@ -161,6 +162,10 @@ const CtxtP_SingletonManager = (props) => {
             }
         setToolboxUpdate(0)
     }, [toolboxUpdate])
+
+    useEffect(()=>{
+        createdVariables = blocklyVariables;
+    },[blocklyVariables])
     useEffect(() => {
         /*Initializes Blockly injection */
         if (currentDeviceName !== "") {
@@ -309,7 +314,7 @@ const CtxtP_SingletonManager = (props) => {
                 newvariable_type = "string"
             }
             var newvariable_name = document.getElementById("variable-name-input").value
-            createdVariables.push([`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]);
+            setBlocklyVariables((blocklyVariables => [...blocklyVariables, [`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]] ))
             document.getElementById("c-variableSelector").style.display = "none";
             
         }
