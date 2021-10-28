@@ -29,6 +29,7 @@ function createWindow() {
         frame: true,
         autoHideMenuBar: true,
         isResizable: true,
+        icon: path.resolve(__dirname + '/logo.ico'),
         /*frame:false,*/
         webPreferences: {
             nodeIntegration: true,
