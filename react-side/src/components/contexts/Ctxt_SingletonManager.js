@@ -24,7 +24,9 @@ const CtxtP_SingletonManager = (props) => {
 
     const [currentDeviceName, setCurrentDeviceName] = useState("");             //Used to set and check the current device selected
     const [toolboxItems, setToolboxItems] = useState([]);                       //Used to set and check the current items in the Toolbox
-    const [deviceCode, setDeviceCode] = useState("");                           //Used to set and check the generated code for the current device
+    const [deviceCode, setDeviceCode] = useState("");
+    const [currentXML, setCurrentXML] = useState(" ");                          //Used to set and check the generated code for the current device
+    const [loadedXML, setLoadedXML] = useState("")
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
     var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);          //Used to set and check the selected device's data
     const [currentDeviceChanged, setCurrentDeviceChanged] = useState(0)
@@ -201,6 +203,7 @@ const CtxtP_SingletonManager = (props) => {
     async function exportBlocks(isSaveAs = false) {
         try {
             var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+            setLoadedXML(xml)
             var xml_text = Blockly.Xml.domToText(xml);
             console.log("Saving the following: " + xml_text);
             var loc;
@@ -236,6 +239,7 @@ const CtxtP_SingletonManager = (props) => {
             console.log(hold)
             if (hold !== "nil") {
                 var xmlss = Blockly.Xml.textToDom(hold.xml)
+                setLoadedXML(xmlss)
                 setToolboxLevel(hold.toolLevel)
                 document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
                 setCurrentDeviceName(hold.device)
@@ -244,8 +248,6 @@ const CtxtP_SingletonManager = (props) => {
                     Blockly.mainWorkspace.clear();
                     Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
                 }, 500);
-                
-
                 setCurrentTabPath(hold.location)
             }
         } catch (e) {
@@ -278,6 +280,7 @@ const CtxtP_SingletonManager = (props) => {
     //Used to show the generated Blockly code.
     function showCode() {
         var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
+        setCurrentXML(Blockly.Xml.workspaceToDom(currentWorkspace))
         code = mainLoopCode;
         setDeviceCode(code);
     }
@@ -390,7 +393,11 @@ const CtxtP_SingletonManager = (props) => {
                 serialport_read,
                 serialport_status,
                 setSerialPortStatus,
-                serialport_write
+                serialport_write,
+                currentXML,
+                setCurrentXML,
+                loadedXML,
+                setLoadedXML
             }}
         >
             {props.children}
