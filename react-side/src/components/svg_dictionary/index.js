@@ -3737,7 +3737,11 @@ const svg_dictionary = {
                 </g>
             </svg>
             <p className="upload-text" id="Add_device" data-name="Add device" font-size="17">Add device</p>
-        </div>]
+        </div>],
+    unsaved_circle: [<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11">
+    <circle id="Ellipse_51" data-name="Ellipse 51" cx="5.5" cy="5.5" r="5.5" fill="rgba(255,255,255,0.69)"/>
+  </svg>
+  ]
 }
 
 export default svg_dictionary
