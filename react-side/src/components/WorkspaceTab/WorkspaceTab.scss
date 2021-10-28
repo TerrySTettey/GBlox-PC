@@ -70,5 +70,10 @@
         transform: skewX(45deg) scale(0.9);
         margin: 10px 0px 25px 5px;
         flex-shrink: 0;
+
+    
+            circle{
+                fill: var(--text-color)
+            }
     }
 }
