@@ -34,11 +34,16 @@ const WorkTabHolder = (props) => {
         savedOrLoaded,
         setSavedOrLoaded,
         currentXML,
-        loadedXML
+        loadedXML,
+        setBlocklyVariables,
+        blocklyVariables,
+        variablesLoadedCorrectly,
+        setVariablesLoadedCorrectly
     } = useContext(Ctxt_SingletonManager);
     const [tabAddedState, setTabAddedState] = useState(0);
     const [tabChangedState, setTabChangedState] = useState(0)
     const [tabClosedState, setTabClosedState] = useState(0)
+    const [loadCheck, setLoadCheck] = useState("Current")
     class Tab {
         tabID
         tabJSX
@@ -49,17 +54,19 @@ const WorkTabHolder = (props) => {
         tabName
         tabSaved
         savedXML
+        variables
         constructor(TabNum) {
             this.tabID = TabNum;
             this.tabPath = "";
             this.tabSaved = true;
-            
+
             this.setName()
             this.tabJSX = (<WorkspaceTab id={"i-WSButton-" + TabNum} text={this.tabName} ChangeTab={ChangeTab} closeOnClick={CloseTab} savedTab={this.tabSaved} />)
             this.tabXML = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
             this.savedXML = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
             this.tabDevice = currentDeviceName
             this.tabLevel = 1;
+            this.variables = [["sample_variable", "0"]]
         }
 
         setName() {
@@ -76,18 +83,17 @@ const WorkTabHolder = (props) => {
     //When a change occurs on current Tab
     useEffect(() => {
         if (currentTab !== null) {
-            if (currentTab.savedXML !== ""){
-                if(Blockly.Xml.domToText(currentTab.savedXML) !== Blockly.Xml.domToText(currentXML)){
+            if (currentTab.savedXML !== "") {
+                if (Blockly.Xml.domToText(currentTab.savedXML) !== Blockly.Xml.domToText(currentXML)) {
                     currentTab.tabSaved = false;
                 }
-                else{
+                else {
                     currentTab.tabSaved = true;
                 }
-
             }
         }
         updateTabHolder()
-    }, [ currentXML])
+    }, [currentXML])
     //When the current device is changed
     useEffect(() => {
         if (currentDeviceChanged === 1) {
@@ -110,7 +116,9 @@ const WorkTabHolder = (props) => {
         if (savedOrLoaded === 1) {
             currentTab.tabPath = currentTabPath
             currentTab.savedXML = loadedXML
+            setLoadCheck("Saved")
             currentTab.setName();
+            currentTab.variables = blocklyVariables
             currentTab.tabSaved = true;
             TabHolder[getTabPosition(currentTab)] = currentTab;
             updateTabHolder()
@@ -123,7 +131,8 @@ const WorkTabHolder = (props) => {
             TabHolder[getTabPosition(currentTab)] = currentTab
             updateTabHolder()
             Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(selectedDevice.default_workspace), currentWorkspace);
-            
+            setBlocklyVariables(currentTab.variables)
+            setLoadCheck("Current")
             saveTabData()
             setTabAddedState(0)
         }
@@ -136,9 +145,9 @@ const WorkTabHolder = (props) => {
             document.getElementById("toolbox_selector_level_" + currentTab.tabLevel).click()
             updateTabHolder()
             setToolboxLevel(currentTab.tabLevel)
+            console.log(blocklyVariables)
             setToolboxUpdate(1)
             console.log(currentTab)
-
             setTabChangedState(0)
         }
     }, [tabChangedState])
@@ -158,12 +167,51 @@ const WorkTabHolder = (props) => {
     useEffect(() => {
         if (currentTab !== null) {
             currentTab.tabLevel = toolboxLevel
+            if (variablesLoadedCorrectly == false) {
+                console.log(currentTab.variables)
+                setBlocklyVariables(currentTab.variables)
+                try {
+                    switch (loadCheck) {
+                        case "Saved":
+                            var matchSaved = Blockly.Xml.domToText(currentTab.savedXML) === Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace))
+                            if (matchSaved === false) {
+                                console.log(loadCheck)
+                                Blockly.mainWorkspace.clear();
+                                Blockly.Xml.domToWorkspace(currentTab.savedXML, Blockly.mainWorkspace)
+                                console.log("does not match")
+                            }
+                            else {
+                                setVariablesLoadedCorrectly(true);
+                            }
+                            break;
+                        case "Current":
+                            setVariablesLoadedCorrectly(true);
+                            break;
+                        default:
+                            console.log(currentTab.tabXML)
+                            console.log(blocklyVariables)
+                            var matchSaved = Blockly.Xml.domToText(currentTab.tabXML) === Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace))
+                            if (matchSaved === false) {
+                                console.log(currentTab.tabXML)
+                                Blockly.mainWorkspace.clear();
+                                Blockly.Xml.domToWorkspace(currentTab.tabXML, Blockly.mainWorkspace)
+                                console.log("does not match")
+                            }
+                            else {
+                                setVariablesLoadedCorrectly(true);
+                            }
+                            break;
+                    }
+                }
+                catch (e) { }
+            }
         }
     })
 
     function AddTab() {
         if (currentTab !== null) {
             currentTab.tabXML = Blockly.Xml.workspaceToDom(currentWorkspace)
+            currentTab.variables = blocklyVariables
             TabHolder[getTabPosition(currentTab)] = currentTab
         }
         var IDArray = []
@@ -180,7 +228,6 @@ const WorkTabHolder = (props) => {
         setCurrentTabPath("")
         setToolboxUpdate(1)
         TabHolder = [...TabHolder, currentTab]
-
         setTabAddedState(1)
     }
     function CloseTab(e) {
@@ -196,9 +243,15 @@ const WorkTabHolder = (props) => {
     function ChangeTab(e) {
         var SelectedID = e.target.id.split("-")[2];
         currentTab.tabXML = Blockly.Xml.workspaceToDom(currentWorkspace)
+        currentTab.variables = blocklyVariables
+        console.log(currentTab.variables)
         TabHolder[getTabPosition(currentTab)] = currentTab
         currentTab = TabHolder[getTabPositionByID(SelectedID)]
+        setLoadCheck("Tab")
         Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
+        setBlocklyVariables(currentTab.variables)
+        console.log(currentTab.tabXML)
+        setVariablesLoadedCorrectly(false);
         setCurrentDeviceName(currentTab.tabDevice)
         setCurrentTabPath(currentTab.tabPath)
         setTabChangedState(1)

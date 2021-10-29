@@ -1,9 +1,10 @@
 import Blockly from 'blockly';
-import { globalToolboxName, createdVariables, currentWorkspace } from '../../components/contexts/Ctxt_SingletonManager.js';
+import { globalToolboxName, createdVariables, workspaceXML } from '../../components/contexts/Ctxt_SingletonManager.js';
 var peripherals = null;
-var variables_set = [["sample_variable","0"]];
+var variables_set = [["sample_variable", "0"]];
+var varcheck = []
 async function getPeripherals() {
-    switch(globalToolboxName){
+    switch (globalToolboxName) {
         case "Basic":
             peripherals = await import('./../peripherals/arduino_peripheral.js');
             break;
@@ -22,6 +23,9 @@ var Total_PreDeclarations = "";
 var Total_SetupCode = "void setup(){\n";
 var Total_BulkFunctions = "";
 var mainLoopCode = "";
+
+
+
 
 Blockly.Blocks['m_mainloop'] = {
     init: function () {
@@ -84,61 +88,61 @@ Blockly.Blocks['communication_serial_read'] = {
 };
 
 Blockly.Blocks['arduino_digital_write'] = {
-    init: function() {
-      this.appendValueInput("Digital Pin Number")
-          .setCheck("Number")
-          .appendField("Set Digital Pin");
-      this.appendDummyInput()
-          .appendField("to")
-          .appendField(new Blockly.FieldDropdown([["On","HIGH"], ["Off","LOW"]]), "On/Off");
-      this.setInputsInline(true);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setStyle("digital_blocks");
-   this.setTooltip("");
-   this.setHelpUrl("");
+    init: function () {
+        this.appendValueInput("Digital Pin Number")
+            .setCheck("Number")
+            .appendField("Set Digital Pin");
+        this.appendDummyInput()
+            .appendField("to")
+            .appendField(new Blockly.FieldDropdown([["On", "HIGH"], ["Off", "LOW"]]), "On/Off");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setStyle("digital_blocks");
+        this.setTooltip("");
+        this.setHelpUrl("");
     }
-  };
-  Blockly.Blocks['arduino_digital_read'] = {
-    init: function() {
-      this.appendValueInput("Digital Pin")
-          .setCheck(null)
-          .appendField("Read Digital Pin");
-      this.setInputsInline(true);
-      this.setOutput(true, null);
-      this.setStyle("digital_blocks");
-   this.setTooltip("");
-   this.setHelpUrl("");
+};
+Blockly.Blocks['arduino_digital_read'] = {
+    init: function () {
+        this.appendValueInput("Digital Pin")
+            .setCheck(null)
+            .appendField("Read Digital Pin");
+        this.setInputsInline(true);
+        this.setOutput(true, null);
+        this.setStyle("digital_blocks");
+        this.setTooltip("");
+        this.setHelpUrl("");
     }
-  };
-  Blockly.Blocks['arduino_analog_write'] = {
-    init: function() {
-      this.appendValueInput("analog pin")
-          .setCheck("String")
-          .appendField("Set Analog Pin");
-      this.appendValueInput("output")
-          .setCheck("Number")
-          .appendField("to");
-      this.setInputsInline(true);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setStyle("analog_blocks");
-   this.setTooltip("");
-   this.setHelpUrl("");
+};
+Blockly.Blocks['arduino_analog_write'] = {
+    init: function () {
+        this.appendValueInput("analog pin")
+            .setCheck("String")
+            .appendField("Set Analog Pin");
+        this.appendValueInput("output")
+            .setCheck("Number")
+            .appendField("to");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setStyle("analog_blocks");
+        this.setTooltip("");
+        this.setHelpUrl("");
     }
-  };
-  Blockly.Blocks['arduino_analog_read'] = {
-    init: function() {
-      this.appendValueInput("analog pin")
-          .setCheck(null)
-          .appendField("Read Analog Pin");
-      this.setInputsInline(true);
-      this.setOutput(true, null);
-      this.setStyle("analog_blocks");
-   this.setTooltip("");
-   this.setHelpUrl("");
+};
+Blockly.Blocks['arduino_analog_read'] = {
+    init: function () {
+        this.appendValueInput("analog pin")
+            .setCheck(null)
+            .appendField("Read Analog Pin");
+        this.setInputsInline(true);
+        this.setOutput(true, null);
+        this.setStyle("analog_blocks");
+        this.setTooltip("");
+        this.setHelpUrl("");
     }
-  };
+};
 
 Blockly.Blocks['variable_set'] = {
     init: function () {
@@ -154,9 +158,9 @@ Blockly.Blocks['variable_set'] = {
         this.setStyle("variable_blocks");
         this.setTooltip("");
         this.setHelpUrl("");
-        
+
     },
-    generateOptions: function() {
+    generateOptions: function () {
         var options = []
         options = variables_set;
         return options;
@@ -175,7 +179,7 @@ Blockly.Blocks['variable_get'] = {
         this.setTooltip("");
         this.setHelpUrl("");
     },
-    generateOptions: function() {
+    generateOptions: function () {
         var options = []
         options = variables_set;
         return options;
@@ -206,10 +210,12 @@ Blockly.JavaScript['m_mainloop'] = function (block) {
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
     if (createdVariables.length != 0) {
         variables_set = createdVariables;
+        varcheck = createdVariables
         for (var i = 0; i < variables_set.length; i++) {
             Total_PreDeclarations += `${variables_set[i][0]};\n`;
         }
     }
+
     var checkbox_loop = block.getFieldValue("LOOP");
     try {
         Total_PreDeclarations += peripherals.peripheral_PreDeclarations;
@@ -253,7 +259,7 @@ Blockly.JavaScript['communication_serial_print'] = function (block) {
     }
     if (Total_SetupCode.includes(`Serial.begin(9600);`) == 0) {
         if (block.getRootBlock().type == "m_mainloop") {
-        Total_SetupCode += `\tSerial.begin(9600);\n`;
+            Total_SetupCode += `\tSerial.begin(9600);\n`;
         }
     }
     var code = `\tSerial.println(${value_serial_print});\n`;
@@ -266,9 +272,9 @@ Blockly.JavaScript['communication_serial_read'] = function (block) {
     }
     var code = ""
     if (block.getRootBlock().type == "m_mainloop") {
-        
-       code = `Serial.read()`;
-       console.log(code)
+
+        code = `Serial.read()`;
+        console.log(code)
     }
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -277,18 +283,15 @@ Blockly.JavaScript['variable_set'] = function (block) {
     var text_varname = block.getFieldValue('variables_set');
     var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
 
-    var code = '';
-    code = `${text_varname} = ${value_value};\n`
-    return code;
+var code = '';
+code = `${text_varname} = ${value_value};\n`
+return code;
 };
 
 Blockly.JavaScript['variable_get'] = function (block) {
     var text_varname = block.getFieldValue('variables_set');
-
     var code = '...';
     code = `${text_varname}`
-    console.log(variables_set);
-
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -300,43 +303,43 @@ Blockly.JavaScript['for_loop'] = function (block) {
     return code;
 };
 
-Blockly.JavaScript['arduino_digital_write'] = function(block) {
+Blockly.JavaScript['arduino_digital_write'] = function (block) {
     var value_digital_pin_number = Blockly.JavaScript.valueToCode(block, 'Digital Pin Number', Blockly.JavaScript.ORDER_ATOMIC);
     var dropdown_on_off = block.getFieldValue('On/Off');
-    if (Total_SetupCode.includes(`pinMode(${value_digital_pin_number}, OUTPUT)`) == 0){
+    if (Total_SetupCode.includes(`pinMode(${value_digital_pin_number}, OUTPUT)`) == 0) {
         if (block.getRootBlock().type == "m_mainloop") {
-        Total_SetupCode+=`pinMode(${value_digital_pin_number}, OUTPUT);\n`
+            Total_SetupCode += `pinMode(${value_digital_pin_number}, OUTPUT);\n`
         }
     }
     var code = `digitalWrite(${value_digital_pin_number},${dropdown_on_off});\n`;
     return code;
-  };
-  Blockly.JavaScript['arduino_digital_read'] = function(block) {
+};
+Blockly.JavaScript['arduino_digital_read'] = function (block) {
     var value_digital_pin_number = Blockly.JavaScript.valueToCode(block, 'Digital Pin', Blockly.JavaScript.ORDER_ATOMIC);
-    if (Total_SetupCode.includes(`pinMode(${value_digital_pin_number}, INPUT)`) == 0){
+    if (Total_SetupCode.includes(`pinMode(${value_digital_pin_number}, INPUT)`) == 0) {
         if (block.getRootBlock().type == "m_mainloop") {
-        Total_SetupCode+=`pinMode(${value_digital_pin_number}, INPUT);\n`
+            Total_SetupCode += `pinMode(${value_digital_pin_number}, INPUT);\n`
         }
     }
     var code = `digitalRead(${value_digital_pin_number})`;
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
-  };
-  Blockly.JavaScript['arduino_analog_write'] = function(block) {
+};
+Blockly.JavaScript['arduino_analog_write'] = function (block) {
     var value_analog_pin_number = Blockly.JavaScript.valueToCode(block, 'analog pin', Blockly.JavaScript.ORDER_ATOMIC);
     var value_output = Blockly.JavaScript.valueToCode(block, 'output', Blockly.JavaScript.ORDER_ATOMIC);
-    if (Total_SetupCode.includes(`pinMode(${value_analog_pin_number}, OUTPUT)`) == 0){
+    if (Total_SetupCode.includes(`pinMode(${value_analog_pin_number}, OUTPUT)`) == 0) {
         if (block.getRootBlock().type == "m_mainloop") {
             Total_SetupCode += `pinMode(${value_analog_pin_number}, OUTPUT);\n`
         }
     }
     var code = `analogWrite(${value_analog_pin_number},${value_output});\n`;
     return code;
-  };
-  Blockly.JavaScript['arduino_analog_read'] = function(block) {
+};
+Blockly.JavaScript['arduino_analog_read'] = function (block) {
     var value_analog_pin_number = Blockly.JavaScript.valueToCode(block, 'analog pin', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
-    if (Total_SetupCode.includes(`pinMode(${value_analog_pin_number}, INPUT)`) == 0){
+    if (Total_SetupCode.includes(`pinMode(${value_analog_pin_number}, INPUT)`) == 0) {
         if (block.getRootBlock().type == "m_mainloop") {
             Total_SetupCode += `pinMode(${value_analog_pin_number}, INPUT);\n`
         }
@@ -345,7 +348,7 @@ Blockly.JavaScript['arduino_digital_write'] = function(block) {
     var code = `analogRead(${value_analog_pin_number})`;
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
-  };
+};
 
 
 export { mainLoopCode }

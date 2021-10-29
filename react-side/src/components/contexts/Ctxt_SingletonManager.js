@@ -18,6 +18,8 @@ var currentWorkspace;
 var createdVariables = [];
 var currentBlock = null;
 var globalToolboxName = "Mello"
+var workspaceXML = <xml></xml>;
+
 
 
 const CtxtP_SingletonManager = (props) => {
@@ -40,6 +42,7 @@ const CtxtP_SingletonManager = (props) => {
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [blocklyVariables, setBlocklyVariables] = useState([])
+    const [variablesLoadedCorrectly, setVariablesLoadedCorrectly] = useState(true)
     const {
         dark_theme,
         light_theme
@@ -163,9 +166,17 @@ const CtxtP_SingletonManager = (props) => {
         setToolboxUpdate(0)
     }, [toolboxUpdate])
 
-    useEffect(()=>{
+    useEffect(() => {
         createdVariables = blocklyVariables;
-    },[blocklyVariables])
+    }, [blocklyVariables])
+    useEffect(() => {
+        if (loadedXML !== "") {
+            console.log("variables changed")
+            console.log(blocklyVariables)
+            setVariablesLoadedCorrectly(false);
+        }
+    }, [loadedXML])
+
     useEffect(() => {
         /*Initializes Blockly injection */
         if (currentDeviceName !== "") {
@@ -198,11 +209,13 @@ const CtxtP_SingletonManager = (props) => {
         //Disables pointer events for blockly if Modal settings is opened
         var dropdowns = document.getElementsByClassName("c-CustomDrop-a-Content")
         for (var i = 0; i < dropdowns.length; i++) {
-            if (dropdowns[i].style.display !== "none"){
+            if (dropdowns[i].style.display !== "none") {
                 document.getElementById("blocklyDiv").style.pointerEvents = "none";
             }
         }
     })
+
+
 
     //Exports Blocks
     async function exportBlocks(isSaveAs = false) {
@@ -248,11 +261,9 @@ const CtxtP_SingletonManager = (props) => {
                 setToolboxLevel(hold.toolLevel)
                 document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
                 setCurrentDeviceName(hold.device)
-                createdVariables = hold.variables;
-                setTimeout(function() {
-                    Blockly.mainWorkspace.clear();
-                    Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
-                }, 500);
+                setBlocklyVariables(hold.variables);
+                Blockly.mainWorkspace.clear();
+                Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
                 setCurrentTabPath(hold.location)
             }
         } catch (e) {
@@ -297,6 +308,7 @@ const CtxtP_SingletonManager = (props) => {
         }
     }
 
+
     function openVariableDialog() {
         document.getElementById("c-variableSelector").style.display = "block";
     }
@@ -307,16 +319,16 @@ const CtxtP_SingletonManager = (props) => {
         }
         else {
             var newvariable_type = document.getElementById("variable-type-select").firstChild.value.toLowerCase();
-            if (newvariable_type === "integer"){
+            if (newvariable_type === "integer") {
                 newvariable_type = "int"
             }
-            else if(newvariable_type === "String"){
+            else if (newvariable_type === "String") {
                 newvariable_type = "string"
             }
             var newvariable_name = document.getElementById("variable-name-input").value
-            setBlocklyVariables((blocklyVariables => [...blocklyVariables, [`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]] ))
+            setBlocklyVariables((blocklyVariables => [...blocklyVariables, [`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]]))
             document.getElementById("c-variableSelector").style.display = "none";
-            
+
         }
     }
     //Used after dropdown functions to clear the dropdown off the screen
@@ -350,10 +362,10 @@ const CtxtP_SingletonManager = (props) => {
 
     function serialport_write(val) {
         ipcRenderer.invoke("serialport_write", val);
-      }
+    }
 
     //Used to close the app from React
-    function closeApp(){
+    function closeApp() {
         ipcRenderer.send("close-app");
         console.log("app closed")
     }
@@ -402,7 +414,11 @@ const CtxtP_SingletonManager = (props) => {
                 currentXML,
                 setCurrentXML,
                 loadedXML,
-                setLoadedXML
+                setLoadedXML,
+                setBlocklyVariables,
+                blocklyVariables,
+                variablesLoadedCorrectly,
+                setVariablesLoadedCorrectly
             }}
         >
             {props.children}
@@ -411,4 +427,4 @@ const CtxtP_SingletonManager = (props) => {
 }
 
 export default CtxtP_SingletonManager
-export { globalToolboxName, createdVariables, currentWorkspace }
+export { globalToolboxName, createdVariables, workspaceXML }
