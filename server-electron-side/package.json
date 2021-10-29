@@ -1,16 +1,16 @@
 {
-  "name": "server-electron-side",
+  "name": "GBlox",
   "version": "1.0.0",
   "description": "Electron Side of the Arduino + Blockly PRoject",
   "main": "electron/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
-    "package": "electron-forge package",
+    "package": "electron-forge package --platform=win32 --asar --extra-resource=electron/ArduinoOutput --extra-resource=electron/settings.txt --extra-resource=electron/arduino-1.8.15 --name=gBlox --overwrite",
     "make": "electron-forge make",
     "ntest": "electron .",
     "rebuild": "electron-rebuild -f -w serialport",
-    "nbuild": "electron-packager .  electron-app --platform=win32 --asar --extra-resource=electron/ArduinoOutput --extra-resource=electron/settings.txt --extra-resource=electron/arduino-1.8.15 --name=gBlox --overwrite"
+    "nbuild": "electron-packager .  GBlox --platform=win32 --asar --extra-resource=electron/ArduinoOutput --extra-resource=electron/settings.txt --extra-resource=electron/arduino-1.8.15 --name=gBlox --overwrite"
   },
   "keywords": [],
   "author": "Michael Adu and Terry Tettey",
@@ -35,7 +35,10 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "extraResource": ["./electron/arduino-1.8.15", "./electron/settings.txt"],
+        "asar": true
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -60,4 +63,5 @@
       ]
     }
   }
+  
 }
