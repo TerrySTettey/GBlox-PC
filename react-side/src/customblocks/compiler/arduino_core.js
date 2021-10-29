@@ -208,6 +208,7 @@ Blockly.JavaScript['m_mainloop'] = function (block) {
     block.setMovable(false);
 
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
+    console.log(createdVariables)
     if (createdVariables.length != 0) {
         variables_set = createdVariables;
         varcheck = createdVariables

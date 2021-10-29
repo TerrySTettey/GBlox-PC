@@ -168,11 +168,14 @@ const CtxtP_SingletonManager = (props) => {
 
     useEffect(() => {
         createdVariables = blocklyVariables;
-        workspaceXML = loadedXML;
-        console.log("variables changed")
-        console.log(blocklyVariables)
-        setVariablesLoadedCorrectly(false);
     }, [blocklyVariables])
+    useEffect(() => {
+        if (loadedXML !== "") {
+            console.log("variables changed")
+            console.log(blocklyVariables)
+            setVariablesLoadedCorrectly(false);
+        }
+    }, [loadedXML])
 
     useEffect(() => {
         /*Initializes Blockly injection */
@@ -214,213 +217,213 @@ const CtxtP_SingletonManager = (props) => {
 
 
 
-//Exports Blocks
-async function exportBlocks(isSaveAs = false) {
-    try {
-        var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-        setLoadedXML(xml)
-        var xml_text = Blockly.Xml.domToText(xml);
-        console.log("Saving the following: " + xml_text);
-        var loc;
-        if (isSaveAs === true) {
-            loc = await ipcRenderer.sendSync('save-file',
-                {
-                    device: currentDeviceName,
-                    toolLevel: toolboxLevel,
-                    variables: createdVariables,
-                    xml: xml_text
-                }, "")
-        } else {
-            loc = await ipcRenderer.sendSync('save-file',
-                {
-                    device: currentDeviceName,
-                    toolLevel: toolboxLevel,
-                    variables: createdVariables,
-                    xml: xml_text
-                }, currentTabPath)
+    //Exports Blocks
+    async function exportBlocks(isSaveAs = false) {
+        try {
+            var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+            setLoadedXML(xml)
+            var xml_text = Blockly.Xml.domToText(xml);
+            console.log("Saving the following: " + xml_text);
+            var loc;
+            if (isSaveAs === true) {
+                loc = await ipcRenderer.sendSync('save-file',
+                    {
+                        device: currentDeviceName,
+                        toolLevel: toolboxLevel,
+                        variables: createdVariables,
+                        xml: xml_text
+                    }, "")
+            } else {
+                loc = await ipcRenderer.sendSync('save-file',
+                    {
+                        device: currentDeviceName,
+                        toolLevel: toolboxLevel,
+                        variables: createdVariables,
+                        xml: xml_text
+                    }, currentTabPath)
+            }
+            setCurrentTabPath(loc)
+        } catch (e) {
+            alert(e);
         }
-        setCurrentTabPath(loc)
-    } catch (e) {
-        alert(e);
+
+        setSavedOrLoaded(1)
     }
 
-    setSavedOrLoaded(1)
-}
-
-//Loads Blocks
-function loadBlocks() {
-    try {
-        var hold = ipcRenderer.sendSync('load-file')
-        console.log(hold)
-        if (hold !== "nil") {
-            var xmlss = Blockly.Xml.textToDom(hold.xml)
-            setLoadedXML(xmlss)
-            setToolboxLevel(hold.toolLevel)
-            document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
-            setCurrentDeviceName(hold.device)
-            setBlocklyVariables(hold.variables);
-            Blockly.mainWorkspace.clear();
-            Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
-            setCurrentTabPath(hold.location)
+    //Loads Blocks
+    function loadBlocks() {
+        try {
+            var hold = ipcRenderer.sendSync('load-file')
+            console.log(hold)
+            if (hold !== "nil") {
+                var xmlss = Blockly.Xml.textToDom(hold.xml)
+                setLoadedXML(xmlss)
+                setToolboxLevel(hold.toolLevel)
+                document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
+                setCurrentDeviceName(hold.device)
+                setBlocklyVariables(hold.variables);
+                Blockly.mainWorkspace.clear();
+                Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+                setCurrentTabPath(hold.location)
+            }
+        } catch (e) {
+            throw e;
         }
-    } catch (e) {
-        throw e;
+
+        setSavedOrLoaded(1)
     }
 
-    setSavedOrLoaded(1)
-}
+    //Generates toolbox list for the GUI
+    function generateToolbox() {
+        var toolbox_temp = [];
+        for (var i = 0; i < (currentWorkspace.toolbox_.getToolboxItems()).length; i++) {
+            var items = currentWorkspace.toolbox_.getToolboxItems();
+            var id = items[i].id_
+            var name = items[i].name_
+            if (items[i].subcategoriesDiv_ === undefined) {
+                toolbox_temp.push([name, id, "non-category"]);
+            }
+            else {
+                var category = currentWorkspace.toolbox_.getToolboxItems()[i];
+                category.setExpanded(true)
+                var children_count = (category.getChildToolboxItems()).length
+                toolbox_temp.push([name, id, "category", children_count]);
+            }
+        }
+        setToolboxItems(toolbox_temp)
+    }
 
-//Generates toolbox list for the GUI
-function generateToolbox() {
-    var toolbox_temp = [];
-    for (var i = 0; i < (currentWorkspace.toolbox_.getToolboxItems()).length; i++) {
-        var items = currentWorkspace.toolbox_.getToolboxItems();
-        var id = items[i].id_
-        var name = items[i].name_
-        if (items[i].subcategoriesDiv_ === undefined) {
-            toolbox_temp.push([name, id, "non-category"]);
+    //Used to show the generated Blockly code.
+    function showCode() {
+        var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
+        setCurrentXML(Blockly.Xml.workspaceToDom(currentWorkspace))
+        code = mainLoopCode;
+        setDeviceCode(code);
+    }
+
+    //Used to get the currently selected block in the Blockly Workspace
+    function selectedBlock(event) {
+        if (event.type == Blockly.Events.SELECTED) {
+            currentBlock = currentWorkspace.getBlockById(event.newElementId);
+        }
+    }
+
+
+    function openVariableDialog() {
+        document.getElementById("c-variableSelector").style.display = "block";
+    }
+    function closeVariableDialog(event) {
+        console.log(event.target.id);
+        if (event.target.id == "a-CloseButton") {
+            document.getElementById("c-variableSelector").style.display = "none";
         }
         else {
-            var category = currentWorkspace.toolbox_.getToolboxItems()[i];
-            category.setExpanded(true)
-            var children_count = (category.getChildToolboxItems()).length
-            toolbox_temp.push([name, id, "category", children_count]);
+            var newvariable_type = document.getElementById("variable-type-select").firstChild.value.toLowerCase();
+            if (newvariable_type === "integer") {
+                newvariable_type = "int"
+            }
+            else if (newvariable_type === "String") {
+                newvariable_type = "string"
+            }
+            var newvariable_name = document.getElementById("variable-name-input").value
+            setBlocklyVariables((blocklyVariables => [...blocklyVariables, [`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]]))
+            document.getElementById("c-variableSelector").style.display = "none";
+
         }
     }
-    setToolboxItems(toolbox_temp)
-}
-
-//Used to show the generated Blockly code.
-function showCode() {
-    var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
-    setCurrentXML(Blockly.Xml.workspaceToDom(currentWorkspace))
-    code = mainLoopCode;
-    setDeviceCode(code);
-}
-
-//Used to get the currently selected block in the Blockly Workspace
-function selectedBlock(event) {
-    if (event.type == Blockly.Events.SELECTED) {
-        currentBlock = currentWorkspace.getBlockById(event.newElementId);
-    }
-}
-
-
-function openVariableDialog() {
-    document.getElementById("c-variableSelector").style.display = "block";
-}
-function closeVariableDialog(event) {
-    console.log(event.target.id);
-    if (event.target.id == "a-CloseButton") {
-        document.getElementById("c-variableSelector").style.display = "none";
-    }
-    else {
-        var newvariable_type = document.getElementById("variable-type-select").firstChild.value.toLowerCase();
-        if (newvariable_type === "integer") {
-            newvariable_type = "int"
+    //Used after dropdown functions to clear the dropdown off the screen
+    function clearDropdowns() {
+        var Boxes = document.getElementsByClassName("blue-dropdown-box")
+        for (var i = 0; i < Boxes.length; i++) {
+            Boxes[i].style.display = "none"
         }
-        else if (newvariable_type === "String") {
-            newvariable_type = "string"
+    }
+
+    function serialport_read() {
+        //Starts the serial port monitor
+        if (serialport_status === false) {
+            //Checks if serial port is already opened. If it is not opened, then start reading the serial port
+            ipcRenderer.invoke(`serialport_retreive`);
+            ipcRenderer.on('serialport_monitor', (event, result) => {
+                setSerialPortMonitor(result);
+            });
+            //Set the Serial port status to ensure that the port does not attempt to open multiple times
+            setSerialPortStatus(true);
         }
-        var newvariable_name = document.getElementById("variable-name-input").value
-        setBlocklyVariables((blocklyVariables => [...blocklyVariables, [`${newvariable_type} ${newvariable_name}`, `${newvariable_name}`]]))
-        document.getElementById("c-variableSelector").style.display = "none";
-
+        else {
+            console.log("CLOSING SERIAL PORT")
+            //If Serial port is already opened, close the serial monitor and reset the values
+            ipcRenderer.invoke(`serialport_close`);
+            setSerialPortMonitor([]);
+            console.log("Serial Port Closed")
+            setSerialPortStatus(false);
+        }
     }
-}
-//Used after dropdown functions to clear the dropdown off the screen
-function clearDropdowns() {
-    var Boxes = document.getElementsByClassName("blue-dropdown-box")
-    for (var i = 0; i < Boxes.length; i++) {
-        Boxes[i].style.display = "none"
+
+    function serialport_write(val) {
+        ipcRenderer.invoke("serialport_write", val);
     }
-}
 
-function serialport_read() {
-    //Starts the serial port monitor
-    if (serialport_status === false) {
-        //Checks if serial port is already opened. If it is not opened, then start reading the serial port
-        ipcRenderer.invoke(`serialport_retreive`);
-        ipcRenderer.on('serialport_monitor', (event, result) => {
-            setSerialPortMonitor(result);
-        });
-        //Set the Serial port status to ensure that the port does not attempt to open multiple times
-        setSerialPortStatus(true);
+    //Used to close the app from React
+    function closeApp() {
+        ipcRenderer.send("close-app");
+        console.log("app closed")
     }
-    else {
-        console.log("CLOSING SERIAL PORT")
-        //If Serial port is already opened, close the serial monitor and reset the values
-        ipcRenderer.invoke(`serialport_close`);
-        setSerialPortMonitor([]);
-        console.log("Serial Port Closed")
-        setSerialPortStatus(false);
-    }
-}
 
-function serialport_write(val) {
-    ipcRenderer.invoke("serialport_write", val);
-}
-
-//Used to close the app from React
-function closeApp() {
-    ipcRenderer.send("close-app");
-    console.log("app closed")
-}
-
-return (
-    <Ctxt_SingletonManager.Provider
-        value={{
-            currentDeviceName,
-            setCurrentDeviceName,
-            toolboxItems,
-            setToolboxItems,
-            deviceCode,
-            setDeviceCode,
-            currentWorkspace,
-            selectedDevice,
-            setSelectedDevice,
-            initialized_workspace,
-            setInitializedWorkspace,
-            selectedToolbox,
-            fileheader,
-            editheader,
-            exportBlocks,
-            currentDeviceChanged,
-            setCurrentDeviceChanged,
-            selectedToolbox,
-            setSelectedToolbox,
-            closeVariableDialog,
-            createdVariables,
-            upload_status,
-            setUploadStatus,
-            toolboxUpdate,
-            setToolboxUpdate,
-            toolboxLevel,
-            setToolboxLevel,
-            setSelectedToolboxName,
-            currentTabPath,
-            setCurrentTabPath,
-            savedOrLoaded,
-            setSavedOrLoaded,
-            serialport_monitor,
-            setSerialPortMonitor,
-            serialport_read,
-            serialport_status,
-            setSerialPortStatus,
-            serialport_write,
-            currentXML,
-            setCurrentXML,
-            loadedXML,
-            setLoadedXML,
-            setBlocklyVariables,
-            blocklyVariables,
-            variablesLoadedCorrectly, 
-            setVariablesLoadedCorrectly
-        }}
-    >
-        {props.children}
-    </Ctxt_SingletonManager.Provider>
-)
+    return (
+        <Ctxt_SingletonManager.Provider
+            value={{
+                currentDeviceName,
+                setCurrentDeviceName,
+                toolboxItems,
+                setToolboxItems,
+                deviceCode,
+                setDeviceCode,
+                currentWorkspace,
+                selectedDevice,
+                setSelectedDevice,
+                initialized_workspace,
+                setInitializedWorkspace,
+                selectedToolbox,
+                fileheader,
+                editheader,
+                exportBlocks,
+                currentDeviceChanged,
+                setCurrentDeviceChanged,
+                selectedToolbox,
+                setSelectedToolbox,
+                closeVariableDialog,
+                createdVariables,
+                upload_status,
+                setUploadStatus,
+                toolboxUpdate,
+                setToolboxUpdate,
+                toolboxLevel,
+                setToolboxLevel,
+                setSelectedToolboxName,
+                currentTabPath,
+                setCurrentTabPath,
+                savedOrLoaded,
+                setSavedOrLoaded,
+                serialport_monitor,
+                setSerialPortMonitor,
+                serialport_read,
+                serialport_status,
+                setSerialPortStatus,
+                serialport_write,
+                currentXML,
+                setCurrentXML,
+                loadedXML,
+                setLoadedXML,
+                setBlocklyVariables,
+                blocklyVariables,
+                variablesLoadedCorrectly,
+                setVariablesLoadedCorrectly
+            }}
+        >
+            {props.children}
+        </Ctxt_SingletonManager.Provider>
+    )
 }
 
 export default CtxtP_SingletonManager
