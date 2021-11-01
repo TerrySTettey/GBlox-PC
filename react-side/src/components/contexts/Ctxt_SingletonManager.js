@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState, useContext, useReducer } from "react";
 import { DeviceList } from "../../deviceDef/device_list";
 import Blockly, { selected } from "blockly";
+import { Dropbox } from "dropbox";
 import AlterBlockly from "../../blocklyextras/blocklyAlters";
 import { mainLoopCode } from "../../customblocks/compiler/arduino_core";
 import { MelloDOM } from "../../customblocks/toolboxes/toolboxes";
@@ -19,8 +20,12 @@ var createdVariables = [];
 var currentBlock = null;
 var globalToolboxName = "Mello"
 var workspaceXML = <xml></xml>;
-
-
+const accessToken = "X7OnyGww3ykAAAAAAAAAAetsktgSj4_XAVPUd7P8GnKdDERWNty9u4ZquSBgPtsZ"
+const fetch = window.fetch.bind(window);
+var dbx = new Dropbox({
+    accessToken,
+    fetch
+});
 
 const CtxtP_SingletonManager = (props) => {
 
@@ -37,7 +42,9 @@ const CtxtP_SingletonManager = (props) => {
     const [toolboxUpdate, setToolboxUpdate] = useState(0)
     const [toolboxLevel, setToolboxLevel] = useState(1)
     const [selectedToolboxName, setSelectedToolboxName] = useState("")
-    const [currentTabPath, setCurrentTabPath] = useState("")
+    const [currentTabPath, setCurrentTabPath] = useState("");
+    const [currentFileName, setCurrentFileName] = useState("");
+    const [tabSaveData, setTabSaveData] = useState("")
     const [savedOrLoaded, setSavedOrLoaded] = useState(0)
     const [serialport_monitor, setSerialPortMonitor] = useState("No Device Detected");
     const [serialport_status, setSerialPortStatus] = useState(false)
@@ -74,7 +81,9 @@ const CtxtP_SingletonManager = (props) => {
         },
         //Share
         () => {
-            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!`)
+            testDropBox();
+            console.log('/' + currentFileName)
+            
             clearDropdowns();
         },
         //Close
@@ -216,8 +225,25 @@ const CtxtP_SingletonManager = (props) => {
         }
     })
 
+    function testDropBox() {
+        
+        dbx.filesUpload({
+            path: '/' + currentFileName,
+            contents: tabSaveData
+        }).then(function (response) {
+            console.log(response);
+            dbx.sharingCreateSharedLinkWithSettings({
+                path: response.result.path_lower
+            }).then(function (response) {
+                console.log(response);
+                window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+            }).catch(function (error) {
+                console.log(error);
+            });
+        });
+        
 
-
+    }
     //Exports Blocks
     async function exportBlocks(isSaveAs = false) {
         try {
@@ -244,6 +270,10 @@ const CtxtP_SingletonManager = (props) => {
                     }, currentTabPath)
             }
             setCurrentTabPath(loc)
+            setTabSaveData(`{"device":${currentDeviceName},"toolLevel":${toolboxLevel},"variables":${createdVariables},"xml":"${Blockly.Xml.domToText(loadedXML)}"}`)
+            var splits = loc.split("\\");
+            var name = splits[splits.length - 1];
+            setCurrentFileName(name)
         } catch (e) {
             alert(e);
         }
@@ -266,6 +296,10 @@ const CtxtP_SingletonManager = (props) => {
                 Blockly.mainWorkspace.clear();
                 Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
                 setCurrentTabPath(hold.location)
+                var splits = hold.location.split("\\");
+                var name = splits[splits.length - 1];
+                setCurrentFileName(name)
+                setTabSaveData(`{"device":${hold.device},"toolLevel":${hold.toolLevel},"variables":${hold.variables},"xml":"${Blockly.Xml.domToText(xmlss)}"}`)
             }
         } catch (e) {
             throw e;
