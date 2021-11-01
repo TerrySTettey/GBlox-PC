@@ -4,7 +4,7 @@ Blockly.Blocks['sensor_ultrasonic'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Ultrasonic Sensor Value");
+        .appendField("Make Mello read Ultrasonic Sensor value");
     this.setOutput(true, null);
     this.setColour(230);
     this.setInputsInline(true);
@@ -18,7 +18,7 @@ Blockly.Blocks['sensor_light_follower_right'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Right Light Follower Value");
+        .appendField("Make Mello read Right Light Follower value");
     this.setOutput(true, null);
     this.setColour(230);
     this.setInputsInline(true);
@@ -32,7 +32,7 @@ Blockly.Blocks['sensor_light_follower_left'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Left Light Follower Value");
+        .appendField("Make Mello read Left Light Follower value");
     this.setOutput(true, null);
     this.setColour(230);
     this.setInputsInline(true);
@@ -74,7 +74,7 @@ Blockly.Blocks['sensor_line_follower_left'] = {
 Blockly.Blocks['communication_infrared_start'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Start Infrared Communication");
+        .appendField("Make Mello start Infrared Communication");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -89,9 +89,10 @@ Blockly.Blocks['communication_infrared_value'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Read Infrared Character:")
-        .appendField(new Blockly.FieldDropdown([["Up","46"],["Down","15"],["Right","43"],["Left","44"],["Ok","40"],["1","16"],["2","19"],["3","D"],["4","C"],["5","18"],["6","5E"],["7","8"],["8","1C"],["9","5A"],["0","52"],["#","4A"],["*","42"]]),"Received_Character");
-    this.appendStatementInput("IR_Decode_Loop")
+        .appendField("When Remote button ")
+        .appendField(new Blockly.FieldDropdown([["Up","46"],["Down","15"],["Right","43"],["Left","44"],["Ok","40"],["1","16"],["2","19"],["3","D"],["4","C"],["5","18"],["6","5E"],["7","8"],["8","1C"],["9","5A"],["0","52"],["#","4A"],["*","42"]]),"Received_Character")
+        .appendField("is pressed");
+        this.appendStatementInput("IR_Decode_Loop")
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -106,7 +107,7 @@ Blockly.Blocks['communication_bluetooth_start'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Start Bluetooth Communication");
+        .appendField("Make Mello start Bluetooth Communication");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
@@ -122,7 +123,7 @@ Blockly.Blocks['communication_bluetooth_receive'] = {
     this.appendValueInput("NAME")
         .setCheck(["Number", "String"])
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Bluetooth Character Read is");
+        .appendField("When Bluetooth Character is");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(230);
@@ -137,7 +138,7 @@ Blockly.Blocks['communincation_bluetooth_send'] = {
     this.appendValueInput("NAME")
         .setCheck(null)
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Send Bluetooth Character:");
+        .appendField("Make Mello send Bluetooth Character ");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -153,7 +154,7 @@ Blockly.Blocks['sound_buzzer_buzz'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Play Note:")
+        .appendField("Make Mello play note ")
         .appendField(new Blockly.FieldDropdown([["C6","1047"], ["C#6","1109"], ["D6","1175"], ["Eb6","1245"], ["E6","1319"], ["F6","1397"], ["F#6","1480"], ["G6","1568"], ["G#6","1661"], ["A6","1760"], ["Bb6","1865"], ["B6","1976"], ["C7","2093"], ["C#7","2217"], ["D7","2349"], ["Eb7","2489"], ["E7","2637"], ["F7","2794"], ["F#7","2960"], ["G7","3136"], ["G#7","3322"], ["A7","3520"], ["Bb7","3729"], ["B7","3951"], ["C8","4186"]]), "Note");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -170,7 +171,7 @@ Blockly.Blocks['sound_buzzer_timer'] = {
     this.appendValueInput("Buzzer Time")
         .setCheck("Number")
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Play Note")
+        .appendField("Make Mello play note")
         .appendField(new Blockly.FieldDropdown([["C6","1047"], ["C#6","1109"], ["D6","1175"], ["Eb6","1245"], ["E6","1319"], ["F6","1397"], ["F#6","1480"], ["G6","1568"], ["G#6","1661"], ["A6","1760"], ["Bb6","1865"], ["B6","1976"], ["C7","2093"], ["C#7","2217"], ["D7","2349"], ["Eb7","2489"], ["E7","2637"], ["F7","2794"], ["F#7","2960"], ["G7","3136"], ["G#7","3322"], ["A7","3520"], ["Bb7","3729"], ["B7","3951"], ["C8","4186"]]), "note")
         .appendField("for");
     this.appendDummyInput()
@@ -188,7 +189,7 @@ Blockly.Blocks['sound_buzzer_timer'] = {
 Blockly.Blocks['sound_buzzer_stop'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Stop Buzzer");
+        .appendField("Make Mello stop the buzzer");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -203,7 +204,7 @@ Blockly.Blocks['led_rgb_led'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Set")
+        .appendField("Make Mello set")
         .appendField(new Blockly.FieldDropdown([["Red","Red"], ["Blue","Blue"], ["Green","Green"]]), "colour")
         .appendField("Light")
         .appendField(new Blockly.FieldDropdown([["On","On"], ["Off","Off"]]), "colour value");
@@ -221,7 +222,7 @@ Blockly.Blocks['led_rgb_led_all'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Set Lights to")
+        .appendField("Make Mello set color to")
         .appendField(new Blockly.FieldDropdown([["Red","Red"], ["Blue","Blue"], ["Green","Green"], ["Yellow","Yellow"],["Magenta","Magenta"],["Cyan","Cyan"],["Off","Off"]]), "colour")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -280,7 +281,7 @@ Blockly.Blocks['motor_single_move_indef'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Turn")
+        .appendField("Make Mello turn")
         .appendField(new Blockly.FieldDropdown([["Left Motor","lm"],["Right Motor", "rm"]]), "motorselect")
         .appendField(new Blockly.FieldDropdown([["forward","forward"], ["backward","backward"], ["to a stop","stop"]]), "direction");
     this.setInputsInline(true);
@@ -318,7 +319,7 @@ Blockly.Blocks['forklift_move_seconds'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Rotate forklift")
+        .appendField("Make Mello rotate forklift")
         .appendField(new Blockly.FieldDropdown([["slowly","slow"], ["moderately","medium"], ["quickly","fast"]]), "speed");
     this.appendValueInput("seconds")
         .setCheck("Number")
@@ -339,8 +340,9 @@ Blockly.Blocks['forklift_move_indef'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Make the forklift")
-        .appendField(new Blockly.FieldDropdown([["rise upwards","up"], ["fall downwards","down"], ["stop","stop"]]), "direction")
+        .appendField("Make Mello ")
+        .appendField(new Blockly.FieldDropdown([["raise","up"], ["lower","down"], ["stop","stop"]]), "direction")
+        .appendField("the forklift ")
         .appendField(new Blockly.FieldDropdown([["slowly","slow"], ["moderately","medium"], ["quickly","fast"]]), "speed");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -355,7 +357,7 @@ Blockly.Blocks['servo_rotate_to_degrees'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Stop Servo Motor");
+        .appendField("Make Mello stop the Servo Motor");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -369,7 +371,7 @@ Blockly.Blocks['servo_360_rotate_direction'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Rotate Servo Motor")
+        .appendField("Make Mello rotate Servo Motor")
         .appendField(new Blockly.FieldDropdown([["clockwise","cw"], ["anti-clockwise","acw"]]), "direction")
         .appendField(new Blockly.FieldDropdown([["slowly","slow"], ["moderately","medium"], ["quickly","fast"]]), "speed");
     this.setInputsInline(true);
