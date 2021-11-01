@@ -66,7 +66,7 @@ const WorkTabHolder = (props) => {
             this.savedXML = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
             this.tabDevice = currentDeviceName
             this.tabLevel = 1;
-            this.variables = [["sample_variable", "0"]]
+            this.variables = [["int sample_variable", "0"]]
         }
 
         setName() {

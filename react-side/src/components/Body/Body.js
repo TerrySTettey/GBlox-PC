@@ -248,6 +248,7 @@ const Body = (props) => {
             default:
                 console.log(upload_status);
                 setInUpload(false);
+                setProgressValue(0);
                 break;
         }
     }, [upload_status])
