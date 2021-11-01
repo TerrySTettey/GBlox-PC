@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
-    "package": "electron-forge package --platform=win32 --asar --extra-resource=electron/ArduinoOutput --extra-resource=electron/settings.txt --extra-resource=electron/arduino-1.8.15 --name=gBlox --overwrite",
+    "package": "electron-forge package",
     "make": "electron-forge make",
     "ntest": "electron .",
     "rebuild": "electron-rebuild -f -w serialport",
@@ -36,7 +36,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "extraResource": ["./electron/arduino-1.8.15", "./electron/settings.txt"],
+        "extraResource": ["./electron/arduino-1.8.15", "./electron/settings.txt", "./electron/ArduinoOutput"],
         "asar": true
       },
       "makers": [
