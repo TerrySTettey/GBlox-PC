@@ -15,7 +15,7 @@ import ToolSelector from '../ToolSelector/ToolSelector';
 import Pull_Out_Menu from '../Pull_Out_Menu'
 import CustomDrop from '../CustomDrop';
 import WorkTabHolder from '../WorkTabHolder';
-import SplashScreen from '../SplashScreen'
+import SplashScreenV2 from '../SplashScreenV2'
 import NewDeviceManager from '../NewDeviceManager';
 import Code_Editor from '../Code_Editor'
 import VariableSelector from '../VariableSelector'
@@ -595,7 +595,7 @@ return (
             <Code_Editor />
         </div>
         <div id="c-Body-a-SplashScreen">
-            <SplashScreen
+            <SplashScreenV2
                 onSplashClick={props.onSplashClick}
                 Splashurl={props.Splashurl} />
         </div>
