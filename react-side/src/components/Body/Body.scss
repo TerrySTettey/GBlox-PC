@@ -477,10 +477,12 @@
         position: absolute;
         display: none;
         z-index: 51;
-        width: 100%;
+        min-width: 90vw;
         height: 91%;
         top: 75px;
-        left: 12.5%;
+        left: 0;
+        margin-left: 240px;
+        margin-right: 100px;
         backdrop-filter: blur(5px);
         align-items: center;
         justify-content: center;

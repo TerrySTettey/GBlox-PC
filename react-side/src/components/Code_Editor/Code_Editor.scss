@@ -10,9 +10,10 @@
     background-color: var(--primary-color);
     padding: 22px 0px 20px 57px;
     top: 0;
+    display: flex;
     left: 0;
-    width: 88%;
-    height: 94.8%;
+    min-width: 85%;
+    min-height: 94.8%;
     transition: all 0.7s;
     z-index: 2;
     transform-origin: top left;
@@ -150,50 +151,56 @@
     }
   }
 
-  .c-Body-a-UploadProg {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    top: 90%;
-    left: 40px;
-    z-index: 2;
-    transition: all 0.7s;
+}
+
+@media screen and (min-width: 1920px) {
+  #outline {
+    min-width: 100% !important;
+  }
+}
+@media screen and (min-width: 1550px) and (max-width: 1920px) {
+  #outline {
+    min-width: 95% !important;
+  }
+}
+@media screen and (min-width: 1300px) and (max-width: 1550px) {
+  #outline {
+    min-width: 90% !important;
   }
 }
 
-@media screen and (min-width: 1540px) and (max-width: 1600px) {
+@media (min-height: 1080px) {
   #outline {
-    transform: scaleX(0.98);
+    min-height: 94.8% !important;
+    #code-editor-items {
+      height: 93% !important;
+    }
   }
 }
-@media screen and (min-width: 1366px) and (max-width: 1540px) {
+
+@media (min-height: 900px) and (max-height:1080px) {
   #outline {
-    transform: scaleX(0.95);
+    min-height: 90% !important;
+    #code-editor-items {
+      height: 90% !important;
+    }
   }
 }
-@media screen and (min-width: 1300px) and (max-width: 1366px) {
+
+@media (min-height: 800px) and (max-height:900px) {
   #outline {
-    transform: scaleX(0.92);
+    min-height: 85% !important;
+    #code-editor-items {
+      height: 93% !important;
+    }
   }
 }
-@media screen and (max-width: 1300px) {
-  #outline {
-    transform: scaleX(0.9);
-  }
-}
-@media screen and (min-height: 800px) and (max-height: 912px) {
-  .c-Body-a-UploadProg {
-    margin-top: -10px;
-  }
-  #outline {
-    transform: scale(0.95);
-  }
-}
+
 @media (max-height: 800px) {
-  .c-Body-a-UploadProg {
-    margin-top: -10px;
-  }
   #outline {
-    transform: scale(0.92);
+    min-height: 80% !important;
+    #code-editor-items {
+      height: 88% !important;
+    }
   }
 }
