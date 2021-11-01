@@ -1,12 +1,10 @@
-sample_variable;
-int l;
+int sample_variable;
  
 void setup(){
  
 }
 
 void loop(){
-   0 = ;
-
+ 
 } 
  
