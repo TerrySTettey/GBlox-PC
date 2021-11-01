@@ -80,6 +80,7 @@ const CtxtP_SingletonManager = (props) => {
         //Close
         () => {
             closeApp()
+            // window.close()
         }
     ]
     var editheader = [
@@ -366,7 +367,7 @@ const CtxtP_SingletonManager = (props) => {
 
     //Used to close the app from React
     function closeApp() {
-        ipcRenderer.send("close-app");
+        ipcRenderer.invoke("close-app");
         console.log("app closed")
     }
 
