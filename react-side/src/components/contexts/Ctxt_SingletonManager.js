@@ -83,7 +83,7 @@ const CtxtP_SingletonManager = (props) => {
         () => {
             testDropBox();
             console.log('/' + currentFileName)
-            
+
             clearDropdowns();
         },
         //Close
@@ -226,22 +226,45 @@ const CtxtP_SingletonManager = (props) => {
     })
 
     function testDropBox() {
-        
-        dbx.filesUpload({
-            path: '/' + currentFileName,
-            contents: tabSaveData
+        dbx.filesDeleteV2({
+            path: '/' + currentFileName
         }).then(function (response) {
-            console.log(response);
-            dbx.sharingCreateSharedLinkWithSettings({
-                path: response.result.path_lower
+            console.log("Deleted File")
+            console.log(response)
+            dbx.filesUpload({
+                path: '/' + currentFileName,
+                contents: tabSaveData,
+                autorename: true
             }).then(function (response) {
                 console.log(response);
-                window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
-            }).catch(function (error) {
-                console.log(error);
+                dbx.sharingCreateSharedLinkWithSettings({
+                    path: response.result.path_lower
+                }).then(function (response) {
+                    console.log(response);
+                    window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                }).catch(function (error) {
+                    console.log(error);
+                });
             });
-        });
-        
+        }).catch(function (error) {
+            console.log(error)
+            dbx.filesUpload({
+                path: '/' + currentFileName,
+                contents: tabSaveData
+            }).then(function (response) {
+                console.log(response);
+                dbx.sharingCreateSharedLinkWithSettings({
+                    path: response.result.path_lower
+                }).then(function (response) {
+                    console.log(response);
+                    window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            });
+        })
+
+
 
     }
     //Exports Blocks
