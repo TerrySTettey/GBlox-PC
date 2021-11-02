@@ -50,24 +50,162 @@
 #Splash-Screen {
     position: absolute;
     z-index: 0;
-    outline: 2px red dotted;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    
+    
     #Splash-Background {
+        position: relative;
+        display: grid;
+        width: calc(100vw - 160px);
+        height: calc(100vh - 160px);
+        margin: 80px;
+        transition: width 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67), height 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67);
         
-        #background-svg {
-            height: 100%;
-            width: 85vw;
-            //transition: width 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67), height 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67);
+        //outline: red 2px dashed;
+        grid-template-columns: 69px minmax(0px, 3000px) auto;//84px;
+        grid-template-rows: 413px minmax(0px, 644px) 68px;
+        grid-template-areas: 
+        "s1 s2 s3"
+        "s4 s5 s6"
+        "s7 s8 s9";
 
-            #Path_366 {
-                fill: var(--primary-color);
-                stroke: var(--border-color);
+        #s_1 {
+            grid-area: s1;
+            margin-top: -20px;
+            margin-left: -20px;
+            
+        }
+        #s_2 {
+            grid-area: s2;
+            margin-top: -20px;
+            margin-left: 0px;
+            svg{
+                width: 100%;
+            }
+        }
+        #s_3 {
+            grid-area: s3;
+            margin-top: -20px;
+            margin-left: 0px;
+            width: 84px;
+        }
+        #s_4 {
+            grid-area: s4;
+            margin-top: 0px;
+            margin-left: -20px;
+
+            svg {
+                height: 100%;
+            }
+        }
+        #s_5 {
+            grid-area: s5;
+            margin-top: 0px;
+            margin-left: 0px;
+            svg{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        #s_6 {
+            grid-area: s6;
+            margin-top: 0px;
+            margin-left: 0px;
+            width: 84px;
+            svg {
+                height: 100%;
+            }
+        }
+        #s_7 {
+            grid-area: s7;
+            margin-top: 0px;
+            margin-left: -20px;
+        }
+        #s_8 {
+            grid-area: s8;
+            margin-top: 0px;
+            margin-left: 0px;
+            svg{
+                width: 100%;
+            }
+        }
+        #s_9 {
+            grid-area: s9;
+            margin-top: 0px;
+            margin-left: 0px;
+            width: 84px;
+        }
+
+        #Path_366 {
+            fill: var(--primary-color);
+            stroke: var(--border-color);
+        }
+
+        .Start-Button {
+            position: absolute;
+            bottom: -4px;
+            right: 100px;
+            transition: transform 2s, margin-top 1s;
+            
+            #button-container {
+                grid-area: getstart;
+            }
+
+            // transform: translate(-90%, -50%);
+        }
+
+        .Splash-checkbox {
+            position: absolute;
+            display: inline-flex;
+            bottom: 30px;
+            left: 100px;
+            white-space: nowrap;
+            input[type="checkbox"] {
+                position: relative;
+                cursor: pointer;
+                margin-top: 3.5%;
+            }
+            input[type="checkbox"]:before {
+                content: "";
+                display: flex;
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                left: 0;
+                background-color: var(--primary-color);
+                border: 2px white solid;
+            }
+            input[type="checkbox"]:checked:before {
+                display: block;
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                top: 0;
+                left: 0;
+                background-color: var(--secondary-color);
+            }
+            input[type="checkbox"]:checked:after {
+                position: absolute;
+                display: block;
+                width: 4px;
+                height: 8px;
+                top: 25%;
+                left: 60%;
+            }
+            label {
+                margin-left: 8%;
+                margin-top: 6px;
+                user-select: none;
             }
         }
     }
 
     .Splash-Items {
         display: grid;
-        top: 0;
+        top: 80px;
         height: 100%;
         z-index: 1;
         position: absolute;
@@ -81,7 +219,6 @@
         grid-template-rows: fit-content(10%) fit-content(10%) fit-content(10%) auto;
         grid-template-columns: 1fr;
         font-family: "Baloo2-Regular";
-        
 
         .Animation {
             grid-area: anim;
@@ -254,73 +391,6 @@
                 }
             }
         }
-        .Splash-checkbox {
-            background-color: transparent;
-            grid-area: splash-check;
-            color: var(--text-color);
-            font-size: 21pt;
-            font-family: "Baloo2-Regular";
-        }
-        .Start-Button {
-            grid-area: button;
-            position: absolute;
-            display: grid;
-            bottom: 8vh;
-            //margin-top: 4%;
-            grid-template-rows: 0;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 30vw;
-            grid-template-areas: "check getstart";
-            transition: transform 2s, margin-top 1s;
-            .Splash-checkbox {
-                grid-area: check;
-                display: inline-flex;
-                margin-top: 3%;
-                margin-left: -5vw;
-                white-space: nowrap;
-                input[type="checkbox"] {
-                    position: relative;
-                    cursor: pointer;
-                    margin-top: 3.5%;
-                }
-                input[type="checkbox"]:before {
-                    content: "";
-                    display: flex;
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    left: 0;
-                    background-color: var(--primary-color);
-                    border: 2px white solid;
-                }
-                input[type="checkbox"]:checked:before {
-                    display: block;
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    top: 0;
-                    left: 0;
-                    background-color: var(--secondary-color);
-                }
-                input[type="checkbox"]:checked:after {
-                    position: absolute;
-                    display: block;
-                    width: 4px;
-                    height: 8px;
-                    top: 25%;
-                    left: 60%;
-                }
-                label {
-                    margin-left: 8%;
-                    user-select: none;
-                }
-            }
-            #button-container {
-                grid-area: getstart;
-            }
-
-            // transform: translate(-90%, -50%);
-        }
     }
 }
 @media only screen and (max-width: 1300px) and (max-height: 912px) {
@@ -336,9 +406,6 @@
         margin-top: -5vh !important;
         transform: scale(0.6);
     }
-    .Start-Button {
-        transform: scale(0.8);
-    }
 }
 
 @media only screen and (min-width: 1300px) and (max-width: 1500px) and (max-height: 912px) {
@@ -352,9 +419,6 @@
     }
     .Splash-Content {
         margin-top: -5vh;
-        transform: scale(0.8);
-    }
-    .Start-Button {
         transform: scale(0.8);
     }
 }
@@ -372,9 +436,6 @@
         margin-top: -5vh;
         transform: scale(0.8);
     }
-    .Start-Button {
-        transform: scale(0.8);
-    }
 }
 
 @media only screen and (max-width: 1600px) and (min-height: 1000px) and (max-height: 1079px) {
@@ -389,9 +450,5 @@
     .Splash-Content {
         margin-top: -5%;
         transform: scale(0.7);
-    }
-    .Start-Button {
-        transform: scale(0.8);
-        bottom: 10.5vh !important;
     }
 }
