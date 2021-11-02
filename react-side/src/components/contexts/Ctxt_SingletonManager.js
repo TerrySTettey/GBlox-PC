@@ -50,6 +50,7 @@ const CtxtP_SingletonManager = (props) => {
     const [serialport_status, setSerialPortStatus] = useState(false)
     const [blocklyVariables, setBlocklyVariables] = useState([])
     const [variablesLoadedCorrectly, setVariablesLoadedCorrectly] = useState(true)
+    const [windowMax, setWindowMax] = useState(false);
     const {
         dark_theme,
         light_theme
@@ -121,7 +122,6 @@ const CtxtP_SingletonManager = (props) => {
             clearDropdowns()
         }
     ]
-
 
     useEffect(() => {
         /*When Current Device is changed:
@@ -211,6 +211,10 @@ const CtxtP_SingletonManager = (props) => {
                 currentWorkspace.registerButtonCallback("createvar", openVariableDialog)
                 AlterBlockly();
                 setInitializedWorkspace(true)
+                ipcRenderer.on("window_size", (event,result) => {
+                    setWindowMax(result)
+                })
+                ipcRenderer.invoke("checkSizeWindow")
             }
         }
         //Disables pointer events for blockly if Modal settings is opened
@@ -221,7 +225,7 @@ const CtxtP_SingletonManager = (props) => {
             }
         }
     })
-
+    //Upload to DropBox and return share link
     async function testDropBox() {
         console.log("In testDropBox")
         if (loadedXML !== "") {
@@ -396,7 +400,6 @@ const CtxtP_SingletonManager = (props) => {
             cb([name, saveData])
         }
     }
-
     //Loads Blocks
     function loadBlocks() {
         try {
@@ -442,6 +445,12 @@ const CtxtP_SingletonManager = (props) => {
             }
         }
         setToolboxItems(toolbox_temp)
+    }
+
+    function electronWindowControl(event){
+        var button = event.target.id.split("WindowButton")[0].toLowerCase();
+        console.log(button)
+        ipcRenderer.invoke("electronWindowControl", button)
     }
 
     //Used to show the generated Blockly code.
@@ -569,7 +578,9 @@ const CtxtP_SingletonManager = (props) => {
                 setBlocklyVariables,
                 blocklyVariables,
                 variablesLoadedCorrectly,
-                setVariablesLoadedCorrectly
+                setVariablesLoadedCorrectly,
+                windowMax,
+                electronWindowControl
             }}
         >
             {props.children}

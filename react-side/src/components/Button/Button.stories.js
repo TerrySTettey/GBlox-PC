@@ -261,3 +261,15 @@ DeviceAddButton.args = {
     text: "Filter",
     hoverEffect: "fill"
 }
+
+export const CloseWindow = Template.bind({})
+CloseWindow.args = {
+    type: "FrameBarButton",
+    children: [<svg xmlns="http://www.w3.org/2000/svg" width="16.598" height="17.619" viewBox="0 0 16.598 17.619">
+    <g id="Group_540" data-name="Group 540" transform="translate(0.604 0.21)">
+      <line id="Line_34" data-name="Line 34" x2="15" y2="16" transform="translate(0.126 0.474)" fill="none" stroke="#fff" stroke-width="2"/>
+      <line id="Line_35" data-name="Line 35" x1="15.087" y2="16.239" transform="translate(0.175 0.49)" fill="none" stroke="#fff" stroke-width="2"/>
+    </g>
+  </svg>
+  ]
+}

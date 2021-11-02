@@ -1,0 +1,13 @@
+#App {
+    display: grid;
+    grid-template-rows: 0fr;;
+    width: 100%;
+    height: 100%;
+    overflow-y: none;
+    #body-frame {
+        overflow-y: hidden;
+        height: 30px;
+    }
+    .body-container{
+    }
+}

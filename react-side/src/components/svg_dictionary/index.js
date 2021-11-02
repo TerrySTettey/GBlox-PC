@@ -3739,9 +3739,31 @@ const svg_dictionary = {
             <p className="upload-text" id="Add_device" data-name="Add device" font-size="17">Add device</p>
         </div>],
     unsaved_circle: [<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11">
-    <circle id="Ellipse_51" data-name="Ellipse 51" cx="5.5" cy="5.5" r="5.5" fill="rgba(255,255,255,0.69)"/>
-  </svg>
-  ]
+        <circle id="Ellipse_51" data-name="Ellipse 51" cx="5.5" cy="5.5" r="5.5" fill="rgba(255,255,255,0.69)" />
+    </svg>
+    ],
+    window_button: {
+        close: [<svg xmlns="http://www.w3.org/2000/svg" width="16.598" height="17.619" viewBox="0 0 16.598 17.619">
+            <g id="Group_540" data-name="Group 540" transform="translate(0.604 0.21)">
+                <line id="Line_34" data-name="Line 34" x2="15" y2="16" transform="translate(0.126 0.474)" fill="none" stroke="#fff" stroke-width="2" />
+                <line id="Line_35" data-name="Line 35" x1="15.087" y2="16.239" transform="translate(0.175 0.49)" fill="none" stroke="#fff" stroke-width="2" />
+            </g>
+        </svg>],
+        maximize: [<svg xmlns="http://www.w3.org/2000/svg" width="18.675" height="18.675" viewBox="0 0 18.675 18.675">
+            <path id="Path_467" data-name="Path 467" d="M0,0H16.675V16.675H0Z" transform="translate(1 1)" fill="none" stroke="#fff" stroke-width="2" />
+        </svg>
+        ],
+        minimize: [<svg xmlns="http://www.w3.org/2000/svg" width="18.429" height="2" viewBox="0 0 18.429 2">
+            <line id="Line_37" data-name="Line 37" x2="18.429" transform="translate(0 1)" fill="none" stroke="#fff" stroke-width="2" />
+        </svg>
+        ],
+        restore: [<svg xmlns="http://www.w3.org/2000/svg" width="19.497" height="19.536" viewBox="0 0 19.497 19.536">
+            <g id="Group_555" data-name="Group 555" transform="translate(1 1)">
+                <path id="Path_468" data-name="Path 468" d="M0,0H13.726V13.726H0Z" transform="translate(0 3.81)" fill="none" stroke="#fff" stroke-width="2" />
+                <path id="Path_470" data-name="Path 470" d="M1981.006-368.274v-3.81h13.754v13.81h-4.287" transform="translate(-1977.262 372.084)" fill="none" stroke="#fff" stroke-width="2" />
+            </g>
+        </svg>]
+    }
 }
 
 export default svg_dictionary

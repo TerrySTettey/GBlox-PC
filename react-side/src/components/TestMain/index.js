@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import Body from '../Body'
 import Blockly from 'blockly';
 import { DeviceList } from '../../deviceDef/device_list';
-
+import FrameBar from '../FrameBar'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
-import {ThemeContext} from '../contexts/ThemeContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 import "./TestMain.scss"
 import "../../customblocks/customblocks";
@@ -21,8 +21,8 @@ var response = "null";
 
 const TestMain = (props) => {
 
-    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName,deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
-    const {currentThemeName, setCurrentThemeName} = useContext(ThemeContext)
+    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName, deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
+    const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
 
     const [available_com_ports, setAvailableCOMports] = useState([]);
     const [system_settings, setSystemSettings] = useState([]);
@@ -215,7 +215,10 @@ const TestMain = (props) => {
 
 
     return (
-        <div>
+        <div id="App">
+            <div id="body-frame">
+                <FrameBar />
+            </div>
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}

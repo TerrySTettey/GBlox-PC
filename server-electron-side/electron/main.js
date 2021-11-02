@@ -26,7 +26,7 @@ function createWindow() {
         maxHeight: 1115, //1080
         maximizable: true,
         title: "GBlox",
-        frame: true,
+        frame: false,
         autoHideMenuBar: true,
         isResizable: true,
         icon: path.resolve(__dirname + '/logo.ico'),
@@ -39,11 +39,15 @@ function createWindow() {
     })
 
     win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-    //win.removeMenu()
-    win.setTitle("Arduino From Scratch")
+    win.setTitle("gBlox")
+    win.webContents.send("window_size", win.isMaximized())
     if (isDev) {
         win.webContents.openDevTools({ mode: 'detach' })
     }
+    win.on('resize', function () {
+        win.webContents.send("window_size", win.isMaximized())
+    });
+
 }
 //When the app is ready to launch...
 app.whenReady().then(() => {
@@ -188,17 +192,17 @@ async function VERIFYCODE(cb) {
     const arduinoIDE = path.join(process.resourcesPath, "arduino-1.8.15/arduino_debug --upload ");
     const arduinoOutput = path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino")
     console.log(COMPORT)
-    if (COMPORT.length>0 || COMPORT=="No Arduino Detected") {
+    if (COMPORT.length > 0 || COMPORT == "No Arduino Detected") {
         if (isDev == true) {
             try {
                 VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
                     if (error) {
                         output += error;
                         const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
-                        if (mainerror !== ""){
+                        if (mainerror !== "") {
                             win.webContents.send("arduino_upload_status", `Upload Failed : Error in Code\n\n  ${mainerror}`)
                         }
-                        else{
+                        else {
                             win.webContents.send("arduino_upload_status", `Upload Failed: Arduino Not Found`);
                         }
                     }
@@ -236,7 +240,7 @@ async function VERIFYCODE(cb) {
             });
         }
         catch (e) { }
-        VERIFICATION.on('uncaughtException',function (e) {
+        VERIFICATION.on('uncaughtException', function (e) {
             win.webContents.send("arduino_upload_status", `Upload Failed`)
         })
     }
@@ -277,8 +281,8 @@ ipcMain.on("load-file", async function (event) {
     var data = await loadFile()
     event.returnValue = data;
 })
-ipcMain.on("send-file-mail", async function (event) {
-    sendMail();
+ipcMain.handle("checkSizeWindow", async function (event) {
+    win.webContents.send("window_size", win.isMaximized())
 })
 //ipc call for "load-settings" which is responsible for loading the current settings.txt file and sending it back to react for use
 ipcMain.handle("load-settings", async function (event) {
@@ -361,12 +365,27 @@ try {
         COMPORT_CONSTANT(function (res) {
             result = res
             win.webContents.send('comport_constant', result)
-        });;
+        }).catch(function (err) { });;
     }, 3000)
 }
 catch (e) { }
 
 //ipc call for "close-app" which closes the application
-ipcMain.handle("close-app", async function (event, args) {
-    app.quit()
+ipcMain.handle("electronWindowControl", async function (event, button) {
+    switch (button) {
+        case "minimize":
+            win.minimize()
+            break;
+        case "maximize":
+            win.maximize();
+            break;
+        case "restore":
+            win.restore();
+            break;
+        case "close":
+            app.quit()
+            break;
+        default:
+            break;
+    }
 })

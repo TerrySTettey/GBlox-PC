@@ -42,10 +42,9 @@
     left: 0;
     top: 0;
     width: auto;
-    height: 100vh;
+    height: 100%;
     background-color: var(--primary-color);
     overflow: hidden;
-
     .tester {
         display: none;
         position: absolute;
@@ -58,7 +57,7 @@
         position: absolute;
         display: grid;
         pointer-events: none;
-        height: 100vh;
+        height: 100%;
         width: auto /*420px*/;
         z-index: 50;
         -webkit-user-drag: none;
@@ -333,7 +332,7 @@
         top: 0px; //92px;
         left: 45.3px;
         width: 200px; //973px;//89.547vh;
-        height: 100vh;
+        height: 100%;
         z-index: 52;
         //outline: 2px red solid;
     }

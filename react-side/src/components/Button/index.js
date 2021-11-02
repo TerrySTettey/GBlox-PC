@@ -474,6 +474,14 @@ const Button = (props) => {
                 </div>
             )
             break;
+        case "FrameBarButton":
+            buttonType = (
+                <div className="c-Button-a-FrameBarButton">
+                    {props.children}
+                    {emptybutton}
+                </div>
+            )
+            break;
         case " ":
             buttonType = (
                 <div>
