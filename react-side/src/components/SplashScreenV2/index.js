@@ -6,37 +6,243 @@ import Button from "../Button"
 function index(props) {
     return (
         <div id="Splash-Screen">
+            <div id="splashHoldup">
+
+            </div>
             <div id="Splash-Background">
-                <svg id="background-svg" xmlns="http://www.w3.org/2000/svg" width="1134.021" height="646.769" viewBox="0 0 1134.021 646.769" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                        <filter id="Path_366" x="0" y="0" width="1131.229" height="646.769" filterUnits="userSpaceOnUse">
-                            <feOffset input="SourceAlpha" />
-                            <feGaussianBlur stdDeviation="10.5" result="blur" />
-                            <feFlood flood-color="#0000dc" flood-opacity="0.2" result="color" />
-                            <feComposite operator="out" in="SourceGraphic" in2="blur" />
-                            <feComposite operator="in" in="color" />
-                            <feComposite operator="in" in2="SourceGraphic" />
-                        </filter>
-                    </defs>
-                    <g id="Group_532" data-name="Group 532" transform="translate(1 1)">
-                        <g id="Group_548" data-name="Group 548">
-                            <g data-type="innerShadowGroup">
-                                <path id="Path_366-2" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" />
-                                <g transform="matrix(1, 0, 0, 1, -1, -1)" filter="url(#Path_366)">
-                                    <path id="Path_366-3" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-356.47 -1506.17)" fill="#fff" />
+                <div id="s_1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="89" height="433" viewBox="0 0 89 433">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_155" data-name="Rectangle 155" width="89" height="433" transform="translate(1555 1613) rotate(180)" fill="rgba(255,0,0,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(-1466 -1180)" clip-path="url(#clip-path)">
+                            <g id="Group_545" data-name="Group 545" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
                                 </g>
-                                <path id="Path_366-4" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="none" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
                             </g>
                         </g>
-                        <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
-                        <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
-                        <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
-                        <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
-                        <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
-                        <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
-                    </g>
-                </svg>
+                    </svg>
+                </div>
+                <div id="s_2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="980" height="433" viewBox="0 0 980 433" preserveAspectRatio="none">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_158" data-name="Rectangle 158" width="980" height="433" transform="translate(2535 1613) rotate(180)" fill="rgba(255,0,0,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_2" data-name="Mask Group 2" transform="translate(-1555 -1180)" clip-path="url(#clip-path)">
+                            <g id="Group_546" data-name="Group 546" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div id="s_3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="104" height="433" viewBox="0 0 104 433">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_161" data-name="Rectangle 161" width="104" height="433" transform="translate(2535 1180)" fill="rgba(255,0,0,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_3" data-name="Mask Group 3" transform="translate(-2535 -1180)" clip-path="url(#clip-path)">
+                            <g id="Group_547" data-name="Group 547" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div id="s_4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="89" height="165" viewBox="0 0 89 165" preserveAspectRatio="none">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_156" data-name="Rectangle 156" width="89" height="165" transform="translate(1555 1778) rotate(180)" fill="rgba(0,34,255,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_4" data-name="Mask Group 4" transform="translate(-1466 -1613)" clip-path="url(#clip-path)">
+                            <g id="Group_548" data-name="Group 548" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div id="s_5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="980" height="165" viewBox="0 0 980 165" preserveAspectRatio="none">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_159" data-name="Rectangle 159" width="980" height="165" transform="translate(1555 1613)" fill="rgba(0,34,255,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_5" data-name="Mask Group 5" transform="translate(-1555 -1613)" clip-path="url(#clip-path)">
+                            <g id="Group_549" data-name="Group 549" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div id="s_6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="104" height="165" viewBox="0 0 104 165" preserveAspectRatio="none">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_162" data-name="Rectangle 162" width="104" height="165" transform="translate(2535 1613)" fill="rgba(0,34,255,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_6" data-name="Mask Group 6" transform="translate(-2535 -1613)" clip-path="url(#clip-path)">
+                            <g id="Group_550" data-name="Group 550" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div id="s_7">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="89" height="88" viewBox="0 0 89 88">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_157" data-name="Rectangle 157" width="89" height="88" transform="translate(1555 1866) rotate(180)" fill="rgba(0,255,17,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_7" data-name="Mask Group 7" transform="translate(-1466 -1778)" clip-path="url(#clip-path)">
+                            <g id="Group_551" data-name="Group 551" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div id="s_8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="980" height="88" viewBox="0 0 980 88" preserveAspectRatio="none">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_160" data-name="Rectangle 160" width="980" height="88" transform="translate(1555 1778)" fill="rgba(0,255,17,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_8" data-name="Mask Group 8" transform="translate(-1555 -1778)" clip-path="url(#clip-path)">
+                            <g id="Group_552" data-name="Group 552" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div id="s_9">
 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="104" height="88" viewBox="0 0 104 88">
+                        <defs>
+                            <clipPath id="clip-path">
+                                <rect id="Rectangle_163" data-name="Rectangle 163" width="104" height="88" transform="translate(2535 1778)" fill="rgba(0,255,17,0.32)" />
+                            </clipPath>
+                        </defs>
+                        <g id="Mask_Group_9" data-name="Mask Group 9" transform="translate(-2535 -1778)" clip-path="url(#clip-path)">
+                            <g id="Group_553" data-name="Group 553" transform="translate(1485.979 1200.468)">
+                                <g id="Ellipse_51" data-name="Ellipse 51" transform="translate(1203.021 254.532)" fill="#fff" stroke="#707070" stroke-width="1">
+                                    <circle cx="79" cy="79" r="79" stroke="none" />
+                                    <circle cx="79" cy="79" r="78.5" fill="none" />
+                                </g>
+                                <path id="Path_366" data-name="Path 366" d="M443.066,1507.169h962.846l80.788,80.788-1.2,171.633-29.5,33.174V2129.93l-22.008,22.008H425.222l-67.748-67.748V1679.125l48.141-48.141V1507.169Z" transform="translate(-357.475 -1507.169)" fill="#dedef1" stroke="#9898f0" stroke-width="2" />
+                                <path id="Path_368" data-name="Path 368" d="M1698.793,480.6l-16.356,16.356V817.514l16.356-16.356Z" transform="translate(-565.773 -203.295)" fill="#0000dc" />
+                                <path id="Path_372" data-name="Path 372" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -792.025)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_373" data-name="Path 373" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -761.669)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_374" data-name="Path 374" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -731.313)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_375" data-name="Path 375" d="M1698.793,800.6l-16.356,16.356v20.275l16.356-16.356Z" transform="translate(-1658.153 -700.957)" fill="none" stroke="#0000dc" stroke-width="2" />
+                                <path id="Path_371" data-name="Path 371" d="M1691.148,539.565l-8.711,8.711V659.2l8.711-8.711Z" transform="translate(-1678.643 -507.173)" fill="#0000dc" />
+                            </g>
+                        </g>
+                    </svg>
+
+                </div>
+                <div className="Start-Button">
+                    <Button
+                        type="FancyButton"
+                        outColor="#0000bc"
+                        hoverColor="#40BF4A"
+                        hoverEffect="svg-fill"
+                        s_ButtonState="Out"
+                        text="Get Started"
+                        onClick={props.onSplashClick}
+                    />
+                </div>
+                <div className="Splash-checkbox">
+                    <input type="checkbox" id="SplashStatus" name="SplashStatus" value="false" />
+                    <label for="SplashStatus"> Don't show me this again</label>
+                </div>
             </div>
             <div className="Splash-Items">
                 <div className="Animation">
@@ -366,21 +572,6 @@ function index(props) {
                     <p>
                         Or, find Help in the menu on the right
                     </p>
-                </div>
-                <div className="Start-Button">
-                    <div className="Splash-checkbox">
-                        <input type="checkbox" id="SplashStatus" name="SplashStatus" value="false" />
-                        <label for="SplashStatus"> Don't show me this again</label>
-                    </div>
-                    <Button
-                        type="FancyButton"
-                        outColor="#0000bc"
-                        hoverColor="#40BF4A"
-                        hoverEffect="svg-fill"
-                        s_ButtonState="Out"
-                        text="Get Started"
-                        onClick={props.onSplashClick}
-                    />
                 </div>
             </div>
         </div>
