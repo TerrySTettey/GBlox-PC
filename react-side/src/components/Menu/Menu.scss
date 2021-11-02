@@ -5,18 +5,16 @@
 
 .menu {
     position: absolute;
-    display: inline-flex;
+    display: flex;
     width: 80%;
-    height: 85vh;
+    height: 82.5vh;
     background:var(--tetiary-color);
     padding: 30px 30px 0px 30px;
     margin-left: -1px;
     align-items: top;
     border: none;
     max-height: 976.94px;
-    margin-top: 10px;
-    // box-shadow: 15px 15px 15px 0px grey;
-    
+    margin-top: 10px;    
     font-family: 'Baloo2-Regular';
     transition: all 0.5s;
 }

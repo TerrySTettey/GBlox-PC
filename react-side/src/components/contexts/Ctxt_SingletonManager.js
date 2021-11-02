@@ -81,15 +81,12 @@ const CtxtP_SingletonManager = (props) => {
         },
         //Share
         () => {
-            testDropBox();
-            console.log('/' + currentFileName)
-
+            testDropBox()
             clearDropdowns();
         },
         //Close
         () => {
             closeApp()
-            // window.close()
         }
     ]
     var editheader = [
@@ -225,50 +222,142 @@ const CtxtP_SingletonManager = (props) => {
         }
     })
 
-    function testDropBox() {
-        dbx.filesDeleteV2({
-            path: '/' + currentFileName
-        }).then(function (response) {
-            console.log("Deleted File")
-            console.log(response)
-            dbx.filesUpload({
-                path: '/' + currentFileName,
-                contents: tabSaveData,
-                autorename: true
-            }).then(function (response) {
-                console.log(response);
-                dbx.sharingCreateSharedLinkWithSettings({
-                    path: response.result.path_lower
+    async function testDropBox() {
+        console.log("In testDropBox")
+        if (loadedXML !== "") {
+            if (Blockly.Xml.domToText(loadedXML) == Blockly.Xml.domToText(currentXML)) {
+                dbx.filesDeleteV2({
+                    path: '/' + currentFileName
                 }).then(function (response) {
-                    console.log(response);
-                    window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                    console.log("Deleted File")
+                    console.log(response)
+                    dbx.filesUpload({
+                        path: '/' + currentFileName,
+                        contents: tabSaveData,
+                        autorename: true
+                    }).then(function (response) {
+                        console.log(response);
+                        dbx.sharingCreateSharedLinkWithSettings({
+                            path: response.result.path_lower
+                        }).then(function (response) {
+                            console.log(response);
+                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    });
                 }).catch(function (error) {
-                    console.log(error);
-                });
-            });
-        }).catch(function (error) {
-            console.log(error)
-            dbx.filesUpload({
-                path: '/' + currentFileName,
-                contents: tabSaveData
-            }).then(function (response) {
-                console.log(response);
-                dbx.sharingCreateSharedLinkWithSettings({
-                    path: response.result.path_lower
+                    console.log(error)
+                    dbx.filesUpload({
+                        path: '/' + currentFileName,
+                        contents: tabSaveData
+                    }).then(function (response) {
+                        console.log(response);
+                        dbx.sharingCreateSharedLinkWithSettings({
+                            path: response.result.path_lower
+                        }).then(function (response) {
+                            console.log(response);
+                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    });
+                })
+            }
+            else {
+                exportBlocks(false, async function (res) {
+                    var filename = res[0];
+                    var data = res[1];
+                    console.log(data)
+                    dbx.filesDeleteV2({
+                        path: '/' + filename
+                    }).then(function (response) {
+                        console.log("Deleted File")
+                        console.log(response)
+                        dbx.filesUpload({
+                            path: '/' + filename,
+                            contents: data,
+                            autorename: true
+                        }).then(function (response) {
+                            console.log(response);
+                            dbx.sharingCreateSharedLinkWithSettings({
+                                path: response.result.path_lower
+                            }).then(function (response) {
+                                console.log(response);
+                                window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                            }).catch(function (error) {
+                                console.log(error);
+                            });
+                        });
+                    }).catch(function (error) {
+                        console.log(error)
+                        dbx.filesUpload({
+                            path: '/' + filename,
+                            contents: tabSaveData
+                        }).then(function (response) {
+                            console.log(response);
+                            dbx.sharingCreateSharedLinkWithSettings({
+                                path: response.result.path_lower
+                            }).then(function (response) {
+                                console.log(response);
+                                window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                            }).catch(function (error) {
+                                console.log(error);
+                            });
+                        });
+                    })
+                })
+            }
+        }
+        else {
+            exportBlocks(false, async function (res) {
+                var filename = res[0];
+                var data = res[1];
+                console.log(data)
+                dbx.filesDeleteV2({
+                    path: '/' + filename
                 }).then(function (response) {
-                    console.log(response);
-                    window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                    console.log("Deleted File")
+                    console.log(response)
+                    dbx.filesUpload({
+                        path: '/' + filename,
+                        contents: data,
+                        autorename: true
+                    }).then(function (response) {
+                        console.log(response);
+                        dbx.sharingCreateSharedLinkWithSettings({
+                            path: response.result.path_lower
+                        }).then(function (response) {
+                            console.log(response);
+                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    });
                 }).catch(function (error) {
-                    console.log(error);
-                });
-            });
-        })
+                    console.log(error)
+                    dbx.filesUpload({
+                        path: '/' + filename,
+                        contents: tabSaveData
+                    }).then(function (response) {
+                        console.log(response);
+                        dbx.sharingCreateSharedLinkWithSettings({
+                            path: response.result.path_lower
+                        }).then(function (response) {
+                            console.log(response);
+                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    });
+                })
+            })
 
-
+        }
 
     }
     //Exports Blocks
-    async function exportBlocks(isSaveAs = false) {
+    async function exportBlocks(isSaveAs = false, cb) {
         try {
             var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
             setLoadedXML(xml)
@@ -293,15 +382,19 @@ const CtxtP_SingletonManager = (props) => {
                     }, currentTabPath)
             }
             setCurrentTabPath(loc)
-            setTabSaveData(`{"device":${currentDeviceName},"toolLevel":${toolboxLevel},"variables":${createdVariables},"xml":"${Blockly.Xml.domToText(loadedXML)}"}`)
+            var saveData = `{"device":${currentDeviceName},"toolLevel":${toolboxLevel},"variables":${createdVariables},"xml":"${Blockly.Xml.domToText(xml)}"}`
+            setTabSaveData(saveData)
             var splits = loc.split("\\");
             var name = splits[splits.length - 1];
             setCurrentFileName(name)
         } catch (e) {
             alert(e);
+            console.log(e)
         }
-
         setSavedOrLoaded(1)
+        if (cb!==undefined){
+            cb([name, saveData])
+        }
     }
 
     //Loads Blocks
