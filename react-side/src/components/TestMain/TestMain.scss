@@ -8,4 +8,21 @@
         overflow-y: hidden;
         height: 30px;
     }
+    #body-container{
+        // display: none;
+    }
+    video{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;    
+        height: calc(100% - 29px);
+        z-index: 1001;
+    }
+    .blocklyFlyoutBackground{
+        text{
+            user-select: none;
+        }
+    }
+
 }

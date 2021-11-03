@@ -6,6 +6,7 @@ import { DeviceList } from '../../deviceDef/device_list';
 import FrameBar from '../FrameBar'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
+import loading from '../Video/loading.mp4';
 
 import "./TestMain.scss"
 import "../../customblocks/customblocks";
@@ -121,11 +122,16 @@ const TestMain = (props) => {
         ipcRenderer.invoke("write-settings", system_settings)
     }
 
-    function openRobocentre(){
+    function openRobocentre() {
         ipcRenderer.invoke("openRobocentre");
     }
-    function contactSupportViaMail(){
+    function contactSupportViaMail() {
         ipcRenderer.invoke("contactSupportViaMail");
+    }
+
+    function removeVideo(){
+        var video = document.getElementById("loading-video-container")
+        video.style.display = "none";
     }
 
     useEffect(() => {
@@ -226,6 +232,13 @@ const TestMain = (props) => {
             <div id="body-frame">
                 <FrameBar />
             </div>
+            <video
+                autoPlay
+                src={loading}
+                preload={'auto'}
+                id="loading-video-container"
+                onEnded={removeVideo}
+            />
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}

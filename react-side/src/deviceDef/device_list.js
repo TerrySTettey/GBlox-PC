@@ -14,8 +14,6 @@ const ft = [`
       <block type="logic_boolean">
           <field name="BOOL">TRUE</field>
       </block>
-      <block type="logic_null"></block>
-      <block type="logic_ternary"></block>
   </category>
   <category name="Loops">
       <block type="for_loop">
@@ -24,11 +22,11 @@ const ft = [`
           <field name="MODE">WHILE</field>
       </block>
       <block type="delay_core">
-      <field name= "seconds" type="number">
+      <value name="seconds">
       <shadow type="math_number">
-      <field name="NUM">1</field>
-  </shadow>
-  </field>
+          <field name="seconds">1</field>
+      </shadow>
+  </value>
       </block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Math">
@@ -64,52 +62,6 @@ const ft = [`
       </block>
       <block type="text_join">
         <mutation items="2"></mutation>
-      </block>
-      <block type="text_length">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_isEmpty">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT"></field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_changeCase">
-        <field name="CASE">UPPERCASE</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_trim">
-        <field name="MODE">BOTH</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_print">
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_prompt_ext">
-        <mutation type="TEXT"></mutation>
-        <field name="TYPE">TEXT</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
       </block>
     </category>  
     <category name="Digital">
@@ -425,42 +377,8 @@ const ft = [`
 
 </xml>`]
 
-function device(device_name, compiler, microcontroller, toolbox, default_workspace, peripherals_used, peripherals_pins) {
-  this.device_name = device_name;
-  this.compiler = compiler;
-  this.microcontroller = microcontroller;
-  this.toolbox = toolbox;
-  this.default_workspace = default_workspace;
-  this.peripherals_used = peripherals_used;
-  this.peripherals_pins = peripherals_pins;
-}
-
-const Arduino_Uno = new device(
-  "Arduino Uno",
-  "Arduino",
-  "Arduino Uno",
-  ft,
-  `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`,
-  [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
-  undefined
-);
-
-const Arduino_Nano = new device(
-  "Arduino Nano",
-  "Arduino",
-  "Arduino Nano",
-  ft,
-  `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
-  [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
-  undefined
-);
-
-const Mello_Bot = new device(
-  "Mello",
-  "Arduino",
-  "Arduino Nano",
-  [`<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-  <category css-icon="customIcon fa fa-cog" name="Logic">
+const defaults = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+<category css-icon="customIcon fa fa-cog" name="Logic">
       <block type="controls_if"></block>
       <block type="logic_compare">
           <field name="OP">EQ</field>
@@ -472,8 +390,6 @@ const Mello_Bot = new device(
       <block type="logic_boolean">
           <field name="BOOL">TRUE</field>
       </block>
-      <block type="logic_null"></block>
-      <block type="logic_ternary"></block>
   </category>
   <category name="Loops">
       <block type="for_loop">
@@ -482,11 +398,11 @@ const Mello_Bot = new device(
           <field name="MODE">WHILE</field>
       </block>
       <block type="delay_core">
-      <field name= "seconds" type="number">
+      <value name="seconds">
       <shadow type="math_number">
-      <field name="NUM">1</field>
-  </shadow>
-  </field>
+          <field name="seconds">1</field>
+      </shadow>
+  </value>
       </block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Math">
@@ -523,53 +439,43 @@ const Mello_Bot = new device(
       <block type="text_join">
         <mutation items="2"></mutation>
       </block>
-      <block type="text_length">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_isEmpty">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT"></field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_changeCase">
-        <field name="CASE">UPPERCASE</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_trim">
-        <field name="MODE">BOTH</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_print">
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_prompt_ext">
-        <mutation type="TEXT"></mutation>
-        <field name="TYPE">TEXT</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-    </category>
+    </category>`
+
+function device(device_name, compiler, microcontroller, toolbox, default_workspace, peripherals_used, peripherals_pins) {
+  this.device_name = device_name;
+  this.compiler = compiler;
+  this.microcontroller = microcontroller;
+  this.toolbox = toolbox;
+  this.default_workspace = default_workspace;
+  this.peripherals_used = peripherals_used;
+  this.peripherals_pins = peripherals_pins;
+}
+
+const Arduino_Uno = new device(
+  "Arduino Uno",
+  "Arduino",
+  "Arduino Uno",
+  ft,
+  `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`,
+  [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
+  undefined
+);
+
+const Arduino_Nano = new device(
+  "Arduino Nano",
+  "Arduino",
+  "Arduino Nano",
+  ft,
+  `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
+  [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
+  undefined
+);
+
+const Mello_Bot = new device(
+  "Mello",
+  "Arduino",
+  "Arduino Nano",
+  [defaults + `
   <category css-icon="customIcon fa fa-cog" name="Actuators">
     <category name="Motor">
       <block type="motor_move_indef">
@@ -645,13 +551,19 @@ const Mello_Bot = new device(
             </value>
         </block>
     </category>
-      <category name="Serial">
-        <block type="communication_serial_print"></block>
-        <block type="communication_serial_read"></block>
-      </category>
+    <category name="Serial">
+    <block type="communication_serial_print">
+    <value name="Serial_Print">
+    <block type="text">
+    <field name="A1"></field>
+  </block>
+    </value>
+    </block>
+    <block type="communication_serial_read"></block>
+  </category>
   </category>
   <category css-icon="customIcon fa fa-cog" name="LEDs">
-    <category css-icon="customIcon fa fa-cog" name="RGB LED">
+
         <block type="led_rgb_led">
             <field name="LED">Left</field>
             <field name="colour">Red</field>
@@ -661,10 +573,10 @@ const Mello_Bot = new device(
             <field name="LED">Left</field>
             <field name="colour">Red</field>
         </block>
-    </category>
+
   </category>
   <category css-icon="customIcon fa fa-cog" name="Sound">
-  <category name="Buzzer">
+
       <block type="sound_buzzer_timer">
           <field name="note">1047</field>
           <value name="Buzzer Time">
@@ -677,7 +589,7 @@ const Mello_Bot = new device(
         <field name="Note">1047</field>
       </block>
       <block type="sound_buzzer_stop"></block>
-  </category>
+
   </category>
 
   <category name="Variables">

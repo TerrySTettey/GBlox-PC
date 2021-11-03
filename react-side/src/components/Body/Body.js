@@ -21,6 +21,7 @@ import Code_Editor from '../Code_Editor'
 import VariableSelector from '../VariableSelector'
 
 
+
 const Toolbox_colors = {
     Logic: "#4C97FF",
     Loop: "#DD0A18",
@@ -257,8 +258,7 @@ const Body = (props) => {
     //     updateProgress()
     // })
     return (
-        <div className="body-container">
-
+        <div id="body-container">
             <div className="c-Body-a-WorkspaceContainer">
                 <svg>
                     <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M1,0.46 l0,-0.426 L0.982,0.001 l-0.472,0.001,-0.149,0,-0.331,0 L0,0.051 v0.089 l0.015,0.026 V0.928 L0.035,0.96 l0.261,0,0.024,0.04 H0.976 l0.024,-0.041 V0.937 l0,-0.001,-0.001,-0.363 h-0.033 V0.516"></path></clipPath>
@@ -550,7 +550,7 @@ const Body = (props) => {
 
             </div>
             <div className="c-Body-a-OverlayExtras" />
-            <Header robocentreURL={props.robocentreURL}/>
+            <Header robocentreURL={props.robocentreURL} />
             <WorkTabHolder />
 
             <div className="c-Body-a-OverlayItems">

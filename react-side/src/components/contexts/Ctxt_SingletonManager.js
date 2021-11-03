@@ -215,16 +215,25 @@ const CtxtP_SingletonManager = (props) => {
                     setWindowMax(result)
                 })
                 ipcRenderer.invoke("checkSizeWindow")
+                var blocklyFlyoutBackground = document.getElementsByClassName("blocklyFlyoutBackground")
+                for (var i = 0; i < blocklyFlyoutBackground.length; i++) {
+                    blocklyFlyoutBackground[i].addEventListener("mouseover", function( event ) {
+                        document.getElementById("blocklyDiv").style.pointerEvents = "auto";
+                    });
+                }
             }
         }
         //Disables pointer events for blockly if Modal settings is opened
         var dropdowns = document.getElementsByClassName("c-CustomDrop-a-Content")
         for (var i = 0; i < dropdowns.length; i++) {
             if (dropdowns[i].style.display !== "none") {
-                document.getElementById("blocklyDiv").style.pointerEvents = "none";
+                if (dropdowns[i].parentElement.parentElement.parentElement.id !=="Toolbox"){
+                    document.getElementById("blocklyDiv").style.pointerEvents = "none";
+                }
             }
         }
-    })
+
+    });
     //Upload to DropBox and return share link
     async function testDropBox() {
         console.log("In testDropBox")

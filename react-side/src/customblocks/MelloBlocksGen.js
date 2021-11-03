@@ -214,7 +214,9 @@ Blockly.JavaScript['communication_infrared_value'] = function (block) {
   var dropdown_character = block.getFieldValue('Received_Character');
   var statements_ir_decode_loop = Blockly.JavaScript.statementToCode(block, 'IR_Decode_Loop');
   var code = ``
-  IR_Loop += `if(IrReceiver.decodedIRData.command==0x${dropdown_character}){\n${statements_ir_decode_loop}\t\t}\n\t`;
+  if (block.getRootBlock().type == "m_mainloop") {
+    IR_Loop += `if(IrReceiver.decodedIRData.command==0x${dropdown_character}){\n${statements_ir_decode_loop}\t\t}\n\t`;
+  }
   return code;
 };
 
@@ -328,7 +330,7 @@ Blockly.JavaScript['led_rgb_led_all'] = function (block) {
       peripheral_SetupCode += `\tpinMode(${RGB_R}, OUTPUT);\n\tpinMode(${RGB_G}, OUTPUT);\n\tpinMode(${RGB_B}, OUTPUT);\n`
       RGBDefined = true;
     }
-    
+
   }
   var code = '...;\n';
   switch (dropdown_colour) {
