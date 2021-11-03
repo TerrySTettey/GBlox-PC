@@ -13,7 +13,7 @@ const { ipcRenderer } = window.require('electron');
 
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);
-    const {setSerialPortMonitor, serialport_read, serialport_status, setSerialPortStatus} = useContext(Ctxt_SingletonManager)
+    const { setSerialPortMonitor, serialport_read, serialport_status, setSerialPortStatus } = useContext(Ctxt_SingletonManager)
     const [currentMenu, setCurrentMenu] = useState("")
     var [menuOpen, setMenuOpen] = useState("Open");
     var pull_out_menu = useRef(null);
@@ -40,7 +40,7 @@ function Pull_Out_Menu(props) {
                     if (serialport_status === false) {
                         serialport_read();
                         setSerialPortStatus(true)
-                        setContents([<Serial_Menu/>]);
+                        setContents([<Serial_Menu />]);
                     }
                     else {
                         closeSerial();

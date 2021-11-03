@@ -54,7 +54,7 @@ function Index(props) {
         var toolbox = document.getElementById("Toolbox");
         toolbox.style.filter = "blur(10px)"
         toolbox.style.pointerEvents = "none"
-        code_editor.style.display = "flex";
+        code_editor.style.display = "block";
         setTimeout(() => {
             code_editor.style.opacity = 1
             code_editor.style.transform = "scaleX(1)"
