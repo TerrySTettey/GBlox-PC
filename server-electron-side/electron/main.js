@@ -281,6 +281,16 @@ ipcMain.on("load-file", async function (event) {
     var data = await loadFile()
     event.returnValue = data;
 })
+
+ipcMain.handle("openRobocentre",async function (event){
+    shell.openExternal("http://robocentregh.com")
+})
+ipcMain.handle("contactSupportViaMail", async function (event){
+    shell.openExternal(`mailto:?subject=Support Needed!`)
+})
+ipcMain.handle("shareWorkspaceViaMail", async function (event, link){
+    shell.openExternal(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${link}`)
+})
 ipcMain.handle("checkSizeWindow", async function (event) {
     win.webContents.send("window_size", win.isMaximized())
 })

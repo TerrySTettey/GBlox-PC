@@ -550,7 +550,7 @@ const Body = (props) => {
 
             </div>
             <div className="c-Body-a-OverlayExtras" />
-            <Header />
+            <Header robocentreURL={props.robocentreURL}/>
             <WorkTabHolder />
 
             <div className="c-Body-a-OverlayItems">
@@ -583,7 +583,7 @@ const Body = (props) => {
             </div>
             {/*<div className="c-Body-a-FlyoutHolder" ref={FlyOutHolder}/>*/}
             <div className="c-Body-a-PulloutMenu">
-                <Pull_Out_Menu toolboxButtons={props.toolboxButtons} example_codes={props.example_codes} />
+                <Pull_Out_Menu toolboxButtons={props.toolboxButtons} example_codes={props.example_codes} contactSupportViaMail={props.contactSupportViaMail} />
             </div>
             <div id="c-device-manager">
                 <div id="closeDeviceBackground" onClick={(e) => {
@@ -599,7 +599,7 @@ const Body = (props) => {
             <div id="c-Body-a-SplashScreen">
                 <SplashScreenV2
                     onSplashClick={props.onSplashClick}
-                    Splashurl={props.Splashurl} />
+                    robocentreURL={props.robocentreURL} />
             </div>
             <div id="c-variableSelector">
                 <VariableSelector />

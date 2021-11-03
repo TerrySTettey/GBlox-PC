@@ -35,9 +35,6 @@ const Header = (props) => {
     }
 //Function to change the theme as per the theme selected
 
-    function openURL(){
-        window.open("http://robocentregh.com", '_blank')
-    }
     return (
         <div>
             <div className="header-container">
@@ -69,8 +66,8 @@ const Header = (props) => {
                 </div>
                 <div id="blank-space" />
                 <div className="header-buttons-segment">
-                    <HeaderButton buttonImage="4" onClick={openURL}/>
-                    <HeaderButton buttonImage="5" onClick={openURL} />
+                    <HeaderButton buttonImage="4" onClick={props.robocentreURL}/>
+                    <HeaderButton buttonImage="5" onClick={props.robocentreURL} />
                     <div style={{
                         marginLeft: '5px'
                     }}>
