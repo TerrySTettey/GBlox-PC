@@ -31,7 +31,7 @@ Blockly.Blocks['m_mainloop'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("https://www.clipartmax.com/png/full/219-2194283_open-green-flag-sprite.png", 40, 40, { alt: "*", flipRtl: "FALSE" }))
-            .appendField("On startup, Make "+ globalToolboxName, "MainField");
+            .appendField("When "+ globalToolboxName + " starts,", "MainField");
         this.appendDummyInput()
             .appendField("Run Forever")
             .appendField(new Blockly.FieldCheckbox("TRUE"), "LOOP");
@@ -206,7 +206,7 @@ Blockly.JavaScript['m_mainloop'] = function (block) {
     getPeripherals();
     block.setDeletable(false);
     block.setMovable(false);
-    block.setFieldValue("On startup, Make "+ globalToolboxName, "MainField")
+    block.setFieldValue("When "+ globalToolboxName + " starts,", "MainField")
 
     var statements_mainloop = Blockly.JavaScript.statementToCode(block, 'mainLoop');
     if (createdVariables.length != 0) {
