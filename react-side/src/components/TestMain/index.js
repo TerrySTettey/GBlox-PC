@@ -121,6 +121,13 @@ const TestMain = (props) => {
         ipcRenderer.invoke("write-settings", system_settings)
     }
 
+    function openRobocentre(){
+        ipcRenderer.invoke("openRobocentre");
+    }
+    function contactSupportViaMail(){
+        ipcRenderer.invoke("contactSupportViaMail");
+    }
+
     useEffect(() => {
         // setTimeout(() => {
         //     check_comport_constant();
@@ -227,9 +234,10 @@ const TestMain = (props) => {
                 example_codes={example_codes}
                 uploadFunction={uploadCode_ipc}
                 onSplashClick={closeSplash}
-                Splashurl={"http://robocentregh.com"}
+                robocentreURL={openRobocentre}
                 deviceOnClick={device_manager}
                 saveFile={exportBlocks}
+                contactSupportViaMail={contactSupportViaMail}
             />
         </div>
     )

@@ -245,7 +245,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -261,7 +261,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -288,7 +288,7 @@ const CtxtP_SingletonManager = (props) => {
                                 path: response.result.path_lower
                             }).then(function (response) {
                                 console.log(response);
-                                window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                                ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
                             }).catch(function (error) {
                                 console.log(error);
                             });
@@ -304,7 +304,7 @@ const CtxtP_SingletonManager = (props) => {
                                 path: response.result.path_lower
                             }).then(function (response) {
                                 console.log(response);
-                                window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                                ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
                             }).catch(function (error) {
                                 console.log(error);
                             });
@@ -333,7 +333,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -349,7 +349,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            window.open(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${response.result.url}`)
+                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -455,6 +455,9 @@ const CtxtP_SingletonManager = (props) => {
 
     //Used to show the generated Blockly code.
     function showCode() {
+        if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(currentWorkspace))=="<xml xmlns=\"https://developers.google.com/blockly/xml\"></xml>"){
+            Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(selectedDevice.default_workspace), currentWorkspace)
+        }
         var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
         setCurrentXML(Blockly.Xml.workspaceToDom(currentWorkspace))
         code = mainLoopCode;
@@ -467,7 +470,6 @@ const CtxtP_SingletonManager = (props) => {
             currentBlock = currentWorkspace.getBlockById(event.newElementId);
         }
     }
-
 
     function openVariableDialog() {
         document.getElementById("c-variableSelector").style.display = "block";

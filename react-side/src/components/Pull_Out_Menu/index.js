@@ -55,7 +55,7 @@ function Pull_Out_Menu(props) {
                     break;
                 case "help-menu":
                     if (currentMenu !== button_clicked) {
-                        setContents([<Help_Menu />]);
+                        setContents([<Help_Menu contactSupportViaMail={props.contactSupportViaMail}/>]);
                         setCurrentMenu(button_clicked)
                     }
                     break;
@@ -82,22 +82,40 @@ function Pull_Out_Menu(props) {
                 closeSerial();
             }
         }
-
+        
         if (currentMenu !== button_clicked) {
             setCurrentMenu(button_clicked);
+            highlightSelectedMenu(button_clicked, true);
+            
             setMenuOpen("Closed")
             pull_out_menu.current.style.marginLeft = "-410px"
             pull_out_container.current.style.opacity = "1"
         }
         else {
             setCurrentMenu("None");
+            highlightSelectedMenu(button_clicked, false)
             pull_out_menu.current.style.marginLeft = "0px"
             pull_out_container.current.style.opacity = "0"
         }
 
     }
 
+    function highlightSelectedMenu(buttonID, fill){
+        if (fill==true){
+            var buttons = document.getElementsByClassName("c-button-a-CircularOverlayMenuButton")
+            for (var i=0; i<buttons.length; i++){
+                buttons[i].style.backgroundColor = "var(--primary-color)"
+            }
+            document.getElementById(buttonID).parentElement.firstChild.style.backgroundColor="var(--border-color)"
+        }
+        else{
+            var buttons = document.getElementsByClassName("c-button-a-CircularOverlayMenuButton")
+            for (var i=0; i<buttons.length; i++){
+                buttons[i].style.backgroundColor = "var(--primary-color)"
+            }
 
+        }
+    }
     useEffect(() => {
         var Overlay = document.getElementsByClassName("c-Body-a-Overlay")[0];
         var OverlayExtras = document.getElementsByClassName("c-Body-a-OverlayExtras")[0];
@@ -163,9 +181,6 @@ function Pull_Out_Menu(props) {
                 <Button
                     id="view-code"
                     type="CircularOverlayMenuButton"
-                    outColor="#060841"
-                    hoverColor="#0000FF"
-                    s_ButtonState="Out"
                     children={svg_dictionary.menu_buttons.viewCode}
                     hoverEffect="fill-tooltip"
                     onClick={Menu}

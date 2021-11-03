@@ -568,7 +568,7 @@ function index(props) {
                     Welcome to Gblox
                 </div>
                 <div className="Splash-Content">
-                    <p>Start with the <a href={props.Splashurl} target="_blank">RoboCentre</a></p>
+                    <p>Start with the <a onClick={props.robocentreURL}>RoboCentre</a></p>
                     <p>
                         Or, find Help in the menu on the right
                     </p>

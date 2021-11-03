@@ -173,7 +173,7 @@
             input[type="checkbox"] {
                 position: relative;
                 cursor: pointer;
-                margin-top: 3.5%;
+                margin-top: 5%;
             }
             input[type="checkbox"]:before {
                 content: "";
@@ -207,6 +207,7 @@
                 margin-top: 6px;
                 user-select: none;
                 font-family: "Baloo2-Regular";
+                font-size: 21pt;
                 color: var(--text-color);
             }
         }
@@ -396,6 +397,8 @@
                 margin-bottom: -10px;
                 a {
                     text-decoration: none;
+                    color: var(--title-text-color);
+                    cursor: pointer;
                 }
             }
         }

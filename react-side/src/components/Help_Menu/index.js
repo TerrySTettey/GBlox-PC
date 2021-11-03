@@ -32,7 +32,7 @@ function Help_Menu(props) {
                 <div className="text">Help</div>
                 <div className="Help-Buttons">
                     {help_div(svg_dictionary.help_buttons.learn, "Learn","")}
-                    {help_div(svg_dictionary.help_buttons.support, "Support",openMail)}
+                    {help_div(svg_dictionary.help_buttons.support, "Support",props.contactSupportViaMail)}
                     {help_div(svg_dictionary.help_buttons.update, "Check for Update")}
                 </div>
             </div>

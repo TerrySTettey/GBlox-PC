@@ -199,11 +199,8 @@ const Button = (props) => {
         case "CircularOverlayMenuButton":
             buttonType = (
                 <div>
-                    <div className="c-button-a-CircularOverlayMenuButton" style={{
-                        backgroundColor: buttonColor
-                    }}>
+                    <div className="c-button-a-CircularOverlayMenuButton">
                         <div className="button-svg">{props.children}</div>
-
                     </div>
                     <span id={`tooltip-${props.id}`} className="tooltiptext">{props.tooltip}</span>
 
