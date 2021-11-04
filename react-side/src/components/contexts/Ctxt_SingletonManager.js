@@ -51,6 +51,7 @@ const CtxtP_SingletonManager = (props) => {
     const [blocklyVariables, setBlocklyVariables] = useState([])
     const [variablesLoadedCorrectly, setVariablesLoadedCorrectly] = useState(true)
     const [windowMax, setWindowMax] = useState(false);
+    const [bodyLoaded, setBodyLoaded] = useState(false);
     const {
         dark_theme,
         light_theme
@@ -591,7 +592,9 @@ const CtxtP_SingletonManager = (props) => {
                 variablesLoadedCorrectly,
                 setVariablesLoadedCorrectly,
                 windowMax,
-                electronWindowControl
+                electronWindowControl,
+                bodyLoaded, 
+                setBodyLoaded
             }}
         >
             {props.children}

@@ -473,7 +473,9 @@ const Button = (props) => {
             break;
         case "FrameBarButton":
             buttonType = (
-                <div className="c-Button-a-FrameBarButton">
+                <div className="c-Button-a-FrameBarButton" style={{
+                    fill: `${svgColor}`
+                }}>
                     {props.children}
                     {emptybutton}
                 </div>

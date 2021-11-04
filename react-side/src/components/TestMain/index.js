@@ -4,9 +4,10 @@ import Body from '../Body'
 import Blockly from 'blockly';
 import { DeviceList } from '../../deviceDef/device_list';
 import FrameBar from '../FrameBar'
+import LoadingVideo from '../Video'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
-import loading from '../Video/loading.mp4';
+
 
 import "./TestMain.scss"
 import "../../customblocks/customblocks";
@@ -22,7 +23,7 @@ var response = "null";
 
 const TestMain = (props) => {
 
-    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName, deviceCode, exportBlocks, upload_status, setUploadStatus } = useContext(Ctxt_SingletonManager)
+    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName, deviceCode, exportBlocks, upload_status, setUploadStatus, bodyLoaded, setBodyLoaded } = useContext(Ctxt_SingletonManager)
     const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
 
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -225,6 +226,13 @@ const TestMain = (props) => {
         //.replaceAll(";\r","").replace("splash: ","")
         //document.getElementById("SplashStatus").checked
     }, [system_settings])
+    useEffect(()=>{
+        if (bodyLoaded==true){
+            setTimeout(() => {
+                removeVideo();
+            },4000)
+        }
+    },[bodyLoaded])
 
 
     return (
@@ -232,13 +240,7 @@ const TestMain = (props) => {
             <div id="body-frame">
                 <FrameBar />
             </div>
-            <video
-                autoPlay
-                src={loading}
-                preload={'auto'}
-                id="loading-video-container"
-                onEnded={removeVideo}
-            />
+            <LoadingVideo/>
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}

@@ -48,8 +48,11 @@ const Body = (props) => {
     const [toolboxButtons, setToolboxButtons] = useState([])
     const {
         selectedDevice,
-        upload_status, setUploadStatus,
-        toolboxItems
+        upload_status,
+        setUploadStatus,
+        toolboxItems,
+        bodyLoaded,
+        setBodyLoaded
     } = useContext(Ctxt_SingletonManager)
 
     function updateProgress(value) {
@@ -254,9 +257,10 @@ const Body = (props) => {
                 break;
         }
     }, [upload_status])
-    // useEffect(()=>{
-    //     updateProgress()
-    // })
+    useEffect(() => {
+        setBodyLoaded(true);
+        console.log("Body Finished Loading");
+    },[])
     return (
         <div id="body-container">
             <div className="c-Body-a-WorkspaceContainer">
