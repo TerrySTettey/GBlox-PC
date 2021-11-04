@@ -15,7 +15,7 @@ import ToolSelector from '../ToolSelector/ToolSelector';
 import Pull_Out_Menu from '../Pull_Out_Menu'
 import CustomDrop from '../CustomDrop';
 import WorkTabHolder from '../WorkTabHolder';
-import SplashScreenV2 from '../SplashScreenV2'
+
 import NewDeviceManager from '../NewDeviceManager';
 import Code_Editor from '../Code_Editor'
 import VariableSelector from '../VariableSelector'
@@ -52,7 +52,9 @@ const Body = (props) => {
         setUploadStatus,
         toolboxItems,
         bodyLoaded,
-        setBodyLoaded
+        setBodyLoaded,
+        splashScreen, 
+        setSplashScreen
     } = useContext(Ctxt_SingletonManager)
 
     function updateProgress(value) {
@@ -223,6 +225,11 @@ const Body = (props) => {
             }
         }
     })
+    useEffect(()=>{
+        if (progress_value>100){
+            setProgressValue(100);
+        }
+    },[progress_value])
     useEffect(() => {
         switch (selectedDevice.device_name) {
             case "Mello":
@@ -601,9 +608,8 @@ const Body = (props) => {
                 <Code_Editor />
             </div>
             <div id="c-Body-a-SplashScreen">
-                <SplashScreenV2
-                    onSplashClick={props.onSplashClick}
-                    robocentreURL={props.robocentreURL} />
+                {splashScreen}
+                
             </div>
             <div id="c-variableSelector">
                 <VariableSelector />

@@ -5,6 +5,7 @@ import Blockly from 'blockly';
 import { DeviceList } from '../../deviceDef/device_list';
 import FrameBar from '../FrameBar'
 import LoadingVideo from '../Video'
+import SplashScreenV2 from '../SplashScreenV2'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
 
@@ -23,7 +24,22 @@ var response = "null";
 
 const TestMain = (props) => {
 
-    const { selectedDevice, setSelectedDevice, currentWorkspace, currentBlock, currentDeviceName, setCurrentDeviceName, toolboxItems, setSelectedToolboxName, deviceCode, exportBlocks, upload_status, setUploadStatus, bodyLoaded, setBodyLoaded } = useContext(Ctxt_SingletonManager)
+    const { selectedDevice,
+        setSelectedDevice,
+        currentWorkspace,
+        currentBlock,
+        currentDeviceName,
+        setCurrentDeviceName,
+        toolboxItems,
+        setSelectedToolboxName,
+        deviceCode,
+        exportBlocks,
+        upload_status,
+        setUploadStatus,
+        bodyLoaded,
+        setBodyLoaded,
+        splashScreen,
+        setSplashScreen } = useContext(Ctxt_SingletonManager)
     const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
 
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -130,7 +146,7 @@ const TestMain = (props) => {
         ipcRenderer.invoke("contactSupportViaMail");
     }
 
-    function removeVideo(){
+    function removeVideo() {
         var video = document.getElementById("loading-video-container")
         video.style.display = "none";
     }
@@ -200,13 +216,6 @@ const TestMain = (props) => {
                 switch (property) {
                     case "hideSplash":
                         setSplashStatus(system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", ""))
-                        if (system_settings[i].toString().replaceAll(";\r", "").replace("hideSplash: ", "") == "true") {
-                            document.getElementById("SplashStatus").checked = true;
-                        }
-                        else {
-                            document.getElementById("SplashStatus").checked = false;
-                            document.getElementById('c-Body-a-SplashScreen').style.display = "inline-flex";
-                        }
                         break;
                     case "theme":
                         setCurrentThemeName(system_settings[i].toString().replaceAll(";\r", "").replace("theme: ", ""));
@@ -226,13 +235,29 @@ const TestMain = (props) => {
         //.replaceAll(";\r","").replace("splash: ","")
         //document.getElementById("SplashStatus").checked
     }, [system_settings])
-    useEffect(()=>{
-        if (bodyLoaded==true){
+    useEffect(() => {
+        if (bodyLoaded == true) {
             setTimeout(() => {
                 removeVideo();
-            },4000)
+                setSplashScreen(
+                    [<SplashScreenV2
+                        onSplashClick={closeSplash}
+                        robocentreURL={openRobocentre} />]
+                )
+            }, 4000)
         }
-    },[bodyLoaded])
+    }, [bodyLoaded])
+    useEffect(() => {
+        if (document.getElementById("SplashStatus") !== null) {
+            if (splash_status == "true") {
+                document.getElementById("SplashStatus").checked = true;
+            }
+            else {
+                document.getElementById("SplashStatus").checked = false;
+                document.getElementById('c-Body-a-SplashScreen').style.display = "inline-flex";
+            }
+        }
+    }, [splashScreen])
 
 
     return (
@@ -240,7 +265,7 @@ const TestMain = (props) => {
             <div id="body-frame">
                 <FrameBar />
             </div>
-            <LoadingVideo/>
+            <LoadingVideo />
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}

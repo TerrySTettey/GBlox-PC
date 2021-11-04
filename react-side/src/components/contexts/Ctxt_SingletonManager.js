@@ -52,6 +52,7 @@ const CtxtP_SingletonManager = (props) => {
     const [variablesLoadedCorrectly, setVariablesLoadedCorrectly] = useState(true)
     const [windowMax, setWindowMax] = useState(false);
     const [bodyLoaded, setBodyLoaded] = useState(false);
+    const [splashScreen, setSplashScreen] =useState(<div></div>);
     const {
         dark_theme,
         light_theme
@@ -594,7 +595,9 @@ const CtxtP_SingletonManager = (props) => {
                 windowMax,
                 electronWindowControl,
                 bodyLoaded, 
-                setBodyLoaded
+                setBodyLoaded,
+                splashScreen, 
+                setSplashScreen
             }}
         >
             {props.children}

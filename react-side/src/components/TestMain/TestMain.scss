@@ -18,6 +18,7 @@
         width: 100%;    
         height: calc(100% - 29px);
         z-index: 1001;
+        object-fit: fill;
     }
     .blocklyFlyoutBackground{
         text{
