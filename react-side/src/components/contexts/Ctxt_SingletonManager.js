@@ -84,7 +84,7 @@ const CtxtP_SingletonManager = (props) => {
         },
         //Share
         () => {
-            testDropBox()
+            uploadToDropbox()
             clearDropdowns();
         },
         //Close
@@ -213,13 +213,13 @@ const CtxtP_SingletonManager = (props) => {
                 currentWorkspace.registerButtonCallback("createvar", openVariableDialog)
                 AlterBlockly();
                 setInitializedWorkspace(true)
-                ipcRenderer.on("window_size", (event,result) => {
+                ipcRenderer.on("window_size", (event, result) => {
                     setWindowMax(result)
                 })
                 ipcRenderer.invoke("checkSizeWindow")
                 var blocklyFlyoutBackground = document.getElementsByClassName("blocklyFlyoutBackground")
                 for (var i = 0; i < blocklyFlyoutBackground.length; i++) {
-                    blocklyFlyoutBackground[i].addEventListener("mouseover", function( event ) {
+                    blocklyFlyoutBackground[i].addEventListener("mouseover", function (event) {
                         document.getElementById("blocklyDiv").style.pointerEvents = "auto";
                     });
                 }
@@ -229,7 +229,7 @@ const CtxtP_SingletonManager = (props) => {
         var dropdowns = document.getElementsByClassName("c-CustomDrop-a-Content")
         for (var i = 0; i < dropdowns.length; i++) {
             if (dropdowns[i].style.display !== "none") {
-                if (dropdowns[i].parentElement.parentElement.parentElement.id !=="Toolbox"){
+                if (dropdowns[i].parentElement.parentElement.parentElement.id !== "Toolbox") {
                     document.getElementById("blocklyDiv").style.pointerEvents = "none";
                 }
             }
@@ -237,8 +237,8 @@ const CtxtP_SingletonManager = (props) => {
 
     });
     //Upload to DropBox and return share link
-    async function testDropBox() {
-        console.log("In testDropBox")
+    async function uploadToDropbox() {
+        console.log("In uploadToDropbox")
         if (loadedXML !== "") {
             if (Blockly.Xml.domToText(loadedXML) == Blockly.Xml.domToText(currentXML)) {
                 dbx.filesDeleteV2({
@@ -256,7 +256,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
+                            ipcRenderer.invoke("shareWorkspaceViaMail", response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -272,7 +272,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
+                            ipcRenderer.invoke("shareWorkspaceViaMail", response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -299,7 +299,7 @@ const CtxtP_SingletonManager = (props) => {
                                 path: response.result.path_lower
                             }).then(function (response) {
                                 console.log(response);
-                                ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
+                                ipcRenderer.invoke("shareWorkspaceViaMail", response.result.url);
                             }).catch(function (error) {
                                 console.log(error);
                             });
@@ -315,7 +315,7 @@ const CtxtP_SingletonManager = (props) => {
                                 path: response.result.path_lower
                             }).then(function (response) {
                                 console.log(response);
-                                ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
+                                ipcRenderer.invoke("shareWorkspaceViaMail", response.result.url);
                             }).catch(function (error) {
                                 console.log(error);
                             });
@@ -344,7 +344,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
+                            ipcRenderer.invoke("shareWorkspaceViaMail", response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -360,7 +360,7 @@ const CtxtP_SingletonManager = (props) => {
                             path: response.result.path_lower
                         }).then(function (response) {
                             console.log(response);
-                            ipcRenderer.invoke("shareWorkspaceViaMail",response.result.url);
+                            ipcRenderer.invoke("shareWorkspaceViaMail", response.result.url);
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -396,18 +396,22 @@ const CtxtP_SingletonManager = (props) => {
                         xml: xml_text
                     }, currentTabPath)
             }
-            setCurrentTabPath(loc)
-            var saveData = `{"device":${currentDeviceName},"toolLevel":${toolboxLevel},"variables":${createdVariables},"xml":"${Blockly.Xml.domToText(xml)}"}`
-            setTabSaveData(saveData)
-            var splits = loc.split("\\");
-            var name = splits[splits.length - 1];
-            setCurrentFileName(name)
+            console.log(loc)
+            if (loc !== null) {
+                setCurrentTabPath(loc)
+                var saveData = `{"device":${currentDeviceName},"toolLevel":${toolboxLevel},"variables":${createdVariables},"xml":"${Blockly.Xml.domToText(xml)}"}`
+                setTabSaveData(saveData)
+                var splits = loc.split("\\");
+                var name = splits[splits.length - 1];
+                setCurrentFileName(name)
+                setSavedOrLoaded(1)
+            }
         } catch (e) {
             alert(e);
             console.log(e)
         }
-        setSavedOrLoaded(1)
-        if (cb!==undefined){
+        
+        if (cb !== undefined) {
             cb([name, saveData])
         }
     }
@@ -458,7 +462,7 @@ const CtxtP_SingletonManager = (props) => {
         setToolboxItems(toolbox_temp)
     }
 
-    function electronWindowControl(event){
+    function electronWindowControl(event) {
         var button = event.target.id.split("WindowButton")[0].toLowerCase();
         console.log(button)
         ipcRenderer.invoke("electronWindowControl", button)
@@ -466,7 +470,7 @@ const CtxtP_SingletonManager = (props) => {
 
     //Used to show the generated Blockly code.
     function showCode() {
-        if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(currentWorkspace))=="<xml xmlns=\"https://developers.google.com/blockly/xml\"></xml>"){
+        if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(currentWorkspace)) == "<xml xmlns=\"https://developers.google.com/blockly/xml\"></xml>") {
             Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(selectedDevice.default_workspace), currentWorkspace)
         }
         var code = Blockly.JavaScript.workspaceToCode(currentWorkspace);
@@ -594,10 +598,15 @@ const CtxtP_SingletonManager = (props) => {
                 setVariablesLoadedCorrectly,
                 windowMax,
                 electronWindowControl,
+<<<<<<< Updated upstream
                 bodyLoaded, 
                 setBodyLoaded,
                 splashScreen, 
                 setSplashScreen
+=======
+                bodyLoaded,
+                setBodyLoaded
+>>>>>>> Stashed changes
             }}
         >
             {props.children}

@@ -3485,8 +3485,7 @@ const svg_dictionary = {
                     <path id="Path_266" data-name="Path 266" d="M0,0H5.573V5.573" transform="translate(19.511 1315.302) rotate(45)" fill="none" stroke="#fff" stroke-width="2" />
                 </g>
             </svg>
-        </div>
-        ,
+        </div>,
         Logic: <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24.041" height="20" viewBox="0 0 24.041 20">
                 <g id="Path_270" data-name="Path 270" fill="none">
