@@ -1,0 +1,13 @@
+.c-LoadScreen-a-Container {
+    --primary : #0B0533;
+    --border: #0000DC;
+    --thicc: #110D40;
+    --logo: white;
+
+    display: block;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--primary);
+    
+}
