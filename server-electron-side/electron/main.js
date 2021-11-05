@@ -109,9 +109,12 @@ async function saveFile(data, loc) {
                 if (err) throw err;
                 console.log('The file has been saved!');
             });
+            return filePath;
+        } else {
+            return null;
         }
 
-        return filePath;
+        
     } else {
         var saveData = JSON.stringify(data);
         fs.writeFile(loc, saveData, (err) => {
