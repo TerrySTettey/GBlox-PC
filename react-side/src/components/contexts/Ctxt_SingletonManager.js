@@ -598,15 +598,10 @@ const CtxtP_SingletonManager = (props) => {
                 setVariablesLoadedCorrectly,
                 windowMax,
                 electronWindowControl,
-<<<<<<< Updated upstream
                 bodyLoaded, 
                 setBodyLoaded,
                 splashScreen, 
                 setSplashScreen
-=======
-                bodyLoaded,
-                setBodyLoaded
->>>>>>> Stashed changes
             }}
         >
             {props.children}
