@@ -1,13 +1,264 @@
+@keyframes flashIn {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    35% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    55% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes erraticMovementTop {
+    0% {
+        transform: translate(0px, 25px);
+    }
+    10% {
+        transform: translate(-30px, 25px);
+    }
+    20% {
+        transform: translate(-50px, 25px);
+    }
+    30% {
+        transform: translate(40px, 25px);
+    }
+    60% {
+        transform: translate(-50px, 25px);
+    }
+    70% {
+        transform: translate(-20px, 25px);
+    }
+    90% {
+        transform: translate(-10px, 25px);
+    }
+    100% {
+        transform: translate(0px, 25px);
+    }
+}
+
+@keyframes erraticMovementBottom {
+    0% {
+        transform: translate(0px, -10px);
+    }
+    10% {
+        transform: translate(-30px, -10px);
+    }
+    20% {
+        transform: translate(-50px, -10px);
+    }
+    30% {
+        transform: translate(40px, -10px);
+    }
+    60% {
+        transform: translate(-50px, -10px);
+    }
+    70% {
+        transform: translate(-20px, -10px);
+    }
+    90% {
+        transform: translate(-10px, -10px);
+    }
+    100% {
+        transform: translate(0px, -10px);
+    }
+}
+
+@keyframes erraticMovementLeft {
+    0% {
+        transform: translate(0px, 152.7px);
+    }
+    10% {
+        transform: translate(30px, 152.7px);
+    }
+    20% {
+        transform: translate(-20px, 152.7px);
+    }
+    30% {
+        transform: translate(25px, 152.7px);
+    }
+    60% {
+        transform: translate(20px, 152.7px);
+    }
+    70% {
+        transform: translate(-5px, 152.7px);
+    }
+    90% {
+        transform: translate(-30px, 152.7px);
+    }
+    100% {
+        transform: translate(0px, 152.7px);
+    }
+}
+
+@keyframes erraticMovementMid {
+    0% {
+        transform: translate(0px, 130.7px);
+    }
+    10% {
+        transform: translate(30px, 130.7px);
+    }
+    20% {
+        transform: translate(-20px, 130.7px);
+    }
+    30% {
+        transform: translate(25px, 130.7px);
+    }
+    60% {
+        transform: translate(20px, 130.7px);
+    }
+    70% {
+        transform: translate(-5px, 130.7px);
+    }
+    90% {
+        transform: translate(-30px, 130.7px);
+    }
+    100% {
+        transform: translate(0px, 130.7px);
+    }
+}
+
+@keyframes dashSmall {
+    from {
+        stroke-dashoffset: 12;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes dashBig {
+    from {
+        stroke-dashoffset: 500;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .c-LoadScreen-a-Container {
-    --primary : #0B0533;
-    --border: #0000DC;
-    --thicc: #110D40;
+    --primary: #0b0533;
+    --border: #0000dc;
+    --thicc: #110d40;
     --logo: white;
 
     display: block;
     position: relative;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background-color: var(--primary);
-    
+    .c-LoadScreen-a-LoadAnim {
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        #SideSVGS {
+            display: flex;
+            flex-direction: row;
+            #RightSide {
+                transform: scaleX(-1);
+            }
+            .MainSVG {
+                z-index: 5;
+                #Group_550 {
+                    opacity: 0;
+                    animation: flashIn 0.5s forwards step-start;
+                }
+                #Path_564 {
+                    opacity: 0;
+                    animation: flashIn 0.5s forwards step-start;
+                    animation-delay: 0.2s;
+                }
+                #Group_551 {
+                    opacity: 0;
+                    animation: flashIn 0.5s forwards step-start;
+                    animation-delay: 0.3s;
+                    #Triangle_End{
+                        animation: flashIn 0.5s forwards step-start infinite;
+                    }
+                }
+                #Rectangle_238 {
+                    opacity: 0;
+                    animation: flashIn 0.5s forwards step-start;
+                    animation-delay: 0.35s;
+                }
+                #Rectangle_237 {
+                    opacity: 0;
+                    animation: flashIn 0.5s forwards step-start;
+                    animation-delay: 0.4s;
+                }
+                #Line_38,
+                #Line_37 {
+                    stroke-dasharray: 12;
+                    stroke-dashoffset: 12;
+                    animation: dashSmall 0.2s linear forwards;
+                    animation-delay: 0.4s;
+                }
+                #Path_569,
+                #Path_568 {
+                    stroke-dasharray: 500;
+                    stroke-dashoffset: 500;
+                    animation: dashBig 0.7s linear forwards;
+                    animation-delay: 0.6s;
+                }
+                #Group_549 {
+                    opacity: 0;
+                    animation: appear 0.2s forwards step-end;
+                    animation-delay: 1.4s;
+                }
+                #Group_548 {
+                    opacity: 0;
+                    animation: appear 0.2s forwards step-end;
+                    animation-delay: 1.7s;
+                }
+                #Group_547 {
+                    opacity: 0;
+                    animation: appear 0.2s forwards step-end;
+                    animation-delay: 1.9s;
+                }
+
+            }
+            #ErraticTop {
+                margin-left: 451.7px;
+                transform-origin: center;
+                animation: erraticMovementTop forwards 2s infinite;
+            }
+            #ErraticBottom {
+                margin-left: 451.7px;
+                transform-origin: center;
+                animation: erraticMovementBottom reverse 2s infinite;
+            }
+            #ErraticLeft {
+                position: absolute;
+                z-index: 3;
+                margin-left: 98.6px;
+                transform-origin: center;
+                animation: erraticMovementLeft reverse 2s infinite;
+            }
+            #ErraticMid {
+                position: absolute;
+                z-index: 3;
+                margin-left: 283.6px;
+                transform-origin: center;
+                animation: erraticMovementMid forwards 2s infinite;
+            }
+        }
+    }
 }
