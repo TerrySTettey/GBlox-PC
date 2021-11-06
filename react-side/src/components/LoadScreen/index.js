@@ -7,6 +7,7 @@ const LoadScreen = () => {
         <div className="c-LoadScreen-a-Container">
             <div className="c-LoadScreen-a-Background" />
             <div className="c-LoadScreen-a-LoadAnim">
+<<<<<<< Updated upstream
                 <div id="SideSVGS">
                     <div id="LeftSide">
                         <div id="ErraticTop">
@@ -203,6 +204,28 @@ const LoadScreen = () => {
                 </div>
             </div>
 
+=======
+                <div className="c-LoadScreen-a-StaticCircle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="283" height="283" viewBox="0 0 283 283">
+                        <g id="Middle_Circle" data-name="Middle Circle" fill="none" stroke="#0000dc" stroke-width="2">
+                            <circle cx="141.5" cy="141.5" r="141.5" stroke="none" />
+                            <circle cx="141.5" cy="141.5" r="140.5" fill="none" />
+                        </g>
+                    </svg>
+
+
+                </div>
+                <div className="c-LoadScreen-a-OuterCircle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="312" height="312" viewBox="0 0 312 312">
+                        <g id="Outer_Circle" data-name="Outer Circle" fill="none" stroke="#0000dc" stroke-width="10">
+                            <circle cx="156" cy="156" r="156" stroke="none" />
+                            <circle cx="156" cy="156" r="151" fill="none" />
+                        </g>
+                    </svg>
+
+                </div>
+            </div>
+>>>>>>> Stashed changes
         </div>
     )
 }

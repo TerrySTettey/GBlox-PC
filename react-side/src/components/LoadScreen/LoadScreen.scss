@@ -162,6 +162,7 @@
 
     display: block;
     position: relative;
+<<<<<<< Updated upstream
     height: 100%;
     width: 100%;
     background-color: var(--primary);
@@ -261,4 +262,124 @@
             }
         }
     }
+=======
+    height: 100vh;
+    width: 100vw;
+
+    .c-LoadScreen-a-Background {
+        display: block;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        background-color: var(--primary);
+    }
+
+    .c-LoadScreen-a-LoadAnim{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        justify-items: center;
+        align-content: center;
+
+
+        .c-LoadScreen-a-StaticCircle {
+            display: block;
+            position: relative;
+            top: 0;
+            left: 0;    
+            svg {
+                animation: 
+                    StaticCircle-Grow 0.8s infinite,
+                    StaticCircle-Flicker 3s step-start infinite;
+            }
+        }
+
+        .c-LoadScreen-a-OuterCircle{
+            display: block;
+            position: relative;
+            top: 0;
+            left: 0; 
+            svg{
+                outline: 2px red dashed;
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 990;
+                transform: rotate(270deg) scaleY(-1);
+                animation:
+                    OuterCircle-PathTurn 5s linear infinite,
+                    OuterCircle-PathGrow 5s linear;
+            }
+        }
+    }
+    
+}
+
+@keyframes StaticCircle-Grow {
+    0% {
+        transform: scale(0.3,0.3);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+@keyframes StaticCircle-Flicker {
+    0% {
+        opacity: 1;
+    }
+    6%{
+        opacity: 0;
+    }
+    12%{
+        opacity: 1;
+    }
+    18%{
+        opacity: 0;
+    }
+    24% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes OuterCircle-PathGrow {
+    0%{
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 990;
+    }
+    10%{
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 990;
+    }
+    50%{
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 990; 
+    }
+    80%{
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 990; 
+    }
+
+    100%{
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 990; 
+    }
+}
+
+@keyframes OuterCircle-PathTurn {
+    0%{
+        transform: rotate(270deg) scaleY(-1);
+    }
+    50%{
+        transform: rotate(180deg) scaleY(-1);
+    }
+    100%{
+        transform: rotate(-90deg) scaleY(-1);
+    }
+>>>>>>> Stashed changes
 }
