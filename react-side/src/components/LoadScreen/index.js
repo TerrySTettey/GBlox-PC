@@ -1,13 +1,66 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import "./LoadScreen.scss"
 
 const LoadScreen = () => {
+    const OuterCircle = useRef(null)
+    const LongDot = useRef(null)
+    const DotRef = useRef(null)
+    var Dotter = [];
+    const DotNum = 14;
+
+    for (var i = 0; i < DotNum; i++) {
+        var DotCode = (<div id={`i-DC-${i}`} className="i-DotController"><div className="i-Dot" /></div>)
+        Dotter = [...Dotter, DotCode]
+    }
+    function DoDot(object,num){
+        if (!object.classList.contains("i-anim-DC")) {
+            object.classList.add("i-anim-DC")
+        }
+        return num;
+    }
+    function RemoveDot(object,num){
+        if (object.classList.contains("i-anim-DC")) {
+            object.classList.remove("i-anim-DC")
+        }
+        return num;
+    }
+    useEffect(() => {
+        //OuterCircle and LongDot
+        setInterval(() => {
+            if (!OuterCircle.current.classList.contains("i-anim-OuterCircle")) {
+                OuterCircle.current.classList.add("i-anim-OuterCircle")
+                setTimeout(() => {
+                    if (!LongDot.current.classList.contains("i-anim-LongDot")) {
+                        LongDot.current.classList.add("i-anim-LongDot")
+                        for (var i = 0; i < DotNum; i++) {
+                            var CurrDot = document.getElementById("i-DC-" + i);
+                            setTimeout(DoDot(CurrDot,i), 200*DoDot(CurrDot,i))
+                        }
+                    }
+                }, 200)
+            }
+            setTimeout(() => {
+                if (OuterCircle.current.classList.contains("i-anim-OuterCircle")) {
+                    OuterCircle.current.classList.remove("i-anim-OuterCircle")
+                    setTimeout(() => {
+                        if (LongDot.current.classList.contains("i-anim-LongDot")) {
+                            LongDot.current.classList.remove("i-anim-LongDot")
+                            for (var i = 0; i < DotNum; i++) {
+                                var CurrDot = document.getElementById("i-DC-" + i);
+                                setTimeout(RemoveDot(CurrDot,i), 200)
+                            }
+                        }
+                    }, 200)
+                }
+            }, 1200)
+        }, 2000)
+
+    }, [])
     return (
         <div className="c-LoadScreen-a-Container">
             <div className="c-LoadScreen-a-Background" />
             <div className="c-LoadScreen-a-LoadAnim">
-<<<<<<< Updated upstream
                 <div id="SideSVGS">
                     <div id="LeftSide">
                         <div id="ErraticTop">
@@ -104,6 +157,38 @@ const LoadScreen = () => {
                                 <path id="Path_550" data-name="Path 550" d="M8.361-.253,71.808-.647l9.361,8.489H-1Z" transform="translate(1 0.647)" fill="#0000dc" />
                             </svg>
                         </div>
+                    </div>
+                    <div className="c-LoadScreen-a-OuterCircle">
+                        <svg id="i-OC" ref={OuterCircle} xmlns="http://www.w3.org/2000/svg" width="312" height="312" viewBox="0 0 312 312">
+                            <g id="Outer_Circle" data-name="Outer Circle" fill="none" stroke="#0000dc" stroke-width="10">
+                                <circle cx="156" cy="156" r="156" stroke="none" />
+                                <circle cx="156" cy="156" r="151" fill="none" />
+                            </g>
+                        </svg>
+                        <div className="c-LoadScreen-a-StaticCircle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="283" height="283" viewBox="0 0 283 283">
+                                <g id="Middle_Circle" data-name="Middle Circle" fill="none" stroke="#0000dc" stroke-width="2">
+                                    <circle cx="141.5" cy="141.5" r="141.5" stroke="none" />
+                                    <circle cx="141.5" cy="141.5" r="140.5" fill="none" />
+                                </g>
+                            </svg>
+                        </div>
+                        <div className="c-LoadScreen-a-Logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="78.932" height="105.276" viewBox="0 0 78.932 105.276">
+                                <path id="Logo" d="M1005.093-589.331c1.006,2.684,2.125,6.374,2.572,8.052l.783,3.131-2.907-1.9c-2.348-1.565-3.467-1.677-5.7-.559-3.578,1.566-3.8,1.566-3.8-.447,0-3.243,4.7-14.09,5.927-13.643C1002.744-594.475,1004.086-592.015,1005.093-589.331Zm-30.976,4.361c6.486,2.46,13.978,8.834,16.886,14.537,1.677,3.355,1.677,3.69-1.006,8.387a37.776,37.776,0,0,1-6.486,7.828l-3.578,3.019-1.23-5.032c-2.46-9.953-8.163-14.649-17.221-14.426-8.946.112-16.327,8.275-15.432,17.109.895,9.841,7.6,15.544,18.451,15.544,15.208,0,29.3-10.176,35.561-25.385,2.348-6.039,2.46-6.039,2.907-2.572,1.566,10.4-4.7,25.944-13.419,33.548-7.828,7.045-13.978,9.393-24.6,9.841-14.537.671-24.154-4.361-30.976-15.991C918.651-564.617,945.489-595.593,974.117-584.97ZM948.509-507.7c8.722,3.131,22.7,2.572,31.535-1.23,6.933-2.907,7.716-2.572,11.518,5.591,3.131,6.71,3.467,6.374-9.505,10.735-14.537,4.808-29.41,4.138-44.954-2.013-7.045-2.684-7.269-3.914-2.572-11.406,2.572-3.914,4.026-5.256,5.368-4.808C940.9-510.382,944.818-509.04,948.509-507.7Z" transform="translate(-929.515 594.712)" fill="#fff" />
+                            </svg>
+
+                        </div>
+                        <div id="i-LongDot">
+                            <svg ref={LongDot} xmlns="http://www.w3.org/2000/svg" width="277" height="277" viewBox="0 0 277 277">
+                                <g id="Path_Of_Travel" data-name="Path Of Travel" fill="none" stroke="#0000dc" stroke-width="4">
+                                    <circle cx="138.5" cy="138.5" r="138.5" stroke="none" />
+                                    <circle cx="138.5" cy="138.5" r="136.5" fill="none" />
+                                </g>
+                            </svg>
+                            {Dotter}
+                        </div>
+
                     </div>
                     <div id="RightSide">
                         <div id="ErraticTop">
@@ -202,30 +287,9 @@ const LoadScreen = () => {
                         </div>
                     </div>
                 </div>
+
+
             </div>
-
-=======
-                <div className="c-LoadScreen-a-StaticCircle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="283" height="283" viewBox="0 0 283 283">
-                        <g id="Middle_Circle" data-name="Middle Circle" fill="none" stroke="#0000dc" stroke-width="2">
-                            <circle cx="141.5" cy="141.5" r="141.5" stroke="none" />
-                            <circle cx="141.5" cy="141.5" r="140.5" fill="none" />
-                        </g>
-                    </svg>
-
-
-                </div>
-                <div className="c-LoadScreen-a-OuterCircle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="312" height="312" viewBox="0 0 312 312">
-                        <g id="Outer_Circle" data-name="Outer Circle" fill="none" stroke="#0000dc" stroke-width="10">
-                            <circle cx="156" cy="156" r="156" stroke="none" />
-                            <circle cx="156" cy="156" r="151" fill="none" />
-                        </g>
-                    </svg>
-
-                </div>
-            </div>
->>>>>>> Stashed changes
         </div>
     )
 }
