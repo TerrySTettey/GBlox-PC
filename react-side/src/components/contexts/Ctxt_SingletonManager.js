@@ -490,7 +490,7 @@ const CtxtP_SingletonManager = (props) => {
         document.getElementById("c-variableSelector").style.display = "block";
     }
     function closeVariableDialog(event) {
-        console.log(event.target.id);
+        document.getElementById("variable-name-input").value = ""
         if (event.target.id == "a-CloseButton") {
             document.getElementById("c-variableSelector").style.display = "none";
         }

@@ -15,7 +15,7 @@ import ToolSelector from '../ToolSelector/ToolSelector';
 import Pull_Out_Menu from '../Pull_Out_Menu'
 import CustomDrop from '../CustomDrop';
 import WorkTabHolder from '../WorkTabHolder';
-
+import Alert_Notification from '../Alert_Notification'
 import NewDeviceManager from '../NewDeviceManager';
 import Code_Editor from '../Code_Editor'
 import VariableSelector from '../VariableSelector'
@@ -45,7 +45,8 @@ const Body = (props) => {
     const [device_svg, setDeviceSVG] = useState(svg_dictionary.devices.Arduino_Uno_SVG)
     const [progress_value, setProgressValue] = useState(0)
     const [inUpload, setInUpload] = useState(false);
-    const [toolboxButtons, setToolboxButtons] = useState([])
+    const [toolboxButtons, setToolboxButtons] = useState([]);
+    const [alertDiv, setAlertDiv] = useState(<div></div>)
     const {
         selectedDevice,
         upload_status,
@@ -53,14 +54,13 @@ const Body = (props) => {
         toolboxItems,
         bodyLoaded,
         setBodyLoaded,
-        splashScreen, 
+        splashScreen,
         setSplashScreen
     } = useContext(Ctxt_SingletonManager)
 
     function updateProgress(value) {
         var cur = progress_value;
         var interv = setInterval(() => {
-            console.log(progress_value)
             if (cur < value) {
                 setProgressValue((p) => p + 1);
                 cur++;
@@ -73,7 +73,14 @@ const Body = (props) => {
 
     function uploadCode() {
         if (inUpload == true) {
-            alert("BE PATIENT FOR ONCE IN YOUR LIFE")
+            document.getElementById("c-Body-Notification").style.display="block";
+            setAlertDiv(
+                <Alert_Notification type="alert" text="Code is Uploading! Please Wait..." closeAlert={e=>{setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display="none";}} />
+            )
+            setTimeout(() => {
+                setAlertDiv(<div></div>)
+            document.getElementById("c-Body-Notification").style.display="none";
+            }, [2000]);
         }
         else {
             setInUpload(true);
@@ -219,17 +226,16 @@ const Body = (props) => {
         if (TrashContainerChanged === false) {
             var Trash = document.getElementsByClassName("blocklyTrash")[0];
             if (Trash !== undefined) {
-                // console.log(Trash.tagName)
                 TrashHolder.current.appendChild(Trash);
                 TrashContainerChanged = true;
             }
         }
     })
-    useEffect(()=>{
-        if (progress_value>100){
+    useEffect(() => {
+        if (progress_value > 100) {
             setProgressValue(100);
         }
-    },[progress_value])
+    }, [progress_value])
     useEffect(() => {
         switch (selectedDevice.device_name) {
             case "Mello":
@@ -257,17 +263,22 @@ const Body = (props) => {
                 updateProgress(100);
                 setInUpload(false);
                 break;
-            default:
-                console.log(upload_status);
+            case "Upload Failed : Error in Code":
+                setProgressValue(0);
                 setInUpload(false);
+                break;
+            case "Arduino found on ":
+                setProgressValue(0);
+                setInUpload(false);
+                break;
+            default:
                 setProgressValue(0);
                 break;
         }
     }, [upload_status])
     useEffect(() => {
         setBodyLoaded(true);
-        console.log("Body Finished Loading");
-    },[])
+    }, [])
     return (
         <div id="body-container">
             <div className="c-Body-a-WorkspaceContainer">
@@ -609,7 +620,9 @@ const Body = (props) => {
             </div>
             <div id="c-Body-a-SplashScreen">
                 {splashScreen}
-                
+            </div>
+            <div id="c-Body-Notification">
+                {alertDiv}
             </div>
             <div id="c-variableSelector">
                 <VariableSelector />

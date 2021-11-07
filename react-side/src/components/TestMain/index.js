@@ -4,7 +4,7 @@ import Body from '../Body'
 import Blockly from 'blockly';
 import { DeviceList } from '../../deviceDef/device_list';
 import FrameBar from '../FrameBar'
-import LoadingVideo from '../Video'
+import LoadScreen from '../LoadScreen'
 import SplashScreenV2 from '../SplashScreenV2'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -138,17 +138,17 @@ const TestMain = (props) => {
     async function writeSystemSettings(system_settings) {
         ipcRenderer.invoke("write-settings", system_settings)
     }
-
     function openRobocentre() {
         ipcRenderer.invoke("openRobocentre");
     }
     function contactSupportViaMail() {
         ipcRenderer.invoke("contactSupportViaMail");
     }
-
     function removeVideo() {
-        var video = document.getElementById("loading-video-container")
+        var video = document.getElementById("loading-screen")
         video.style.display = "none";
+        // var body = document.getElementById("body-container")
+        // body.style.display = "block";
     }
 
     useEffect(() => {
@@ -259,13 +259,14 @@ const TestMain = (props) => {
         }
     }, [splashScreen])
 
-
     return (
         <div id="App">
             <div id="body-frame">
                 <FrameBar />
             </div>
-            <LoadingVideo />
+            <div id="loading-screen">
+                <LoadScreen />
+            </div>
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}

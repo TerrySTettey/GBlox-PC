@@ -1,0 +1,35 @@
+.c-Alert-a-Container {
+    display: grid;
+    width: fit-content;
+    background-color: #0b0533;
+    color: white;
+    grid-template-columns: 0fr 1fr;
+    padding: 25px;
+    border-radius: 10px;
+    .c-Alert-SVG {
+        padding: 20px;
+    }
+    .c-Alert-a-notificationContent {
+        display: grid;
+        grid-template-areas:
+            "content content"
+            "close ok";
+        .c-Alert-Alert {
+            grid-area: content;
+        }
+    }
+    .c-Alert-a-alertContent {
+        display: grid;
+        grid-template-areas:
+            "content"
+            "ok";
+    }
+    .c-Alert-CloseButton {
+        grid-area: close;
+        margin: auto;
+    }
+    .c-Alert-OkButton {
+        grid-area: ok;
+        margin: auto;
+    }
+}

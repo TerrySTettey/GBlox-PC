@@ -35,7 +35,6 @@ function Index(props) {
                     hoverEffect="fill"
                     onClick={closeVariableDialog}
                     >
-                    
                 </Button>
             </div>
             <div id="ok-button">
