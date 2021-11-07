@@ -280,7 +280,7 @@ const Body = (props) => {
                 setInUpload(false);
                 document.getElementById("c-Body-Notification").style.display = "block";
                 setAlertDiv(
-                    <Alert_Notification type="notification" text="No device has been detected. Make sure that an Arduino is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
+                    <Alert_Notification type="notification" text="No device has been detected. Make sure that a device is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
                 )
                 setUploadStatus("")
                 break;
