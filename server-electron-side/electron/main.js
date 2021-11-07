@@ -415,3 +415,7 @@ ipcMain.handle("electronWindowControl", async function (event, button) {
             break;
     }
 })
+
+ipcMain.handle("close-app", async function (event, settings) {
+    app.quit();
+})
