@@ -22,8 +22,8 @@ function createWindow() {
         height: 800,
         minHeight: 713, //678
         minWidth: 1284, //1271
-        maxWidth: 1933, //1920
-        maxHeight: 1115, //1080
+        maxWidth: 1920, //1933
+        maxHeight: 1080, //1115
         maximizable: true,
         title: "GBlox",
         frame: false,
@@ -88,8 +88,11 @@ async function loadFile() {
         } catch (err) {
             throw err;
         }
+        return ourdata;
+    } else if (canceled){
+        return null;
     }
-    return ourdata;
+    
 }
 //Save As Function
 async function saveFile(data, loc) {

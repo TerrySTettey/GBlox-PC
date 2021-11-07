@@ -5,7 +5,6 @@ import "./LoadScreen.scss"
 const LoadScreen = () => {
     const OuterCircle = useRef(null)
     const LongDot = useRef(null)
-    const DotRef = useRef(null)
     var Dotter = [];
     const DotNum = 14;
 
@@ -13,15 +12,15 @@ const LoadScreen = () => {
         var DotCode = (<div id={`i-DC-${i}`} className="i-DotController"><div className="i-Dot" /></div>)
         Dotter = [...Dotter, DotCode]
     }
-    function DoDot(object,num){
-        if (!object.classList.contains("i-anim-DC")) {
-            object.classList.add("i-anim-DC")
+    function DoDot(object, num) {
+        if (!object.classList.contains("i-anim-DC-" + num)) {
+            object.classList.add("i-anim-DC-" + num)
         }
         return num;
     }
-    function RemoveDot(object,num){
-        if (object.classList.contains("i-anim-DC")) {
-            object.classList.remove("i-anim-DC")
+    function RemoveDot(object, num) {
+        if (object.classList.contains("i-anim-DC-" + num)) {
+            object.classList.remove("i-anim-DC-" + num)
         }
         return num;
     }
@@ -33,10 +32,13 @@ const LoadScreen = () => {
                 setTimeout(() => {
                     if (!LongDot.current.classList.contains("i-anim-LongDot")) {
                         LongDot.current.classList.add("i-anim-LongDot")
-                        for (var i = 0; i < DotNum; i++) {
-                            var CurrDot = document.getElementById("i-DC-" + i);
-                            setTimeout(DoDot(CurrDot,i), 200*DoDot(CurrDot,i))
-                        }
+
+                    }
+                }, 200)
+                setTimeout(() => {
+                    for (var i = 0; i < DotNum; i++) {
+                        var CurrDot = document.getElementById("i-DC-" + i);
+                        DoDot(CurrDot, i)
                     }
                 }, 200)
             }
@@ -46,12 +48,15 @@ const LoadScreen = () => {
                     setTimeout(() => {
                         if (LongDot.current.classList.contains("i-anim-LongDot")) {
                             LongDot.current.classList.remove("i-anim-LongDot")
-                            for (var i = 0; i < DotNum; i++) {
-                                var CurrDot = document.getElementById("i-DC-" + i);
-                                setTimeout(RemoveDot(CurrDot,i), 200)
-                            }
+
                         }
                     }, 200)
+                    setTimeout(() => {
+                        for (var i = 0; i < DotNum; i++) {
+                            var CurrDot = document.getElementById("i-DC-" + i);
+                            RemoveDot(CurrDot, i)
+                        }
+                    }, 400)
                 }
             }, 1200)
         }, 2000)
@@ -161,10 +166,10 @@ const LoadScreen = () => {
                     <div className="c-LoadScreen-a-OuterCircle">
                         <svg id="i-OC" ref={OuterCircle} xmlns="http://www.w3.org/2000/svg" width="312" height="312" viewBox="0 0 312 312">
                             <g id="Outer_Circle" data-name="Outer Circle" fill="none" stroke="#0000dc" stroke-width="10">
-                                <circle cx="156" cy="156" r="156" stroke="none" />
                                 <circle cx="156" cy="156" r="151" fill="none" />
                             </g>
                         </svg>
+
                         <div className="c-LoadScreen-a-StaticCircle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="283" height="283" viewBox="0 0 283 283">
                                 <g id="Middle_Circle" data-name="Middle Circle" fill="none" stroke="#0000dc" stroke-width="2">
