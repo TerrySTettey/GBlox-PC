@@ -52,7 +52,7 @@ const CtxtP_SingletonManager = (props) => {
     const [variablesLoadedCorrectly, setVariablesLoadedCorrectly] = useState(true)
     const [windowMax, setWindowMax] = useState(false);
     const [bodyLoaded, setBodyLoaded] = useState(false);
-    const [splashScreen, setSplashScreen] =useState(<div></div>);
+    const [splashScreen, setSplashScreen] = useState(<div></div>);
     const {
         dark_theme,
         light_theme
@@ -410,7 +410,7 @@ const CtxtP_SingletonManager = (props) => {
             alert(e);
             console.log(e)
         }
-        
+
         if (cb !== undefined) {
             cb([name, saveData])
         }
@@ -420,26 +420,29 @@ const CtxtP_SingletonManager = (props) => {
         try {
             var hold = ipcRenderer.sendSync('load-file')
             console.log(hold)
-            if (hold !== "nil") {
-                var xmlss = Blockly.Xml.textToDom(hold.xml)
-                setLoadedXML(xmlss)
-                setToolboxLevel(hold.toolLevel)
-                document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
-                setCurrentDeviceName(hold.device)
-                setBlocklyVariables(hold.variables);
-                Blockly.mainWorkspace.clear();
-                Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
-                setCurrentTabPath(hold.location)
-                var splits = hold.location.split("\\");
-                var name = splits[splits.length - 1];
-                setCurrentFileName(name)
-                setTabSaveData(`{"device":${hold.device},"toolLevel":${hold.toolLevel},"variables":${hold.variables},"xml":"${Blockly.Xml.domToText(xmlss)}"}`)
+            if (hold !== null) {
+                if (hold !== "nil") {
+                    var xmlss = Blockly.Xml.textToDom(hold.xml)
+                    setLoadedXML(xmlss)
+                    setToolboxLevel(hold.toolLevel)
+                    document.getElementById(`toolbox_selector_level_${hold.toolLevel}`).click()
+                    setCurrentDeviceName(hold.device)
+                    setBlocklyVariables(hold.variables);
+                    Blockly.mainWorkspace.clear();
+                    Blockly.Xml.domToWorkspace(xmlss, Blockly.mainWorkspace);
+                    setCurrentTabPath(hold.location)
+                    var splits = hold.location.split("\\");
+                    var name = splits[splits.length - 1];
+                    setCurrentFileName(name)
+                    setTabSaveData(`{"device":${hold.device},"toolLevel":${hold.toolLevel},"variables":${hold.variables},"xml":"${Blockly.Xml.domToText(xmlss)}"}`)
+                    setSavedOrLoaded(1)
+                }
             }
         } catch (e) {
             throw e;
         }
 
-        setSavedOrLoaded(1)
+
     }
 
     //Generates toolbox list for the GUI
@@ -598,9 +601,9 @@ const CtxtP_SingletonManager = (props) => {
                 setVariablesLoadedCorrectly,
                 windowMax,
                 electronWindowControl,
-                bodyLoaded, 
+                bodyLoaded,
                 setBodyLoaded,
-                splashScreen, 
+                splashScreen,
                 setSplashScreen
             }}
         >

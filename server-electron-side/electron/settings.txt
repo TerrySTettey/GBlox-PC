@@ -1,3 +1,3 @@
-theme: light-theme
+theme: dark-theme
 hideSplash: false
 device: Arduino Uno
