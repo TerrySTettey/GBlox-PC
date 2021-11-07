@@ -201,6 +201,7 @@
                     opacity: 0;
                     animation: flashIn 0.5s forwards step-start;
                     animation-delay: 0.2s;
+                    fill: var(--progress-empty-bar-color);
                 }
                 #Group_551 {
                     opacity: 0;
@@ -219,6 +220,7 @@
                     opacity: 0;
                     animation: flashIn 0.5s forwards step-start;
                     animation-delay: 0.4s;
+                    fill: var(--secondary-color);
                 }
                 #Line_38,
                 #Line_37 {
@@ -290,6 +292,9 @@
                 transform: rotate(270deg) scaleY(-1);
                 color: var(--border-color);
                 opacity: 1;
+                g{
+                    stroke: var(--border-color);
+                }
             }
 
             .c-LoadScreen-a-StaticCircle {
@@ -315,7 +320,9 @@
                 margin: auto;
                 align-self: center;
                 svg {
-                    fill: var(--logo-color);
+                    path{
+                        fill: var(--logo-color) !important;
+                    }
                     animation: StaticCircle-Grow 0.8s;
                 }
             }
