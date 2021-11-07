@@ -60,8 +60,6 @@ const TestMain = (props) => {
 
         //Waits for results on which comport arduino is found on
         ipcRenderer.on('arduino_comport', (event, result) => {
-            response = result;
-            setUploadStatus(`Arduino found on ${response}`);
         });
         //Returns a confirmation for when the upload is done
 
@@ -162,6 +160,7 @@ const TestMain = (props) => {
             });
             ipcRenderer.on('arduino_upload_status', (event, result) => {
                 response = result;
+                console.log(`This is the response from Electron : ${response}`);
                 if (response.includes("Verifying...") == true) {
                     setUploadStatus("Verifying Code");
                     console.log("Verifying the code now")
@@ -180,6 +179,10 @@ const TestMain = (props) => {
                 else if (response.includes("Upload Successful") == true) {
                     setUploadStatus("Upload Successful")
                     console.log("Upload Successful")
+                }
+                else if (response.includes("No Arduino Detected") == true) {
+                    setUploadStatus("No Arduino Detected")
+                    console.log("No Arduino Detected")
                 }
             });
         }

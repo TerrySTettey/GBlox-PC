@@ -45,7 +45,7 @@ const Body = (props) => {
     const [progress_value, setProgressValue] = useState(0)
     const [inUpload, setInUpload] = useState(false);
     const [toolboxButtons, setToolboxButtons] = useState([]);
-    
+
     const {
         selectedDevice,
         upload_status,
@@ -55,7 +55,7 @@ const Body = (props) => {
         setBodyLoaded,
         splashScreen,
         setSplashScreen,
-        alertDiv, 
+        alertDiv,
         setAlertDiv
     } = useContext(Ctxt_SingletonManager)
 
@@ -74,14 +74,14 @@ const Body = (props) => {
 
     function uploadCode() {
         if (inUpload == true) {
-            document.getElementById("c-Body-Notification").style.display="block";
+            document.getElementById("c-Body-Notification").style.display = "block";
             setAlertDiv(
-                <Alert_Notification type="notification" text="Code is Uploading! Please Wait..." closeAlert={e=>{setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display="none";}} />
+                <Alert_Notification type="notification" text="Code is Uploading! Please Wait..." closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
             )
-            setTimeout(() => {
-                setAlertDiv(<div></div>)
-            document.getElementById("c-Body-Notification").style.display="none";
-            }, [2000]);
+            // setTimeout(() => {
+            //     setAlertDiv(<div></div>)
+            //     document.getElementById("c-Body-Notification").style.display = "none";
+            // }, [2000]);
         }
         else {
             setInUpload(true);
@@ -223,7 +223,6 @@ const Body = (props) => {
     }, [toolboxItems])
 
     useEffect(() => {
-
         if (TrashContainerChanged === false) {
             var Trash = document.getElementsByClassName("blocklyTrash")[0];
             if (Trash !== undefined) {
@@ -253,6 +252,7 @@ const Body = (props) => {
         }
     }, [selectedDevice])
     useEffect(() => {
+        console.log(upload_status)
         switch (upload_status) {
             case "Verifying Code":
                 updateProgress(50);
@@ -267,13 +267,34 @@ const Body = (props) => {
             case "Upload Failed : Error in Code":
                 setProgressValue(0);
                 setInUpload(false);
+                setUploadStatus("")
+                break;
+            case "Upload Failed":
+                setProgressValue(0);
+                setInUpload(false);
+                setUploadStatus("")
+                break;
+            case "No Arduino Detected":
+                console.log("I am here")
+                setProgressValue(0);
+                setInUpload(false);
+                document.getElementById("c-Body-Notification").style.display = "block";
+                setAlertDiv(
+                    <Alert_Notification type="notification" text="No device has been detected. Make sure that an Arduino is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
+                )
+                setUploadStatus("")
                 break;
             case "Arduino found on ":
                 setProgressValue(0);
                 setInUpload(false);
+                document.getElementById("c-Body-Notification").style.display = "block";
+                setAlertDiv(
+                    <Alert_Notification type="notification" text="No device has been detected. Make sure that an Arduino is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
+                )
                 break;
             default:
                 setProgressValue(0);
+                setInUpload(false);
                 break;
         }
     }, [upload_status])

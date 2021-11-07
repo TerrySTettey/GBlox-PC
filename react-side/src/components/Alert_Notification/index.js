@@ -16,7 +16,7 @@ function Index(props) {
                     <Button
                         type="ExampleButton"
                         id="c-CloseButton"
-                        text={"Close"}
+                        text={"No"}
                         onClick={props.closeAlert}
                     >
                     </Button>
@@ -25,7 +25,7 @@ function Index(props) {
                     <Button
                         type="ExampleButton"
                         id="c-OkButton"
-                        text={"Ok"}
+                        text={"Yes"}
                         onClick={props.acceptAlert}
                     >
                     </Button>

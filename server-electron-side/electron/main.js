@@ -89,10 +89,10 @@ async function loadFile() {
             throw err;
         }
         return ourdata;
-    } else if (canceled){
+    } else if (canceled) {
         return null;
     }
-    
+
 }
 //Save As Function
 async function saveFile(data, loc) {
@@ -117,7 +117,7 @@ async function saveFile(data, loc) {
             return null;
         }
 
-        
+
     } else {
         var saveData = JSON.stringify(data);
         fs.writeFile(loc, saveData, (err) => {
@@ -173,16 +173,21 @@ async function COMPORT_CONSTANT(cb) {
 //Function which identifies the COM Port that Arduino is connected to...
 function CHECK_COMPORT(cb) {
     try {
-        COMPORT = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })
-        COMPORT = COMPORT.split(`\n`)
+        COMPORT = null;
+        var COMPORT_cmd = execSync("REG QUERY HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM", { encoding: "utf-8" })
+        COMPORT_cmd = COMPORT_cmd.split(`\n`)
         var temp_ports = []
-        for (var i = 0; i < COMPORT.length; i++) {
-            if (COMPORT[i].includes("\\Device\\Serial") == true) {
-                temp_ports.push(COMPORT[i].split("REG_SZ    ")[1].split("\r")[0]);
+        for (var i = 0; i < COMPORT_cmd.length; i++) {
+            if (COMPORT_cmd[i].includes("\\Device\\Serial") == true) {
+                temp_ports.push(COMPORT_cmd[i].split("REG_SZ    ")[1].split("\r")[0]);
             }
         }
-        if (temp_ports !== []) {
+        if (temp_ports.length > 0) {
             COMPORT = temp_ports
+        }
+        else {
+            COMPORT = "No Arduino Detected";
+            
         }
     }
     catch (e) {
@@ -198,62 +203,59 @@ async function VERIFYCODE(cb) {
     const arduinoIDE = path.join(process.resourcesPath, "arduino-1.8.15/arduino_debug --upload ");
     const arduinoOutput = path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino")
     console.log(COMPORT)
-    if (COMPORT.length > 0 || COMPORT == "No Arduino Detected") {
-        if (isDev == true) {
-            try {
-                VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
-                    if (error) {
-                        output += error;
-                        const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
-                        if (mainerror !== "") {
-                            win.webContents.send("arduino_upload_status", `Upload Failed : Error in Code\n\n  ${mainerror}`)
-                        }
-                        else {
-                            win.webContents.send("arduino_upload_status", `Upload Failed: Arduino Not Found`);
-                        }
-                    }
-                    else {
-                        win.webContents.send("arduino_upload_status", "Upload Successful")
-                    }
-                })
-            }
-            catch (e) {
-                win.webContents.send("arduino_upload_status", `Upload Failed`)
-            }
-        }
-        else {
-            try {
-                VERIFICATION = exec(arduinoIDE + arduinoOutput + " --port " + COMPORT[0], (error, stdout, stderr) => {
-                    if (error) {
-                        output += error;
-                        const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
-                        console.log(mainerror);
+    console.log("I AM ABOUT TO TRY AND UPLOAD")
+    if (isDev == true) {
+        try {
+            VERIFICATION = exec(path.resolve(__dirname, "./arduino-1.8.15/arduino_debug --upload ") + path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") + " --port " + COMPORT[0], (error, stdout, stderr) => {
+                if (error) {
+                    output += error;
+                    const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
+                    if (mainerror !== "") {
                         win.webContents.send("arduino_upload_status", `Upload Failed : Error in Code\n\n  ${mainerror}`)
                     }
                     else {
-                        win.webContents.send("arduino_upload_status", "Upload Successful")
+                        win.webContents.send("arduino_upload_status", `Upload Failed: Arduino Not Found`);
                     }
-                })
-            }
-            catch (e) {
-                win.webContents.send("arduino_upload_status", `Upload Failed`)
-            }
+                }
+                else {
+                    win.webContents.send("arduino_upload_status", "Upload Successful")
+                }
+            })
         }
-        try {
-            VERIFICATION.stderr.on('data', function (data) {
-                win.webContents.send("arduino_upload_status", data);
-                console.log(data)
-            });
-        }
-        catch (e) { }
-        VERIFICATION.on('uncaughtException', function (e) {
+        catch (e) {
             win.webContents.send("arduino_upload_status", `Upload Failed`)
-        })
+        }
     }
     else {
-        win.webContents.send("arduino_upload_status", `Upload Failed`)
-        cb("No Arduino Detected");
+        try {
+            VERIFICATION = exec(arduinoIDE + arduinoOutput + " --port " + COMPORT[0], (error, stdout, stderr) => {
+                if (error) {
+                    output += error;
+                    const mainerror = output.split("Fail to get the Vid Pid information from the builder response code=404")[1].split(`exit status`)[0].replaceAll("ArduinoOutput:", "");
+                    console.log(mainerror);
+                    win.webContents.send("arduino_upload_status", `Upload Failed : Error in Code\n\n  ${mainerror}`)
+                }
+                else {
+                    win.webContents.send("arduino_upload_status", "Upload Successful")
+                }
+            })
+        }
+        catch (e) {
+            win.webContents.send("arduino_upload_status", `Upload Failed`)
+        }
     }
+    try {
+        VERIFICATION.stderr.on('data', function (data) {
+            win.webContents.send("arduino_upload_status", data);
+            console.log(data)
+        });
+    }
+    catch (e) { }
+    VERIFICATION.on('uncaughtException', function (e) {
+        win.webContents.send("arduino_upload_status", `Upload Failed`)
+    })
+
+
 }
 
 //Function to read the serial port of the device via COMPORT
@@ -288,13 +290,13 @@ ipcMain.on("load-file", async function (event) {
     event.returnValue = data;
 })
 
-ipcMain.handle("openRobocentre",async function (event){
+ipcMain.handle("openRobocentre", async function (event) {
     shell.openExternal("http://robocentregh.com")
 })
-ipcMain.handle("contactSupportViaMail", async function (event){
+ipcMain.handle("contactSupportViaMail", async function (event) {
     shell.openExternal(`mailto:?subject=Support Needed!`)
 })
-ipcMain.handle("shareWorkspaceViaMail", async function (event, link){
+ipcMain.handle("shareWorkspaceViaMail", async function (event, link) {
     shell.openExternal(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${link}`)
 })
 ipcMain.handle("checkSizeWindow", async function (event) {
@@ -364,14 +366,22 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
     try {
         fs.writeFileSync(isDev ? path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") : path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino"), jsCode)
         CHECK_COMPORT(function (res) {
+            console.log(COMPORT)
             event.sender.send('arduino_comport', res);
+            if (res !== "No Arduino Detected") {
+                console.log(res)
+                VERIFYCODE(function (result) {
+                    win.webContents.send('arduino_upload_status', result);
+                });
+            }
+            else{
+                console.log("No arduino")
+                win.webContents.send("arduino_upload_status", `No Arduino Detected`)
+            }
         });
-        VERIFYCODE(function (res) {
-            // event.sender.send('arduino_upload_status', res);
-        });
+
     }
     catch (e) {
-        //win.webContents.send("arduino_upload_status",`Upload Failed`)
     }
 })
 try {

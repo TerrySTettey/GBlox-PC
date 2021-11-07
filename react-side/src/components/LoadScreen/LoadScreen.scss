@@ -164,8 +164,8 @@
     .c-LoadScreen-a-Background {
         display: block;
         position: absolute;
-        top:0;
-        left:0;
+        top: 0;
+        left: 0;
         height: 100%;
         width: 100%;
         background-color: var(--primary-color);
@@ -177,7 +177,6 @@
         position: relative;
         top: 0;
         left: 0;
-        
 
         #SideSVGS {
             display: flex;
@@ -187,7 +186,8 @@
             width: 100%;
             height: 100%;
             position: absolute;
-            transition: transform 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67), height 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67);
+            transition: transform 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67),
+                height 0.75s cubic-bezier(0.79, 2.38, 0.44, 0.67);
             #RightSide {
                 transform: scaleX(-1);
             }
@@ -292,8 +292,8 @@
                 transform: rotate(270deg) scaleY(-1);
                 color: var(--border-color);
                 opacity: 1;
-                g{
-                    stroke: var(--border-color);
+                g circle{
+                    stroke: var(--secondary-color) !important;
                 }
             }
 
@@ -320,7 +320,7 @@
                 margin: auto;
                 align-self: center;
                 svg {
-                    path{
+                    path {
                         fill: var(--logo-color) !important;
                     }
                     animation: StaticCircle-Grow 0.8s;
@@ -343,22 +343,22 @@
                 }
             }
 
-            .i-Dot{
+            .i-Dot {
                 position: absolute;
                 background-color: var(--border-color);
                 width: 4px;
                 height: 4px;
-                top:0;
+                top: 0;
                 left: 50%;
                 border-radius: 50%;
             }
 
-            .i-DotController{
+            .i-DotController {
                 position: absolute;
                 background-color: transparent;
                 width: 100%;
                 height: 100%;
-                top:0;
+                top: 0;
                 left: 0;
                 opacity: 1;
             }
@@ -371,47 +371,47 @@
     .i-anim-LongDot {
         animation: LongDot-PathTurn 1.2s linear infinite, LongDot-PathGrow 1.2s ease-in infinite;
     }
-    .i-anim-DC-0{
+    .i-anim-DC-0 {
         animation: Appear 0.1s, DC-Orbit 1.2s 0s;
     }
-    .i-anim-DC-1{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.1s;
+    .i-anim-DC-1 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.1s;
     }
-    .i-anim-DC-2{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.2s;
+    .i-anim-DC-2 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.2s;
     }
-    .i-anim-DC-3{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.3s;
+    .i-anim-DC-3 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.3s;
     }
-    .i-anim-DC-4{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.4s;
+    .i-anim-DC-4 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.4s;
     }
-    .i-anim-DC-5{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.42s;
+    .i-anim-DC-5 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.42s;
     }
-    .i-anim-DC-6{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.43s;
+    .i-anim-DC-6 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.43s;
     }
-    .i-anim-DC-7{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.45s;
+    .i-anim-DC-7 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.45s;
     }
-    .i-anim-DC-8{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.46s;
+    .i-anim-DC-8 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.46s;
     }
-    .i-anim-DC-9{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.48s;
+    .i-anim-DC-9 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.48s;
     }
-    .i-anim-DC-10{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.5s;
+    .i-anim-DC-10 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.5s;
     }
-    .i-anim-DC-11{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.53s;
+    .i-anim-DC-11 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.53s;
     }
-    .i-anim-DC-12{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.55s;
+    .i-anim-DC-12 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.55s;
     }
-    .i-anim-DC-13{
-        animation: Appear 0.1s,DC-Orbit 1.2s 0.57s;
+    .i-anim-DC-13 {
+        animation: Appear 0.1s, DC-Orbit 1.2s 0.57s;
     }
 }
 
@@ -508,34 +508,33 @@
 }
 
 @keyframes Disappear {
-    0%{
+    0% {
         opacity: 1;
     }
-    100%{
+    100% {
         opacity: 0;
     }
 }
 
 @keyframes Appear {
-    0%{
+    0% {
         opacity: 0;
     }
-    100%{
+    100% {
         opacity: 1;
     }
 }
 
-@media only screen and (min-width: 1284px) and (min-height: 713px) and (max-height: 960px){
-    #SideSVGS{
+@media only screen and (min-width: 1284px) and (min-height: 713px) and (max-height: 960px) {
+    #SideSVGS {
         margin-top: 0vh !important;
-        transform: scale(0.6); 
+        transform: scale(0.6);
     }
 }
 
-@media only screen and (min-width: 1284px) and (min-height: 961px){
-    #SideSVGS{
+@media only screen and (min-width: 1284px) and (min-height: 961px) {
+    #SideSVGS {
         margin-top: 0vh !important;
-        transform: scale(0.8); 
+        transform: scale(0.8);
     }
 }
-
