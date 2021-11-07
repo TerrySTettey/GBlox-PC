@@ -1,35 +1,64 @@
 .c-Alert-a-Container {
     display: grid;
     width: fit-content;
-    background-color: #0b0533;
-    color: white;
+    background-color: var(--border-color);
+    color: var(--text-color);
     grid-template-columns: 0fr 1fr;
     padding: 25px;
     border-radius: 10px;
+    font-family: "Baloo2-Regular";
+    font-size: 17pt;
     .c-Alert-SVG {
         padding: 20px;
+        path{
+            fill: red;
+        }
     }
     .c-Alert-a-notificationContent {
         display: grid;
         grid-template-areas:
-            "content content"
-            "close ok";
-        .c-Alert-Alert {
-            grid-area: content;
-        }
+            "content"
+            "ok";
+
     }
     .c-Alert-a-alertContent {
         display: grid;
         grid-template-areas:
-            "content"
-            "ok";
+        "content content"
+        "close ok";
+        gap: 15px;
+
+    }
+    .c-Alert-Alert {
+        grid-area: content;
+        user-select: none;
     }
     .c-Alert-CloseButton {
         grid-area: close;
         margin: auto;
+        width: 100%;
+        
     }
     .c-Alert-OkButton {
         grid-area: ok;
         margin: auto;
+        width: 100%;
+    }
+    #button-container{
+        width: 100%;
+        .c-button-a-ExampleButton{
+            background-color: var(--secondary-color);
+            
+            z-index: 1;
+        }
+        #c-CloseButton,#c-OkButton{
+            width: 100%;
+            cursor: pointer;
+        }
+        &:hover{
+            .c-button-a-ExampleButton{
+            background-color: var(--primary-color);
+            }
+        }
     }
 }

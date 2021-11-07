@@ -393,13 +393,11 @@ const Button = (props) => {
         case "ExampleButton":
             buttonType = (
                 <div>
-                    <div className="c-button-a-ExampleButton" ref={buttonTyper} style={{
-                        backgroundColor: buttonColor,
-                        borderColor: borderColor
-                    }}>
+                    <div className="c-button-a-ExampleButton">
                         <p className="button-text"> {props.text}</p>
                     </div>
                     {emptybutton}
+                    
                 </div>
             )
             break;

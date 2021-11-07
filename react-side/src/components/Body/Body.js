@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import "./Body.scss";
 import svg_dictionary from '../svg_dictionary';
 import ProgressBar from '../ProgressBar';
-import Slide_Out_Menu from '../Slide_Out_Menu'
 import Upload_Circle from '../Upload_Circle'
 import Toolbox from '../Toolbox/Toolbox';
 import Button from '../Button';
@@ -46,7 +45,7 @@ const Body = (props) => {
     const [progress_value, setProgressValue] = useState(0)
     const [inUpload, setInUpload] = useState(false);
     const [toolboxButtons, setToolboxButtons] = useState([]);
-    const [alertDiv, setAlertDiv] = useState(<div></div>)
+    
     const {
         selectedDevice,
         upload_status,
@@ -55,7 +54,9 @@ const Body = (props) => {
         bodyLoaded,
         setBodyLoaded,
         splashScreen,
-        setSplashScreen
+        setSplashScreen,
+        alertDiv, 
+        setAlertDiv
     } = useContext(Ctxt_SingletonManager)
 
     function updateProgress(value) {
@@ -75,7 +76,7 @@ const Body = (props) => {
         if (inUpload == true) {
             document.getElementById("c-Body-Notification").style.display="block";
             setAlertDiv(
-                <Alert_Notification type="alert" text="Code is Uploading! Please Wait..." closeAlert={e=>{setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display="none";}} />
+                <Alert_Notification type="notification" text="Code is Uploading! Please Wait..." closeAlert={e=>{setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display="none";}} />
             )
             setTimeout(() => {
                 setAlertDiv(<div></div>)

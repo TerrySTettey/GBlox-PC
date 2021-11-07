@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import WorkspaceAdd from '../WorkspaceAdd'
 import WorkspaceTab from '../WorkspaceTab'
+import Alert_Notification from '../Alert_Notification'
 import Blockly, { Block } from 'blockly'
 import "./WorkTabHolder.scss"
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
@@ -38,7 +39,9 @@ const WorkTabHolder = (props) => {
         setBlocklyVariables,
         blocklyVariables,
         variablesLoadedCorrectly,
-        setVariablesLoadedCorrectly
+        setVariablesLoadedCorrectly,
+        alertDiv,
+        setAlertDiv
     } = useContext(Ctxt_SingletonManager);
     const [tabAddedState, setTabAddedState] = useState(0);
     const [tabChangedState, setTabChangedState] = useState(0)
@@ -86,9 +89,11 @@ const WorkTabHolder = (props) => {
             if (currentTab.savedXML !== "") {
                 if (Blockly.Xml.domToText(currentTab.savedXML) !== Blockly.Xml.domToText(currentXML)) {
                     currentTab.tabSaved = false;
+                    setLoadCheck("Current")
                 }
                 else {
                     currentTab.tabSaved = true;
+                    setLoadCheck("Saved")
                 }
             }
         }
@@ -231,13 +236,37 @@ const WorkTabHolder = (props) => {
         setTabAddedState(1)
     }
     function CloseTab(e) {
-        if (TabHolder.length > 1) {
-            var SelectedID = e.target.parentNode.id.split("-")[2];
-            TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
-            currentTab = TabHolder[TabHolder.length - 1]
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
-            setCurrentDeviceName(currentTab.tabDevice)
-            setTabClosedState(1)
+        if (currentTab.tabSaved == true) {
+            if (TabHolder.length > 1) {
+                var SelectedID = e.target.parentNode.id.split("-")[2];
+                TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
+                currentTab = TabHolder[TabHolder.length - 1]
+                Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
+                setCurrentDeviceName(currentTab.tabDevice)
+                setTabClosedState(1)
+            }
+        }
+        else {
+            document.getElementById("c-Body-Notification").style.display="block";
+            setAlertDiv(
+                <Alert_Notification
+                    type="alert"
+                    text="This tab has not been saved! Close anyways?"
+                    acceptAlert={ev => {
+                        setAlertDiv(<div></div>); 
+                        document.getElementById("c-Body-Notification").style.display="none";
+                        if (TabHolder.length > 1) {
+                            var SelectedID = e.target.parentNode.id.split("-")[2];
+                            TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
+                            currentTab = TabHolder[TabHolder.length - 1]
+                            Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
+                            setCurrentDeviceName(currentTab.tabDevice)
+                            setTabClosedState(1)
+                        }
+                    }}
+                    closeAlert={event=>{
+                        setAlertDiv(<div></div>); 
+                        document.getElementById("c-Body-Notification").style.display="none";}} />)
         }
     }
     function ChangeTab(e) {

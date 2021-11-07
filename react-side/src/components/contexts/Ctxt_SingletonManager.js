@@ -6,6 +6,7 @@ import AlterBlockly from "../../blocklyextras/blocklyAlters";
 import { mainLoopCode } from "../../customblocks/compiler/arduino_core";
 import { MelloDOM } from "../../customblocks/toolboxes/toolboxes";
 import { ThemeContext } from "./ThemeContext";
+import Alert_Notification from '../Alert_Notification'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import WorkspaceTab from "../WorkspaceTab";
@@ -52,7 +53,8 @@ const CtxtP_SingletonManager = (props) => {
     const [variablesLoadedCorrectly, setVariablesLoadedCorrectly] = useState(true)
     const [windowMax, setWindowMax] = useState(false);
     const [bodyLoaded, setBodyLoaded] = useState(false);
-    const [splashScreen, setSplashScreen] =useState(<div></div>);
+    const [splashScreen, setSplashScreen] = useState(<div></div>);
+    const [alertDiv, setAlertDiv] = useState(<div></div>)
     const {
         dark_theme,
         light_theme
@@ -410,7 +412,7 @@ const CtxtP_SingletonManager = (props) => {
             alert(e);
             console.log(e)
         }
-        
+
         if (cb !== undefined) {
             cb([name, saveData])
         }
@@ -465,7 +467,24 @@ const CtxtP_SingletonManager = (props) => {
     function electronWindowControl(event) {
         var button = event.target.id.split("WindowButton")[0].toLowerCase();
         console.log(button)
-        ipcRenderer.invoke("electronWindowControl", button)
+        if (button === "close") {
+            document.getElementById("c-Body-Notification").style.display = "block";
+            setAlertDiv(
+                <Alert_Notification
+                    type="alert"
+                    text="Close gBlox?"
+                    acceptAlert={ev => {
+                        ipcRenderer.invoke("electronWindowControl", button)
+                    }}
+                    closeAlert={event => {
+                        setAlertDiv(<div></div>);
+                        document.getElementById("c-Body-Notification").style.display = "none";
+                    }} />)
+        }
+        else{
+            ipcRenderer.invoke("electronWindowControl", button)
+        }
+        
     }
 
     //Used to show the generated Blockly code.
@@ -543,8 +562,20 @@ const CtxtP_SingletonManager = (props) => {
 
     //Used to close the app from React
     function closeApp() {
-        ipcRenderer.invoke("close-app");
-        console.log("app closed")
+        document.getElementById("c-Body-Notification").style.display = "block";
+        setAlertDiv(
+            <Alert_Notification
+                type="alert"
+                text="Close gBlox?"
+                acceptAlert={ev => {
+                    setAlertDiv(<div></div>);
+                    document.getElementById("c-Body-Notification").style.display = "none";
+                    ipcRenderer.invoke("close-app");
+                }}
+                closeAlert={event => {
+                    setAlertDiv(<div></div>);
+                    document.getElementById("c-Body-Notification").style.display = "none";
+                }} />)
     }
 
     return (
@@ -598,10 +629,12 @@ const CtxtP_SingletonManager = (props) => {
                 setVariablesLoadedCorrectly,
                 windowMax,
                 electronWindowControl,
-                bodyLoaded, 
+                bodyLoaded,
                 setBodyLoaded,
-                splashScreen, 
-                setSplashScreen
+                splashScreen,
+                setSplashScreen,
+                alertDiv,
+                setAlertDiv
             }}
         >
             {props.children}
