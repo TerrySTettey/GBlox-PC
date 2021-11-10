@@ -106,9 +106,12 @@ const TestMain = (props) => {
     function device_manager(event) {
         var popout = document.getElementById("c-device-manager")
         if (event.target.id === "device-add-button") {
+            popout.style.display = "inline-flex"
             popout.style.opacity = "1"
             popout.style.backgroundColor = "#0B0533dd";
-            popout.style.display = "inline-flex"
+            // setTimeout(function () {
+                
+            // },500)
         }
         else {
             if (currentDeviceName !== event.target.id) {
@@ -121,7 +124,7 @@ const TestMain = (props) => {
             popout.style.backgroundColor = "transparent";
             setTimeout(() => {
                 popout.style.display = "none"
-            }, 1)
+            }, 500)
         }
     }
     async function readSystemSettings() {
@@ -143,8 +146,12 @@ const TestMain = (props) => {
         ipcRenderer.invoke("contactSupportViaMail");
     }
     function removeVideo() {
-        var video = document.getElementById("loading-screen")
-        video.style.display = "none";
+        var video = document.getElementById("loading-screen");
+        video.style.opacity = 0
+        setTimeout(function() {
+            video.style.display = "none";
+        },[1000])
+        
         // var body = document.getElementById("body-container")
         // body.style.display = "block";
     }
@@ -191,7 +198,7 @@ const TestMain = (props) => {
         })
     })
     useEffect(() => {
-        var outer_circle = document.getElementById("Outer_Circle");
+        var outer_circle = document.getElementById("Outer_Circle_Device");
         if (available_com_ports.length > 0) {
             outer_circle.style.fill = "green"
             outer_circle.style.animation = ("none")
