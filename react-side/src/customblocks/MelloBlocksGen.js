@@ -258,7 +258,7 @@ Blockly.JavaScript['communincation_bluetooth_send'] = function (block) {
   }
 
   // TODO: Assemble JavaScript into code variable.
-  var code = `\tsend_bluetooth("${value_name}");\n`
+  var code = `\tsend_bluetooth('${value_name}');\n`
   return code;
 };
 
@@ -273,7 +273,7 @@ Blockly.JavaScript['sound_buzzer_timer'] = function (block) {
   var dropdown_name = block.getFieldValue('note');
   var value_buzzer_time = Blockly.JavaScript.valueToCode(block, 'Buzzer Time', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `\ntone(${Buzzer_Pin},${dropdown_name});\ndelay(${value_buzzer_time});\nnoTone(${Buzzer_Pin});`;
+  var code = `\ntone(${Buzzer_Pin},${dropdown_name});\ndelay(${value_buzzer_time*1000});\nnoTone(${Buzzer_Pin});`;
   return code;
 };
 
