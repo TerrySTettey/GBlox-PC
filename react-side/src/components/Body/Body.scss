@@ -284,6 +284,12 @@
         }
     }
 
+    .blocklyBubbleCanvas{
+        .blocklyFlyout{
+            transform: none !important;
+        }
+    }
+
     .c-Body-a-OverlayExtras {
         position: absolute;
         top: 0;
