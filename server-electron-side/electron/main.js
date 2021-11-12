@@ -15,6 +15,9 @@ const { execSync, exec } = require('child_process');
 const { shell } = require('electron');
 var loaded_path = "";
 var win = null;
+
+if (require('electron-squirrel-startup')) return app.quit();
+
 //Creation of Application Window
 function createWindow() {
     win = new BrowserWindow({
