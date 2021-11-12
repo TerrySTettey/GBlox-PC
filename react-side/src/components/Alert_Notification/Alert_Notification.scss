@@ -1,7 +1,7 @@
 .c-Alert-a-Container {
     display: grid;
     width: fit-content;
-    background-color: var(--border-color);
+    background-color: var(--primary-color);
     color: var(--text-color);
     grid-template-columns: 0fr 1fr;
     padding: 25px;
@@ -47,8 +47,10 @@
     #button-container{
         width: 100%;
         .c-button-a-ExampleButton{
-            background-color: var(--secondary-color);
-            
+            background-color: var(--primary-color);
+            p{
+                color: var(--text-color) !important;
+            }
             z-index: 1;
         }
         #c-CloseButton,#c-OkButton{
@@ -57,7 +59,10 @@
         }
         &:hover{
             .c-button-a-ExampleButton{
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
+            p{
+                color: white !important;
+            }
             }
         }
     }

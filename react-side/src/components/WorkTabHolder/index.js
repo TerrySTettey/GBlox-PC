@@ -247,26 +247,29 @@ const WorkTabHolder = (props) => {
             }
         }
         else {
-            document.getElementById("c-Body-Notification").style.display="block";
-            setAlertDiv(
-                <Alert_Notification
-                    type="alert"
-                    text="This tab has not been saved! Close anyways?"
-                    acceptAlert={ev => {
-                        setAlertDiv(<div></div>); 
-                        document.getElementById("c-Body-Notification").style.display="none";
-                        if (TabHolder.length > 1) {
-                            var SelectedID = e.target.parentNode.id.split("-")[2];
-                            TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
-                            currentTab = TabHolder[TabHolder.length - 1]
-                            Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
-                            setCurrentDeviceName(currentTab.tabDevice)
-                            setTabClosedState(1)
-                        }
-                    }}
-                    closeAlert={event=>{
-                        setAlertDiv(<div></div>); 
-                        document.getElementById("c-Body-Notification").style.display="none";}} />)
+            if (TabHolder.length > 1) {
+                document.getElementById("c-Body-Notification").style.display = "block";
+                setAlertDiv(
+                    <Alert_Notification
+                        type="alert"
+                        text="This tab has not been saved! Close anyways?"
+                        acceptAlert={ev => {
+                            setAlertDiv(<div></div>);
+                            document.getElementById("c-Body-Notification").style.display = "none";
+                            if (TabHolder.length > 1) {
+                                var SelectedID = e.target.parentNode.id.split("-")[2];
+                                TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
+                                currentTab = TabHolder[TabHolder.length - 1]
+                                Blockly.Xml.clearWorkspaceAndLoadFromXml(currentTab.tabXML, currentWorkspace)
+                                setCurrentDeviceName(currentTab.tabDevice)
+                                setTabClosedState(1)
+                            }
+                        }}
+                        closeAlert={event => {
+                            setAlertDiv(<div></div>);
+                            document.getElementById("c-Body-Notification").style.display = "none";
+                        }} />)
+            }
         }
     }
     function ChangeTab(e) {
