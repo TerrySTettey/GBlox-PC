@@ -581,6 +581,10 @@ const CtxtP_SingletonManager = (props) => {
                 }} />)
     }
 
+    function openMingoBlox(){
+        ipcRenderer.invoke("openMingoBlox")
+    }
+
     return (
         <Ctxt_SingletonManager.Provider
             value={{
@@ -637,7 +641,8 @@ const CtxtP_SingletonManager = (props) => {
                 splashScreen,
                 setSplashScreen,
                 alertDiv,
-                setAlertDiv
+                setAlertDiv,
+                openMingoBlox
             }}
         >
             {props.children}

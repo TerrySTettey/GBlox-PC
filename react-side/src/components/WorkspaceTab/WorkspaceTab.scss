@@ -4,9 +4,8 @@
     height: 36px;
     max-width: 1000px;
     min-width: 10px;
-    transition: max-width 1s;
+    transition: all 0.3s;
     
-
     background-color: var(--tab-color);
     border: var(--border-color);
     outline: 2px red  var(--border-color);
@@ -14,6 +13,16 @@
     justify-content: center;
     transform: skewX(-45deg);
 
+    &:hover {
+        max-width: fit-content !important;
+        flex-grow: 10 !important;
+        flex-shrink: 0 !important;
+
+        .c-WorkspaceTab-a-Text {
+            max-width: 1000px;
+        }
+        
+    }
     
 
     .c-WorkspaceTab-a-Text {

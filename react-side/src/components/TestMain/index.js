@@ -39,7 +39,8 @@ const TestMain = (props) => {
         bodyLoaded,
         setBodyLoaded,
         splashScreen,
-        setSplashScreen } = useContext(Ctxt_SingletonManager)
+        setSplashScreen,
+        openMingoBlox } = useContext(Ctxt_SingletonManager)
     const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
 
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -110,7 +111,7 @@ const TestMain = (props) => {
             popout.style.opacity = "1"
             popout.style.backgroundColor = "#0B0533dd";
             // setTimeout(function () {
-                
+
             // },500)
         }
         else {
@@ -148,10 +149,10 @@ const TestMain = (props) => {
     function removeVideo() {
         var video = document.getElementById("loading-screen");
         video.style.opacity = 0
-        setTimeout(function() {
+        setTimeout(function () {
             video.style.display = "none";
-        },[1000])
-        
+        }, [1000])
+
         // var body = document.getElementById("body-container")
         // body.style.display = "block";
     }
@@ -276,7 +277,13 @@ const TestMain = (props) => {
             </div>
             <div id="loading-screen">
                 <LoadScreen />
+                <div id="comp-details">
+                    <p>v1.0.1</p>
+                    <p>© Mingo Blox LLC</p>
+                    <a onClick={openMingoBlox}>www.mingoblox.com</a>
+                </div>
             </div>
+
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}
