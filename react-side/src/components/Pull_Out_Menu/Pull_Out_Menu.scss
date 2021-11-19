@@ -32,7 +32,7 @@
     .c-Pull-Out-Menu-a-buttongroup {
         margin-top: 51.1px;
         margin-right: -34.7px;
-        display: inline-flex;
+        display: flex;
         flex-direction: column;
         z-index: 1;
         transform-origin: top center;
@@ -41,6 +41,7 @@
         #button-container {
             display: flex;
             margin-bottom: 10px;
+            transition: margin-bottom 0.3s cubic-bezier(0.79, 2.38, 0.44, 0.67);
             .c-button-a-CircularOverlayMenuButton{
                 background-color: var(--primary-color);
                 transition: all 0.5s;
@@ -52,6 +53,8 @@
                 }
             }
             &:hover{
+                margin-bottom: 50px;
+
                 .c-button-a-CircularOverlayMenuButton{
                 background-color: var(--border-color) !important;
                 transition: all 0.5s;

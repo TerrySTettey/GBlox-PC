@@ -298,7 +298,7 @@
             }
 
             .c-LoadScreen-a-StaticCircle {
-                display: none;
+                display: block;
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -306,6 +306,7 @@
                 transform: translate(-50%, -50%);
                 margin: auto;
                 align-self: center;
+                outline: 2px red solid;
                 svg {
                     animation: StaticCircle-Grow 0.8s, StaticCircle-Flicker 2.4s step-start infinite;
                 }

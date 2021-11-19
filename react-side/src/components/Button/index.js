@@ -202,7 +202,7 @@ const Button = (props) => {
                     <div className="c-button-a-CircularOverlayMenuButton">
                         <div className="button-svg">{props.children}</div>
                     </div>
-                    <span id={`tooltip-${props.id}`} className="tooltiptext">{props.tooltip}</span>
+                    <span id={`tooltip-${props.id}`} className="tooltiptext">{props.tooltip[0]}<div className="shortcutText2">{props.tooltip[1]}</div></span>
 
                     {emptybutton}
                 </div>

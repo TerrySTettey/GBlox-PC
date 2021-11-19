@@ -184,7 +184,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.viewCode}
                     hoverEffect="fill-tooltip"
                     onClick={Menu}
-                    tooltip="View Code"
+                    tooltip={["View Code","Ctrl+G"]}
                 />
 
                 <Button
@@ -196,7 +196,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.serialPort}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip="Serial Monitor"
+                    tooltip={["Serial Monitor","Ctrl+H"]}
                 />
                 <Button
                     id="code-editor"
@@ -207,7 +207,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.codeEditor}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip="Code Editor"
+                    tooltip={["Code Editor","Ctrl+J"]}
                 />
                 <Button
                     id="example-code"
@@ -218,7 +218,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.exampleCode}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip="Sample Codes"
+                    tooltip={["Sample Codes","Ctrl+K"]}
                 />
 
                 <Button
@@ -230,7 +230,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.helpMenu}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip="Help"
+                    tooltip={["Help","Ctrl+L"]}
                 />
             </div>
             <div className="pull-out-container" ref={pull_out_container} >

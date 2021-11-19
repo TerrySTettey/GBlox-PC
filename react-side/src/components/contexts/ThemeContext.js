@@ -119,6 +119,7 @@ const ThemeContextProvider = (props) => {
         directive_keyword_code
         punctuation_code_color
         function_code_color
+        shortcut_text_color
 
         constructor(primary,
             secondary,
@@ -140,7 +141,8 @@ const ThemeContextProvider = (props) => {
             directive_hash_code,
             directive_keyword_code,
             punctuation_code_color,
-            function_code_color) {
+            function_code_color,
+            shortcut_text_color) {
             this.primaryColor = primary;
             this.secondaryColor = secondary;
             this.tetiaryColor = tetiary;
@@ -162,6 +164,7 @@ const ThemeContextProvider = (props) => {
             this.directive_keyword_code = directive_keyword_code;
             this.punctuation_code_color = punctuation_code_color;
             this.function_code_color = function_code_color
+            this.shortcut_text_color = shortcut_text_color
         }
     }
 
@@ -186,7 +189,8 @@ const ThemeContextProvider = (props) => {
         "goldenrod", //directive_hash_code
         "goldenrod", //directive_keyword_code
         "grey", //punctuation_code_color
-        "rgb(205, 5, 255)" //function_code_color
+        "rgb(205, 5, 255)", //function_code_color
+        "#FFF8" //shortcut_text_color
     )
         ;
     var globalLightTheme = new Theme(
@@ -210,7 +214,8 @@ const ThemeContextProvider = (props) => {
         "black", //directive_hash_code
         "black", //directive_keyword_code
         "grey", //punctuation_code_color
-        "rgb(205, 5, 255)" //function_code_color
+        "rgb(205, 5, 255)", //function_code_color
+        "#0000dc"   //shortcut_text_color
     );
 
     function changeTheme(event) {
@@ -269,6 +274,7 @@ const ThemeContextProvider = (props) => {
             document.documentElement.style.setProperty('--directive_keyword_code', current_theme.directive_keyword_code);
             document.documentElement.style.setProperty('--punctuation_code_color', current_theme.punctuation_code_color);
             document.documentElement.style.setProperty('--function_code_color', current_theme.function_code_color);
+            document.documentElement.style.setProperty('--shortcut_text_color', current_theme.shortcut_text_color);
         }
 
     }, [current_theme])

@@ -1,16 +1,16 @@
 /*Div Class for holding the dropdown content*/
 
-.dropdown-container{
+.dropdown-container {
     display: block;
     position: relative;
 
     .blue-dropdown-box {
         display: none;
-        position:absolute;
+        position: absolute;
         background-color: none;
         min-width: 160px;
         /*HATE THIS PROPERTY*/
-        top:100%;
+        top: 100%;
         left: 5px;
         margin: 0;
         padding: 0;
@@ -28,24 +28,27 @@
             background-color: var(--secondary-color);
             width: 100%;
             text-align: left;
-            
 
             &:hover {
                 background-color: #0000ad;
             }
         }
     }
+}
 
+.shortcutText {
+    color: #FFF8;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .button-no-border {
-    display: block;
     border: none;
-    padding:0;
+    padding: 0;
     margin-left: 5px;
     margin-right: 5px;
     text-decoration: none;
-    background:none;
+    background: none;
 }
-
-

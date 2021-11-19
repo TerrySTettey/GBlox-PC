@@ -78,7 +78,7 @@ function createWindow() {
         label: 'Electron',
         submenu: [{
             role: 'help',
-            accelerator: 'CommandOrControl+G',
+            accelerator: 'Alt+V',
             click: () => { win.webContents.send("shortcut","openCodeView") }
         }]
     }))
@@ -86,7 +86,7 @@ function createWindow() {
         label: 'Electron',
         submenu: [{
             role: 'help',
-            accelerator: 'CommandOrControl+H',
+            accelerator: 'Alt+M',
             click: () => { win.webContents.send("shortcut","openSerialMonitor") }
         }]
     }))
@@ -94,7 +94,7 @@ function createWindow() {
         label: 'Electron',
         submenu: [{
             role: 'help',
-            accelerator: 'CommandOrControl+J',
+            accelerator: 'Alt+E',
             click: () => { win.webContents.send("shortcut","openCodeEditor") }
         }]
     }))
@@ -102,7 +102,7 @@ function createWindow() {
         label: 'Electron',
         submenu: [{
             role: 'help',
-            accelerator: 'CommandOrControl+K',
+            accelerator: 'Alt+X',
             click: () => { win.webContents.send("shortcut","openExamples") }
         }]
     }))
@@ -110,7 +110,7 @@ function createWindow() {
         label: 'Electron',
         submenu: [{
             role: 'help',
-            accelerator: 'CommandOrControl+L',
+            accelerator: 'Alt+H',
             click: () => { win.webContents.send("shortcut","openHelp") }
         }]
     }))

@@ -48,7 +48,7 @@ const Dropdown = (props) => {
         var i = 0;
         if (props.list !== undefined && props.funcsOnClick !== undefined) {
             for (i; i < props.list.length; i++) {
-                ButtonHolder.push(<button className="button-no-border" onClick={props.funcsOnClick[i]} >{props.list[i]}</button>)
+                ButtonHolder.push(<button className="button-no-border" onClick={props.funcsOnClick[i]} >{props.list[i][0]} <div className="shortcutText"> {props.list[i][1]} </div></button>)
             }
         }
     }
@@ -66,7 +66,7 @@ const Dropdown = (props) => {
 
 Dropdown.defaultProps = {
     buttonImage: 5,
-    list: ["Hello", "World"],
+    list: [["Hello",], ["World",]],
     funcsOnClick: [() => { console.log("Hello") }, () => { console.log("World") }],
     type: "2"
 }

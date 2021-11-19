@@ -18,6 +18,10 @@ code {
     monospace;
 }
 
+p, div, a, span {
+  font-family: 'Baloo2-Regular';
+}
+
 #root {
   width: 100%;
   height: 100%;
