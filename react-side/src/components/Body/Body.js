@@ -45,6 +45,7 @@ const Body = (props) => {
     const [progress_value, setProgressValue] = useState(0)
     const [inUpload, setInUpload] = useState(false);
     const [toolboxButtons, setToolboxButtons] = useState([]);
+    const [uploadInProgressStatus, setUploadInProgressStatus] = useState()
 
     const {
         selectedDevice,
@@ -73,15 +74,15 @@ const Body = (props) => {
     }
 
     function uploadCode() {
+        console.log(inUpload)
         if (inUpload == true) {
-            document.getElementById("c-Body-Notification").style.display = "block";
-            setAlertDiv(
-                <Alert_Notification type="notification" text="Code is Uploading! Please Wait..." closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
-            )
-            // setTimeout(() => {
-            //     setAlertDiv(<div></div>)
-            //     document.getElementById("c-Body-Notification").style.display = "none";
-            // }, [2000]);
+            setUploadInProgressStatus("Upload already in Progress. Please Wait")
+            document.getElementById("uploadInProgressStatus").style.opacity="1";
+            setTimeout(() => {
+                setUploadInProgressStatus()
+                document.getElementById("uploadInProgressStatus").style.opacity="0";
+            },2000)
+            
         }
         else {
             setInUpload(true);
@@ -621,6 +622,9 @@ const Body = (props) => {
                     </div>
                     <div className="c-Body-a-ProgressBar">
                         <ProgressBar progress={progress_value} />
+                        <p id="uploadInProgressStatus">
+                            {uploadInProgressStatus}
+                        </p>
                     </div>
                 </div>
                 <div className="i-emptyDiv4" />

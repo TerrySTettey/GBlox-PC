@@ -368,14 +368,15 @@ ipcMain.handle("serialport_close", function (event) {
 })
 
 //ipc call for "upload-code" which checks for an available COMPORT and attempts to uplaod arduino code to the device
-ipcMain.handle("upload-code", async function (event, jsCode) {
+ipcMain.handle("upload-code", async function (event, jsCode, port) {
     try {
         fs.writeFileSync(isDev ? path.resolve(__dirname, "./ArduinoOutput/ArduinoOutput.ino") : path.join(process.resourcesPath, "ArduinoOutput/ArduinoOutput.ino"), jsCode)
         CHECK_COMPORT(function (res) {
             console.log(COMPORT)
             event.sender.send('arduino_comport', res);
-            if (res !== "No Arduino Detected") {
-                console.log(res)
+            COMPORT = [port];
+            if (port.length<10) {
+                console.log(port)
                 VERIFYCODE(function (result) {
                     win.webContents.send('arduino_upload_status', result);
                 });

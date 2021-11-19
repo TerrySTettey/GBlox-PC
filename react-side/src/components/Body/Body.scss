@@ -388,9 +388,23 @@
 
     .c-Body-a-ProgressBar {
         top: var(--shift);
-        display: block;
+        display: inline-block;
         position: relative;
         margin-left: -20px;
+        #uploadInProgressStatus{
+            transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+            padding: 10px;
+            background-color: var(--progress-empty-bar-color);
+            position: absolute;
+            margin-left: 800px;
+            bottom: -30px;
+            white-space: nowrap;
+            font-family: "Baloo2-Regular";
+            font-size: 17pt;
+            color: var(--text-color);
+            opacity: 0;
+        }
+
         //margin-top: 74.3px;
         //left: 30px;
         //top: 1030.1px;

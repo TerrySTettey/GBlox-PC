@@ -40,23 +40,26 @@ const TestMain = (props) => {
         setBodyLoaded,
         splashScreen,
         setSplashScreen,
+        available_com_ports, 
+        setAvailableCOMports,
         openMingoBlox } = useContext(Ctxt_SingletonManager)
     const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
 
-    const [available_com_ports, setAvailableCOMports] = useState([]);
+    
     const [system_settings, setSystemSettings] = useState([]);
     const [current_theme, setCurrentTheme] = useState("")
     const [splash_status, setSplashStatus] = useState("false");
 
 
     async function uploadCode_ipc() {
+        var port = document.getElementById("selected-comport").value
         if (document.getElementById("c-codeEditor").style.display !== "flex") {
             //Invokes upload-code from electron with the current code
-            ipcRenderer.invoke('upload-code', deviceCode);
+            ipcRenderer.invoke('upload-code', deviceCode, port);
         }
         else {
             var code = document.getElementById("full-editing").value
-            ipcRenderer.invoke('upload-code', code);
+            ipcRenderer.invoke('upload-code', code, port);
         }
 
         //Waits for results on which comport arduino is found on
@@ -167,28 +170,26 @@ const TestMain = (props) => {
                 setAvailableCOMports(result);
             });
             ipcRenderer.on('arduino_upload_status', (event, result) => {
-                response = result;
-                console.log(`This is the response from Electron : ${response}`);
-                if (response.includes("Verifying...") == true) {
+                if (result.includes("Verifying...") == true) {
                     setUploadStatus("Verifying Code");
                     console.log("Verifying the code now")
                 }
-                else if (response.includes("Uploading...") == true) {
+                else if (result.includes("Uploading...") == true) {
                     setUploadStatus("Uploading Code");
                     console.log("Uploading the code now")
                 }
-                else if (response.includes("An error occurred while uploading the sketch") == true) {
+                else if (result.includes("An error occurred while uploading the sketch") == true) {
                     setUploadStatus("Upload Failed");
                     console.log("Upload Failed")
                 }
-                else if (response.includes("Upload Failed") == true) {
+                else if (result.includes("Upload Failed") == true) {
                     setUploadStatus("Upload Failed : Error in Code")
                 }
-                else if (response.includes("Upload Successful") == true) {
+                else if (result.includes("Upload Successful") == true) {
                     setUploadStatus("Upload Successful")
                     console.log("Upload Successful")
                 }
-                else if (response.includes("No Arduino Detected") == true) {
+                else if (result.includes("No Arduino Detected") == true) {
                     setUploadStatus("No Arduino Detected")
                     console.log("No Arduino Detected")
                 }

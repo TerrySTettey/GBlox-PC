@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import "./NewDeviceManager.scss"
 import PropTypes from 'prop-types'
 import Upload_Circle from '../Upload_Circle'
-import { useState, useEffect, useRef } from 'react'
 import Button from "../Button"
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import svg_dictionary from '../svg_dictionary'
 
 
 function Index(props) {
+    const { available_com_ports, setActiveCOMports } = useContext(Ctxt_SingletonManager)
+    const [comportList, setComportList] = useState(<option>No Device Found</option>)
     var slide_out = useRef(null);
     var device_id = useRef(null);
-    
+
     function add_device(svg, device_name) {
         return (
             <div className="device_icon" id={device_name} onClick={props.deviceOnClick}>
@@ -33,8 +35,27 @@ function Index(props) {
                 </div>
             </div>
         )
-    
+
     }
+
+    useEffect(() => {
+        var list = [];
+        if (available_com_ports!==undefined) {
+            for (var i = 0; i < available_com_ports.length; i++) {
+                if (i==0){
+                    list.push(<option selected>{available_com_ports[i]}</option>)
+                }
+                else{
+                    list.push(<option>{available_com_ports[i]}</option>)
+                }
+            }
+            if (list.length < 1) {
+                list = <option>No Arduino Connected</option>
+            }
+            setComportList(list)
+        }
+    },[available_com_ports])
+
     return (
         <div id="c-NewDeviceManager">
             <div id="Device-Background" ref={slide_out}>
@@ -66,7 +87,7 @@ function Index(props) {
                             </g>
                             <path id="Path_366-6" data-name="Path 366" d="M470.259,1507.169H1739l106.454,106.454-1.579,226.161L1805,1883.5v444.283l-29,29H446.746l-89.271-89.271V1733.755l63.436-63.436v-163.15Z" transform="translate(-146.464 -1388.975)" fill="none" stroke="#0000dc" stroke-width="2" />
                         </g>
-                        <path id="Path_368" data-name="Path 368" d="M1703.99,480.6l-21.552,21.552V924.55L1703.99,903Z" transform="translate(0 3)"  />
+                        <path id="Path_368" data-name="Path 368" d="M1703.99,480.6l-21.552,21.552V924.55L1703.99,903Z" transform="translate(0 3)" />
                         <path id="Path_372" data-name="Path 372" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -671.104)" fill="none" stroke="#0000dc" stroke-width="2" />
                         <path id="Path_373" data-name="Path 373" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -631.104)" fill="none" stroke="#0000dc" stroke-width="2" />
                         <path id="Path_374" data-name="Path 374" d="M1703.99,800.6l-21.552,21.552v26.716l21.552-21.552Z" transform="translate(-1439.427 -591.104)" fill="none" stroke="#0000dc" stroke-width="2" />
@@ -75,6 +96,11 @@ function Index(props) {
                     </g>
                 </svg>
                 <div className="initial-text">Select Your Device</div>
+                <div id="comport-selector">
+                    <select id="selected-comport">
+                        {comportList}
+                    </select>
+                </div>
                 <div className="Device-Items">
                     {add_device(svg_dictionary.devices.Arduino_Uno_SVG, "Arduino Uno")}
                     {add_device(svg_dictionary.devices.mello_temp, "Mello")}
