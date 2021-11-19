@@ -1,13 +1,19 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useContext } from 'react'
 import Blockly from 'blockly'
 import Menu from '../Menu'
 import Button from '../Button'
+import Alert_Notification from '../Alert_Notification'
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import PropTypes from 'prop-types'
 import "./Example_Code_Menu.scss"
 
 function Index(props) {
     const { children } = props;
-
+    const {
+        selectedDevice, 
+        setAlertDiv,
+        currentXML
+    } = useContext(Ctxt_SingletonManager);
     function addDevices(example_object) {
         var devices = [];
         console.log(example_object.length)
@@ -25,11 +31,33 @@ function Index(props) {
     function loadXML(event) {
         const example_object = props.example_codes;
         var i = parseInt(event.target.id.replace("code-open-", ""));
-        try {
-            Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(example_object[i].xml), Blockly.mainWorkspace);
+        console.log(selectedDevice.default_workspace)
+        console.log(Blockly.Xml.domToText(currentXML))
+        if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace))!==selectedDevice.default_workspace){
+            document.getElementById("c-Body-Notification").style.display = "block";
+            setAlertDiv(<Alert_Notification
+                type="alert"
+                text="Opening this example will clear your workspace. Open anyways?"
+                acceptAlert={ev => {
+                    setAlertDiv(<div></div>);
+                    document.getElementById("c-Body-Notification").style.display = "none";
+                    try {
+                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(example_object[i].xml), Blockly.mainWorkspace);
+                    }
+                    catch (e) { }
+                }}
+                closeAlert={event => {
+                    setAlertDiv(<div></div>);
+                    document.getElementById("c-Body-Notification").style.display = "none";
+                }} 
+                />)
         }
-        catch (e) { }
-
+        else{
+            try {
+                Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(example_object[i].xml), Blockly.mainWorkspace);
+            }
+            catch (e) { }
+        }
 
     }
 

@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow , Menu, MenuItem} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 const { ipcMain, dialog } = require('electron')
@@ -40,6 +40,82 @@ function createWindow() {
             enableRemoteModule: true,
         }
     })
+
+    const menu = new Menu()
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+S',
+            click: () => { win.webContents.send("shortcut","save") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+O',
+            click: () => { win.webContents.send("shortcut","load") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+N',
+            click: () => { win.webContents.send("shortcut","new") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+Tab',
+            click: () => { win.webContents.send("shortcut","selectDevice") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+G',
+            click: () => { win.webContents.send("shortcut","openCodeView") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+H',
+            click: () => { win.webContents.send("shortcut","openSerialMonitor") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+J',
+            click: () => { win.webContents.send("shortcut","openCodeEditor") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+K',
+            click: () => { win.webContents.send("shortcut","openExamples") }
+        }]
+    }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'CommandOrControl+L',
+            click: () => { win.webContents.send("shortcut","openHelp") }
+        }]
+    }))
+
+    Menu.setApplicationMenu(menu)
 
     win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
     win.setTitle("gBlox")
@@ -190,7 +266,7 @@ function CHECK_COMPORT(cb) {
         }
         else {
             COMPORT = "No Arduino Detected";
-            
+
         }
     }
     catch (e) {
@@ -380,7 +456,7 @@ ipcMain.handle("upload-code", async function (event, jsCode) {
                     win.webContents.send('arduino_upload_status', result);
                 });
             }
-            else{
+            else {
                 console.log("No arduino")
                 win.webContents.send("arduino_upload_status", `No Arduino Detected`)
             }

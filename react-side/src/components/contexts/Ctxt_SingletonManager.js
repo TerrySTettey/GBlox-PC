@@ -102,7 +102,6 @@ const CtxtP_SingletonManager = (props) => {
             }
             catch (e) { }
             clearDropdowns()
-
         },
         () => {
             try {
@@ -218,6 +217,36 @@ const CtxtP_SingletonManager = (props) => {
                 ipcRenderer.on("window_size", (event, result) => {
                     setWindowMax(result)
                 })
+                ipcRenderer.on("shortcut", (event, result) => {
+                    switch (result) {
+                        case "save":
+                            exportBlocks(false)
+                            break;
+                        case "load":
+                            loadBlocks()
+                            break;
+                        case "selectDevice":
+                            document.getElementById("device-add-button").click()
+                            break;
+                        case "openCodeView":
+                            document.getElementById("view-code").click()
+                            break;
+                        case "openSerialMonitor":
+                            document.getElementById("serial-port").click()
+                            break;
+                        case "openCodeEditor":
+                            document.getElementById("code-editor").click()
+                            break;
+                        case "openExamples":
+                            document.getElementById("example-code").click()
+                            break;
+                        case "openHelp":
+                            document.getElementById("help-menu").click()
+                            break;
+                        default:
+                            break;
+                    }
+                })
                 ipcRenderer.invoke("checkSizeWindow")
                 var blocklyFlyoutBackground = document.getElementsByClassName("blocklyFlyoutBackground")
                 for (var i = 0; i < blocklyFlyoutBackground.length; i++) {
@@ -238,6 +267,27 @@ const CtxtP_SingletonManager = (props) => {
         }
 
     });
+    function device_manager(event) {
+        var popout = document.getElementById("c-device-manager")
+        if (event.target.id === "device-add-button") {
+            popout.style.display = "inline-flex"
+            popout.style.opacity = "1"
+            popout.style.backgroundColor = "#0B0533dd";
+        }
+        else {
+            if (currentDeviceName !== event.target.id) {
+                setCurrentDeviceName(event.target.id)
+                currentWorkspace.clear()
+                Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
+            }
+            //setCurrentDeviceVar( event.target.id)
+            popout.style.opacity = "0"
+            popout.style.backgroundColor = "transparent";
+            setTimeout(() => {
+                popout.style.display = "none"
+            }, 500)
+        }
+    }
     //Upload to DropBox and return share link
     async function uploadToDropbox() {
         console.log("In uploadToDropbox")
@@ -484,10 +534,10 @@ const CtxtP_SingletonManager = (props) => {
                         document.getElementById("c-Body-Notification").style.display = "none";
                     }} />)
         }
-        else{
+        else {
             ipcRenderer.invoke("electronWindowControl", button)
         }
-        
+
     }
 
     //Used to show the generated Blockly code.
@@ -581,7 +631,7 @@ const CtxtP_SingletonManager = (props) => {
                 }} />)
     }
 
-    function openMingoBlox(){
+    function openMingoBlox() {
         ipcRenderer.invoke("openMingoBlox")
     }
 
@@ -642,7 +692,8 @@ const CtxtP_SingletonManager = (props) => {
                 setSplashScreen,
                 alertDiv,
                 setAlertDiv,
-                openMingoBlox
+                openMingoBlox,
+                device_manager
             }}
         >
             {props.children}

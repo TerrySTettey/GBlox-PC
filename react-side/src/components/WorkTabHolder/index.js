@@ -11,6 +11,8 @@ var WSNumTracker = 0;
 var TabHolder = [];
 var currentTab = null;
 
+const { ipcRenderer } = window.require('electron');
+
 const WorkTabHolder = (props) => {
     const {
         initialized_workspace,
@@ -112,6 +114,16 @@ const WorkTabHolder = (props) => {
     useEffect(() => {
         if (initialized_workspace) {
             AddTab()
+            ipcRenderer.on("shortcut", (event, result) => {
+                switch(result){
+                    case "new":
+                        AddTab()
+                        break;
+
+                    default:
+                        break;
+                }
+            })
         }
     }, [initialized_workspace])
 

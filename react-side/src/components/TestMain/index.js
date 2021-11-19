@@ -40,7 +40,8 @@ const TestMain = (props) => {
         setBodyLoaded,
         splashScreen,
         setSplashScreen,
-        openMingoBlox } = useContext(Ctxt_SingletonManager)
+        openMingoBlox,
+        device_manager } = useContext(Ctxt_SingletonManager)
     const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
 
     const [available_com_ports, setAvailableCOMports] = useState([]);
@@ -104,30 +105,7 @@ const TestMain = (props) => {
     function open_flyout(event) {
         document.getElementById(event.target.id).click()
     }
-    function device_manager(event) {
-        var popout = document.getElementById("c-device-manager")
-        if (event.target.id === "device-add-button") {
-            popout.style.display = "inline-flex"
-            popout.style.opacity = "1"
-            popout.style.backgroundColor = "#0B0533dd";
-            // setTimeout(function () {
 
-            // },500)
-        }
-        else {
-            if (currentDeviceName !== event.target.id) {
-                setCurrentDeviceName(event.target.id)
-                currentWorkspace.clear()
-                Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
-            }
-            //setCurrentDeviceVar( event.target.id)
-            popout.style.opacity = "0"
-            popout.style.backgroundColor = "transparent";
-            setTimeout(() => {
-                popout.style.display = "none"
-            }, 500)
-        }
-    }
     async function readSystemSettings() {
         ipcRenderer.invoke("load-settings");
         ipcRenderer.on('current-settings', (event, result) => {
