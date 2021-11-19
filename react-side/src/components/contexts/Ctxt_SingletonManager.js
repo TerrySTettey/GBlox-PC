@@ -55,6 +55,8 @@ const CtxtP_SingletonManager = (props) => {
     const [bodyLoaded, setBodyLoaded] = useState(false);
     const [splashScreen, setSplashScreen] = useState(<div></div>);
     const [alertDiv, setAlertDiv] = useState(<div></div>)
+    const [available_com_ports, setAvailableCOMports] = useState([])
+    const [activeCOMports, setActiveCOMports] = useState("No Arduino Detected")
     const {
         dark_theme,
         light_theme
@@ -692,8 +694,12 @@ const CtxtP_SingletonManager = (props) => {
                 setSplashScreen,
                 alertDiv,
                 setAlertDiv,
-                openMingoBlox,
-                device_manager
+                device_manager,
+                available_com_ports, 
+                setAvailableCOMports,
+                activeCOMports, 
+                setActiveCOMports,
+                openMingoBlox
             }}
         >
             {props.children}

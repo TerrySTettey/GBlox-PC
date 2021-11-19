@@ -41,6 +41,43 @@
             margin: auto;
             user-select: none;
         }
+        #comport-selector {
+            position: absolute;
+            left: 70%;
+            top: 5%;
+            min-width: 250px;
+            white-space: nowrap;
+            display: inline-flex;
+            outline: none;
+            cursor: pointer;
+            line-height: 1.1;
+            font-size: 1.25rem;
+            background-color: white;
+            height: 28px;
+            border: 1px solid var(--border-color);
+            user-select: none;
+            transition: inherit;
+
+            select {
+                text-indent: 5%;
+                color: var(--secondary-color);
+                padding-right: 14.58px;
+                outline: none;
+            }
+            &:not(.select--multiple)::after {
+                pointer-events: none;
+                position: absolute;
+                content: "";
+                margin-left: 220px;
+                margin-top: 8px;
+                justify-self: end;
+                width: 0.8em;
+                height: 0.5em;
+                background-color: var(--border-color);
+                clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+                z-index: 2;
+            }
+        }
         .Device-Items {
             position: absolute;
             display: grid;
@@ -64,7 +101,6 @@
                     fill: inherit;
                     display: block;
                     margin: -12px -6px -12px -6px;
-                    
                 }
                 .children {
                     pointer-events: none;
