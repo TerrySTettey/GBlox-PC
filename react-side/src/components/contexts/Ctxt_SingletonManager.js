@@ -57,6 +57,13 @@ const CtxtP_SingletonManager = (props) => {
     const [alertDiv, setAlertDiv] = useState(<div></div>)
     const [available_com_ports, setAvailableCOMports] = useState([])
     const [activeCOMports, setActiveCOMports] = useState("No Arduino Detected")
+    const [edited_code, setEditedCode] = useState(
+`void setup(){
+
+}
+void loop(){
+        
+}`);
     const {
         dark_theme,
         light_theme
@@ -245,6 +252,14 @@ const CtxtP_SingletonManager = (props) => {
                         case "openHelp":
                             document.getElementById("help-menu").click()
                             break;
+                        case "openExpandedEditor":
+                            if (document.getElementById("c-codeEditor").style.display!=="block"){
+                                document.getElementById("code-editor").click()
+                                document.getElementById("expand-editor-button").click()
+                            }
+                            else{
+                                document.getElementById("code-editor-close-button").click()
+                            }
                         default:
                             break;
                     }
@@ -699,7 +714,9 @@ const CtxtP_SingletonManager = (props) => {
                 setAvailableCOMports,
                 activeCOMports, 
                 setActiveCOMports,
-                openMingoBlox
+                openMingoBlox,
+                edited_code, 
+                setEditedCode
             }}
         >
             {props.children}

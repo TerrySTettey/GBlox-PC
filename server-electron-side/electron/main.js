@@ -114,6 +114,14 @@ function createWindow() {
             click: () => { win.webContents.send("shortcut","openHelp") }
         }]
     }))
+    menu.append(new MenuItem({
+        label: 'Electron',
+        submenu: [{
+            role: 'help',
+            accelerator: 'Alt+Shift+E',
+            click: () => { win.webContents.send("shortcut","openExpandedEditor") }
+        }]
+    }))
 
     Menu.setApplicationMenu(menu)
 

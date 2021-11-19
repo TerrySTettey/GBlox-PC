@@ -306,7 +306,6 @@
                 transform: translate(-50%, -50%);
                 margin: auto;
                 align-self: center;
-                outline: 2px red solid;
                 svg {
                     animation: StaticCircle-Grow 0.8s, StaticCircle-Flicker 2.4s step-start infinite;
                 }
