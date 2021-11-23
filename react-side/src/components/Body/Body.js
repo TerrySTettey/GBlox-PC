@@ -76,18 +76,23 @@ const Body = (props) => {
     function uploadCode() {
         console.log(inUpload)
         if (inUpload == true) {
-            setUploadInProgressStatus("Upload already in Progress. Please Wait")
-            document.getElementById("uploadInProgressStatus").style.opacity="1";
-            setTimeout(() => {
-                setUploadInProgressStatus()
-                document.getElementById("uploadInProgressStatus").style.opacity="0";
-            },2000)
-            
+
         }
         else {
             setInUpload(true);
             setProgressValue(0);
-            props.uploadFunction();
+            document.getElementById("uploadInProgressStatus").style.opacity="1";    
+            setUploadInProgressStatus("Upload already in Progress. Please Wait")
+            document.getElementById("c-Body-Notification").style.display = "block";
+            setAlertDiv(
+                <Alert_Notification 
+                type="selectCOMPORT" 
+                text="Select your Device" 
+                closeAlert={e => { 
+                    setAlertDiv(<div></div>); 
+                    document.getElementById("c-Body-Notification").style.display = "none"; 
+                    props.uploadFunction();}} />
+            )
         }
     }
     var TrashContainerChanged = false;
@@ -264,26 +269,38 @@ const Body = (props) => {
             case "Upload Successful":
                 updateProgress(100);
                 setInUpload(false);
+                setUploadInProgressStatus()
+                document.getElementById("uploadInProgressStatus").style.opacity="0";
                 break;
             case "Upload Failed : Error in Code":
                 setProgressValue(0);
                 setInUpload(false);
-                setUploadStatus("")
+                setUploadStatus("");
+                setUploadInProgressStatus();
+                document.getElementById("uploadInProgressStatus").style.opacity="0";
                 break;
             case "Upload Failed":
                 setProgressValue(0);
                 setInUpload(false);
-                setUploadStatus("")
+                setUploadStatus("");
+                setUploadInProgressStatus();
+                document.getElementById("uploadInProgressStatus").style.opacity="0";
                 break;
             case "No Arduino Detected":
-                console.log("I am here")
                 setProgressValue(0);
                 setInUpload(false);
                 document.getElementById("c-Body-Notification").style.display = "block";
                 setAlertDiv(
-                    <Alert_Notification type="notification" text="No device has been detected. Make sure that a device is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
+                    <Alert_Notification 
+                    type="notification" 
+                    text="No device has been detected. Make sure that a device is connected" 
+                    closeAlert={e => { 
+                        setAlertDiv(<div></div>); 
+                        document.getElementById("c-Body-Notification").style.display = "none"; }} />
                 )
                 setUploadStatus("")
+                setUploadInProgressStatus()
+                document.getElementById("uploadInProgressStatus").style.opacity="0";
                 break;
             case "Arduino found on ":
                 setProgressValue(0);
@@ -292,6 +309,8 @@ const Body = (props) => {
                 setAlertDiv(
                     <Alert_Notification type="notification" text="No device has been detected. Make sure that an Arduino is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
                 )
+                setUploadInProgressStatus()
+                document.getElementById("uploadInProgressStatus").style.opacity="0";
                 break;
             default:
                 setProgressValue(0);

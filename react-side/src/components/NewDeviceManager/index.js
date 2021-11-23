@@ -3,13 +3,10 @@ import "./NewDeviceManager.scss"
 import PropTypes from 'prop-types'
 import Upload_Circle from '../Upload_Circle'
 import Button from "../Button"
-import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import svg_dictionary from '../svg_dictionary'
 
 
 function Index(props) {
-    const { available_com_ports, setActiveCOMports } = useContext(Ctxt_SingletonManager)
-    const [comportList, setComportList] = useState(<option>No Device Found</option>)
     var slide_out = useRef(null);
     var device_id = useRef(null);
 
@@ -37,25 +34,6 @@ function Index(props) {
         )
 
     }
-
-    useEffect(() => {
-        var list = [];
-        if (available_com_ports!==undefined) {
-            for (var i = 0; i < available_com_ports.length; i++) {
-                if (i==0){
-                    list.push(<option selected>{available_com_ports[i]}</option>)
-                }
-                else{
-                    list.push(<option>{available_com_ports[i]}</option>)
-                }
-            }
-            if (list.length < 1) {
-                list = <option>No Arduino Connected</option>
-            }
-            setComportList(list)
-        }
-    },[available_com_ports])
-
     return (
         <div id="c-NewDeviceManager">
             <div id="Device-Background" ref={slide_out}>
@@ -96,11 +74,7 @@ function Index(props) {
                     </g>
                 </svg>
                 <div className="initial-text">Select Your Device</div>
-                <div id="comport-selector">
-                    <select id="selected-comport">
-                        {comportList}
-                    </select>
-                </div>
+  
                 <div className="Device-Items">
                     {add_device(svg_dictionary.devices.Arduino_Uno_SVG, "Arduino Uno")}
                     {add_device(svg_dictionary.devices.mello_temp, "Mello")}
