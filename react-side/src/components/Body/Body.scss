@@ -398,7 +398,8 @@
             background-color: var(--progress-empty-bar-color);
             position: absolute;
             margin-left: 800px;
-            bottom: -30px;
+            top: 50%;
+            transform: translateY(-50%);
             white-space: nowrap;
             font-family: "Baloo2-Regular";
             font-size: 17pt;
@@ -414,6 +415,7 @@
     .c-Body-a-UploadProg {
         top: var(--shift);
         z-index: 53;
+        margin-bottom: -9px;
     }
 
     .c-Body-a-WorkspaceContainer {
