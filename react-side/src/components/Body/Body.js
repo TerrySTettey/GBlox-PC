@@ -87,7 +87,7 @@ const Body = (props) => {
             setAlertDiv(
                 <Alert_Notification 
                 type="selectCOMPORT" 
-                text="Select your Device" 
+                text="Select your COM Port" 
                 closeAlert={e => { 
                     setAlertDiv(<div></div>); 
                     document.getElementById("c-Body-Notification").style.display = "none"; 

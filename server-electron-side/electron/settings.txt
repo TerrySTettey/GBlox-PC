@@ -1,3 +1,3 @@
-theme: dark-theme
-hideSplash: true
+theme: light-theme
+hideSplash: false
 device: Mello
