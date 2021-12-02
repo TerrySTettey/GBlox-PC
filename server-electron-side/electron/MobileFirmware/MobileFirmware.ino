@@ -44,5 +44,47 @@ void loop() {
         Serial.println(command);
         digitalWrite(5, atoi(command));
     }
+
+    if(strcmp(command,"piano") == 0){
+        command = strtok(0, " ");
+        mySerial.println(command);
+        Serial.println(command);
+        char * Note = command;
+        command = strtok(0, " ");
+        mySerial.println(command);
+        Serial.println(command);
+        int octave = atoi(command);
+
+        //Starting from C1's frequency of 32.70
+        int interval = 0;
+        if (strcmp(Note, "C")==0){
+          interval = 0;
+        } else if (strcmp(Note, "C#")==0){
+          interval = 1;
+        } else if (strcmp(Note, "D")==0){
+          interval = 2;
+        } else if (strcmp(Note, "D#")==0){
+          interval = 3;
+        } else if (strcmp(Note, "E")==0){
+          interval = 4;
+        } else if (strcmp(Note, "F")==0){
+          interval = 5;
+        } else if (strcmp(Note, "F#")==0){
+          interval = 6;
+        } else if (strcmp(Note, "G")==0){
+          interval = 7;
+        } else if (strcmp(Note, "G#")==0){
+          interval = 8;
+        } else if (strcmp(Note, "A")==0){
+          interval = 9;
+        } else if (strcmp(Note, "A#")==0){
+          interval = 10;
+        } else if (strcmp(Note, "B")==0){
+          interval = 11;
+        }
+
+        int frequency = 32.70 * pow(2,interval/12) * octave;
+        tone(7, frequency);
+    }
   }
 }
