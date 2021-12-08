@@ -87,13 +87,13 @@ Blockly.Blocks['mingo_led_range'] = {
             .appendField("LED on port")
             .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"]]), "port")
             .appendField("to");
-        this.appendValueInput("Red Value")
+        this.appendValueInput("red")
             .setCheck("Number")
             .appendField("Red:");
-        this.appendValueInput("Green Value")
+        this.appendValueInput("green")
             .setCheck("Number")
             .appendField("Green:");
-        this.appendValueInput("Blue Value")
+        this.appendValueInput("blue")
             .setCheck("Number")
             .appendField("Blue:");
         this.setInputsInline(true);
@@ -358,7 +358,7 @@ Blockly.Blocks['mingo_display_face'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Default, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("print")
-            .appendField(new Blockly.FieldDropdown([["Happy Face", "1"], ["Sad Face", "2"], ["Smiling Face","3"],["Crying Face","4"], ["Surprised Face","5"],["Heart", "6"]]), "port")
+            .appendField(new Blockly.FieldDropdown([["Happy Face", "1"], ["Sad Face", "2"], ["Smiling Face","3"],["Crying Face","4"], ["Surprised Face","5"],["Heart", "6"]]), "face")
             .appendField(" to display on port ")
             .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"],["4","4"]]), "port");
         this.setInputsInline(true);
@@ -376,7 +376,7 @@ Blockly.Blocks['mingo_display_animation'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Default, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("play")
-            .appendField(new Blockly.FieldDropdown([["Loading Animation", "1"]]), "port")
+            .appendField(new Blockly.FieldDropdown([["Loading Animation", "1"]]), "anim")
             .appendField(" on display oconnected to port ")
             .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"],["4","4"]]), "port");
         this.setInputsInline(true);
@@ -388,6 +388,3 @@ Blockly.Blocks['mingo_display_animation'] = {
         this.setHelpUrl("");
     }
 };
-
-
-
