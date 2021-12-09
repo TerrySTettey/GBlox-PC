@@ -2,6 +2,7 @@
 #include <AltSoftSerial.h>
 #include <SoftwareSerial.h>
 #include <String.h>
+#include <math.h>
 
 #define INPUT_SIZE 30
 
@@ -20,7 +21,7 @@ void setup() {
 void loop() {
   
   if(mySerial.available() > 0){
-    mySerial.println("received");
+    //mySerial.println("received");
     Serial.println("received");
     char input[INPUT_SIZE + 1];
     byte size = mySerial.readBytes(input, INPUT_SIZE);
@@ -32,26 +33,26 @@ void loop() {
     mySerial.println(command);
     if(strcmp(command,"led") == 0){
         command = strtok(0, " ");
-        mySerial.println(command);
+        //mySerial.println(command);
         Serial.println(command);
         digitalWrite(6, atoi(command));
         command = strtok(0, " ");
-        mySerial.println(command);
+        //mySerial.println(command);
         Serial.println(command);
         digitalWrite(4, atoi(command));
         command = strtok(0, " ");
-        mySerial.println(command);
+        //mySerial.println(command);
         Serial.println(command);
         digitalWrite(5, atoi(command));
     }
 
     if(strcmp(command,"piano") == 0){
         command = strtok(0, " ");
-        mySerial.println(command);
+        //mySerial.println(command);
         Serial.println(command);
         char * Note = command;
         command = strtok(0, " ");
-        mySerial.println(command);
+        //mySerial.println(command);
         Serial.println(command);
         int octave = atoi(command);
 
@@ -83,8 +84,10 @@ void loop() {
           interval = 11;
         }
 
-        int frequency = 32.70 * pow(2,interval/12) * octave;
-        tone(7, frequency);
+        double frequency = 32.70 * pow(2,(interval+12*(octave-1))/12.000);
+        Serial.println((interval+12*(octave-1)));
+        Serial.println(frequency);
+        tone(7, frequency, 1000);
     }
   }
 }
