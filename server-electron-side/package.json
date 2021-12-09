@@ -24,19 +24,23 @@
     "electron": "^13.6.0",
     "electron-is-dev": "^2.0.0",
     "electron-react-devtools": "^0.5.3",
-    "electron-rebuild": "^3.2.2"
+    "electron-rebuild": "^3.2.5"
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "node-gyp": "^8.2.0",
     "python-shell": "^3.0.0",
-    "serialport": "^9.2.4"
+    "serialport": "^9.2.8"
   },
   "config": {
     "forge": {
       "packagerConfig": {
-        "extraResource": ["./electron/arduino-1.8.15", "./electron/settings.txt", "./electron/ArduinoOutput"],
+        "extraResource": [
+          "./electron/arduino-1.8.15",
+          "./electron/settings.txt",
+          "./electron/ArduinoOutput"
+        ],
         "asar": true
       },
       "makers": [
@@ -63,5 +67,4 @@
       ]
     }
   }
-  
 }

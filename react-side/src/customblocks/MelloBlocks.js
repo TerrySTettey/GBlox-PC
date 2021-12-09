@@ -162,7 +162,7 @@ Blockly.Blocks['sound_buzzer_buzz'] = {
   init: function () {
     this.appendDummyInput()
     .appendField(new Blockly.FieldImage(Sound, 25, 25, { alt: "*", flipRtl: "FALSE" }))
-    .appendField(" play note ")
+    .appendField("play note ")
       .appendField(new Blockly.FieldDropdown([["C6", "1047"], ["C#6", "1109"], ["D6", "1175"], ["Eb6", "1245"], ["E6", "1319"], ["F6", "1397"], ["F#6", "1480"], ["G6", "1568"], ["G#6", "1661"], ["A6", "1760"], ["Bb6", "1865"], ["B6", "1976"], ["C7", "2093"], ["C#7", "2217"], ["D7", "2349"], ["Eb7", "2489"], ["E7", "2637"], ["F7", "2794"], ["F#7", "2960"], ["G7", "3136"], ["G#7", "3322"], ["A7", "3520"], ["Bb7", "3729"], ["B7", "3951"], ["C8", "4186"]]), "Note");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -366,7 +366,7 @@ Blockly.Blocks['servo_rotate_to_degrees'] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-      .appendField(" stop the Servo Motor");
+      .appendField("stop the Servo Motor");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

@@ -124,7 +124,7 @@ Blockly.JavaScript['sensor_ultrasonic'] = function (block) {
       peripheral_SetupCode += `\tpinMode(${US_Trigger}, OUTPUT);\n\tpinMode(${US_Echo}, INPUT);\n`;
       peripheral_BulkFunctions += `\nint read_ultrasonic(int trigger, int echo){
             digitalWrite(trigger, LOW);
-            delayMicroseconds(2);
+            delayMicroseconds(2);d 
             digitalWrite(trigger, HIGH);
             delayMicroseconds(10);
             digitalWrite(trigger, LOW);
