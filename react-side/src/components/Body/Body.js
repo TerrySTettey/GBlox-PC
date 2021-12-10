@@ -245,11 +245,15 @@ const Body = (props) => {
     useEffect(() => {
         switch (selectedDevice.device_name) {
             case "Mello":
-                setDeviceSVG(svg_dictionary.devices.mello_temp);
+                setDeviceSVG(svg_dictionary.devices.mello);
                 document.getElementById("Add_device").style.display = "none"
                 break;
             case "Arduino Uno":
                 setDeviceSVG(svg_dictionary.devices.Arduino_Uno_SVG);
+                document.getElementById("Add_device").style.display = "none"
+                break;
+            case "Mingo":
+                setDeviceSVG(svg_dictionary.devices.mingo);
                 document.getElementById("Add_device").style.display = "none"
                 break;
             default:
