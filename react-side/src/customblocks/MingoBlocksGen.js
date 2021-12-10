@@ -40,6 +40,12 @@ function clearvars() {
 
     //Clear Definition Bools
     DCMotorDefined = false;
+    ServoDefined = false;
+    NeoLEDDefined = false;
+    MelodyDefined = false;
+    UltrasonicDefined = false;
+    InfraredDefined = false;
+    BluetoothDefined = false;
 
 }
 
