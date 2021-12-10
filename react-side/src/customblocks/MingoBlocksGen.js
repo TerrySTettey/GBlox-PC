@@ -1,4 +1,4 @@
-import Blockly from 'blockly';
+import Blockly, { selected } from 'blockly';
 
 //Peripheral Vars
 var peripheral_PreDeclarations = "";
@@ -27,6 +27,9 @@ var DCMotorDefined = false;
 var ServoDefined = false;
 var NeoLEDDefined = false;
 var MelodyDefined = false;
+var UltrasonicDefined = false;
+var InfraredDefined = false;
+var BluetoothDefined = false;
 
 
 function clearvars() {
@@ -183,7 +186,75 @@ const MelodySetup = {
         NOTE_A4,-4, NOTE_F4,-4, NOTE_G4,-4,
         NOTE_F4,-2,
     };
+
+    void SirenA(){
+        for(int hz = 440; hz < 1000; hz+=25){
+          tone(buzz, hz, 50);
+          delay(5);
+        }
+        // Whoop down
+        for(int hz = 1000; hz > 440; hz-=25){
+          tone(buzz, hz, 50);
+          delay(5);
+        }
+      }
+      
+      void SirenB(){
+        for(int hz = 440; hz < 1000; hz++){
+          tone(buzz, hz, 50);
+          delay(5);
+        }
+        for(int hz = 1000; hz > 440; hz--){
+          tone(buzz, hz, 50);
+          delay(5);
+          }
+      }
     }
+    \n`
+}
+
+const UltrasonicSetup = {
+    PreDec: `\n
+    
+    \n`,
+    Setup: `\n
+    
+    \n`,
+    Bulk: `\n
+    int read_ultrasonic(int trigger, int echo){
+        digitalWrite(trigger, LOW);
+        delayMicroseconds(2);d 
+        digitalWrite(trigger, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(trigger, LOW);
+        int duration = pulseIn(echo, HIGH);
+        int distance = duration * 0.034 / 2;
+        return distance;
+    }
+    \n`
+}
+
+const InfraredSetup = {
+    PreDec: `\n
+    #include <IRremote.h>\nint IR_Remote=${IR_Remote};
+    \n`,
+    Setup: `\n
+    \tIrReceiver.begin(IR_Remote, ENABLE_LED_FEEDBACK);
+    \n`,
+    Bulk: `\n
+    \n`,
+    Loop: `\n
+    \n`
+}
+
+const BluetoothSetup = {
+    PreDec: `\n
+    #include <SoftwareSerial.h>\nSoftwareSerial hc06(${BluetoothRX},${BluetoothTX});\nchar bdata = '.';
+    \n`,
+    Setup: `\n
+    \thc06.begin(9600);
+    \n`,
+    Bulk: `\n
     \n`
 }
 
@@ -403,7 +474,7 @@ Blockly.JavaScript["mingo_led_range"] = function (block) {
     if (NeoLEDDefined === false) {
         if (block.getRootBlock().type == "m_mainloop") {
 
-            switch (dropdown_port) {
+            switch (port) {
                 case "1":
                     NeoLEDSetup.Setup = `\n
                     Adafruit_NeoPixel pixels(2, ${Port1[3]}, NEO_GRB + NEO_KHZ800);
@@ -417,11 +488,11 @@ Blockly.JavaScript["mingo_led_range"] = function (block) {
             }
 
 
-            peripheral_PreDeclarations += ServoSetup.PreDec;
-            peripheral_SetupCode += ServoSetup.Setup;
-            peripheral_BulkFunctions += ServoSetup.Bulk;
+            peripheral_PreDeclarations += NeoLEDSetup.PreDec;
+            peripheral_SetupCode += NeoLEDSetup.Setup;
+            peripheral_BulkFunctions += NeoLEDSetup.Bulk;
 
-            ServoDefined = true;
+            NeoLEDDefined = true;
         }
     }
 
@@ -460,7 +531,7 @@ Blockly.JavaScript["mingo_led_definite"] = function (block) {
     if (NeoLEDDefined === false) {
         if (block.getRootBlock().type == "m_mainloop") {
 
-            switch (dropdown_port) {
+            switch (port) {
                 case "1":
                     NeoLEDSetup.Setup = `\n
                     Adafruit_NeoPixel pixels(2, ${Port1[3]}, NEO_GRB + NEO_KHZ800);
@@ -474,11 +545,11 @@ Blockly.JavaScript["mingo_led_definite"] = function (block) {
             }
 
 
-            peripheral_PreDeclarations += ServoSetup.PreDec;
-            peripheral_SetupCode += ServoSetup.Setup;
-            peripheral_BulkFunctions += ServoSetup.Bulk;
+            peripheral_PreDeclarations += NeoLEDSetup.PreDec;
+            peripheral_SetupCode += NeoLEDSetup.Setup;
+            peripheral_BulkFunctions += NeoLEDSetup.Bulk;
 
-            ServoDefined = true;
+            NeoLEDDefined = true;
         }
     }
 
@@ -551,17 +622,28 @@ Blockly.JavaScript["mingo_sound_stop"] = function (block) {
 Blockly.JavaScript["mingo_sound_play_song"] = function (block) {
     var song = block.getFieldValue('song');
 
+    if (MelodyDefined === false) {
+        if (block.getRootBlock().type == "m_mainloop") {
+            peripheral_PreDeclarations += MelodySetup.PreDec;
+            peripheral_SetupCode += MelodySetup.Setup;
+            peripheral_BulkFunctions += MelodySetup.Bulk;
+            MelodyDefined = true;
+        }
+    }
+
     var code = `...\n`;
     switch (song) {
         case "merry":
-            code = `mPlayer.play_melody(140, MerryChristmas())`;
+            code = `mPlayer.play_melody(140, MerryChristmas()bb);\n`;
             break;
         case "bday":
-            code = `mPlayer.play_melody(180, HappyBirthday())`;
+            code = `mPlayer.play_melody(180, HappyBirthday());\n`;
             break;
         case "sirenA":
+            code = `SirenA();\n`
             break;
         case "sirenB":
+            code = `SirenB();\n`
             break;
     }
 
@@ -569,35 +651,159 @@ Blockly.JavaScript["mingo_sound_play_song"] = function (block) {
 }
 
 Blockly.JavaScript["mingo_light_read"] = function (block) {
+    var sensor = block.getFieldValue('sensor');
+    var port = block.getFieldValue('port');
 
+    var code = '...;\n';
+    var selectedPort = 0;
+
+    switch (port) {
+        case "3":
+            selectedPort = Port3;
+            break;
+        case "4":
+            selectedPort = Port4;
+            break;
+    }
+
+    switch (sensor) {
+        case "left":
+            code = `analogRead(${selectedPort[0]})`
+            break;
+        case "right":
+            code = `analogRead(${selectedPort[1]})`
+            break;
+    }
+
+    return code;
 }
 
 Blockly.JavaScript["mingo_line_read"] = function (block) {
+    var sensor = block.getFieldValue('sensor');
+    var port = block.getFieldValue('port');
 
+    var code = '...;\n';
+    var selectedPort = 0;
+
+    switch (port) {
+        case "3":
+            selectedPort = Port3;
+            break;
+        case "4":
+            selectedPort = Port4;
+            break;
+    }
+
+    switch (sensor) {
+        case "left":
+            code = `analogRead(${selectedPort[0]})`
+            break;
+        case "right":
+            code = `analogRead(${selectedPort[1]})`
+            break;
+    }
+
+    return code;
 }
 
 Blockly.JavaScript["mingo_ultrasonic_sensor"] = function (block) {
+    var port = block.getFieldValue('port');
 
+    if (UltrasonicDefined === false) {
+        if (block.getRootBlock().type == "m_mainloop") {
+            peripheral_PreDeclarations += UltrasonicSetup.PreDec;
+            peripheral_SetupCode += UltrasonicSetup.Setup;
+            peripheral_BulkFunctions += UltrasonicSetup.Bulk;
+            UltrasonicDefined = true;
+        }
+    }
+
+    var code = '...;\n';
+    var selectedPort = 0;
+
+    switch (port) {
+        case "1":
+            selectedPort = Port3;
+            break;
+        case "2":
+            selectedPort = Port4;
+            break;
+    }
+
+    code = `read_ultrasonic( ${selectedPort[2]} , ${selectedPort[3]})`
+
+
+    return code;
 }
 
 Blockly.JavaScript["mingo_ir_begin"] = function (block) {
 
+    if (InfraredDefined === false) {
+        if (block.getRootBlock().type == "m_mainloop") {
+            peripheral_PreDeclarations += InfraredSetup.PreDec;
+            peripheral_SetupCode += InfraredSetup.Setup;
+            peripheral_BulkFunctions += InfraredSetup.Bulk;
+            InfraredDefined = true;
+        }
+    }
+
+    var code = ``;
+
+    return code;
 }
 
 Blockly.JavaScript["mingo_ir_read"] = function (block) {
-
+    var dropdown_character = block.getFieldValue('Received_Character');
+    var statements_ir_decode_loop = Blockly.JavaScript.statementToCode(block, 'IR_Decode_Loop');
+    var code = ``
+    if (block.getRootBlock().type == "m_mainloop") {
+        InfraredSetup.Loop += `if(IrReceiver.decodedIRData.command==0x${dropdown_character}){\n${statements_ir_decode_loop}\t\t}\n\t`;
+    }
+    return code;
 }
 
 Blockly.JavaScript["mingo_bluetooth_begin"] = function (block) {
+    if (BluetoothDefined === false) {
+        if (block.getRootBlock().type == "m_mainloop") {
+            peripheral_PreDeclarations += BluetoothSetup.PreDec;
+            peripheral_SetupCode += BluetoothSetup.Setup;
+            peripheral_BulkFunctions += BluetoothSetup.Bulk;
+            BluetoothDefined = true;
+        }
+    }
 
+    var code = `while (hc06.available()>0){\n\tbdata = hc06.read();\n}\n`;
+
+    return code;
 }
 
 Blockly.JavaScript["mingo_bluetooth_read"] = function (block) {
+    var value_name = Blockly.JavaScript.valueToCode(block, "NAME", Blockly.JavaScript.ORDER_ATOMIC);
+    value_name = value_name.replaceAll(`'`, ``);
 
+    var code = `(bdata=='${value_name}')`;
+
+    return [code, Blockly.JavaScript.ORDER_NONE];
 }
 
 Blockly.JavaScript["mingo_bluetooth_send"] = function (block) {
+    var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+    value_name = value_name.replaceAll(`'`, ``);
 
+    if (BluetoothDefined === false) {
+        BluetoothSetup.PreDec += `int send_bluetooth(char x);\n`;
+        BluetoothSetup.Bulk += `int send_bluetooth(char x){\n\thc06.write(x);\n}\n`
+
+        if (block.getRootBlock().type == "m_mainloop") {
+            peripheral_PreDeclarations += BluetoothSetup.PreDec;
+            peripheral_SetupCode += BluetoothSetup.Setup;
+            peripheral_BulkFunctions += BluetoothSetup.Bulk;
+            BluetoothDefined = true;
+        }
+    }
+
+    var code = `\tsend_bluetooth('${value_name}');\n`
+    return code;
 }
 
 Blockly.JavaScript["mingo_display_text"] = function (block) {

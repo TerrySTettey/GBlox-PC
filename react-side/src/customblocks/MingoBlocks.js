@@ -215,7 +215,7 @@ Blockly.Blocks['mingo_line_read'] = {
             .appendField("read")
             .appendField(new Blockly.FieldDropdown([["left line sensor", "left"], ["right line sensor", "right"]]), "sensor")
             .appendField("from port")
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"]]), "port");
+            .appendField(new Blockly.FieldDropdown([["3", "3"], ["4", "4"]]), "port");
         this.setOutput(true, null);
         this.setColour(230);
         this.setInputsInline(true);
