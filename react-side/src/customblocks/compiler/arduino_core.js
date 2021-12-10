@@ -14,6 +14,9 @@ async function getPeripherals() {
         case "Arduino Uno":
             peripherals = await import('./../customblocks.js')
             break;
+        case "Mingo":
+            peripherals = await import('./../MingoBlocksGen.js')
+            break;
         default:
             break;
     }
