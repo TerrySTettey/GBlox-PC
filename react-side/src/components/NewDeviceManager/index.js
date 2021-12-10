@@ -74,10 +74,10 @@ function Index(props) {
                     </g>
                 </svg>
                 <div className="initial-text">Select Your Device</div>
-  
                 <div className="Device-Items">
                     {add_device(svg_dictionary.devices.Arduino_Uno_SVG, "Arduino Uno")}
-                    {add_device(svg_dictionary.devices.mello_temp, "Mello")}
+                    {add_device(svg_dictionary.devices.mello, "Mello")}
+                    {add_device(svg_dictionary.devices.mingo, "Mingo")}
                 </div>
             </div>
         </div>

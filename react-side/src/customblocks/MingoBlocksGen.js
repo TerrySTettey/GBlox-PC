@@ -488,7 +488,7 @@ Blockly.JavaScript["mingo_led_range"] = function (block) {
                     break;
                 case "2":
                     NeoLEDSetup.Setup = `\n
-                    Adafruit_NeoPixel pixels(2, ${Port[3]}, NEO_GRB + NEO_KHZ800);
+                    Adafruit_NeoPixel pixels(2, ${Port2[3]}, NEO_GRB + NEO_KHZ800);
                     \n`
                     break;
             }
@@ -545,7 +545,7 @@ Blockly.JavaScript["mingo_led_definite"] = function (block) {
                     break;
                 case "2":
                     NeoLEDSetup.Setup = `\n
-                    Adafruit_NeoPixel pixels(2, ${Port[3]}, NEO_GRB + NEO_KHZ800);
+                    Adafruit_NeoPixel pixels(2, ${Port2[3]}, NEO_GRB + NEO_KHZ800);
                     \n`
                     break;
             }

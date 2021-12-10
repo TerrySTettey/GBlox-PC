@@ -16,6 +16,8 @@ import "../../customblocks/compiler/arduino_core";
 import "../../customblocks/peripherals/arduino_peripheral"
 import "../../customblocks/MelloBlocks"
 import "../../customblocks/MelloBlocksGen"
+import "../../customblocks/MingoBlocks"
+import "../../customblocks/MingoBlocksGen"
 
 import example_codes from "../../example_codes"
 const { ipcRenderer } = window.require('electron')
