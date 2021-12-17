@@ -6,6 +6,13 @@ import LED from "./../SVGs/LED.png"
 import Default from "./../SVGs/Default.png"
 import Sound from "./../SVGs/Sound.png"
 
+import Smiling from "./../DisplayPNGS/Smiling Face.png"
+import Happy from "./../DisplayPNGS/Happy Face.png"
+import Heart from "./../DisplayPNGS/Heart.png"
+import Sad from "./../DisplayPNGS/Sad Face.png"
+import Crying from "./../DisplayPNGS/Crying Face.png"
+import laugh from "./../DisplayPNGS/laugh.gif"
+
 Blockly.Blocks['mingo_motor_move_indef'] = {
     init: function () {
         this.appendDummyInput()
@@ -324,9 +331,9 @@ Blockly.Blocks['mingo_display_text'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Default, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField(" write ")
-            .appendField(new Blockly.FieldTextInput("text"),"text")
+            .appendField(new Blockly.FieldTextInput("text"), "text")
             .appendField(" to display on port ")
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"],["4","4"]]), "port");
+            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"]]), "port");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -342,7 +349,7 @@ Blockly.Blocks['mingo_display_clear'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Default, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("clear display on port")
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"],["4","4"]]), "port");
+            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"]]), "port");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -358,9 +365,17 @@ Blockly.Blocks['mingo_display_face'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Default, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("print")
-            .appendField(new Blockly.FieldDropdown([["Happy Face", "1"], ["Sad Face", "2"], ["Smiling Face","3"],["Crying Face","4"], ["Surprised Face","5"],["Heart", "6"]]), "face")
+            .appendField(new Blockly.FieldDropdown(
+                [
+                    [{'src': Smiling, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'smile'],
+                    [{'src': Happy, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'happy'],
+                    [{'src': Heart, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'heart'],
+                    [{'src': Sad, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'sad'],
+                    [{'src': Crying, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'crying'],
+                    [{'src': laugh, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'laugh'],
+                ]), "face")
             .appendField(" to display on port ")
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"],["4","4"]]), "port");
+            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"]]), "port");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -378,7 +393,7 @@ Blockly.Blocks['mingo_display_animation'] = {
             .appendField("play")
             .appendField(new Blockly.FieldDropdown([["Loading Animation", "1"]]), "anim")
             .appendField(" on display oconnected to port ")
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"],["4","4"]]), "port");
+            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"]]), "port");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

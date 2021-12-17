@@ -31,6 +31,7 @@ void loop() {
     // strto(0, "characters") = goes to the next 
     char* command = strtok(input, " ");
     mySerial.println(command);
+
     if(strcmp(command,"led") == 0){
         command = strtok(0, " ");
         //mySerial.println(command);
@@ -44,6 +45,8 @@ void loop() {
         //mySerial.println(command);
         Serial.println(command);
         digitalWrite(5, atoi(command));
+        strto(0, "characters")
+        
     }
 
     if(strcmp(command,"piano") == 0){
@@ -89,5 +92,5 @@ void loop() {
         Serial.println(frequency);
         tone(7, frequency, 1000);
     }
-  }
+
 }

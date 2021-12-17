@@ -610,7 +610,6 @@ const Mingo_Bot = new device(
   "Arduino Nano",
   [defaults + `
   <category css-icon="customIcon fa fa-cog" name="Actuators" colour="#05386B">
-      <category name="Motor">
           <block type="mingo_motor_move_indef">
               <field name="direction">forward</field>
               <field name="speed">50</field>
@@ -623,41 +622,29 @@ const Mingo_Bot = new device(
           <block type="mingo_motor_stop_indef">
               <field name="motor">all</field>
           </block>
-      </category>
-      <category name="Grabber">
           <block type="mingo_grabber_move">
               <field name="action">open</field>
               <field name="port">1</field>
           </block>
-      </category>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Sensors">
-      <category name="Ultrasonic">
           <block type="mingo_ultrasonic_sensor">
               <field name="port">1</field>
           </block>
-      </category>
-      <category name="Light Sensor">
           <block type="mingo_light_read">
               <field name="sensor">left</field>
               <field name="port">3</field>
           </block>
-      </category>
-      <category name="Line Follower">
           <block type="mingo_line_read">
               <field name="sensor">left</field>
               <field name="port">1</field>
           </block>
-      </category>
   </category>
   <category css-icon="customIcon fa fa-cog" name="COM">
-      <category name="IR">
           <block type="mingo_ir_begin"></block>
           <block type="mingo_ir_read">
               <field name="Received_Character">15</field>
           </block>
-      </category>
-      <category name="Bluetooth">
           <block type="mingo_bluetooth_begin"></block>
           <block type="mingo_bluetooth_read">
               <value name="NAME">
@@ -673,14 +660,10 @@ const Mingo_Bot = new device(
                   </block>
               </value>
           </block>
-      </category>
-      <category name="Serial">
           <block type="communication_serial_print"></block>
           <block type="communication_serial_read"></block>
-      </category>
   </category>
   <category css-icon="customIcon fa fa-cog" name="LEDs">
-      <category css-icon="customIcon fa fa-cog" name="NeoPixel LED">
           <block type="mingo_led_range">
               <field name="ledSelect">all</field>
               <field name="port">1</field>
@@ -705,7 +688,6 @@ const Mingo_Bot = new device(
               <field name="port">1</field>
               <field name="colorSelect">Red</field>
           </block>
-      </category>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Sound">
       <block type="mingo_sound_play">

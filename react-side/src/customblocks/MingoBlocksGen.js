@@ -813,19 +813,34 @@ Blockly.JavaScript["mingo_bluetooth_send"] = function (block) {
 }
 
 Blockly.JavaScript["mingo_display_text"] = function (block) {
+    var port = block.getFieldValue('port');
+    var text = block.getFieldValue('text');
 
+    var code = ``;
+    return code;
 }
 
 Blockly.JavaScript["mingo_display_clear"] = function (block) {
+    var port = block.getFieldValue('port');
 
+    var code = ``;
+    return code;
 }
 
 Blockly.JavaScript["mingo_display_face"] = function (block) {
+    var port = block.getFieldValue('port');
+    var text = block.getFieldValue('face');
 
+    var code = ``;
+    return code;
 }
 
 Blockly.JavaScript["mingo_display_animation"] = function (block) {
+    var port = block.getFieldValue('port');
+    var text = block.getFieldValue('anim');
 
+    var code = ``;
+    return code;
 }
 
 
