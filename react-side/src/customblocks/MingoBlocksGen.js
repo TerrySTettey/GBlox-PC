@@ -681,7 +681,7 @@ Blockly.JavaScript["mingo_light_read"] = function (block) {
             break;
     }
 
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 }
 
 Blockly.JavaScript["mingo_line_read"] = function (block) {
@@ -709,12 +709,11 @@ Blockly.JavaScript["mingo_line_read"] = function (block) {
             break;
     }
 
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 }
 
 Blockly.JavaScript["mingo_ultrasonic_sensor"] = function (block) {
     var port = block.getFieldValue('port');
-
     if (UltrasonicDefined === false) {
         if (block.getRootBlock().type == "m_mainloop") {
             peripheral_PreDeclarations += UltrasonicSetup.PreDec;
@@ -725,7 +724,7 @@ Blockly.JavaScript["mingo_ultrasonic_sensor"] = function (block) {
     }
 
     var code = '...;\n';
-    var selectedPort = 0;
+    var selectedPort = [];
 
     switch (port) {
         case "1":
@@ -735,11 +734,11 @@ Blockly.JavaScript["mingo_ultrasonic_sensor"] = function (block) {
             selectedPort = Port4;
             break;
     }
-
+    console.log(selectedPort);
     code = `read_ultrasonic( ${selectedPort[2]} , ${selectedPort[3]})`
+    console.log(code);
 
-
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 }
 
 Blockly.JavaScript["mingo_ir_begin"] = function (block) {
@@ -755,7 +754,7 @@ Blockly.JavaScript["mingo_ir_begin"] = function (block) {
 
     var code = ``;
 
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 }
 
 Blockly.JavaScript["mingo_ir_read"] = function (block) {
@@ -763,7 +762,8 @@ Blockly.JavaScript["mingo_ir_read"] = function (block) {
     var statements_ir_decode_loop = Blockly.JavaScript.statementToCode(block, 'IR_Decode_Loop');
     var code = ``
     if (block.getRootBlock().type == "m_mainloop") {
-        InfraredSetup.Loop += `if(IrReceiver.decodedIRData.command==0x${dropdown_character}){\n${statements_ir_decode_loop}\t\t}\n\t`;
+        //InfraredSetup.Loop += `if(IrReceiver.decodedIRData.command==0x${dropdown_character}){\n${statements_ir_decode_loop}\t\t}\n\t`;
+        code = `if(IrReceiver.decodedIRData.command==0x${dropdown_character}){\n${statements_ir_decode_loop}\t\t}\n\t`;
     }
     return code;
 }
@@ -844,4 +844,4 @@ Blockly.JavaScript["mingo_display_animation"] = function (block) {
 }
 
 
-export { peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode, clearvars }
+export { peripheral_PreDeclarations, peripheral_BulkFunctions, peripheral_SetupCode,InfraredSetup, clearvars }
