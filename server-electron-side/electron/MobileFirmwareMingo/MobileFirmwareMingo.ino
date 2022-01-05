@@ -134,7 +134,9 @@ void loop() {
         double frequency = 32.70 * pow(2,(interval+12*(octave-1))/12.000);
         Serial.println((interval+12*(octave-1)));
         Serial.println(frequency);
-        tone(8, frequency, 1000);
+        tone(8, frequency);
+      } else if(strcmp(command,"pn")==0){
+        noTone(8);
       } else if(strcmp(command,"dy") == 0){
         //DELAY
         command = strtok(0, " ");

@@ -702,7 +702,7 @@ const Mingo_Bot = new device(
           </value>
       </block>
       <block type="mingo_sound_stop"></block>
-      <block type="mingo_sound_play">
+      <block type="mingo_sound_play_song">
           <field name="song">merry</field>
       </block>
   </category>
