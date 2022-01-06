@@ -136,7 +136,31 @@ Blockly.Blocks['mingo_sound_play'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Sound, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("play note ")
-            .appendField(new Blockly.FieldDropdown([["C6", "1047"], ["C#6", "1109"], ["D6", "1175"], ["Eb6", "1245"], ["E6", "1319"], ["F6", "1397"], ["F#6", "1480"], ["G6", "1568"], ["G#6", "1661"], ["A6", "1760"], ["Bb6", "1865"], ["B6", "1976"], ["C7", "2093"], ["C#7", "2217"], ["D7", "2349"], ["Eb7", "2489"], ["E7", "2637"], ["F7", "2794"], ["F#7", "2960"], ["G7", "3136"], ["G#7", "3322"], ["A7", "3520"], ["Bb7", "3729"], ["B7", "3951"], ["C8", "4186"]]), "Note");
+            .appendField(new Blockly.FieldDropdown([["C4", "262"],
+            ["C#4", "277"],
+            ["D4", "294"],
+            ["Eb4", "311"],
+            ["E4", "330"],
+            ["F4", "349"],
+            ["F#4", "370"],
+            ["G4", "392"],
+            ["G#4", "415"],
+            ["A4", "440"],
+            ["Bb4", "466"],
+            ["B4", "494"],
+            ["C5", "523"],
+            ["C#5", "554"],
+            ["D5", "587"],
+            ["Eb5", "622"],
+            ["E5", "659"],
+            ["F5", "699"],
+            ["F#5", "740"],
+            ["G5", "784"],
+            ["G#5", "831"],
+            ["A5", "880"],
+            ["Bb5", "932"],
+            ["B5", "988"],
+            ["C6", "1047"]]), "Note");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -153,7 +177,33 @@ Blockly.Blocks['mingo_sound_play_timed'] = {
             .setCheck("Number")
             .appendField(new Blockly.FieldImage(Sound, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField(" play note")
-            .appendField(new Blockly.FieldDropdown([["C6", "1047"], ["C#6", "1109"], ["D6", "1175"], ["Eb6", "1245"], ["E6", "1319"], ["F6", "1397"], ["F#6", "1480"], ["G6", "1568"], ["G#6", "1661"], ["A6", "1760"], ["Bb6", "1865"], ["B6", "1976"], ["C7", "2093"], ["C#7", "2217"], ["D7", "2349"], ["Eb7", "2489"], ["E7", "2637"], ["F7", "2794"], ["F#7", "2960"], ["G7", "3136"], ["G#7", "3322"], ["A7", "3520"], ["Bb7", "3729"], ["B7", "3951"], ["C8", "4186"]]), "note")
+            .appendField(new Blockly.FieldDropdown([
+                ["C4", "262"],
+                ["C#4", "277"],
+                ["D4", "294"],
+                ["Eb4", "311"],
+                ["E4", "330"],
+                ["F4", "349"],
+                ["F#4", "370"],
+                ["G4", "392"],
+                ["G#4", "415"],
+                ["A4", "440"],
+                ["Bb4", "466"],
+                ["B4", "494"],
+                ["C5", "523"],
+                ["C#5", "554"],
+                ["D5", "587"],
+                ["Eb5", "622"],
+                ["E5", "659"],
+                ["F5", "699"],
+                ["F#5", "740"],
+                ["G5", "784"],
+                ["G#5", "831"],
+                ["A5", "880"],
+                ["Bb5", "932"],
+                ["B5", "988"],
+                ["C6", "1047"]
+            ]), "note")
             .appendField("for");
         this.appendDummyInput()
             .appendField("seconds");
@@ -187,7 +237,7 @@ Blockly.Blocks['mingo_sound_play_song'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Sound, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("play")
-            .appendField(new Blockly.FieldDropdown([["Merry Christmas", "merry"], ["Happy Birthday", "bday"], ["Police Siren A", "sirenA"], ["Police Siren B", "sirenB"]]), "song");
+            .appendField(new Blockly.FieldDropdown([["Merry Christmas", "merry"], ["RR", "rastley"], ["Happy Birthday", "bday"], ["Police Siren A", "sirenA"], ["Police Siren B", "sirenB"]]), "song");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -367,12 +417,12 @@ Blockly.Blocks['mingo_display_face'] = {
             .appendField("print")
             .appendField(new Blockly.FieldDropdown(
                 [
-                    [{'src': Smiling, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'smile'],
-                    [{'src': Happy, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'happy'],
-                    [{'src': Heart, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'heart'],
-                    [{'src': Sad, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'sad'],
-                    [{'src': Crying, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'crying'],
-                    [{'src': laugh, 'width': 75, 'height': 50, 'alt': 'Smiling Face'}, 'laugh'],
+                    [{ 'src': Smiling, 'width': 75, 'height': 50, 'alt': 'Smiling Face' }, 'smile'],
+                    [{ 'src': Happy, 'width': 75, 'height': 50, 'alt': 'Smiling Face' }, 'happy'],
+                    [{ 'src': Heart, 'width': 75, 'height': 50, 'alt': 'Smiling Face' }, 'heart'],
+                    [{ 'src': Sad, 'width': 75, 'height': 50, 'alt': 'Smiling Face' }, 'sad'],
+                    [{ 'src': Crying, 'width': 75, 'height': 50, 'alt': 'Smiling Face' }, 'crying'],
+                    [{ 'src': laugh, 'width': 75, 'height': 50, 'alt': 'Smiling Face' }, 'laugh'],
                 ]), "face")
             .appendField(" to display on port ")
             .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"]]), "port");
