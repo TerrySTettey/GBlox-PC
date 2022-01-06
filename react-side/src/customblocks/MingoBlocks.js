@@ -237,7 +237,15 @@ Blockly.Blocks['mingo_sound_play_song'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Sound, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("play")
-            .appendField(new Blockly.FieldDropdown([["Merry Christmas", "merry"], ["RR", "rastley"], ["Happy Birthday", "bday"], ["Police Siren A", "sirenA"], ["Police Siren B", "sirenB"]]), "song");
+            .appendField(new Blockly.FieldDropdown([
+                ["Merry Christmas", "merry"],
+                ["Happy Birthday", "bday"],
+                ["Fur Elise", "furelise"],
+                ["Silent Night", "silent"],
+                ["Lion Sleeps Tonight", "lion"],
+                ["Game of Thrones", "got"],
+                ["Police Siren A", "sirenA"],
+                ["Police Siren B", "sirenB"]]), "song");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
