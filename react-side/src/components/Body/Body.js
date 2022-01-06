@@ -100,6 +100,7 @@ const Body = (props) => {
 
     useEffect(() => {
         //variables to hold various properties
+        setToolboxButtons([]);
         var buttons = [];   //holds button DOMS before setting them to the toolboxButtons
         var children = [];  //holds children of categories. Is reset when category is finished
         var category = "";  //Holds the name of the category

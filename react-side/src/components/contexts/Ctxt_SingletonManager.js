@@ -517,6 +517,7 @@ void loop(){
     //Generates toolbox list for the GUI
     function generateToolbox() {
         var toolbox_temp = [];
+        setToolboxItems([]);
         for (var i = 0; i < (currentWorkspace.toolbox_.getToolboxItems()).length; i++) {
             var items = currentWorkspace.toolbox_.getToolboxItems();
             var id = items[i].id_
