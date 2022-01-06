@@ -131,9 +131,14 @@ const TestMain = (props) => {
     }
     function removeVideo() {
         var video = document.getElementById("loading-screen");
+        var buffer = document.getElementById("smooth-buffer");
         video.style.opacity = 0
         setTimeout(function () {
             video.style.display = "none";
+            buffer.style.opacity = 0;
+            setTimeout(function() {
+                buffer.style.display = "none";
+            }, [1000])
         }, [1000])
 
         // var body = document.getElementById("body-container")
@@ -264,7 +269,7 @@ const TestMain = (props) => {
                     <a onClick={openMingoBlox}>www.mingoblox.com</a>
                 </div>
             </div>
-
+            <div id="smooth-buffer"></div>
             <Body
                 ToolboxFunction={open_flyout}
                 workspaceClick={workspaceClick}
