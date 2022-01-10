@@ -57,6 +57,7 @@ const CtxtP_SingletonManager = (props) => {
     const [alertDiv, setAlertDiv] = useState(<div></div>)
     const [available_com_ports, setAvailableCOMports] = useState([])
     const [activeCOMports, setActiveCOMports] = useState("No Arduino Detected")
+    const [toolboxRefresh, setToolboxRefresh] = useState(0);
     const [edited_code, setEditedCode] = useState(
 `void setup(){
 
@@ -533,6 +534,7 @@ void loop(){
             }
         }
         setToolboxItems(toolbox_temp)
+        setToolboxRefresh(1)
     }
 
     function electronWindowControl(event) {
@@ -717,7 +719,9 @@ void loop(){
                 setActiveCOMports,
                 openMingoBlox,
                 edited_code, 
-                setEditedCode
+                setEditedCode,
+                toolboxRefresh,
+                setToolboxRefresh
             }}
         >
             {props.children}

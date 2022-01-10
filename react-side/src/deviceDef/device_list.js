@@ -819,6 +819,20 @@ const Mingo_Bot = new device(
           <field name="BOOL">TRUE</field>
       </block>
   </category>
+  <category name="Loops">
+      <block type="for_loop">
+      </block>
+      <block type="controls_whileUntil">
+          <field name="MODE">WHILE</field>
+      </block>
+      <block type="delay_core">
+        <value name="seconds">
+          <shadow type="math_number">
+            <field name="seconds">1</field>
+          </shadow>
+        </value>
+      </block>
+  </category>
   <category css-icon="customIcon fa fa-cog" name="Math">
       <block type="math_number">
           <field name="NUM">0</field>
@@ -844,20 +858,6 @@ const Mingo_Bot = new device(
                   <field name="NUM">0</field>
               </shadow>
           </value>
-      </block>
-  </category>
-  <category name="Loops">
-      <block type="for_loop">
-      </block>
-      <block type="controls_whileUntil">
-          <field name="MODE">WHILE</field>
-      </block>
-      <block type="delay_core">
-        <value name="seconds">
-          <shadow type="math_number">
-            <field name="seconds">1</field>
-          </shadow>
-        </value>
       </block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Actuators" colour="#05386B">

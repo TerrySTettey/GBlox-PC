@@ -37,6 +37,8 @@ const Toolbox_colors = {
     Default: "#000000"
 }
 
+var toolBoxStaticButtons = [];
+
 const Body = (props) => {
     var [PullOutState, setPullOutState] = useState("Closed")
     var TrashHolder = useRef(null);
@@ -47,11 +49,14 @@ const Body = (props) => {
     const [toolboxButtons, setToolboxButtons] = useState([]);
     const [uploadInProgressStatus, setUploadInProgressStatus] = useState()
 
+
     const {
         selectedDevice,
         upload_status,
         setUploadStatus,
         toolboxItems,
+        toolboxRefresh,
+        setToolboxRefresh,
         bodyLoaded,
         setBodyLoaded,
         splashScreen,
@@ -81,17 +86,18 @@ const Body = (props) => {
         else {
             setInUpload(true);
             setProgressValue(0);
-            document.getElementById("uploadInProgressStatus").style.opacity="1";    
+            document.getElementById("uploadInProgressStatus").style.opacity = "1";
             setUploadInProgressStatus("Upload already in Progress. Please Wait")
             document.getElementById("c-Body-Notification").style.display = "block";
             setAlertDiv(
-                <Alert_Notification 
-                type="selectCOMPORT" 
-                text="Select your COM Port" 
-                closeAlert={e => { 
-                    setAlertDiv(<div></div>); 
-                    document.getElementById("c-Body-Notification").style.display = "none"; 
-                    props.uploadFunction();}} />
+                <Alert_Notification
+                    type="selectCOMPORT"
+                    text="Select your COM Port"
+                    closeAlert={e => {
+                        setAlertDiv(<div></div>);
+                        document.getElementById("c-Body-Notification").style.display = "none";
+                        props.uploadFunction();
+                    }} />
             )
         }
     }
@@ -99,135 +105,142 @@ const Body = (props) => {
     var FlyoutContainerChanged = false;
 
     useEffect(() => {
-        //variables to hold various properties
-        setToolboxButtons([]);
-        var buttons = [];   //holds button DOMS before setting them to the toolboxButtons
-        var children = [];  //holds children of categories. Is reset when category is finished
-        var category = "";  //Holds the name of the category
-        var category_svg = [];  //Holds the category svg
-        var category_color = "";    //Holds the color of the category
-        var children_count = 0; //Counts the children inside the category. Once there is one child left, it resets itself and clears the category svg, color, and name
-        for (var i = 0; i < toolboxItems.length; i++) { //Go through each item in toolboxItems
-            var svg = [];   //Current svg holder for toolbox Item
-            var color = ""; //Current color holder for toolbox Item
-            switch (toolboxItems[i][0]) {   //Sets the appropriate svg and color to the above variables
-                case "Loops":
-                    svg = svg_dictionary.toolbox.Loop
-                    color = Toolbox_colors.Loop;
-                    break;
-                case "Logic":
-                    svg = svg_dictionary.toolbox.Logic;
-                    color = Toolbox_colors.Logic;
-                    break;
-                case "Math":
-                    svg = svg_dictionary.toolbox.Math;
-                    color = Toolbox_colors.Math;
-                    break;
-                case "Text":
-                    svg = svg_dictionary.toolbox.Text;
-                    color = Toolbox_colors.Text;
-                    break;
-                case "Actuators":
-                    svg = svg_dictionary.toolbox.Actuators;
-                    color = Toolbox_colors.Actuators;
-                    break;
-                case "Sensors":
-                    svg = svg_dictionary.toolbox.Sensors;
-                    color = Toolbox_colors.Sensors;
-                    break;
-                case "COM":
-                    svg = svg_dictionary.toolbox.COM;
-                    color = Toolbox_colors.COM;
-                    break;
-                case "LEDs":
-                    svg = svg_dictionary.toolbox.LEDs;
-                    color = Toolbox_colors.Light;
-                    break;
-                case "Sound":
-                    svg = svg_dictionary.toolbox.Sound;
-                    color = Toolbox_colors.Sound;
-                    break;
-                case "Digital":
-                    svg = svg_dictionary.toolbox.Default;
-                    color = Toolbox_colors.Digital;
-                    break;
-                case "Analog":
-                    svg = svg_dictionary.toolbox.Default;
-                    color = Toolbox_colors.Analog;
-                    break;
-                case "Variables":
-                    svg = svg_dictionary.toolbox.Variables;
-                    color = Toolbox_colors.Variables;
-                    break;
-                default:
-                    svg = svg_dictionary.toolbox.Default;
-                    color = Toolbox_colors.Default;
-                    break;
-            }
-            if (toolboxItems[i][2] == "category") { //Checks to see if the toolbox item is a category
-                children_count = toolboxItems[i][3];    //Checks the number of children in the category and sets them to children_count
-                category = toolboxItems[i][0]   //Sets the current category name to category
-                category_svg = svg; //Sets the current category svg to category
-                category_color = color; //Sets the current category color to category
-            }
-            else {  //if the toolbox item is not a category
-                children_count -= 1;    //reduce children_count by 1
-                if (children_count < 0) {   //Checks to see if children_count is less than zero. That means that the category is finished or was not present
-                    children_count = 0; //sets children_count to 0
-                    //Level 0 Buttons
-                    buttons.push(
-                        <Button
-                            id={toolboxItems[i][1]}
-                            type="ToolboxCategoryButton"
-                            outColor={color}
-                            hoverColor="#0000dc"
-                            s_ButtonState="Out"
-                            children={[svg]}
-                            text={toolboxItems[i][0]}
-                            toolbox_type={toolboxItems[i][2]}
-                            child_count={children_count}
-                            hoverEffect="fill"
-                            onClick={props.ToolboxFunction}
-                        />
-                    )
+        if (toolboxRefresh === 1) {
+            toolBoxStaticButtons = [];
+            setToolboxRefresh(0)
+        } else {
+            //variables to hold various properties
+            var buttons = [];   //holds button DOMS before setting them to the toolboxButtons
+            var children = [];  //holds children of categories. Is reset when category is finished
+            var category = "";  //Holds the name of the category
+            var category_svg = [];  //Holds the category svg
+            var category_color = "";    //Holds the color of the category
+            var children_count = 0; //Counts the children inside the category. Once there is one child left, it resets itself and clears the category svg, color, and name
+            for (var i = 0; i < toolboxItems.length; i++) { //Go through each item in toolboxItems
+                var svg = [];   //Current svg holder for toolbox Item
+                var color = ""; //Current color holder for toolbox Item
+                switch (toolboxItems[i][0]) {   //Sets the appropriate svg and color to the above variables
+                    case "Loops":
+                        svg = svg_dictionary.toolbox.Loop
+                        color = Toolbox_colors.Loop;
+                        break;
+                    case "Logic":
+                        svg = svg_dictionary.toolbox.Logic;
+                        color = Toolbox_colors.Logic;
+                        break;
+                    case "Math":
+                        svg = svg_dictionary.toolbox.Math;
+                        color = Toolbox_colors.Math;
+                        break;
+                    case "Text":
+                        svg = svg_dictionary.toolbox.Text;
+                        color = Toolbox_colors.Text;
+                        break;
+                    case "Actuators":
+                        svg = svg_dictionary.toolbox.Actuators;
+                        color = Toolbox_colors.Actuators;
+                        break;
+                    case "Sensors":
+                        svg = svg_dictionary.toolbox.Sensors;
+                        color = Toolbox_colors.Sensors;
+                        break;
+                    case "COM":
+                        svg = svg_dictionary.toolbox.COM;
+                        color = Toolbox_colors.COM;
+                        break;
+                    case "LEDs":
+                        svg = svg_dictionary.toolbox.LEDs;
+                        color = Toolbox_colors.Light;
+                        break;
+                    case "Sound":
+                        svg = svg_dictionary.toolbox.Sound;
+                        color = Toolbox_colors.Sound;
+                        break;
+                    case "Digital":
+                        svg = svg_dictionary.toolbox.Default;
+                        color = Toolbox_colors.Digital;
+                        break;
+                    case "Analog":
+                        svg = svg_dictionary.toolbox.Default;
+                        color = Toolbox_colors.Analog;
+                        break;
+                    case "Variables":
+                        svg = svg_dictionary.toolbox.Variables;
+                        color = Toolbox_colors.Variables;
+                        break;
+                    default:
+                        svg = svg_dictionary.toolbox.Default;
+                        color = Toolbox_colors.Default;
+                        break;
                 }
-                else {
-                    children.push(
-                        <Button
-                            id={toolboxItems[i][1]}
-                            type="ToolboxCategoryButton"
-                            outColor={category_color}
-                            hoverColor="#0000dc"
-                            s_ButtonState="Out"
-                            children={[category_svg]}
-                            text={toolboxItems[i][0]}
-                            toolbox_type={toolboxItems[i][2]}
-                            child_count={children_count}
-                            hoverEffect="fill"
-                            onClick={props.ToolboxFunction}
-                        />
-                    )
-                    if (children_count === 0) {
+                if (toolboxItems[i][2] == "category") { //Checks to see if the toolbox item is a category
+                    children_count = toolboxItems[i][3];    //Checks the number of children in the category and sets them to children_count
+                    category = toolboxItems[i][0]   //Sets the current category name to category
+                    category_svg = svg; //Sets the current category svg to category
+                    category_color = color; //Sets the current category color to category
+                }
+                else {  //if the toolbox item is not a category
+                    children_count -= 1;    //reduce children_count by 1
+                    if (children_count < 0) {   //Checks to see if children_count is less than zero. That means that the category is finished or was not present
+                        children_count = 0; //sets children_count to 0
+                        //Level 0 Buttons
                         buttons.push(
-                            <CustomDrop
-                                buttonType="ToolboxCategoryButton"
-                                text={category}
-                                childrenlist={children}
-                                outColor={category_color}
-                                dropType="toolbox_list"
-                                svg={[category_svg]}
-                                modal=""
+                            <Button
+                                id={toolboxItems[i][1]}
+                                type="ToolboxCategoryButton"
+                                outColor={color}
+                                hoverColor="#0000dc"
+                                s_ButtonState="Out"
+                                children={[svg]}
+                                text={toolboxItems[i][0]}
+                                toolbox_type={toolboxItems[i][2]}
+                                child_count={children_count}
+                                hoverEffect="fill"
+                                onClick={props.ToolboxFunction}
                             />
                         )
-                        children = []
-                        category = ""
-                        category_svg = [];
+                    }
+                    else {
+                        children.push(
+                            <Button
+                                id={toolboxItems[i][1]}
+                                type="ToolboxCategoryButton"
+                                outColor={category_color}
+                                hoverColor="#0000dc"
+                                s_ButtonState="Out"
+                                children={[category_svg]}
+                                text={toolboxItems[i][0]}
+                                toolbox_type={toolboxItems[i][2]}
+                                child_count={children_count}
+                                hoverEffect="fill"
+                                onClick={props.ToolboxFunction}
+                            />
+                        )
+                        if (children_count === 0) {
+                            buttons.push(
+                                <CustomDrop
+                                    buttonType="ToolboxCategoryButton"
+                                    text={category}
+                                    childrenlist={children}
+                                    outColor={category_color}
+                                    dropType="toolbox_list"
+                                    svg={[category_svg]}
+                                    modal=""
+                                />
+                            )
+                            children = []
+                            category = ""
+                            category_svg = [];
+                        }
                     }
                 }
             }
+            setToolboxButtons(buttons)
+            toolBoxStaticButtons = buttons;
         }
-        setToolboxButtons(buttons)
-    }, [toolboxItems])
+    }, [toolboxItems, toolboxRefresh])
+
+
 
     useEffect(() => {
         if (TrashContainerChanged === false) {
@@ -275,37 +288,38 @@ const Body = (props) => {
                 updateProgress(100);
                 setInUpload(false);
                 setUploadInProgressStatus()
-                document.getElementById("uploadInProgressStatus").style.opacity="0";
+                document.getElementById("uploadInProgressStatus").style.opacity = "0";
                 break;
             case "Upload Failed : Error in Code":
                 setProgressValue(0);
                 setInUpload(false);
                 setUploadStatus("");
                 setUploadInProgressStatus();
-                document.getElementById("uploadInProgressStatus").style.opacity="0";
+                document.getElementById("uploadInProgressStatus").style.opacity = "0";
                 break;
             case "Upload Failed":
                 setProgressValue(0);
                 setInUpload(false);
                 setUploadStatus("");
                 setUploadInProgressStatus();
-                document.getElementById("uploadInProgressStatus").style.opacity="0";
+                document.getElementById("uploadInProgressStatus").style.opacity = "0";
                 break;
             case "No Arduino Detected":
                 setProgressValue(0);
                 setInUpload(false);
                 document.getElementById("c-Body-Notification").style.display = "block";
                 setAlertDiv(
-                    <Alert_Notification 
-                    type="notification" 
-                    text="No device has been detected. Make sure that a device is connected" 
-                    closeAlert={e => { 
-                        setAlertDiv(<div></div>); 
-                        document.getElementById("c-Body-Notification").style.display = "none"; }} />
+                    <Alert_Notification
+                        type="notification"
+                        text="No device has been detected. Make sure that a device is connected"
+                        closeAlert={e => {
+                            setAlertDiv(<div></div>);
+                            document.getElementById("c-Body-Notification").style.display = "none";
+                        }} />
                 )
                 setUploadStatus("")
                 setUploadInProgressStatus()
-                document.getElementById("uploadInProgressStatus").style.opacity="0";
+                document.getElementById("uploadInProgressStatus").style.opacity = "0";
                 break;
             case "Arduino found on ":
                 setProgressValue(0);
@@ -315,7 +329,7 @@ const Body = (props) => {
                     <Alert_Notification type="notification" text="No device has been detected. Make sure that an Arduino is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
                 )
                 setUploadInProgressStatus()
-                document.getElementById("uploadInProgressStatus").style.opacity="0";
+                document.getElementById("uploadInProgressStatus").style.opacity = "0";
                 break;
             default:
                 setProgressValue(0);
@@ -601,8 +615,10 @@ const Body = (props) => {
                         </g>
                     </g>
                 </svg>
-                <div id="TrashTotal">
-                    <div id="num15HoverHolder">
+                <div id="TrashTotal" onDragEnter={()=>{
+                    document.getElementById("TrashTotal").style.cursor = "url";
+                }}>
+                    <div id="num15HoverHolder" >
 
                         <svg id="lid" xmlns="http://www.w3.org/2000/svg" width="45.049" height="9.565" viewBox="0 0 45.049 9.565">
                             <path id="Path_81" data-name="Path 81" d="M1849.7,938.283h-10.84v-1.969l-1.052-1.052h-8.6L1827.943,934H1821.9v4.283h-10.4l-3.059,2.141v2.141h44.049v-2.141Z" transform="translate(-1807.942 -933.5)" stroke="rgba(0,0,0,0)" stroke-width="1" />
@@ -635,7 +651,7 @@ const Body = (props) => {
                 </div>
                 <div className="c-Body-a-ToolBox">
                     <Toolbox>
-                        {toolboxButtons}
+                        {toolBoxStaticButtons}
                     </Toolbox>
 
                 </div>
@@ -653,7 +669,7 @@ const Body = (props) => {
                 </div>
                 <div className="i-emptyDiv4" />
             </div>
-            {/*<div className="c-Body-a-FlyoutHolder" ref={FlyOutHolder}/>*/}
+            {/*<div className="c-Body-a-FlyoutHolder" ref={FlyOutHolder}/>*/ }
             <div className="c-Body-a-PulloutMenu">
                 <Pull_Out_Menu toolboxButtons={props.toolboxButtons} example_codes={props.example_codes} contactSupportViaMail={props.contactSupportViaMail} />
             </div>

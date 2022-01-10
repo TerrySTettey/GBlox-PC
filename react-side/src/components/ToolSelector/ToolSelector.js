@@ -51,11 +51,12 @@ function ToolSelector(props) {
     var Connector = useRef(null);
     const [level, setLevel] = useState("")
 
-    const {toolboxUpdate, setToolboxUpdate,toolboxLevel, setToolboxLevel} = useContext(Ctxt_SingletonManager)
+    const {toolboxUpdate, setToolboxUpdate,toolboxLevel, setToolboxLevel, toolboxRefresh, setToolboxRefresh} = useContext(Ctxt_SingletonManager)
 
     function level1OnClick() {
         setToolboxLevel(1)
         setToolboxUpdate(1)
+        setToolboxRefresh(1)
         setLevel("Beginner")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
@@ -78,6 +79,7 @@ function ToolSelector(props) {
     function level2OnClick() {
         setToolboxLevel(2)
         setToolboxUpdate(1)
+        setToolboxRefresh(1)
         setLevel("Apprentice")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
@@ -100,6 +102,7 @@ function ToolSelector(props) {
     function level3OnClick() {
         setToolboxLevel(3)
         setToolboxUpdate(1)
+        setToolboxRefresh(1)
         setLevel("Intermediate")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
@@ -122,6 +125,7 @@ function ToolSelector(props) {
     function level4OnClick() {
         setToolboxLevel(4)
         setToolboxUpdate(1)
+        setToolboxRefresh(1)
         setLevel("Pro")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
@@ -144,6 +148,7 @@ function ToolSelector(props) {
     function level5OnClick() {
         setToolboxLevel(5)
         setToolboxUpdate(1)
+        setToolboxRefresh(1)
         setLevel("Master")
         if (Connector.current.classList.contains("con-pos-1")) {
             Connector.current.classList.remove("con-pos-1");
