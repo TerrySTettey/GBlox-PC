@@ -45,6 +45,7 @@ const TestMain = (props) => {
         openMingoBlox,
         device_manager,
         available_com_ports, 
+        uploadInProgress, setUploadInProgress,
         setAvailableCOMports} = useContext(Ctxt_SingletonManager)
     const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
 
@@ -56,6 +57,7 @@ const TestMain = (props) => {
 
     async function uploadCode_ipc() {
         var port = document.getElementById("selected-comport").value
+        setUploadInProgress(true);
         if (document.getElementById("c-codeEditor").style.display !== "flex") {
             //Invokes upload-code from electron with the current code
             ipcRenderer.invoke('upload-code', deviceCode, port);

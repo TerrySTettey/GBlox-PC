@@ -39,6 +39,7 @@ const CtxtP_SingletonManager = (props) => {
     var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);          //Used to set and check the selected device's data
     const [currentDeviceChanged, setCurrentDeviceChanged] = useState(0)
     const [upload_status, setUploadStatus] = useState("");
+    const [uploadInProgress, setUploadInProgress] = useState(false);
     const [selectedToolbox, setSelectedToolbox] = useState(MelloDOM)
     const [toolboxUpdate, setToolboxUpdate] = useState(0)
     const [toolboxLevel, setToolboxLevel] = useState(1)
@@ -750,7 +751,8 @@ void loop(){
                 edited_code, 
                 setEditedCode,
                 toolboxRefresh,
-                setToolboxRefresh
+                setToolboxRefresh,
+                uploadInProgress, setUploadInProgress
             }}
         >
             {props.children}

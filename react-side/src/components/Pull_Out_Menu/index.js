@@ -13,7 +13,7 @@ const { ipcRenderer } = window.require('electron');
 
 function Pull_Out_Menu(props) {
     const [contents, setContents] = useState([<div></div>]);
-    const { setSerialPortMonitor, serialport_read, serialport_status, setSerialPortStatus } = useContext(Ctxt_SingletonManager)
+    const { setSerialPortMonitor, serialport_read, serialport_status, setSerialPortStatus,uploadInProgress, setUploadInProgress } = useContext(Ctxt_SingletonManager)
     const [currentMenu, setCurrentMenu] = useState("")
     var [menuOpen, setMenuOpen] = useState("Open");
     var pull_out_menu = useRef(null);
@@ -37,15 +37,22 @@ function Pull_Out_Menu(props) {
         if (button_clicked !== "") {
             switch (button_clicked) {
                 case "serial-port":
-                    if (serialport_status === false) {
-                        serialport_read();
-                        setSerialPortStatus(true)
-                        setContents([<Serial_Menu />]);
+                    if (uploadInProgress==false){
+                        if (serialport_status == false) {
+                            serialport_read();
+                            setSerialPortStatus(true)
+                            setContents([<Serial_Menu />]);
+                        }
+                        else {
+                            closeSerial();
+                        }
+                        setCurrentMenu(button_clicked)
                     }
-                    else {
-                        closeSerial();
+                    else{
+                        setContents([<View_Code_Menu />]);
+                        setCurrentMenu(button_clicked)
                     }
-                    setCurrentMenu(button_clicked)
+                    
                     break;
                 case "view-code":
                     if (currentMenu !== button_clicked) {
@@ -57,6 +64,7 @@ function Pull_Out_Menu(props) {
                     if (currentMenu !== button_clicked) {
                         setContents([<Help_Menu contactSupportViaMail={props.contactSupportViaMail}/>]);
                         setCurrentMenu(button_clicked)
+
                     }
                     break;
                 case "code-editor":
@@ -66,6 +74,7 @@ function Pull_Out_Menu(props) {
                         var code_editor = document.getElementById("c-codeEditor")
                         code_editor.style.display = "none";
                         code_editor.style.transform = "scaleX(0.35)"
+
                     }
                     break;
                 case "example-code":
@@ -75,6 +84,7 @@ function Pull_Out_Menu(props) {
                             </Example_Code_Menu>
                         ])
                         setCurrentMenu(button_clicked)
+  
                     }
                     break;
             }
@@ -172,6 +182,12 @@ function Pull_Out_Menu(props) {
             }, 500);
         }
     }, [menuOpen])
+
+    useEffect(()=>{
+        // if (uploadInProgress==true){
+        //     setMenuOpen("Closed");
+        // }
+    },[uploadInProgress])
 
 
 
