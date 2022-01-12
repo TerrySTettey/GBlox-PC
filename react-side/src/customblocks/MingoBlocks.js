@@ -73,9 +73,14 @@ Blockly.Blocks['mingo_grabber_move'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Actuators, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField(" ")
-            .appendField(new Blockly.FieldDropdown([["open", "open"], ["close", "close"]]), "action")
-            .appendField("grabber at Port")
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"]]), "port");
+            //.appendField(new Blockly.FieldDropdown([["open", "open"], ["close", "close"]]), "action")
+            .appendField("set grabber at port")
+            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"]]), "port")
+            .appendField("to position ")
+            .appendField(new Blockly.FieldNumber(0, 0, 90, 1), "position")
+            .appendField("degrees at")
+            .appendField(new Blockly.FieldNumber(0, 0, 100, 1), "speed")
+            .appendField("% speed");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -450,7 +455,7 @@ Blockly.Blocks['mingo_display_animation'] = {
             .appendField(new Blockly.FieldImage(Default, 25, 25, { alt: "*", flipRtl: "FALSE" }))
             .appendField("play")
             .appendField(new Blockly.FieldDropdown([["Loading Animation", "1"]]), "anim")
-            .appendField(" on display oconnected to port ")
+            .appendField(" on display connected to port ")
             .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"]]), "port");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);

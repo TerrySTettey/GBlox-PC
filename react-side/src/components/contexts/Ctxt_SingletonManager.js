@@ -294,9 +294,38 @@ void loop(){
         }
         else {
             if (currentDeviceName !== event.target.id) {
-                setCurrentDeviceName(event.target.id)
-                currentWorkspace.clear()
-                Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
+                //Test
+                if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace))!==selectedDevice.default_workspace){
+                    document.getElementById("c-Body-Notification").style.display = "block";
+                    setAlertDiv(<Alert_Notification
+                        type="alert"
+                        text="Selecting this device will clear your workspace. Open anyways?"
+                        acceptAlert={ev => {
+                            setAlertDiv(<div></div>);
+                            document.getElementById("c-Body-Notification").style.display = "none";
+                            try {
+                                setCurrentDeviceName(event.target.id)
+                                currentWorkspace.clear()
+                                Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
+                            }
+                            catch (e) { }
+                        }}
+                        closeAlert={event => {
+                            setAlertDiv(<div></div>);
+                            document.getElementById("c-Body-Notification").style.display = "none";
+                        }} 
+                        />)
+                }
+                else{
+                    try {
+                        Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
+                    }
+                    catch (e) { }
+                }
+                //End Test
+                //setCurrentDeviceName(event.target.id)
+                //currentWorkspace.clear()
+                //Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
             }
             //setCurrentDeviceVar( event.target.id)
             popout.style.opacity = "0"

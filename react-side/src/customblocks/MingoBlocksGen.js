@@ -66,38 +66,50 @@ const ServoSetup = {
     PreDec: `\n
     #include <Servo.h>
     Servo Grabber;
+    int grabberAngle = 50;
     \n`,
     Setup: `\n
     \n`,
     Bulk: `\n
-    void open_grabber(float speed) {
-        for (int i = 90; i > 0; i--) {
-          if (i < 0) {
-            i = 0;
+    void open_grabber(float speed, int target) {
+        for (int i = grabberAngle; i > target; i--) {
+          if (i < target) {
+            i = target;
           }
           Grabber.write(i);
+          grabberAngle = i;
           delay(90 / (speed * 1000));
         }
       }
       
-      void close_grabber(float speed) {
-        for (int i = 0; i < 90; i++) {
-          if (i > 90) {
-            i = 90;
+      void close_grabber(float speed, int target) {
+        for (int i = grabberAngle; i < target; i++) {
+          if (i > target) {
+            i = target;
           }
           Grabber.write(i);
+          grabberAngle = i;
           delay(90 / (speed * 1000));
+        }
+      }
+
+      void set_grabber(float speed, int target) {
+        //int angleChange = map(grabberAngle, 0, 90, 90, 0);
+        if (target > grabberAngle) {
+            close_grabber(speed, target);
+        } else {
+            open_grabber(speed, target);
         }
       }
     \n`
 }
 
 const NeoLEDSetup = {
-    PreDec: `\n
-    #include <Adafruit_NeoPixel.h>
+    PreDec: `\n#include <Adafruit_NeoPixel.h>
+    Adafruit_NeoPixel pixels(2, ${Port1[3]}, NEO_GRB + NEO_KHZ800);
+
     \n`,
     Setup: `\n
-    pixels.begin();
     \n`,
     Bulk: `\n
     \n`
@@ -145,16 +157,18 @@ const UltrasonicSetup = {
     
     \n`,
     Bulk: `\n
-    int read_ultrasonic(int trigger, int echo){
-        digitalWrite(trigger, LOW);
-        delayMicroseconds(2);d 
-        digitalWrite(trigger, HIGH);
+    int read_ultrasonic(int ultra){
+        pinMode(ultra, OUTPUT);
+        digitalWrite(ultra, LOW);
+        delayMicroseconds(2);
+        digitalWrite(ultra, HIGH);
         delayMicroseconds(10);
-        digitalWrite(trigger, LOW);
-        int duration = pulseIn(echo, HIGH);
+        digitalWrite(ultra, LOW);
+        pinMode(ultra, INPUT);
+        int duration = pulseIn(ultra, HIGH);
         int distance = duration * 0.034 / 2;
         return distance;
-    }
+      }
     \n`
 }
 
@@ -347,8 +361,10 @@ Blockly.JavaScript["mingo_motor_stop_indef"] = function (block) {
 }
 
 Blockly.JavaScript["mingo_grabber_move"] = function (block) {
-    var dropdown_action = block.getFieldValue('action');
+    //var dropdown_action = block.getFieldValue('action');
     var dropdown_port = block.getFieldValue('port');
+    var value_position = block.getFieldValue('position');
+    var value_speed = block.getFieldValue('speed');
 
     if (ServoDefined === false) {
         if (block.getRootBlock().type == "m_mainloop") {
@@ -356,12 +372,14 @@ Blockly.JavaScript["mingo_grabber_move"] = function (block) {
             switch (dropdown_port) {
                 case "1":
                     ServoSetup.Setup = `\n
-                    Grabber.attach(${Port1[2]})
+                    Grabber.attach(${Port1[2]});
+                    Grabber.write(50);
                     \n`
                     break;
                 case "2":
                     ServoSetup.Setup = `\n
-                    Grabber.attach(${Port2[2]})
+                    Grabber.attach(${Port2[2]});
+                    Grabber.write(50);
                     \n`
                     break;
             }
@@ -375,8 +393,9 @@ Blockly.JavaScript["mingo_grabber_move"] = function (block) {
         }
     }
 
-    var code = '...;\n';
-    switch (dropdown_action) {
+    var code = `set_grabber(${value_speed},${value_position});\n`;
+
+   /*  switch (dropdown_action) {
         case "open":
             code = `open_grabber(50);\n`
             break;
@@ -384,7 +403,7 @@ Blockly.JavaScript["mingo_grabber_move"] = function (block) {
             code = `close_grabber(50);\n`
             break;
     }
-
+    */
     return code;
 }
 
@@ -398,20 +417,6 @@ Blockly.JavaScript["mingo_led_range"] = function (block) {
     if (NeoLEDDefined === false) {
         if (block.getRootBlock().type == "m_mainloop") {
 
-            switch (port) {
-                case "1":
-                    NeoLEDSetup.Setup = `\n
-                    Adafruit_NeoPixel pixels(2, ${Port1[3]}, NEO_GRB + NEO_KHZ800);
-                    \n`
-                    break;
-                case "2":
-                    NeoLEDSetup.Setup = `\n
-                    Adafruit_NeoPixel pixels(2, ${Port2[3]}, NEO_GRB + NEO_KHZ800);
-                    \n`
-                    break;
-            }
-
-
             peripheral_PreDeclarations += NeoLEDSetup.PreDec;
             peripheral_SetupCode += NeoLEDSetup.Setup;
             peripheral_BulkFunctions += NeoLEDSetup.Bulk;
@@ -421,10 +426,21 @@ Blockly.JavaScript["mingo_led_range"] = function (block) {
     }
 
     var code = '...;\n';
+    var SelectedPort = 0;
+    switch (port){
+        case "1":
+            SelectedPort = Port1;
+            break;
+        case "2":
+            SelectedPort = Port2;
+            break;
+    }
 
     switch (ledSelect) {
         case "all":
             code = `
+            pixels = Adafruit_NeoPixel(2, ${SelectedPort[3]}, NEO_GRB + NEO_KHZ800);
+            pixels.begin();
             pixels.setPixelColor(0,pixels.Color(${red},${green}, ${blue}));
             pixels.setPixelColor(1,pixels.Color(${red},${green}, ${blue}));
             pixels.show();
@@ -432,12 +448,16 @@ Blockly.JavaScript["mingo_led_range"] = function (block) {
             break;
         case "left":
             code = `
+            pixels = Adafruit_NeoPixel(2, ${SelectedPort[3]}, NEO_GRB + NEO_KHZ800);
+            pixels.begin();
             pixels.setPixelColor(0,pixels.Color(${red},${green}, ${blue}));
             pixels.show();
             \n`
             break;
         case "right":
             code = `
+            pixels = Adafruit_NeoPixel(2, ${SelectedPort[3]}, NEO_GRB + NEO_KHZ800);
+            pixels.begin();
             pixels.setPixelColor(1,pixels.Color(${red},${green}, ${blue}));
             pixels.show();
             \n`
@@ -454,21 +474,6 @@ Blockly.JavaScript["mingo_led_definite"] = function (block) {
 
     if (NeoLEDDefined === false) {
         if (block.getRootBlock().type == "m_mainloop") {
-
-            switch (port) {
-                case "1":
-                    NeoLEDSetup.Setup = `\n
-                    Adafruit_NeoPixel pixels(2, ${Port1[3]}, NEO_GRB + NEO_KHZ800);
-                    \n`
-                    break;
-                case "2":
-                    NeoLEDSetup.Setup = `\n
-                    Adafruit_NeoPixel pixels(2, ${Port2[3]}, NEO_GRB + NEO_KHZ800);
-                    \n`
-                    break;
-            }
-
-
             peripheral_PreDeclarations += NeoLEDSetup.PreDec;
             peripheral_SetupCode += NeoLEDSetup.Setup;
             peripheral_BulkFunctions += NeoLEDSetup.Bulk;
@@ -480,15 +485,25 @@ Blockly.JavaScript["mingo_led_definite"] = function (block) {
     var code = '...;\n';
     var colorCode = '';
 
+    var SelectedPort = 0;
+    switch (port){
+        case "1":
+            SelectedPort = Port1;
+            break;
+        case "2":
+            SelectedPort = Port2;
+            break;
+    }
+
     switch (colorSelect) {
         case "red":
-            colorCode = '1, 0 , 0';
+            colorCode = '255, 0 , 0';
             break;
         case "green":
-            colorCode = '0, 1 , 0';
+            colorCode = '0, 255 , 0';
             break;
         case "blue":
-            colorCode = '0, 0 , 1';
+            colorCode = '0, 0 , 255';
             break;
         case "none":
             colorCode = '0, 0 , 0';
@@ -498,6 +513,8 @@ Blockly.JavaScript["mingo_led_definite"] = function (block) {
     switch (ledSelect) {
         case "all":
             code = `
+            pixels = Adafruit_NeoPixel(2, ${SelectedPort[3]}, NEO_GRB + NEO_KHZ800);
+            pixels.begin();
             pixels.setPixelColor(0,pixels.Color(${colorCode}));
             pixels.setPixelColor(1,pixels.Color(${colorCode}));
             pixels.show();
@@ -505,12 +522,16 @@ Blockly.JavaScript["mingo_led_definite"] = function (block) {
             break;
         case "left":
             code = `
+            pixels = Adafruit_NeoPixel(2, ${SelectedPort[3]}, NEO_GRB + NEO_KHZ800);
+            pixels.begin();
             pixels.setPixelColor(0,pixels.Color(${colorCode}));
             pixels.show();
             \n`
             break;
         case "right":
             code = `
+            pixels = Adafruit_NeoPixel(2, ${SelectedPort[3]}, NEO_GRB + NEO_KHZ800);
+            pixels.begin();
             pixels.setPixelColor(1,pixels.Color(${colorCode}));
             pixels.show();
             \n`
@@ -1049,14 +1070,14 @@ Blockly.JavaScript["mingo_ultrasonic_sensor"] = function (block) {
 
     switch (port) {
         case "1":
-            selectedPort = Port3;
+            selectedPort = Port1;
             break;
         case "2":
-            selectedPort = Port4;
+            selectedPort = Port2;
             break;
     }
     console.log(selectedPort);
-    code = `read_ultrasonic( ${selectedPort[2]} , ${selectedPort[3]})`
+    code = `read_ultrasonic( ${selectedPort[2]})`
     console.log(code);
 
     return [code, Blockly.JavaScript.ORDER_NONE];
