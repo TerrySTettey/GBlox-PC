@@ -230,7 +230,7 @@ void loop(){
                 ipcRenderer.on("shortcut", (event, result) => {
                     switch (result) {
                         case "save":
-                            exportBlocks(false)
+                            document.getElementById("save-button").click();
                             break;
                         case "load":
                             loadBlocks()

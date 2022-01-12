@@ -62,7 +62,7 @@ const Header = (props) => {
                 <div className="header-buttons-segment">
                     <Dropdown buttonImage="1" list={[["New","Ctrl+N"], ["Open","Ctrl+O"], ["Save","Ctrl+S"], ["Save As","Ctrl+S"], ["Share",""], ["Close"],""]} funcsOnClick={fileheader}/>
                     <Dropdown buttonImage="2" list={[["Cut","Ctrl+X"], ["Copy","Ctrl+C"], ["Paste","Ctrl+V"], ["Delete","Del"]]} funcsOnClick={editheader}/>
-                    <HeaderButton buttonImage="3" onClick={exportBlocks}/>
+                    <HeaderButton id="save-button" buttonImage="3" onClick={exportBlocks}/>
                 </div>
                 <div id="blank-space" />
                 <div className="header-buttons-segment">

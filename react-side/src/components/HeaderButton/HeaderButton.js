@@ -136,7 +136,7 @@ const HeaderButton = (props) => {
     return (
         <div id="header-button-container">
             {buttonImage}
-            <button type="button" id="file-button" className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut} href={props.href} />
+            <button type="button" id={props.id} className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut} href={props.href} />
         </div>
     )
 }
