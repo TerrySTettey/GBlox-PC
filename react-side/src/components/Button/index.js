@@ -87,10 +87,18 @@ const Button = (props) => {
 
     function hoverIn() {
         setHoverState(true)
+
+        if(props.type === "DeviceAddButton"){
+             setSVGColor("#0000dc")
+        }
     }
 
     function hoverOut() {
         setHoverState(false)
+
+        if(props.type === "DeviceAddButton"){
+            setSVGColor("#4c97ff")
+        }
     }
 
     const emptybutton = <button type="button" id={props.id} className="empty-button" onClick={props.onClick} onMouseEnter={hoverIn} onMouseLeave={hoverOut} />
@@ -377,10 +385,12 @@ const Button = (props) => {
         case "DeviceAddButton":
             buttonType = (
                 <div>
-                    <div>
+                    <div className="c-button-a-DeviceAddButton" style={{
+                        fill: `${svgColor}`
+                    }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                             <g id="Add_Button" data-name="Add Button" transform="translate(-166 -240)">
-                                <circle id="Ellipse_4" data-name="Ellipse 4" cx="12.5" cy="12.5" r="12.5" transform="translate(166 240)" fill="#4c97ff" />
+                                <circle id="Ellipse_4" data-name="Ellipse 4" cx="12.5" cy="12.5" r="12.5" transform="translate(166 240)" fill={props.svgColor} />
                                 <rect id="Rectangle_137" data-name="Rectangle 137" width="11.263" height="1.449" transform="translate(172.869 251.795)" fill="#e9e9ff" />
                                 <rect id="Rectangle_138" data-name="Rectangle 138" width="1.449" height="11.263" transform="translate(177.775 246.885)" fill="#e9e9ff" />
                             </g>
@@ -514,6 +524,7 @@ Button.propTypes = {
     inColor: PropTypes.string,
     outColor: PropTypes.string,
     hoverColor: PropTypes.string,
+    hoverEffect: PropTypes.string,
     s_ButtonState: PropTypes.string,
 }
 

@@ -345,3 +345,12 @@
         background-color: var(--border-color);
     }
 }
+
+.Add_Button {
+    &:hover{
+        circle{
+            fill:rgb(0,0,220);
+
+        }
+    }
+}

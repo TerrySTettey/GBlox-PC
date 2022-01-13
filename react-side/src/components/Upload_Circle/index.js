@@ -18,8 +18,8 @@ function index(props) {
         <Button
           id="device-add-button"
           type="DeviceAddButton"
-          outColor="#0000bc"
-          hoverColor="#0000aa"
+          outColor="#4c97ff"
+          hoverColor="#0000dc"
           hoverEffect="svg-fill"
           onClick={props.onClick}
         />
