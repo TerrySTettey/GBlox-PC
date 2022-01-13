@@ -248,7 +248,9 @@ const WorkTabHolder = (props) => {
         setTabAddedState(1)
     }
     function CloseTab(e) {
-        if (currentTab.tabSaved == true) {
+        var SelectedID = e.target.parentNode.id.split("-")[2];
+        var focusedTab = TabHolder.filter((el) => { return el.tabID == SelectedID })[0];
+        if (focusedTab.tabSaved == true) {
             if (TabHolder.length > 1) {
                 var SelectedID = e.target.parentNode.id.split("-")[2];
                 TabHolder = TabHolder.filter((el) => { return el.tabID != SelectedID })
