@@ -685,6 +685,10 @@ void loop(){
         ipcRenderer.invoke("openMingoBlox")
     }
 
+    function openFile(link){
+        ipcRenderer.invoke("openFile", link);
+    }
+
     return (
         <Ctxt_SingletonManager.Provider
             value={{
@@ -752,7 +756,9 @@ void loop(){
                 setEditedCode,
                 toolboxRefresh,
                 setToolboxRefresh,
-                uploadInProgress, setUploadInProgress
+                uploadInProgress,
+                setUploadInProgress,
+                openFile
             }}
         >
             {props.children}

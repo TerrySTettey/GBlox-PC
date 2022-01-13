@@ -89,7 +89,7 @@ const Body = (props) => {
             setProgressValue(0);
             document.getElementById("uploadInProgressStatus").style.opacity = "1";
             console.log(document.getElementsByClassName("c-Body-a-OverlayExtras")[0].style.width)
-            if (document.getElementsByClassName("menu")[0].firstElementChild.id == "serial-menu") {
+            if (document.getElementsByClassName("pull-out-menu")[0].firstElementChild.id == "serial-menu") {
                 if (document.getElementsByClassName("c-Body-a-OverlayExtras")[0].style.width != "0px"){
                     document.getElementById("serial-port").click();
                 }

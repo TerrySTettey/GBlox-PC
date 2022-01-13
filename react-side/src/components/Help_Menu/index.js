@@ -1,8 +1,9 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import PropTypes from 'prop-types'
 import './Help_Menu.scss'
 import Menu from '../Menu'
 import svg_dictionary from '../svg_dictionary'
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 
 function help_div(svg, text, onClick) {
     svg = [svg[0]];
@@ -25,15 +26,26 @@ function openMail(){
     window.open(`mailto:?subject=Issue with gBlox&body=`)
 }
 function Help_Menu(props) {
+    const {
+        openMingoBlox,
+        openFile
+    } = useContext(Ctxt_SingletonManager)
+
     const { name, children, ...rest } = props;
     return (
         <Menu>
             <div className="help-menu">
                 <div className="text">Help</div>
                 <div className="Help-Buttons">
-                    {help_div(svg_dictionary.help_buttons.learn, "Learn","")}
-                    {help_div(svg_dictionary.help_buttons.support, "Support",props.contactSupportViaMail)}
-                    {help_div(svg_dictionary.help_buttons.update, "Check for Update")}
+                    {help_div(svg_dictionary.help_buttons.learn, "Learn",()=>{
+                        openFile("sample.pdf");
+                    })}
+                    {help_div(svg_dictionary.help_buttons.support, "Support",()=>{
+                        openMingoBlox();
+                    })}
+                    {help_div(svg_dictionary.help_buttons.update, "Check for Update",()=>{
+                        openMingoBlox();
+                    })}
                 </div>
             </div>
         </Menu>

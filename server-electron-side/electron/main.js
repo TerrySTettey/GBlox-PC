@@ -386,6 +386,10 @@ ipcMain.handle("openMingoBlox", async function (event) {
 ipcMain.handle("contactSupportViaMail", async function (event) {
     shell.openExternal(`mailto:?subject=Support Needed!`)
 })
+ipcMain.handle("openFile",async function (event, link) {
+    var filePath = isDev ? path.resolve(__dirname, link) : path.join(process.resourcesPath, link);
+    shell.openExternal(filePath);
+})
 ipcMain.handle("shareWorkspaceViaMail", async function (event, link) {
     shell.openExternal(`mailto:?subject=Check out my gBlox code!&body=Hey There! Check out this awesome code!%0D%0A${link}`)
 })

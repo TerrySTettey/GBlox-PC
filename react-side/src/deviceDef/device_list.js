@@ -377,6 +377,24 @@ const ft = [`
 
 </xml>`]
 
+const MingoDisplayTools = `<category css-icon="customIcon fa fa-cog" name="Display">
+<block type="mingo_display_text">
+    <field name="text">text</field>
+    <field name="port">1</field>
+</block>
+<block type="mingo_display_face">
+    <field name="face">1</field>
+    <field name="port">1</field>
+</block>
+<block type="mingo_display_animation">
+    <field name="anim">1</field>
+    <field name="port">1</field>
+</block>
+<block type="mingo_display_clear">
+    <field name="port">1</field>
+</block>
+</category>`;
+
 const defaults = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 <category css-icon="customIcon fa fa-cog" name="Logic">
       <block type="controls_if"></block>
@@ -1028,23 +1046,7 @@ const Mingo_Bot = new device(
           <field name="song">merry</field>
       </block>
   </category>
-  <category css-icon="customIcon fa fa-cog" name="Display">
-      <block type="mingo_display_text">
-          <field name="text">text</field>
-          <field name="port">1</field>
-      </block>
-      <block type="mingo_display_face">
-          <field name="face">1</field>
-          <field name="port">1</field>
-      </block>
-      <block type="mingo_display_animation">
-          <field name="anim">1</field>
-          <field name="port">1</field>
-      </block>
-      <block type="mingo_display_clear">
-          <field name="port">1</field>
-      </block>
-  </category>
+  
   
   <category name="Variables">
       <button text="Create New Variable" callbackKey="createvar"></button>

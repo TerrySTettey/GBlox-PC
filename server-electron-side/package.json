@@ -39,7 +39,9 @@
         "extraResource": [
           "./electron/arduino-1.8.15",
           "./electron/settings.txt",
-          "./electron/ArduinoOutput"
+          "./electron/ArduinoOutput",
+          "./electron/sample.pdf"
+
         ],
         "asar": true
       },
