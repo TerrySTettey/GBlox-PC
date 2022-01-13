@@ -2,13 +2,13 @@
     display: inline-flex;
     position: relative;
     height: 36px;
-    max-width: 1000px;
+    max-width: fit-content !important;
     min-width: 10px;
     transition: all 0.3s;
     
     background-color: var(--tab-color);
     border: var(--border-color);
-    outline: 2px red  var(--border-color);
+    outline: 2px var(--border-color) thick;
     margin: 0 0 0 0px;
     justify-content: center;
     transform: skewX(-45deg);
@@ -19,7 +19,7 @@
         flex-shrink: 0 !important;
 
         .c-WorkspaceTab-a-Text {
-            max-width: 1000px;
+            max-width: fit-content !important;
         }
         
     }
