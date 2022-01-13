@@ -18,8 +18,16 @@
     margin-bottom: 5%;
     margin-left: -5%;
     overflow: auto;
+    user-select: auto;
     pre{
         width: 70%;
         background: var(--tetiary-color) !important;
+    }
+
+    .language-arduino {
+        user-select: text;
+    }
+    span {
+        user-select: auto;
     }
 }

@@ -111,6 +111,7 @@ const Body = (props) => {
 var TrashContainerChanged = false;
 var FlyoutContainerChanged = false;
 
+
 useEffect(() => {
     if (toolboxRefresh === 1) {
         toolBoxStaticButtons = [];
