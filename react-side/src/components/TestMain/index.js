@@ -33,6 +33,7 @@ const TestMain = (props) => {
         currentDeviceName,
         setCurrentDeviceName,
         toolboxItems,
+        edited_code,
         setSelectedToolboxName,
         deviceCode,
         exportBlocks,
@@ -58,13 +59,14 @@ const TestMain = (props) => {
     async function uploadCode_ipc() {
         var port = document.getElementById("selected-comport").value
         setUploadInProgress(true);
-        if (document.getElementById("c-codeEditor").style.display !== "flex") {
+        if (document.getElementById("c-codeEditor").style.display !== "block" || document.getElementById("c-codeEditor").style.display == "" ) {
             //Invokes upload-code from electron with the current code
             ipcRenderer.invoke('upload-code', deviceCode, port);
         }
         else {
-            var code = document.getElementById("full-editing").value
-            ipcRenderer.invoke('upload-code', code, port);
+            //var code = document.getElementById("full-editing").value
+            ipcRenderer.invoke('upload-code', edited_code, port);
+            console.log(edited_code)
         }
 
         //Waits for results on which comport arduino is found on

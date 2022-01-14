@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types'
+
+import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import Prism from "prismjs";
 import Button from "../Button"
 import "prismjs/components/prism-c";
@@ -13,7 +15,7 @@ const { ipcRenderer } = window.require('electron')
 var lines = [1]
 
 function Index(props) {
-    const [edited_code, setEditedCode] = useState("");
+    const { edited_code, setEditedCode } = useContext(Ctxt_SingletonManager)
     const slider_highlighting = useRef(null);
     const editor = useRef(null);
     const [lineNumber, setLineNumber] = useState(<p>{1}</p>);
@@ -55,11 +57,36 @@ function Index(props) {
         }
     }
     function collapseContainer(event) {
-        document.getElementById("menu-editing").value = document.getElementById("full-editing").value
-        document.querySelector("#menu-highlighting-content").innerHTML = document.querySelector("#full-highlighting-content").innerHTML
-        var code_editor = document.getElementById("c-codeEditor")
-        var toolbox = document.getElementById("Toolbox");
-        if (event.target.id == "code-editor-collapse-button") {
+        try {
+            document.getElementById("menu-editing").value = document.getElementById("full-editing").value
+            document.querySelector("#menu-highlighting-content").innerHTML = document.querySelector("#full-highlighting-content").innerHTML
+            var code_editor = document.getElementById("c-codeEditor")
+            var toolbox = document.getElementById("Toolbox");
+            if (event.target.id == "code-editor-collapse-button") {
+                toolbox.style.filter = "none"
+                toolbox.style.pointerEvents = "auto"
+                code_editor.style.transform = "scaleX(0.35)"
+                code_editor.style.opacity = "0";
+                setTimeout(() => {
+                    code_editor.style.display = "none";
+                }, 500);
+            }
+            else {
+                toolbox.style.filter = "none"
+                toolbox.style.pointerEvents = "auto"
+                code_editor.style.transform = "scaleX(0)"
+                code_editor.style.opacity = "0";
+                document.getElementById("code-editor").click();
+                setTimeout(() => {
+                    code_editor.style.display = "none";
+                }, 500);
+
+            }
+
+        } catch (error) {
+            var code_editor = document.getElementById("c-codeEditor")
+            var toolbox = document.getElementById("Toolbox");
+            console.log(error)
             toolbox.style.filter = "none"
             toolbox.style.pointerEvents = "auto"
             code_editor.style.transform = "scaleX(0.35)"
@@ -67,17 +94,6 @@ function Index(props) {
             setTimeout(() => {
                 code_editor.style.display = "none";
             }, 500);
-        }
-        else {
-            toolbox.style.filter = "none"
-            toolbox.style.pointerEvents = "auto"
-            code_editor.style.transform = "scaleX(0)"
-            code_editor.style.opacity = "0";
-            document.getElementById("code-editor").click();
-            setTimeout(() => {
-                code_editor.style.display = "none";
-            }, 500);
-
         }
 
     }

@@ -107,9 +107,17 @@ const ServoSetup = {
 const NeoLEDSetup = {
     PreDec: `\n#include <Adafruit_NeoPixel.h>
     Adafruit_NeoPixel pixels(2, ${Port1[3]}, NEO_GRB + NEO_KHZ800);
-
     \n`,
-    Setup: `\n
+    Setup: `\n//Clearing LEDs Initially
+    pixels.begin();
+    pixels.setPixelColor(0,pixels.Color(0,0,0));
+    pixels.setPixelColor(1,pixels.Color(0,0,0));
+    pixels.show();
+    pixels = Adafruit_NeoPixel(2, ${Port2[3]}, NEO_GRB + NEO_KHZ800);
+    pixels.begin();
+    pixels.setPixelColor(0,pixels.Color(0,0,0));
+    pixels.setPixelColor(1,pixels.Color(0,0,0));
+    pixels.show();
     \n`,
     Bulk: `\n
     \n`
