@@ -58,13 +58,14 @@ function Pull_Out_Menu(props) {
                     if (currentMenu !== button_clicked) {
                         setContents([<View_Code_Menu />]);
                         setCurrentMenu(button_clicked)
+                        closeSerial();
                     }
                     break;
                 case "help-menu":
                     if (currentMenu !== button_clicked) {
                         setContents([<Help_Menu contactSupportViaMail={props.contactSupportViaMail}/>]);
                         setCurrentMenu(button_clicked)
-
+                        closeSerial();
                     }
                     break;
                 case "code-editor":
@@ -74,7 +75,7 @@ function Pull_Out_Menu(props) {
                         var code_editor = document.getElementById("c-codeEditor")
                         code_editor.style.display = "none";
                         code_editor.style.transform = "scaleX(0.35)"
-
+                        closeSerial();
                     }
                     break;
                 case "example-code":
@@ -82,9 +83,10 @@ function Pull_Out_Menu(props) {
                         setContents([
                             <Example_Code_Menu example_codes={props.example_codes}>
                             </Example_Code_Menu>
+                            
                         ])
                         setCurrentMenu(button_clicked)
-  
+                        closeSerial();
                     }
                     break;
             }

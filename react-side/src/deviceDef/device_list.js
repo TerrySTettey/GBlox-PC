@@ -1,7 +1,6 @@
 var DeviceList = []
 
-const ft = [`
-<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+const ft = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 <category css-icon="customIcon fa fa-cog" name="Logic">
       <block type="controls_if"></block>
       <block type="logic_compare">
@@ -148,7 +147,8 @@ const ft = [`
 <block type="variable_set"></block>
   </category>
 </xml>
-`, `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+`
+const ft2 = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 <category css-icon="customIcon fa fa-cog" name="Logic">
     <block type="controls_if"></block>
     <block type="logic_compare">
@@ -375,7 +375,8 @@ const ft = [`
 <block type="variable_set"></block>
 </category>
 
-</xml>`]
+</xml>
+`
 
 const MingoDisplayTools = `<category css-icon="customIcon fa fa-cog" name="Display">
 <block type="mingo_display_text">
@@ -473,7 +474,7 @@ const Arduino_Uno = new device(
   "Arduino Uno",
   "Arduino",
   "Arduino Uno",
-  ft,
+  [ft],
   `<xml xmlns="https://developers.google.com/blockly/xml"><block type="m_mainloop" x="430" y="150"></block></xml>`,
   [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
   undefined
@@ -483,7 +484,7 @@ const Arduino_Nano = new device(
   "Arduino Nano",
   "Arduino",
   "Arduino Nano",
-  ft,
+  [ft],
   `<xml xmlns="https://developers.google.com/blockly/xml"></xml>`,
   [`Digital Pins`, `Analog Pins`, `Ultrasonic Sensor`, `Buzzer`, `Servo Motor`, `Bluetooth Receiver`, `Infrared Receiver`, `Neopixel Led`, `LCD`],
   undefined
@@ -625,7 +626,7 @@ const Mello_Bot = new device(
 const Mingo_Bot = new device(
   "Mingo",
   "Arduino",
-  "Arduino Nano",
+  "Arduino Nano",   
   [`<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
   <category css-icon="customIcon fa fa-cog" name="Actuators" colour="#05386B">
           <block type="mingo_motor_move_indef">
@@ -639,6 +640,10 @@ const Mingo_Bot = new device(
           </block>
           <block type="mingo_motor_stop_indef">
               <field name="motor">all</field>
+          </block>
+          <block type="mingo_grabber_move">
+              <field name="action">open</field>
+              <field name="port">1</field>
           </block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="LEDs">
@@ -706,6 +711,10 @@ const Mingo_Bot = new device(
           </block>
           <block type="mingo_motor_stop_indef">
               <field name="motor">all</field>
+          </block>
+          <block type="mingo_grabber_move">
+              <field name="action">open</field>
+              <field name="port">1</field>
           </block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="LEDs">
@@ -778,6 +787,10 @@ const Mingo_Bot = new device(
           </block>
           <block type="mingo_motor_stop_indef">
               <field name="motor">all</field>
+          </block>
+          <block type="mingo_grabber_move">
+              <field name="action">open</field>
+              <field name="port">1</field>
           </block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="LEDs">
@@ -890,6 +903,10 @@ const Mingo_Bot = new device(
           </block>
           <block type="mingo_motor_stop_indef">
               <field name="motor">all</field>
+          </block>
+          <block type="mingo_grabber_move">
+              <field name="action">open</field>
+              <field name="port">1</field>
           </block>
   </category>
   <category css-icon="customIcon fa fa-cog" name="Sensors">
@@ -1046,8 +1063,6 @@ const Mingo_Bot = new device(
           <field name="song">merry</field>
       </block>
   </category>
-  
-  
   <category name="Variables">
       <button text="Create New Variable" callbackKey="createvar"></button>
       <block type="variable_get"></block>

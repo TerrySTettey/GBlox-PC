@@ -38,8 +38,7 @@ const CtxtP_SingletonManager = (props) => {
     const [initialized_workspace, setInitializedWorkspace] = useState(false);   //Used to set and check whether the Blockly Workspace has been initialized
     var [selectedDevice, setSelectedDevice] = useState(DeviceList[2]);          //Used to set and check the selected device's data
     const [currentDeviceChanged, setCurrentDeviceChanged] = useState(0)
-    const [upload_status, setUploadStatus] = useState("");
-    const [uploadInProgress, setUploadInProgress] = useState(false);
+    const [upload_status, setUploadStatus] = useState("");    const [uploadInProgress, setUploadInProgress] = useState(false);
     const [selectedToolbox, setSelectedToolbox] = useState(MelloDOM)
     const [toolboxUpdate, setToolboxUpdate] = useState(0)
     const [toolboxLevel, setToolboxLevel] = useState(1)
@@ -60,7 +59,7 @@ const CtxtP_SingletonManager = (props) => {
     const [activeCOMports, setActiveCOMports] = useState("No Arduino Detected")
     const [toolboxRefresh, setToolboxRefresh] = useState(0);
     const [edited_code, setEditedCode] = useState(
-`void setup(){
+        `void setup(){
 
 }
 void loop(){
@@ -255,11 +254,11 @@ void loop(){
                             document.getElementById("help-menu").click()
                             break;
                         case "openExpandedEditor":
-                            if (document.getElementById("c-codeEditor").style.display!=="block"){
+                            if (document.getElementById("c-codeEditor").style.display !== "block") {
                                 document.getElementById("code-editor").click()
                                 document.getElementById("expand-editor-button").click()
                             }
-                            else{
+                            else {
                                 document.getElementById("code-editor-close-button").click()
                             }
                         default:
@@ -286,6 +285,7 @@ void loop(){
         }
 
     });
+
     function device_manager(event) {
         var popout = document.getElementById("c-device-manager")
         if (event.target.id === "device-add-button") {
@@ -296,7 +296,7 @@ void loop(){
         else {
             if (currentDeviceName !== event.target.id) {
                 //Test
-                if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace))!==selectedDevice.default_workspace){
+                if (Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)) !== selectedDevice.default_workspace) {
                     document.getElementById("c-Body-Notification").style.display = "block";
                     setAlertDiv(<Alert_Notification
                         type="alert"
@@ -314,10 +314,10 @@ void loop(){
                         closeAlert={event => {
                             setAlertDiv(<div></div>);
                             document.getElementById("c-Body-Notification").style.display = "none";
-                        }} 
-                        />)
+                        }}
+                    />)
                 }
-                else{
+                else {
                     try {
                         Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(DeviceList[DeviceList.findIndex(e => e.device_name == event.target.id)].default_workspace), currentWorkspace)
                     }
@@ -577,6 +577,7 @@ void loop(){
                     type="alert"
                     text="Close gBlox?"
                     acceptAlert={ev => {
+                        //ipcRenderer.invoke("close-app");
                         ipcRenderer.invoke("electronWindowControl", button)
                     }}
                     closeAlert={event => {
@@ -685,7 +686,7 @@ void loop(){
         ipcRenderer.invoke("openMingoBlox")
     }
 
-    function openFile(link){
+    function openFile(link) {
         ipcRenderer.invoke("openFile", link);
     }
 
@@ -747,12 +748,12 @@ void loop(){
                 alertDiv,
                 setAlertDiv,
                 device_manager,
-                available_com_ports, 
+                available_com_ports,
                 setAvailableCOMports,
-                activeCOMports, 
+                activeCOMports,
                 setActiveCOMports,
                 openMingoBlox,
-                edited_code, 
+                edited_code,
                 setEditedCode,
                 toolboxRefresh,
                 setToolboxRefresh,

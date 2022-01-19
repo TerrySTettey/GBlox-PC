@@ -493,8 +493,8 @@ catch (e) { }
 
 //ipc call for "close-app" which closes the application
 ipcMain.handle("electronWindowControl", async function (event, button) {
-    switch (button) {
-        case "minimize":
+                                                        switch (button) {
+                                                            case "minimize":
             win.minimize()
             break;
         case "maximize":
@@ -504,6 +504,7 @@ ipcMain.handle("electronWindowControl", async function (event, button) {
             win.restore();
             break;
         case "close":
+            console.log("Brethren, we have been tasked with closing the applicash")
             app.quit()
             break;
         default:
@@ -512,5 +513,6 @@ ipcMain.handle("electronWindowControl", async function (event, button) {
 })
 
 ipcMain.handle("close-app", async function (event, settings) {
+    
     app.quit();
 })

@@ -1,35 +1,21 @@
-
-#include <Adafruit_NeoPixel.h>
-    Adafruit_NeoPixel pixels(2, 10, NEO_GRB + NEO_KHZ800);
-    
 int sample_variable;
+float testVariable;
  
 void setup(){
-
-//Clearing LEDs Initially
-    pixels.begin();
-    pixels.setPixelColor(0,pixels.Color(0,0,0));
-    pixels.setPixelColor(1,pixels.Color(0,0,0));
-    pixels.show();
-    pixels = Adafruit_NeoPixel(2, 13, NEO_GRB + NEO_KHZ800);
-    pixels.begin();
-    pixels.setPixelColor(0,pixels.Color(0,0,0));
-    pixels.setPixelColor(1,pixels.Color(0,0,0));
-    pixels.show();
-    
  
 }
 
 void loop(){
-   
-              pixels = Adafruit_NeoPixel(2, 13, NEO_GRB + NEO_KHZ800);
-              pixels.begin();
-              pixels.setPixelColor(0,pixels.Color(45,30, 35));
-              pixels.setPixelColor(1,pixels.Color(45,30, 35));
-              pixels.show();
-              
-
+   testVariable = 0;
+  while ((testVariable) <= 5) {
+    tone(8, 330);
+    delay(100);
+    noTone(8);testVariable = ((testVariable) + 1);
+    
+    delay(1000);
+  }
+  tone(8, 392);
+  delay(1000);
+  noTone(8);
 } 
  
-
-    
