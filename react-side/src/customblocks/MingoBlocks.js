@@ -165,7 +165,7 @@ Blockly.Blocks['mingo_sound_play'] = {
             ["A5", "880"],
             ["Bb5", "932"],
             ["B5", "988"],
-            ["C6", "1047"]]), "Note");
+            ["C6", "1047"]]), "note");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
