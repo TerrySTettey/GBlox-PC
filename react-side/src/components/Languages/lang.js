@@ -94,7 +94,25 @@ const resources = {
 };
 
 const blockly = {
-    
+    en: {
+        seconds: "seconds",
+        Number: "Number",
+        Print: "Print",
+        toSerialMonitor: "to Serial Monitor",
+        readSerialMonitor: "Read From Serial Monitor",
+        digitalPinNumber: "Digital Pin Number",
+        setDigitalPin: "Set Digital Pin",
+    },
+    fr: {
+        seconds: "secondes",
+        Number: "Numéro",
+        Print: "Imprimer",
+        toSerialMonitor: "vers le moniteur série",
+        readSerialMonitor: "Lire à partir du moniteur série",
+        digitalPinNumber: "Numéro de broche numérique",
+        setDigitalPin: "Définir la broche numérique",
+
+    }
 }
 
-export {resources}
+export {resources, blockly}

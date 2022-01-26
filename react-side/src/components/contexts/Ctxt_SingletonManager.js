@@ -67,6 +67,7 @@ const CtxtP_SingletonManager = (props) => {
 void loop(){
         
 }`);
+const [language, setLanguage] = useState("en");
     const {
         dark_theme,
         light_theme
@@ -760,7 +761,8 @@ void loop(){
                 setToolboxRefresh,
                 uploadInProgress,
                 setUploadInProgress,
-                openFile
+                openFile,
+                language, setLanguage
             }}
         >
             {props.children}
