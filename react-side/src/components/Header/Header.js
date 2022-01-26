@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import { useLocale } from "react-easy-localization";
 import "./Header.scss"
 import Dropdown from '../Dropdown';
 import HeaderButton from '../HeaderButton';
@@ -16,7 +16,7 @@ const Header = (props) => {
         exportBlocks,
         currentWorkspace
     } = useContext(Ctxt_SingletonManager)
-    
+    const { i18n} = useLocale();
     const { 
         changeTheme
     } = useContext(ThemeContext)
@@ -60,8 +60,8 @@ const Header = (props) => {
                     </svg>
                 </div>
                 <div className="header-buttons-segment">
-                    <Dropdown buttonImage="1" list={[["New","Ctrl+N"], ["Open","Ctrl+O"], ["Save","Ctrl+S"], ["Save As","Ctrl+S"], ["Share",""], ["Close"],""]} funcsOnClick={fileheader}/>
-                    <Dropdown buttonImage="2" list={[["Cut","Ctrl+X"], ["Copy","Ctrl+C"], ["Paste","Ctrl+V"], ["Delete","Del"]]} funcsOnClick={editheader}/>
+                    <Dropdown buttonImage="1" list={[[i18n.new,"Ctrl+N"], [i18n.open,"Ctrl+O"], [i18n.save,"Ctrl+S"], [i18n.saveAs,"Ctrl+S"], [i18n.share,""], ["Close"],""]} funcsOnClick={fileheader}/>
+                    <Dropdown buttonImage="2" list={[[i18n.cut,"Ctrl+X"], [i18n.copy,"Ctrl+C"], [i18n.paste,"Ctrl+V"], [i18n.delete,"Del"]]} funcsOnClick={editheader}/>
                     <HeaderButton id="save-button" buttonImage="3" onClick={exportBlocks}/>
                 </div>
                 <div id="blank-space" />

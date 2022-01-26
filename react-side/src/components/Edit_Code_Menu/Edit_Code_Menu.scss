@@ -50,7 +50,8 @@
       }
       #menu-highlighting {
         z-index: 0;
-    
+        height: calc(80% - 40px);
+        overflow: hidden;
       }
       #menu-editing {
         color: transparent;

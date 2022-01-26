@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useLocale } from "react-easy-localization";
 import WorkspaceAdd from '../WorkspaceAdd'
 import WorkspaceTab from '../WorkspaceTab'
 import Alert_Notification from '../Alert_Notification'
@@ -45,6 +46,7 @@ const WorkTabHolder = (props) => {
         alertDiv,
         setAlertDiv
     } = useContext(Ctxt_SingletonManager);
+    const { i18n} = useLocale();
     const [tabAddedState, setTabAddedState] = useState(0);
     const [tabChangedState, setTabChangedState] = useState(0)
     const [tabClosedState, setTabClosedState] = useState(0)
@@ -80,7 +82,7 @@ const WorkTabHolder = (props) => {
                 var name = splits[splits.length - 1]
                 this.tabName = name.split(".")[0]
             } else {
-                this.tabName = "Workspace " + this.tabID
+                this.tabName = i18n.workspace + " " + this.tabID
             }
         }
     }
@@ -266,7 +268,7 @@ const WorkTabHolder = (props) => {
                 setAlertDiv(
                     <Alert_Notification
                         type="alert"
-                        text="This tab has not been saved! Close anyways?"
+                        text={i18n.alert_tab_not_saved}
                         acceptAlert={ev => {
                             setAlertDiv(<div></div>);
                             document.getElementById("c-Body-Notification").style.display = "none";

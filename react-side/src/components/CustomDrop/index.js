@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useLocale } from "react-easy-localization";
 import Button from '../Button'
+
 import ModalSettings from '../ModalSettings';
 import './CustomDrop.scss'
 
 const CustomDrop = (props) => {
+const { i18n} = useLocale();
     var [buttonState, setButtonState] = useState("Out");
     const dropContainer = useRef(null);
     const dropContent = useRef(null);

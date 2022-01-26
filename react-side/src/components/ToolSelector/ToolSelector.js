@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
+import { useLocale } from "react-easy-localization";
 import PropTypes from 'prop-types'
 import './ToolSelector.scss'
 import Button from '../Button'
@@ -50,7 +51,7 @@ var init = false;
 function ToolSelector(props) {
     var Connector = useRef(null);
     const [level, setLevel] = useState("")
-
+    const { i18n} = useLocale();
     const {toolboxUpdate, setToolboxUpdate,toolboxLevel, setToolboxLevel, toolboxRefresh, setToolboxRefresh} = useContext(Ctxt_SingletonManager)
 
     function level1OnClick() {
@@ -177,7 +178,7 @@ function ToolSelector(props) {
 
     return (
         <div className="c-ToolSelector">
-            <div className="toolbox-title">Level: {level}</div>
+            <div className="toolbox-title">{i18n.level + ": " +  level}</div>
             <div className="c-buttongroup-a-Levels">
                 {/*level_group(5)*/}
                 <Button

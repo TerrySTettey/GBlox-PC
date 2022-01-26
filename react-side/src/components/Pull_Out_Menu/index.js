@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
+import { useLocale } from "react-easy-localization";
 import "./Pull_Out_Menu.scss"
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import svg_dictionary from "../svg_dictionary"
@@ -18,7 +19,7 @@ function Pull_Out_Menu(props) {
     var [menuOpen, setMenuOpen] = useState("Open");
     var pull_out_menu = useRef(null);
     var pull_out_container = useRef(null);
-
+    const { i18n} = useLocale();
 
 
 
@@ -200,7 +201,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.viewCode}
                     hoverEffect="fill-tooltip"
                     onClick={Menu}
-                    tooltip={["View Code","Alt+V"]}
+                    tooltip={[i18n.view_code,"Alt+V"]}
                 />
 
                 <Button
@@ -212,7 +213,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.serialPort}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip={["Serial Monitor","Alt+M"]}
+                    tooltip={[i18n.serial_monitor,"Alt+M"]}
                 />
                 <Button
                     id="code-editor"
@@ -223,7 +224,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.codeEditor}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip={["Code Editor","Alt+E"]}
+                    tooltip={[i18n.code_editor,"Alt+E"]}
                 />
                 <Button
                     id="example-code"
@@ -234,7 +235,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.exampleCode}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip={["Sample Codes","Alt+X"]}
+                    tooltip={[i18n.example_codes,"Alt+X"]}
                 />
 
                 <Button
@@ -246,7 +247,7 @@ function Pull_Out_Menu(props) {
                     children={svg_dictionary.menu_buttons.helpMenu}
                     onClick={Menu}
                     hoverEffect="fill-tooltip"
-                    tooltip={["Help","Alt+H"]}
+                    tooltip={[i18n.help,"Alt+H"]}
                 />
             </div>
             <div className="pull-out-container" ref={pull_out_container} >

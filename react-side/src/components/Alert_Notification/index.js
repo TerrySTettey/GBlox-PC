@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
+import { useLocale } from "react-easy-localization";
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import Button from '../Button'
 import './Alert_Notification.scss'
@@ -7,6 +8,7 @@ import PropTypes from 'prop-types'
 function Index(props) {
     const { available_com_ports, setActiveCOMports } = useContext(Ctxt_SingletonManager)
     const [comportList, setComportList] = useState(<option>No Device Found</option>)
+    const { i18n} = useLocale();
     function alertType() {
         var returnedDiv;
         switch (props.type) {
@@ -19,7 +21,7 @@ function Index(props) {
                         <Button
                             type="ExampleButton"
                             id="c-CloseButton"
-                            text={"No"}
+                            text={i18n.no}
                             onClick={props.closeAlert}
                         >
                         </Button>
@@ -28,7 +30,7 @@ function Index(props) {
                         <Button
                             type="ExampleButton"
                             id="c-OkButton"
-                            text={"Yes"}
+                            text={i18n.yes}
                             onClick={props.acceptAlert}
                         >
                         </Button>
@@ -43,7 +45,7 @@ function Index(props) {
                         <Button
                             type="ExampleButton"
                             id="c-OkButton"
-                            text={"Ok"}
+                            text={i18n.ok}
                             onClick={props.closeAlert}
                         >
                         </Button>
@@ -63,7 +65,7 @@ function Index(props) {
                         <Button
                             type="ExampleButton"
                             id="c-OkButton"
-                            text={"Ok"}
+                            text={i18n.ok}
                             onClick={props.closeAlert}
                         >
                         </Button>

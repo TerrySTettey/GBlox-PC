@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
+import { useLocale } from "react-easy-localization";
 import "./NewDeviceManager.scss"
 import PropTypes from 'prop-types'
 import Upload_Circle from '../Upload_Circle'
@@ -9,7 +10,7 @@ import svg_dictionary from '../svg_dictionary'
 function Index(props) {
     var slide_out = useRef(null);
     var device_id = useRef(null);
-
+    const { i18n} = useLocale();
     function add_device(svg, device_name) {
         return (
             <div className="device_icon" id={device_name} onClick={props.deviceOnClick}>
@@ -73,7 +74,7 @@ function Index(props) {
                         <path id="Path_371" data-name="Path 371" d="M1693.916,539.565l-11.478,11.478V697.214l11.478-11.478Z" transform="translate(-1466.427 -378.687)" fill="#0000dc" stroke="#0000dc" stroke-width="2" />
                     </g>
                 </svg>
-                <div className="initial-text">Select Your Device</div>
+                <div className="initial-text">{i18n.select_device}</div>
                 <div className="Device-Items">
                     {add_device(svg_dictionary.devices.Arduino_Uno_SVG, "Arduino Uno")}
                     {/* {add_device(svg_dictionary.devices.mello, "Mello")} */}

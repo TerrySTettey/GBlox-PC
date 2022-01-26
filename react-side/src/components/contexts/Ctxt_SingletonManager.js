@@ -6,7 +6,8 @@ import AlterBlockly from "../../blocklyextras/blocklyAlters";
 import { mainLoopCode } from "../../customblocks/compiler/arduino_core";
 import { MelloDOM } from "../../customblocks/toolboxes/toolboxes";
 import { ThemeContext } from "./ThemeContext";
-import Alert_Notification from '../Alert_Notification'
+import Alert_Notification from '../Alert_Notification';
+
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import WorkspaceTab from "../WorkspaceTab";
@@ -70,6 +71,7 @@ void loop(){
         dark_theme,
         light_theme
     } = useContext(ThemeContext)
+
 
     var fileheader = [
         //New File

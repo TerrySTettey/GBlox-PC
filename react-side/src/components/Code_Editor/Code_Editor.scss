@@ -133,6 +133,8 @@
           }
           #full-highlighting {
             z-index: 0;
+            height: calc(100% - 120px);
+            overflow: hidden;
           }
           #full-editing {
             color: transparent !important;

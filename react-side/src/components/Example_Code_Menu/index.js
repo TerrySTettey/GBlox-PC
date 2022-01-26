@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useContext } from 'react'
 import Blockly from 'blockly'
+import { useLocale } from "react-easy-localization";
 import Menu from '../Menu'
 import Button from '../Button'
 import Alert_Notification from '../Alert_Notification'
@@ -14,6 +15,7 @@ function Index(props) {
         setAlertDiv,
         currentXML
     } = useContext(Ctxt_SingletonManager);
+    const { i18n} = useLocale();
     function addDevices(example_object) {
         var devices = [];
         console.log(example_object.length)
@@ -85,7 +87,7 @@ function Index(props) {
                             id={`code-open-${i}`}
                             type="ExampleButton"
                             outColor="#0000DC"
-                            text="Open Code"
+                            text={i18n.open_code}
                             onClick={loadXML}
                         />
                     </div>
@@ -97,7 +99,7 @@ function Index(props) {
     return (
         <Menu>
             <div id="example-code-menu">
-                <div id="example-header-text">Example Codes</div>
+                <div id="example-header-text">{i18n.example_codes}</div>
                 <div id="example-filter-button">
                     <Button
                         type="FilterButton"

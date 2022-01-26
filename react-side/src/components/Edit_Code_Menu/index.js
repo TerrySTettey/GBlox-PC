@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types'
+import { useLocale } from "react-easy-localization";
 import Menu from '../Menu'
 import Prism from "prismjs";
 import Button from "../Button"
@@ -18,6 +19,7 @@ function Index(props) {
     const { edited_code, setEditedCode } = useContext(Ctxt_SingletonManager)
     const slider_highlighting = useRef(null);
     const editor = useRef(null);
+    const { i18n} = useLocale();
     const [lineNumber, setLineNumber] = useState(<p>{1}</p>);
 
     function update(event) {
@@ -80,7 +82,7 @@ function Index(props) {
     return (
         <Menu>
             <div id="edit-code-menu">
-                <div className="text">Code Editor</div>
+                <div className="text">{i18n.code_editor}</div>
                 <div id="code-editor-menu-textarea">
                     <textarea
                         id="menu-editing"

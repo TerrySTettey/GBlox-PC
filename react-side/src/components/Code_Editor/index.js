@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types'
+import { useLocale } from "react-easy-localization";
 
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager'
 import Prism from "prismjs";
@@ -18,6 +19,7 @@ function Index(props) {
     const { edited_code, setEditedCode } = useContext(Ctxt_SingletonManager)
     const slider_highlighting = useRef(null);
     const editor = useRef(null);
+    const { i18n} = useLocale();
     const [lineNumber, setLineNumber] = useState(<p>{1}</p>);
 
     function update(event) {
@@ -116,7 +118,7 @@ function Index(props) {
         <div id="code-editor-container">
             <div id="outline">
                 <div id="code-editor-items">
-                    <div className="text">Code Editor</div>
+                    <div className="text">{i18n.code_editor}</div>
                     <div id="code-editor-buttons">
                         <div id="collapse-button">
                             <Button
@@ -141,7 +143,7 @@ function Index(props) {
                         </div>
 
                         <div id="full-editor">
-                            <textarea id="full-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab} rows={50}></textarea>
+                            <textarea id="full-editing" ref={editor} spellcheck="false" onInput={e => { update(e); sync_scroll(e) }} onScroll={e => sync_scroll(e)} onKeyDown={check_tab}></textarea>
                             <pre id="full-highlighting" ref={slider_highlighting} aria-hidden="true">
                                 <code className="language-arduino" id="full-highlighting-content"></code>
                             </pre>

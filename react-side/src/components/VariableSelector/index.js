@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useLocale } from "react-easy-localization";
 import Button from '../Button'
 import CustomDrop from '../CustomDrop'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
@@ -10,9 +11,10 @@ function Index(props) {
     const { 
         closeVariableDialog
     } = useContext(Ctxt_SingletonManager)
+    const { i18n} = useLocale();
     return (
         <div className={`dialog-container`}>
-            <div id="variable-type-text">Variable Type: </div>
+            <div id="variable-type-text">{i18n.variable_type + ": "}</div>
             <div id="variable-type-select">
             <select>
                 <option>Float</option>
@@ -21,7 +23,7 @@ function Index(props) {
             </select>
             </div>
             <div id="variable-name-text">
-                Variable Name:
+            {i18n.variable_name + ": "}
             </div>
             <input type="text" id="variable-name-input" onChange = {
                 (e) => {
@@ -36,7 +38,7 @@ function Index(props) {
                     inColor="#060841"
                     outColor="#0000DC"
                     hoverColor="#060841"
-                    text={"Close"}
+                    text={i18n.close}
                     hoverEffect="fill"
                     onClick={(e) => {
                         closeVariableDialog(e, variableName)}
@@ -52,7 +54,7 @@ function Index(props) {
                     inColor="#060841"
                     outColor="#0000DC"
                     hoverColor="#060841"
-                    text={"Create New Variable"}
+                    text={i18n.create_variable}
                     hoverEffect="fill"
                     onClick={(e) => {
                         closeVariableDialog(e, variableName)}

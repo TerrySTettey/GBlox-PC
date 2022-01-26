@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
+import { useLocale } from "react-easy-localization";
 
 import "./HeaderButton.scss"
 
 const HeaderButton = (props) => {
     var buttonImage;
-
+    const { i18n} = useLocale();
     var [buttonColor, setButtonColor] = useState("#0000dc");
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const HeaderButton = (props) => {
             buttonImage = <svg id="Component_3_21" data-name="Component 3 – 21" xmlns="http://www.w3.org/2000/svg" width="93" height="40" viewBox="0 0 93 40">
             <path id="Path_33" data-name="Path 33" d="M306.954,42h67.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill={buttonColor}/>
             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-              <text id="File" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">File</tspan></text>
+              <text id="File" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">{i18n.file}</tspan></text>
               <g id="Group_424" data-name="Group 424" transform="translate(-4 -2.007)">
                 <g id="Group_30" data-name="Group 30" transform="translate(-9.427 4.252)">
                   <path id="Path_291" data-name="Path 291" d="M.573,1.451h6.5L9.17,3.514H18.6l1.81,2.435V18.564H.573Z" transform="translate(-0.573 -1.451)" fill="none" stroke="#fff" stroke-width="2"/>
@@ -40,7 +41,7 @@ const HeaderButton = (props) => {
             buttonImage = <svg id="Component_3_2" data-name="Component 3 – 2" xmlns="http://www.w3.org/2000/svg" width="100" height="40" viewBox="0 0 100 40">
             <path id="Path_33" data-name="Path 33" d="M306.954,42h74.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill={buttonColor}/>
             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-              <text id="Edit" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">Edit</tspan></text>
+              <text id="Edit" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">{i18n.edit}</tspan></text>
             </g>
             <g id="Group_427" data-name="Group 427" transform="translate(-714.946 -406.786)">
               <path id="Path_294" data-name="Path 294" d="M741.417,433.677l-4.545.909.909-4.545,12.691-12.691,2.764-2.764,3.636,3.636Z" transform="translate(-3.441 2.795)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
@@ -57,7 +58,7 @@ const HeaderButton = (props) => {
               <path id="Path_252" data-name="Path 252" d="M0,0H19.035V13.274l-3.006,4.778H0Z" transform="translate(524.001 49.458)" fill="none" stroke="#fff" stroke-width="2"/>
               <rect id="Rectangle_136" data-name="Rectangle 136" width="6.662" height="5.71" transform="translate(529.671 49.458)" fill="none" stroke="#fff" stroke-width="2"/>
             </g>
-            <text id="Save" transform="translate(51.227 26.595)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">Save</tspan></text>
+            <text id="Save" transform="translate(51.227 26.595)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">{i18n.save}</tspan></text>
           </svg>
           
             break;
@@ -80,7 +81,7 @@ const HeaderButton = (props) => {
             buttonImage = <svg id="Component_3_5" data-name="Component 3 – 5" xmlns="http://www.w3.org/2000/svg" width="170" height="40" viewBox="0 0 170 40">
             <path id="Path_33" data-name="Path 33" d="M306.954,42H451.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill={buttonColor}/>
             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-              <text id="Competitions" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">Competitions</tspan></text>
+              <text id="Competitions" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">{i18n.competitions}</tspan></text>
               <g id="Group_428" data-name="Group 428" transform="translate(-849.472 -404.742)">
                 <path id="Path_297" data-name="Path 297" d="M850.715,417.639V408H838v9.639l4.488,2.094v3.838h-.748V425.8h5.236v-2.224h-.748v-3.838Z" transform="translate(-0.358)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
                 <path id="Path_298" data-name="Path 298" d="M857.732,417.374H855V411h3.642Z" transform="translate(-4.642 -0.268)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
@@ -95,7 +96,7 @@ const HeaderButton = (props) => {
             buttonImage = <svg id="Component_3_3" data-name="Component 3 – 3" xmlns="http://www.w3.org/2000/svg" width="130" height="40" viewBox="0 0 130 40">
             <path id="Path_33" data-name="Path 33" d="M306.954,42H411.045c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill="#0000dc"/>
             <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-              <text id="Settings" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">Settings</tspan></text>
+              <text id="Settings" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32 '"><tspan x="0" y="0">{i18n.setting}</tspan></text>
               <path id="Path_302" data-name="Path 302" d="M928,500.214v-4.427h-2.214a8.033,8.033,0,0,0-.716-1.724l1.567-1.567-3.131-3.131-1.567,1.567a8.015,8.015,0,0,0-1.724-.716V488h-4.427v2.214a8.014,8.014,0,0,0-1.724.716l-1.567-1.567-3.131,3.131,1.567,1.567a8.009,8.009,0,0,0-.716,1.724H908v4.427h2.215a8,8,0,0,0,.716,1.724l-1.567,1.567,3.131,3.131,1.567-1.567a8.005,8.005,0,0,0,1.724.716V508h4.427v-2.214a8.006,8.006,0,0,0,1.724-.716l1.567,1.567,3.131-3.131-1.567-1.567a8.029,8.029,0,0,0,.716-1.724ZM920.5,498a2.5,2.5,0,0,1-3.979,2.015,2.524,2.524,0,0,1-.536-.536,2.5,2.5,0,0,1,0-2.959,2.523,2.523,0,0,1,.536-.536,2.5,2.5,0,0,1,2.959,0,2.52,2.52,0,0,1,.536.536A2.495,2.495,0,0,1,920.5,498Z" transform="translate(-922.426 -486.2)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
             </g>
           </svg>
@@ -105,7 +106,7 @@ const HeaderButton = (props) => {
             buttonImage = <svg id="Component_3_1" data-name="Component 3 – 1" xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
                 <path id="Path_33" data-name="Path 33" d="M306.954,42h94.091c5.06,5.1,7.9,7.961,12.955,13.063V82H294V55.063Z" transform="translate(-294 -42)" fill={buttonColor} />
                 <g id="Group_31" data-name="Group 31" transform="translate(30.99 8.794)">
-                    <text id="File" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32"><tspan x="0" y="0">File</tspan></text>
+                    <text id="File" transform="translate(18.237 17.801)" fill="#fff" font-size="17" font-family="Baloo2-Regular, 'Baloo \32"><tspan x="0" y="0">{i18n.file}</tspan></text>
                     <g id="Group_424" data-name="Group 424" transform="translate(-4 -2.007)">
                         <g id="Group_30" data-name="Group 30" transform="translate(-9.427 4.252)">
                             <path id="Path_291" data-name="Path 291" d="M.573,1.451h6.5L9.17,3.514H18.6l1.81,2.435V18.564H.573Z" transform="translate(-0.573 -1.451)" fill="none" stroke="#fff" stroke-width="2" />

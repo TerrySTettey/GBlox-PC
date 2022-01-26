@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { useLocale } from "react-easy-localization";
 import PropTypes from 'prop-types';
 
 import "./Body.scss";
@@ -48,7 +49,7 @@ const Body = (props) => {
     const [inUpload, setInUpload] = useState(false);
     const [toolboxButtons, setToolboxButtons] = useState([]);
     const [uploadInProgressStatus, setUploadInProgressStatus] = useState()
-
+    const { i18n} = useLocale();
 
     const {
         selectedDevice,
@@ -99,7 +100,7 @@ const Body = (props) => {
         setAlertDiv(
             <Alert_Notification
                 type="selectCOMPORT"
-                text="Select your COM Port"
+                text={i18n.alert_select_com_port}
                 closeAlert={e => {
                     setAlertDiv(<div></div>);
                     document.getElementById("c-Body-Notification").style.display = "none";
@@ -320,7 +321,7 @@ useEffect(() => {
             setAlertDiv(
                 <Alert_Notification
                     type="notification"
-                    text="No device has been detected. Make sure that a device is connected"
+                    text={i18n.alert_ensure_device_connected}
                     closeAlert={e => {
                         setAlertDiv(<div></div>);
                         document.getElementById("c-Body-Notification").style.display = "none";
@@ -335,7 +336,7 @@ useEffect(() => {
             setInUpload(false);
             document.getElementById("c-Body-Notification").style.display = "block";
             setAlertDiv(
-                <Alert_Notification type="notification" text="No device has been detected. Make sure that an Arduino is connected" closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
+                <Alert_Notification type="notification" text={i18n.alert_ensure_device_connected} closeAlert={e => { setAlertDiv(<div></div>); document.getElementById("c-Body-Notification").style.display = "none"; }} />
             )
             setUploadInProgressStatus()
             document.getElementById("uploadInProgressStatus").style.opacity = "0";
@@ -646,7 +647,6 @@ return (
         <div className="c-Body-a-OverlayExtras" />
         <Header robocentreURL={props.robocentreURL} />
         <WorkTabHolder />
-
         <div className="c-Body-a-OverlayItems">
             <div className="i-emptyDiv1" />
             <div className="c-Body-a-UploadCircle">
@@ -667,7 +667,7 @@ return (
             <div className="i-emptyDiv3" />
             <div className="c-Body-a-UploadProg">
                 <div className="c-Body-a-UploadButton">
-                    <Button type="UploadButton" text="Upload" outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" onClick={(e) => { uploadCode() }} />
+                    <Button type="UploadButton" text={i18n.upload} outColor="#0000dc" hoverColor="#0000AA" hoverEffect="svg-fill" onClick={(e) => { uploadCode() }} />
                 </div>
                 <div className="c-Body-a-ProgressBar">
                     <ProgressBar progress={progress_value} />

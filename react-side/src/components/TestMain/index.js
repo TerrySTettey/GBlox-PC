@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types'
 import Body from '../Body'
+import { LocaleProvider } from "react-easy-localization";
 import Blockly from 'blockly';
+import { useLocale } from "react-easy-localization";
 import { DeviceList } from '../../deviceDef/device_list';
 import FrameBar from '../FrameBar'
 import LoadScreen from '../LoadScreen'
 import SplashScreenV2 from '../SplashScreenV2'
 import { Ctxt_SingletonManager } from '../contexts/Ctxt_SingletonManager';
 import { ThemeContext } from '../contexts/ThemeContext';
+import {resources} from "../Languages/lang.js";
 
 
 import "./TestMain.scss"
@@ -49,7 +52,7 @@ const TestMain = (props) => {
         uploadInProgress, setUploadInProgress,
         setAvailableCOMports} = useContext(Ctxt_SingletonManager)
     const { currentThemeName, setCurrentThemeName } = useContext(ThemeContext)
-
+    const { i18n, languageCode, changeLanguage } = useLocale();
     
     const [system_settings, setSystemSettings] = useState([]);
     const [current_theme, setCurrentTheme] = useState("")
@@ -237,6 +240,7 @@ const TestMain = (props) => {
         //document.getElementById("SplashStatus").checked
     }, [system_settings])
     useEffect(() => {
+        changeLanguage("en");
         if (bodyLoaded == true) {
             setTimeout(() => {
                 removeVideo();
@@ -260,7 +264,12 @@ const TestMain = (props) => {
         }
     }, [splashScreen])
 
+
+
+
+    
     return (
+        <LocaleProvider resources={resources}>
         <div id="App">
             <div id="body-frame">
                 <FrameBar />
@@ -288,6 +297,7 @@ const TestMain = (props) => {
                 contactSupportViaMail={contactSupportViaMail}
             />
         </div>
+        </LocaleProvider>
     )
 }
 
