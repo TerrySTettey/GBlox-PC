@@ -34,6 +34,8 @@
     "serialport": "^9.2.8"
   },
   "config": {
+    "loadingGif": "",
+    "setupIcon" : "./electron/logo.ico",
     "forge": {
       "packagerConfig": {
         "extraResource": [
