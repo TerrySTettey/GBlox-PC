@@ -202,6 +202,7 @@ void loop() {
         //mySerial.println(text);
         mySerial.println(read_ultrasonic(Ultrasonic));
       } else if(strcmp(command,"gr") == 0){
+        //GRABBER
         command = strtok(0, "");
         int action = atoi(command);
         if(action == 0){
@@ -210,6 +211,7 @@ void loop() {
           open_grabber(50);
         }
       } else if(strcmp(command,"rlf")==0){
+        //READ LIGHT FOLLOWER
         command = strtok(0, "");
         int sensor = atoi(command);
         if(sensor == 1){
@@ -218,6 +220,7 @@ void loop() {
           mySerial.println(analogRead(RfSensor));
         }
       } else if(strcmp(command,"rls")==0){
+        //READ LINE SENSOR
         command = strtok(0, "");
         int sensor = atoi(command);
         if(sensor == 1){
@@ -226,24 +229,81 @@ void loop() {
           mySerial.println(analogRead(RsSensor));
         }
       } else if(strcmp(command,"dr") == 0){
+        //DRIVE
         command = strtok(0, "");
         char* action = command;
         
         if(strcmp(action, "f")==0){
           digitalWrite(4,HIGH);
           digitalWrite(7,HIGH);
+                  analogWrite(5,(int)((50*225)/100));
+        analogWrite(6,(int)((50*225)/100));
         } else if(strcmp(action, "b")==0){
           digitalWrite(4,LOW);
           digitalWrite(7,LOW);
+                  analogWrite(5,(int)((50*225)/100));
+        analogWrite(6,(int)((50*225)/100));
         } else if(strcmp(action, "l")==0){
           digitalWrite(4,LOW);
           digitalWrite(7,HIGH);
+                  analogWrite(5,(int)((50*225)/100));
+        analogWrite(6,(int)((50*225)/100));
         } else if(strcmp(action, "r")==0){
           digitalWrite(4,HIGH);
           digitalWrite(7,LOW);
-        }
-        analogWrite(5,(int)((50*225)/100));
+                  analogWrite(5,(int)((50*225)/100));
         analogWrite(6,(int)((50*225)/100));
+        }
+        else if(strcmp(action, "s")==0){
+          digitalWrite(4,LOW);
+          digitalWrite(7,LOW);
+                  analogWrite(5,0);
+        analogWrite(6,0);
+        }
+
+      } else if(strcmp(command,"drp") == 0){
+        //DRIVE
+        command = strtok(0, "");
+        char* angle = command;
+        float ang = atof(angle);
+        command = strtok(0, "");
+        char* radius = command;
+        float rad = atof(radius);
+
+        float xCord = rad * cos(ang);
+        float yCord = rad * sin(ang);
+
+        int LSp;
+        int RSp;
+
+        if ( xCord > 0){
+          LSp = map(yCord,-1, 1, -225, 225);
+          RSp = map (xCord, -1, 1, -225, 225);
+        } else if ( xCord < 0){
+
+        } else if (xCord == 0){
+
+        }
+        
+
+        if (LSp >= 0){
+          digitalWrite(4, HIGH);
+        } else {
+          digitalWrite(4, LOW);
+        }
+
+        if (RSp >= 0){
+          digitalWrite(7, HIGH);
+        } else {
+          digitalWrite(7, LOW);
+        }
+
+        mySerial.println(LSp);
+        Serial.println(LSp);
+        mySerial.println(RSp);
+        Serial.println(RSp);
+        analogWrite(5,(int)(abs(LSp)));
+        analogWrite(6,(int)(abs(RSp)));
       }
     }
   }
