@@ -10,11 +10,15 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "blockly": "^6.20210701.0",
+    "dropbox": "^10.15.0",
+    "node-sass": "^6.0.1",
+    "prismjs": "^1.25.0",
     "python-shell": "^3.0.0",
     "react": "^17.0.2",
-    "react-blockly": "^7.0.0-alpha.1",
     "react-dom": "^17.0.2",
+    "react-easy-localization": "^1.0.2",
     "react-scripts": "^4.0.3",
+    "react-simple-code-editor": "^0.11.0",
     "react-syntax-highlighter": "^15.4.4",
     "web-vitals": "^1.1.2"
   },
@@ -29,12 +33,24 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && npm run electron\""
+    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && npm run electron\"",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -50,8 +66,14 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-essentials": "^6.4.8",
+    "@storybook/addon-links": "^6.3.8",
+    "@storybook/node-logger": "^6.3.8",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.4.8",
     "concurrently": "^6.2.0",
-    "electron": "^13.1.6",
+    "electron": "^13.5.2",
     "electron-is-dev": "^2.0.0",
     "wait-on": "^6.0.0"
   }

@@ -1,5 +1,5 @@
 {
-  "name": "server-electron-side",
+  "name": "GBlox",
   "version": "1.0.0",
   "description": "Electron Side of the Arduino + Blockly PRoject",
   "main": "electron/main.js",
@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "ntest": "electron .",
     "rebuild": "electron-rebuild -f -w serialport",
-    "nbuild": "electron-packager .  electron-app --platform=win32 --asar --overwrite"
+    "nbuild": "electron-packager .  GBlox --platform=win32 --asar --extra-resource=electron/ArduinoOutput --extra-resource=electron/settings.txt --extra-resource=electron/arduino-1.8.15 --name=gBlox --overwrite"
   },
   "keywords": [],
   "author": "Michael Adu and Terry Tettey",
@@ -21,20 +21,32 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.57",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
     "@electron-forge/maker-zip": "^6.0.0-beta.57",
-    "electron": "^13.2.3",
+    "electron": "^13.6.0",
     "electron-is-dev": "^2.0.0",
-    "electron-rebuild": "^3.2.2"
+    "electron-react-devtools": "^0.5.3",
+    "electron-rebuild": "^3.2.5"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "electron-is-dev": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "node-gyp": "^8.2.0",
     "python-shell": "^3.0.0",
-    "serialport": "^9.2.0"
+    "serialport": "^9.2.8"
   },
   "config": {
+    "loadingGif": "",
+    "setupIcon" : "./electron/logo.ico",
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "extraResource": [
+          "./electron/arduino-1.8.15",
+          "./electron/settings.txt",
+          "./electron/ArduinoOutput",
+          "./electron/sample.pdf"
+
+        ],
+        "asar": true
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",

@@ -4,8 +4,8 @@
 /node_modules
 /.pnp
 /electron/arduino-1.8.15
-/electron-app-win32-x64
-.pnp.js
+/.pnp.js
+/out
 
 # testing
 /coverage

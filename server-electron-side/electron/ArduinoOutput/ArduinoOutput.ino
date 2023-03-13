@@ -1,36 +1,35 @@
- 
-int runOnce;
+
+#include <Adafruit_NeoPixel.h>
+    Adafruit_NeoPixel pixels(2, 10, NEO_GRB + NEO_KHZ800);
+    
+int sample_variable;
  
 void setup(){
-	pinMode(6, OUTPUT);
-	pinMode(4, OUTPUT);
-	pinMode(5, OUTPUT);
+
+//Clearing LEDs Initially
+    pixels.begin();
+    pixels.setPixelColor(0,pixels.Color(0,0,0));
+    pixels.setPixelColor(1,pixels.Color(0,0,0));
+    pixels.show();
+    pixels = Adafruit_NeoPixel(2, 13, NEO_GRB + NEO_KHZ800);
+    pixels.begin();
+    pixels.setPixelColor(0,pixels.Color(0,0,0));
+    pixels.setPixelColor(1,pixels.Color(0,0,0));
+    pixels.show();
+    
  
-runOnce = 0;
 }
 
 void loop(){
-	if(runOnce == 0){
-  for (int i = 0;i<2;i++) {
-    digitalWrite(6, HIGH);
-    digitalWrite(4, LOW);
-    digitalWrite(5, LOW);
-    
-    delay(1000);
-    digitalWrite(6, HIGH);
-    	digitalWrite(4, HIGH);
-    digitalWrite(5, LOW);
-    
-    delay(1000);
-    digitalWrite(4, HIGH);
-    digitalWrite(6, LOW);
-    digitalWrite(5, LOW);
-    
-    delay(1000);
-  };
-  digitalWrite(4, LOW);
-  digitalWrite(6, LOW);
-  digitalWrite(5, LOW);
+   
+              pixels = Adafruit_NeoPixel(2, 13, NEO_GRB + NEO_KHZ800);
+              pixels.begin();
+              pixels.setPixelColor(0,pixels.Color(45,30, 35));
+              pixels.setPixelColor(1,pixels.Color(45,30, 35));
+              pixels.show();
+              
 
-runOnce = 1;}
-}
+} 
+ 
+
+    
